@@ -570,55 +570,56 @@ export default function DesignSystemPage() {
             <div className="p-4 rounded-xl bg-card border border-border">
               <p className="text-sm font-medium text-foreground mb-3 font-sans">Estrutura e Regras de Modais</p>
               <ul className="text-sm text-text-secondary space-y-2 font-sans list-disc ml-4">
-                <li><strong>Background:</strong> #1a1a1a</li>
-                <li><strong>Borda:</strong> #2A2B35, 1px, interna</li>
+                <li><strong>Background:</strong> #101112</li>
+                <li><strong>Borda:</strong> #2A2B35, 1px</li>
                 <li><strong>Border-radius:</strong> 12px</li>
-                <li><strong>Padding:</strong> 24px</li>
-                <li><strong>Header:</strong> Ícone (cor da vertical) + Título em Cygnito UPPERCASE + Botão X (fechar) à direita</li>
-                <li><strong>Linha separadora do header:</strong> Pode ser cor da borda (#2A2B35) OU cor da vertical (#72284b) dependendo do contexto, sempre 1px</li>
-                <li><strong>Labels:</strong> Texto branco, Inter Tight, campos obrigatórios com * (também branco)</li>
-                <li><strong>Select:</strong> Background #2A2B35, borda #3B3D4A, border-radius 8px</li>
-                <li><strong>Tabs internas:</strong> Underline rosa da vertical ativa com <strong>8px de altura</strong>, texto bold na tab ativa</li>
-                <li><strong>Linha abaixo das tabs:</strong> #2A2B35, 1px (mesma cor da borda do modal)</li>
+                <li><strong>Header:</strong> Padding 16px 24px (compacto), altura ~56px</li>
+                <li><strong>Título:</strong> Cygnito UPPERCASE, 18px ou maior</li>
+                <li><strong>Ícone do header:</strong> Cor da vertical (#72284b para Inteligência)</li>
+                <li><strong>Linha separadora do header:</strong> Cor da vertical (#72284b), 1px</li>
+                <li><strong>Padding do conteúdo:</strong> 24px</li>
+                <li><strong>Labels:</strong> Texto branco, Inter Tight</li>
+                <li><strong>Select:</strong> Background #2A2B35, borda #2A2B35, border-radius 8px</li>
+                <li><strong>Tabs internas:</strong> Underline 8px altura, <strong>SEM border-radius</strong> (retangular), cor da vertical</li>
+                <li><strong>Linha abaixo das tabs:</strong> #2A2B35, 1px</li>
                 <li><strong>Textarea/Input:</strong> Background #000000, borda #2A2B35</li>
-                <li><strong>Card de dados (key-value):</strong> Fundo preto, linhas horizontais #2A2B35 separando cada row</li>
-                <li><strong>Botões de ação:</strong> Alinhados à <strong>DIREITA</strong>, gap de 12px</li>
-                <li><strong>Texto dos botões:</strong> Font-weight <strong>BOLD</strong></li>
-                <li><strong>Botão Cancelar:</strong> Background #2A2B35, borda #3B3D4A</li>
-                <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b para Inteligência)</li>
-                <li><strong>Overlay:</strong> Background preto com opacidade (~50%)</li>
+                <li><strong>Card de dados:</strong> Background #000000, borda #2A2B35, linhas internas #2A2B35</li>
+                <li><strong>Botões:</strong> Alinhados à direita, texto <strong>BOLD</strong></li>
+                <li><strong>Botão Cancelar:</strong> Background #2A2B35, borda #2A2B35</li>
+                <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b)</li>
+                <li><strong>Overlay:</strong> Background #000000 com opacidade 50%</li>
               </ul>
             </div>
 
             {/* Exemplo de Modal - Tramitar Processo */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Tramitar Processo</p>
-              {/* Modal: borda #2A2B35, 1px, border-radius 12px */}
-              <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
-                {/* Header */}
-                <div className="p-6 pb-4">
+              {/* Modal: background #101112, borda #2A2B35, 1px */}
+              <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
+                {/* Header compacto */}
+                <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <svg className="w-5 h-5 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
-                      <span className="font-title text-lg">TRAMITAR PROCESSO</span>
+                      <span className="font-title text-[18px]">TRAMITAR PROCESSO</span>
                     </div>
-                    <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                    <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
                       <X className="w-5 h-5 text-text-muted" />
                     </button>
                   </div>
                 </div>
                 
-                {/* Linha separadora do header - MESMA COR da borda do modal (#2A2B35), 1px */}
-                <div className="h-[1px] bg-[#2a2b35]" />
+                {/* Linha separadora do header - cor da vertical, 1px */}
+                <div className="h-[1px] bg-[#72284b]" />
 
                 {/* Conteúdo */}
                 <div className="p-6">
-                  {/* Select - background cinza escuro #2a2b35 */}
+                  {/* Select */}
                   <div className="mb-6">
                     <label className="text-sm text-foreground mb-2 block font-sans">Selecione um destinatário <span className="text-foreground">*</span></label>
-                    <div className="bg-[#2a2b35] border border-[#3b3d4a] rounded-lg px-4 py-3 flex items-center justify-between">
+                    <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg px-4 py-3 flex items-center justify-between">
                       <span className="text-text-secondary text-sm font-sans">Chefe Contrainteligência</span>
                       <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -626,34 +627,34 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
 
-                  {/* Tabs - underline rosa 8px de altura */}
+                  {/* Tabs - underline 8px, SEM rounded */}
                   <div className="mb-6">
-                    <div className="flex gap-6 pb-2">
-                      {/* Tab ativa - ícone rosa, texto bold */}
-                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-3">
+                    <div className="flex gap-6">
+                      {/* Tab ativa - ícone rosa */}
+                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-4">
                         <FileText className="w-4 h-4 text-[#72284b]" />
                         <span className="font-semibold">Confeccionar</span>
-                        {/* Underline rosa 8px de altura */}
-                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b] rounded-sm" />
+                        {/* Underline 8px, SEM border-radius */}
+                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b]" />
                       </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-3">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
                         <Eye className="w-4 h-4" />
                         Revisar
                       </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-3">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
                         <Search className="w-4 h-4" />
                         Analisar
                       </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-3">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
                         <Check className="w-4 h-4" />
                         Formalizar
                       </button>
                     </div>
-                    {/* Linha cinza base abaixo de todas as tabs */}
-                    <div className="h-[1px] bg-[#2a2b35]" />
+                    {/* Linha base */}
+                    <div className="h-[1px] bg-[#2a2b35] -mt-[8px]" />
                   </div>
 
-                  {/* Textarea - label branco, borda #2a2b35 */}
+                  {/* Textarea */}
                   <div className="mb-8">
                     <label className="text-sm text-foreground mb-2 block font-sans">Observação <span className="text-foreground">*</span></label>
                     <textarea 
@@ -663,9 +664,9 @@ export default function DesignSystemPage() {
                     />
                   </div>
 
-                  {/* Botões - alinhados à DIREITA, texto BOLD */}
+                  {/* Botões - alinhados à DIREITA */}
                   <div className="flex items-center justify-end gap-3">
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#3b3d4a] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#2a2b35] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
                       <X className="w-4 h-4" />
                       Cancelar
                     </button>
@@ -682,36 +683,36 @@ export default function DesignSystemPage() {
 
             {/* Exemplo de Modal - Verificação de Entidade */}
             <div className="space-y-4">
-              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade (não encontrada)</p>
-              {/* Modal: borda #2A2B35, 1px */}
-              <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
-                {/* Header */}
-                <div className="p-6 pb-4">
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade</p>
+              {/* Modal: background #101112, borda #2A2B35, 1px */}
+              <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
+                {/* Header compacto */}
+                <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <AlertTriangle className="w-5 h-5 text-[#72284b]" />
-                      <span className="font-title text-lg">VERIFICACAO DE ENTIDADE</span>
+                      <span className="font-title text-[18px]">VERIFICACAO DE ENTIDADE</span>
                     </div>
-                    <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                    <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
                       <X className="w-5 h-5 text-text-muted" />
                     </button>
                   </div>
                 </div>
 
-                {/* Linha separadora do header - COR DA VERTICAL (rosa), 1px */}
+                {/* Linha separadora do header - cor da vertical, 1px */}
                 <div className="h-[1px] bg-[#72284b]" />
 
                 {/* Conteúdo */}
                 <div className="p-6">
-                  {/* Mensagem com check verde + link rosa */}
+                  {/* Mensagem com check verde */}
                   <div className="flex items-start gap-3 mb-4">
                     <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
                     <p className="text-foreground text-sm font-sans">
-                      A entidade não foi encontrada no banco de dados! <strong className="text-[#72284b] cursor-pointer hover:underline">Deseja criar uma nova?</strong>
+                      A entidade não foi encontrada no banco de dados! <strong className="text-foreground cursor-pointer hover:underline">Deseja criar uma nova?</strong>
                     </p>
                   </div>
 
-                  {/* Card de dados: fundo PRETO, borda ao redor, linhas internas */}
+                  {/* Card de dados */}
                   <div className="bg-[#000000] rounded-lg border border-[#2a2b35] overflow-hidden mb-4">
                     <div className="text-sm font-sans divide-y divide-[#2a2b35]">
                       <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">UF:</span><span className="text-text-muted">MG</span></div>
@@ -729,9 +730,9 @@ export default function DesignSystemPage() {
                     <span className="text-sm text-text-muted cursor-pointer hover:underline font-sans">Ver detalhes</span>
                   </div>
 
-                  {/* Botões - CENTRALIZADOS, texto BOLD */}
+                  {/* Botões - centralizados */}
                   <div className="flex items-center justify-center gap-3">
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#3b3d4a] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#2a2b35] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
                       <X className="w-4 h-4" />
                       Cancelar
                     </button>
@@ -747,88 +748,102 @@ export default function DesignSystemPage() {
             {/* Exemplo de Modal - Difusão */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Difusão de Processo</p>
-              <div className="bg-card rounded-xl border border-border p-6 max-w-md mx-auto">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-success" />
-                    <span className="font-title text-lg">DIFUSAO DE PROCESSO</span>
+              {/* Modal: background #101112, borda #2A2B35, 1px */}
+              <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
+                {/* Header compacto */}
+                <div className="px-6 py-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Check className="w-5 h-5 text-success" />
+                      <span className="font-title text-[18px]">DIFUSAO DE PROCESSO</span>
+                    </div>
+                    <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
+                      <X className="w-5 h-5 text-text-muted" />
+                    </button>
                   </div>
-                  <button className="p-1.5 rounded hover:bg-muted transition-colors">
-                    <X className="w-5 h-5 text-text-muted" />
-                  </button>
                 </div>
 
-                {/* Tabs - com ícones */}
-                <div className="flex gap-6 mb-4 border-b border-border">
-                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
-                    <Search className="w-4 h-4" />
-                    Sigiloso
-                  </button>
-                  <button className="flex items-center gap-2 pb-3 border-b-2 border-[#72284b] text-foreground text-sm font-sans">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                    Reservado
-                  </button>
-                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
-                    </svg>
-                    Público
-                  </button>
-                </div>
+                {/* Linha separadora do header - cor da vertical, 1px */}
+                <div className="h-[1px] bg-[#72284b]" />
 
-                {/* Alert box */}
-                <div className="bg-muted rounded-lg p-4 mb-4">
-                  <p className="text-sm text-text-secondary font-sans">
+                {/* Conteúdo */}
+                <div className="p-6">
+                  {/* Tabs - underline 8px, SEM rounded */}
+                  <div className="mb-4">
+                    <div className="flex gap-6">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
+                        <Search className="w-4 h-4" />
+                        Sigiloso
+                      </button>
+                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-4">
+                        <svg className="w-4 h-4 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        <span className="font-semibold">Reservado</span>
+                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b]" />
+                      </button>
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+                        </svg>
+                        Público
+                      </button>
+                    </div>
+                    {/* Linha base */}
+                    <div className="h-[1px] bg-[#2a2b35] -mt-[8px]" />
+                  </div>
+
+                  {/* Alert box */}
+                  <div className="bg-[#2a2b35] rounded-lg p-4 mb-4">
+                    <p className="text-sm text-text-secondary font-sans">
                     SUBSEC e SUP-CONTRA-INTEL são obrigatórios e não podem ser desmarcados.
                   </p>
                 </div>
 
-                {/* Search input */}
-                <div className="bg-muted border border-border rounded-lg px-4 py-3 flex items-center gap-2 mb-4">
-                  <span className="text-text-muted text-sm font-sans">Buscar pessoa</span>
-                  <Search className="w-4 h-4 text-text-muted ml-auto" />
-                </div>
+                  {/* Search input */}
+                  <div className="bg-[#000000] border border-[#2a2b35] rounded-lg px-4 py-3 flex items-center gap-2 mb-4">
+                    <span className="text-text-muted text-sm font-sans">Buscar pessoa</span>
+                    <Search className="w-4 h-4 text-text-muted ml-auto" />
+                  </div>
 
-                {/* Lista expansível */}
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center gap-3 p-2 bg-muted rounded-lg">
-                    <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                    <User className="w-4 h-4 text-text-secondary" />
-                    <span className="text-sm text-foreground font-sans">Ministério Público de Minas Gerais</span>
+                  {/* Lista expansível */}
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center gap-3 p-2 bg-[#2a2b35] rounded-lg">
+                      <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <User className="w-4 h-4 text-text-secondary" />
+                      <span className="text-sm text-foreground font-sans">Ministério Público de Minas Gerais</span>
+                    </div>
+                    <div className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded-lg transition-colors">
+                      <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <User className="w-4 h-4 text-text-secondary" />
+                      <span className="text-sm text-text-muted font-sans">Entidade especial dentre 150</span>
+                    </div>
+                    <div className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded-lg transition-colors">
+                      <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <User className="w-4 h-4 text-text-secondary" />
+                      <span className="text-sm text-text-muted font-sans">Tribunal Superior Eleitoral</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 p-2 hover:bg-muted rounded-lg transition-colors">
-                    <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                    <User className="w-4 h-4 text-text-secondary" />
-                    <span className="text-sm text-text-muted font-sans">Entidade especial dentre 150</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-2 hover:bg-muted rounded-lg transition-colors">
-                    <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                    <User className="w-4 h-4 text-text-secondary" />
-                    <span className="text-sm text-text-muted font-sans">Tribunal Superior Eleitoral</span>
-                  </div>
-                </div>
 
-                {/* Botões */}
-                <div className="flex items-center justify-center gap-3">
-                  <button className="flex items-center gap-2 px-6 py-2 rounded-lg border border-border text-text-secondary text-sm font-sans hover:bg-muted transition-colors">
-                    <X className="w-4 h-4" />
-                    Cancelar
-                  </button>
-                  <button className="flex items-center gap-2 px-6 py-2 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                    </svg>
-                    Confirmar difusão
-                  </button>
+                  {/* Botões - centralizados, texto BOLD */}
+                  <div className="flex items-center justify-center gap-3">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#2a2b35] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
+                      <X className="w-4 h-4" />
+                      Cancelar
+                    </button>
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                      </svg>
+                      Confirmar difusão
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
