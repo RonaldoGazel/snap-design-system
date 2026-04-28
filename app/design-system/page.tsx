@@ -575,7 +575,7 @@ export default function DesignSystemPage() {
                 <li><strong>Border-radius:</strong> 12px</li>
                 <li><strong>Padding:</strong> 24px</li>
                 <li><strong>Header:</strong> Ícone (cor da vertical) + Título em Cygnito UPPERCASE + Botão X (fechar) à direita</li>
-                <li><strong>Linha separadora do header:</strong> MESMA COR e espessura da borda do modal (#2A2B35, 1px)</li>
+                <li><strong>Linha separadora do header:</strong> Pode ser cor da borda (#2A2B35) OU cor da vertical (#72284b) dependendo do contexto, sempre 1px</li>
                 <li><strong>Labels:</strong> Texto branco, Inter Tight, campos obrigatórios com * (também branco)</li>
                 <li><strong>Select:</strong> Background #2A2B35, borda #3B3D4A, border-radius 8px</li>
                 <li><strong>Tabs internas:</strong> Underline rosa da vertical ativa com <strong>8px de altura</strong>, texto bold na tab ativa</li>
@@ -683,7 +683,8 @@ export default function DesignSystemPage() {
             {/* Exemplo de Modal - Verificação de Entidade */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade (não encontrada)</p>
-              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+              {/* Modal: borda #2A2B35, 1px */}
+              <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
                 {/* Header */}
                 <div className="p-6 pb-4">
                   <div className="flex items-center justify-between">
@@ -697,44 +698,44 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
 
-                {/* Linha separadora do header - cor da vertical */}
-                <div className="h-[2px] bg-[#72284b]" />
+                {/* Linha separadora do header - COR DA VERTICAL (rosa), 1px */}
+                <div className="h-[1px] bg-[#72284b]" />
 
                 {/* Conteúdo */}
                 <div className="p-6">
-                  {/* Mensagem com check */}
+                  {/* Mensagem com check verde + link rosa */}
                   <div className="flex items-start gap-3 mb-4">
-                    <Check className="w-6 h-6 text-success shrink-0" />
-                    <p className="text-text-secondary text-sm font-sans">
-                      A entidade não foi encontrada no banco de dados! <strong className="text-foreground cursor-pointer hover:underline">Deseja criar uma nova?</strong>
+                    <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
+                    <p className="text-foreground text-sm font-sans">
+                      A entidade não foi encontrada no banco de dados! <strong className="text-[#72284b] cursor-pointer hover:underline">Deseja criar uma nova?</strong>
                     </p>
                   </div>
 
-                  {/* Card de dados com linhas entre rows */}
-                  <div className="bg-input rounded-lg overflow-hidden mb-4">
-                    <div className="text-sm font-sans divide-y divide-border">
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">UF:</span><span className="text-text-secondary">MG</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">CEP:</span><span className="text-text-secondary">30.431-214</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Bairro:</span><span className="text-text-secondary">Barro Preto</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Cidade:</span><span className="text-text-secondary">Belo Horizonte</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Número:</span><span className="text-text-secondary">37</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Logradouro:</span><span className="text-text-secondary">Belo Horizonte</span></div>
+                  {/* Card de dados: fundo PRETO, borda ao redor, linhas internas */}
+                  <div className="bg-[#000000] rounded-lg border border-[#2a2b35] overflow-hidden mb-4">
+                    <div className="text-sm font-sans divide-y divide-[#2a2b35]">
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">UF:</span><span className="text-text-muted">MG</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">CEP:</span><span className="text-text-muted">30.431-214</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Bairro:</span><span className="text-text-muted">Barro Preto</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Cidade:</span><span className="text-text-muted">Belo Horizonte</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Número:</span><span className="text-text-muted">37</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Logradouro:</span><span className="text-text-muted">Belo Horizonte</span></div>
                     </div>
                   </div>
 
                   {/* Link Ver detalhes */}
                   <div className="flex items-center gap-2 mb-6">
-                    <Search className="w-4 h-4 text-text-secondary" />
-                    <span className="text-sm text-text-secondary cursor-pointer hover:underline font-sans">Ver detalhes</span>
+                    <Search className="w-4 h-4 text-text-muted" />
+                    <span className="text-sm text-text-muted cursor-pointer hover:underline font-sans">Ver detalhes</span>
                   </div>
 
-                  {/* Botões - Cancelar com borda visível */}
+                  {/* Botões - CENTRALIZADOS, texto BOLD */}
                   <div className="flex items-center justify-center gap-3">
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg border border-text-muted text-foreground text-sm font-sans hover:bg-muted transition-colors">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#3b3d4a] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
                       <X className="w-4 h-4" />
                       Cancelar
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
                       <Check className="w-4 h-4" />
                       Confirmar
                     </button>
