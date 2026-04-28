@@ -570,16 +570,22 @@ export default function DesignSystemPage() {
             <div className="p-4 rounded-xl bg-card border border-border">
               <p className="text-sm font-medium text-foreground mb-3 font-sans">Estrutura e Regras de Modais</p>
               <ul className="text-sm text-text-secondary space-y-2 font-sans list-disc ml-4">
-                <li><strong>Background:</strong> #1a1a1a (--card)</li>
+                <li><strong>Background:</strong> #1a1a1a</li>
+                <li><strong>Borda:</strong> #2A2B35, 1px, interna</li>
                 <li><strong>Border-radius:</strong> 12px</li>
                 <li><strong>Padding:</strong> 24px</li>
                 <li><strong>Header:</strong> Ícone (cor da vertical) + Título em Cygnito UPPERCASE + Botão X (fechar) à direita</li>
-                <li><strong>Linha separadora do header:</strong> Linha horizontal na cor da vertical ativa logo abaixo do header</li>
-                <li><strong>Conteúdo:</strong> Labels em Inter Tight, campos obrigatórios com * em rosa</li>
-                <li><strong>Tabs internas:</strong> Underline como indicador, cor da vertical ativa + linha cinza abaixo de todas as tabs</li>
-                <li><strong>Card de dados (key-value):</strong> Fundo preto, com linhas horizontais cinza separando cada row</li>
-                <li><strong>Botões de ação:</strong> Centralizados ou à direita, gap de 12px entre eles</li>
-                <li><strong>Botão Cancelar:</strong> Outline com borda visível (não apenas texto)</li>
+                <li><strong>Linha separadora do header:</strong> MESMA COR e espessura da borda do modal (#2A2B35, 1px)</li>
+                <li><strong>Labels:</strong> Texto branco, Inter Tight, campos obrigatórios com * (também branco)</li>
+                <li><strong>Select:</strong> Background #2A2B35, borda #3B3D4A, border-radius 8px</li>
+                <li><strong>Tabs internas:</strong> Underline rosa da vertical ativa com <strong>8px de altura</strong>, texto bold na tab ativa</li>
+                <li><strong>Linha abaixo das tabs:</strong> #2A2B35, 1px (mesma cor da borda do modal)</li>
+                <li><strong>Textarea/Input:</strong> Background #000000, borda #2A2B35</li>
+                <li><strong>Card de dados (key-value):</strong> Fundo preto, linhas horizontais #2A2B35 separando cada row</li>
+                <li><strong>Botões de ação:</strong> Alinhados à <strong>DIREITA</strong>, gap de 12px</li>
+                <li><strong>Texto dos botões:</strong> Font-weight <strong>BOLD</strong></li>
+                <li><strong>Botão Cancelar:</strong> Background #2A2B35, borda #3B3D4A</li>
+                <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b para Inteligência)</li>
                 <li><strong>Overlay:</strong> Background preto com opacidade (~50%)</li>
               </ul>
             </div>
@@ -587,7 +593,8 @@ export default function DesignSystemPage() {
             {/* Exemplo de Modal - Tramitar Processo */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Tramitar Processo</p>
-              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+              {/* Modal: borda #2A2B35, 1px, border-radius 12px */}
+              <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
                 {/* Header */}
                 <div className="p-6 pb-4">
                   <div className="flex items-center justify-between">
@@ -603,8 +610,8 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
                 
-                {/* Linha separadora do header - cor da vertical */}
-                <div className="h-[2px] bg-[#72284b]" />
+                {/* Linha separadora do header - MESMA COR da borda do modal (#2A2B35), 1px */}
+                <div className="h-[1px] bg-[#2a2b35]" />
 
                 {/* Conteúdo */}
                 <div className="p-6">
@@ -619,50 +626,50 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
 
-                  {/* Tabs - underline separada do texto, linha cinza como base */}
+                  {/* Tabs - underline rosa 8px de altura */}
                   <div className="mb-6">
-                    <div className="flex gap-6">
-                      {/* Tab ativa - ícone rosa */}
-                      <button className="flex items-center gap-2 pb-3 text-foreground text-sm font-sans relative">
+                    <div className="flex gap-6 pb-2">
+                      {/* Tab ativa - ícone rosa, texto bold */}
+                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-3">
                         <FileText className="w-4 h-4 text-[#72284b]" />
-                        <span className="font-medium">Confeccionar</span>
-                        {/* Underline rosa separada */}
-                        <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#72284b] rounded-full" />
+                        <span className="font-semibold">Confeccionar</span>
+                        {/* Underline rosa 8px de altura */}
+                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b] rounded-sm" />
                       </button>
-                      <button className="flex items-center gap-2 pb-3 text-text-muted text-sm font-sans">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-3">
                         <Eye className="w-4 h-4" />
                         Revisar
                       </button>
-                      <button className="flex items-center gap-2 pb-3 text-text-muted text-sm font-sans">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-3">
                         <Search className="w-4 h-4" />
                         Analisar
                       </button>
-                      <button className="flex items-center gap-2 pb-3 text-text-muted text-sm font-sans">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-3">
                         <Check className="w-4 h-4" />
                         Formalizar
                       </button>
                     </div>
                     {/* Linha cinza base abaixo de todas as tabs */}
-                    <div className="h-[1px] bg-[#3b3d4a] -mt-[1px]" />
+                    <div className="h-[1px] bg-[#2a2b35]" />
                   </div>
 
-                  {/* Textarea - label branco, borda mais visível */}
+                  {/* Textarea - label branco, borda #2a2b35 */}
                   <div className="mb-8">
                     <label className="text-sm text-foreground mb-2 block font-sans">Observação <span className="text-foreground">*</span></label>
                     <textarea 
-                      className="w-full bg-[#000000] border border-[#3b3d4a] rounded-lg px-4 py-3 text-sm text-text-secondary font-sans resize-none"
+                      className="w-full bg-[#000000] border border-[#2a2b35] rounded-lg px-4 py-3 text-sm text-text-secondary font-sans resize-none"
                       rows={5}
                       placeholder="Descreva o motivo da tramitação..."
                     />
                   </div>
 
-                  {/* Botões - Cancelar com background escuro sólido */}
-                  <div className="flex items-center justify-center gap-3">
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#3b3d4a] text-foreground text-sm font-sans hover:bg-[#3b3d4a] transition-colors">
+                  {/* Botões - alinhados à DIREITA, texto BOLD */}
+                  <div className="flex items-center justify-end gap-3">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#3b3d4a] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
                       <X className="w-4 h-4" />
                       Cancelar
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
