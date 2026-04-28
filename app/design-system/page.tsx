@@ -608,54 +608,61 @@ export default function DesignSystemPage() {
 
                 {/* Conteúdo */}
                 <div className="p-6">
-                  {/* Select */}
-                  <div className="mb-4">
-                  <label className="text-sm text-text-secondary mb-2 block font-sans">Selecione um destinatário <span className="text-[#72284b]">*</span></label>
-                  <div className="bg-input border border-border rounded-lg px-4 py-3 flex items-center justify-between">
-                    <span className="text-text-muted text-sm font-sans">Chefe Contrainteligência</span>
-                    <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
+                  {/* Select - background cinza escuro #2a2b35 */}
+                  <div className="mb-6">
+                    <label className="text-sm text-foreground mb-2 block font-sans">Selecione um destinatário <span className="text-foreground">*</span></label>
+                    <div className="bg-[#2a2b35] border border-[#3b3d4a] rounded-lg px-4 py-3 flex items-center justify-between">
+                      <span className="text-text-secondary text-sm font-sans">Chefe Contrainteligência</span>
+                      <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
                   </div>
-                </div>
 
-                {/* Tabs */}
-                <div className="flex gap-6 mb-4 border-b border-border">
-                  <button className="flex items-center gap-2 pb-3 border-b-2 border-[#72284b] text-foreground text-sm font-sans">
-                    <FileText className="w-4 h-4" />
-                    Confeccionar
-                  </button>
-                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
-                    <Eye className="w-4 h-4" />
-                    Revisar
-                  </button>
-                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
-                    <Search className="w-4 h-4" />
-                    Analisar
-                  </button>
-                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
-                    <Check className="w-4 h-4" />
-                    Formalizar
-                  </button>
-                </div>
+                  {/* Tabs - underline separada do texto, linha cinza como base */}
+                  <div className="mb-6">
+                    <div className="flex gap-6">
+                      {/* Tab ativa - ícone rosa */}
+                      <button className="flex items-center gap-2 pb-3 text-foreground text-sm font-sans relative">
+                        <FileText className="w-4 h-4 text-[#72284b]" />
+                        <span className="font-medium">Confeccionar</span>
+                        {/* Underline rosa separada */}
+                        <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#72284b] rounded-full" />
+                      </button>
+                      <button className="flex items-center gap-2 pb-3 text-text-muted text-sm font-sans">
+                        <Eye className="w-4 h-4" />
+                        Revisar
+                      </button>
+                      <button className="flex items-center gap-2 pb-3 text-text-muted text-sm font-sans">
+                        <Search className="w-4 h-4" />
+                        Analisar
+                      </button>
+                      <button className="flex items-center gap-2 pb-3 text-text-muted text-sm font-sans">
+                        <Check className="w-4 h-4" />
+                        Formalizar
+                      </button>
+                    </div>
+                    {/* Linha cinza base abaixo de todas as tabs */}
+                    <div className="h-[1px] bg-[#3b3d4a] -mt-[1px]" />
+                  </div>
 
-                {/* Textarea */}
-                <div className="mb-6">
-                  <label className="text-sm text-text-secondary mb-2 block font-sans">Observação <span className="text-[#72284b]">*</span></label>
-                  <textarea 
-                    className="w-full bg-input border border-border rounded-lg px-4 py-3 text-sm text-text-muted font-sans resize-none"
-                    rows={4}
-                    placeholder="Descreva o motivo da tramitação..."
-                  />
-                </div>
+                  {/* Textarea - label branco, borda mais visível */}
+                  <div className="mb-8">
+                    <label className="text-sm text-foreground mb-2 block font-sans">Observação <span className="text-foreground">*</span></label>
+                    <textarea 
+                      className="w-full bg-[#000000] border border-[#3b3d4a] rounded-lg px-4 py-3 text-sm text-text-secondary font-sans resize-none"
+                      rows={5}
+                      placeholder="Descreva o motivo da tramitação..."
+                    />
+                  </div>
 
-                  {/* Botões */}
+                  {/* Botões - Cancelar com background escuro sólido */}
                   <div className="flex items-center justify-center gap-3">
-                    <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-text-muted text-foreground text-sm font-sans hover:bg-muted transition-colors">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#3b3d4a] text-foreground text-sm font-sans hover:bg-[#3b3d4a] transition-colors">
                       <X className="w-4 h-4" />
                       Cancelar
                     </button>
-                    <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
