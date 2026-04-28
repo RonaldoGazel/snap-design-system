@@ -60,8 +60,8 @@ const colors = {
 
 const typography = {
   families: [
-    { name: "Sans (Geist)", class: "font-sans", sample: "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789" },
-    { name: "Mono (Geist Mono)", class: "font-mono", sample: "const snap = { ai: true }; // Código exemplo" },
+    { name: "Inter Tight", class: "font-sans", sample: "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789", description: "Fonte principal para textos e UI. Versão condensada da Inter, ideal para interfaces compactas." },
+    { name: "Cygnito Mono", class: "font-mono", sample: "const snap = { ai: true }; // Código exemplo", description: "Fonte monospace customizada para código, dados técnicos e elementos que precisam de alinhamento." },
   ],
   scale: [
     { name: "xs", class: "text-xs", size: "12px", lineHeight: "16px" },
@@ -229,6 +229,7 @@ export default function DesignSystemPage() {
                     </code>
                   </div>
                   <p className={`text-lg text-text-secondary ${font.class}`}>{font.sample}</p>
+                  <p className="text-xs text-text-muted mt-2">{font.description}</p>
                 </div>
               ))}
             </div>

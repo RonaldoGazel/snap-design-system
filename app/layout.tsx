@@ -1,10 +1,20 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter_Tight } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const interTight = Inter_Tight({ 
+  subsets: ["latin"],
+  variable: '--font-inter-tight',
+  display: 'swap',
+});
+
+const cygnitoMono = localFont({
+  src: '../public/fonts/cygnito-mono.otf',
+  variable: '--font-cygnito-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'SNAP AI Assistant',
@@ -35,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className="bg-background">
+    <html lang="pt-BR" className={`${interTight.variable} ${cygnitoMono.variable} bg-background`}>
       <body className="font-sans antialiased bg-background text-foreground">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
