@@ -573,10 +573,13 @@ export default function DesignSystemPage() {
                 <li><strong>Background:</strong> #1a1a1a (--card)</li>
                 <li><strong>Border-radius:</strong> 12px</li>
                 <li><strong>Padding:</strong> 24px</li>
-                <li><strong>Header:</strong> Ícone + Título em Cygnito UPPERCASE + Botão X (fechar) alinhado à direita</li>
+                <li><strong>Header:</strong> Ícone (cor da vertical) + Título em Cygnito UPPERCASE + Botão X (fechar) à direita</li>
+                <li><strong>Linha separadora do header:</strong> Linha horizontal na cor da vertical ativa logo abaixo do header</li>
                 <li><strong>Conteúdo:</strong> Labels em Inter Tight, campos obrigatórios com * em rosa</li>
-                <li><strong>Tabs internas:</strong> Underline como indicador (não pill), cor da vertical ativa</li>
-                <li><strong>Botões de ação:</strong> Sempre alinhados à direita, espaçamento de 12px entre eles</li>
+                <li><strong>Tabs internas:</strong> Underline como indicador, cor da vertical ativa + linha cinza abaixo de todas as tabs</li>
+                <li><strong>Card de dados (key-value):</strong> Fundo preto, com linhas horizontais cinza separando cada row</li>
+                <li><strong>Botões de ação:</strong> Centralizados ou à direita, gap de 12px entre eles</li>
+                <li><strong>Botão Cancelar:</strong> Outline com borda visível (não apenas texto)</li>
                 <li><strong>Overlay:</strong> Background preto com opacidade (~50%)</li>
               </ul>
             </div>
@@ -584,22 +587,29 @@ export default function DesignSystemPage() {
             {/* Exemplo de Modal - Tramitar Processo */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Tramitar Processo</p>
-              <div className="bg-card rounded-xl border border-border p-6 max-w-md mx-auto">
+              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                    </svg>
-                    <span className="font-title text-lg">TRAMITAR PROCESSO</span>
+                <div className="p-6 pb-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <svg className="w-5 h-5 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                      </svg>
+                      <span className="font-title text-lg">TRAMITAR PROCESSO</span>
+                    </div>
+                    <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                      <X className="w-5 h-5 text-text-muted" />
+                    </button>
                   </div>
-                  <button className="p-1.5 rounded hover:bg-muted transition-colors">
-                    <X className="w-5 h-5 text-text-muted" />
-                  </button>
                 </div>
+                
+                {/* Linha separadora do header - cor da vertical */}
+                <div className="h-[2px] bg-[#72284b]" />
 
-                {/* Select */}
-                <div className="mb-4">
+                {/* Conteúdo */}
+                <div className="p-6">
+                  {/* Select */}
+                  <div className="mb-4">
                   <label className="text-sm text-text-secondary mb-2 block font-sans">Selecione um destinatário <span className="text-[#72284b]">*</span></label>
                   <div className="bg-input border border-border rounded-lg px-4 py-3 flex items-center justify-between">
                     <span className="text-text-muted text-sm font-sans">Chefe Contrainteligência</span>
@@ -639,18 +649,19 @@ export default function DesignSystemPage() {
                   />
                 </div>
 
-                {/* Botões */}
-                <div className="flex items-center justify-end gap-3">
-                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-text-secondary text-sm font-sans hover:bg-muted transition-colors">
-                    <X className="w-4 h-4" />
-                    Cancelar
-                  </button>
-                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                    </svg>
-                    Tramitar
-                  </button>
+                  {/* Botões */}
+                  <div className="flex items-center justify-center gap-3">
+                    <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-text-muted text-foreground text-sm font-sans hover:bg-muted transition-colors">
+                      <X className="w-4 h-4" />
+                      Cancelar
+                    </button>
+                    <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                      </svg>
+                      Tramitar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -658,54 +669,62 @@ export default function DesignSystemPage() {
             {/* Exemplo de Modal - Verificação de Entidade */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade (não encontrada)</p>
-              <div className="bg-card rounded-xl border border-border p-6 max-w-md mx-auto">
+              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <AlertTriangle className="w-5 h-5 text-warning" />
-                    <span className="font-title text-lg">VERIFICACAO DE ENTIDADE</span>
-                  </div>
-                  <button className="p-1.5 rounded hover:bg-muted transition-colors">
-                    <X className="w-5 h-5 text-text-muted" />
-                  </button>
-                </div>
-
-                {/* Mensagem com check ou warning */}
-                <div className="flex items-start gap-3 mb-4">
-                  <Check className="w-6 h-6 text-success shrink-0" />
-                  <p className="text-text-secondary text-sm font-sans">
-                    A entidade não foi encontrada no banco de dados! <strong className="text-[#72284b] cursor-pointer hover:underline">Deseja criar uma nova?</strong>
-                  </p>
-                </div>
-
-                {/* Card de dados */}
-                <div className="bg-input rounded-lg p-4 mb-4">
-                  <div className="space-y-2 text-sm font-sans">
-                    <div className="flex"><span className="text-text-muted w-24">UF:</span><span className="text-foreground">MG</span></div>
-                    <div className="flex"><span className="text-text-muted w-24">CEP:</span><span className="text-foreground">30.431-214</span></div>
-                    <div className="flex"><span className="text-text-muted w-24">Bairro:</span><span className="text-foreground">Barro Preto</span></div>
-                    <div className="flex"><span className="text-text-muted w-24">Cidade:</span><span className="text-foreground">Belo Horizonte</span></div>
-                    <div className="flex"><span className="text-text-muted w-24">Número:</span><span className="text-foreground">37</span></div>
-                    <div className="flex"><span className="text-text-muted w-24">Logradouro:</span><span className="text-foreground">Belo Horizonte</span></div>
+                <div className="p-6 pb-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <AlertTriangle className="w-5 h-5 text-[#72284b]" />
+                      <span className="font-title text-lg">VERIFICACAO DE ENTIDADE</span>
+                    </div>
+                    <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                      <X className="w-5 h-5 text-text-muted" />
+                    </button>
                   </div>
                 </div>
 
-                {/* Link Ver detalhes */}
-                <div className="flex items-center gap-2 mb-6">
-                  <Search className="w-4 h-4 text-[#72284b]" />
-                  <span className="text-sm text-[#72284b] cursor-pointer hover:underline font-sans">Ver detalhes</span>
-                </div>
+                {/* Linha separadora do header - cor da vertical */}
+                <div className="h-[2px] bg-[#72284b]" />
 
-                {/* Botões - estado incerto = outline nos dois */}
-                <div className="flex items-center justify-center gap-3">
-                  <button className="flex items-center gap-2 px-6 py-2 rounded-lg border border-border text-text-secondary text-sm font-sans hover:bg-muted transition-colors">
-                    <X className="w-4 h-4" />
-                    Cancelar
-                  </button>
-                  <button className="flex items-center gap-2 px-6 py-2 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
-                    <Check className="w-4 h-4" />
-                    Confirmar
-                  </button>
+                {/* Conteúdo */}
+                <div className="p-6">
+                  {/* Mensagem com check */}
+                  <div className="flex items-start gap-3 mb-4">
+                    <Check className="w-6 h-6 text-success shrink-0" />
+                    <p className="text-text-secondary text-sm font-sans">
+                      A entidade não foi encontrada no banco de dados! <strong className="text-foreground cursor-pointer hover:underline">Deseja criar uma nova?</strong>
+                    </p>
+                  </div>
+
+                  {/* Card de dados com linhas entre rows */}
+                  <div className="bg-input rounded-lg overflow-hidden mb-4">
+                    <div className="text-sm font-sans divide-y divide-border">
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">UF:</span><span className="text-text-secondary">MG</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">CEP:</span><span className="text-text-secondary">30.431-214</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Bairro:</span><span className="text-text-secondary">Barro Preto</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Cidade:</span><span className="text-text-secondary">Belo Horizonte</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Número:</span><span className="text-text-secondary">37</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Logradouro:</span><span className="text-text-secondary">Belo Horizonte</span></div>
+                    </div>
+                  </div>
+
+                  {/* Link Ver detalhes */}
+                  <div className="flex items-center gap-2 mb-6">
+                    <Search className="w-4 h-4 text-text-secondary" />
+                    <span className="text-sm text-text-secondary cursor-pointer hover:underline font-sans">Ver detalhes</span>
+                  </div>
+
+                  {/* Botões - Cancelar com borda visível */}
+                  <div className="flex items-center justify-center gap-3">
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg border border-text-muted text-foreground text-sm font-sans hover:bg-muted transition-colors">
+                      <X className="w-4 h-4" />
+                      Cancelar
+                    </button>
+                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
+                      <Check className="w-4 h-4" />
+                      Confirmar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
