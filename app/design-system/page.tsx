@@ -572,21 +572,19 @@ export default function DesignSystemPage() {
               <ul className="text-sm text-text-secondary space-y-2 font-sans list-disc ml-4">
                 <li><strong>Background:</strong> #101112</li>
                 <li><strong>Borda:</strong> #2A2B35, 1px</li>
-                <li><strong>Border-radius:</strong> 12px</li>
-                <li><strong>Header:</strong> Padding 16px 24px (compacto), altura ~56px</li>
-                <li><strong>Título:</strong> Cygnito UPPERCASE, 18px ou maior</li>
-                <li><strong>Ícone do header:</strong> Cor da vertical (#72284b para Inteligência)</li>
-                <li><strong>Linha separadora do header:</strong> Cor da vertical (#72284b), 1px</li>
+                <li><strong>Border-radius modal:</strong> 12px</li>
+                <li><strong>Header:</strong> Padding 16px 24px (compacto)</li>
+                <li><strong>Título:</strong> Cygnito UPPERCASE, 18px</li>
+                <li><strong>Linha separadora do header:</strong> #2A2B35, 1px (mesma cor da borda)</li>
                 <li><strong>Padding do conteúdo:</strong> 24px</li>
-                <li><strong>Labels:</strong> Texto branco, Inter Tight</li>
-                <li><strong>Select:</strong> Background #2A2B35, borda #2A2B35, border-radius 8px</li>
-                <li><strong>Tabs internas:</strong> Underline 8px altura, <strong>SEM border-radius</strong> (retangular), cor da vertical</li>
-                <li><strong>Linha abaixo das tabs:</strong> #2A2B35, 1px</li>
-                <li><strong>Textarea/Input:</strong> Background #000000, borda #2A2B35</li>
-                <li><strong>Card de dados:</strong> Background #000000, borda #2A2B35, linhas internas #2A2B35</li>
-                <li><strong>Botões:</strong> Alinhados à direita, texto <strong>BOLD</strong></li>
-                <li><strong>Botão Cancelar:</strong> Background #2A2B35, borda #2A2B35</li>
-                <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b)</li>
+                <li><strong>Select:</strong> Background #2A2B35, border-radius 8px</li>
+                <li><strong>Tabs:</strong> Underline 8px altura, SEM border-radius, cor da vertical</li>
+                <li><strong>Input/Textarea:</strong> Background #000000, borda #2A2B35</li>
+                <li><strong>Alert box:</strong> Background #2A2B35, borda verde (success), border-radius 6px</li>
+                <li><strong>Card de dados:</strong> Background #000000, borda #2A2B35</li>
+                <li><strong>Botões:</strong> Sempre alinhados à <strong>DIREITA</strong>, border-radius <strong>6px</strong></li>
+                <li><strong>Botão Cancelar:</strong> OUTLINE - background transparente, borda #676C70 (cinza claro)</li>
+                <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b), texto bold</li>
                 <li><strong>Overlay:</strong> Background #000000 com opacidade 50%</li>
               </ul>
             </div>
@@ -611,8 +609,8 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
                 
-                {/* Linha separadora do header - cor da vertical, 1px */}
-                <div className="h-[1px] bg-[#72284b]" />
+                {/* Linha separadora do header - mesma cor da borda */}
+                <div className="h-[1px] bg-[#2a2b35]" />
 
                 {/* Conteúdo */}
                 <div className="p-6">
@@ -664,13 +662,13 @@ export default function DesignSystemPage() {
                     />
                   </div>
 
-                  {/* Botões - alinhados à DIREITA */}
+                  {/* Botões - SEMPRE à direita, radius 6px */}
                   <div className="flex items-center justify-end gap-3">
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#2a2b35] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
+                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-4 h-4" />
                       Cancelar
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
@@ -699,8 +697,8 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
 
-                {/* Linha separadora do header - cor da vertical, 1px */}
-                <div className="h-[1px] bg-[#72284b]" />
+                {/* Linha separadora do header - mesma cor da borda */}
+                <div className="h-[1px] bg-[#2a2b35]" />
 
                 {/* Conteúdo */}
                 <div className="p-6">
@@ -730,13 +728,13 @@ export default function DesignSystemPage() {
                     <span className="text-sm text-text-muted cursor-pointer hover:underline font-sans">Ver detalhes</span>
                   </div>
 
-                  {/* Botões - centralizados */}
-                  <div className="flex items-center justify-center gap-3">
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#2a2b35] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
+                  {/* Botões - SEMPRE à direita, radius 6px */}
+                  <div className="flex items-center justify-end gap-3">
+                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-4 h-4" />
                       Cancelar
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
                       <Check className="w-4 h-4" />
                       Confirmar
                     </button>
@@ -763,8 +761,8 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
 
-                {/* Linha separadora do header - cor da vertical, 1px */}
-                <div className="h-[1px] bg-[#72284b]" />
+                {/* Linha separadora do header - mesma cor da borda */}
+                <div className="h-[1px] bg-[#2a2b35]" />
 
                 {/* Conteúdo */}
                 <div className="p-6">
@@ -793,12 +791,12 @@ export default function DesignSystemPage() {
                     <div className="h-[1px] bg-[#2a2b35] -mt-[8px]" />
                   </div>
 
-                  {/* Alert box */}
-                  <div className="bg-[#2a2b35] rounded-lg p-4 mb-4">
+                  {/* Alert box - com borda verde */}
+                  <div className="bg-[#2a2b35] rounded-[6px] border border-success p-4 mb-4">
                     <p className="text-sm text-text-secondary font-sans">
-                    SUBSEC e SUP-CONTRA-INTEL são obrigatórios e não podem ser desmarcados.
-                  </p>
-                </div>
+                      SUBSEC e SUP-CONTRA-INTEL são obrigatórios e não podem ser desmarcados.
+                    </p>
+                  </div>
 
                   {/* Search input */}
                   <div className="bg-[#000000] border border-[#2a2b35] rounded-lg px-4 py-3 flex items-center gap-2 mb-4">
@@ -831,13 +829,13 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
 
-                  {/* Botões - centralizados, texto BOLD */}
-                  <div className="flex items-center justify-center gap-3">
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#2a2b35] border border-[#2a2b35] text-foreground text-sm font-bold font-sans hover:bg-[#3b3d4a] transition-colors">
+                  {/* Botões - SEMPRE à direita, radius 6px */}
+                  <div className="flex items-center justify-end gap-3">
+                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-4 h-4" />
                       Cancelar
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
