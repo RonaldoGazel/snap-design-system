@@ -61,8 +61,8 @@ const colors = {
 const typography = {
   families: [
     { name: "Inter Tight", class: "font-sans", sample: "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789", description: "Fonte principal para textos de corpo, labels e UI geral." },
-    { name: "Cygnito Mono (Títulos)", class: "font-title", sample: "SNAP AI DASHBOARD TÍTULOS MODAIS", description: "Fonte de títulos usada em headings, barras de título de modais e elementos de destaque." },
-    { name: "Cygnito Mono (Código)", class: "font-mono", sample: "const snap = { ai: true }; // Código", description: "Mesma fonte para código e dados técnicos." },
+    { name: "Cygnito Mono (Títulos)", class: "font-title", sample: "snap ai dashboard títulos modais", description: "REGRA: Sempre em UPPERCASE. Aplicado automaticamente via CSS em h1-h6, títulos de modais e sheets." },
+    { name: "Cygnito Mono (Código)", class: "font-mono", sample: "const snap = { ai: true };", description: "Mesma fonte para código e dados técnicos (sem uppercase forçado)." },
   ],
   scale: [
     { name: "xs", class: "text-xs", size: "12px", lineHeight: "16px" },
