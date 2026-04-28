@@ -3,6 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================
+   SNAP DESIGN SYSTEM
+   Consolidado a partir das referências Figma
+   ============================================ */
+
 /* Custom Fonts */
 @font-face {
   font-family: 'Cygnito Mono';
@@ -12,10 +17,11 @@
   font-display: swap;
 }
 
-/* SNAP Design System - Consolidado a partir das referências Figma */
 :root {
   /* ============================================
-     CORES DAS VERTICAIS DO ECOSSISTEMA SNAP
+     1. CORES DAS VERTICAIS DO ECOSSISTEMA SNAP
+     Cada vertical tem sua cor primária que define
+     botões de ação, destaques e indicadores.
      ============================================ */
   --vertical-investigacao: #fe473c;
   --vertical-inteligencia: #72284b;
@@ -23,108 +29,126 @@
   --vertical-infraestrutura: #3f9f76;
   --vertical-administracao: #333540;
 
-  /* Base backgrounds */
-  --background: #0A0A0A;
+  /* ============================================
+     2. BACKGROUNDS
+     ============================================ */
+  --background: #0a0a0a;
   --foreground: #ffffff;
-  
-  /* Card surfaces */
-  --card: #1A1A1A;
+  --card: #1a1a1a;
   --card-foreground: #ffffff;
   --card-elevated: #242424;
-  --card-hover: #2A2A2A;
-  
-  /* Popover/Modal */
-  --popover: #1A1A1A;
+  --card-hover: #2a2a2a;
+  --popover: #1a1a1a;
   --popover-foreground: #ffffff;
-  
-  /* Primary - Cor da vertical ativa (default: Inteligência) */
+  --input: #000000; /* Inputs são preto puro, não cinza */
+
+  /* ============================================
+     3. COR PRIMÁRIA (Default: Inteligência)
+     A cor primária muda conforme a vertical ativa.
+     ============================================ */
   --primary: #72284b;
   --primary-foreground: #ffffff;
   --primary-dark: #5a1f3c;
-  
-  /* Secondary */
-  --secondary: #2A2A2A;
-  --secondary-foreground: #ffffff;
-  
-  /* Muted */
-  --muted: #1A1A1A;
-  --muted-foreground: #888888;
-  
-  /* Accent */
-  --accent: #2A2A2A;
-  --accent-foreground: #ffffff;
-  
-  /* Destructive */
-  --destructive: #F44336;
+
+  /* ============================================
+     4. CORES DE STATUS
+     ============================================ */
+  --success: #3f9f76;
+  --success-dark: #1b5e20;
+  --warning: #ffc563;
+  --warning-dark: #d4a017;
+  --info: #00bcd4;
+  --error: #fe473c;
+  --destructive: #fe473c;
   --destructive-foreground: #ffffff;
-  
-  /* Status colors - Validados nas referências */
-  --success: #4CAF50;
-  --success-dark: #1B5E20;
-  --warning: #FFC107;
-  --warning-dark: #D4A017;
-  --info: #00BCD4;
-  --error: #F44336;
-  
-  /* Entity colors - Sistema de cores por tipo de entidade */
-  --entity-person: #E91E63;
-  --entity-address: #D4A017;
-  --entity-vehicle: #00BCD4;
-  --entity-company: #00BCD4;
-  
-  /* Risk colors - Sistema de níveis de risco */
-  --risk-critical: #F44336;
-  --risk-high: #FF9800;
-  --risk-medium: #FFC107;
-  --risk-low: #4CAF50;
-  
-  /* Tag colors - Sistema de tags por categoria */
-  --tag-preso: #E91E63;
-  --tag-visitante: #00BCD4;
-  --tag-advogado: #4CAF50;
-  --tag-familiar: #FFC107;
-  --tag-ex-preso: #FF9800;
-  
-  /* Borders */
-  --border: #2A2A2A;
-  --border-subtle: #333333;
-  --input: #000000;
-  --ring: #E91E63;
-  
-  /* Text hierarchy */
+
+  /* ============================================
+     5. SECONDARY / MUTED / ACCENT
+     ============================================ */
+  --secondary: #2a2a2a;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #888888;
+  --accent: #2a2a2a;
+  --accent-foreground: #ffffff;
+
+  /* ============================================
+     6. CORES DE ENTIDADE (para links no texto)
+     ============================================ */
+  --entity-person: #72284b;
+  --entity-address: #d4a017;
+  --entity-vehicle: #00bcd4;
+  --entity-company: #00bcd4;
+
+  /* ============================================
+     7. NÍVEIS DE RISCO
+     ============================================ */
+  --risk-critical: #fe473c;
+  --risk-high: #ff9800;
+  --risk-medium: #ffc563;
+  --risk-low: #3f9f76;
+
+  /* ============================================
+     8. TAGS POR CATEGORIA
+     ============================================ */
+  --tag-preso: #72284b;
+  --tag-visitante: #00bcd4;
+  --tag-advogado: #3f9f76;
+  --tag-familiar: #ffc563;
+  --tag-ex-preso: #ff9800;
+
+  /* ============================================
+     9. HIERARQUIA DE TEXTO
+     ============================================ */
   --text-primary: #ffffff;
-  --text-secondary: #A0A0A0;
+  --text-secondary: #a0a0a0;
   --text-muted: #888888;
   --text-subtle: #666666;
-  
-  /* Charts */
-  --chart-1: #E91E63;
-  --chart-2: #00BCD4;
-  --chart-3: #4CAF50;
-  --chart-4: #FF9800;
-  --chart-5: #FFC107;
-  
-  /* Border radius - Validados */
+
+  /* ============================================
+     10. BORDAS
+     ============================================ */
+  --border: #2a2a2a;
+  --border-subtle: #333333;
+  --ring: #72284b;
+
+  /* ============================================
+     11. BORDER RADIUS
+     ============================================ */
   --radius: 0.75rem;
   --radius-card: 12px;
   --radius-button: 8px;
   --radius-tag: 6px;
   --radius-input: 8px;
-  
-  /* Spacing */
+
+  /* ============================================
+     12. ESPAÇAMENTOS
+     ============================================ */
   --spacing-card-padding: 16px;
   --spacing-card-gap: 16px;
   --spacing-row-height: 44px;
-  
-  /* Sidebar */
+  --spacing-modal-padding: 24px;
+
+  /* ============================================
+     13. SIDEBAR
+     ============================================ */
   --sidebar: #000000;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #E91E63;
+  --sidebar-primary: #72284b;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1A1A1A;
+  --sidebar-accent: #1a1a1a;
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #2A2A2A;
-  --sidebar-ring: #E91E63;
+  --sidebar-border: #2a2a2a;
+  --sidebar-ring: #72284b;
+
+  /* ============================================
+     14. CHARTS
+     ============================================ */
+  --chart-1: #72284b;
+  --chart-2: #00bcd4;
+  --chart-3: #3f9f76;
+  --chart-4: #ff9800;
+  --chart-5: #ffc563;
 }
 
 @theme inline {
@@ -233,12 +257,13 @@
   }
 }
 
-/* 
- * REGRA CYGNITO MONO:
- * - Só usar em títulos grandes (>= 18px / text-lg)
- * - Sempre em UPPERCASE
- * - Fica ruim em tamanhos pequenos, usar Inter Tight nesses casos
- */
+/* ============================================
+   REGRAS TIPOGRÁFICAS - CYGNITO MONO
+   
+   REGRA 1: Sempre em UPPERCASE
+   REGRA 2: Apenas em tamanhos >= 18px (text-lg)
+   REGRA 3: Fica ruim reduzida, usar Inter Tight < 18px
+   ============================================ */
 
 /* Classe utilitária para forçar Cygnito (usar apenas em textos >= 18px) */
 .font-title {
@@ -247,7 +272,7 @@
   letter-spacing: 0.02em;
 }
 
-/* Aplicar Cygnito + uppercase apenas em h1 e h2 (geralmente >= 18px) */
+/* Aplicar Cygnito + uppercase apenas em h1 e h2 (>= 18px) */
 h1, h2,
 .dialog-title,
 .modal-title,
@@ -261,4 +286,95 @@ h1, h2,
 h3, h4, h5, h6 {
   font-family: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif !important;
   text-transform: none !important;
+}
+
+/* ============================================
+   COMPONENTES - ESTILOS BASE
+   ============================================ */
+
+/* Inline Edit - borda ao redor do campo editável */
+.inline-edit-active {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  background: transparent;
+}
+
+/* Toggle Buttons (Ativas/Encerradas) */
+.toggle-button-active {
+  background-color: var(--primary);
+  color: white;
+}
+
+.toggle-button-inactive {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+
+/* Tab com underline */
+.tab-underline-active {
+  border-bottom: 2px solid var(--primary);
+  color: var(--foreground);
+}
+
+.tab-underline-inactive {
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+}
+
+/* Badge IA */
+.badge-ia {
+  background-color: var(--muted);
+  color: var(--foreground);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.empty-state-icon {
+  color: var(--text-subtle);
+  margin-bottom: 16px;
+}
+
+.empty-state-title {
+  color: var(--foreground);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.empty-state-description {
+  color: var(--text-muted);
+}
+
+/* DropZone */
+.dropzone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-input);
+  padding: 24px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.dropzone:hover {
+  border-color: var(--text-muted);
+}
+
+/* Toast de Sucesso */
+.toast-success {
+  background-color: var(--success-dark);
+  color: white;
+  border-radius: var(--radius-input);
+  padding: 12px 16px;
 }
