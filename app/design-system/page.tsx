@@ -562,6 +562,273 @@ export default function DesignSystemPage() {
         </Section>
 
         {/* ============================================
+            MODAIS (Dialog/Popup)
+            ============================================ */}
+        <Section title="MODAIS (DIALOG / POPUP)">
+          <div className="space-y-6">
+            {/* Regras */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Estrutura e Regras de Modais</p>
+              <ul className="text-sm text-text-secondary space-y-2 font-sans list-disc ml-4">
+                <li><strong>Background:</strong> #1a1a1a (--card)</li>
+                <li><strong>Border-radius:</strong> 12px</li>
+                <li><strong>Padding:</strong> 24px</li>
+                <li><strong>Header:</strong> Ícone + Título em Cygnito UPPERCASE + Botão X (fechar) alinhado à direita</li>
+                <li><strong>Conteúdo:</strong> Labels em Inter Tight, campos obrigatórios com * em rosa</li>
+                <li><strong>Tabs internas:</strong> Underline como indicador (não pill), cor da vertical ativa</li>
+                <li><strong>Botões de ação:</strong> Sempre alinhados à direita, espaçamento de 12px entre eles</li>
+                <li><strong>Overlay:</strong> Background preto com opacidade (~50%)</li>
+              </ul>
+            </div>
+
+            {/* Exemplo de Modal - Tramitar Processo */}
+            <div className="space-y-4">
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Tramitar Processo</p>
+              <div className="bg-card rounded-xl border border-border p-6 max-w-md mx-auto">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <svg className="w-5 h-5 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    <span className="font-title text-lg">TRAMITAR PROCESSO</span>
+                  </div>
+                  <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                    <X className="w-5 h-5 text-text-muted" />
+                  </button>
+                </div>
+
+                {/* Select */}
+                <div className="mb-4">
+                  <label className="text-sm text-text-secondary mb-2 block font-sans">Selecione um destinatário <span className="text-[#72284b]">*</span></label>
+                  <div className="bg-input border border-border rounded-lg px-4 py-3 flex items-center justify-between">
+                    <span className="text-text-muted text-sm font-sans">Chefe Contrainteligência</span>
+                    <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Tabs */}
+                <div className="flex gap-6 mb-4 border-b border-border">
+                  <button className="flex items-center gap-2 pb-3 border-b-2 border-[#72284b] text-foreground text-sm font-sans">
+                    <FileText className="w-4 h-4" />
+                    Confeccionar
+                  </button>
+                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
+                    <Eye className="w-4 h-4" />
+                    Revisar
+                  </button>
+                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
+                    <Search className="w-4 h-4" />
+                    Analisar
+                  </button>
+                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
+                    <Check className="w-4 h-4" />
+                    Formalizar
+                  </button>
+                </div>
+
+                {/* Textarea */}
+                <div className="mb-6">
+                  <label className="text-sm text-text-secondary mb-2 block font-sans">Observação <span className="text-[#72284b]">*</span></label>
+                  <textarea 
+                    className="w-full bg-input border border-border rounded-lg px-4 py-3 text-sm text-text-muted font-sans resize-none"
+                    rows={4}
+                    placeholder="Descreva o motivo da tramitação..."
+                  />
+                </div>
+
+                {/* Botões */}
+                <div className="flex items-center justify-end gap-3">
+                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-text-secondary text-sm font-sans hover:bg-muted transition-colors">
+                    <X className="w-4 h-4" />
+                    Cancelar
+                  </button>
+                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    Tramitar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Exemplo de Modal - Verificação de Entidade */}
+            <div className="space-y-4">
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade (não encontrada)</p>
+              <div className="bg-card rounded-xl border border-border p-6 max-w-md mx-auto">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <AlertTriangle className="w-5 h-5 text-warning" />
+                    <span className="font-title text-lg">VERIFICACAO DE ENTIDADE</span>
+                  </div>
+                  <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                    <X className="w-5 h-5 text-text-muted" />
+                  </button>
+                </div>
+
+                {/* Mensagem com check ou warning */}
+                <div className="flex items-start gap-3 mb-4">
+                  <Check className="w-6 h-6 text-success shrink-0" />
+                  <p className="text-text-secondary text-sm font-sans">
+                    A entidade não foi encontrada no banco de dados! <strong className="text-[#72284b] cursor-pointer hover:underline">Deseja criar uma nova?</strong>
+                  </p>
+                </div>
+
+                {/* Card de dados */}
+                <div className="bg-input rounded-lg p-4 mb-4">
+                  <div className="space-y-2 text-sm font-sans">
+                    <div className="flex"><span className="text-text-muted w-24">UF:</span><span className="text-foreground">MG</span></div>
+                    <div className="flex"><span className="text-text-muted w-24">CEP:</span><span className="text-foreground">30.431-214</span></div>
+                    <div className="flex"><span className="text-text-muted w-24">Bairro:</span><span className="text-foreground">Barro Preto</span></div>
+                    <div className="flex"><span className="text-text-muted w-24">Cidade:</span><span className="text-foreground">Belo Horizonte</span></div>
+                    <div className="flex"><span className="text-text-muted w-24">Número:</span><span className="text-foreground">37</span></div>
+                    <div className="flex"><span className="text-text-muted w-24">Logradouro:</span><span className="text-foreground">Belo Horizonte</span></div>
+                  </div>
+                </div>
+
+                {/* Link Ver detalhes */}
+                <div className="flex items-center gap-2 mb-6">
+                  <Search className="w-4 h-4 text-[#72284b]" />
+                  <span className="text-sm text-[#72284b] cursor-pointer hover:underline font-sans">Ver detalhes</span>
+                </div>
+
+                {/* Botões - estado incerto = outline nos dois */}
+                <div className="flex items-center justify-center gap-3">
+                  <button className="flex items-center gap-2 px-6 py-2 rounded-lg border border-border text-text-secondary text-sm font-sans hover:bg-muted transition-colors">
+                    <X className="w-4 h-4" />
+                    Cancelar
+                  </button>
+                  <button className="flex items-center gap-2 px-6 py-2 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <Check className="w-4 h-4" />
+                    Confirmar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Exemplo de Modal - Difusão */}
+            <div className="space-y-4">
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Difusão de Processo</p>
+              <div className="bg-card rounded-xl border border-border p-6 max-w-md mx-auto">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-success" />
+                    <span className="font-title text-lg">DIFUSAO DE PROCESSO</span>
+                  </div>
+                  <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                    <X className="w-5 h-5 text-text-muted" />
+                  </button>
+                </div>
+
+                {/* Tabs - com ícones */}
+                <div className="flex gap-6 mb-4 border-b border-border">
+                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
+                    <Search className="w-4 h-4" />
+                    Sigiloso
+                  </button>
+                  <button className="flex items-center gap-2 pb-3 border-b-2 border-[#72284b] text-foreground text-sm font-sans">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Reservado
+                  </button>
+                  <button className="flex items-center gap-2 pb-3 border-b-2 border-transparent text-text-muted text-sm font-sans">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+                    </svg>
+                    Público
+                  </button>
+                </div>
+
+                {/* Alert box */}
+                <div className="bg-muted rounded-lg p-4 mb-4">
+                  <p className="text-sm text-text-secondary font-sans">
+                    SUBSEC e SUP-CONTRA-INTEL são obrigatórios e não podem ser desmarcados.
+                  </p>
+                </div>
+
+                {/* Search input */}
+                <div className="bg-muted border border-border rounded-lg px-4 py-3 flex items-center gap-2 mb-4">
+                  <span className="text-text-muted text-sm font-sans">Buscar pessoa</span>
+                  <Search className="w-4 h-4 text-text-muted ml-auto" />
+                </div>
+
+                {/* Lista expansível */}
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-center gap-3 p-2 bg-muted rounded-lg">
+                    <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    <User className="w-4 h-4 text-text-secondary" />
+                    <span className="text-sm text-foreground font-sans">Ministério Público de Minas Gerais</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2 hover:bg-muted rounded-lg transition-colors">
+                    <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    <User className="w-4 h-4 text-text-secondary" />
+                    <span className="text-sm text-text-muted font-sans">Entidade especial dentre 150</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2 hover:bg-muted rounded-lg transition-colors">
+                    <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    <User className="w-4 h-4 text-text-secondary" />
+                    <span className="text-sm text-text-muted font-sans">Tribunal Superior Eleitoral</span>
+                  </div>
+                </div>
+
+                {/* Botões */}
+                <div className="flex items-center justify-center gap-3">
+                  <button className="flex items-center gap-2 px-6 py-2 rounded-lg border border-border text-text-secondary text-sm font-sans hover:bg-muted transition-colors">
+                    <X className="w-4 h-4" />
+                    Cancelar
+                  </button>
+                  <button className="flex items-center gap-2 px-6 py-2 rounded-lg bg-[#72284b] text-white text-sm font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    Confirmar difusão
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Tipos de Modais */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Tipos de Modais Identificados</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-sans">
+                <div>
+                  <p className="text-text-muted mb-1">Tramitar Processo</p>
+                  <p className="text-text-secondary">Select + Tabs (underline) + Textarea + Botões</p>
+                </div>
+                <div>
+                  <p className="text-text-muted mb-1">Verificação de Entidade</p>
+                  <p className="text-text-secondary">Status (check/warning) + Card dados + Link + Botões</p>
+                </div>
+                <div>
+                  <p className="text-text-muted mb-1">Difusão de Processo</p>
+                  <p className="text-text-secondary">Tabs + Alert box + Search + Lista expansível + Botões</p>
+                </div>
+                <div>
+                  <p className="text-text-muted mb-1">Novo Documento</p>
+                  <p className="text-text-secondary">Input + Selects (grid 2 colunas) + Select template + Botões</p>
+                </div>
+                <div>
+                  <p className="text-text-muted mb-1">Busca Inteligente</p>
+                  <p className="text-text-secondary">Search input + Lista sugestões com Badge IA + Seleção direta</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
             TABELAS (DataTable)
             ============================================ */}
         <Section title="TABELAS (DATATABLE)">
