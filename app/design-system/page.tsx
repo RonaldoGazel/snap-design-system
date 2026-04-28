@@ -452,19 +452,27 @@ export default function DesignSystemPage() {
             ============================================ */}
         <Section title="EXEMPLOS VISUAIS">
 
-          {/* Tabs Underline */}
+          {/* Tabs Underline - 8px de altura, ACIMA da linha base */}
           <div className="mb-8">
             <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Tabs (Underline)</p>
-            <div className="flex gap-6 border-b border-border">
-              <button className="pb-3 border-b-2 border-[#72284b] text-foreground font-sans flex items-center gap-2">
-                <FileText className="w-4 h-4" /> Documentos
-              </button>
-              <button className="pb-3 border-b-2 border-transparent text-text-muted font-sans flex items-center gap-2">
-                Tramitações
-              </button>
-              <button className="pb-3 border-b-2 border-transparent text-text-muted font-sans flex items-center gap-2">
-                Auditoria
-              </button>
+            <div className="relative">
+              {/* Linha base - fica no fundo (z-0) */}
+              <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
+              <div className="flex gap-6">
+                {/* Tab ativa - ícone rosa, underline 8px */}
+                <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-5">
+                  <FileText className="w-4 h-4 text-[#72284b]" />
+                  <span className="font-semibold">Documentos</span>
+                  {/* Underline 8px ACIMA da linha (z-10) */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b] z-10" />
+                </button>
+                <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
+                  Tramitações
+                </button>
+                <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
+                  Auditoria
+                </button>
+              </div>
             </div>
           </div>
 
