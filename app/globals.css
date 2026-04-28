@@ -12,84 +12,119 @@
   font-display: swap;
 }
 
-/* SNAP Design System */
+/* SNAP Design System - Consolidado a partir das referências Figma */
 :root {
   /* Base backgrounds */
-  --background: #111114;
+  --background: #0A0A0A;
   --foreground: #ffffff;
   
   /* Card surfaces */
-  --card: #2a2b35;
+  --card: #1A1A1A;
   --card-foreground: #ffffff;
-  --card-elevated: #313131;
-  --card-hover: #363640;
+  --card-elevated: #242424;
+  --card-hover: #2A2A2A;
   
-  /* Popover */
-  --popover: #24242b;
+  /* Popover/Modal */
+  --popover: #1A1A1A;
   --popover-foreground: #ffffff;
   
   /* Primary - Pink/Magenta accent */
-  --primary: #9b4d72;
+  --primary: #E91E63;
   --primary-foreground: #ffffff;
-  --primary-dark: #72284b;
+  --primary-dark: #C2185B;
   
   /* Secondary */
-  --secondary: #3b3d4a;
+  --secondary: #2A2A2A;
   --secondary-foreground: #ffffff;
   
   /* Muted */
-  --muted: #2d2e36;
-  --muted-foreground: #7c868c;
+  --muted: #1A1A1A;
+  --muted-foreground: #888888;
   
   /* Accent */
-  --accent: #474852;
+  --accent: #2A2A2A;
   --accent-foreground: #ffffff;
   
   /* Destructive */
-  --destructive: #f87171;
+  --destructive: #F44336;
   --destructive-foreground: #ffffff;
   
-  /* Status colors */
-  --success: #4ade80;
-  --warning: #f59e0c;
-  --info: #60a5fa;
+  /* Status colors - Validados nas referências */
+  --success: #4CAF50;
+  --success-dark: #1B5E20;
+  --warning: #FFC107;
+  --warning-dark: #D4A017;
+  --info: #00BCD4;
+  --error: #F44336;
+  
+  /* Entity colors - Sistema de cores por tipo de entidade */
+  --entity-person: #E91E63;
+  --entity-address: #D4A017;
+  --entity-vehicle: #00BCD4;
+  --entity-company: #00BCD4;
+  
+  /* Risk colors - Sistema de níveis de risco */
+  --risk-critical: #F44336;
+  --risk-high: #FF9800;
+  --risk-medium: #FFC107;
+  --risk-low: #4CAF50;
+  
+  /* Tag colors - Sistema de tags por categoria */
+  --tag-preso: #E91E63;
+  --tag-visitante: #00BCD4;
+  --tag-advogado: #4CAF50;
+  --tag-familiar: #FFC107;
+  --tag-ex-preso: #FF9800;
   
   /* Borders */
-  --border: #363640;
-  --border-subtle: #474852;
-  --input: #2d2e36;
-  --ring: #9b4d72;
+  --border: #2A2A2A;
+  --border-subtle: #333333;
+  --input: #000000;
+  --ring: #E91E63;
   
   /* Text hierarchy */
   --text-primary: #ffffff;
-  --text-secondary: #a0adb5;
-  --text-muted: #7c868c;
-  --text-subtle: #657984;
+  --text-secondary: #A0A0A0;
+  --text-muted: #888888;
+  --text-subtle: #666666;
   
   /* Charts */
-  --chart-1: #9b4d72;
-  --chart-2: #60a5fa;
-  --chart-3: #4ade80;
-  --chart-4: #f59e0c;
-  --chart-5: #facc13;
+  --chart-1: #E91E63;
+  --chart-2: #00BCD4;
+  --chart-3: #4CAF50;
+  --chart-4: #FF9800;
+  --chart-5: #FFC107;
   
-  --radius: 0.5rem;
+  /* Border radius - Validados */
+  --radius: 0.75rem;
+  --radius-card: 12px;
+  --radius-button: 8px;
+  --radius-tag: 6px;
+  --radius-input: 8px;
+  
+  /* Spacing */
+  --spacing-card-padding: 16px;
+  --spacing-card-gap: 16px;
+  --spacing-row-height: 44px;
   
   /* Sidebar */
   --sidebar: #000000;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #9b4d72;
+  --sidebar-primary: #E91E63;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #24242b;
+  --sidebar-accent: #1A1A1A;
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #363640;
-  --sidebar-ring: #9b4d72;
+  --sidebar-border: #2A2A2A;
+  --sidebar-ring: #E91E63;
 }
 
 @theme inline {
+  /* Fonts */
   --font-sans: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
   --font-mono: 'Cygnito Mono', ui-monospace, monospace;
   --font-title: 'Cygnito Mono', ui-monospace, monospace;
+  
+  /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -109,26 +144,60 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  
+  /* Status colors */
   --color-success: var(--success);
+  --color-success-dark: var(--success-dark);
   --color-warning: var(--warning);
+  --color-warning-dark: var(--warning-dark);
   --color-info: var(--info);
+  --color-error: var(--error);
+  
+  /* Entity colors */
+  --color-entity-person: var(--entity-person);
+  --color-entity-address: var(--entity-address);
+  --color-entity-vehicle: var(--entity-vehicle);
+  --color-entity-company: var(--entity-company);
+  
+  /* Risk colors */
+  --color-risk-critical: var(--risk-critical);
+  --color-risk-high: var(--risk-high);
+  --color-risk-medium: var(--risk-medium);
+  --color-risk-low: var(--risk-low);
+  
+  /* Tag colors */
+  --color-tag-preso: var(--tag-preso);
+  --color-tag-visitante: var(--tag-visitante);
+  --color-tag-advogado: var(--tag-advogado);
+  --color-tag-familiar: var(--tag-familiar);
+  --color-tag-ex-preso: var(--tag-ex-preso);
+  
+  /* Borders & inputs */
   --color-border: var(--border);
   --color-border-subtle: var(--border-subtle);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  
+  /* Text hierarchy */
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-text-subtle: var(--text-subtle);
+  
+  /* Charts */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  
+  /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Sidebar */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
