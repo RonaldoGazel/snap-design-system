@@ -877,6 +877,85 @@ export default function DesignSystemPage() {
         </Section>
 
         {/* ============================================
+            TOASTS / NOTIFICAÇÕES
+            ============================================ */}
+        <Section title="TOASTS / NOTIFICAÇÕES">
+          <div className="space-y-6">
+            {/* Regras */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Regras de Toasts</p>
+              <ul className="text-sm text-text-secondary space-y-2 font-sans list-disc ml-4">
+                <li><strong>Background:</strong> Cor semântica (verde para sucesso, vermelho para erro, amarelo para warning)</li>
+                <li><strong>Border-radius:</strong> 6px</li>
+                <li><strong>Ícone:</strong> À esquerda, dentro de círculo ou simples</li>
+                <li><strong>Texto:</strong> Branco, Inter Tight</li>
+                <li><strong>Posição:</strong> Geralmente top-right ou bottom-center</li>
+                <li><strong>Tamanhos:</strong> Regular (padding 16px 20px) e Compacto (padding 12px 16px)</li>
+                <li><strong>Duração:</strong> Auto-dismiss após 3-5 segundos ou com botão de fechar</li>
+              </ul>
+            </div>
+
+            {/* Exemplos de Toasts */}
+            <div className="space-y-4">
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplos de Toasts</p>
+              
+              <div className="flex flex-col gap-4 max-w-md">
+                {/* Toast Sucesso - Regular */}
+                <div className="bg-[#1a4d3a] rounded-[6px] px-5 py-4 flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#2d6b50] flex items-center justify-center shrink-0">
+                    <Check className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-white text-sm font-sans">Processo criado com sucesso.</span>
+                </div>
+
+                {/* Toast Sucesso - Compacto */}
+                <div className="bg-[#1a4d3a] rounded-[6px] px-4 py-3 flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#2d6b50] flex items-center justify-center shrink-0">
+                    <Check className="w-3 h-3 text-white" />
+                  </div>
+                  <span className="text-white text-sm font-sans">Processo criado com sucesso.</span>
+                </div>
+
+                {/* Toast Erro - Regular */}
+                <div className="bg-[#5c1a1a] rounded-[6px] px-5 py-4 flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#7a2d2d] flex items-center justify-center shrink-0">
+                    <X className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-white text-sm font-sans">Erro ao criar processo. Tente novamente.</span>
+                </div>
+
+                {/* Toast Warning - Regular */}
+                <div className="bg-[#4d3a1a] rounded-[6px] px-5 py-4 flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#6b502d] flex items-center justify-center shrink-0">
+                    <AlertTriangle className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-white text-sm font-sans">Atenção: campos obrigatórios não preenchidos.</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Variantes */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Variantes de Toast</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm font-sans">
+                <div>
+                  <p className="text-success mb-1">Sucesso</p>
+                  <p className="text-text-secondary">Background #1a4d3a, ícone check</p>
+                </div>
+                <div>
+                  <p className="text-red-500 mb-1">Erro</p>
+                  <p className="text-text-secondary">Background #5c1a1a, ícone X</p>
+                </div>
+                <div>
+                  <p className="text-yellow-500 mb-1">Warning</p>
+                  <p className="text-text-secondary">Background #4d3a1a, ícone alerta</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
             TABELAS (DataTable)
             ============================================ */}
         <Section title="TABELAS (DATATABLE)">
