@@ -1,18 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter_Tight } from 'next/font/google'
-import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const interTight = Inter_Tight({ 
   subsets: ["latin"],
   variable: '--font-inter-tight',
-  display: 'swap',
-});
-
-const cygnitoMono = localFont({
-  src: '../public/fonts/cygnito-mono.otf',
-  variable: '--font-cygnito-mono',
   display: 'swap',
 });
 
@@ -45,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`${interTight.variable} ${cygnitoMono.variable} bg-background`}>
+    <html lang="pt-BR" className={`${interTight.variable} bg-background`}>
       <body className="font-sans antialiased bg-background text-foreground">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

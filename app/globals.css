@@ -3,6 +3,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Custom Fonts */
+@font-face {
+  font-family: 'Cygnito Mono';
+  src: url('http://clubedamanga.com/fonts/cygnito-mono.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* SNAP Design System */
 :root {
   /* Base backgrounds */
@@ -79,7 +88,7 @@
 
 @theme inline {
   --font-sans: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
-  --font-mono: var(--font-cygnito-mono), 'Cygnito Mono', monospace;
+  --font-mono: 'Cygnito Mono', ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
