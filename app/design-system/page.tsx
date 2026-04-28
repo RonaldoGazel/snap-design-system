@@ -625,31 +625,31 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
 
-                  {/* Tabs - underline 8px, SEM rounded */}
-                  <div className="mb-6">
+                  {/* Tabs - underline 8px ACIMA da linha base */}
+                  <div className="mb-6 relative">
+                    {/* Linha base - fica no fundo (z-0) */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
                     <div className="flex gap-6">
                       {/* Tab ativa - ícone rosa */}
-                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-4">
+                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-2">
                         <FileText className="w-4 h-4 text-[#72284b]" />
                         <span className="font-semibold">Confeccionar</span>
-                        {/* Underline 8px, SEM border-radius */}
-                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b]" />
+                        {/* Underline 8px ACIMA da linha (z-10) */}
+                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b] z-10" />
                       </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-2">
                         <Eye className="w-4 h-4" />
                         Revisar
                       </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-2">
                         <Search className="w-4 h-4" />
                         Analisar
                       </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-2">
                         <Check className="w-4 h-4" />
                         Formalizar
                       </button>
                     </div>
-                    {/* Linha base */}
-                    <div className="h-[1px] bg-[#2a2b35] -mt-[8px]" />
                   </div>
 
                   {/* Textarea */}
@@ -766,29 +766,30 @@ export default function DesignSystemPage() {
 
                 {/* Conteúdo */}
                 <div className="p-6">
-                  {/* Tabs - underline 8px, SEM rounded */}
-                  <div className="mb-4">
+                  {/* Tabs - underline 8px ACIMA da linha base */}
+                  <div className="mb-4 relative">
+                    {/* Linha base - fica no fundo (z-0) */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
                     <div className="flex gap-6">
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-2">
                         <Search className="w-4 h-4" />
                         Sigiloso
                       </button>
-                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-4">
+                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-2">
                         <svg className="w-4 h-4 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                         <span className="font-semibold">Reservado</span>
-                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b]" />
+                        {/* Underline ACIMA da linha (z-10) */}
+                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b] z-10" />
                       </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-4">
+                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-2">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
                         </svg>
                         Público
                       </button>
                     </div>
-                    {/* Linha base */}
-                    <div className="h-[1px] bg-[#2a2b35] -mt-[8px]" />
                   </div>
 
                   {/* Alert box - com borda verde */}
