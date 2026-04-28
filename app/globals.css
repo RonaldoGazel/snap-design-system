@@ -150,8 +150,8 @@
 
 /* Título usando Cygnito Mono - SEMPRE em UPPERCASE */
 .font-title {
-  font-family: 'Cygnito Mono', ui-monospace, monospace;
-  text-transform: uppercase;
+  font-family: 'Cygnito Mono', ui-monospace, monospace !important;
+  text-transform: uppercase !important;
   letter-spacing: 0.02em;
 }
 
@@ -160,7 +160,7 @@ h1, h2, h3, h4, h5, h6,
 .dialog-title,
 .modal-title,
 .sheet-title {
-  font-family: 'Cygnito Mono', ui-monospace, monospace;
-  text-transform: uppercase;
+  font-family: 'Cygnito Mono', ui-monospace, monospace !important;
+  text-transform: uppercase !important;
   letter-spacing: 0.02em;
 }
