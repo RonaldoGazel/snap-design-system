@@ -6,7 +6,7 @@
 /* Custom Fonts */
 @font-face {
   font-family: 'Cygnito Mono';
-  src: url('http://clubedamanga.com/fonts/cygnito-mono.otf') format('opentype');
+  src: url('/fonts/cygnito-mono.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -89,6 +89,7 @@
 @theme inline {
   --font-sans: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
   --font-mono: 'Cygnito Mono', ui-monospace, monospace;
+  --font-title: 'Cygnito Mono', ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -145,4 +146,17 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Título usando Cygnito Mono */
+.font-title {
+  font-family: 'Cygnito Mono', ui-monospace, monospace;
+}
+
+/* Aplicar Cygnito em todos os headings por padrão */
+h1, h2, h3, h4, h5, h6,
+.dialog-title,
+.modal-title,
+.sheet-title {
+  font-family: 'Cygnito Mono', ui-monospace, monospace;
 }

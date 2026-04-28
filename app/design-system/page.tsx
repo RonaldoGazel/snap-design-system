@@ -60,8 +60,9 @@ const colors = {
 
 const typography = {
   families: [
-    { name: "Inter Tight", class: "font-sans", sample: "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789", description: "Fonte principal para textos e UI. Versão condensada da Inter, ideal para interfaces compactas." },
-    { name: "Cygnito Mono", class: "font-mono", sample: "const snap = { ai: true }; // Código exemplo", description: "Fonte monospace customizada para código, dados técnicos e elementos que precisam de alinhamento." },
+    { name: "Inter Tight", class: "font-sans", sample: "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789", description: "Fonte principal para textos de corpo, labels e UI geral." },
+    { name: "Cygnito Mono (Títulos)", class: "font-title", sample: "SNAP AI DASHBOARD TÍTULOS MODAIS", description: "Fonte de títulos usada em headings, barras de título de modais e elementos de destaque." },
+    { name: "Cygnito Mono (Código)", class: "font-mono", sample: "const snap = { ai: true }; // Código", description: "Mesma fonte para código e dados técnicos." },
   ],
   scale: [
     { name: "xs", class: "text-xs", size: "12px", lineHeight: "16px" },
