@@ -562,6 +562,106 @@ export default function DesignSystemPage() {
         </Section>
 
         {/* ============================================
+            TABELAS (DataTable)
+            ============================================ */}
+        <Section title="TABELAS (DATATABLE)">
+          <div className="space-y-6">
+            {/* Regras */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Regras de Tabela</p>
+              <ul className="text-sm text-text-secondary space-y-2 font-sans list-disc ml-4">
+                <li><strong>Header:</strong> Texto cinza médio (#888888), sem background destacado, font-weight medium</li>
+                <li><strong>Rows:</strong> Sem bordas entre linhas (estilo clean/minimal)</li>
+                <li><strong>Altura de row:</strong> 40-48px</li>
+                <li><strong>Hover:</strong> Background sutil (#1a1a1a para #242424)</li>
+                <li><strong>Ações:</strong> Sempre alinhadas à direita</li>
+                <li><strong>Ícones de ação:</strong> Visualizar/Download = cinza | Excluir = rosa #72284b</li>
+                <li><strong>Checkbox:</strong> Se houver seleção, à esquerda de cada row</li>
+              </ul>
+            </div>
+
+            {/* Exemplo de Tabela */}
+            <div className="rounded-xl border border-border overflow-hidden">
+              {/* DropZone acima da tabela */}
+              <div className="p-6 border-b border-dashed border-text-muted text-center">
+                <p className="text-text-secondary font-sans">Para <strong>anexar arquivos</strong>, arraste-o(s) para essa área</p>
+                <p className="text-text-muted text-sm font-sans">Ou clique para selecionar manualmente</p>
+              </div>
+
+              {/* Tabela */}
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Arquivo</th>
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Tamanho</th>
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Data de criação</th>
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Data de modificação</th>
+                    <th className="text-right py-3 px-4 text-text-muted font-medium text-sm font-sans">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { nome: "Relatório Especial de Inteligência.PDF", tamanho: "55 MegaBytes", criacao: "02/04/2026 10:35", modificacao: "02/04/2026 16:50" },
+                    { nome: "Arquivo de provas selecionadas v2", tamanho: "55 MegaBytes", criacao: "02/04/2026 10:35", modificacao: "02/04/2026 16:50" },
+                    { nome: "Diagnóstico de investigação", tamanho: "55 MegaBytes", criacao: "02/04/2026 10:35", modificacao: "02/04/2026 16:50" },
+                  ].map((arquivo, i) => (
+                    <tr key={i} className="border-b border-border hover:bg-card-hover transition-colors" style={{ height: "48px" }}>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-2">
+                          <FileText className="w-4 h-4 text-text-muted" />
+                          <span className="text-foreground text-sm font-sans">{arquivo.nome}</span>
+                        </div>
+                      </td>
+                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{arquivo.tamanho}</td>
+                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{arquivo.criacao}</td>
+                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{arquivo.modificacao}</td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center justify-end gap-2">
+                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                            <Eye className="w-4 h-4 text-text-muted" />
+                          </button>
+                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                            <Download className="w-4 h-4 text-text-muted" />
+                          </button>
+                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                            <Trash2 className="w-4 h-4 text-[#72284b]" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Paginação */}
+            <div className="flex items-center justify-between">
+              <button className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary hover:text-foreground font-sans">
+                <ArrowLeft className="w-4 h-4" />
+                Página anterior
+              </button>
+              <div className="flex items-center gap-1">
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">1</span>
+                <span className="px-2 text-text-muted">...</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">3</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">4</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">5</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">6</span>
+                <span className="px-3 py-1 text-sm text-foreground font-bold font-sans bg-muted rounded">7</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">8</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">9</span>
+                <span className="px-2 text-text-muted">...</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">25</span>
+              </div>
+              <button className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary hover:text-foreground font-sans">
+                Próxima página
+                <ArrowLeft className="w-4 h-4 rotate-180" />
+              </button>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
             ESPAÇAMENTOS
             ============================================ */}
         <Section title="ESPACAMENTOS">
