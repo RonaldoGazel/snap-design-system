@@ -148,19 +148,32 @@
   }
 }
 
-/* Título usando Cygnito Mono - SEMPRE em UPPERCASE */
+/* 
+ * REGRA CYGNITO MONO:
+ * - Só usar em títulos grandes (>= 18px / text-lg)
+ * - Sempre em UPPERCASE
+ * - Fica ruim em tamanhos pequenos, usar Inter Tight nesses casos
+ */
+
+/* Classe utilitária para forçar Cygnito (usar apenas em textos >= 18px) */
 .font-title {
   font-family: 'Cygnito Mono', ui-monospace, monospace !important;
   text-transform: uppercase !important;
   letter-spacing: 0.02em;
 }
 
-/* Aplicar Cygnito + uppercase em todos os headings por padrão */
-h1, h2, h3, h4, h5, h6,
+/* Aplicar Cygnito + uppercase apenas em h1 e h2 (geralmente >= 18px) */
+h1, h2,
 .dialog-title,
 .modal-title,
 .sheet-title {
   font-family: 'Cygnito Mono', ui-monospace, monospace !important;
   text-transform: uppercase !important;
   letter-spacing: 0.02em;
+}
+
+/* h3-h6 usam Inter Tight (tamanhos menores que 18px) */
+h3, h4, h5, h6 {
+  font-family: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
+  text-transform: none;
 }
