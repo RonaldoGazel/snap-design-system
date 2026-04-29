@@ -904,7 +904,7 @@ export default function DesignSystemPage() {
             <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Badges de Risco</p>
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#fe473c]">Risco Crítico</span>
-              <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#ff9800]">Risco Alto</span>
+              <span className="px-3 py-1 rounded-full text-xs font-sans text-black bg-[#ff9800]">Risco Alto</span>
               <span className="px-3 py-1 rounded-full text-xs font-sans text-black bg-[#ffc563]">Risco Médio</span>
               <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#3f9f76]">Risco Baixo</span>
             </div>
@@ -915,10 +915,10 @@ export default function DesignSystemPage() {
             <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Tags de Categoria</p>
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1 rounded-md text-xs font-sans text-white bg-[#72284b]">preso</span>
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-white bg-[#00bcd4]">visitante</span>
+              <span className="px-3 py-1 rounded-md text-xs font-sans text-black bg-[#00bcd4]">visitante</span>
               <span className="px-3 py-1 rounded-md text-xs font-sans text-white bg-[#3f9f76]">advogado</span>
               <span className="px-3 py-1 rounded-md text-xs font-sans text-black bg-[#ffc563]">familiar</span>
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-white bg-[#ff9800]">ex-preso</span>
+              <span className="px-3 py-1 rounded-md text-xs font-sans text-black bg-[#ff9800]">ex-preso</span>
             </div>
           </div>
 
@@ -1006,6 +1006,15 @@ export default function DesignSystemPage() {
                   <li><strong>Badges com fundo sólido:</strong> Usar texto branco ou preto conforme luminosidade do fundo</li>
                   <li><strong>Links inline:</strong> Texto clareado + background sutil da cor base com 20-25% opacidade</li>
                 </ul>
+                
+                {/* Tabela de cores e texto */}
+                <div className="mt-4 pt-4 border-t border-[#3f9f76]/30">
+                  <p className="text-xs text-[#3f9f76] font-bold mb-2 font-sans">Guia de cores para badges:</p>
+                  <div className="grid grid-cols-2 gap-2 text-xs text-text-secondary font-sans">
+                    <div><span className="text-white">Texto BRANCO</span>: #fe473c, #72284b, #3f9f76</div>
+                    <div><span className="text-black bg-white/20 px-1 rounded">Texto PRETO</span>: #ff9800, #ffc563, #00bcd4</div>
+                  </div>
+                </div>
               </div>
             </div>
 
