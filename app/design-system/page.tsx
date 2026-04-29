@@ -405,6 +405,94 @@ function TramitarModal() {
   )
 }
 
+// Dados das Tabs de Exemplo
+const exampleTabs = [
+  { id: 'documentos', label: 'Documentos', icon: true },
+  { id: 'tramitacoes', label: 'Tramitações', icon: false },
+  { id: 'auditoria', label: 'Auditoria', icon: false },
+]
+
+// Componente Tabs Interativo (Exemplo Visual)
+function ExampleTabs() {
+  const [activeTab, setActiveTab] = useState('documentos')
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const [tabIndicator, setTabIndicator] = useState({ left: 0, width: 0 })
+
+  useEffect(() => {
+    const activeIndex = exampleTabs.findIndex(t => t.id === activeTab)
+    const activeTabElement = tabRefs.current[activeIndex]
+    if (activeTabElement) {
+      setTabIndicator({
+        left: activeTabElement.offsetLeft,
+        width: activeTabElement.offsetWidth,
+      })
+    }
+  }, [activeTab])
+
+  return (
+    <div className="relative">
+      {/* Linha base */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
+      <div className="flex gap-6">
+        {exampleTabs.map((tab, index) => {
+          const isActive = activeTab === tab.id
+          return (
+            <button
+              key={tab.id}
+              ref={(el) => { tabRefs.current[index] = el }}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 text-sm font-sans relative pb-5 transition-colors ${
+                isActive ? 'text-foreground' : 'text-text-muted hover:text-text-secondary'
+              }`}
+            >
+              {tab.icon && <FileText className={`w-4 h-4 ${isActive ? 'text-[#72284b]' : ''}`} />}
+              <span className={isActive ? 'font-semibold' : ''}>{tab.label}</span>
+            </button>
+          )
+        })}
+        {/* Barrinha animada */}
+        <div 
+          className="absolute bottom-0 h-[8px] bg-[#72284b] z-10 transition-all duration-300 ease-out"
+          style={{
+            left: tabIndicator.left,
+            width: tabIndicator.width,
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+
+// Componente Toggle Buttons Interativo
+function ExampleToggle() {
+  const [active, setActive] = useState<'ativas' | 'encerradas'>('ativas')
+
+  return (
+    <div className="inline-flex rounded-full overflow-hidden border border-border">
+      <button 
+        onClick={() => setActive('ativas')}
+        className={`px-4 py-2 font-sans text-sm transition-colors ${
+          active === 'ativas' 
+            ? 'bg-[#72284b] text-white' 
+            : 'bg-transparent text-text-muted hover:text-text-secondary'
+        }`}
+      >
+        Ativas
+      </button>
+      <button 
+        onClick={() => setActive('encerradas')}
+        className={`px-4 py-2 font-sans text-sm transition-colors ${
+          active === 'encerradas' 
+            ? 'bg-[#72284b] text-white' 
+            : 'bg-transparent text-text-muted hover:text-text-secondary'
+        }`}
+      >
+        Encerradas
+      </button>
+    </div>
+  )
+}
+
 // Componentes
 const componentes = [
   { 
@@ -759,37 +847,16 @@ export default function DesignSystemPage() {
             ============================================ */}
         <Section title="EXEMPLOS VISUAIS">
 
-          {/* Tabs Underline - 8px de altura, ACIMA da linha base */}
+          {/* Tabs Underline - Interativo com animação */}
           <div className="mb-8">
             <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Tabs (Underline)</p>
-            <div className="relative">
-              {/* Linha base - fica no fundo (z-0) */}
-              <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
-              <div className="flex gap-6">
-                {/* Tab ativa - ícone rosa, underline 8px */}
-                <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-5">
-                  <FileText className="w-4 h-4 text-[#72284b]" />
-                  <span className="font-semibold">Documentos</span>
-                  {/* Underline 8px ACIMA da linha (z-10) */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b] z-10" />
-                </button>
-                <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
-                  Tramitações
-                </button>
-                <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
-                  Auditoria
-                </button>
-              </div>
-            </div>
+            <ExampleTabs />
           </div>
 
-          {/* Toggle Buttons */}
+          {/* Toggle Buttons - Interativo */}
           <div className="mb-8">
             <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Toggle Buttons</p>
-            <div className="inline-flex rounded-full overflow-hidden border border-border">
-              <button className="px-4 py-2 bg-[#72284b] text-white font-sans text-sm">Ativas</button>
-              <button className="px-4 py-2 bg-transparent text-text-muted font-sans text-sm">Encerradas</button>
-            </div>
+            <ExampleToggle />
           </div>
 
           {/* Badge IA */}
