@@ -98,6 +98,127 @@ const padroesBotoes = [
   { contexto: "Ação de módulo", negativo: "Tramitar (outline)", positivo: "Formalizar (filled VERDE #3f9f76)" },
 ]
 
+// Dados do Accordion de Difusão
+const accordionData = [
+  {
+    id: 'mpmg',
+    title: 'Ministério Público de Minas Gerais',
+    items: [
+      { id: 'subsec', label: 'SUBSEC', checked: true, disabled: true },
+      { id: 'sup-contra', label: 'SUP-CONTRA-INTEL', checked: true, disabled: true },
+      { id: 'coord-seg', label: 'Coordenadoria de Segurança', checked: false },
+      { id: 'div-analise', label: 'Divisão de Análise Criminal', checked: false },
+      { id: 'nucleo-intel', label: 'Núcleo de Inteligência', checked: false },
+      { id: 'assessoria', label: 'Assessoria Especial', checked: false },
+    ]
+  },
+  {
+    id: 'entidade-especial',
+    title: 'Entidade especial dentre 150',
+    items: [
+      { id: 'setor-a', label: 'Setor A', checked: false },
+      { id: 'setor-b', label: 'Setor B', checked: false },
+      { id: 'setor-c', label: 'Setor C', checked: false },
+    ]
+  },
+  {
+    id: 'tse',
+    title: 'Tribunal Superior Eleitoral',
+    items: [
+      { id: 'gabinete', label: 'Gabinete da Presidência', checked: false },
+      { id: 'secretaria', label: 'Secretaria de Segurança', checked: false },
+      { id: 'coord-tse', label: 'Coordenação de Inteligência', checked: false },
+      { id: 'nucleo-tse', label: 'Núcleo de Análise', checked: false },
+    ]
+  }
+]
+
+// Componente Accordion Interativo para Modal Difusão
+function DifusaoAccordion() {
+  const [openItems, setOpenItems] = useState<string[]>(['mpmg'])
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({
+    'subsec': true,
+    'sup-contra': true,
+  })
+
+  const toggleAccordion = (id: string) => {
+    setOpenItems(prev => 
+      prev.includes(id) 
+        ? prev.filter(item => item !== id)
+        : [...prev, id]
+    )
+  }
+
+  const toggleCheckbox = (itemId: string, disabled?: boolean) => {
+    if (disabled) return
+    setCheckedItems(prev => ({
+      ...prev,
+      [itemId]: !prev[itemId]
+    }))
+  }
+
+  return (
+    <div className="space-y-2 mb-6">
+      {accordionData.map((section) => {
+        const isOpen = openItems.includes(section.id)
+        return (
+          <div key={section.id}>
+            {/* Header do Accordion */}
+            <button
+              onClick={() => toggleAccordion(section.id)}
+              className={`w-full flex items-center gap-3 p-2 hover:bg-[#2a2b35] transition-colors cursor-pointer ${
+                isOpen ? 'bg-[#2a2b35] rounded-t-lg' : 'rounded-lg'
+              }`}
+            >
+              <svg 
+                className={`w-4 h-4 text-text-muted transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+              <User className="w-4 h-4 text-text-secondary" />
+              <span className={`text-sm font-sans ${isOpen ? 'text-foreground' : 'text-text-muted'}`}>
+                {section.title}
+              </span>
+            </button>
+            
+            {/* Conteúdo expandido */}
+            {isOpen && (
+              <div className="bg-[#1a1b1e] border-x border-b border-[#2a2b35] rounded-b-lg max-h-[140px] overflow-y-auto scrollbar-minimal">
+                <div className="p-2 space-y-1">
+                  {section.items.map((item) => {
+                    const isChecked = checkedItems[item.id] || item.checked
+                    return (
+                      <label 
+                        key={item.id}
+                        onClick={() => toggleCheckbox(item.id, item.disabled)}
+                        className={`flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded ${item.disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}`}
+                      >
+                        <div className={`w-4 h-4 rounded border flex items-center justify-center ${
+                          isChecked 
+                            ? 'border-[#72284b] bg-[#72284b]' 
+                            : 'border-[#676c70] bg-transparent'
+                        }`}>
+                          {isChecked && <Check className="w-3 h-3 text-white" />}
+                        </div>
+                        <span className={`text-sm font-sans ${isChecked ? 'text-foreground' : 'text-text-muted'}`}>
+                          {item.label}
+                        </span>
+                      </label>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 // Componentes
 const componentes = [
   { 
@@ -813,67 +934,8 @@ export default function DesignSystemPage() {
                     <Search className="w-4 h-4 text-text-muted ml-auto" />
                   </div>
 
-                  {/* Lista expansível (Accordion) */}
-                  <div className="space-y-2 mb-6">
-                    {/* Item 1 - EXPANDIDO */}
-                    <div>
-                      <div className="flex items-center gap-3 p-2 bg-[#2a2b35] rounded-t-lg">
-                        <svg className="w-4 h-4 text-text-muted transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                        <User className="w-4 h-4 text-text-secondary" />
-                        <span className="text-sm text-foreground font-sans">Ministério Público de Minas Gerais</span>
-                      </div>
-                      {/* Sub-itens expandidos com scroll */}
-                      <div className="bg-[#1a1b1e] border-x border-b border-[#2a2b35] rounded-b-lg max-h-[140px] overflow-y-auto">
-                        <div className="p-2 space-y-1">
-                          {/* Sub-item com checkbox marcado */}
-                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
-                            <div className="w-4 h-4 rounded border border-[#72284b] bg-[#72284b] flex items-center justify-center">
-                              <Check className="w-3 h-3 text-white" />
-                            </div>
-                            <span className="text-sm text-foreground font-sans">SUBSEC</span>
-                          </label>
-                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
-                            <div className="w-4 h-4 rounded border border-[#72284b] bg-[#72284b] flex items-center justify-center">
-                              <Check className="w-3 h-3 text-white" />
-                            </div>
-                            <span className="text-sm text-foreground font-sans">SUP-CONTRA-INTEL</span>
-                          </label>
-                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
-                            <div className="w-4 h-4 rounded border border-[#676c70] bg-transparent"></div>
-                            <span className="text-sm text-text-muted font-sans">Coordenadoria de Segurança</span>
-                          </label>
-                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
-                            <div className="w-4 h-4 rounded border border-[#676c70] bg-transparent"></div>
-                            <span className="text-sm text-text-muted font-sans">Divisão de Análise Criminal</span>
-                          </label>
-                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
-                            <div className="w-4 h-4 rounded border border-[#676c70] bg-transparent"></div>
-                            <span className="text-sm text-text-muted font-sans">Núcleo de Inteligência</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Item 2 - Fechado */}
-                    <div className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded-lg transition-colors">
-                      <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                      <User className="w-4 h-4 text-text-secondary" />
-                      <span className="text-sm text-text-muted font-sans">Entidade especial dentre 150</span>
-                    </div>
-                    
-                    {/* Item 3 - Fechado */}
-                    <div className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded-lg transition-colors">
-                      <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                      <User className="w-4 h-4 text-text-secondary" />
-                      <span className="text-sm text-text-muted font-sans">Tribunal Superior Eleitoral</span>
-                    </div>
-                  </div>
+                  {/* Lista expansível (Accordion) - Interativo */}
+                  <DifusaoAccordion />
 
                   {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
                   <div className="flex items-center justify-end gap-3">

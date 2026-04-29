@@ -378,3 +378,28 @@ h3, h4, h5, h6 {
   border-radius: var(--radius-input);
   padding: 12px 16px;
 }
+
+/* ============================================
+   SCROLLBAR MINIMALISTA
+   ============================================ */
+.scrollbar-minimal {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3b45 transparent;
+}
+
+.scrollbar-minimal::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-minimal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-minimal::-webkit-scrollbar-thumb {
+  background-color: #3a3b45;
+  border-radius: 4px;
+}
+
+.scrollbar-minimal::-webkit-scrollbar-thumb:hover {
+  background-color: #4a4b55;
+}
