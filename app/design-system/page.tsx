@@ -1201,14 +1201,14 @@ export default function DesignSystemPage() {
             <div className="p-4 rounded-xl bg-card border border-border">
               <p className="text-sm font-medium text-foreground mb-3 font-sans">Estrutura e Regras de Cards</p>
               <ul className="text-sm text-text-secondary space-y-2 font-sans list-disc ml-4">
-                <li><strong>Background:</strong> #1a1a1a (card)</li>
-                <li><strong>Borda:</strong> #2A2B35, 1px</li>
+                <li><strong>Background:</strong> #383838 (cinza médio)</li>
+                <li><strong>Borda:</strong> #4a4a4a, 1px</li>
                 <li><strong>Border-radius:</strong> 12px</li>
                 <li><strong>Largura:</strong> ~340px (compacto)</li>
-                <li><strong>Padding geral:</strong> 20px (p-5)</li>
+                <li><strong>Header:</strong> padding-top <strong>22px</strong>, padding-bottom <strong>16px</strong> (até a linha)</li>
                 <li><strong>Header:</strong> Ícone 20px (cor da vertical) + Título (Inter/Sans, 18px, font-medium, capitalize)</li>
-                <li><strong>Linha separadora:</strong> #2A2B35, 1px, com <strong>margem horizontal de 20px</strong> (mx-5)</li>
-                <li><strong>Área de destaque:</strong> Background #2A2B35, border-radius 8px, padding px-3 py-2, texto 12px itálico</li>
+                <li><strong>Linha separadora:</strong> #4a4a4a, 1px, com <strong>margem horizontal de 20px</strong> (mx-5)</li>
+                <li><strong>Área de destaque:</strong> Background #2a2a2a, border-radius 8px, padding px-3 py-2, texto 12px itálico</li>
                 <li><strong>Lista de campos:</strong> Label (bold, 12px, w-20) + Valor (regular, 12px), espaçamento vertical 4px (space-y-1)</li>
                 <li><strong>Botões:</strong> Alinhados à <strong>ESQUERDA</strong>, largura 110px, texto 12px, gap-2</li>
                 <li><strong>Margem botões:</strong> <strong>24px</strong> (mb-6) entre o conteúdo e os botões</li>
@@ -1249,22 +1249,22 @@ export default function DesignSystemPage() {
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Card de Entidade (Endereço)</p>
               
               {/* Card */}
-              <div className="bg-card rounded-xl border border-border w-[340px] overflow-hidden">
-                {/* Header */}
-                <div className="px-5 pt-5 pb-3">
+              <div className="bg-[#383838] rounded-xl border border-[#4a4a4a] w-[340px] overflow-hidden">
+                {/* Header - pt-[22px] do topo, pb-[16px] até a linha */}
+                <div className="px-5 pt-[22px] pb-[16px]">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-[#72284b]" />
                     <span className="font-sans text-[18px] font-medium text-foreground">Endereço</span>
                   </div>
                 </div>
                 
-                {/* Linha separadora com margem horizontal de 24px */}
-                <div className="mx-5 h-[1px] bg-[#2a2b35]" />
+                {/* Linha separadora com margem horizontal de 20px */}
+                <div className="mx-5 h-[1px] bg-[#4a4a4a]" />
 
                 {/* Conteúdo */}
                 <div className="p-5">
                   {/* Área de destaque */}
-                  <div className="bg-[#2a2b35] rounded-lg px-3 py-2 mb-4">
+                  <div className="bg-[#2a2a2a] rounded-lg px-3 py-2 mb-4">
                     <p className="text-text-secondary text-xs font-sans italic leading-relaxed">
                       Nome: João Francisco Santo Pereira Salviano Bernardo Guimarães Aversa, CPF: 013.511.976-65
                     </p>
