@@ -768,31 +768,34 @@ export default function DesignSystemPage() {
           </p>
           <div className="p-4 rounded-xl bg-card border border-border">
             <p className="text-text-secondary font-sans leading-relaxed">
-              Nesta data, foi verificada a presença da pessoa de NOME: <span className="text-[#72284b] bg-[#72284b]/15 px-1 rounded">João Bernardo Guimarães Aversa</span>, 
-              CPF: <span className="text-[#72284b] bg-[#72284b]/15 px-1 rounded">013.511.976-65</span> na localidade de Belo Horizonte, 
-              localizado no ENDEREÇO: <span className="text-[#d4a017] bg-[#d4a017]/15 px-1 rounded">Rua Major Lopes, NÚMERO: 37, BAIRRO: Barro Preto</span>. 
-              O alvo foi visto em um VEÍCULO: <span className="text-[#00bcd4] bg-[#00bcd4]/15 px-1 rounded">Corsa Sedan, PLACA: NPX-3031</span>, 
-              nas imediações da empresa de RAZÃO SOCIAL: <span className="text-[#00bcd4] bg-[#00bcd4]/15 px-1 rounded">JB Aversa Participações Ltda</span>.
+              Nesta data, foi verificada a presença da pessoa de NOME: <span className="text-[#d4789b] bg-[#72284b]/25 px-1 rounded">João Bernardo Guimarães Aversa</span>, 
+              CPF: <span className="text-[#d4789b] bg-[#72284b]/25 px-1 rounded">013.511.976-65</span> na localidade de Belo Horizonte, 
+              localizado no ENDEREÇO: <span className="text-[#f0c048] bg-[#d4a017]/20 px-1 rounded">Rua Major Lopes, NÚMERO: 37, BAIRRO: Barro Preto</span>. 
+              O alvo foi visto em um VEÍCULO: <span className="text-[#4dd4e8] bg-[#00bcd4]/20 px-1 rounded">Corsa Sedan, PLACA: NPX-3031</span>, 
+              nas imediações da empresa de RAZÃO SOCIAL: <span className="text-[#4dd4e8] bg-[#00bcd4]/20 px-1 rounded">JB Aversa Participações Ltda</span>.
             </p>
           </div>
           <div className="mt-4 flex flex-wrap gap-6">
             <div className="flex items-center gap-2">
-              <User className="w-5 h-5 text-[#72284b]" />
-              <span className="text-sm text-text-secondary font-sans">Pessoa = Rosa #72284b</span>
+              <User className="w-5 h-5 text-[#d4789b]" />
+              <span className="text-sm text-text-secondary font-sans">Pessoa = Rosa #d4789b (texto) / #72284b (bg)</span>
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-[#d4a017]" />
-              <span className="text-sm text-text-secondary font-sans">Endereço = Amarelo #d4a017</span>
+              <MapPin className="w-5 h-5 text-[#f0c048]" />
+              <span className="text-sm text-text-secondary font-sans">Endereço = Amarelo #f0c048 (texto) / #d4a017 (bg)</span>
             </div>
             <div className="flex items-center gap-2">
-              <Car className="w-5 h-5 text-[#00bcd4]" />
-              <span className="text-sm text-text-secondary font-sans">Veículo = Ciano #00bcd4</span>
+              <Car className="w-5 h-5 text-[#4dd4e8]" />
+              <span className="text-sm text-text-secondary font-sans">Veículo = Ciano #4dd4e8 (texto) / #00bcd4 (bg)</span>
             </div>
             <div className="flex items-center gap-2">
-              <Building className="w-5 h-5 text-[#00bcd4]" />
-              <span className="text-sm text-text-secondary font-sans">Empresa = Ciano #00bcd4</span>
+              <Building className="w-5 h-5 text-[#4dd4e8]" />
+              <span className="text-sm text-text-secondary font-sans">Empresa = Ciano #4dd4e8 (texto) / #00bcd4 (bg)</span>
             </div>
           </div>
+          <p className="mt-3 text-xs text-text-muted font-sans">
+            * Cores de texto clareadas para atingir contraste WCAG AA (4.5:1 mínimo)
+          </p>
         </Section>
 
         {/* ============================================
@@ -993,6 +996,17 @@ export default function DesignSystemPage() {
                 <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b), texto bold</li>
                 <li><strong>Overlay:</strong> Background #000000 com opacidade 50%</li>
               </ul>
+              
+              {/* Regras de Acessibilidade WCAG */}
+              <div className="mt-6 p-4 bg-[#1a2b1f] border border-[#3f9f76] rounded-lg">
+                <h4 className="text-sm font-bold text-[#3f9f76] mb-2 font-sans">Regras de Acessibilidade (WCAG AA)</h4>
+                <ul className="text-sm text-text-secondary space-y-1 font-sans">
+                  <li><strong>Contraste mínimo texto:</strong> 4.5:1 para texto normal, 3:1 para texto grande (18px+)</li>
+                  <li><strong>Texto sobre fundo escuro:</strong> Usar versões clareadas das cores (ex: #d4789b ao invés de #72284b)</li>
+                  <li><strong>Badges com fundo sólido:</strong> Usar texto branco ou preto conforme luminosidade do fundo</li>
+                  <li><strong>Links inline:</strong> Texto clareado + background sutil da cor base com 20-25% opacidade</li>
+                </ul>
+              </div>
             </div>
 
             {/* Exemplo de Modal - Tramitar Processo (Interativo) */}
