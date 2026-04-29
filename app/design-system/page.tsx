@@ -158,7 +158,7 @@ function DifusaoAccordion() {
   }
 
   return (
-    <div className="space-y-2 mb-6">
+    <div className="space-y-2">
       {accordionData.map((section) => {
         const isOpen = openItems.includes(section.id)
         return (
@@ -215,6 +215,177 @@ function DifusaoAccordion() {
           </div>
         )
       })}
+    </div>
+  )
+}
+
+// Dados do Select de Destinatários
+const destinatarios = [
+  'Chefe Contrainteligência',
+  'Diretor de Operações',
+  'Coordenador de Análise',
+  'Supervisor de Campo',
+  'Assessor Especial',
+]
+
+// Dados das Tabs do modal Tramitar
+const tramitarTabs = [
+  { id: 'confeccionar', label: 'Confeccionar', icon: 'FileText' },
+  { id: 'revisar', label: 'Revisar', icon: 'Eye' },
+  { id: 'analisar', label: 'Analisar', icon: 'Search' },
+  { id: 'formalizar', label: 'Formalizar', icon: 'Check' },
+]
+
+// Componente Modal Tramitar Interativo
+function TramitarModal() {
+  const [selectOpen, setSelectOpen] = useState(false)
+  const [selectedDestinatario, setSelectedDestinatario] = useState('Chefe Contrainteligência')
+  const [activeTab, setActiveTab] = useState('confeccionar')
+
+  const handleSelectOption = (option: string) => {
+    setSelectedDestinatario(option)
+    setSelectOpen(false)
+  }
+
+  // Calcula a posição da barrinha animada
+  const getTabIndex = () => tramitarTabs.findIndex(t => t.id === activeTab)
+
+  return (
+    <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
+      {/* Header compacto */}
+      <div className="px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <svg className="w-5 h-5 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span className="font-title text-[18px]">TRAMITAR PROCESSO</span>
+          </div>
+          <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
+            <X className="w-5 h-5 text-text-muted" />
+          </button>
+        </div>
+      </div>
+      
+      {/* Linha separadora do header */}
+      <div className="h-[1px] bg-[#2a2b35]" />
+
+      {/* Conteúdo */}
+      <div className="p-6">
+        {/* Select Interativo */}
+        <div className="mb-6 relative">
+          <label className="text-sm text-foreground mb-2 block font-sans">
+            Selecione um destinatário <span className="text-foreground">*</span>
+          </label>
+          <button
+            onClick={() => setSelectOpen(!selectOpen)}
+            className="w-full bg-[#2a2b35] border border-[#2a2b35] rounded-lg px-4 py-3 flex items-center justify-between hover:border-[#3a3b45] transition-colors"
+          >
+            <span className="text-text-secondary text-sm font-sans">{selectedDestinatario}</span>
+            <svg 
+              className={`w-4 h-4 text-text-muted transition-transform duration-200 ${selectOpen ? 'rotate-180' : ''}`} 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          
+          {/* Dropdown Menu */}
+          {selectOpen && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-[#1a1b1e] border border-[#2a2b35] rounded-lg overflow-hidden z-20 shadow-lg">
+              <div className="max-h-[160px] overflow-y-auto scrollbar-minimal">
+                {destinatarios.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => handleSelectOption(option)}
+                    className={`w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#2a2b35] transition-colors ${
+                      option === selectedDestinatario 
+                        ? 'text-foreground bg-[#2a2b35]' 
+                        : 'text-text-muted'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Tabs Animadas */}
+        <div className="mb-6 relative">
+          {/* Linha base */}
+          <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
+          
+          <div className="flex gap-6 relative">
+            {tramitarTabs.map((tab) => {
+              const isActive = activeTab === tab.id
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 text-sm font-sans relative pb-5 transition-colors ${
+                    isActive ? 'text-foreground' : 'text-text-muted hover:text-text-secondary'
+                  }`}
+                >
+                  {tab.icon === 'FileText' && <FileText className={`w-4 h-4 ${isActive ? 'text-[#72284b]' : ''}`} />}
+                  {tab.icon === 'Eye' && <Eye className={`w-4 h-4 ${isActive ? 'text-[#72284b]' : ''}`} />}
+                  {tab.icon === 'Search' && <Search className={`w-4 h-4 ${isActive ? 'text-[#72284b]' : ''}`} />}
+                  {tab.icon === 'Check' && <Check className={`w-4 h-4 ${isActive ? 'text-[#72284b]' : ''}`} />}
+                  <span className={isActive ? 'font-semibold' : ''}>{tab.label}</span>
+                </button>
+              )
+            })}
+            
+            {/* Barrinha animada */}
+            <div 
+              className="absolute bottom-0 h-[8px] bg-[#72284b] z-10 transition-all duration-300 ease-out"
+              style={{
+                left: `${getTabIndex() * 25}%`,
+                width: getTabIndex() === 0 ? '90px' : getTabIndex() === 1 ? '60px' : getTabIndex() === 2 ? '65px' : '75px',
+                transform: `translateX(${getTabIndex() * 24}px)`,
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Conteúdo da Tab */}
+        <div className="mb-10">
+          <label className="text-sm text-foreground mb-2 block font-sans">
+            {activeTab === 'confeccionar' && 'Observação'}
+            {activeTab === 'revisar' && 'Parecer da Revisão'}
+            {activeTab === 'analisar' && 'Análise Técnica'}
+            {activeTab === 'formalizar' && 'Despacho Final'}
+            <span className="text-foreground"> *</span>
+          </label>
+          <textarea 
+            className="w-full bg-[#000000] border border-[#2a2b35] rounded-lg px-4 py-3 text-sm text-text-secondary font-sans resize-none focus:border-[#72284b] focus:outline-none transition-colors"
+            rows={5}
+            placeholder={
+              activeTab === 'confeccionar' ? 'Descreva o motivo da tramitação...' :
+              activeTab === 'revisar' ? 'Insira o parecer da revisão...' :
+              activeTab === 'analisar' ? 'Descreva a análise técnica...' :
+              'Insira o despacho final...'
+            }
+          />
+        </div>
+
+        {/* Botões - margem de 40px (mt-10) já aplicada acima com mb-10 */}
+        <div className="flex items-center justify-end gap-3">
+          <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+            <X className="w-4 h-4" />
+            <span>Cancelar</span>
+          </button>
+          <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span>Tramitar</span>
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
@@ -712,100 +883,17 @@ export default function DesignSystemPage() {
                 <li><strong>Alert box:</strong> Background #2A2B35, borda verde (success), border-radius 6px</li>
                 <li><strong>Card de dados:</strong> Background #000000, borda #2A2B35</li>
                 <li><strong>Botões:</strong> Sempre alinhados à <strong>DIREITA</strong>, border-radius <strong>6px</strong>, layout interno: ícone à ESQUERDA + texto à DIREITA (justify-between)</li>
+                <li><strong>Margem botões:</strong> Mínimo de <strong>40px</strong> entre o conteúdo acima e os botões de ação</li>
                 <li><strong>Botão Cancelar:</strong> OUTLINE - background transparente, borda #676C70 (cinza claro)</li>
                 <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b), texto bold</li>
                 <li><strong>Overlay:</strong> Background #000000 com opacidade 50%</li>
               </ul>
             </div>
 
-            {/* Exemplo de Modal - Tramitar Processo */}
+            {/* Exemplo de Modal - Tramitar Processo (Interativo) */}
             <div className="space-y-4">
-              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Tramitar Processo</p>
-              {/* Modal: background #101112, borda #2A2B35, 1px */}
-              <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
-                {/* Header compacto */}
-                <div className="px-6 py-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <svg className="w-5 h-5 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                      </svg>
-                      <span className="font-title text-[18px]">TRAMITAR PROCESSO</span>
-                    </div>
-                    <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
-                      <X className="w-5 h-5 text-text-muted" />
-                    </button>
-                  </div>
-                </div>
-                
-                {/* Linha separadora do header - mesma cor da borda */}
-                <div className="h-[1px] bg-[#2a2b35]" />
-
-                {/* Conteúdo */}
-                <div className="p-6">
-                  {/* Select */}
-                  <div className="mb-6">
-                    <label className="text-sm text-foreground mb-2 block font-sans">Selecione um destinatário <span className="text-foreground">*</span></label>
-                    <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg px-4 py-3 flex items-center justify-between">
-                      <span className="text-text-secondary text-sm font-sans">Chefe Contrainteligência</span>
-                      <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Tabs - underline 8px ACIMA da linha base */}
-                  <div className="mb-6 relative">
-                    {/* Linha base - fica no fundo (z-0) */}
-                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
-                    <div className="flex gap-6">
-                      {/* Tab ativa - ícone rosa, pb-5 para espaçamento correto */}
-                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-5">
-                        <FileText className="w-4 h-4 text-[#72284b]" />
-                        <span className="font-semibold">Confeccionar</span>
-                        {/* Underline 8px ACIMA da linha (z-10) */}
-                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b] z-10" />
-                      </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
-                        <Eye className="w-4 h-4" />
-                        Revisar
-                      </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
-                        <Search className="w-4 h-4" />
-                        Analisar
-                      </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
-                        <Check className="w-4 h-4" />
-                        Formalizar
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Textarea */}
-                  <div className="mb-8">
-                    <label className="text-sm text-foreground mb-2 block font-sans">Observação <span className="text-foreground">*</span></label>
-                    <textarea 
-                      className="w-full bg-[#000000] border border-[#2a2b35] rounded-lg px-4 py-3 text-sm text-text-secondary font-sans resize-none"
-                      rows={5}
-                      placeholder="Descreva o motivo da tramitação..."
-                    />
-                  </div>
-
-                  {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
-                  <div className="flex items-center justify-end gap-3">
-                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
-                      <X className="w-4 h-4" />
-                      <span>Cancelar</span>
-                    </button>
-                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                      </svg>
-                      <span>Tramitar</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Tramitar Processo (Interativo)</p>
+              <TramitarModal />
             </div>
 
             {/* Exemplo de Modal - Verificação de Entidade */}
@@ -851,8 +939,8 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
 
-                  {/* Link Ver detalhes */}
-                  <div className="flex items-center gap-2 mb-6">
+                  {/* Link Ver detalhes - margem de 40px (mb-10) antes dos botões */}
+                  <div className="flex items-center gap-2 mb-10">
                     <Search className="w-4 h-4 text-text-muted" />
                     <span className="text-sm text-text-muted cursor-pointer hover:underline font-sans">Ver detalhes</span>
                   </div>
@@ -935,7 +1023,9 @@ export default function DesignSystemPage() {
                   </div>
 
                   {/* Lista expansível (Accordion) - Interativo */}
-                  <DifusaoAccordion />
+                  <div className="mb-10">
+                    <DifusaoAccordion />
+                  </div>
 
                   {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
                   <div className="flex items-center justify-end gap-3">
