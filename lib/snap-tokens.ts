@@ -1,18 +1,70 @@
 /**
  * SNAP Design System - Tokens
  * Arquivo central de tokens para portabilidade
+ * 
+ * Ecossistema SNAP - Verticais e suas cores primárias:
+ * - Investigação: Coral (#FE473C)
+ * - Inteligência: Bordô (#72284B)
+ * - Cooperação: Grey Ahead (#889EA3)
+ * - Infraestrutura: Petroleum Blue (#287266)
+ * - Administração: Deep Gray Blue (#333540)
  */
 
 // ===========================================
-// CORES
+// CORES DAS VERTICAIS
+// ===========================================
+
+export const verticals = {
+  investigacao: {
+    name: 'Investigação',
+    color: 'Coral',
+    hex: '#FE473C',
+    hover: '#e53d33',
+    light: '#ff8a82', // Versão acessível para texto sobre fundo escuro
+  },
+  inteligencia: {
+    name: 'Inteligência',
+    color: 'Bordô',
+    hex: '#72284B',
+    hover: '#5a1f3c',
+    light: '#d4789b', // Versão acessível para texto sobre fundo escuro
+  },
+  cooperacao: {
+    name: 'Cooperação',
+    color: 'Grey Ahead',
+    hex: '#889EA3',
+    hover: '#718a8f',
+    light: '#b3c4c8', // Versão acessível para texto sobre fundo escuro
+  },
+  infraestrutura: {
+    name: 'Infraestrutura',
+    color: 'Petroleum Blue',
+    hex: '#287266',
+    hover: '#1f5a50',
+    light: '#4da89a', // Versão acessível para texto sobre fundo escuro
+  },
+  administracao: {
+    name: 'Administração',
+    color: 'Deep Gray Blue',
+    hex: '#333540',
+    hover: '#252730',
+    light: '#6b6e7a', // Versão acessível para texto sobre fundo escuro
+  },
+} as const
+
+// Vertical ativa atual (pode ser alterada conforme o contexto)
+export const activeVertical = verticals.inteligencia
+
+// ===========================================
+// CORES GERAIS
 // ===========================================
 
 export const colors = {
-  // Cor primária da vertical (SNAP)
+  // Cor primária (herdada da vertical ativa)
   primary: {
-    DEFAULT: '#72284b',
-    hover: '#5a1f3c',
-    light: '#d4789b', // Versão acessível para texto sobre fundo escuro
+    DEFAULT: activeVertical.hex,
+    hover: activeVertical.hover,
+    light: activeVertical.light,
   },
 
   // Backgrounds
@@ -274,6 +326,8 @@ export const wcag = {
 // ===========================================
 
 export const snapTokens = {
+  verticals,
+  activeVertical,
   colors,
   typography,
   spacing,
@@ -284,3 +338,4 @@ export const snapTokens = {
 } as const
 
 export type SnapTokens = typeof snapTokens
+export type Vertical = keyof typeof verticals

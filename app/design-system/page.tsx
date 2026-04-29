@@ -826,7 +826,111 @@ export default function DesignSystemPage() {
         {/* ============================================
             CORES
             ============================================ */}
-        <Section title="CORES">
+        <Section title="CORES DAS VERTICAIS">
+          <div className="space-y-6">
+            <p className="text-text-secondary font-sans">
+              O Ecossistema SNAP possui 5 verticais, cada uma com sua cor primária identificadora:
+            </p>
+            
+            {/* Grid de Verticais */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Investigação */}
+              <div className="p-4 rounded-xl bg-card border border-border">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#FE473C]" />
+                  <div>
+                    <p className="font-sans font-bold text-foreground">Investigação</p>
+                    <p className="text-xs text-text-muted font-sans">Coral</p>
+                  </div>
+                </div>
+                <div className="space-y-1 text-xs font-mono text-text-secondary">
+                  <p>HEX: <span className="text-[#ff8a82]">#FE473C</span></p>
+                  <p>Hover: #e53d33</p>
+                  <p>Light: #ff8a82 (WCAG)</p>
+                </div>
+              </div>
+
+              {/* Inteligência */}
+              <div className="p-4 rounded-xl bg-card border-2 border-[#72284B]">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#72284B]" />
+                  <div>
+                    <p className="font-sans font-bold text-foreground">Inteligência</p>
+                    <p className="text-xs text-text-muted font-sans">Bordô</p>
+                  </div>
+                </div>
+                <div className="space-y-1 text-xs font-mono text-text-secondary">
+                  <p>HEX: <span className="text-[#d4789b]">#72284B</span></p>
+                  <p>Hover: #5a1f3c</p>
+                  <p>Light: #d4789b (WCAG)</p>
+                </div>
+                <div className="mt-2 px-2 py-1 bg-[#72284B]/20 rounded text-xs text-[#d4789b] font-sans">
+                  Vertical ativa neste Design System
+                </div>
+              </div>
+
+              {/* Cooperação */}
+              <div className="p-4 rounded-xl bg-card border border-border">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#889EA3]" />
+                  <div>
+                    <p className="font-sans font-bold text-foreground">Cooperação</p>
+                    <p className="text-xs text-text-muted font-sans">Grey Ahead</p>
+                  </div>
+                </div>
+                <div className="space-y-1 text-xs font-mono text-text-secondary">
+                  <p>HEX: <span className="text-[#b3c4c8]">#889EA3</span></p>
+                  <p>Hover: #718a8f</p>
+                  <p>Light: #b3c4c8 (WCAG)</p>
+                </div>
+              </div>
+
+              {/* Infraestrutura */}
+              <div className="p-4 rounded-xl bg-card border border-border">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#287266]" />
+                  <div>
+                    <p className="font-sans font-bold text-foreground">Infraestrutura</p>
+                    <p className="text-xs text-text-muted font-sans">Petroleum Blue</p>
+                  </div>
+                </div>
+                <div className="space-y-1 text-xs font-mono text-text-secondary">
+                  <p>HEX: <span className="text-[#4da89a]">#287266</span></p>
+                  <p>Hover: #1f5a50</p>
+                  <p>Light: #4da89a (WCAG)</p>
+                </div>
+              </div>
+
+              {/* Administração */}
+              <div className="p-4 rounded-xl bg-card border border-border">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#333540]" />
+                  <div>
+                    <p className="font-sans font-bold text-foreground">Administração</p>
+                    <p className="text-xs text-text-muted font-sans">Deep Gray Blue</p>
+                  </div>
+                </div>
+                <div className="space-y-1 text-xs font-mono text-text-secondary">
+                  <p>HEX: <span className="text-[#6b6e7a]">#333540</span></p>
+                  <p>Hover: #252730</p>
+                  <p>Light: #6b6e7a (WCAG)</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Nota de uso */}
+            <div className="p-4 bg-[#2a1a2a] border border-[#72284b] rounded-lg">
+              <p className="text-sm text-[#d4789b] font-sans">
+                <strong>Uso da cor da vertical:</strong> A cor primária da vertical ativa é usada em ícones de headers (modais/cards), underlines de tabs, botões de ação positiva, badges de destaque e elementos de foco.
+              </p>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            CORES BASE
+            ============================================ */}
+        <Section title="CORES BASE">
           <div className="space-y-8">
             {Object.entries(coresBase).map(([categoria, cores]) => (
               <div key={categoria}>
@@ -1687,6 +1791,10 @@ export default function DesignSystemPage() {
                     <span className="text-text-secondary">Links de entidade com cores WCAG</span>
                   </div>
                   <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">verticals</code>
+                    <span className="text-text-secondary">Cores das 5 verticais SNAP</span>
+                  </div>
+                  <div className="flex items-start gap-2">
                     <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">snapTokens</code>
                     <span className="text-text-secondary">Tokens centralizados (cores, espaçamentos)</span>
                   </div>
@@ -1699,17 +1807,23 @@ export default function DesignSystemPage() {
               <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Estrutura de Arquivos</h4>
               <pre className="text-xs text-text-secondary font-mono bg-[#0f0f10] p-4 rounded-lg overflow-x-auto">
 {`/components/snap/
-  ├── index.ts           # Exports centralizados
-  ├── snap-badge.tsx     # SnapBadge, RiskBadge, StatusBadge, CategoryTag
-  ├── snap-button.tsx    # SnapButton, SnapButtonGroup
-  ├── snap-card.tsx      # SnapCard, SnapCardHeader, SnapCardTitle, etc.
-  ├── snap-modal.tsx     # SnapModal, SnapModalHeader, SnapModalContent, etc.
-  ├── snap-tabs.tsx      # SnapTabs, SnapTabsList, SnapTabsTrigger, SnapTabsContent
-  ├── snap-select.tsx    # SnapSelect (estilo accordion)
+  ├── index.ts              # Exports centralizados (inclui verticais)
+  ├── snap-badge.tsx        # SnapBadge, RiskBadge, StatusBadge, CategoryTag
+  ├── snap-button.tsx       # SnapButton, SnapButtonGroup
+  ├── snap-card.tsx         # SnapCard, SnapCardHeader, SnapCardTitle, etc.
+  ├── snap-modal.tsx        # SnapModal, SnapModalHeader, SnapModalContent, etc.
+  ├── snap-tabs.tsx         # SnapTabs, SnapTabsList, SnapTabsTrigger, SnapTabsContent
+  ├── snap-select.tsx       # SnapSelect (estilo accordion)
   └── snap-entity-link.tsx  # SnapEntityLink, PessoaLink, EnderecoLink, etc.
 
 /lib/
-  └── snap-tokens.ts     # Tokens: cores, tipografia, espaçamentos, WCAG`}
+  └── snap-tokens.ts        # Verticais, cores, tipografia, espaçamentos, WCAG
+                            # Cores das verticais:
+                            # - Investigação: Coral (#FE473C)
+                            # - Inteligência: Bordô (#72284B) <- ativa
+                            # - Cooperação: Grey Ahead (#889EA3)
+                            # - Infraestrutura: Petroleum Blue (#287266)
+                            # - Administração: Deep Gray Blue (#333540)`}
               </pre>
             </div>
 
