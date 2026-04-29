@@ -1204,14 +1204,14 @@ export default function DesignSystemPage() {
                 <li><strong>Background:</strong> #1a1a1a (card)</li>
                 <li><strong>Borda:</strong> #2A2B35, 1px</li>
                 <li><strong>Border-radius:</strong> 12px</li>
-                <li><strong>Padding geral:</strong> 24px</li>
-                <li><strong>Header:</strong> Ícone (cor da vertical) + Título (Cygnito UPPERCASE, 24px)</li>
-                <li><strong>Linha separadora:</strong> #2A2B35, 1px, com <strong>margem horizontal de 24px</strong> (não encosta nas bordas)</li>
-                <li><strong>Área de destaque:</strong> Background #2A2B35, border-radius 8px, texto em itálico</li>
-                <li><strong>Lista de campos:</strong> Label (bold) + Valor (regular), espaçamento vertical 8px</li>
-                <li><strong>Botões:</strong> Alinhados à <strong>ESQUERDA</strong> (diferente dos modais)</li>
-                <li><strong>Margem botões:</strong> <strong>24px</strong> fixos entre o conteúdo e os botões (diferente dos modais que são 36px)</li>
-                <li><strong>Layout interno botões:</strong> ícone à ESQUERDA + texto à DIREITA (justify-between), igual aos modais</li>
+                <li><strong>Largura:</strong> ~340px (compacto)</li>
+                <li><strong>Padding geral:</strong> 20px (p-5)</li>
+                <li><strong>Header:</strong> Ícone 20px (cor da vertical) + Título (Inter/Sans, 18px, font-medium, capitalize)</li>
+                <li><strong>Linha separadora:</strong> #2A2B35, 1px, com <strong>margem horizontal de 20px</strong> (mx-5)</li>
+                <li><strong>Área de destaque:</strong> Background #2A2B35, border-radius 8px, padding px-3 py-2, texto 12px itálico</li>
+                <li><strong>Lista de campos:</strong> Label (bold, 12px, w-20) + Valor (regular, 12px), espaçamento vertical 4px (space-y-1)</li>
+                <li><strong>Botões:</strong> Alinhados à <strong>ESQUERDA</strong>, largura 110px, texto 12px, gap-2</li>
+                <li><strong>Margem botões:</strong> <strong>24px</strong> (mb-6) entre o conteúdo e os botões</li>
               </ul>
               
               {/* Diferenças entre Card e Modal */}
@@ -1223,7 +1223,9 @@ export default function DesignSystemPage() {
                     <ul className="space-y-1 list-disc ml-4">
                       <li>Botões à ESQUERDA</li>
                       <li>Margem botões: 24px</li>
-                      <li>Linha separadora: mx-6</li>
+                      <li>Linha separadora: mx-5</li>
+                      <li>Título: Sans 18px capitalize</li>
+                      <li>Texto: 12px</li>
                       <li>Inline na página</li>
                     </ul>
                   </div>
@@ -1233,6 +1235,8 @@ export default function DesignSystemPage() {
                       <li>Botões à DIREITA</li>
                       <li>Margem botões: 36px</li>
                       <li>Linha separadora: full-width</li>
+                      <li>Título: Cygnito 18px UPPERCASE</li>
+                      <li>Texto: 14px</li>
                       <li>Overlay + centralizado</li>
                     </ul>
                   </div>
@@ -1245,63 +1249,63 @@ export default function DesignSystemPage() {
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Card de Entidade (Endereço)</p>
               
               {/* Card */}
-              <div className="bg-card rounded-xl border border-border max-w-lg overflow-hidden">
+              <div className="bg-card rounded-xl border border-border w-[340px] overflow-hidden">
                 {/* Header */}
-                <div className="p-6 pb-4">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-6 h-6 text-[#72284b]" />
-                    <span className="font-title text-[24px]">Endereço</span>
+                <div className="px-5 pt-5 pb-3">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-[#72284b]" />
+                    <span className="font-sans text-[18px] font-medium text-foreground">Endereço</span>
                   </div>
                 </div>
                 
                 {/* Linha separadora com margem horizontal de 24px */}
-                <div className="mx-6 h-[1px] bg-[#2a2b35]" />
+                <div className="mx-5 h-[1px] bg-[#2a2b35]" />
 
                 {/* Conteúdo */}
-                <div className="p-6">
+                <div className="p-5">
                   {/* Área de destaque */}
-                  <div className="bg-[#2a2b35] rounded-lg p-4 mb-6">
-                    <p className="text-text-secondary text-sm font-sans italic">
+                  <div className="bg-[#2a2b35] rounded-lg px-3 py-2 mb-4">
+                    <p className="text-text-secondary text-xs font-sans italic leading-relaxed">
                       Nome: João Francisco Santo Pereira Salviano Bernardo Guimarães Aversa, CPF: 013.511.976-65
                     </p>
                   </div>
 
                   {/* Lista de campos */}
-                  <div className="space-y-2 mb-6">
+                  <div className="space-y-1 mb-6">
                     <div className="flex">
-                      <span className="text-foreground font-bold text-sm w-28 font-sans">UF:</span>
-                      <span className="text-text-secondary text-sm font-sans">MG</span>
+                      <span className="text-foreground font-bold text-xs w-20 font-sans">UF:</span>
+                      <span className="text-text-secondary text-xs font-sans">MG</span>
                     </div>
                     <div className="flex">
-                      <span className="text-foreground font-bold text-sm w-28 font-sans">CEP:</span>
-                      <span className="text-text-secondary text-sm font-sans">30.431-214</span>
+                      <span className="text-foreground font-bold text-xs w-20 font-sans">CEP:</span>
+                      <span className="text-text-secondary text-xs font-sans">30.431-214</span>
                     </div>
                     <div className="flex">
-                      <span className="text-foreground font-bold text-sm w-28 font-sans">Bairro:</span>
-                      <span className="text-text-secondary text-sm font-sans">Barro Preto</span>
+                      <span className="text-foreground font-bold text-xs w-20 font-sans">Bairro:</span>
+                      <span className="text-text-secondary text-xs font-sans">Barro Preto</span>
                     </div>
                     <div className="flex">
-                      <span className="text-foreground font-bold text-sm w-28 font-sans">Cidade:</span>
-                      <span className="text-text-secondary text-sm font-sans">Belo Horizonte</span>
+                      <span className="text-foreground font-bold text-xs w-20 font-sans">Cidade:</span>
+                      <span className="text-text-secondary text-xs font-sans">Belo Horizonte</span>
                     </div>
                     <div className="flex">
-                      <span className="text-foreground font-bold text-sm w-28 font-sans">Número:</span>
-                      <span className="text-text-secondary text-sm font-sans">37</span>
+                      <span className="text-foreground font-bold text-xs w-20 font-sans">Número:</span>
+                      <span className="text-text-secondary text-xs font-sans">37</span>
                     </div>
                     <div className="flex">
-                      <span className="text-foreground font-bold text-sm w-28 font-sans">Logradouro:</span>
-                      <span className="text-text-secondary text-sm font-sans">Rua Major Lopes</span>
+                      <span className="text-foreground font-bold text-xs w-20 font-sans">Logradouro:</span>
+                      <span className="text-text-secondary text-xs font-sans">Rua Major Lopes</span>
                     </div>
                   </div>
 
                   {/* Botões - alinhados à ESQUERDA, margem de 24px (mb-6 acima) */}
-                  <div className="flex items-center justify-start gap-3">
-                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
-                      <X className="w-4 h-4" />
+                  <div className="flex items-center justify-start gap-2">
+                    <button className="w-[110px] flex items-center justify-between px-3 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-xs font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+                      <X className="w-3.5 h-3.5" />
                       <span>Ignorar</span>
                     </button>
-                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
-                      <Check className="w-4 h-4" />
+                    <button className="w-[110px] flex items-center justify-between px-3 py-2 rounded-[6px] bg-[#72284b] text-white text-xs font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                      <Check className="w-3.5 h-3.5" />
                       <span>Vincular</span>
                     </button>
                   </div>
