@@ -657,11 +657,11 @@ export default function DesignSystemPage() {
           </p>
           <div className="p-4 rounded-xl bg-card border border-border">
             <p className="text-text-secondary font-sans leading-relaxed">
-              Nesta data, foi verificada a presença da pessoa de NOME: <span className="text-[#72284b]">João Bernardo Guimarães Aversa</span>, 
-              CPF: <span className="text-[#72284b]">013.511.976-65</span> na localidade de Belo Horizonte, 
-              localizado no ENDEREÇO: <span className="text-[#d4a017]">Rua Major Lopes, NÚMERO: 37, BAIRRO: Barro Preto</span>. 
-              O alvo foi visto em um VEÍCULO: <span className="text-[#00bcd4]">Corsa Sedan, PLACA: NPX-3031</span>, 
-              nas imediações da empresa de RAZÃO SOCIAL: <span className="text-[#00bcd4]">JB Aversa Participações Ltda</span>.
+              Nesta data, foi verificada a presença da pessoa de NOME: <span className="text-[#72284b] bg-[#72284b]/15 px-1 rounded">João Bernardo Guimarães Aversa</span>, 
+              CPF: <span className="text-[#72284b] bg-[#72284b]/15 px-1 rounded">013.511.976-65</span> na localidade de Belo Horizonte, 
+              localizado no ENDEREÇO: <span className="text-[#d4a017] bg-[#d4a017]/15 px-1 rounded">Rua Major Lopes, NÚMERO: 37, BAIRRO: Barro Preto</span>. 
+              O alvo foi visto em um VEÍCULO: <span className="text-[#00bcd4] bg-[#00bcd4]/15 px-1 rounded">Corsa Sedan, PLACA: NPX-3031</span>, 
+              nas imediações da empresa de RAZÃO SOCIAL: <span className="text-[#00bcd4] bg-[#00bcd4]/15 px-1 rounded">JB Aversa Participações Ltda</span>.
             </p>
           </div>
           <div className="mt-4 flex flex-wrap gap-6">
