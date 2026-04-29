@@ -813,15 +813,50 @@ export default function DesignSystemPage() {
                     <Search className="w-4 h-4 text-text-muted ml-auto" />
                   </div>
 
-                  {/* Lista expansível */}
+                  {/* Lista expansível (Accordion) */}
                   <div className="space-y-2 mb-6">
-                    <div className="flex items-center gap-3 p-2 bg-[#2a2b35] rounded-lg">
-                      <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                      <User className="w-4 h-4 text-text-secondary" />
-                      <span className="text-sm text-foreground font-sans">Ministério Público de Minas Gerais</span>
+                    {/* Item 1 - EXPANDIDO */}
+                    <div>
+                      <div className="flex items-center gap-3 p-2 bg-[#2a2b35] rounded-t-lg">
+                        <svg className="w-4 h-4 text-text-muted transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                        <User className="w-4 h-4 text-text-secondary" />
+                        <span className="text-sm text-foreground font-sans">Ministério Público de Minas Gerais</span>
+                      </div>
+                      {/* Sub-itens expandidos com scroll */}
+                      <div className="bg-[#1a1b1e] border-x border-b border-[#2a2b35] rounded-b-lg max-h-[140px] overflow-y-auto">
+                        <div className="p-2 space-y-1">
+                          {/* Sub-item com checkbox marcado */}
+                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
+                            <div className="w-4 h-4 rounded border border-[#72284b] bg-[#72284b] flex items-center justify-center">
+                              <Check className="w-3 h-3 text-white" />
+                            </div>
+                            <span className="text-sm text-foreground font-sans">SUBSEC</span>
+                          </label>
+                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
+                            <div className="w-4 h-4 rounded border border-[#72284b] bg-[#72284b] flex items-center justify-center">
+                              <Check className="w-3 h-3 text-white" />
+                            </div>
+                            <span className="text-sm text-foreground font-sans">SUP-CONTRA-INTEL</span>
+                          </label>
+                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
+                            <div className="w-4 h-4 rounded border border-[#676c70] bg-transparent"></div>
+                            <span className="text-sm text-text-muted font-sans">Coordenadoria de Segurança</span>
+                          </label>
+                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
+                            <div className="w-4 h-4 rounded border border-[#676c70] bg-transparent"></div>
+                            <span className="text-sm text-text-muted font-sans">Divisão de Análise Criminal</span>
+                          </label>
+                          <label className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded cursor-pointer">
+                            <div className="w-4 h-4 rounded border border-[#676c70] bg-transparent"></div>
+                            <span className="text-sm text-text-muted font-sans">Núcleo de Inteligência</span>
+                          </label>
+                        </div>
+                      </div>
                     </div>
+                    
+                    {/* Item 2 - Fechado */}
                     <div className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded-lg transition-colors">
                       <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -829,6 +864,8 @@ export default function DesignSystemPage() {
                       <User className="w-4 h-4 text-text-secondary" />
                       <span className="text-sm text-text-muted font-sans">Entidade especial dentre 150</span>
                     </div>
+                    
+                    {/* Item 3 - Fechado */}
                     <div className="flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded-lg transition-colors">
                       <svg className="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
