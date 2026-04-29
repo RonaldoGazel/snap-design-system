@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Check, Copy, ArrowLeft, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar } from "lucide-react"
 import Link from "next/link"
 
@@ -241,14 +241,25 @@ function TramitarModal() {
   const [selectOpen, setSelectOpen] = useState(false)
   const [selectedDestinatario, setSelectedDestinatario] = useState('Chefe Contrainteligência')
   const [activeTab, setActiveTab] = useState('confeccionar')
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const [tabIndicator, setTabIndicator] = useState({ left: 0, width: 0 })
 
   const handleSelectOption = (option: string) => {
     setSelectedDestinatario(option)
     setSelectOpen(false)
   }
 
-  // Calcula a posição da barrinha animada
-  const getTabIndex = () => tramitarTabs.findIndex(t => t.id === activeTab)
+  // Atualiza a posição e largura da barrinha quando a tab muda
+  useEffect(() => {
+    const activeIndex = tramitarTabs.findIndex(t => t.id === activeTab)
+    const activeTabElement = tabRefs.current[activeIndex]
+    if (activeTabElement) {
+      setTabIndicator({
+        left: activeTabElement.offsetLeft,
+        width: activeTabElement.offsetWidth,
+      })
+    }
+  }, [activeTab])
 
   return (
     <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
@@ -272,30 +283,34 @@ function TramitarModal() {
 
       {/* Conteúdo */}
       <div className="p-6">
-        {/* Select Interativo */}
-        <div className="mb-6 relative">
+        {/* Select Interativo - Estilo Accordion */}
+        <div className="mb-6">
           <label className="text-sm text-foreground mb-2 block font-sans">
             Selecione um destinatário <span className="text-foreground">*</span>
           </label>
-          <button
-            onClick={() => setSelectOpen(!selectOpen)}
-            className="w-full bg-[#2a2b35] border border-[#2a2b35] rounded-lg px-4 py-3 flex items-center justify-between hover:border-[#3a3b45] transition-colors"
-          >
-            <span className="text-text-secondary text-sm font-sans">{selectedDestinatario}</span>
-            <svg 
-              className={`w-4 h-4 text-text-muted transition-transform duration-200 ${selectOpen ? 'rotate-180' : ''}`} 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
+          <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg overflow-hidden">
+            <button
+              onClick={() => setSelectOpen(!selectOpen)}
+              className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#3a3b45] transition-colors"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          
-          {/* Dropdown Menu */}
-          {selectOpen && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-[#1a1b1e] border border-[#2a2b35] rounded-lg overflow-hidden z-20 shadow-lg">
-              <div className="max-h-[160px] overflow-y-auto scrollbar-minimal">
+              <span className="text-text-secondary text-sm font-sans">{selectedDestinatario}</span>
+              <svg 
+                className={`w-4 h-4 text-text-muted transition-transform duration-200 ${selectOpen ? 'rotate-90' : ''}`} 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            
+            {/* Dropdown estilo Accordion */}
+            <div 
+              className={`bg-[#1a1b1e] overflow-hidden transition-all duration-200 ease-out ${
+                selectOpen ? 'max-h-[160px] border-t border-[#2a2b35]' : 'max-h-0'
+              }`}
+            >
+              <div className="overflow-y-auto max-h-[160px] scrollbar-minimal">
                 {destinatarios.map((option) => (
                   <button
                     key={option}
@@ -311,20 +326,21 @@ function TramitarModal() {
                 ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
 
-        {/* Tabs Animadas */}
+        {/* Tabs Animadas - Barrinha segue largura real da tab */}
         <div className="mb-6 relative">
           {/* Linha base */}
           <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
           
           <div className="flex gap-6 relative">
-            {tramitarTabs.map((tab) => {
+            {tramitarTabs.map((tab, index) => {
               const isActive = activeTab === tab.id
               return (
                 <button
                   key={tab.id}
+                  ref={(el) => { tabRefs.current[index] = el }}
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 text-sm font-sans relative pb-5 transition-colors ${
                     isActive ? 'text-foreground' : 'text-text-muted hover:text-text-secondary'
@@ -339,20 +355,19 @@ function TramitarModal() {
               )
             })}
             
-            {/* Barrinha animada */}
+            {/* Barrinha animada - segue largura e posição real da tab */}
             <div 
               className="absolute bottom-0 h-[8px] bg-[#72284b] z-10 transition-all duration-300 ease-out"
               style={{
-                left: `${getTabIndex() * 25}%`,
-                width: getTabIndex() === 0 ? '90px' : getTabIndex() === 1 ? '60px' : getTabIndex() === 2 ? '65px' : '75px',
-                transform: `translateX(${getTabIndex() * 24}px)`,
+                left: tabIndicator.left,
+                width: tabIndicator.width,
               }}
             />
           </div>
         </div>
 
-        {/* Conteúdo da Tab */}
-        <div className="mb-10">
+        {/* Conteúdo da Tab - margem de 36px (mb-9) */}
+        <div className="mb-9">
           <label className="text-sm text-foreground mb-2 block font-sans">
             {activeTab === 'confeccionar' && 'Observação'}
             {activeTab === 'revisar' && 'Parecer da Revisão'}
@@ -372,7 +387,7 @@ function TramitarModal() {
           />
         </div>
 
-        {/* Botões - margem de 40px (mt-10) já aplicada acima com mb-10 */}
+        {/* Botões */}
         <div className="flex items-center justify-end gap-3">
           <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
             <X className="w-4 h-4" />
@@ -883,7 +898,7 @@ export default function DesignSystemPage() {
                 <li><strong>Alert box:</strong> Background #2A2B35, borda verde (success), border-radius 6px</li>
                 <li><strong>Card de dados:</strong> Background #000000, borda #2A2B35</li>
                 <li><strong>Botões:</strong> Sempre alinhados à <strong>DIREITA</strong>, border-radius <strong>6px</strong>, layout interno: ícone à ESQUERDA + texto à DIREITA (justify-between)</li>
-                <li><strong>Margem botões:</strong> Mínimo de <strong>40px</strong> entre o conteúdo acima e os botões de ação</li>
+                <li><strong>Margem botões:</strong> Mínimo de <strong>36px</strong> entre o conteúdo acima e os botões de ação</li>
                 <li><strong>Botão Cancelar:</strong> OUTLINE - background transparente, borda #676C70 (cinza claro)</li>
                 <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b), texto bold</li>
                 <li><strong>Overlay:</strong> Background #000000 com opacidade 50%</li>
@@ -939,8 +954,8 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
 
-                  {/* Link Ver detalhes - margem de 40px (mb-10) antes dos botões */}
-                  <div className="flex items-center gap-2 mb-10">
+                  {/* Link Ver detalhes - margem de 36px (mb-9) antes dos botões */}
+                  <div className="flex items-center gap-2 mb-9">
                     <Search className="w-4 h-4 text-text-muted" />
                     <span className="text-sm text-text-muted cursor-pointer hover:underline font-sans">Ver detalhes</span>
                   </div>
@@ -1023,7 +1038,7 @@ export default function DesignSystemPage() {
                   </div>
 
                   {/* Lista expansível (Accordion) - Interativo */}
-                  <div className="mb-10">
+                  <div className="mb-9">
                     <DifusaoAccordion />
                   </div>
 
