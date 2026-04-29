@@ -1570,6 +1570,131 @@ export default function DesignSystemPage() {
           </div>
         </Section>
 
+        {/* ============================================
+            COMPONENTES SNAP (PORTÁVEIS)
+            ============================================ */}
+        <Section title="COMPONENTES SNAP">
+          <div className="space-y-6">
+            {/* Instruções de Portabilidade */}
+            <div className="p-4 rounded-xl bg-[#1a2b1f] border border-[#3f9f76]">
+              <h4 className="text-sm font-bold text-[#3f9f76] mb-2 font-sans">Portabilidade para Kiro/Outros Projetos</h4>
+              <p className="text-sm text-text-secondary font-sans mb-3">
+                Os componentes SNAP estão isolados e prontos para serem copiados para qualquer projeto:
+              </p>
+              <ol className="text-sm text-text-secondary font-sans list-decimal ml-4 space-y-1">
+                <li>Copie a pasta <code className="text-[#3f9f76] bg-[#3f9f76]/10 px-1 rounded">/components/snap/</code></li>
+                <li>Copie o arquivo <code className="text-[#3f9f76] bg-[#3f9f76]/10 px-1 rounded">/lib/snap-tokens.ts</code></li>
+                <li>Instale as dependências: <code className="text-[#3f9f76] bg-[#3f9f76]/10 px-1 rounded">class-variance-authority</code>, <code className="text-[#3f9f76] bg-[#3f9f76]/10 px-1 rounded">lucide-react</code></li>
+                <li>Configure as fontes Cygnito Mono e Inter Tight</li>
+              </ol>
+            </div>
+
+            {/* Lista de Componentes */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Componentes Disponíveis</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-sans">
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapBadge</code>
+                    <span className="text-text-secondary">Badges de risco, status e categoria</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapButton</code>
+                    <span className="text-text-secondary">Botões com variantes e layout interno</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapCard</code>
+                    <span className="text-text-secondary">Card de entidade com subcomponentes</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapModal</code>
+                    <span className="text-text-secondary">Modal com header, content e footer</span>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapTabs</code>
+                    <span className="text-text-secondary">Tabs com underline animado</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapSelect</code>
+                    <span className="text-text-secondary">Select estilo accordion</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapEntityLink</code>
+                    <span className="text-text-secondary">Links de entidade com cores WCAG</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">snapTokens</code>
+                    <span className="text-text-secondary">Tokens centralizados (cores, espaçamentos)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Estrutura de Arquivos */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Estrutura de Arquivos</h4>
+              <pre className="text-xs text-text-secondary font-mono bg-[#0f0f10] p-4 rounded-lg overflow-x-auto">
+{`/components/snap/
+  ├── index.ts           # Exports centralizados
+  ├── snap-badge.tsx     # SnapBadge, RiskBadge, StatusBadge, CategoryTag
+  ├── snap-button.tsx    # SnapButton, SnapButtonGroup
+  ├── snap-card.tsx      # SnapCard, SnapCardHeader, SnapCardTitle, etc.
+  ├── snap-modal.tsx     # SnapModal, SnapModalHeader, SnapModalContent, etc.
+  ├── snap-tabs.tsx      # SnapTabs, SnapTabsList, SnapTabsTrigger, SnapTabsContent
+  ├── snap-select.tsx    # SnapSelect (estilo accordion)
+  └── snap-entity-link.tsx  # SnapEntityLink, PessoaLink, EnderecoLink, etc.
+
+/lib/
+  └── snap-tokens.ts     # Tokens: cores, tipografia, espaçamentos, WCAG`}
+              </pre>
+            </div>
+
+            {/* Exemplo de Uso */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Exemplo de Uso</h4>
+              <pre className="text-xs text-text-secondary font-mono bg-[#0f0f10] p-4 rounded-lg overflow-x-auto">
+{`import { 
+  SnapCard, 
+  SnapCardHeader, 
+  SnapCardTitle, 
+  SnapCardSeparator,
+  SnapCardContent,
+  SnapCardFooter,
+  SnapButton,
+  RiskBadge,
+} from "@/components/snap"
+import { MapPin, X, Check } from "lucide-react"
+
+export function EnderecoCard() {
+  return (
+    <SnapCard>
+      <SnapCardHeader>
+        <SnapCardTitle icon={<MapPin className="w-5 h-5" />}>
+          Endereço
+        </SnapCardTitle>
+      </SnapCardHeader>
+      <SnapCardSeparator />
+      <SnapCardContent>
+        {/* ... conteúdo ... */}
+        <SnapCardFooter>
+          <SnapButton variant="secondary" size="card" icon={<X className="w-3.5 h-3.5" />}>
+            Ignorar
+          </SnapButton>
+          <SnapButton variant="primary" size="card" icon={<Check className="w-3.5 h-3.5" />}>
+            Vincular
+          </SnapButton>
+        </SnapCardFooter>
+      </SnapCardContent>
+    </SnapCard>
+  )
+}`}
+              </pre>
+            </div>
+          </div>
+        </Section>
+
       </main>
     </div>
   )
