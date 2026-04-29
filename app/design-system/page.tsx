@@ -1,21 +1,20 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Check, Copy, ArrowLeft, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar } from "lucide-react"
-import Link from "next/link"
+import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar } from "lucide-react"
 
 /* ============================================
    SNAP DESIGN SYSTEM
    Consolidado a partir de 7+ telas de referência do Figma
    ============================================ */
 
-// Verticais do Ecossistema SNAP
+// Verticais do Ecossistema SNAP (cores oficiais)
 const verticais = [
-  { name: "INVESTIGAÇÃO", color: "#fe473c", icon: "Lupa" },
-  { name: "INTELIGÊNCIA", color: "#72284b", icon: "Cabeça/Cérebro" },
-  { name: "COOPERAÇÃO", color: "#72758a", icon: "Pessoas" },
-  { name: "INFRAESTRUTURA", color: "#3f9f76", icon: "Nós conectados" },
-  { name: "ADMINISTRAÇÃO", color: "#333540", icon: "Pessoa com engrenagem" },
+  { name: "INVESTIGAÇÃO", color: "#FE473C", colorName: "Coral", icon: "Lupa" },
+  { name: "INTELIGÊNCIA", color: "#72284B", colorName: "Bordô", icon: "Cabeça/Cérebro" },
+  { name: "COOPERAÇÃO", color: "#889EA3", colorName: "Grey Ahead", icon: "Pessoas" },
+  { name: "INFRAESTRUTURA", color: "#287266", colorName: "Petroleum Blue", icon: "Nós conectados" },
+  { name: "ADMINISTRAÇÃO", color: "#333540", colorName: "Deep Gray Blue", icon: "Pessoa com engrenagem" },
 ]
 
 // Cores Base
@@ -727,15 +726,45 @@ function ColorSwatch({ name, value, token, description }: { name: string; value:
   )
 }
 
+// Gera ID a partir do título
+function generateId(title: string): string {
+  return title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
 // Componente Section
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  const id = generateId(title)
   return (
-    <section className="mb-12">
+    <section id={id} className="mb-12 scroll-mt-32">
       <h2 className="text-xl text-foreground mb-6 pb-2 border-b border-border">{title}</h2>
       {children}
     </section>
   )
 }
+
+// Índice de navegação
+const indice = [
+  { titulo: 'Verticais do Ecossistema SNAP', id: 'verticais-do-ecossistema-snap' },
+  { titulo: 'Tipografia', id: 'tipografia' },
+  { titulo: 'Cores das Verticais', id: 'cores-das-verticais' },
+  { titulo: 'Cores Base', id: 'cores-base' },
+  { titulo: 'Links por Tipo de Entidade', id: 'links-por-tipo-de-entidade' },
+  { titulo: 'Padrões de Botões', id: 'padroes-de-botoes' },
+  { titulo: 'Componentes', id: 'componentes' },
+  { titulo: 'Exemplos Visuais', id: 'exemplos-visuais' },
+  { titulo: 'Modais', id: 'modais-dialog-popup' },
+  { titulo: 'Cards', id: 'cards' },
+  { titulo: 'Toasts / Notificações', id: 'toasts-notificacoes' },
+  { titulo: 'Tabelas', id: 'tabelas-datatable' },
+  { titulo: 'Espaçamentos', id: 'espacamentos' },
+  { titulo: 'Border Radius', id: 'border-radius' },
+  { titulo: 'Componentes SNAP (Portáveis)', id: 'componentes-snap' },
+]
 
 export default function DesignSystemPage() {
   return (
@@ -743,19 +772,38 @@ export default function DesignSystemPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="p-2 rounded-lg hover:bg-muted transition-colors">
-              <ArrowLeft className="w-5 h-5 text-text-muted" />
-            </Link>
+          <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-xl text-foreground">SNAP DESIGN SYSTEM</h1>
-              <p className="text-sm text-text-muted font-sans">Consolidado a partir de 7+ telas de referência do Figma</p>
+              <h1 className="font-title text-3xl text-foreground tracking-wide">SNAP DESIGN SYSTEM</h1>
+              <p className="text-sm text-text-muted font-sans mt-1">Consolidado a partir de 7+ telas de referência do Figma</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#FE473C]" title="Investigação" />
+              <div className="w-3 h-3 rounded-full bg-[#72284B]" title="Inteligência" />
+              <div className="w-3 h-3 rounded-full bg-[#889EA3]" title="Cooperação" />
+              <div className="w-3 h-3 rounded-full bg-[#287266]" title="Infraestrutura" />
+              <div className="w-3 h-3 rounded-full bg-[#333540]" title="Administração" />
             </div>
           </div>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
+        {/* Índice de Navegação */}
+        <nav className="mb-12 p-6 bg-card rounded-xl border border-border">
+          <h2 className="text-lg font-bold text-foreground mb-4 font-sans">Índice</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+            {indice.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="text-sm text-text-secondary hover:text-[#72284b] font-sans transition-colors py-1"
+              >
+                {item.titulo}
+              </a>
+            ))}
+          </div>
+        </nav>
 
         {/* ============================================
             VERTICAIS DO ECOSSISTEMA SNAP
