@@ -1193,6 +1193,148 @@ export default function DesignSystemPage() {
         </Section>
 
         {/* ============================================
+            CARDS
+            ============================================ */}
+        <Section title="CARDS">
+          <div className="space-y-6">
+            {/* Regras */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Estrutura e Regras de Cards</p>
+              <ul className="text-sm text-text-secondary space-y-2 font-sans list-disc ml-4">
+                <li><strong>Background:</strong> #1a1a1a (card)</li>
+                <li><strong>Borda:</strong> #2A2B35, 1px</li>
+                <li><strong>Border-radius:</strong> 12px</li>
+                <li><strong>Padding geral:</strong> 24px</li>
+                <li><strong>Header:</strong> Ícone (cor da vertical) + Título (Cygnito UPPERCASE, 24px)</li>
+                <li><strong>Linha separadora:</strong> #2A2B35, 1px, com <strong>margem horizontal de 24px</strong> (não encosta nas bordas)</li>
+                <li><strong>Área de destaque:</strong> Background #2A2B35, border-radius 8px, texto em itálico</li>
+                <li><strong>Lista de campos:</strong> Label (bold) + Valor (regular), espaçamento vertical 8px</li>
+                <li><strong>Botões:</strong> Alinhados à <strong>ESQUERDA</strong> (diferente dos modais)</li>
+                <li><strong>Margem botões:</strong> <strong>24px</strong> fixos entre o conteúdo e os botões (diferente dos modais que são 36px)</li>
+                <li><strong>Layout interno botões:</strong> ícone à ESQUERDA + texto à DIREITA (justify-between), igual aos modais</li>
+              </ul>
+              
+              {/* Diferenças entre Card e Modal */}
+              <div className="mt-6 p-4 bg-[#1a2b3f] border border-[#3f7fbf] rounded-lg">
+                <h4 className="text-sm font-bold text-[#3f7fbf] mb-2 font-sans">Diferenças: Card vs Modal</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm text-text-secondary font-sans">
+                  <div>
+                    <p className="text-foreground font-medium mb-1">Card</p>
+                    <ul className="space-y-1 list-disc ml-4">
+                      <li>Botões à ESQUERDA</li>
+                      <li>Margem botões: 24px</li>
+                      <li>Linha separadora: mx-6</li>
+                      <li>Inline na página</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-foreground font-medium mb-1">Modal</p>
+                    <ul className="space-y-1 list-disc ml-4">
+                      <li>Botões à DIREITA</li>
+                      <li>Margem botões: 36px</li>
+                      <li>Linha separadora: full-width</li>
+                      <li>Overlay + centralizado</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Exemplo de Card - Endereço */}
+            <div className="space-y-4">
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Card de Entidade (Endereço)</p>
+              
+              {/* Card */}
+              <div className="bg-card rounded-xl border border-border max-w-lg overflow-hidden">
+                {/* Header */}
+                <div className="p-6 pb-4">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-6 h-6 text-[#72284b]" />
+                    <span className="font-title text-[24px]">Endereço</span>
+                  </div>
+                </div>
+                
+                {/* Linha separadora com margem horizontal de 24px */}
+                <div className="mx-6 h-[1px] bg-[#2a2b35]" />
+
+                {/* Conteúdo */}
+                <div className="p-6">
+                  {/* Área de destaque */}
+                  <div className="bg-[#2a2b35] rounded-lg p-4 mb-6">
+                    <p className="text-text-secondary text-sm font-sans italic">
+                      Nome: João Francisco Santo Pereira Salviano Bernardo Guimarães Aversa, CPF: 013.511.976-65
+                    </p>
+                  </div>
+
+                  {/* Lista de campos */}
+                  <div className="space-y-2 mb-6">
+                    <div className="flex">
+                      <span className="text-foreground font-bold text-sm w-28 font-sans">UF:</span>
+                      <span className="text-text-secondary text-sm font-sans">MG</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-foreground font-bold text-sm w-28 font-sans">CEP:</span>
+                      <span className="text-text-secondary text-sm font-sans">30.431-214</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-foreground font-bold text-sm w-28 font-sans">Bairro:</span>
+                      <span className="text-text-secondary text-sm font-sans">Barro Preto</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-foreground font-bold text-sm w-28 font-sans">Cidade:</span>
+                      <span className="text-text-secondary text-sm font-sans">Belo Horizonte</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-foreground font-bold text-sm w-28 font-sans">Número:</span>
+                      <span className="text-text-secondary text-sm font-sans">37</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-foreground font-bold text-sm w-28 font-sans">Logradouro:</span>
+                      <span className="text-text-secondary text-sm font-sans">Rua Major Lopes</span>
+                    </div>
+                  </div>
+
+                  {/* Botões - alinhados à ESQUERDA, margem de 24px (mb-6 acima) */}
+                  <div className="flex items-center justify-start gap-3">
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+                      <X className="w-4 h-4" />
+                      <span>Ignorar</span>
+                    </button>
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                      <Check className="w-4 h-4" />
+                      <span>Vincular</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tipos de Cards */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Tipos de Cards Identificados</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-sans">
+                <div>
+                  <p className="text-text-muted mb-1">Card de Entidade</p>
+                  <p className="text-text-secondary">Header (ícone + título) + Área destaque + Lista campos + Botões</p>
+                </div>
+                <div>
+                  <p className="text-text-muted mb-1">Card de Resultado de Busca</p>
+                  <p className="text-text-secondary">Header + Dados resumidos + Ação (vincular/ignorar)</p>
+                </div>
+                <div>
+                  <p className="text-text-muted mb-1">Card de Documento</p>
+                  <p className="text-text-secondary">Header + Preview/Resumo + Metadados + Ações</p>
+                </div>
+                <div>
+                  <p className="text-text-muted mb-1">Card de Alerta</p>
+                  <p className="text-text-secondary">Ícone status + Mensagem + Ações rápidas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
             TOASTS / NOTIFICAÇÕES
             ============================================ */}
         <Section title="TOASTS / NOTIFICAÇÕES">
