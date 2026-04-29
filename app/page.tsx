@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation"
+import { ChatContainer } from "@/components/chat/chat-container"
 
 export default function Home() {
-  redirect("/design-system")
+  return <ChatContainer />
 }
