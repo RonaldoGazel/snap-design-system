@@ -388,7 +388,7 @@ function TramitarModal() {
         </div>
 
         {/* Botões */}
-        <div className="flex items-center justify-end gap-3">
+        <div className="flex items-center justify-end gap-4">
           <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
             <X className="w-4 h-4" />
             <span>Cancelar</span>
@@ -802,6 +802,13 @@ export default function DesignSystemPage() {
             PADRÕES DE BOTÕES
             ============================================ */}
         <Section title="PADROES DE BOTOES">
+          {/* Regra de espaçamento */}
+          <div className="mb-6 p-4 bg-[#2a1a2a] border border-[#72284b] rounded-lg">
+            <p className="text-sm text-[#d4789b] font-sans">
+              <strong>Regra de Espaçamento:</strong> A distância mínima entre botões deve ser de <strong>16px</strong> (gap-4 em Tailwind).
+            </p>
+          </div>
+          
           <p className="text-text-secondary mb-4 font-sans">
             A cor e estilo do botão positivo muda conforme o contexto da ação:
           </p>
@@ -1074,7 +1081,7 @@ export default function DesignSystemPage() {
                   </div>
 
                   {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
-                  <div className="flex items-center justify-end gap-3">
+                  <div className="flex items-center justify-end gap-4">
                     <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-4 h-4" />
                       <span>Cancelar</span>
@@ -1156,7 +1163,7 @@ export default function DesignSystemPage() {
                   </div>
 
                   {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
-                  <div className="flex items-center justify-end gap-3">
+                  <div className="flex items-center justify-end gap-4">
                     <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-4 h-4" />
                       <span>Cancelar</span>
@@ -1315,7 +1322,7 @@ export default function DesignSystemPage() {
                   </div>
 
                   {/* Botões - alinhados à ESQUERDA, margem de 24px (mb-6 acima) */}
-                  <div className="flex items-center justify-start gap-2">
+                  <div className="flex items-center justify-start gap-4">
                     <button className="w-[110px] flex items-center justify-between px-3 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-xs font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-3.5 h-3.5" />
                       <span>Ignorar</span>
