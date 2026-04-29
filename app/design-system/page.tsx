@@ -590,7 +590,7 @@ export default function DesignSystemPage() {
                 <li><strong>Input/Textarea:</strong> Background #000000, borda #2A2B35</li>
                 <li><strong>Alert box:</strong> Background #2A2B35, borda verde (success), border-radius 6px</li>
                 <li><strong>Card de dados:</strong> Background #000000, borda #2A2B35</li>
-                <li><strong>Botões:</strong> Sempre alinhados à <strong>DIREITA</strong>, border-radius <strong>6px</strong></li>
+                <li><strong>Botões:</strong> Sempre alinhados à <strong>DIREITA</strong>, border-radius <strong>6px</strong>, layout interno: ícone à ESQUERDA + texto à DIREITA (justify-between)</li>
                 <li><strong>Botão Cancelar:</strong> OUTLINE - background transparente, borda #676C70 (cinza claro)</li>
                 <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b), texto bold</li>
                 <li><strong>Overlay:</strong> Background #000000 com opacidade 50%</li>
@@ -670,17 +670,17 @@ export default function DesignSystemPage() {
                     />
                   </div>
 
-                  {/* Botões - SEMPRE à direita, radius 6px */}
+                  {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
                   <div className="flex items-center justify-end gap-3">
-                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-4 h-4" />
-                      Cancelar
+                      <span>Cancelar</span>
                     </button>
-                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
-                      Tramitar
+                      <span>Tramitar</span>
                     </button>
                   </div>
                 </div>
@@ -736,15 +736,15 @@ export default function DesignSystemPage() {
                     <span className="text-sm text-text-muted cursor-pointer hover:underline font-sans">Ver detalhes</span>
                   </div>
 
-                  {/* Botões - SEMPRE à direita, radius 6px */}
+                  {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
                   <div className="flex items-center justify-end gap-3">
-                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-4 h-4" />
-                      Cancelar
+                      <span>Cancelar</span>
                     </button>
-                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
                       <Check className="w-4 h-4" />
-                      Confirmar
+                      <span>Confirmar</span>
                     </button>
                   </div>
                 </div>
@@ -838,17 +838,17 @@ export default function DesignSystemPage() {
                     </div>
                   </div>
 
-                  {/* Botões - SEMPRE à direita, radius 6px */}
+                  {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
                   <div className="flex items-center justify-end gap-3">
-                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
                       <X className="w-4 h-4" />
-                      Cancelar
+                      <span>Cancelar</span>
                     </button>
-                    <button className="flex items-center gap-2 px-5 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
+                    <button className="w-[180px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                       </svg>
-                      Confirmar difusão
+                      <span>Confirmar difusão</span>
                     </button>
                   </div>
                 </div>
