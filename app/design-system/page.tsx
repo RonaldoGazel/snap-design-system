@@ -236,6 +236,86 @@ const tramitarTabs = [
   { id: 'formalizar', label: 'Formalizar', icon: 'Check' },
 ]
 
+// Dados das Tabs do modal Difusão
+const difusaoTabs = [
+  { id: 'sigiloso', label: 'Sigiloso', icon: 'Search' },
+  { id: 'reservado', label: 'Reservado', icon: 'Lock' },
+  { id: 'publico', label: 'Público', icon: 'Globe' },
+]
+
+// Componente Tabs Interativo para Modal Difusão
+function DifusaoTabsComponent() {
+  const [activeTab, setActiveTab] = useState('reservado')
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const [tabIndicator, setTabIndicator] = useState({ left: 0, width: 0 })
+
+  useEffect(() => {
+    const activeIndex = difusaoTabs.findIndex(t => t.id === activeTab)
+    const activeTabElement = tabRefs.current[activeIndex]
+    if (activeTabElement) {
+      setTabIndicator({
+        left: activeTabElement.offsetLeft,
+        width: activeTabElement.offsetWidth,
+      })
+    }
+  }, [activeTab])
+
+  const renderIcon = (iconName: string, isActive: boolean) => {
+    const iconClass = `w-4 h-4 ${isActive ? 'text-[#72284b]' : ''}`
+    switch (iconName) {
+      case 'Search':
+        return <Search className={iconClass} />
+      case 'Lock':
+        return (
+          <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        )
+      case 'Globe':
+        return (
+          <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+          </svg>
+        )
+      default:
+        return null
+    }
+  }
+
+  return (
+    <div className="relative">
+      {/* Linha base */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
+      <div className="flex gap-6">
+        {difusaoTabs.map((tab, index) => {
+          const isActive = activeTab === tab.id
+          return (
+            <button
+              key={tab.id}
+              ref={(el) => { tabRefs.current[index] = el }}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 text-sm font-sans relative pb-5 transition-colors ${
+                isActive ? 'text-foreground' : 'text-text-muted hover:text-text-secondary'
+              }`}
+            >
+              {renderIcon(tab.icon, isActive)}
+              <span className={isActive ? 'font-semibold' : ''}>{tab.label}</span>
+            </button>
+          )
+        })}
+        {/* Barrinha animada */}
+        <div 
+          className="absolute bottom-0 h-[8px] bg-[#72284b] z-10 transition-all duration-300 ease-out"
+          style={{
+            left: tabIndicator.left,
+            width: tabIndicator.width,
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+
 // Componente Modal Tramitar Interativo
 function TramitarModal() {
   const [selectOpen, setSelectOpen] = useState(false)
@@ -1104,7 +1184,10 @@ export default function DesignSystemPage() {
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Check className="w-5 h-5 text-success" />
+                      {/* Ícone sempre na cor da vertical (#72284b) */}
+                      <svg className="w-5 h-5 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                      </svg>
                       <span className="font-title text-[18px]">DIFUSAO DE PROCESSO</span>
                     </div>
                     <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
@@ -1118,30 +1201,9 @@ export default function DesignSystemPage() {
 
                 {/* Conteúdo */}
                 <div className="p-6">
-                  {/* Tabs - underline 8px ACIMA da linha base */}
-                  <div className="mb-4 relative">
-                    {/* Linha base - fica no fundo (z-0) */}
-                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
-                    <div className="flex gap-6">
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
-                        <Search className="w-4 h-4" />
-                        Sigiloso
-                      </button>
-                      <button className="flex items-center gap-2 text-foreground text-sm font-sans relative pb-5">
-                        <svg className="w-4 h-4 text-[#72284b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
-                        <span className="font-semibold">Reservado</span>
-                        {/* Underline ACIMA da linha (z-10) */}
-                        <div className="absolute bottom-0 left-0 right-0 h-[8px] bg-[#72284b] z-10" />
-                      </button>
-                      <button className="flex items-center gap-2 text-text-muted text-sm font-sans pb-5">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
-                        </svg>
-                        Público
-                      </button>
-                    </div>
+                  {/* Tabs Interativas com animação */}
+                  <div className="mb-4">
+                    <DifusaoTabsComponent />
                   </div>
 
                   {/* Alert box - com borda verde */}
