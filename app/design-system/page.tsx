@@ -407,9 +407,9 @@ function TramitarModal() {
 
 // Dados das Tabs de Exemplo
 const exampleTabs = [
-  { id: 'documentos', label: 'Documentos', icon: true },
-  { id: 'tramitacoes', label: 'Tramitações', icon: false },
-  { id: 'auditoria', label: 'Auditoria', icon: false },
+  { id: 'documentos', label: 'Documentos', icon: 'FileText' },
+  { id: 'tramitacoes', label: 'Tramitações', icon: 'ArrowLeftRight' },
+  { id: 'auditoria', label: 'Auditoria', icon: 'ClipboardList' },
 ]
 
 // Componente Tabs Interativo (Exemplo Visual)
@@ -429,6 +429,29 @@ function ExampleTabs() {
     }
   }, [activeTab])
 
+  // Renderiza o ícone baseado no tipo
+  const renderIcon = (iconName: string, isActive: boolean) => {
+    const iconClass = `w-4 h-4 ${isActive ? 'text-[#72284b]' : ''}`
+    switch (iconName) {
+      case 'FileText':
+        return <FileText className={iconClass} />
+      case 'ArrowLeftRight':
+        return (
+          <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+        )
+      case 'ClipboardList':
+        return (
+          <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+          </svg>
+        )
+      default:
+        return null
+    }
+  }
+
   return (
     <div className="relative">
       {/* Linha base */}
@@ -445,7 +468,7 @@ function ExampleTabs() {
                 isActive ? 'text-foreground' : 'text-text-muted hover:text-text-secondary'
               }`}
             >
-              {tab.icon && <FileText className={`w-4 h-4 ${isActive ? 'text-[#72284b]' : ''}`} />}
+              {renderIcon(tab.icon, isActive)}
               <span className={isActive ? 'font-semibold' : ''}>{tab.label}</span>
             </button>
           )
