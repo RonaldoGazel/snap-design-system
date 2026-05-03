@@ -1003,7 +1003,7 @@ export default function DesignSystemPage() {
             CORES BASE
             ============================================ */}
         <Section title="CORES BASE">
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {Object.entries(coresBase).map(([categoria, cores]) => (
               <div key={categoria}>
                 <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">{categoria}</p>
