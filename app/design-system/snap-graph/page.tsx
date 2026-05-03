@@ -119,37 +119,49 @@ export default function SnapGraphDesignSystem() {
                 backgroundRepeat: 'repeat',
               }}
             >
-              {/* Exemplo com nodes */}
-              <div className="w-full h-full flex items-center justify-center gap-8 p-8">
-                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden opacity-80">
+              {/* Exemplo com nodes conectados */}
+              <div className="w-full h-full relative p-8">
+                {/* Node A - Company */}
+                <div className="absolute w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" style={{ left: '80px', top: '50%', transform: 'translateY(-50%)' }}>
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade A</p>
-                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center">
+                      <div className="flex items-start gap-3">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
+                        </div>
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                           <Building className="w-5 h-5 text-[#696969]" />
                         </div>
+                      </div>
+                      <div className="mt-4">
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
                       </div>
                     </div>
                   </div>
                 </div>
                 
-                {/* Conexão visual */}
-                <svg width="80" height="2" className="flex-shrink-0">
-                  <line x1="0" y1="1" x2="70" y2="1" stroke="#454545" strokeWidth="2" />
-                  <polygon points="80,1 72,-3 72,5" fill="#454545" />
+                {/* Conexão: lateral direita A → lateral esquerda B */}
+                <svg className="absolute" style={{ left: '344px', top: '50%', transform: 'translateY(-50%)' }} width="72" height="2">
+                  <line x1="0" y1="1" x2="62" y2="1" stroke="#454545" strokeWidth="2" />
+                  <polygon points="72,1 64,-3 64,5" fill="#454545" />
                 </svg>
                 
-                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden opacity-80">
+                {/* Node B - Person */}
+                <div className="absolute w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" style={{ left: '416px', top: '50%', transform: 'translateY(-50%)' }}>
                   <div className="flex h-full">
                     <div className="w-1 bg-[#9b7fb8]" />
                     <div className="flex-1 p-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade B</p>
-                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center">
-                          <User className="w-5 h-5 text-[#696969]" />
+                      <div className="flex items-start gap-3">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Luiz Henrique de Souza Borges</p>
                         </div>
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] overflow-hidden flex-shrink-0">
+                          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Foto" className="w-full h-full object-cover" />
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-full">Person SNAP</span>
                       </div>
                     </div>
                   </div>
