@@ -142,9 +142,21 @@ export default function SnapGraphDesignSystem() {
                 </div>
                 
                 {/* Conexão: lateral direita A → lateral esquerda B */}
-                <svg className="absolute" style={{ left: '344px', top: '50%', transform: 'translateY(-50%)' }} width="72" height="2">
-                  <line x1="0" y1="1" x2="62" y2="1" stroke="#454545" strokeWidth="2" />
-                  <polygon points="72,1 64,-3 64,5" fill="#454545" />
+                <svg className="absolute" style={{ left: '344px', top: '50%', transform: 'translateY(-50%)' }} width="72" height="24">
+                  <defs>
+                    <marker
+                      id="arrow-canvas"
+                      markerWidth="12"
+                      markerHeight="12"
+                      refX="6"
+                      refY="6"
+                      orient="auto"
+                      markerUnits="userSpaceOnUse"
+                    >
+                      <polygon points="0,0 12,6 0,12" fill="#454545" />
+                    </marker>
+                  </defs>
+                  <line x1="0" y1="12" x2="60" y2="12" stroke="#454545" strokeWidth="2" markerEnd="url(#arrow-canvas)" />
                 </svg>
                 
                 {/* Node B - Person */}
