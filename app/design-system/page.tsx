@@ -1308,7 +1308,7 @@ export default function DesignSystemPage() {
                 {/* Linha separadora do header - mesma cor da borda */}
                 <div className="h-[1px] bg-[#2a2b35]" />
 
-                {/* Conte��do */}
+                {/* Conte����do */}
                 <div className="p-6">
                   {/* Mensagem com check verde */}
                   <div className="flex items-start gap-3 mb-4">
@@ -1884,9 +1884,9 @@ export default function DesignSystemPage() {
                     <div className="flex-1 p-4">
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">Techbiz Forense Digital LTDA</p>
+                          <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">Techbiz Forense Digital LTDA</p>
                         </div>
-                        <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                           <Building className="w-5 h-5 text-[#696969]" />
                         </div>
                       </div>
@@ -1904,9 +1904,9 @@ export default function DesignSystemPage() {
                     <div className="flex-1 p-4">
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">Luiz Henrique de Souza Borges da Silva e Santos</p>
+                          <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">Luiz Henrique de Souza Borges da Silva e Santos</p>
                         </div>
-                        <div className="w-11 h-11 rounded-full border-2 border-[#696969] overflow-hidden flex-shrink-0">
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] overflow-hidden flex-shrink-0">
                           <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Foto" className="w-full h-full object-cover" />
                         </div>
                       </div>
@@ -1924,9 +1924,9 @@ export default function DesignSystemPage() {
                     <div className="flex-1 p-4">
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">(31) 92332-2122 Telefone celular</p>
+                          <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">(31) 92332-2122 Telefone celular</p>
                         </div>
-                        <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                           <svg className="w-5 h-5 text-[#696969]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                           </svg>
@@ -1946,9 +1946,9 @@ export default function DesignSystemPage() {
                     <div className="flex-1 p-4">
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">ABC-1234 Veículo Honda Civic 2020</p>
+                          <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">ABC-1234 Veículo Honda Civic 2020</p>
                         </div>
-                        <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                           <Car className="w-5 h-5 text-[#696969]" />
                         </div>
                       </div>
@@ -1968,10 +1968,10 @@ export default function DesignSystemPage() {
                   <li><strong>Container:</strong> background #2c2c2c, border-radius 8px, sem stroke</li>
                   <li><strong>Barra de destaque:</strong> 4px à esquerda, cor accent da categoria</li>
                   <li><strong>Padding interno:</strong> 16px (p-4) - OBRIGATÓRIO</li>
-                  <li><strong>Nome:</strong> 14px, font-weight 500, line-height 1.3, máximo 2 linhas (line-clamp-2), mesmo estilo nas 2 linhas</li>
+                  <li><strong>Nome:</strong> 16px (text-base), font-weight 500, line-height 1.3, máximo 2 linhas (line-clamp-2), mesmo estilo nas 2 linhas</li>
                   <li><strong>Gap nome → label:</strong> 16px (mt-4) - OBRIGATÓRIO</li>
                   <li><strong>Tooltip:</strong> Atributo title no container para mostrar nome completo no hover</li>
-                  <li><strong>Ícone circular:</strong> 44px, stroke 2px #696969, fundo transparente (sem preenchimento)</li>
+                  <li><strong>Ícone circular:</strong> 44px, stroke 3px #696969 (border-[3px]), fundo transparente (sem preenchimento)</li>
                   <li><strong>Ícone Person:</strong> usar foto/thumbnail do rosto ao invés de ícone</li>
                   <li><strong>Label:</strong> 11px, padding 10px x 4px, border-radius 12px (padrão badges/tags)</li>
                 </ul>

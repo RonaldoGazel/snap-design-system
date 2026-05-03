@@ -107,7 +107,7 @@ export const snapGraph = {
     // Ícone circular (à direita)
     icon: {
       size: '44px',
-      strokeWidth: '2px', // REGRA: stroke de 2px
+      strokeWidth: '3px', // REGRA: stroke de 3px para melhor visibilidade
       strokeColor: '#696969',
       background: 'transparent', // Sem preenchimento, só stroke
       // Para Person: usar foto/thumbnail ao invés de ícone
@@ -115,7 +115,7 @@ export const snapGraph = {
 
     // Tipografia do nome
     name: {
-      fontSize: '14px',
+      fontSize: '16px', // REGRA: 16px
       fontWeight: '500',
       color: '#ffffff',
       lineHeight: '1.3',
