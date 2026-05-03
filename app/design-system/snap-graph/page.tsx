@@ -573,10 +573,10 @@ export default function SnapGraphDesignSystem() {
         <Section title="Conexões (Edges)">
           <div className="space-y-8">
             
-            {/* Conexão Vertical Simples (caso base) */}
+            {/* Conexão Vertical em Cadeia (3 nodes) */}
             <div>
-              <p className="text-sm text-text-muted font-sans mb-4 uppercase tracking-wide">Conexão Vertical Simples</p>
-              <div className="relative bg-[#0a0a0a] rounded-xl border border-border overflow-hidden" style={{ height: '320px' }}>
+              <p className="text-sm text-text-muted font-sans mb-4 uppercase tracking-wide">Conexão Vertical em Cadeia</p>
+              <div className="relative bg-[#0a0a0a] rounded-xl border border-border overflow-hidden" style={{ height: '520px' }}>
                 {/* Grid de fundo */}
                 <div className="absolute inset-0 opacity-20" style={{
                   backgroundImage: 'radial-gradient(circle, #333 1px, transparent 1px)',
@@ -585,20 +585,22 @@ export default function SnapGraphDesignSystem() {
                 
                 {/* 
                   CÁLCULOS:
-                  - Node largura: 256px
-                  - Centro horizontal do node: 128px
-                  - Node 1 posição: left 48px → centro em 48 + 128 = 176px
-                  - Node 1 altura estimada: ~110px → bottom em 48 + 110 = 158px
-                  - Gap: 80px
-                  - Node 2 posição: top = 158 + 80 = 238px → mas para caber, top = 200px
-                  - Linha: de (176, 158) até (176, 200)
+                  - Node largura: 256px (w-64)
+                  - Centro horizontal: left + 128px
+                  - Todos os nodes: left: 48px → centro X = 176px
+                  
+                  - Node 1 (Company): top: 24px, altura ~110px → bottom: 134px
+                  - Gap: 80px → Linha 1: Y de 134 até 214-12=202 (menos seta)
+                  - Node 2 (Person): top: 214px, altura ~110px → bottom: 324px
+                  - Gap: 80px → Linha 2: Y de 324 até 404-12=392 (menos seta)
+                  - Node 3 (Phone): top: 404px
                 */}
                 
-                {/* SVG para a conexão */}
+                {/* SVG para as conexões */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
                   <defs>
                     <marker
-                      id="arrow-simple"
+                      id="arrow-chain"
                       markerWidth="12"
                       markerHeight="12"
                       refX="6"
@@ -610,22 +612,33 @@ export default function SnapGraphDesignSystem() {
                     </marker>
                   </defs>
                   
-                  {/* Linha vertical: sai do centro inferior do Node 1, entra no centro superior do Node 2 */}
+                  {/* Conexão 1: Company → Person */}
                   <line
                     x1="176"
-                    y1="150"
+                    y1="134"
                     x2="176"
-                    y2="188"
+                    y2="202"
                     stroke="#454545"
                     strokeWidth="2"
-                    markerEnd="url(#arrow-simple)"
+                    markerEnd="url(#arrow-chain)"
+                  />
+                  
+                  {/* Conexão 2: Person → Phone */}
+                  <line
+                    x1="176"
+                    y1="324"
+                    x2="176"
+                    y2="392"
+                    stroke="#454545"
+                    strokeWidth="2"
+                    markerEnd="url(#arrow-chain)"
                   />
                 </svg>
                 
                 {/* Nodes */}
                 <div className="relative" style={{ zIndex: 2 }}>
-                  {/* Node 1: Company (topo) */}
-                  <div className="absolute" style={{ left: '48px', top: '40px' }}>
+                  {/* Node 1: Company (topo) - top: 24px */}
+                  <div className="absolute" style={{ left: '48px', top: '24px' }}>
                     <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#7c8db0]" />
@@ -646,8 +659,8 @@ export default function SnapGraphDesignSystem() {
                     </div>
                   </div>
                   
-                  {/* Node 2: Person (abaixo, com gap de 80px) */}
-                  <div className="absolute" style={{ left: '48px', top: '200px' }}>
+                  {/* Node 2: Person (meio) - top: 214px (24 + 110 + 80) */}
+                  <div className="absolute" style={{ left: '48px', top: '214px' }}>
                     <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#9b7fb8]" />
@@ -667,16 +680,41 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                   </div>
+                  
+                  {/* Node 3: Phone (baixo) - top: 404px (214 + 110 + 80) */}
+                  <div className="absolute" style={{ left: '48px', top: '404px' }}>
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
+                      <div className="flex h-full">
+                        <div className="w-1 bg-[#6b9490]" />
+                        <div className="flex-1 p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-white text-base font-medium font-sans leading-[1.3] break-words">(31) 92332-2122</p>
+                              <p className="text-[#a0a0a0] text-sm font-sans mt-0.5">Telefone celular</p>
+                            </div>
+                            <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                              <Phone className="w-5 h-5 text-[#696969]" />
+                            </div>
+                          </div>
+                          <div className="mt-4">
+                            <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              {/* Explicação */}
-              <div className="mt-4 p-4 bg-card rounded-lg border border-border">
-                <p className="text-sm text-text-secondary font-sans">
-                  <strong>Regra:</strong> A linha sai do <strong>centro horizontal inferior</strong> do node de origem 
-                  e entra no <strong>centro horizontal superior</strong> do node de destino. 
-                  Centro = left + (256px / 2) = left + 128px.
-                </p>
+              {/* Regra documentada */}
+              <div className="mt-4 p-4 bg-[#1a2020] border border-[#287266] rounded-lg">
+                <h4 className="text-sm font-bold text-[#4da89a] mb-2 font-sans">Regra de Conexão Vertical</h4>
+                <ul className="text-sm text-text-secondary font-sans space-y-1">
+                  <li><strong>Origem:</strong> Centro horizontal inferior do node (left + 128px, top + altura)</li>
+                  <li><strong>Destino:</strong> Centro horizontal superior do node (left + 128px, top)</li>
+                  <li><strong>Gap mínimo:</strong> 80px entre nodes</li>
+                  <li><strong>Seta:</strong> 12x12px no destino, apontando para baixo</li>
+                </ul>
               </div>
             </div>
             
