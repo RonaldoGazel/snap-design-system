@@ -1863,7 +1863,7 @@ export default function DesignSystemPage() {
                 {/* Company Node */}
                 <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
                   <div className="flex">
-                    <div className="w-1 bg-[#72284B]" />
+                    <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
@@ -1874,7 +1874,7 @@ export default function DesignSystemPage() {
                         </div>
                       </div>
                       <div className="mt-2">
-                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-white bg-[#72284B] rounded">Company SNAP</span>
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded">Company SNAP</span>
                       </div>
                     </div>
                   </div>
@@ -1883,7 +1883,7 @@ export default function DesignSystemPage() {
                 {/* Person Node (with photo) */}
                 <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
                   <div className="flex">
-                    <div className="w-1 bg-[#72284B]" />
+                    <div className="w-1 bg-[#9b7fb8]" />
                     <div className="flex-1 p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
@@ -1894,7 +1894,7 @@ export default function DesignSystemPage() {
                         </div>
                       </div>
                       <div className="mt-2">
-                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-white bg-[#72284B] rounded">Person SNAP</span>
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded">Person SNAP</span>
                       </div>
                     </div>
                   </div>
@@ -1903,7 +1903,7 @@ export default function DesignSystemPage() {
                 {/* Phone Node */}
                 <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
                   <div className="flex">
-                    <div className="w-1 bg-[#287266]" />
+                    <div className="w-1 bg-[#6b9490]" />
                     <div className="flex-1 p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
@@ -1917,7 +1917,7 @@ export default function DesignSystemPage() {
                         </div>
                       </div>
                       <div className="mt-2">
-                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-white bg-[#287266] rounded">TrueCallerID</span>
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded">TrueCallerID</span>
                       </div>
                     </div>
                   </div>
@@ -1926,7 +1926,7 @@ export default function DesignSystemPage() {
                 {/* Vehicle Node */}
                 <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
                   <div className="flex">
-                    <div className="w-1 bg-[#889EA3]" />
+                    <div className="w-1 bg-[#7a9098]" />
                     <div className="flex-1 p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex-1">
@@ -1938,7 +1938,7 @@ export default function DesignSystemPage() {
                         </div>
                       </div>
                       <div className="mt-2">
-                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-black bg-[#889EA3] rounded">DETRAN</span>
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded">DETRAN</span>
                       </div>
                     </div>
                   </div>
@@ -1950,43 +1950,46 @@ export default function DesignSystemPage() {
                 <h4 className="text-sm font-bold text-foreground mb-2 font-sans">Anatomia do Entity Node</h4>
                 <ul className="text-xs text-text-secondary font-sans list-disc ml-4 space-y-1">
                   <li><strong>Container:</strong> background #2c2c2c, border-radius 8px, sem stroke</li>
-                  <li><strong>Barra de destaque:</strong> 4px à esquerda, cor da fonte de dados</li>
+                  <li><strong>Barra de destaque:</strong> 4px à esquerda, cor accent da categoria</li>
                   <li><strong>Nome:</strong> 14px, font-weight 500, cor #ffffff, alinhado à esquerda</li>
                   <li><strong>Subtítulo:</strong> 12px, cor #8a8a8a (opcional)</li>
                   <li><strong>Ícone:</strong> 44px circular, stroke 2px #696969, ícone SVG ou foto</li>
-                  <li><strong>Label:</strong> 11px, padding 8px x 2px, border-radius 4px</li>
+                  <li><strong>Label:</strong> 11px, padding 8px x 2px, border-radius 4px, cores dessaturadas</li>
                 </ul>
               </div>
             </div>
 
             {/* Category Labels */}
             <div>
-              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Labels de Categoria (Fontes de Dados)</p>
-              <div className="flex flex-wrap gap-3 p-4 bg-card rounded-xl border border-border">
-                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#72284B] rounded">Company SNAP</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#72284B] rounded">Person SNAP</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#287266] rounded">TrueCallerID</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#FE473C] rounded">Receita Federal</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-black bg-[#889EA3] rounded">DETRAN</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-black bg-[#ff9800] rounded">INFOSEG</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#333540] rounded">Manual</span>
+              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Labels de Categoria (Paleta Dessaturada)</p>
+              <p className="text-xs text-text-muted font-sans mb-3">
+                Cores próprias para labels, com tons menos saturados que não conflitam com as cores das verticais.
+              </p>
+              <div className="flex flex-wrap gap-3 p-4 bg-[#1a1a1a] rounded-xl border border-border">
+                <span className="px-2 py-0.5 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded">Company SNAP</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded">Person SNAP</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded">TrueCallerID</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded">Receita Federal</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded">DETRAN</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-[#f0e8d8] bg-[#605540] rounded">INFOSEG</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-[#e0e0e0] bg-[#404040] rounded">Manual</span>
               </div>
               <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-sans">
                 <div className="p-2 bg-card rounded border border-border">
-                  <span className="text-[#d4789b]">Company/Person SNAP</span>
-                  <p className="text-text-muted">#72284B (Bordô)</p>
+                  <span className="text-[#7c8db0]">Company SNAP</span>
+                  <p className="text-text-muted">bg #4a5568 / accent #7c8db0</p>
                 </div>
                 <div className="p-2 bg-card rounded border border-border">
-                  <span className="text-[#4da89a]">TrueCallerID</span>
-                  <p className="text-text-muted">#287266 (Petroleum)</p>
+                  <span className="text-[#9b7fb8]">Person SNAP</span>
+                  <p className="text-text-muted">bg #5c4a6b / accent #9b7fb8</p>
                 </div>
                 <div className="p-2 bg-card rounded border border-border">
-                  <span className="text-[#ff8a82]">Receita Federal</span>
-                  <p className="text-text-muted">#FE473C (Coral)</p>
+                  <span className="text-[#6b9490]">TrueCallerID</span>
+                  <p className="text-text-muted">bg #3d5a58 / accent #6b9490</p>
                 </div>
                 <div className="p-2 bg-card rounded border border-border">
-                  <span className="text-[#b3c4c8]">DETRAN</span>
-                  <p className="text-text-muted">#889EA3 (Grey Ahead)</p>
+                  <span className="text-[#a87070]">Receita Federal</span>
+                  <p className="text-text-muted">bg #6b4a4a / accent #a87070</p>
                 </div>
               </div>
             </div>

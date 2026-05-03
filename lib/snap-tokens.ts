@@ -137,7 +137,8 @@ export const snapGraph = {
     },
   },
 
-  // Labels de categoria (fontes de dados)
+  // Labels de categoria de entidade
+  // Paleta própria com cores menos saturadas (não conflita com verticais)
   categoryLabels: {
     borderRadius: '4px',
     paddingX: '8px',
@@ -145,36 +146,42 @@ export const snapGraph = {
     fontSize: '11px',
     fontWeight: '500',
     
-    // Cores por tipo de fonte
+    // Cores por categoria/fonte de dados (tons dessaturados)
     sources: {
       'Company SNAP': {
-        background: '#72284B',
-        text: '#ffffff',
+        background: '#4a5568', // Cinza azulado
+        text: '#e2e8f0',
+        accent: '#7c8db0', // Para barra lateral do node
         description: 'Empresa cadastrada no SNAP',
       },
       'Person SNAP': {
-        background: '#72284B',
-        text: '#ffffff',
+        background: '#5c4a6b', // Roxo dessaturado
+        text: '#e8e0f0',
+        accent: '#9b7fb8', // Para barra lateral do node
         description: 'Pessoa física cadastrada no SNAP',
       },
       'TrueCallerID': {
-        background: '#287266',
-        text: '#ffffff',
+        background: '#3d5a58', // Verde-azulado dessaturado
+        text: '#d8ebe9',
+        accent: '#6b9490', // Para barra lateral do node
         description: 'Telefone identificado via TrueCaller',
       },
       'Receita Federal': {
-        background: '#FE473C',
-        text: '#ffffff',
+        background: '#6b4a4a', // Vermelho dessaturado
+        text: '#f0e0e0',
+        accent: '#a87070', // Para barra lateral do node
         description: 'Dados da Receita Federal',
       },
       'DETRAN': {
-        background: '#889EA3',
-        text: '#000000',
+        background: '#4a5a60', // Cinza esverdeado
+        text: '#e0e8eb',
+        accent: '#7a9098', // Para barra lateral do node
         description: 'Dados do DETRAN',
       },
       'INFOSEG': {
-        background: '#ff9800',
-        text: '#000000',
+        background: '#605540', // Âmbar dessaturado
+        text: '#f0e8d8',
+        accent: '#a89870', // Para barra lateral do node
         description: 'Base INFOSEG',
       },
       'Manual': {
