@@ -252,7 +252,7 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
                     </div>
                   </div>
                 </div>
@@ -272,7 +272,7 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-full">Person SNAP</span>
                     </div>
                   </div>
                 </div>
@@ -292,7 +292,7 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-full">TrueCallerID</span>
                     </div>
                   </div>
                 </div>
@@ -312,7 +312,7 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-xl">DETRAN</span>
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-full">DETRAN</span>
                     </div>
                   </div>
                 </div>
@@ -336,7 +336,7 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded-xl">Receita Federal</span>
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded-full">Receita Federal</span>
                     </div>
                   </div>
                 </div>
@@ -356,7 +356,7 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#f0e8d8] bg-[#605540] rounded-xl">INFOSEG</span>
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#f0e8d8] bg-[#605540] rounded-full">INFOSEG</span>
                     </div>
                   </div>
                 </div>
@@ -376,7 +376,7 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e0e0e0] bg-[#404040] rounded-xl">Manual</span>
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e0e0e0] bg-[#404040] rounded-full">Manual</span>
                     </div>
                   </div>
                 </div>
@@ -396,7 +396,7 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e0e0e0] bg-[#404040] rounded-xl">Manual</span>
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e0e0e0] bg-[#404040] rounded-full">Manual</span>
                     </div>
                   </div>
                 </div>
@@ -453,10 +453,11 @@ export default function SnapGraphDesignSystem() {
                   <p className="font-medium text-foreground mb-2">Label de Categoria</p>
                   <ul className="list-disc ml-4 space-y-1">
                     <li><strong>Gap do nome:</strong> 16px (mt-4)</li>
-                    <li><strong>Font-size:</strong> 11px</li>
+                    <li><strong>Font-size:</strong> 12px (text-xs)</li>
                     <li><strong>Font-weight:</strong> 500</li>
-                    <li><strong>Padding:</strong> 10px x 4px (px-2.5 py-1)</li>
-                    <li><strong>Border-radius:</strong> 12px (rounded-xl)</li>
+                    <li><strong>Font-family:</strong> font-sans (NUNCA Cygnito)</li>
+                    <li><strong>Padding:</strong> 12px x 4px (px-3 py-1)</li>
+                    <li><strong>Border-radius:</strong> pill (rounded-full)</li>
                   </ul>
                 </div>
                 <div>
@@ -498,13 +499,13 @@ export default function SnapGraphDesignSystem() {
 
             {/* Preview das labels */}
             <div className="flex flex-wrap gap-3 p-6 bg-[#1a1a1a] rounded-xl border border-border">
-              <span className="px-2.5 py-1 text-[11px] font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
-              <span className="px-2.5 py-1 text-[11px] font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
-              <span className="px-2.5 py-1 text-[11px] font-sans font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
-              <span className="px-2.5 py-1 text-[11px] font-sans font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded-xl">Receita Federal</span>
-              <span className="px-2.5 py-1 text-[11px] font-sans font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-xl">DETRAN</span>
-              <span className="px-2.5 py-1 text-[11px] font-sans font-medium text-[#f0e8d8] bg-[#605540] rounded-xl">INFOSEG</span>
-              <span className="px-2.5 py-1 text-[11px] font-sans font-medium text-[#e0e0e0] bg-[#404040] rounded-xl">Manual</span>
+              <span className="px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
+              <span className="px-3 py-1 text-xs font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-full">Person SNAP</span>
+              <span className="px-3 py-1 text-xs font-sans font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-full">TrueCallerID</span>
+              <span className="px-3 py-1 text-xs font-sans font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded-full">Receita Federal</span>
+              <span className="px-3 py-1 text-xs font-sans font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-full">DETRAN</span>
+              <span className="px-3 py-1 text-xs font-sans font-medium text-[#f0e8d8] bg-[#605540] rounded-full">INFOSEG</span>
+              <span className="px-3 py-1 text-xs font-sans font-medium text-[#e0e0e0] bg-[#404040] rounded-full">Manual</span>
             </div>
 
             {/* Tabela de cores */}
@@ -702,7 +703,7 @@ export default function SnapGraphDesignSystem() {
                             </div>
                           </div>
                           <div className="mt-4">
-                            <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
                           </div>
                         </div>
                       </div>
@@ -724,7 +725,7 @@ export default function SnapGraphDesignSystem() {
                             </div>
                           </div>
                           <div className="mt-4">
-                            <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
                           </div>
                         </div>
                       </div>
@@ -746,7 +747,7 @@ export default function SnapGraphDesignSystem() {
                             </div>
                           </div>
                           <div className="mt-4">
-                            <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
+                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-full">Person SNAP</span>
                           </div>
                         </div>
                       </div>
@@ -768,7 +769,7 @@ export default function SnapGraphDesignSystem() {
                             </div>
                           </div>
                           <div className="mt-4">
-                            <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
+                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-full">TrueCallerID</span>
                           </div>
                         </div>
                       </div>
@@ -1029,7 +1030,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                         </div>
                       </div>
                       <div className="mt-4">
-                        <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
                       </div>
                     </div>
                   </div>
@@ -1050,7 +1051,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                         </div>
                       </div>
                       <div className="mt-4">
-                        <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
                       </div>
                     </div>
                   </div>
@@ -1071,7 +1072,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                         </div>
                       </div>
                       <div className="mt-4">
-                        <span className="inline-block px-2.5 py-1 text-[11px] font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
                       </div>
                     </div>
                   </div>
