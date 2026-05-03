@@ -833,26 +833,26 @@ export default function SnapGraphDesignSystem() {
                           <tr className="border-b border-border/50">
                             <td className="py-2 pr-4">Techbiz Forense Digital LTDA</td>
                             <td className="py-2 pr-4">Company</td>
-                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#7c8db0]" /> #7c8db0</td>
-                            <td className="py-2"><code className="text-xs bg-[#4a5568] px-1.5 py-0.5 rounded">Company SNAP</code></td>
+                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#7c8db0]" /> <span className="font-sans">#7c8db0</span></td>
+                            <td className="py-2"><span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span></td>
                           </tr>
                           <tr className="border-b border-border/50">
                             <td className="py-2 pr-4">Inspect Segurança Digital Tecnologia</td>
                             <td className="py-2 pr-4">Company</td>
-                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#7c8db0]" /> #7c8db0</td>
-                            <td className="py-2"><code className="text-xs bg-[#4a5568] px-1.5 py-0.5 rounded">Company SNAP</code></td>
+                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#7c8db0]" /> <span className="font-sans">#7c8db0</span></td>
+                            <td className="py-2"><span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span></td>
                           </tr>
                           <tr className="border-b border-border/50">
                             <td className="py-2 pr-4">Luiz Henrique de Souza Borges</td>
                             <td className="py-2 pr-4">Person</td>
-                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#9b7fb8]" /> #9b7fb8</td>
-                            <td className="py-2"><code className="text-xs bg-[#5c4a6b] px-1.5 py-0.5 rounded">Person SNAP</code></td>
+                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#9b7fb8]" /> <span className="font-sans">#9b7fb8</span></td>
+                            <td className="py-2"><span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-full">Person SNAP</span></td>
                           </tr>
                           <tr>
                             <td className="py-2 pr-4">(31) 92332-2122 - Telefone celular</td>
                             <td className="py-2 pr-4">Phone</td>
-                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#6b9490]" /> #6b9490</td>
-                            <td className="py-2"><code className="text-xs bg-[#3d5a58] px-1.5 py-0.5 rounded">TrueCallerID</code></td>
+                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#6b9490]" /> <span className="font-sans">#6b9490</span></td>
+                            <td className="py-2"><span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-full">TrueCallerID</span></td>
                           </tr>
                         </tbody>
                       </table>
