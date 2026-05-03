@@ -573,10 +573,10 @@ export default function SnapGraphDesignSystem() {
         <Section title="Conexões (Edges)">
           <div className="space-y-8">
             
-            {/* Conexão Vertical em Cadeia (3 nodes) */}
+            {/* Grafo Completo: Descoberta de Vínculo Oculto */}
             <div>
-              <p className="text-sm text-text-muted font-sans mb-4 uppercase tracking-wide">Conexão Vertical em Cadeia</p>
-              <div className="relative bg-[#0a0a0a] rounded-xl border border-border overflow-hidden" style={{ height: '520px' }}>
+              <p className="text-sm text-text-muted font-sans mb-4 uppercase tracking-wide">Descoberta de Vínculo Oculto</p>
+              <div className="relative bg-[#0a0a0a] rounded-xl border border-border overflow-hidden" style={{ height: '560px' }}>
                 {/* Grid de fundo */}
                 <div className="absolute inset-0 opacity-20" style={{
                   backgroundImage: 'radial-gradient(circle, #333 1px, transparent 1px)',
@@ -584,23 +584,49 @@ export default function SnapGraphDesignSystem() {
                 }} />
                 
                 {/* 
-                  CÁLCULOS:
-                  - Node largura: 256px (w-64)
-                  - Centro horizontal: left + 128px
-                  - Todos os nodes: left: 48px → centro X = 176px
+                  LAYOUT DO GRAFO:
+                  ================
                   
-                  - Node 1 (Company): top: 24px, altura ~110px → bottom: 134px
-                  - Gap: 80px → Linha 1: Y de 134 até 214-12=202 (menos seta)
-                  - Node 2 (Person): top: 214px, altura ~110px → bottom: 324px
-                  - Gap: 80px → Linha 2: Y de 324 até 404-12=392 (menos seta)
-                  - Node 3 (Phone): top: 404px
+                  TECHBIZ (left: 32px)          INSPECT (left: 368px)
+                  top: 24px                     top: 24px
+                  centro X: 32+128 = 160px      centro X: 368+128 = 496px
+                  altura: ~110px                altura: ~110px
+                  bottom: 134px                 bottom: 134px
+                  centro Y: 24+55 = 79px        
+                  
+                                                    |
+                                                    | (conexão vertical)
+                                                    v
+                                                    
+                                                LUIZ HENRIQUE (left: 368px)
+                                                top: 214px (134 + 80 gap)
+                                                centro X: 496px
+                                                altura: ~110px
+                                                bottom: 324px
+                                                    
+                                                    |
+                                                    | (conexão vertical)
+                                                    v
+                                                    
+                                                TELEFONE (left: 368px)
+                                                top: 404px (324 + 80 gap)
+                                                centro X: 496px
+                                                centro Y: 404+55 = 459px
+                                                lateral esquerda: 368px
+                  
+                  CONEXÃO VÍNCULO OCULTO (BRANCA):
+                  - Sai: lateral esquerda do Phone (X=368, Y=459 centro vertical)
+                  - Waypoint 1: vai para esquerda até X=160 (centro da Techbiz)
+                  - Waypoint 2: sobe até Y=134+6 (base da Techbiz + offset seta)
+                  - Entra: base da Techbiz com seta apontando para cima
                 */}
                 
                 {/* SVG para as conexões */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
                   <defs>
+                    {/* Seta cinza (conexões normais) */}
                     <marker
-                      id="arrow-chain"
+                      id="arrow-normal"
                       markerWidth="12"
                       markerHeight="12"
                       refX="6"
@@ -610,35 +636,81 @@ export default function SnapGraphDesignSystem() {
                     >
                       <polygon points="0,0 12,6 0,12" fill="#454545" />
                     </marker>
+                    
+                    {/* Seta branca (vínculo descoberto) */}
+                    <marker
+                      id="arrow-discovery"
+                      markerWidth="12"
+                      markerHeight="12"
+                      refX="6"
+                      refY="6"
+                      orient="auto"
+                      markerUnits="userSpaceOnUse"
+                    >
+                      <polygon points="0,0 12,6 0,12" fill="#ffffff" />
+                    </marker>
                   </defs>
                   
-                  {/* Conexão 1: Company → Person */}
+                  {/* Conexão 1: Inspect → Luiz Henrique (vertical normal) */}
                   <line
-                    x1="176"
+                    x1="496"
                     y1="134"
-                    x2="176"
+                    x2="496"
                     y2="202"
                     stroke="#454545"
                     strokeWidth="2"
-                    markerEnd="url(#arrow-chain)"
+                    markerEnd="url(#arrow-normal)"
                   />
                   
-                  {/* Conexão 2: Person → Phone */}
+                  {/* Conexão 2: Luiz Henrique → Phone (vertical normal) */}
                   <line
-                    x1="176"
+                    x1="496"
                     y1="324"
-                    x2="176"
+                    x2="496"
                     y2="392"
                     stroke="#454545"
                     strokeWidth="2"
-                    markerEnd="url(#arrow-chain)"
+                    markerEnd="url(#arrow-normal)"
+                  />
+                  
+                  {/* Conexão 3: Phone → Techbiz (VÍNCULO OCULTO - ortogonal com waypoint) */}
+                  {/* Sai da lateral esquerda do Phone, vai até o centro X da Techbiz, sobe até a base */}
+                  <path
+                    d="M 368 459 L 160 459 L 160 146"
+                    fill="none"
+                    stroke="#ffffff"
+                    strokeWidth="2"
+                    markerEnd="url(#arrow-discovery)"
                   />
                 </svg>
                 
                 {/* Nodes */}
                 <div className="relative" style={{ zIndex: 2 }}>
-                  {/* Node 1: Company (topo) - top: 24px */}
-                  <div className="absolute" style={{ left: '48px', top: '24px' }}>
+                  
+                  {/* Node 1: TECHBIZ (topo esquerda) */}
+                  <div className="absolute" style={{ left: '32px', top: '24px' }}>
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
+                      <div className="flex h-full">
+                        <div className="w-1 bg-[#7c8db0]" />
+                        <div className="flex-1 p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
+                            </div>
+                            <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                              <Building className="w-5 h-5 text-[#696969]" />
+                            </div>
+                          </div>
+                          <div className="mt-4">
+                            <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Node 2: INSPECT (topo direita) */}
+                  <div className="absolute" style={{ left: '368px', top: '24px' }}>
                     <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#7c8db0]" />
@@ -659,8 +731,8 @@ export default function SnapGraphDesignSystem() {
                     </div>
                   </div>
                   
-                  {/* Node 2: Person (meio) - top: 214px (24 + 110 + 80) */}
-                  <div className="absolute" style={{ left: '48px', top: '214px' }}>
+                  {/* Node 3: LUIZ HENRIQUE (meio direita) */}
+                  <div className="absolute" style={{ left: '368px', top: '214px' }}>
                     <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#9b7fb8]" />
@@ -681,8 +753,8 @@ export default function SnapGraphDesignSystem() {
                     </div>
                   </div>
                   
-                  {/* Node 3: Phone (baixo) - top: 404px (214 + 110 + 80) */}
-                  <div className="absolute" style={{ left: '48px', top: '404px' }}>
+                  {/* Node 4: TELEFONE (baixo direita) */}
+                  <div className="absolute" style={{ left: '368px', top: '404px' }}>
                     <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#6b9490]" />
@@ -706,15 +778,25 @@ export default function SnapGraphDesignSystem() {
                 </div>
               </div>
               
-              {/* Regra documentada */}
-              <div className="mt-4 p-4 bg-[#1a2020] border border-[#287266] rounded-lg">
-                <h4 className="text-sm font-bold text-[#4da89a] mb-2 font-sans">Regra de Conexão Vertical</h4>
-                <ul className="text-sm text-text-secondary font-sans space-y-1">
-                  <li><strong>Origem:</strong> Centro horizontal inferior do node (left + 128px, top + altura)</li>
-                  <li><strong>Destino:</strong> Centro horizontal superior do node (left + 128px, top)</li>
-                  <li><strong>Gap mínimo:</strong> 80px entre nodes</li>
-                  <li><strong>Seta:</strong> 12x12px no destino, apontando para baixo</li>
-                </ul>
+              {/* Legenda e explicação */}
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-[#1a2020] border border-[#287266] rounded-lg">
+                  <h4 className="text-sm font-bold text-[#4da89a] mb-2 font-sans">Regras de Conexão</h4>
+                  <ul className="text-sm text-text-secondary font-sans space-y-1">
+                    <li><strong>Vertical:</strong> Sai do centro inferior, entra no centro superior</li>
+                    <li><strong>Lateral:</strong> Sai do centro vertical da lateral (esquerda ou direita)</li>
+                    <li><strong>Waypoint:</strong> Ângulo de 90° sem border-radius</li>
+                    <li><strong>Gap mínimo:</strong> 80px entre nodes</li>
+                  </ul>
+                </div>
+                
+                <div className="p-4 bg-[#1a1a2a] border border-[#ffffff] rounded-lg">
+                  <h4 className="text-sm font-bold text-white mb-2 font-sans">Vínculo Descoberto (Linha Branca)</h4>
+                  <p className="text-sm text-text-secondary font-sans">
+                    Ao investigar o sócio da Inspect (Luiz Henrique), descobriu-se um telefone vinculado à Techbiz, 
+                    <strong className="text-white"> comprovando um vínculo oculto</strong> entre as duas empresas.
+                  </p>
+                </div>
               </div>
             </div>
             
