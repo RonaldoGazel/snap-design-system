@@ -1878,53 +1878,53 @@ export default function DesignSystemPage() {
               <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Nós de Entidade (Entity Nodes)</p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* Company Node */}
-                <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
-                  <div className="flex">
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Techbiz Forense Digital LTDA">
+                  <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-3">
                       <div className="flex items-start justify-between gap-2">
-                        <div className="flex-1">
-                          <p className="text-white text-sm font-medium font-sans leading-tight">Techbiz Forense Digital LTDA</p>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">Techbiz Forense Digital LTDA</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
                           <Building className="w-5 h-5 text-[#696969]" />
                         </div>
                       </div>
                       <div className="mt-2">
-                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded">Company SNAP</span>
+                        <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Person Node (with photo) */}
-                <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
-                  <div className="flex">
+                {/* Person Node (with photo) - nome longo para testar truncate */}
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Luiz Henrique de Souza Borges da Silva e Santos">
+                  <div className="flex h-full">
                     <div className="w-1 bg-[#9b7fb8]" />
                     <div className="flex-1 p-3">
                       <div className="flex items-start justify-between gap-2">
-                        <div className="flex-1">
-                          <p className="text-white text-sm font-medium font-sans leading-tight">Luiz Henrique de Souza Borges</p>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">Luiz Henrique de Souza Borges da Silva e Santos</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-2 border-[#696969] overflow-hidden flex-shrink-0">
                           <img src="/placeholder.svg?height=44&width=44&query=professional man with glasses portrait" alt="Foto" className="w-full h-full object-cover" />
                         </div>
                       </div>
                       <div className="mt-2">
-                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded">Person SNAP</span>
+                        <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Phone Node */}
-                <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
-                  <div className="flex">
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="(31) 92332-2122">
+                  <div className="flex h-full">
                     <div className="w-1 bg-[#6b9490]" />
                     <div className="flex-1 p-3">
                       <div className="flex items-start justify-between gap-2">
-                        <div className="flex-1">
-                          <p className="text-white text-sm font-medium font-sans leading-tight">(31) 92332-2122</p>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">(31) 92332-2122</p>
                           <p className="text-[#8a8a8a] text-xs font-sans mt-0.5">Telefone celular</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
@@ -1934,20 +1934,20 @@ export default function DesignSystemPage() {
                         </div>
                       </div>
                       <div className="mt-2">
-                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded">TrueCallerID</span>
+                        <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Vehicle Node */}
-                <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
-                  <div className="flex">
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="ABC-1234 - Veículo Honda Civic">
+                  <div className="flex h-full">
                     <div className="w-1 bg-[#7a9098]" />
                     <div className="flex-1 p-3">
                       <div className="flex items-start justify-between gap-2">
-                        <div className="flex-1">
-                          <p className="text-white text-sm font-medium font-sans leading-tight">ABC-1234</p>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">ABC-1234</p>
                           <p className="text-[#8a8a8a] text-xs font-sans mt-0.5">Veículo - Honda Civic</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
@@ -1955,7 +1955,7 @@ export default function DesignSystemPage() {
                         </div>
                       </div>
                       <div className="mt-2">
-                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded">DETRAN</span>
+                        <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-xl">DETRAN</span>
                       </div>
                     </div>
                   </div>
@@ -1966,12 +1966,14 @@ export default function DesignSystemPage() {
               <div className="mt-4 p-4 bg-card rounded-lg border border-border">
                 <h4 className="text-sm font-bold text-foreground mb-2 font-sans">Anatomia do Entity Node</h4>
                 <ul className="text-xs text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Largura fixa:</strong> 256px (w-64)</li>
                   <li><strong>Container:</strong> background #2c2c2c, border-radius 8px, sem stroke</li>
                   <li><strong>Barra de destaque:</strong> 4px à esquerda, cor accent da categoria</li>
-                  <li><strong>Nome:</strong> 14px, font-weight 500, cor #ffffff, alinhado à esquerda</li>
+                  <li><strong>Nome:</strong> 14px, font-weight 500, line-height 1.3, máximo 2 linhas com reticências (line-clamp-2)</li>
+                  <li><strong>Tooltip:</strong> Atributo title no container para mostrar nome completo no hover</li>
                   <li><strong>Subtítulo:</strong> 12px, cor #8a8a8a (opcional)</li>
                   <li><strong>Ícone:</strong> 44px circular, stroke 2px #696969, ícone SVG ou foto</li>
-                  <li><strong>Label:</strong> 11px, padding 8px x 2px, border-radius 4px, cores dessaturadas</li>
+                  <li><strong>Label:</strong> 11px, padding 10px x 4px, <strong>border-radius 12px</strong> (padrão badges/tags)</li>
                 </ul>
               </div>
             </div>
@@ -1981,15 +1983,16 @@ export default function DesignSystemPage() {
               <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Labels de Categoria (Paleta Dessaturada)</p>
               <p className="text-xs text-text-muted font-sans mb-3">
                 Cores próprias para labels, com tons menos saturados que não conflitam com as cores das verticais.
+                <strong className="text-text-secondary"> Todas as tags/badges usam border-radius 12px.</strong>
               </p>
               <div className="flex flex-wrap gap-3 p-4 bg-[#1a1a1a] rounded-xl border border-border">
-                <span className="px-2 py-0.5 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded">Company SNAP</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded">Person SNAP</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded">TrueCallerID</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded">Receita Federal</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded">DETRAN</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-[#f0e8d8] bg-[#605540] rounded">INFOSEG</span>
-                <span className="px-2 py-0.5 text-[11px] font-medium text-[#e0e0e0] bg-[#404040] rounded">Manual</span>
+                <span className="px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                <span className="px-2.5 py-1 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
+                <span className="px-2.5 py-1 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
+                <span className="px-2.5 py-1 text-[11px] font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded-xl">Receita Federal</span>
+                <span className="px-2.5 py-1 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-xl">DETRAN</span>
+                <span className="px-2.5 py-1 text-[11px] font-medium text-[#f0e8d8] bg-[#605540] rounded-xl">INFOSEG</span>
+                <span className="px-2.5 py-1 text-[11px] font-medium text-[#e0e0e0] bg-[#404040] rounded-xl">Manual</span>
               </div>
               <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-sans">
                 <div className="p-2 bg-card rounded border border-border">

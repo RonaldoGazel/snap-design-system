@@ -97,11 +97,11 @@ export const snapGraph = {
 
   // Nós de entidade (Entity Nodes)
   entityNode: {
+    width: '256px', // Largura fixa
     background: '#2c2c2c',
     borderRadius: '8px',
     accentWidth: '4px', // Barra de destaque à esquerda
     padding: '12px',
-    minWidth: '180px',
     
     // Ícone circular
     icon: {
@@ -116,6 +116,10 @@ export const snapGraph = {
       fontSize: '14px',
       fontWeight: '500',
       color: '#ffffff',
+      lineHeight: '1.3',
+      maxLines: 2, // Máximo 2 linhas
+      overflow: 'ellipsis', // Reticências se não couber
+      showTooltip: true, // Mostrar hint com nome completo no hover
     },
     subtitle: {
       fontSize: '12px',
@@ -138,11 +142,12 @@ export const snapGraph = {
   },
 
   // Labels de categoria de entidade
+  // Segue o padrão de badges/tags do design system (border-radius grande)
   // Paleta própria com cores menos saturadas (não conflita com verticais)
   categoryLabels: {
-    borderRadius: '4px',
-    paddingX: '8px',
-    paddingY: '2px',
+    borderRadius: '12px', // REGRA: Tags e badges sempre usam border-radius 12px
+    paddingX: '10px',
+    paddingY: '4px',
     fontSize: '11px',
     fontWeight: '500',
     
@@ -405,6 +410,16 @@ export const components = {
     borderRadius: '12px',
     headerSeparator: 'with-margin', // mx-5
     buttonAlign: 'left',
+  },
+
+  // Badges e Tags (REGRA GLOBAL)
+  // Sempre usam border-radius grande (12px)
+  badge: {
+    borderRadius: '12px', // OBRIGATÓRIO para todos badges/tags
+    paddingX: '10px',
+    paddingY: '4px',
+    fontSize: '11px',
+    fontWeight: '500',
   },
 
   // Tabs
