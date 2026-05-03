@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils"
  */
 
 const snapButtonVariants = cva(
-  "inline-flex items-center justify-between font-sans font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-between font-sans font-bold uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -25,7 +25,7 @@ const snapButtonVariants = cva(
         // Ação secundária/cancelar (outline)
         secondary: "bg-transparent border border-[#676c70] text-white hover:bg-[#2a2b35]",
         
-        // Ação destrutiva (vermelho)
+        // Ação destrutiva (vermelho coral - para exclusões/remoções críticas)
         destructive: "bg-[#fe473c] text-white hover:bg-[#e03c32]",
         
         // Ação de sucesso (verde)

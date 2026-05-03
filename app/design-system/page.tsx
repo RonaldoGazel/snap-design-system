@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft } from "lucide-react"
+import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw } from "lucide-react"
+import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
 
 /* ============================================
    SNAP DESIGN SYSTEM
@@ -1044,7 +1045,7 @@ export default function DesignSystemPage() {
               CPF: <span className="text-[#d4789b] bg-[#72284b]/25 px-1 rounded">013.511.976-65</span> na localidade de Belo Horizonte, 
               localizado no ENDEREÇO: <span className="text-[#f0c048] bg-[#d4a017]/20 px-1 rounded">Rua Major Lopes, NÚMERO: 37, BAIRRO: Barro Preto</span>. 
               O alvo foi visto em um VEÍCULO: <span className="text-[#4dd4e8] bg-[#00bcd4]/20 px-1 rounded">Corsa Sedan, PLACA: NPX-3031</span>, 
-              nas imediações da empresa de RAZÃO SOCIAL: <span className="text-[#4dd4e8] bg-[#00bcd4]/20 px-1 rounded">JB Aversa Participações Ltda</span>.
+              nas imediações da empresa de RAZÃO SOCIAL: <span className="text-[#4dd4e8] bg-[#00bcd4]/20 px-1 rounded">JB Aversa Participa��ões Ltda</span>.
             </p>
           </div>
           <div className="mt-4 flex flex-wrap gap-6">
@@ -1105,26 +1106,55 @@ export default function DesignSystemPage() {
             </table>
           </div>
 
-          {/* Exemplos de botões */}
-          <div className="mt-6 flex flex-wrap gap-3">
-            <button className="px-4 py-2 rounded-lg border border-border text-foreground font-sans flex items-center gap-2 hover:bg-muted transition-colors">
-              <X className="w-4 h-4" /> Cancelar
-            </button>
-            <button className="px-4 py-2 rounded-lg border border-border text-foreground font-sans flex items-center gap-2 hover:bg-muted transition-colors">
-              <X className="w-4 h-4" /> Ignorar
-            </button>
-            <button className="px-4 py-2 rounded-lg bg-[#3f9f76] text-white font-sans flex items-center gap-2 hover:opacity-90 transition-opacity">
-              <Check className="w-4 h-4" /> Vincular
-            </button>
-            <button className="px-4 py-2 rounded-lg bg-[#3f9f76] text-white font-sans flex items-center gap-2 hover:opacity-90 transition-opacity">
-              <Check className="w-4 h-4" /> Criar
-            </button>
-            <button className="px-4 py-2 rounded-lg bg-[#72284b] text-white font-sans flex items-center gap-2 hover:opacity-90 transition-opacity">
-              <X className="w-4 h-4" /> Remover vinculação
-            </button>
-            <button className="px-4 py-2 rounded-lg bg-[#00bcd4] text-white font-sans flex items-center gap-2 hover:opacity-90 transition-opacity">
-              Tramitar
-            </button>
+          {/* Regras visuais do botão */}
+          <div className="mt-6 p-4 bg-card rounded-lg border border-border">
+            <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Anatomia do Botão (REGRAS)</h4>
+            <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+              <li><strong>Texto:</strong> UPPERCASE (caixa alta) + font-bold</li>
+              <li><strong>Border-radius:</strong> 6px (rounded-[6px])</li>
+              <li><strong>Layout:</strong> ícone à ESQUERDA + texto à DIREITA (justify-between)</li>
+              <li><strong>Largura Modal:</strong> 130px fixa</li>
+              <li><strong>Largura Card:</strong> 110px fixa</li>
+              <li><strong>Gap entre botões:</strong> 16px (gap-4)</li>
+              <li><strong>Fonte:</strong> font-sans (NUNCA Cygnito)</li>
+            </ul>
+          </div>
+
+          {/* Exemplos de botões - usando SnapButton */}
+          <div className="mt-6">
+            <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Botões em Contexto de Modal</p>
+            <SnapButtonGroup align="left">
+              <SnapButton variant="secondary" size="modal" icon={<X className="w-4 h-4" />}>
+                Cancelar
+              </SnapButton>
+              <SnapButton variant="primary" size="modal" icon={<RefreshCw className="w-4 h-4" />}>
+                Tramitar
+              </SnapButton>
+            </SnapButtonGroup>
+          </div>
+
+          <div className="mt-6">
+            <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Variantes por Contexto</p>
+            <div className="flex flex-wrap gap-4">
+              <SnapButton variant="secondary" size="default" icon={<X className="w-4 h-4" />}>
+                Cancelar
+              </SnapButton>
+              <SnapButton variant="secondary" size="default" icon={<X className="w-4 h-4" />}>
+                Ignorar
+              </SnapButton>
+              <SnapButton variant="success" size="default" icon={<Check className="w-4 h-4" />}>
+                Vincular
+              </SnapButton>
+              <SnapButton variant="success" size="default" icon={<Check className="w-4 h-4" />}>
+                Criar
+              </SnapButton>
+              <SnapButton variant="primary" size="default" icon={<X className="w-4 h-4" />}>
+                Remover Vinculação
+              </SnapButton>
+              <SnapButton variant="primary" size="default" icon={<RefreshCw className="w-4 h-4" />}>
+                Tramitar
+              </SnapButton>
+            </div>
           </div>
         </Section>
 
