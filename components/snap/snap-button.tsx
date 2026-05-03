@@ -10,14 +10,15 @@ import { cn } from "@/lib/utils"
  * Regras:
  * - Texto: Capitalização normal (ex: "Cancelar", "Remover Vinculação") - NÃO UPPERCASE
  * - Layout interno: justify-between (ícone ESQUERDA, texto alinhado à DIREITA)
+ * - Gap mínimo ícone-texto: 12px (gap-3) - botão cresce se necessário
  * - Border-radius: 6px (rounded-[6px])
  * - Gap entre botões: 16px (gap-4)
- * - Largura padrão Modal: 130px fixa
- * - Largura padrão Card: 110px fixa
+ * - Largura padrão Modal: 130px fixa (cresce se texto longo)
+ * - Largura padrão Card: 110px fixa (cresce se texto longo)
  */
 
 const snapButtonVariants = cva(
-  "inline-flex items-center justify-between font-sans font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-between gap-3 font-sans font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -40,11 +41,11 @@ const snapButtonVariants = cva(
         link: "bg-transparent text-[#72284b] hover:text-[#d4789b] underline-offset-4 hover:underline",
       },
       size: {
-        // Para uso em Modais
-        modal: "w-[130px] px-4 py-2 text-sm rounded-[6px]",
+        // Para uso em Modais (min-w permite crescer se texto longo)
+        modal: "min-w-[130px] px-4 py-2 text-sm rounded-[6px]",
         
-        // Para uso em Cards
-        card: "w-[110px] px-3 py-2 text-xs rounded-[6px]",
+        // Para uso em Cards (min-w permite crescer se texto longo)
+        card: "min-w-[110px] px-3 py-2 text-xs rounded-[6px]",
         
         // Tamanho padrão (largura mínima para manter layout)
         default: "min-w-[130px] px-4 py-2 text-sm rounded-[6px]",

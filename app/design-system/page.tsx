@@ -1236,11 +1236,11 @@ export default function DesignSystemPage() {
           <div className="mb-8">
             <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Tags de Categoria</p>
             <div className="flex flex-wrap gap-2">
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-white bg-[#72284b]">preso</span>
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-black bg-[#00bcd4]">visitante</span>
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-white bg-[#3f9f76]">advogado</span>
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-black bg-[#ffc563]">familiar</span>
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-black bg-[#ff9800]">ex-preso</span>
+              <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#72284b]">preso</span>
+              <span className="px-3 py-1 rounded-full text-xs font-sans text-black bg-[#00bcd4]">visitante</span>
+              <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#3f9f76]">advogado</span>
+              <span className="px-3 py-1 rounded-full text-xs font-sans text-black bg-[#ffc563]">familiar</span>
+              <span className="px-3 py-1 rounded-full text-xs font-sans text-black bg-[#ff9800]">ex-preso</span>
             </div>
           </div>
 
