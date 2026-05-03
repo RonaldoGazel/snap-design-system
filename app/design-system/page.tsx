@@ -749,6 +749,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 // Índice de navegação
 const indice = [
+  { titulo: 'Marca SNAP', id: 'marca-snap' },
   { titulo: 'Verticais do Ecossistema', id: 'verticais-do-ecossistema-snap' },
   { titulo: 'Tipografia', id: 'tipografia' },
   { titulo: 'Cores das Verticais', id: 'cores-das-verticais' },
@@ -805,6 +806,28 @@ export default function DesignSystemPage() {
             ))}
           </div>
         </nav>
+
+        {/* ============================================
+            MARCA SNAP
+            ============================================ */}
+        <Section title="MARCA SNAP">
+          <p className="text-text-secondary mb-4 font-sans">
+            Logo principal do Ecossistema SNAP. Aplicável em todas as verticais e áreas do sistema.
+          </p>
+          <div className="flex items-center gap-8 p-6 bg-card rounded-xl border border-border">
+            <div className="flex flex-col items-center gap-3">
+              <div className="p-6 bg-[#0a0a0a] rounded-lg">
+                <img src="/assets/snap-logo.svg" alt="SNAP" className="h-8" />
+              </div>
+              <code className="text-xs text-text-muted font-mono">/assets/snap-logo.svg</code>
+            </div>
+            <div className="flex-1 text-sm text-text-secondary font-sans space-y-2">
+              <p><strong>Formato:</strong> SVG vetorial</p>
+              <p><strong>Cor:</strong> Branco (#FFFFFF) sobre fundo escuro</p>
+              <p><strong>Uso:</strong> Headers, splashscreens, documentos oficiais</p>
+            </div>
+          </div>
+        </Section>
 
         {/* ============================================
             VERTICAIS DO ECOSSISTEMA SNAP
@@ -1805,16 +1828,10 @@ export default function DesignSystemPage() {
               </p>
             </div>
 
-            {/* Assets / Logos */}
+            {/* Logo SNAP Graph */}
             <div>
-              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Logos e Assets</p>
+              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Logo SNAP Graph</p>
               <div className="flex items-center gap-8 p-6 bg-card rounded-xl border border-border">
-                <div className="flex flex-col items-center gap-2">
-                  <div className="p-4 bg-[#0a0a0a] rounded-lg">
-                    <img src="/assets/snap-logo.svg" alt="SNAP" className="h-6" />
-                  </div>
-                  <code className="text-xs text-text-muted font-mono">/assets/snap-logo.svg</code>
-                </div>
                 <div className="flex flex-col items-center gap-2">
                   <div className="p-4 bg-[#0a0a0a] rounded-lg">
                     <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6" />
