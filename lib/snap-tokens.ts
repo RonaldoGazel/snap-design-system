@@ -56,6 +56,145 @@ export const verticals = {
 export const activeVertical = verticals.inteligencia
 
 // ===========================================
+// ÁREAS AGNÓSTICAS DO ECOSSISTEMA SNAP
+// ===========================================
+
+/**
+ * SNAP Graph - Aplicativo de visualização e manipulação de grafos
+ * Área agnóstica de vertical, usa cor neutra (#696969)
+ */
+export const snapGraph = {
+  name: 'SNAP Graph',
+  description: 'Aplicativo de busca e visualização de entidades em grafo',
+  
+  // Cor primária (neutra, agnóstica de vertical)
+  color: {
+    primary: '#696969',
+    primaryLight: '#8a8a8a',
+    primaryDark: '#4d4d4d',
+  },
+  
+  // Assets
+  assets: {
+    logo: '/assets/snap-graph-logo.svg',
+    logoMain: '/assets/snap-logo.svg',
+  },
+
+  // Background do canvas
+  canvas: {
+    background: '#0a0a0a',
+    gridTile: '/assets/snap-graph-grid.png', // Bitmap tiling pattern
+  },
+
+  // Header
+  header: {
+    height: '56px',
+    background: 'transparent',
+    breadcrumbGap: '8px',
+    breadcrumbColor: '#696969',
+    breadcrumbActiveColor: '#ffffff',
+  },
+
+  // Nós de entidade (Entity Nodes)
+  entityNode: {
+    background: '#2c2c2c',
+    borderRadius: '8px',
+    accentWidth: '4px', // Barra de destaque à esquerda
+    padding: '12px',
+    minWidth: '180px',
+    
+    // Ícone circular
+    icon: {
+      size: '44px',
+      strokeWidth: '2px',
+      strokeColor: '#696969',
+      background: 'transparent',
+    },
+
+    // Tipografia
+    name: {
+      fontSize: '14px',
+      fontWeight: '500',
+      color: '#ffffff',
+    },
+    subtitle: {
+      fontSize: '12px',
+      color: '#8a8a8a',
+    },
+  },
+
+  // Linhas de conexão (Edges)
+  edges: {
+    strokeWidth: '2px',
+    strokeColor: '#454545',
+    arrowSize: '8px',
+    
+    // REGRA IMPORTANTE: Roteamento ortogonal
+    routing: {
+      type: 'orthogonal', // NUNCA diagonal
+      avoidOverlap: true, // NUNCA passar por cima de elementos
+      waypointsEnabled: true, // Pontos de mudança de direção
+    },
+  },
+
+  // Labels de categoria (fontes de dados)
+  categoryLabels: {
+    borderRadius: '4px',
+    paddingX: '8px',
+    paddingY: '2px',
+    fontSize: '11px',
+    fontWeight: '500',
+    
+    // Cores por tipo de fonte
+    sources: {
+      'Company SNAP': {
+        background: '#72284B',
+        text: '#ffffff',
+        description: 'Empresa cadastrada no SNAP',
+      },
+      'Person SNAP': {
+        background: '#72284B',
+        text: '#ffffff',
+        description: 'Pessoa física cadastrada no SNAP',
+      },
+      'TrueCallerID': {
+        background: '#287266',
+        text: '#ffffff',
+        description: 'Telefone identificado via TrueCaller',
+      },
+      'Receita Federal': {
+        background: '#FE473C',
+        text: '#ffffff',
+        description: 'Dados da Receita Federal',
+      },
+      'DETRAN': {
+        background: '#889EA3',
+        text: '#000000',
+        description: 'Dados do DETRAN',
+      },
+      'INFOSEG': {
+        background: '#ff9800',
+        text: '#000000',
+        description: 'Base INFOSEG',
+      },
+      'Manual': {
+        background: '#333540',
+        text: '#ffffff',
+        description: 'Cadastro manual',
+      },
+    },
+  },
+
+  // Botão pequeno (32px)
+  buttonSmall: {
+    height: '32px',
+    borderRadius: '6px',
+    paddingX: '16px',
+    fontSize: '13px',
+  },
+} as const
+
+// ===========================================
 // CORES GERAIS
 // ===========================================
 
@@ -235,11 +374,13 @@ export const components = {
     width: '130px', // Largura padrão em modais
     widthCompact: '110px', // Largura em cards
     height: '40px',
+    heightSmall: '32px', // Botão pequeno (SNAP Graph header, etc.)
     gap: '16px', // Entre botões
     borderRadius: '6px',
     fontSize: {
       modal: '14px',
       card: '12px',
+      small: '13px', // Para botões de 32px
     },
   },
 
@@ -328,6 +469,7 @@ export const wcag = {
 export const snapTokens = {
   verticals,
   activeVertical,
+  snapGraph,
   colors,
   typography,
   spacing,
@@ -339,3 +481,4 @@ export const snapTokens = {
 
 export type SnapTokens = typeof snapTokens
 export type Vertical = keyof typeof verticals
+export type SnapGraphCategoryLabel = keyof typeof snapGraph.categoryLabels.sources

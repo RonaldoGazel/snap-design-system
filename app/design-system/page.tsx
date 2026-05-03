@@ -749,21 +749,22 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 // Índice de navegação
 const indice = [
-  { titulo: 'Verticais do Ecossistema SNAP', id: 'verticais-do-ecossistema-snap' },
+  { titulo: 'Verticais do Ecossistema', id: 'verticais-do-ecossistema-snap' },
   { titulo: 'Tipografia', id: 'tipografia' },
   { titulo: 'Cores das Verticais', id: 'cores-das-verticais' },
   { titulo: 'Cores Base', id: 'cores-base' },
-  { titulo: 'Links por Tipo de Entidade', id: 'links-por-tipo-de-entidade' },
+  { titulo: 'Links por Entidade', id: 'links-por-tipo-de-entidade' },
   { titulo: 'Padrões de Botões', id: 'padroes-de-botoes' },
   { titulo: 'Componentes', id: 'componentes' },
   { titulo: 'Exemplos Visuais', id: 'exemplos-visuais' },
   { titulo: 'Modais', id: 'modais-dialog-popup' },
   { titulo: 'Cards', id: 'cards' },
-  { titulo: 'Toasts / Notificações', id: 'toasts-notificacoes' },
+  { titulo: 'Toasts', id: 'toasts-notificacoes' },
   { titulo: 'Tabelas', id: 'tabelas-datatable' },
   { titulo: 'Espaçamentos', id: 'espacamentos' },
   { titulo: 'Border Radius', id: 'border-radius' },
-  { titulo: 'Componentes SNAP (Portáveis)', id: 'componentes-snap' },
+  { titulo: 'SNAP Graph', id: 'snap-graph' },
+  { titulo: 'Componentes Portáveis', id: 'componentes-snap' },
 ]
 
 export default function DesignSystemPage() {
@@ -1781,6 +1782,272 @@ export default function DesignSystemPage() {
                 <code className="text-xs text-text-subtle font-mono">{r.classe}</code>
               </div>
             ))}
+          </div>
+        </Section>
+
+        {/* ============================================
+            SNAP GRAPH - ÁREA AGNÓSTICA
+            ============================================ */}
+        <Section title="SNAP GRAPH">
+          <div className="space-y-8">
+            {/* Introdução */}
+            <div className="p-4 rounded-xl bg-[#696969]/10 border border-[#696969]">
+              <div className="flex items-center gap-4 mb-3">
+                <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-8" />
+                <div>
+                  <p className="text-sm font-bold text-[#8a8a8a] font-sans">Área Agnóstica de Vertical</p>
+                  <p className="text-xs text-text-muted font-sans">Cor primária: #696969 (cinza neutro)</p>
+                </div>
+              </div>
+              <p className="text-sm text-text-secondary font-sans">
+                Aplicativo de busca e visualização de entidades em grafo. Por ser usado por todas as verticais, 
+                utiliza uma cor neutra para não criar conflito visual com as cores das verticais.
+              </p>
+            </div>
+
+            {/* Assets / Logos */}
+            <div>
+              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Logos e Assets</p>
+              <div className="flex items-center gap-8 p-6 bg-card rounded-xl border border-border">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="p-4 bg-[#0a0a0a] rounded-lg">
+                    <img src="/assets/snap-logo.svg" alt="SNAP" className="h-6" />
+                  </div>
+                  <code className="text-xs text-text-muted font-mono">/assets/snap-logo.svg</code>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="p-4 bg-[#0a0a0a] rounded-lg">
+                    <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6" />
+                  </div>
+                  <code className="text-xs text-text-muted font-mono">/assets/snap-graph-logo.svg</code>
+                </div>
+              </div>
+            </div>
+
+            {/* Header */}
+            <div>
+              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Header com Breadcrumb</p>
+              <div className="bg-[#0a0a0a] rounded-xl border border-border overflow-hidden">
+                {/* Simulated header */}
+                <div className="flex items-center justify-between px-6 py-4">
+                  <div className="flex items-center gap-4">
+                    <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6" />
+                    <div className="w-px h-6 bg-[#696969]" />
+                    {/* Breadcrumb */}
+                    <div className="flex items-center gap-2 text-sm font-sans">
+                      <span className="text-[#696969]">Inteligência</span>
+                      <span className="text-[#454545]">&gt;</span>
+                      <span className="text-[#696969]">Processos/Documentos</span>
+                      <span className="text-[#454545]">&gt;</span>
+                      <span className="text-white">Relatório de Inteligência</span>
+                    </div>
+                  </div>
+                  {/* Botão pequeno 32px */}
+                  <button className="flex items-center gap-2 h-8 px-4 bg-transparent border border-[#454545] text-white text-[13px] font-sans rounded-md hover:bg-[#2c2c2c] transition-colors">
+                    <X className="w-4 h-4" />
+                    Fechar / Voltar
+                  </button>
+                </div>
+              </div>
+              <div className="mt-3 p-3 bg-card rounded-lg border border-border">
+                <p className="text-xs text-text-secondary font-sans">
+                  <strong>Botão Pequeno:</strong> height 32px, border-radius 6px, font-size 13px, padding-x 16px
+                </p>
+              </div>
+            </div>
+
+            {/* Entity Nodes */}
+            <div>
+              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Nós de Entidade (Entity Nodes)</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* Company Node */}
+                <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
+                  <div className="flex">
+                    <div className="w-1 bg-[#72284B]" />
+                    <div className="flex-1 p-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <p className="text-white text-sm font-medium font-sans leading-tight">Techbiz Forense Digital LTDA</p>
+                        </div>
+                        <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
+                          <Building className="w-5 h-5 text-[#696969]" />
+                        </div>
+                      </div>
+                      <div className="mt-2">
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-white bg-[#72284B] rounded">Company SNAP</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Person Node (with photo) */}
+                <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
+                  <div className="flex">
+                    <div className="w-1 bg-[#72284B]" />
+                    <div className="flex-1 p-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <p className="text-white text-sm font-medium font-sans leading-tight">Luiz Henrique de Souza Borges</p>
+                        </div>
+                        <div className="w-11 h-11 rounded-full border-2 border-[#696969] overflow-hidden flex-shrink-0">
+                          <img src="/placeholder.svg?height=44&width=44&query=professional man with glasses portrait" alt="Foto" className="w-full h-full object-cover" />
+                        </div>
+                      </div>
+                      <div className="mt-2">
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-white bg-[#72284B] rounded">Person SNAP</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Phone Node */}
+                <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
+                  <div className="flex">
+                    <div className="w-1 bg-[#287266]" />
+                    <div className="flex-1 p-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <p className="text-white text-sm font-medium font-sans leading-tight">(31) 92332-2122</p>
+                          <p className="text-[#8a8a8a] text-xs font-sans mt-0.5">Telefone celular</p>
+                        </div>
+                        <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
+                          <svg className="w-5 h-5 text-[#696969]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="mt-2">
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-white bg-[#287266] rounded">TrueCallerID</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Vehicle Node */}
+                <div className="bg-[#2c2c2c] rounded-lg overflow-hidden">
+                  <div className="flex">
+                    <div className="w-1 bg-[#889EA3]" />
+                    <div className="flex-1 p-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <p className="text-white text-sm font-medium font-sans leading-tight">ABC-1234</p>
+                          <p className="text-[#8a8a8a] text-xs font-sans mt-0.5">Veículo - Honda Civic</p>
+                        </div>
+                        <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
+                          <Car className="w-5 h-5 text-[#696969]" />
+                        </div>
+                      </div>
+                      <div className="mt-2">
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-black bg-[#889EA3] rounded">DETRAN</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Anatomia do Node */}
+              <div className="mt-4 p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-2 font-sans">Anatomia do Entity Node</h4>
+                <ul className="text-xs text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Container:</strong> background #2c2c2c, border-radius 8px, sem stroke</li>
+                  <li><strong>Barra de destaque:</strong> 4px à esquerda, cor da fonte de dados</li>
+                  <li><strong>Nome:</strong> 14px, font-weight 500, cor #ffffff, alinhado à esquerda</li>
+                  <li><strong>Subtítulo:</strong> 12px, cor #8a8a8a (opcional)</li>
+                  <li><strong>Ícone:</strong> 44px circular, stroke 2px #696969, ícone SVG ou foto</li>
+                  <li><strong>Label:</strong> 11px, padding 8px x 2px, border-radius 4px</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Category Labels */}
+            <div>
+              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Labels de Categoria (Fontes de Dados)</p>
+              <div className="flex flex-wrap gap-3 p-4 bg-card rounded-xl border border-border">
+                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#72284B] rounded">Company SNAP</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#72284B] rounded">Person SNAP</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#287266] rounded">TrueCallerID</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#FE473C] rounded">Receita Federal</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-black bg-[#889EA3] rounded">DETRAN</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-black bg-[#ff9800] rounded">INFOSEG</span>
+                <span className="px-2 py-0.5 text-[11px] font-medium text-white bg-[#333540] rounded">Manual</span>
+              </div>
+              <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-sans">
+                <div className="p-2 bg-card rounded border border-border">
+                  <span className="text-[#d4789b]">Company/Person SNAP</span>
+                  <p className="text-text-muted">#72284B (Bordô)</p>
+                </div>
+                <div className="p-2 bg-card rounded border border-border">
+                  <span className="text-[#4da89a]">TrueCallerID</span>
+                  <p className="text-text-muted">#287266 (Petroleum)</p>
+                </div>
+                <div className="p-2 bg-card rounded border border-border">
+                  <span className="text-[#ff8a82]">Receita Federal</span>
+                  <p className="text-text-muted">#FE473C (Coral)</p>
+                </div>
+                <div className="p-2 bg-card rounded border border-border">
+                  <span className="text-[#b3c4c8]">DETRAN</span>
+                  <p className="text-text-muted">#889EA3 (Grey Ahead)</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Connection Lines (Edges) */}
+            <div>
+              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Linhas de Conexão (Edges)</p>
+              <div className="p-6 bg-[#0a0a0a] rounded-xl border border-border">
+                {/* Visual example of orthogonal routing */}
+                <svg width="100%" height="120" className="text-[#454545]">
+                  {/* Horizontal line with arrow */}
+                  <line x1="50" y1="30" x2="200" y2="30" stroke="currentColor" strokeWidth="2" />
+                  <polygon points="200,30 192,26 192,34" fill="currentColor" />
+                  <text x="125" y="20" className="text-xs fill-[#696969]" textAnchor="middle">Conexão direta</text>
+                  
+                  {/* Orthogonal line with waypoint */}
+                  <line x1="50" y1="90" x2="120" y2="90" stroke="currentColor" strokeWidth="2" />
+                  <line x1="120" y1="90" x2="120" y2="60" stroke="currentColor" strokeWidth="2" />
+                  <line x1="120" y1="60" x2="200" y2="60" stroke="currentColor" strokeWidth="2" />
+                  <polygon points="200,60 192,56 192,64" fill="currentColor" />
+                  <circle cx="120" cy="90" r="3" fill="currentColor" />
+                  <circle cx="120" cy="60" r="3" fill="currentColor" />
+                  <text x="125" y="105" className="text-xs fill-[#696969]" textAnchor="middle">Com waypoints</text>
+                  
+                  {/* Labels */}
+                  <rect x="250" y="20" width="120" height="80" rx="8" fill="#2c2c2c" />
+                  <text x="310" y="50" className="text-xs fill-white" textAnchor="middle">Entidade</text>
+                  <text x="310" y="70" className="text-xs fill-[#696969]" textAnchor="middle">Destino</text>
+                </svg>
+              </div>
+              
+              {/* Rules box */}
+              <div className="mt-4 p-4 bg-[#2a1a1a] border border-[#fe473c] rounded-lg">
+                <h4 className="text-sm font-bold text-[#fe473c] mb-2 font-sans">Regras de Roteamento (IMPORTANTE)</h4>
+                <ul className="text-xs text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Stroke:</strong> 2px, cor #454545</li>
+                  <li><strong>Seta:</strong> na extremidade final do vínculo</li>
+                  <li><strong>NUNCA</strong> usar linhas diagonais - apenas roteamento ortogonal</li>
+                  <li><strong>NUNCA</strong> passar linhas por cima de outros elementos</li>
+                  <li><strong>Waypoints:</strong> pontos de mudança de direção (90°) para evitar sobreposição</li>
+                  <li>Semelhante a um circuito eletrônico - limpo e organizado</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Canvas Background */}
+            <div>
+              <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Background do Canvas</p>
+              <div className="p-4 bg-card rounded-xl border border-border">
+                <p className="text-sm text-text-secondary font-sans mb-3">
+                  O canvas usa um padrão de grid pontilhado em bitmap (tiling), criando uma textura sutil que auxilia 
+                  na percepção de zoom e pan durante a manipulação do grafo.
+                </p>
+                <ul className="text-xs text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Background base:</strong> #0a0a0a</li>
+                  <li><strong>Padrão:</strong> grid pontilhado em bitmap (PNG)</li>
+                  <li><strong>Arquivo:</strong> /assets/snap-graph-grid.png</li>
+                  <li><strong>Aplicação:</strong> CSS background-repeat: repeat</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </Section>
 
