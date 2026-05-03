@@ -1,0 +1,734 @@
+'use client'
+
+import Link from 'next/link'
+import { ArrowLeft, Building, Car, X, Phone, User, CreditCard, FileText, MapPin, Mail } from 'lucide-react'
+
+// Componente Section reutilizável
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  const id = title.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '')
+  return (
+    <section id={id} className="mb-16 scroll-mt-8">
+      <h2 className="text-2xl font-bold text-foreground mb-6 pb-2 border-b border-border font-sans">
+        {title}
+      </h2>
+      {children}
+    </section>
+  )
+}
+
+// Índice de navegação
+const indice = [
+  { titulo: 'Visão Geral', id: 'visão-geral' },
+  { titulo: 'Canvas e Grid', id: 'canvas-e-grid' },
+  { titulo: 'Header', id: 'header' },
+  { titulo: 'Entity Nodes', id: 'entity-nodes' },
+  { titulo: 'Labels de Categoria', id: 'labels-de-categoria' },
+  { titulo: 'Conexões (Edges)', id: 'conexões-edges' },
+  { titulo: 'Estados Interativos', id: 'estados-interativos' },
+]
+
+export default function SnapGraphDesignSystem() {
+  return (
+    <div className="min-h-screen bg-background text-foreground p-8 md:p-12">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Header com navegação */}
+        <header className="mb-12">
+          <Link 
+            href="/design-system" 
+            className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-foreground transition-colors font-sans mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Voltar ao Design System Base
+          </Link>
+          
+          <div className="flex items-center gap-4 mb-4">
+            <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-8" />
+            <div className="w-px h-8 bg-border" />
+            <span className="text-sm text-text-muted font-sans uppercase tracking-wide">Documentação de Interface</span>
+          </div>
+          
+          <h1 className="text-4xl font-bold text-foreground font-sans">
+            SNAP Graph
+          </h1>
+          <p className="text-lg text-text-secondary mt-2 font-sans">
+            Área agnóstica de visualização de grafos do Ecossistema SNAP.
+            <br />
+            <span className="text-text-muted text-sm">Cor base: #696969 (neutro)</span>
+          </p>
+        </header>
+
+        {/* Índice */}
+        <nav className="mb-12 p-6 rounded-xl bg-card border border-border">
+          <h3 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wide font-sans">Índice</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            {indice.map((item) => (
+              <a 
+                key={item.id}
+                href={`#${item.id}`}
+                className="text-sm text-text-secondary hover:text-foreground transition-colors font-sans py-1"
+              >
+                {item.titulo}
+              </a>
+            ))}
+          </div>
+        </nav>
+
+        {/* ============================================
+            VISÃO GERAL
+            ============================================ */}
+        <Section title="Visão Geral">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 bg-card rounded-xl border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">O que é o SNAP Graph?</h4>
+              <p className="text-sm text-text-secondary font-sans leading-relaxed">
+                Ferramenta de visualização de relacionamentos entre entidades (pessoas, empresas, telefones, 
+                veículos, etc.) em formato de grafo interativo. Permite análise visual de vínculos e 
+                descoberta de padrões em investigações.
+              </p>
+            </div>
+            <div className="p-6 bg-card rounded-xl border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Características Técnicas</h4>
+              <ul className="text-sm text-text-secondary font-sans space-y-1 list-disc ml-4">
+                <li>Canvas infinito com zoom e pan</li>
+                <li>Roteamento ortogonal de conexões</li>
+                <li>Nodes com largura fixa (256px)</li>
+                <li>Grid de fundo pontilhado (bitmap tiling)</li>
+                <li>Paleta de cores neutra (#696969 base)</li>
+              </ul>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            CANVAS E GRID
+            ============================================ */}
+        <Section title="Canvas e Grid">
+          <div className="space-y-6">
+            {/* Preview do Canvas */}
+            <div 
+              className="h-64 rounded-xl border border-border overflow-hidden"
+              style={{
+                backgroundColor: '#0a0a0a',
+                backgroundImage: 'url(/assets/snap-graph-grid.png)',
+                backgroundRepeat: 'repeat',
+              }}
+            >
+              {/* Exemplo com nodes */}
+              <div className="w-full h-full flex items-center justify-center gap-8 p-8">
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden opacity-80">
+                  <div className="flex h-full">
+                    <div className="w-1 bg-[#7c8db0]" />
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade A</p>
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center">
+                          <Building className="w-5 h-5 text-[#696969]" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Conexão visual */}
+                <svg width="80" height="2" className="flex-shrink-0">
+                  <line x1="0" y1="1" x2="70" y2="1" stroke="#454545" strokeWidth="2" />
+                  <polygon points="80,1 72,-3 72,5" fill="#454545" />
+                </svg>
+                
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden opacity-80">
+                  <div className="flex h-full">
+                    <div className="w-1 bg-[#9b7fb8]" />
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade B</p>
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center">
+                          <User className="w-5 h-5 text-[#696969]" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Regras do Canvas */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Especificações do Canvas</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-text-secondary font-sans">
+                <div>
+                  <p className="font-medium text-foreground mb-1">Background</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Cor base:</strong> #0a0a0a</li>
+                    <li><strong>Grid:</strong> bitmap pontilhado (PNG)</li>
+                    <li><strong>Arquivo:</strong> /assets/snap-graph-grid.png</li>
+                    <li><strong>CSS:</strong> background-repeat: repeat</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-1">Interação</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Zoom:</strong> scroll do mouse ou pinch</li>
+                    <li><strong>Pan:</strong> arrastar com mouse ou touch</li>
+                    <li><strong>Limite zoom:</strong> 25% a 200%</li>
+                    <li><strong>Animação:</strong> ease-out 200ms</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            HEADER
+            ============================================ */}
+        <Section title="Header">
+          <div className="space-y-6">
+            {/* Preview do Header */}
+            <div className="bg-[#0a0a0a] rounded-xl border border-border overflow-hidden">
+              <div className="flex items-center justify-between px-6 py-4">
+                <div className="flex items-center gap-4">
+                  <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6" />
+                  <div className="w-px h-6 bg-[#696969]" />
+                  {/* Breadcrumb */}
+                  <div className="flex items-center gap-2 text-sm font-sans">
+                    <span className="text-[#696969]">Inteligência</span>
+                    <span className="text-[#454545]">&gt;</span>
+                    <span className="text-[#696969]">Processos/Documentos</span>
+                    <span className="text-[#454545]">&gt;</span>
+                    <span className="text-white">Relatório de Inteligência</span>
+                  </div>
+                </div>
+                <button className="flex items-center gap-2 h-8 px-4 bg-transparent border border-[#454545] text-white text-[13px] font-sans rounded-md hover:bg-[#2c2c2c] transition-colors">
+                  <X className="w-4 h-4" />
+                  Fechar / Voltar
+                </button>
+              </div>
+            </div>
+
+            {/* Regras do Header */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Anatomia do Header (REGRAS)</h4>
+              <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                <li><strong>Altura:</strong> auto (padding vertical 16px)</li>
+                <li><strong>Background:</strong> #0a0a0a (mesmo do canvas)</li>
+                <li><strong>Logo:</strong> snap-graph-logo.svg, altura 24px</li>
+                <li><strong>Separador:</strong> linha vertical 1px, cor #696969, altura 24px</li>
+                <li><strong>Breadcrumb:</strong> texto 14px, níveis em #696969, atual em #ffffff</li>
+                <li><strong>Separador breadcrumb:</strong> {">"} em #454545</li>
+                <li><strong>Botão pequeno:</strong> height 32px, border-radius 6px, font-size 13px, padding-x 16px</li>
+              </ul>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            ENTITY NODES
+            ============================================ */}
+        <Section title="Entity Nodes">
+          <div className="space-y-6">
+            {/* Preview dos Nodes */}
+            <p className="text-sm text-text-secondary font-sans">
+              Nós de entidade representam pessoas, empresas, telefones, veículos e outros objetos no grafo.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Company Node */}
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Techbiz Forense Digital LTDA">
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#7c8db0]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">Techbiz Forense Digital LTDA</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <Building className="w-5 h-5 text-[#696969]" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Person Node */}
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Luiz Henrique de Souza Borges da Silva e Santos">
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#9b7fb8]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">Luiz Henrique de Souza Borges da Silva e Santos</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Foto" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Phone Node */}
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="(31) 92332-2122 Telefone celular">
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#6b9490]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">(31) 92332-2122 Telefone celular</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <Phone className="w-5 h-5 text-[#696969]" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Vehicle Node */}
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="ABC-1234 Veículo Honda Civic 2020">
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#7a9098]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">ABC-1234 Veículo Honda Civic 2020</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <Car className="w-5 h-5 text-[#696969]" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-xl">DETRAN</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mais tipos de nodes */}
+            <p className="text-sm text-text-muted font-sans uppercase tracking-wide mt-8">Mais tipos de entidade</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* CPF Node */}
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="123.456.789-00">
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#a87070]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">123.456.789-00</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <CreditCard className="w-5 h-5 text-[#696969]" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded-xl">Receita Federal</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Documento Node */}
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Relatório de Inteligência #2024-001">
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#a89870]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">Relatório de Inteligência #2024-001</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <FileText className="w-5 h-5 text-[#696969]" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#f0e8d8] bg-[#605540] rounded-xl">INFOSEG</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Endereço Node */}
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Av. Brasil, 1500 Centro, Belo Horizonte - MG">
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#666666]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">Av. Brasil, 1500 Centro, Belo Horizonte - MG</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <MapPin className="w-5 h-5 text-[#696969]" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e0e0e0] bg-[#404040] rounded-xl">Manual</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Email Node */}
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="contato@empresa.com.br">
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#666666]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2">contato@empresa.com.br</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <Mail className="w-5 h-5 text-[#696969]" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e0e0e0] bg-[#404040] rounded-xl">Manual</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Anatomia do Node - REGRAS */}
+            <div className="mt-6 p-4 bg-[#1a2020] border border-[#287266] rounded-lg">
+              <h4 className="text-sm font-bold text-[#4da89a] mb-3 font-sans">Anatomia do Entity Node (REGRAS OBRIGATÓRIAS)</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-text-secondary font-sans">
+                <div>
+                  <p className="font-medium text-foreground mb-2">Dimensões</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Largura fixa:</strong> 256px (w-64)</li>
+                    <li><strong>Padding interno:</strong> 16px (p-4)</li>
+                    <li><strong>Border-radius:</strong> 8px (rounded-lg)</li>
+                    <li><strong>Background:</strong> #2c2c2c</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-2">Barra de Destaque</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Largura:</strong> 4px (w-1)</li>
+                    <li><strong>Posição:</strong> esquerda</li>
+                    <li><strong>Cor:</strong> accent da categoria</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-2">Nome da Entidade</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Font-size:</strong> 16px (text-base)</li>
+                    <li><strong>Font-weight:</strong> 500 (medium)</li>
+                    <li><strong>Line-height:</strong> 1.3</li>
+                    <li><strong>Máx linhas:</strong> 2 (line-clamp-2)</li>
+                    <li><strong>Cor:</strong> #ffffff</li>
+                    <li><strong>Tooltip:</strong> title com nome completo</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-2">Ícone Circular</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Tamanho:</strong> 44px (w-11 h-11)</li>
+                    <li><strong>Stroke:</strong> 3px (border-[3px])</li>
+                    <li><strong>Cor stroke:</strong> #696969</li>
+                    <li><strong>Background:</strong> transparente</li>
+                    <li><strong>Person:</strong> usar foto ao invés de ícone</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-2">Label de Categoria</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Gap do nome:</strong> 16px (mt-4)</li>
+                    <li><strong>Font-size:</strong> 11px</li>
+                    <li><strong>Font-weight:</strong> 500</li>
+                    <li><strong>Padding:</strong> 10px x 4px (px-2.5 py-1)</li>
+                    <li><strong>Border-radius:</strong> 12px (rounded-xl)</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-2">Ícones Lucide</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Empresa:</strong> Building</li>
+                    <li><strong>Pessoa:</strong> User (ou foto)</li>
+                    <li><strong>Telefone:</strong> Phone</li>
+                    <li><strong>Veículo:</strong> Car</li>
+                    <li><strong>CPF/Doc:</strong> CreditCard</li>
+                    <li><strong>Endereço:</strong> MapPin</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            LABELS DE CATEGORIA
+            ============================================ */}
+        <Section title="Labels de Categoria">
+          <div className="space-y-6">
+            <p className="text-sm text-text-secondary font-sans">
+              Paleta própria com cores dessaturadas que não conflitam com as cores das verticais do ecossistema.
+              <strong className="text-foreground"> Todas as tags/badges usam border-radius 12px.</strong>
+            </p>
+
+            {/* Preview das labels */}
+            <div className="flex flex-wrap gap-3 p-6 bg-[#1a1a1a] rounded-xl border border-border">
+              <span className="px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+              <span className="px-2.5 py-1 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
+              <span className="px-2.5 py-1 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
+              <span className="px-2.5 py-1 text-[11px] font-medium text-[#f0e0e0] bg-[#6b4a4a] rounded-xl">Receita Federal</span>
+              <span className="px-2.5 py-1 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-xl">DETRAN</span>
+              <span className="px-2.5 py-1 text-[11px] font-medium text-[#f0e8d8] bg-[#605540] rounded-xl">INFOSEG</span>
+              <span className="px-2.5 py-1 text-[11px] font-medium text-[#e0e0e0] bg-[#404040] rounded-xl">Manual</span>
+            </div>
+
+            {/* Tabela de cores */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm font-sans">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-2 text-text-muted font-medium">Categoria</th>
+                    <th className="text-left py-2 text-text-muted font-medium">Background</th>
+                    <th className="text-left py-2 text-text-muted font-medium">Texto</th>
+                    <th className="text-left py-2 text-text-muted font-medium">Accent (barra)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-text-secondary">
+                  <tr className="border-b border-border/50">
+                    <td className="py-2">Company SNAP</td>
+                    <td className="py-2"><code className="text-[#7c8db0]">#4a5568</code></td>
+                    <td className="py-2"><code className="text-[#e2e8f0]">#e2e8f0</code></td>
+                    <td className="py-2"><code className="text-[#7c8db0]">#7c8db0</code></td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-2">Person SNAP</td>
+                    <td className="py-2"><code className="text-[#9b7fb8]">#5c4a6b</code></td>
+                    <td className="py-2"><code className="text-[#e8e0f0]">#e8e0f0</code></td>
+                    <td className="py-2"><code className="text-[#9b7fb8]">#9b7fb8</code></td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-2">TrueCallerID</td>
+                    <td className="py-2"><code className="text-[#6b9490]">#3d5a58</code></td>
+                    <td className="py-2"><code className="text-[#d8ebe9]">#d8ebe9</code></td>
+                    <td className="py-2"><code className="text-[#6b9490]">#6b9490</code></td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-2">Receita Federal</td>
+                    <td className="py-2"><code className="text-[#a87070]">#6b4a4a</code></td>
+                    <td className="py-2"><code className="text-[#f0e0e0]">#f0e0e0</code></td>
+                    <td className="py-2"><code className="text-[#a87070]">#a87070</code></td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-2">DETRAN</td>
+                    <td className="py-2"><code className="text-[#7a9098]">#4a5a60</code></td>
+                    <td className="py-2"><code className="text-[#e0e8eb]">#e0e8eb</code></td>
+                    <td className="py-2"><code className="text-[#7a9098]">#7a9098</code></td>
+                  </tr>
+                  <tr className="border-b border-border/50">
+                    <td className="py-2">INFOSEG</td>
+                    <td className="py-2"><code className="text-[#a89870]">#605540</code></td>
+                    <td className="py-2"><code className="text-[#f0e8d8]">#f0e8d8</code></td>
+                    <td className="py-2"><code className="text-[#a89870]">#a89870</code></td>
+                  </tr>
+                  <tr>
+                    <td className="py-2">Manual</td>
+                    <td className="py-2"><code className="text-[#666666]">#404040</code></td>
+                    <td className="py-2"><code className="text-[#e0e0e0]">#e0e0e0</code></td>
+                    <td className="py-2"><code className="text-[#666666]">#666666</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            CONEXÕES (EDGES)
+            ============================================ */}
+        <Section title="Conexões (Edges)">
+          <div className="space-y-6">
+            {/* Preview visual */}
+            <div className="p-6 bg-[#0a0a0a] rounded-xl border border-border">
+              <svg width="100%" height="160" className="text-[#454545]">
+                {/* Conexão direta */}
+                <line x1="50" y1="40" x2="250" y2="40" stroke="currentColor" strokeWidth="2" />
+                <polygon points="250,40 242,36 242,44" fill="currentColor" />
+                <text x="150" y="25" className="text-xs fill-[#696969] font-sans" textAnchor="middle">Conexão direta horizontal</text>
+                
+                {/* Conexão com waypoints */}
+                <line x1="50" y1="100" x2="120" y2="100" stroke="currentColor" strokeWidth="2" />
+                <line x1="120" y1="100" x2="120" y2="130" stroke="currentColor" strokeWidth="2" />
+                <line x1="120" y1="130" x2="250" y2="130" stroke="currentColor" strokeWidth="2" />
+                <polygon points="250,130 242,126 242,134" fill="currentColor" />
+                <circle cx="120" cy="100" r="3" fill="currentColor" />
+                <circle cx="120" cy="130" r="3" fill="currentColor" />
+                <text x="150" y="85" className="text-xs fill-[#696969] font-sans" textAnchor="middle">Com waypoints (roteamento ortogonal)</text>
+                
+                {/* Node exemplo */}
+                <rect x="280" y="105" width="140" height="50" rx="8" fill="#2c2c2c" />
+                <rect x="280" y="105" width="4" height="50" fill="#7c8db0" />
+                <text x="355" y="135" className="text-sm fill-white font-sans" textAnchor="middle">Entidade</text>
+              </svg>
+            </div>
+
+            {/* Regras de Roteamento */}
+            <div className="p-4 bg-[#2a1a1a] border border-[#fe473c] rounded-lg">
+              <h4 className="text-sm font-bold text-[#fe473c] mb-3 font-sans">Regras de Roteamento (CRÍTICO)</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-text-secondary font-sans">
+                <div>
+                  <p className="font-medium text-foreground mb-2">Especificações</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li><strong>Stroke:</strong> 2px</li>
+                    <li><strong>Cor:</strong> #454545</li>
+                    <li><strong>Seta:</strong> triângulo na extremidade final</li>
+                    <li><strong>Waypoints:</strong> círculo 3px nos pontos de curva</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-2">Proibições</p>
+                  <ul className="list-disc ml-4 space-y-1 text-[#fe473c]">
+                    <li><strong>NUNCA</strong> usar linhas diagonais</li>
+                    <li><strong>NUNCA</strong> passar por cima de nodes</li>
+                    <li><strong>NUNCA</strong> cruzar outras conexões</li>
+                    <li><strong>SEMPRE</strong> roteamento ortogonal (90°)</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-sm text-text-muted font-sans mt-4">
+                O visual deve ser semelhante a um circuito eletrônico: limpo, organizado e previsível.
+              </p>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            ESTADOS INTERATIVOS
+            ============================================ */}
+        <Section title="Estados Interativos">
+          <div className="space-y-6">
+            <p className="text-sm text-text-secondary font-sans">
+              Estados visuais para feedback de interação com os elementos do grafo.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Estado Normal */}
+              <div>
+                <p className="text-sm text-text-muted font-sans mb-3 uppercase tracking-wide">Normal</p>
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
+                  <div className="flex h-full">
+                    <div className="w-1 bg-[#7c8db0]" />
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade Normal</p>
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center">
+                          <Building className="w-5 h-5 text-[#696969]" />
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Estado Hover */}
+              <div>
+                <p className="text-sm text-text-muted font-sans mb-3 uppercase tracking-wide">Hover</p>
+                <div className="w-64 bg-[#363636] rounded-lg overflow-hidden ring-1 ring-[#696969]">
+                  <div className="flex h-full">
+                    <div className="w-1 bg-[#7c8db0]" />
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade Hover</p>
+                        <div className="w-11 h-11 rounded-full border-[3px] border-[#888888] flex items-center justify-center">
+                          <Building className="w-5 h-5 text-[#888888]" />
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Estado Selecionado */}
+              <div>
+                <p className="text-sm text-text-muted font-sans mb-3 uppercase tracking-wide">Selecionado</p>
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden ring-2 ring-white">
+                  <div className="flex h-full">
+                    <div className="w-1 bg-[#7c8db0]" />
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade Selecionada</p>
+                        <div className="w-11 h-11 rounded-full border-[3px] border-white flex items-center justify-center">
+                          <Building className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Regras de estados */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Especificações de Estados</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-text-secondary font-sans">
+                <div>
+                  <p className="font-medium text-foreground mb-1">Normal</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li>Background: #2c2c2c</li>
+                    <li>Ícone: #696969</li>
+                    <li>Sem ring/outline</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-1">Hover</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li>Background: #363636</li>
+                    <li>Ícone: #888888</li>
+                    <li>Ring: 1px #696969</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-1">Selecionado</p>
+                  <ul className="list-disc ml-4 space-y-1">
+                    <li>Background: #2c2c2c</li>
+                    <li>Ícone: #ffffff</li>
+                    <li>Ring: 2px #ffffff</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* Footer */}
+        <footer className="mt-16 pt-8 border-t border-border">
+          <div className="flex items-center justify-between">
+            <Link 
+              href="/design-system" 
+              className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-foreground transition-colors font-sans"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Voltar ao Design System Base
+            </Link>
+            <p className="text-sm text-text-muted font-sans">
+              SNAP Graph v1.0 - Documentação para Kiro
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
+  )
+}
