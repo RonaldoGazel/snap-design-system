@@ -1251,8 +1251,8 @@ export default function DesignSystemPage() {
               <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#3f9f76]">NOVO</span>
               <span className="px-3 py-1 rounded-full text-xs font-sans text-black bg-[#ffc563]">PRIORIDADE ALTA</span>
               <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#72284b]">RASCUNHO</span>
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-foreground border border-border">INTERNO</span>
-              <span className="px-3 py-1 rounded-md text-xs font-sans text-foreground border border-border">FORMALIZADO</span>
+              <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#676c70]">INTERNO</span>
+              <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#3f9f76]">FORMALIZADO</span>
               <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#fe473c]">URGENTE</span>
               <span className="px-3 py-1 rounded-full text-xs font-sans text-white bg-[#3f9f76]">SIGILOSO</span>
             </div>
@@ -1262,13 +1262,13 @@ export default function DesignSystemPage() {
           <div className="mb-8">
             <p className="text-sm font-medium text-text-secondary mb-3 uppercase tracking-wide font-sans">Ícones de Ação (Tabela)</p>
             <div className="flex items-center gap-4">
-              <button className="p-2 rounded-lg hover:bg-muted transition-colors">
+              <button className="p-2 rounded-[6px] hover:bg-muted transition-colors">
                 <Eye className="w-5 h-5 text-text-muted" />
               </button>
-              <button className="p-2 rounded-lg hover:bg-muted transition-colors">
+              <button className="p-2 rounded-[6px] hover:bg-muted transition-colors">
                 <Download className="w-5 h-5 text-text-muted" />
               </button>
-              <button className="p-2 rounded-lg hover:bg-muted transition-colors">
+              <button className="p-2 rounded-[6px] hover:bg-muted transition-colors">
                 <Trash2 className="w-5 h-5 text-[#72284b]" />
               </button>
             </div>

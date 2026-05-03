@@ -112,7 +112,7 @@ export function StatusBadge({
   return (
     <SnapBadge 
       variant={status} 
-      shape="squared"
+      shape="pill"
       {...props}
     >
       {children}
@@ -128,7 +128,7 @@ export function CategoryTag({
   return (
     <SnapBadge 
       variant={category} 
-      shape="squared"
+      shape="pill"
       {...props}
     >
       {children}
