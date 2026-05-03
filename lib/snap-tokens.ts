@@ -432,17 +432,6 @@ export const components = {
     paddingBottom: '20px',
   },
 
-  // Badge
-  badge: {
-    paddingX: '12px',
-    paddingY: '4px',
-    borderRadius: {
-      pill: '9999px', // Para badges de risco
-      squared: '6px', // Para tags
-    },
-    fontSize: '12px',
-  },
-
   // Select (Accordion Style)
   select: {
     borderRadius: '8px',
