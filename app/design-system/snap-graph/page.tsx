@@ -252,7 +252,8 @@ export default function SnapGraphDesignSystem() {
                 <li><strong>Background:</strong> #0a0a0a (mesmo do canvas)</li>
                 <li><strong>Logo:</strong> snap-graph-logo.svg, altura 24px</li>
                 <li><strong>Separador:</strong> linha vertical 1px, cor #696969, altura 24px</li>
-                <li><strong>Botão Fechar:</strong> SnapButton variant=secondary size=sm</li>
+                <li><strong>Botão Fechar:</strong> SnapButton variant=secondary size=sm (outline cinza = ação negativa/cancelar)</li>
+                <li className="text-[#72284B]"><strong>Ver:</strong> <Link href="/design-system#padroes-de-botoes" className="underline hover:text-white">Padrões de Botões</Link> no Design System principal</li>
               </ul>
             </div>
             
