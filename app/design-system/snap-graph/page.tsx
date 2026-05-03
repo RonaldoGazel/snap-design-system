@@ -798,6 +798,134 @@ export default function SnapGraphDesignSystem() {
                   </p>
                 </div>
               </div>
+              
+              {/* Documentação do Use Case */}
+              <div className="mt-6 p-6 bg-[#12121a] border border-[#72284B] rounded-lg">
+                <h4 className="text-lg font-bold text-[#72284B] mb-4 font-sans">Use Case: Descoberta de Vínculo Oculto</h4>
+                <p className="text-sm text-text-muted font-sans mb-4 italic">
+                  Este cenário é a base para o protótipo interativo no Kiro.
+                </p>
+                
+                <div className="space-y-4 text-sm text-text-secondary font-sans">
+                  {/* Contexto */}
+                  <div>
+                    <h5 className="font-semibold text-foreground mb-1">Contexto</h5>
+                    <p>
+                      Duas empresas concorrentes no mercado de segurança digital: <strong>Techbiz Forense Digital LTDA</strong> e 
+                      <strong> Inspect Segurança Digital Tecnologia</strong>. Não há vínculo societário direto aparente entre elas.
+                    </p>
+                  </div>
+                  
+                  {/* Entidades */}
+                  <div>
+                    <h5 className="font-semibold text-foreground mb-2">Entidades Envolvidas</h5>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="border-b border-border">
+                            <th className="py-2 pr-4 text-text-muted font-medium">Entidade</th>
+                            <th className="py-2 pr-4 text-text-muted font-medium">Tipo</th>
+                            <th className="py-2 pr-4 text-text-muted font-medium">Cor Lateral</th>
+                            <th className="py-2 text-text-muted font-medium">Label</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="border-b border-border/50">
+                            <td className="py-2 pr-4">Techbiz Forense Digital LTDA</td>
+                            <td className="py-2 pr-4">Company</td>
+                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#7c8db0]" /> #7c8db0</td>
+                            <td className="py-2"><code className="text-xs bg-[#4a5568] px-1.5 py-0.5 rounded">Company SNAP</code></td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-2 pr-4">Inspect Segurança Digital Tecnologia</td>
+                            <td className="py-2 pr-4">Company</td>
+                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#7c8db0]" /> #7c8db0</td>
+                            <td className="py-2"><code className="text-xs bg-[#4a5568] px-1.5 py-0.5 rounded">Company SNAP</code></td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-2 pr-4">Luiz Henrique de Souza Borges</td>
+                            <td className="py-2 pr-4">Person</td>
+                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#9b7fb8]" /> #9b7fb8</td>
+                            <td className="py-2"><code className="text-xs bg-[#5c4a6b] px-1.5 py-0.5 rounded">Person SNAP</code></td>
+                          </tr>
+                          <tr>
+                            <td className="py-2 pr-4">(31) 92332-2122 - Telefone celular</td>
+                            <td className="py-2 pr-4">Phone</td>
+                            <td className="py-2 pr-4"><span className="inline-block w-3 h-3 rounded-sm bg-[#6b9490]" /> #6b9490</td>
+                            <td className="py-2"><code className="text-xs bg-[#3d5a58] px-1.5 py-0.5 rounded">TrueCallerID</code></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  {/* Fluxo de Investigação */}
+                  <div>
+                    <h5 className="font-semibold text-foreground mb-2">Fluxo de Investigação</h5>
+                    <ol className="list-decimal ml-4 space-y-1">
+                      <li>Analista parte da empresa <strong>Inspect</strong> como ponto de interesse</li>
+                      <li>Expande para ver sócios → encontra <strong>Luiz Henrique</strong></li>
+                      <li>Expande dados de Luiz Henrique → encontra <strong>telefone (31) 92332-2122</strong></li>
+                      <li>Sistema cruza o telefone com outras bases → descobre vínculo com <strong>Techbiz</strong></li>
+                      <li><strong className="text-white">Vínculo oculto revelado!</strong> As empresas têm conexão através do telefone do sócio</li>
+                    </ol>
+                  </div>
+                  
+                  {/* Conexões */}
+                  <div>
+                    <h5 className="font-semibold text-foreground mb-2">Conexões (Edges)</h5>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="border-b border-border">
+                            <th className="py-2 pr-4 text-text-muted font-medium">De</th>
+                            <th className="py-2 pr-4 text-text-muted font-medium">Para</th>
+                            <th className="py-2 pr-4 text-text-muted font-medium">Tipo</th>
+                            <th className="py-2 text-text-muted font-medium">Cor</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="border-b border-border/50">
+                            <td className="py-2 pr-4">Inspect</td>
+                            <td className="py-2 pr-4">Luiz Henrique</td>
+                            <td className="py-2 pr-4">Vertical (centro inferior → centro superior)</td>
+                            <td className="py-2">#454545</td>
+                          </tr>
+                          <tr className="border-b border-border/50">
+                            <td className="py-2 pr-4">Luiz Henrique</td>
+                            <td className="py-2 pr-4">Telefone</td>
+                            <td className="py-2 pr-4">Vertical (centro inferior → centro superior)</td>
+                            <td className="py-2">#454545</td>
+                          </tr>
+                          <tr>
+                            <td className="py-2 pr-4">Telefone</td>
+                            <td className="py-2 pr-4">Techbiz</td>
+                            <td className="py-2 pr-4">Ortogonal com waypoint (lateral esquerda → base)</td>
+                            <td className="py-2 font-semibold text-white">#FFFFFF (vínculo descoberto)</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  {/* Posicionamento */}
+                  <div>
+                    <h5 className="font-semibold text-foreground mb-2">Posicionamento dos Nodes</h5>
+                    <div className="bg-[#0a0a0a] p-4 rounded font-mono text-xs overflow-x-auto">
+                      <pre>{`// Coordenadas absolutas (em pixels)
+// Node largura: 256px | Centro horizontal: left + 128px
+
+TECHBIZ:       left: 32px,  top: 24px   → centro X: 160px
+INSPECT:       left: 368px, top: 24px   → centro X: 496px
+LUIZ HENRIQUE: left: 368px, top: 214px  → centro X: 496px  (gap 80px de Inspect)
+TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
+
+// Altura estimada de cada node: ~110px
+// Gap entre nodes: 80px`}</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             
             {/* Anatomia da conexão */}
