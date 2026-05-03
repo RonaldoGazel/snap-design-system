@@ -761,8 +761,7 @@ export default function SnapGraphDesignSystem() {
                         <div className="flex-1 p-4">
                           <div className="flex items-start gap-3">
                             <div className="flex-1 min-w-0">
-                              <p className="text-white text-base font-medium font-sans leading-[1.3] break-words">(31) 92332-2122</p>
-                              <p className="text-[#a0a0a0] text-sm font-sans mt-0.5">Telefone celular</p>
+                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">(31) 92332-2122 Telefone celular</p>
                             </div>
                             <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                               <Phone className="w-5 h-5 text-[#696969]" />
