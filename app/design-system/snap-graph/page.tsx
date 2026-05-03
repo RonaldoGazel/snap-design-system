@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { ArrowLeft, Building, Car, X, Phone, User, CreditCard, FileText, MapPin, Mail } from 'lucide-react'
+import { SnapButton } from '@/components/snap/snap-button'
 
 // Componente Section reutilizável
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -221,17 +222,25 @@ export default function SnapGraphDesignSystem() {
                   <div className="w-px h-6 bg-[#696969]" />
                   {/* Breadcrumb */}
                   <div className="flex items-center gap-2 text-sm font-sans">
-                    <span className="text-[#696969]">Inteligência</span>
+                    {/* Vertical: cor da vertical + ícone */}
+                    <span className="flex items-center gap-1.5 text-[#72284B] font-medium">
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                      </svg>
+                      Inteligência
+                    </span>
                     <span className="text-[#454545]">&gt;</span>
-                    <span className="text-[#696969]">Processos/Documentos</span>
+                    <span className="text-[#696969] font-medium">Processos/Documentos</span>
                     <span className="text-[#454545]">&gt;</span>
-                    <span className="text-white">Relatório de Inteligência</span>
+                    {/* Item atual: branco + semibold */}
+                    <span className="text-white font-semibold">Relatório de Inteligência</span>
                   </div>
                 </div>
-                <button className="flex items-center gap-2 h-8 px-4 bg-transparent border border-[#454545] text-white text-[13px] font-sans rounded-md hover:bg-[#2c2c2c] transition-colors">
-                  <X className="w-4 h-4" />
+                {/* Botão secondary do SnapButton */}
+                <SnapButton variant="secondary" size="sm" icon={<X className="w-4 h-4" />}>
                   Fechar / Voltar
-                </button>
+                </SnapButton>
               </div>
             </div>
 
@@ -243,9 +252,20 @@ export default function SnapGraphDesignSystem() {
                 <li><strong>Background:</strong> #0a0a0a (mesmo do canvas)</li>
                 <li><strong>Logo:</strong> snap-graph-logo.svg, altura 24px</li>
                 <li><strong>Separador:</strong> linha vertical 1px, cor #696969, altura 24px</li>
-                <li><strong>Breadcrumb:</strong> texto 14px, níveis em #696969, atual em #ffffff</li>
-                <li><strong>Separador breadcrumb:</strong> {">"} em #454545</li>
-                <li><strong>Botão pequeno:</strong> height 32px, border-radius 6px, font-size 13px, padding-x 16px</li>
+                <li><strong>Botão Fechar:</strong> SnapButton variant=secondary size=sm</li>
+              </ul>
+            </div>
+            
+            {/* Regras do Breadcrumb */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Breadcrumb (REGRAS)</h4>
+              <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                <li><strong>Primeiro item (Vertical):</strong> cor da vertical (#72284B para Inteligência) + ícone + font-medium</li>
+                <li><strong>Itens intermediários:</strong> cor #696969 + font-medium</li>
+                <li><strong>Item atual (último):</strong> cor #ffffff + font-semibold</li>
+                <li><strong>Separador:</strong> {">"} em #454545</li>
+                <li><strong>Font-size:</strong> 14px (text-sm)</li>
+                <li><strong>Gap:</strong> 8px entre itens</li>
               </ul>
             </div>
           </div>
