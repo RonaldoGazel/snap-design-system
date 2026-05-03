@@ -776,8 +776,16 @@ export default function DesignSystemPage() {
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
+              {/* Breadcrumb */}
+              <nav className="flex items-center gap-2 text-sm font-sans mb-2">
+                <span className="text-foreground font-medium">Design System</span>
+                <span className="text-text-muted">|</span>
+                <a href="/design-system/snap-graph" className="text-text-muted hover:text-foreground transition-colors">
+                  SNAP Graph
+                </a>
+              </nav>
               <h1 className="font-title text-3xl text-foreground tracking-wide">SNAP DESIGN SYSTEM</h1>
-              <p className="text-sm text-text-muted font-sans mt-1">Consolidado a partir de 7+ telas de referência do Figma</p>
+              <p className="text-sm text-text-muted font-sans mt-1">Documentação base do Ecossistema SNAP</p>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-[#FE473C]" title="Investigação" />
@@ -791,9 +799,17 @@ export default function DesignSystemPage() {
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        {/* Índice de Navegação */}
+        {/* Índice de Navegação - Nível 1 (Base) */}
         <nav className="mb-12 p-6 bg-card rounded-xl border border-border">
-          <h2 className="text-lg font-bold text-foreground mb-4 font-sans">Índice</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-foreground font-sans">Índice - Design System Base</h2>
+            <a 
+              href="/design-system/snap-graph" 
+              className="text-sm text-[#696969] hover:text-foreground transition-colors font-sans flex items-center gap-2"
+            >
+              Ver SNAP Graph →
+            </a>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
             {indice.map((item) => (
               <a
