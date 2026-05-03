@@ -1112,11 +1112,24 @@ export default function DesignSystemPage() {
             <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
               <li><strong>Texto:</strong> UPPERCASE (caixa alta) + font-bold</li>
               <li><strong>Border-radius:</strong> 6px (rounded-[6px])</li>
-              <li><strong>Layout:</strong> ícone à ESQUERDA + texto à DIREITA (justify-between)</li>
-              <li><strong>Largura Modal:</strong> 130px fixa</li>
-              <li><strong>Largura Card:</strong> 110px fixa</li>
+              <li><strong>Layout interno:</strong> justify-between (ícone ESQUERDA, texto DIREITA, gap automático)</li>
+              <li><strong>Largura mínima:</strong> 130px (modal/default) | 110px (sm/card)</li>
+              <li><strong>Padding:</strong> px-4 py-2 (default/modal) | px-3 py-1.5 (sm)</li>
               <li><strong>Gap entre botões:</strong> 16px (gap-4)</li>
-              <li><strong>Fonte:</strong> font-sans (NUNCA Cygnito)</li>
+              <li><strong>Fonte:</strong> font-sans + font-bold (NUNCA Cygnito)</li>
+            </ul>
+          </div>
+          
+          {/* Tamanhos disponíveis */}
+          <div className="mt-4 p-4 bg-card rounded-lg border border-border">
+            <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Tamanhos (size=)</h4>
+            <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+              <li><strong>modal:</strong> w-[130px] fixa - para modais com botões uniformes</li>
+              <li><strong>card:</strong> w-[110px] fixa - para cards com botões uniformes</li>
+              <li><strong>default:</strong> min-w-[130px] - cresce com conteúdo longo</li>
+              <li><strong>sm:</strong> min-w-[110px] - para headers, ações secundárias</li>
+              <li><strong>lg:</strong> sem largura fixa - para CTAs grandes</li>
+              <li><strong>icon:</strong> 40x40px quadrado - apenas ícone</li>
             </ul>
           </div>
 

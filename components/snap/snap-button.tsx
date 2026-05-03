@@ -44,11 +44,11 @@ const snapButtonVariants = cva(
         // Para uso em Cards
         card: "w-[110px] px-3 py-2 text-xs rounded-[6px]",
         
-        // Tamanho livre (sem largura fixa)
-        default: "px-4 py-2 text-sm rounded-[6px]",
+        // Tamanho padrão (largura mínima para manter layout)
+        default: "min-w-[130px] px-4 py-2 text-sm rounded-[6px]",
         
-        // Pequeno
-        sm: "px-3 py-1.5 text-xs rounded-[6px]",
+        // Pequeno (para headers, etc)
+        sm: "min-w-[110px] px-3 py-1.5 text-xs rounded-[6px]",
         
         // Grande
         lg: "px-6 py-3 text-base rounded-[8px]",
