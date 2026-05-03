@@ -687,9 +687,9 @@ export default function SnapGraphDesignSystem() {
                 {/* Nodes */}
                 <div className="relative" style={{ zIndex: 2 }}>
                   
-                  {/* Node 1: TECHBIZ (topo esquerda) */}
+                  {/* Node 1: TECHBIZ (topo esquerda) - VÍNCULO DESCOBERTO */}
                   <div className="absolute" style={{ left: '32px', top: '24px' }}>
-                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden outline outline-4 outline-white">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#7c8db0]" />
                         <div className="flex-1 p-4">
@@ -753,9 +753,9 @@ export default function SnapGraphDesignSystem() {
                     </div>
                   </div>
                   
-                  {/* Node 4: TELEFONE (baixo direita) */}
+                  {/* Node 4: TELEFONE (baixo direita) - VÍNCULO DESCOBERTO */}
                   <div className="absolute" style={{ left: '368px', top: '404px' }}>
-                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden outline outline-4 outline-white">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#6b9490]" />
                         <div className="flex-1 p-4">
