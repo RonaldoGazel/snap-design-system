@@ -573,25 +573,35 @@ export default function SnapGraphDesignSystem() {
         <Section title="Conexões (Edges)">
           <div className="space-y-8">
             
-            {/* Visualização realista do grafo */}
+            {/* Conexão Vertical Simples (caso base) */}
             <div>
-              <p className="text-sm text-text-muted font-sans mb-4 uppercase tracking-wide">Exemplo de Grafo com Conexões</p>
-              <div className="relative p-8 bg-[#0a0a0a] rounded-xl border border-border overflow-hidden min-h-[500px]">
-                {/* Grid de fundo simulado */}
+              <p className="text-sm text-text-muted font-sans mb-4 uppercase tracking-wide">Conexão Vertical Simples</p>
+              <div className="relative bg-[#0a0a0a] rounded-xl border border-border overflow-hidden" style={{ height: '320px' }}>
+                {/* Grid de fundo */}
                 <div className="absolute inset-0 opacity-20" style={{
                   backgroundImage: 'radial-gradient(circle, #333 1px, transparent 1px)',
                   backgroundSize: '20px 20px'
                 }} />
                 
-                {/* SVG para as conexões - posicionado atrás dos nodes */}
-                <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
+                {/* 
+                  CÁLCULOS:
+                  - Node largura: 256px
+                  - Centro horizontal do node: 128px
+                  - Node 1 posição: left 48px → centro em 48 + 128 = 176px
+                  - Node 1 altura estimada: ~110px → bottom em 48 + 110 = 158px
+                  - Gap: 80px
+                  - Node 2 posição: top = 158 + 80 = 238px → mas para caber, top = 200px
+                  - Linha: de (176, 158) até (176, 200)
+                */}
+                
+                {/* SVG para a conexão */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
                   <defs>
-                    {/* Seta 12x12 */}
                     <marker
-                      id="arrowhead"
+                      id="arrow-simple"
                       markerWidth="12"
                       markerHeight="12"
-                      refX="10"
+                      refX="6"
                       refY="6"
                       orient="auto"
                       markerUnits="userSpaceOnUse"
@@ -600,71 +610,23 @@ export default function SnapGraphDesignSystem() {
                     </marker>
                   </defs>
                   
-                  {/* Conexão 1: Company (topo esquerda) → Person (centro direita) - roteamento ortogonal */}
-                  <path
-                    d="M 180 125 L 180 230 L 380 230 L 380 175"
-                    fill="none"
+                  {/* Linha vertical: sai do centro inferior do Node 1, entra no centro superior do Node 2 */}
+                  <line
+                    x1="176"
+                    y1="150"
+                    x2="176"
+                    y2="188"
                     stroke="#454545"
                     strokeWidth="2"
-                    markerEnd="url(#arrowhead)"
-                  />
-                  
-                  {/* Conexão 2: Company (topo direita) → Person (centro direita) - vertical direta */}
-                  <path
-                    d="M 475 125 L 475 175"
-                    fill="none"
-                    stroke="#454545"
-                    strokeWidth="2"
-                    markerEnd="url(#arrowhead)"
-                  />
-                  
-                  {/* Conexão 3: Person → Phone (abaixo) - vertical direta */}
-                  <path
-                    d="M 475 285 L 475 335"
-                    fill="none"
-                    stroke="#454545"
-                    strokeWidth="2"
-                    markerEnd="url(#arrowhead)"
-                  />
-                  
-                  {/* Conexão 4: Company (esquerda) → Phone (abaixo) - roteamento ortogonal complexo */}
-                  <path
-                    d="M 60 125 L 60 390 L 380 390 L 380 395"
-                    fill="none"
-                    stroke="#454545"
-                    strokeWidth="2"
-                    markerEnd="url(#arrowhead)"
+                    markerEnd="url(#arrow-simple)"
                   />
                 </svg>
                 
-                {/* Nodes posicionados absolutamente */}
-                <div className="relative" style={{ zIndex: 1 }}>
-                  
-                  {/* Node 1: Company (topo esquerda) */}
-                  <div className="absolute" style={{ left: '32px', top: '32px' }}>
-                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Techbiz Forense Digital LTDA">
-                      <div className="flex h-full">
-                        <div className="w-1 bg-[#7c8db0]" />
-                        <div className="flex-1 p-4">
-                          <div className="flex items-start gap-3">
-                            <div className="flex-1 min-w-0">
-                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
-                            </div>
-                            <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
-                              <Building className="w-5 h-5 text-[#696969]" />
-                            </div>
-                          </div>
-                          <div className="mt-4">
-                            <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Node 2: Company (topo direita) */}
-                  <div className="absolute" style={{ left: '352px', top: '32px' }}>
-                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Inspect Segurança Digital Tecnologia">
+                {/* Nodes */}
+                <div className="relative" style={{ zIndex: 2 }}>
+                  {/* Node 1: Company (topo) */}
+                  <div className="absolute" style={{ left: '48px', top: '40px' }}>
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#7c8db0]" />
                         <div className="flex-1 p-4">
@@ -684,9 +646,9 @@ export default function SnapGraphDesignSystem() {
                     </div>
                   </div>
                   
-                  {/* Node 3: Person (centro direita) - gap de 80px do node acima */}
-                  <div className="absolute" style={{ left: '352px', top: '192px' }}>
-                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Luiz Henrique de Souza Borges">
+                  {/* Node 2: Person (abaixo, com gap de 80px) */}
+                  <div className="absolute" style={{ left: '48px', top: '200px' }}>
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#9b7fb8]" />
                         <div className="flex-1 p-4">
@@ -705,30 +667,16 @@ export default function SnapGraphDesignSystem() {
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Node 4: Phone (abaixo do Person) - gap de 80px */}
-                  <div className="absolute" style={{ left: '352px', top: '352px' }}>
-                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="(31) 92332-2122 Telefone celular">
-                      <div className="flex h-full">
-                        <div className="w-1 bg-[#6b9490]" />
-                        <div className="flex-1 p-4">
-                          <div className="flex items-start gap-3">
-                            <div className="flex-1 min-w-0">
-                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">(31) 92332-2122 Telefone celular</p>
-                            </div>
-                            <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
-                              <Phone className="w-5 h-5 text-[#696969]" />
-                            </div>
-                          </div>
-                          <div className="mt-4">
-                            <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
                 </div>
+              </div>
+              
+              {/* Explicação */}
+              <div className="mt-4 p-4 bg-card rounded-lg border border-border">
+                <p className="text-sm text-text-secondary font-sans">
+                  <strong>Regra:</strong> A linha sai do <strong>centro horizontal inferior</strong> do node de origem 
+                  e entra no <strong>centro horizontal superior</strong> do node de destino. 
+                  Centro = left + (256px / 2) = left + 128px.
+                </p>
               </div>
             </div>
             
