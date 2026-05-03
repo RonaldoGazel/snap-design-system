@@ -1110,10 +1110,10 @@ export default function DesignSystemPage() {
           <div className="mt-6 p-4 bg-card rounded-lg border border-border">
             <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Anatomia do Botão (REGRAS)</h4>
             <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
-              <li><strong>Texto:</strong> UPPERCASE (caixa alta) + font-bold</li>
+              <li><strong>Texto:</strong> Capitalização normal (ex: "Cancelar", "Remover Vinculação") - NÃO UPPERCASE</li>
               <li><strong>Border-radius:</strong> 6px (rounded-[6px])</li>
-              <li><strong>Layout interno:</strong> justify-between (ícone ESQUERDA, texto DIREITA, gap automático)</li>
-              <li><strong>Largura mínima:</strong> 130px (modal/default) | 110px (sm/card)</li>
+              <li><strong>Gap ícone-texto:</strong> 8px fixo (gap-2)</li>
+              <li><strong>Largura:</strong> 130px (modal/default) | 110px (sm/card)</li>
               <li><strong>Padding:</strong> px-4 py-2 (default/modal) | px-3 py-1.5 (sm)</li>
               <li><strong>Gap entre botões:</strong> 16px (gap-4)</li>
               <li><strong>Fonte:</strong> font-sans + font-bold (NUNCA Cygnito)</li>
