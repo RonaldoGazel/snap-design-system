@@ -479,8 +479,8 @@ export default function SnapGraphDesignSystem() {
               <h4 className="text-sm font-bold text-[#fe473c] mb-2 font-sans">REGRA CRÍTICA: Quebra de Texto</h4>
               <p className="text-sm text-text-secondary font-sans">
                 O texto do nome DEVE quebrar automaticamente em até 2 linhas. O ícone circular NUNCA pode mudar de posição 
-                (flex-shrink-0). Para strings longas sem espaços (emails, URLs), usar <code className="text-[#fe473c]">break-all</code> 
-                ao invés de <code className="text-[#fe473c]">break-words</code>.
+                (flex-shrink-0). Para strings longas sem espaços (emails, URLs), usar <code className="font-sans text-[#fe473c]">break-all</code> 
+                ao invés de <code className="font-sans text-[#fe473c]">break-words</code>.
               </p>
             </div>
           </div>
@@ -521,45 +521,45 @@ export default function SnapGraphDesignSystem() {
                 <tbody className="text-text-secondary">
                   <tr className="border-b border-border/50">
                     <td className="py-2">Company SNAP</td>
-                    <td className="py-2"><code className="text-[#7c8db0]">#4a5568</code></td>
-                    <td className="py-2"><code className="text-[#e2e8f0]">#e2e8f0</code></td>
-                    <td className="py-2"><code className="text-[#7c8db0]">#7c8db0</code></td>
+                    <td className="py-2"><code className="font-sans text-[#7c8db0]">#4a5568</code></td>
+                    <td className="py-2"><code className="font-sans text-[#e2e8f0]">#e2e8f0</code></td>
+                    <td className="py-2"><code className="font-sans text-[#7c8db0]">#7c8db0</code></td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-2">Person SNAP</td>
-                    <td className="py-2"><code className="text-[#9b7fb8]">#5c4a6b</code></td>
-                    <td className="py-2"><code className="text-[#e8e0f0]">#e8e0f0</code></td>
-                    <td className="py-2"><code className="text-[#9b7fb8]">#9b7fb8</code></td>
+                    <td className="py-2"><code className="font-sans text-[#9b7fb8]">#5c4a6b</code></td>
+                    <td className="py-2"><code className="font-sans text-[#e8e0f0]">#e8e0f0</code></td>
+                    <td className="py-2"><code className="font-sans text-[#9b7fb8]">#9b7fb8</code></td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-2">TrueCallerID</td>
-                    <td className="py-2"><code className="text-[#6b9490]">#3d5a58</code></td>
-                    <td className="py-2"><code className="text-[#d8ebe9]">#d8ebe9</code></td>
-                    <td className="py-2"><code className="text-[#6b9490]">#6b9490</code></td>
+                    <td className="py-2"><code className="font-sans text-[#6b9490]">#3d5a58</code></td>
+                    <td className="py-2"><code className="font-sans text-[#d8ebe9]">#d8ebe9</code></td>
+                    <td className="py-2"><code className="font-sans text-[#6b9490]">#6b9490</code></td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-2">Receita Federal</td>
-                    <td className="py-2"><code className="text-[#a87070]">#6b4a4a</code></td>
-                    <td className="py-2"><code className="text-[#f0e0e0]">#f0e0e0</code></td>
-                    <td className="py-2"><code className="text-[#a87070]">#a87070</code></td>
+                    <td className="py-2"><code className="font-sans text-[#a87070]">#6b4a4a</code></td>
+                    <td className="py-2"><code className="font-sans text-[#f0e0e0]">#f0e0e0</code></td>
+                    <td className="py-2"><code className="font-sans text-[#a87070]">#a87070</code></td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-2">DETRAN</td>
-                    <td className="py-2"><code className="text-[#7a9098]">#4a5a60</code></td>
-                    <td className="py-2"><code className="text-[#e0e8eb]">#e0e8eb</code></td>
-                    <td className="py-2"><code className="text-[#7a9098]">#7a9098</code></td>
+                    <td className="py-2"><code className="font-sans text-[#7a9098]">#4a5a60</code></td>
+                    <td className="py-2"><code className="font-sans text-[#e0e8eb]">#e0e8eb</code></td>
+                    <td className="py-2"><code className="font-sans text-[#7a9098]">#7a9098</code></td>
                   </tr>
                   <tr className="border-b border-border/50">
                     <td className="py-2">INFOSEG</td>
-                    <td className="py-2"><code className="text-[#a89870]">#605540</code></td>
-                    <td className="py-2"><code className="text-[#f0e8d8]">#f0e8d8</code></td>
-                    <td className="py-2"><code className="text-[#a89870]">#a89870</code></td>
+                    <td className="py-2"><code className="font-sans text-[#a89870]">#605540</code></td>
+                    <td className="py-2"><code className="font-sans text-[#f0e8d8]">#f0e8d8</code></td>
+                    <td className="py-2"><code className="font-sans text-[#a89870]">#a89870</code></td>
                   </tr>
                   <tr>
                     <td className="py-2">Manual</td>
-                    <td className="py-2"><code className="text-[#666666]">#404040</code></td>
-                    <td className="py-2"><code className="text-[#e0e0e0]">#e0e0e0</code></td>
-                    <td className="py-2"><code className="text-[#666666]">#666666</code></td>
+                    <td className="py-2"><code className="font-sans text-[#666666]">#404040</code></td>
+                    <td className="py-2"><code className="font-sans text-[#e0e0e0]">#e0e0e0</code></td>
+                    <td className="py-2"><code className="font-sans text-[#666666]">#666666</code></td>
                   </tr>
                 </tbody>
               </table>
