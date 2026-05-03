@@ -8,16 +8,16 @@ import { cn } from "@/lib/utils"
  * SNAP Button Component
  * 
  * Regras:
- * - Texto: Capitalização normal (caixa alta e baixa), NÃO UPPERCASE
- * - Layout interno: ícone à ESQUERDA + texto à DIREITA
- * - Gap fixo entre ícone e texto: 8px (gap-2)
- * - Gap mínimo entre botões: 16px (gap-4)
- * - Largura padrão Modal: 130px
- * - Largura padrão Card: 110px
+ * - Texto: Capitalização normal (ex: "Cancelar", "Remover Vinculação") - NÃO UPPERCASE
+ * - Layout interno: justify-between (ícone ESQUERDA, texto alinhado à DIREITA)
+ * - Border-radius: 6px (rounded-[6px])
+ * - Gap entre botões: 16px (gap-4)
+ * - Largura padrão Modal: 130px fixa
+ * - Largura padrão Card: 110px fixa
  */
 
 const snapButtonVariants = cva(
-  "inline-flex items-center gap-2 font-sans font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-between font-sans font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
