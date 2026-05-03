@@ -239,7 +239,7 @@ export default function SnapGraphDesignSystem() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Company Node */}
-              <div className="w-64 max-h-[100px] bg-[#2c2c2c] rounded-lg overflow-hidden" title="Techbiz Forense Digital LTDA">
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Techbiz Forense Digital LTDA">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#7c8db0]" />
                   <div className="flex-1 p-4">
@@ -259,7 +259,7 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Person Node */}
-              <div className="w-64 max-h-[100px] bg-[#2c2c2c] rounded-lg overflow-hidden" title="Luiz Henrique de Souza Borges da Silva e Santos">
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Luiz Henrique de Souza Borges da Silva e Santos">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#9b7fb8]" />
                   <div className="flex-1 p-4">
@@ -279,7 +279,7 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Phone Node */}
-              <div className="w-64 max-h-[100px] bg-[#2c2c2c] rounded-lg overflow-hidden" title="(31) 92332-2122 Telefone celular">
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="(31) 92332-2122 Telefone celular">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#6b9490]" />
                   <div className="flex-1 p-4">
@@ -299,7 +299,7 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Vehicle Node */}
-              <div className="w-64 max-h-[100px] bg-[#2c2c2c] rounded-lg overflow-hidden" title="ABC-1234 Veículo Honda Civic 2020">
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="ABC-1234 Veículo Honda Civic 2020">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#7a9098]" />
                   <div className="flex-1 p-4">
@@ -323,7 +323,7 @@ export default function SnapGraphDesignSystem() {
             <p className="text-sm text-text-muted font-sans uppercase tracking-wide mt-8">Mais tipos de entidade</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* CPF Node */}
-              <div className="w-64 max-h-[100px] bg-[#2c2c2c] rounded-lg overflow-hidden" title="123.456.789-00">
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="123.456.789-00">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#a87070]" />
                   <div className="flex-1 p-4">
@@ -343,7 +343,7 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Documento Node */}
-              <div className="w-64 max-h-[100px] bg-[#2c2c2c] rounded-lg overflow-hidden" title="Relatório de Inteligência #2024-001">
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Relatório de Inteligência #2024-001">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#a89870]" />
                   <div className="flex-1 p-4">
@@ -363,7 +363,7 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Endereço Node */}
-              <div className="w-64 max-h-[100px] bg-[#2c2c2c] rounded-lg overflow-hidden" title="Av. Brasil, 1500 Centro, Belo Horizonte - MG">
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Av. Brasil, 1500 Centro, Belo Horizonte - MG">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#666666]" />
                   <div className="flex-1 p-4">
@@ -383,7 +383,7 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Email Node - demonstra break-words para strings longas sem espaço */}
-              <div className="w-64 max-h-[100px] bg-[#2c2c2c] rounded-lg overflow-hidden" title="contato@empresa.com.br">
+              <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="contato@empresa.com.br">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#666666]" />
                   <div className="flex-1 p-4">
@@ -411,7 +411,7 @@ export default function SnapGraphDesignSystem() {
                   <p className="font-medium text-foreground mb-2">Dimensões</p>
                   <ul className="list-disc ml-4 space-y-1">
                     <li><strong>Largura fixa:</strong> 256px (w-64)</li>
-                    <li><strong>Altura máxima:</strong> 100px (max-h-[100px])</li>
+                    <li><strong>Altura:</strong> automática (cresce conforme conteúdo)</li>
                     <li><strong>Padding interno:</strong> 16px (p-4)</li>
                     <li><strong>Border-radius:</strong> 8px (rounded-lg)</li>
                     <li><strong>Background:</strong> #2c2c2c</li>

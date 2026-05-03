@@ -98,7 +98,7 @@ export const snapGraph = {
   // Nós de entidade (Entity Nodes)
   entityNode: {
     width: '256px', // Largura fixa OBRIGATÓRIA
-    maxHeight: '100px', // REGRA: altura máxima 100px
+    // Altura: automática (cresce conforme conteúdo)
     background: '#2c2c2c',
     borderRadius: '8px',
     accentWidth: '4px', // Barra de destaque à esquerda
