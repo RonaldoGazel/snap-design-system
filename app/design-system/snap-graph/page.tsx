@@ -571,29 +571,210 @@ export default function SnapGraphDesignSystem() {
             CONEXÕES (EDGES)
             ============================================ */}
         <Section title="Conexões (Edges)">
-          <div className="space-y-6">
-            {/* Preview visual */}
-            <div className="p-6 bg-[#0a0a0a] rounded-xl border border-border">
-              <svg width="100%" height="160" className="text-[#454545]">
-                {/* Conexão direta */}
-                <line x1="50" y1="40" x2="250" y2="40" stroke="currentColor" strokeWidth="2" />
-                <polygon points="250,40 242,36 242,44" fill="currentColor" />
-                <text x="150" y="25" className="text-xs fill-[#696969] font-sans" textAnchor="middle">Conexão direta horizontal</text>
+          <div className="space-y-8">
+            
+            {/* Visualização realista do grafo */}
+            <div>
+              <p className="text-sm text-text-muted font-sans mb-4 uppercase tracking-wide">Exemplo de Grafo com Conexões</p>
+              <div className="relative p-8 bg-[#0a0a0a] rounded-xl border border-border overflow-hidden min-h-[500px]">
+                {/* Grid de fundo simulado */}
+                <div className="absolute inset-0 opacity-20" style={{
+                  backgroundImage: 'radial-gradient(circle, #333 1px, transparent 1px)',
+                  backgroundSize: '20px 20px'
+                }} />
                 
-                {/* Conexão com waypoints */}
-                <line x1="50" y1="100" x2="120" y2="100" stroke="currentColor" strokeWidth="2" />
-                <line x1="120" y1="100" x2="120" y2="130" stroke="currentColor" strokeWidth="2" />
-                <line x1="120" y1="130" x2="250" y2="130" stroke="currentColor" strokeWidth="2" />
-                <polygon points="250,130 242,126 242,134" fill="currentColor" />
-                <circle cx="120" cy="100" r="3" fill="currentColor" />
-                <circle cx="120" cy="130" r="3" fill="currentColor" />
-                <text x="150" y="85" className="text-xs fill-[#696969] font-sans" textAnchor="middle">Com waypoints (roteamento ortogonal)</text>
+                {/* SVG para as conexões - posicionado atrás dos nodes */}
+                <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
+                  <defs>
+                    {/* Seta 12x12 */}
+                    <marker
+                      id="arrowhead"
+                      markerWidth="12"
+                      markerHeight="12"
+                      refX="10"
+                      refY="6"
+                      orient="auto"
+                      markerUnits="userSpaceOnUse"
+                    >
+                      <polygon points="0,0 12,6 0,12" fill="#454545" />
+                    </marker>
+                  </defs>
+                  
+                  {/* Conexão 1: Company (topo esquerda) → Person (centro direita) - roteamento ortogonal */}
+                  <path
+                    d="M 180 125 L 180 230 L 380 230 L 380 175"
+                    fill="none"
+                    stroke="#454545"
+                    strokeWidth="2"
+                    markerEnd="url(#arrowhead)"
+                  />
+                  
+                  {/* Conexão 2: Company (topo direita) → Person (centro direita) - vertical direta */}
+                  <path
+                    d="M 475 125 L 475 175"
+                    fill="none"
+                    stroke="#454545"
+                    strokeWidth="2"
+                    markerEnd="url(#arrowhead)"
+                  />
+                  
+                  {/* Conexão 3: Person → Phone (abaixo) - vertical direta */}
+                  <path
+                    d="M 475 285 L 475 335"
+                    fill="none"
+                    stroke="#454545"
+                    strokeWidth="2"
+                    markerEnd="url(#arrowhead)"
+                  />
+                  
+                  {/* Conexão 4: Company (esquerda) → Phone (abaixo) - roteamento ortogonal complexo */}
+                  <path
+                    d="M 60 125 L 60 390 L 380 390 L 380 395"
+                    fill="none"
+                    stroke="#454545"
+                    strokeWidth="2"
+                    markerEnd="url(#arrowhead)"
+                  />
+                </svg>
                 
-                {/* Node exemplo */}
-                <rect x="280" y="105" width="140" height="50" rx="8" fill="#2c2c2c" />
-                <rect x="280" y="105" width="4" height="50" fill="#7c8db0" />
-                <text x="355" y="135" className="text-sm fill-white font-sans" textAnchor="middle">Entidade</text>
-              </svg>
+                {/* Nodes posicionados absolutamente */}
+                <div className="relative" style={{ zIndex: 1 }}>
+                  
+                  {/* Node 1: Company (topo esquerda) */}
+                  <div className="absolute" style={{ left: '32px', top: '32px' }}>
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Techbiz Forense Digital LTDA">
+                      <div className="flex h-full">
+                        <div className="w-1 bg-[#7c8db0]" />
+                        <div className="flex-1 p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
+                            </div>
+                            <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                              <Building className="w-5 h-5 text-[#696969]" />
+                            </div>
+                          </div>
+                          <div className="mt-4">
+                            <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Node 2: Company (topo direita) */}
+                  <div className="absolute" style={{ left: '352px', top: '32px' }}>
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Inspect Segurança Digital Tecnologia">
+                      <div className="flex h-full">
+                        <div className="w-1 bg-[#7c8db0]" />
+                        <div className="flex-1 p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Inspect Segurança Digital Tecnologia</p>
+                            </div>
+                            <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                              <Building className="w-5 h-5 text-[#696969]" />
+                            </div>
+                          </div>
+                          <div className="mt-4">
+                            <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Node 3: Person (centro direita) - gap de 80px do node acima */}
+                  <div className="absolute" style={{ left: '352px', top: '192px' }}>
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Luiz Henrique de Souza Borges">
+                      <div className="flex h-full">
+                        <div className="w-1 bg-[#9b7fb8]" />
+                        <div className="flex-1 p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Luiz Henrique de Souza Borges</p>
+                            </div>
+                            <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] overflow-hidden flex-shrink-0">
+                              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Foto" className="w-full h-full object-cover" />
+                            </div>
+                          </div>
+                          <div className="mt-4">
+                            <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Node 4: Phone (abaixo do Person) - gap de 80px */}
+                  <div className="absolute" style={{ left: '352px', top: '352px' }}>
+                    <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="(31) 92332-2122 Telefone celular">
+                      <div className="flex h-full">
+                        <div className="w-1 bg-[#6b9490]" />
+                        <div className="flex-1 p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">(31) 92332-2122 Telefone celular</p>
+                            </div>
+                            <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                              <Phone className="w-5 h-5 text-[#696969]" />
+                            </div>
+                          </div>
+                          <div className="mt-4">
+                            <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            
+            {/* Anatomia da conexão */}
+            <div>
+              <p className="text-sm text-text-muted font-sans mb-4 uppercase tracking-wide">Anatomia da Conexão</p>
+              <div className="p-6 bg-[#0a0a0a] rounded-xl border border-border">
+                <svg width="100%" height="120" viewBox="0 0 600 120">
+                  {/* Seta de referência */}
+                  <defs>
+                    <marker
+                      id="arrowhead-demo"
+                      markerWidth="12"
+                      markerHeight="12"
+                      refX="10"
+                      refY="6"
+                      orient="auto"
+                      markerUnits="userSpaceOnUse"
+                    >
+                      <polygon points="0,0 12,6 0,12" fill="#454545" />
+                    </marker>
+                  </defs>
+                  
+                  {/* Linha de exemplo */}
+                  <path
+                    d="M 50 60 L 200 60 L 200 100 L 400 100"
+                    fill="none"
+                    stroke="#454545"
+                    strokeWidth="2"
+                    markerEnd="url(#arrowhead-demo)"
+                  />
+                  
+                  {/* Anotações */}
+                  <text x="125" y="45" className="text-[10px] fill-[#696969] font-sans" textAnchor="middle">stroke: 2px</text>
+                  <text x="125" y="80" className="text-[10px] fill-[#696969] font-sans" textAnchor="middle">cor: #454545</text>
+                  
+                  <text x="200" y="30" className="text-[10px] fill-[#fe473c] font-sans" textAnchor="middle">waypoint 90°</text>
+                  <circle cx="200" cy="60" r="4" fill="#fe473c" />
+                  <circle cx="200" cy="100" r="4" fill="#fe473c" />
+                  
+                  <text x="450" y="85" className="text-[10px] fill-[#696969] font-sans" textAnchor="start">seta: 12x12px</text>
+                  
+                  {/* Box indicando área da seta */}
+                  <rect x="400" y="94" width="12" height="12" fill="none" stroke="#696969" strokeWidth="1" strokeDasharray="2" />
+                </svg>
+              </div>
             </div>
 
             {/* Regras de Roteamento */}
@@ -605,8 +786,10 @@ export default function SnapGraphDesignSystem() {
                   <ul className="list-disc ml-4 space-y-1">
                     <li><strong>Stroke:</strong> 2px</li>
                     <li><strong>Cor:</strong> #454545</li>
-                    <li><strong>Seta:</strong> triângulo na extremidade final</li>
-                    <li><strong>Waypoints:</strong> círculo 3px nos pontos de curva</li>
+                    <li><strong>Linecap:</strong> square</li>
+                    <li><strong>Seta:</strong> 12x12px, triângulo preenchido na extremidade final</li>
+                    <li><strong>Waypoints:</strong> ângulos de 90° (sem border-radius)</li>
+                    <li><strong>Gap mínimo nodes:</strong> 80px (vertical e horizontal)</li>
                   </ul>
                 </div>
                 <div>
@@ -616,6 +799,7 @@ export default function SnapGraphDesignSystem() {
                     <li><strong>NUNCA</strong> passar por cima de nodes</li>
                     <li><strong>NUNCA</strong> cruzar outras conexões</li>
                     <li><strong>SEMPRE</strong> roteamento ortogonal (90°)</li>
+                    <li><strong>NUNCA</strong> usar border-radius nas curvas</li>
                   </ul>
                 </div>
               </div>
