@@ -97,34 +97,33 @@ export const snapGraph = {
 
   // Nós de entidade (Entity Nodes)
   entityNode: {
-    width: '256px', // Largura fixa
+    width: '256px', // Largura fixa OBRIGATÓRIA
     background: '#2c2c2c',
     borderRadius: '8px',
     accentWidth: '4px', // Barra de destaque à esquerda
-    padding: '12px',
+    padding: '16px', // REGRA: padding interno de 16px
+    gapNameToLabel: '16px', // REGRA: gap entre nome e label de 16px
     
-    // Ícone circular
+    // Ícone circular (à direita)
     icon: {
       size: '44px',
-      strokeWidth: '2px',
+      strokeWidth: '2px', // REGRA: stroke de 2px
       strokeColor: '#696969',
-      background: 'transparent',
+      background: 'transparent', // Sem preenchimento, só stroke
+      // Para Person: usar foto/thumbnail ao invés de ícone
     },
 
-    // Tipografia
+    // Tipografia do nome
     name: {
       fontSize: '14px',
       fontWeight: '500',
       color: '#ffffff',
       lineHeight: '1.3',
-      maxLines: 2, // Máximo 2 linhas
+      maxLines: 2, // REGRA: máximo 2 linhas, mesmo estilo
       overflow: 'ellipsis', // Reticências se não couber
       showTooltip: true, // Mostrar hint com nome completo no hover
     },
-    subtitle: {
-      fontSize: '12px',
-      color: '#8a8a8a',
-    },
+    // NOTA: NÃO há subtítulo separado - o nome ocupa até 2 linhas
   },
 
   // Linhas de conexão (Edges)

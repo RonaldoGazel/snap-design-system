@@ -1308,7 +1308,7 @@ export default function DesignSystemPage() {
                 {/* Linha separadora do header - mesma cor da borda */}
                 <div className="h-[1px] bg-[#2a2b35]" />
 
-                {/* Conteúdo */}
+                {/* Conte��do */}
                 <div className="p-6">
                   {/* Mensagem com check verde */}
                   <div className="flex items-start gap-3 mb-4">
@@ -1881,8 +1881,8 @@ export default function DesignSystemPage() {
                 <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Techbiz Forense Digital LTDA">
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
-                    <div className="flex-1 p-3">
-                      <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
                           <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">Techbiz Forense Digital LTDA</p>
                         </div>
@@ -1890,7 +1890,7 @@ export default function DesignSystemPage() {
                           <Building className="w-5 h-5 text-[#696969]" />
                         </div>
                       </div>
-                      <div className="mt-2">
+                      <div className="mt-4">
                         <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e2e8f0] bg-[#4a5568] rounded-xl">Company SNAP</span>
                       </div>
                     </div>
@@ -1901,60 +1901,58 @@ export default function DesignSystemPage() {
                 <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="Luiz Henrique de Souza Borges da Silva e Santos">
                   <div className="flex h-full">
                     <div className="w-1 bg-[#9b7fb8]" />
-                    <div className="flex-1 p-3">
-                      <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
                           <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">Luiz Henrique de Souza Borges da Silva e Santos</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-2 border-[#696969] overflow-hidden flex-shrink-0">
-                          <img src="/placeholder.svg?height=44&width=44&query=professional man with glasses portrait" alt="Foto" className="w-full h-full object-cover" />
+                          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Foto" className="w-full h-full object-cover" />
                         </div>
                       </div>
-                      <div className="mt-2">
+                      <div className="mt-4">
                         <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-xl">Person SNAP</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Phone Node */}
-                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="(31) 92332-2122">
+                {/* Phone Node - nome em 2 linhas */}
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="(31) 92332-2122 Telefone celular">
                   <div className="flex h-full">
                     <div className="w-1 bg-[#6b9490]" />
-                    <div className="flex-1 p-3">
-                      <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">(31) 92332-2122</p>
-                          <p className="text-[#8a8a8a] text-xs font-sans mt-0.5">Telefone celular</p>
+                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">(31) 92332-2122 Telefone celular</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
-                          <svg className="w-5 h-5 text-[#696969]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                          <svg className="w-5 h-5 text-[#696969]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                           </svg>
                         </div>
                       </div>
-                      <div className="mt-2">
+                      <div className="mt-4">
                         <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#d8ebe9] bg-[#3d5a58] rounded-xl">TrueCallerID</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Vehicle Node */}
-                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="ABC-1234 - Veículo Honda Civic">
+                {/* Vehicle Node - nome em 2 linhas */}
+                <div className="w-64 bg-[#2c2c2c] rounded-lg overflow-hidden" title="ABC-1234 Veículo Honda Civic 2020">
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7a9098]" />
-                    <div className="flex-1 p-3">
-                      <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 p-4">
+                      <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">ABC-1234</p>
-                          <p className="text-[#8a8a8a] text-xs font-sans mt-0.5">Veículo - Honda Civic</p>
+                          <p className="text-white text-sm font-medium font-sans leading-[1.3] line-clamp-2">ABC-1234 Veículo Honda Civic 2020</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-2 border-[#696969] flex items-center justify-center flex-shrink-0">
                           <Car className="w-5 h-5 text-[#696969]" />
                         </div>
                       </div>
-                      <div className="mt-2">
+                      <div className="mt-4">
                         <span className="inline-block px-2.5 py-1 text-[11px] font-medium text-[#e0e8eb] bg-[#4a5a60] rounded-xl">DETRAN</span>
                       </div>
                     </div>
@@ -1962,18 +1960,20 @@ export default function DesignSystemPage() {
                 </div>
               </div>
 
-              {/* Anatomia do Node */}
+              {/* Anatomia do Node - REGRAS DOCUMENTADAS */}
               <div className="mt-4 p-4 bg-card rounded-lg border border-border">
-                <h4 className="text-sm font-bold text-foreground mb-2 font-sans">Anatomia do Entity Node</h4>
+                <h4 className="text-sm font-bold text-foreground mb-2 font-sans">Anatomia do Entity Node (REGRAS)</h4>
                 <ul className="text-xs text-text-secondary font-sans list-disc ml-4 space-y-1">
-                  <li><strong>Largura fixa:</strong> 256px (w-64)</li>
+                  <li><strong>Largura fixa:</strong> 256px (w-64) - OBRIGATÓRIO</li>
                   <li><strong>Container:</strong> background #2c2c2c, border-radius 8px, sem stroke</li>
                   <li><strong>Barra de destaque:</strong> 4px à esquerda, cor accent da categoria</li>
-                  <li><strong>Nome:</strong> 14px, font-weight 500, line-height 1.3, máximo 2 linhas com reticências (line-clamp-2)</li>
+                  <li><strong>Padding interno:</strong> 16px (p-4) - OBRIGATÓRIO</li>
+                  <li><strong>Nome:</strong> 14px, font-weight 500, line-height 1.3, máximo 2 linhas (line-clamp-2), mesmo estilo nas 2 linhas</li>
+                  <li><strong>Gap nome → label:</strong> 16px (mt-4) - OBRIGATÓRIO</li>
                   <li><strong>Tooltip:</strong> Atributo title no container para mostrar nome completo no hover</li>
-                  <li><strong>Subtítulo:</strong> 12px, cor #8a8a8a (opcional)</li>
-                  <li><strong>Ícone:</strong> 44px circular, stroke 2px #696969, ícone SVG ou foto</li>
-                  <li><strong>Label:</strong> 11px, padding 10px x 4px, <strong>border-radius 12px</strong> (padrão badges/tags)</li>
+                  <li><strong>Ícone circular:</strong> 44px, stroke 2px #696969, fundo transparente (sem preenchimento)</li>
+                  <li><strong>Ícone Person:</strong> usar foto/thumbnail do rosto ao invés de ícone</li>
+                  <li><strong>Label:</strong> 11px, padding 10px x 4px, border-radius 12px (padrão badges/tags)</li>
                 </ul>
               </div>
             </div>
