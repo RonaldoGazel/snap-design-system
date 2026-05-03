@@ -46,7 +46,7 @@ const snapBadgeVariants = cva(
       },
       shape: {
         pill: "rounded-full",
-        squared: "rounded-md",
+        // squared removido - padrão SNAP usa apenas pill (rounded-full)
       },
       size: {
         sm: "px-2 py-0.5 text-[10px]",
