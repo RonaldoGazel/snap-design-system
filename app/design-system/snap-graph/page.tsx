@@ -217,6 +217,7 @@ export default function SnapGraphDesignSystem() {
             {/* Preview do Header */}
             <div className="bg-[#0a0a0a] rounded-xl border border-border overflow-hidden">
               <div className="flex items-center justify-between px-6 py-4">
+                {/* Esquerda: Logo + Breadcrumb */}
                 <div className="flex items-center gap-4">
                   <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6" />
                   <div className="w-px h-6 bg-[#696969]" />
@@ -237,10 +238,56 @@ export default function SnapGraphDesignSystem() {
                     <span className="text-white font-semibold">Relatório de Inteligência</span>
                   </div>
                 </div>
-                {/* Botão secondary do SnapButton */}
-                <SnapButton variant="secondary" size="sm" icon={<X className="w-4 h-4" />}>
-                  Fechar / Voltar
-                </SnapButton>
+                
+                {/* Direita: Notificações + Theme + Usuário + Voltar */}
+                <div className="flex items-center gap-4">
+                  {/* Sino de notificações com badge */}
+                  <div className="relative">
+                    <svg className="w-5 h-5 text-[#696969]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    <span className="absolute -top-2 -right-2 bg-[#72284B] text-white text-[10px] font-bold font-sans rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
+                      35
+                    </span>
+                  </div>
+                  
+                  {/* Theme toggle */}
+                  <button className="p-1.5 rounded-[6px] hover:bg-[#2c2c2c] transition-colors">
+                    <svg className="w-5 h-5 text-[#696969]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="5" />
+                      <line x1="12" y1="1" x2="12" y2="3" />
+                      <line x1="12" y1="21" x2="12" y2="23" />
+                      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                      <line x1="1" y1="12" x2="3" y2="12" />
+                      <line x1="21" y1="12" x2="23" y2="12" />
+                      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                  </button>
+                  
+                  {/* Separador */}
+                  <div className="w-px h-6 bg-[#454545]" />
+                  
+                  {/* Usuário/Órgão */}
+                  <div className="flex items-center gap-2 text-right">
+                    <div className="text-xs font-sans leading-tight max-w-[180px]">
+                      <span className="text-[#696969] font-semibold">SEAP</span>
+                      <span className="text-[#696969]"> - Secretaria da Administração</span>
+                      <br />
+                      <span className="text-[#696969]">Penitenciária do Rio de Janeiro</span>
+                    </div>
+                  </div>
+                  
+                  {/* Botão Voltar - filled dark */}
+                  <button className="flex items-center gap-2 h-9 px-4 bg-[#333540] text-white text-sm font-sans font-bold rounded-[6px] hover:bg-[#3b3d4a] transition-colors">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Voltar
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -251,9 +298,19 @@ export default function SnapGraphDesignSystem() {
                 <li><strong>Altura:</strong> auto (padding vertical 16px)</li>
                 <li><strong>Background:</strong> #0a0a0a (mesmo do canvas)</li>
                 <li><strong>Logo:</strong> snap-graph-logo.svg, altura 24px</li>
-                <li><strong>Separador:</strong> linha vertical 1px, cor #696969, altura 24px</li>
-                <li><strong>Botão Fechar:</strong> SnapButton variant=secondary size=sm (outline cinza = ação negativa/cancelar)</li>
-                <li className="text-[#72284B]"><strong>Ver:</strong> <Link href="/design-system#padroes-de-botoes" className="underline hover:text-white">Padrões de Botões</Link> no Design System principal</li>
+                <li><strong>Separador:</strong> linha vertical 1px, cor #696969/#454545, altura 24px</li>
+                <li><strong>Gap entre elementos:</strong> 16px (gap-4)</li>
+              </ul>
+            </div>
+            
+            {/* Elementos do Header - Direita */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Elementos da Direita (REGRAS)</h4>
+              <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                <li><strong>Sino notificações:</strong> 20x20px, cor #696969, badge 18px circular bg-[#72284B]</li>
+                <li><strong>Theme toggle:</strong> ícone sol/lua 20x20px, padding 6px, hover bg-[#2c2c2c]</li>
+                <li><strong>Usuário/Órgão:</strong> max-width 180px, text-xs, até 2 linhas, alinhado à direita</li>
+                <li><strong>Botão Voltar:</strong> filled bg-[#333540], chevron left + texto, rounded-[6px]</li>
               </ul>
             </div>
             
