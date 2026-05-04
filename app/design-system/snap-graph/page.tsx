@@ -271,17 +271,24 @@ export default function SnapGraphDesignSystem() {
                   <div className="w-px h-6 bg-[#454545]" />
                   
                   {/* Usuário/Órgão */}
-                  <div className="flex items-center gap-2 text-right">
+                  <div className="flex items-center gap-3 text-right">
                     <div className="text-xs font-sans leading-tight max-w-[180px]">
                       <span className="text-[#696969] font-semibold">SEAP</span>
                       <span className="text-[#696969]"> - Secretaria da Administração</span>
                       <br />
                       <span className="text-[#696969]">Penitenciária do Rio de Janeiro</span>
                     </div>
+                    {/* Avatar com iniciais - cor da vertical */}
+                    <div className="w-8 h-8 rounded-full bg-[#72284B] flex items-center justify-center text-white text-xs font-bold font-sans">
+                      SE
+                    </div>
                   </div>
                   
+                  {/* Espaço de 32px entre avatar e botão Voltar */}
+                  <div className="w-4" />
+                  
                   {/* Botão Voltar - filled dark */}
-                  <button className="flex items-center gap-2 h-9 px-4 bg-[#333540] text-white text-sm font-sans font-bold rounded-[6px] hover:bg-[#3b3d4a] transition-colors">
+                  <button className="flex items-center gap-2 h-9 px-4 bg-[#333540] text-white text-sm font-sans font-bold rounded-[6px] hover:bg-[#3b3d4a] transition-colors mr-4">
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="15 18 9 12 15 6" />
                     </svg>
