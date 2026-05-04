@@ -219,7 +219,7 @@ export default function SnapGraphDesignSystem() {
               <div className="flex items-center justify-between px-6 py-4">
                 {/* Esquerda: Logo + Breadcrumb */}
                 <div className="flex items-center gap-4">
-                  <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6" />
+                  <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6 mr-4" />
                   <div className="w-px h-6 bg-[#696969]" />
                   {/* Breadcrumb */}
                   <div className="flex items-center gap-2 text-sm font-sans">
