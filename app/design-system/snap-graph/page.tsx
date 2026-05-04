@@ -220,7 +220,7 @@ export default function SnapGraphDesignSystem() {
                 {/* Esquerda: Logo + Breadcrumb */}
                 <div className="flex items-center gap-4">
                   <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6 mr-4" />
-                  <div className="w-px h-6 bg-[#696969]" />
+                  <div className="w-px h-6 bg-[#696969] mr-4" />
                   {/* Breadcrumb */}
                   <div className="flex items-center gap-2 text-sm font-sans">
                     {/* Vertical: cor da vertical + ícone */}
