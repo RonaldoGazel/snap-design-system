@@ -278,20 +278,19 @@ export default function SnapGraphDesignSystem() {
                       <br />
                       <span className="text-[#696969]">Penitenciária do Rio de Janeiro</span>
                     </div>
-                    {/* Avatar com iniciais - 32px circular, cor da vertical, gap-8 (32px) até botão Voltar */}
-                    <div className="w-[32px] h-[32px] min-w-[32px] min-h-[32px] rounded-full bg-[#72284B] flex items-center justify-center text-white text-xs font-bold font-sans shrink-0">
+                    {/* Avatar: 32px circular perfeito, cor da vertical */}
+                    <div className="w-[32px] h-[32px] min-w-[32px] min-h-[32px] rounded-full bg-[#72284B] flex items-center justify-center text-white text-xs font-bold font-sans shrink-0 aspect-square">
                       SE
                     </div>
                   </div>
                   
-                  {/* Gap de 32px (gap-8) entre avatar e botão Voltar */}
-                  
-                  {/* Botão Voltar - filled dark, margem direita 32px */}
-                  <button className="flex items-center gap-2 h-9 px-4 ml-8 bg-[#333540] text-white text-sm font-sans font-bold rounded-[6px] hover:bg-[#3b3d4a] transition-colors">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  {/* Botão Voltar - REGRAS: justify-between, gap-3, min-w-[130px], rounded-[6px] */}
+                  {/* ml-4 = 16px (somado ao gap-4=16px do container = 32px total) */}
+                  <button className="inline-flex items-center justify-between gap-3 min-w-[130px] h-9 px-4 ml-4 bg-[#333540] text-white text-sm font-sans font-bold rounded-[6px] hover:bg-[#3b3d4a] transition-colors">
+                    <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="15 18 9 12 15 6" />
                     </svg>
-                    Voltar
+                    <span>Voltar</span>
                   </button>
                 </div>
               </div>
