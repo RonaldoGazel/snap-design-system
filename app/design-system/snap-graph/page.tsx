@@ -5,6 +5,8 @@ import { ArrowLeft, Building, Car, X, Phone, User, CreditCard, FileText, MapPin,
 import { SnapButton } from '@/components/snap/snap-button'
 import { SnapThemeToggle } from '@/components/snap/snap-theme-toggle'
 import { SnapLogo } from '@/components/snap/snap-logo'
+import { GraphSidebar } from '@/components/snap/graph-sidebar'
+import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
 
 // Componente Section reutilizável
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -23,6 +25,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 const indice = [
   { titulo: 'Visão Geral', id: 'visão-geral' },
   { titulo: 'Canvas e Grid', id: 'canvas-e-grid' },
+  { titulo: 'Sidebar e Zoom Controls', id: 'sidebar-e-zoom-controls' },
   { titulo: 'Header', id: 'header' },
   { titulo: 'Entity Nodes', id: 'entity-nodes' },
   { titulo: 'Labels de Categoria', id: 'labels-de-categoria' },
@@ -207,6 +210,188 @@ export default function SnapGraphDesignSystem() {
                   </ul>
                 </div>
               </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            SIDEBAR E ZOOM CONTROLS
+            ============================================ */}
+        <Section title="Sidebar e Zoom Controls">
+          <div className="space-y-6">
+            <p className="text-sm text-text-secondary font-sans">
+              Menu principal e controles de navegação da interface SNAP Graph. Posicionados na lateral esquerda com 32px de margem das bordas da tela.
+            </p>
+            
+            {/* Preview Visual com Canvas */}
+            <div className="snap-canvas rounded-xl border border-border overflow-hidden relative" style={{ height: '500px' }}>
+              {/* Margem visual de 32px */}
+              <div className="absolute top-[32px] left-[32px] flex flex-col" style={{ gap: '36px' }}>
+                {/* Sidebar */}
+                <GraphSidebar 
+                  recommendationsCount={35}
+                  badgeColor="#72284B"
+                />
+                
+                {/* Zoom Controls - 36px abaixo da sidebar */}
+                <GraphZoomControls />
+              </div>
+              
+              {/* Indicadores de medida - apenas visuais */}
+              <div className="absolute top-[8px] left-[32px] text-[10px] text-[#696969] font-mono">
+                ← 32px margem
+              </div>
+              <div className="absolute top-[32px] left-[8px] text-[10px] text-[#696969] font-mono" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+                32px ↑
+              </div>
+              
+              {/* Entity Node de exemplo no canvas */}
+              <div className="absolute w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm" style={{ left: '300px', top: '120px' }}>
+                <div className="flex h-full">
+                  <div className="w-1 bg-[#7c8db0]" />
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start gap-3">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
+                      </div>
+                      <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
+                        <Building className="w-5 h-5 text-[#696969]" />
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#696969] rounded-full">Company SNAP</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Grid de especificações */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Sidebar Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">GraphSidebar (Menu Principal)</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Largura:</strong> 64px</li>
+                  <li><strong>Border-radius:</strong> 12px</li>
+                  <li><strong>Background:</strong> bg-card-elevated</li>
+                  <li><strong>Border:</strong> 1px border-border-subtle</li>
+                  <li><strong>Gap entre ícones:</strong> 24px</li>
+                  <li><strong>Margem da borda:</strong> 32px</li>
+                </ul>
+              </div>
+              
+              {/* Badge Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Badge Numérico (Recomendações)</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Diâmetro:</strong> 32px</li>
+                  <li><strong>Cor:</strong> Cor da vertical ativa (#72284B para Inteligência)</li>
+                  <li><strong>Texto:</strong> branco, font-bold, font-sans</li>
+                  <li><strong>Posição:</strong> canto superior direito do ícone</li>
+                  <li><strong>Max display:</strong> 99+ (se {">"}99)</li>
+                </ul>
+              </div>
+              
+              {/* Ícones da Sidebar */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Ícones da Sidebar</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>1. Olho (Eye):</strong> Recomendações - com badge numérico</li>
+                  <li><strong>2. Plus (+):</strong> Adicionar entidade</li>
+                  <li><strong>3. Settings:</strong> Opções gerais (inativo, abre modal futuro)</li>
+                  <li><strong>Tamanho ícones:</strong> 24x24px (w-6 h-6)</li>
+                  <li><strong>Cor:</strong> branco (hover: 80% opacity)</li>
+                </ul>
+              </div>
+              
+              {/* Zoom Controls Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">GraphZoomControls (Navegação)</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Posição:</strong> 36px abaixo da sidebar</li>
+                  <li><strong>Tamanho ícones:</strong> 20x20px</li>
+                  <li><strong>Gap entre ícones:</strong> 12px</li>
+                  <li><strong>Cor normal:</strong> #696969</li>
+                  <li><strong>Cor hover:</strong> branco puro (#ffffff)</li>
+                  <li><strong>Sem box:</strong> ícones soltos (sem container)</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Componentes isolados lado a lado */}
+            <div className="p-6 bg-card rounded-xl border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-4 font-sans uppercase tracking-wide">Componentes Isolados</h4>
+              <div className="flex items-start gap-12">
+                {/* Sidebar isolada */}
+                <div className="flex flex-col items-center">
+                  <p className="text-xs text-text-muted font-sans mb-3 uppercase tracking-wide">GraphSidebar</p>
+                  <GraphSidebar 
+                    recommendationsCount={35}
+                    badgeColor="#72284B"
+                  />
+                </div>
+                
+                {/* Zoom Controls isolados */}
+                <div className="flex flex-col items-center">
+                  <p className="text-xs text-text-muted font-sans mb-3 uppercase tracking-wide">GraphZoomControls</p>
+                  <div className="p-4">
+                    <GraphZoomControls />
+                  </div>
+                </div>
+                
+                {/* Variações de badge */}
+                <div className="flex flex-col items-center">
+                  <p className="text-xs text-text-muted font-sans mb-3 uppercase tracking-wide">Badge Variações</p>
+                  <div className="flex flex-col gap-3">
+                    {/* Badge Inteligência */}
+                    <div className="flex items-center gap-3">
+                      <div className="w-[32px] h-[32px] rounded-full bg-[#72284B] flex items-center justify-center text-white text-sm font-bold font-sans">
+                        35
+                      </div>
+                      <span className="text-xs text-text-muted font-sans">Inteligência</span>
+                    </div>
+                    {/* Badge Investigação */}
+                    <div className="flex items-center gap-3">
+                      <div className="w-[32px] h-[32px] rounded-full bg-[#FE473C] flex items-center justify-center text-white text-sm font-bold font-sans">
+                        12
+                      </div>
+                      <span className="text-xs text-text-muted font-sans">Investigação</span>
+                    </div>
+                    {/* Badge 99+ */}
+                    <div className="flex items-center gap-3">
+                      <div className="w-[32px] h-[32px] rounded-full bg-[#72284B] flex items-center justify-center text-white text-[10px] font-bold font-sans">
+                        99+
+                      </div>
+                      <span className="text-xs text-text-muted font-sans">Overflow</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Código de uso */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Uso dos Componentes</h4>
+              <pre className="text-xs text-text-secondary font-mono bg-background p-3 rounded-lg overflow-x-auto">
+{`import { GraphSidebar } from '@/components/snap/graph-sidebar'
+import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
+
+// Sidebar com badge de recomendações
+<GraphSidebar 
+  recommendationsCount={35}
+  badgeColor="#72284B" // Cor da vertical ativa
+  onRecommendationsClick={() => {}}
+  onAddClick={() => {}}
+/>
+
+// Controles de zoom
+<GraphZoomControls 
+  onZoomIn={() => {}}
+  onZoomOut={() => {}}
+  onFit={() => {}}
+/>`}
+              </pre>
             </div>
           </div>
         </Section>
