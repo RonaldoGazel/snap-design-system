@@ -278,25 +278,21 @@
    - Dark mode: mostra logos claros (para fundo escuro)
    - Light mode: mostra logos escuros (para fundo claro)
    ============================================ */
-.snap-logo-container {
-  display: inline-flex;
-  align-items: center;
-}
 
-/* Default: esconde ambos até o tema ser aplicado */
-.snap-logo-dark,
-.snap-logo-light {
-  display: none;
-}
-
-/* Dark mode: mostra logo claro */
+/* Dark mode: mostra logo dark, esconde logo light */
 .dark .snap-logo-dark {
-  display: inline-block;
+  display: inline-block !important;
+}
+.dark .snap-logo-light {
+  display: none !important;
 }
 
-/* Light mode: mostra logo escuro */
+/* Light mode: mostra logo light, esconde logo dark */
+.light .snap-logo-dark {
+  display: none !important;
+}
 .light .snap-logo-light {
-  display: inline-block;
+  display: inline-block !important;
 }
 
 @theme inline {
