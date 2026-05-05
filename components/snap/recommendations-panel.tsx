@@ -71,7 +71,7 @@ export function RecommendationsPanel({
           style={{ width: '24px', height: '18.45px' }} 
           strokeWidth={2}
         />
-        <h2 className="text-lg font-medium text-foreground font-sans">
+        <h2 className="text-lg font-medium text-foreground font-sans normal-case tracking-normal">
           Recomendações
         </h2>
       </div>
@@ -118,7 +118,7 @@ function AccordionItem({
     <div
       className={cn(
         "rounded-lg overflow-hidden transition-colors duration-200",
-        isExpanded ? "bg-[#16191A]" : "bg-[#1e2122]"
+        isExpanded ? "bg-[#16191A]" : "bg-[#121415]"
       )}
     >
       {/* Header do Item */}
@@ -161,7 +161,7 @@ function AccordionItem({
 
       {/* Conteúdo Expandido */}
       {isExpanded && (
-        <div className="px-4 pb-4">
+        <div className="px-4 pb-4 pt-2">
           <div className="flex flex-col" style={{ gap: '15px' }}>
             {entity.actions.map((action) => (
               <ActionItem
