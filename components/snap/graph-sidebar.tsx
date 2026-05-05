@@ -42,7 +42,7 @@ export function GraphSidebar({
     <div
       className={cn(
         "w-[64px] h-[144px] bg-card-elevated rounded-[12px] flex flex-col items-center justify-center p-[20px]",
-        "border border-border-subtle",
+        "border border-border-subtle overflow-visible",
         className
       )}
       style={{ gap: '24px' }}
@@ -55,11 +55,15 @@ export function GraphSidebar({
       >
         <Eye style={{ width: '25px', height: '20px' }} strokeWidth={2} />
         
-        {/* Badge numérico - 32px, posicionado no canto superior direito */}
+        {/* Badge numérico - 32px, posicionado acima e à direita, pode sair do container */}
         {recommendationsCount > 0 && (
           <span
-            className="absolute -top-3 -right-4 w-[32px] h-[32px] rounded-full flex items-center justify-center text-white text-sm font-bold font-sans"
-            style={{ backgroundColor: badgeColor }}
+            className="absolute w-[32px] h-[32px] rounded-full flex items-center justify-center text-white text-sm font-bold font-sans"
+            style={{ 
+              backgroundColor: badgeColor,
+              top: '-20px',
+              right: '-18px'
+            }}
           >
             {recommendationsCount > 99 ? "99+" : recommendationsCount}
           </span>
