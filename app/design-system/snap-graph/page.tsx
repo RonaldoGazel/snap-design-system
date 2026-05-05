@@ -7,6 +7,7 @@ import { SnapThemeToggle } from '@/components/snap/snap-theme-toggle'
 import { SnapLogo } from '@/components/snap/snap-logo'
 import { GraphSidebar } from '@/components/snap/graph-sidebar'
 import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
+import { RecommendationsPanel } from '@/components/snap/recommendations-panel'
 
 // Componente Section reutilizável
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -26,6 +27,7 @@ const indice = [
   { titulo: 'Visão Geral', id: 'visão-geral' },
   { titulo: 'Canvas e Grid', id: 'canvas-e-grid' },
   { titulo: 'Sidebar e Zoom Controls', id: 'sidebar-e-zoom-controls' },
+  { titulo: 'Painel de Recomendações', id: 'painel-de-recomendações' },
   { titulo: 'Header', id: 'header' },
   { titulo: 'Entity Nodes', id: 'entity-nodes' },
   { titulo: 'Labels de Categoria', id: 'labels-de-categoria' },
@@ -288,7 +290,7 @@ export default function SnapGraphDesignSystem() {
                 <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Badge Numérico (Recomendações)</h4>
                 <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
                   <li><strong>Diâmetro:</strong> 32px</li>
-                  <li><strong>Cor:</strong> Cor da vertical ativa (#72284B para Inteligência)</li>
+                  <li><strong>Cor:</strong> Cor da vertical ativa (#72284B para Intelig��ncia)</li>
                   <li><strong>Texto:</strong> branco, font-bold, font-sans</li>
                   <li><strong>Posição:</strong> canto superior direito do ícone</li>
                   <li><strong>Max display:</strong> 99+ (se {">"}99)</li>
@@ -393,6 +395,180 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
   onZoomIn={() => {}}
   onZoomOut={() => {}}
   onFit={() => {}}
+/>`}
+              </pre>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            PAINEL DE RECOMENDAÇÕES
+            ============================================ */}
+        <Section title="Painel de Recomendações">
+          <div className="space-y-6">
+            <p className="text-sm text-text-secondary font-sans">
+              Painel lateral que exibe recomendações de ações para entidades do grafo. Usa formato accordion para organizar ações por entidade.
+            </p>
+            
+            {/* Preview do Componente */}
+            <div className="flex justify-center p-8 bg-background rounded-xl border border-border">
+              <RecommendationsPanel 
+                entities={[
+                  {
+                    id: '1',
+                    name: 'Luiz Henrique Borges',
+                    type: 'person',
+                    count: 21,
+                    actions: [
+                      { id: 'a1', label: 'Pesquisar tudo sobre a pessoa' },
+                      { id: 'a2', label: 'Analisar contratos públicos' },
+                      { id: 'a3', label: 'Verificar vínculos societários' },
+                      { id: 'a4', label: 'Pesquisa tudo sobre a pessoa' },
+                    ],
+                  },
+                  {
+                    id: '2',
+                    name: 'Alysson Rainer',
+                    type: 'person',
+                    count: 21,
+                    actions: [
+                      { id: 'b1', label: 'Pesquisar tudo sobre a pessoa' },
+                    ],
+                  },
+                  {
+                    id: '3',
+                    name: 'Masterclass Tecnologia',
+                    type: 'company',
+                    count: 21,
+                    actions: [
+                      { id: 'c1', label: 'Analisar contratos públicos' },
+                    ],
+                  },
+                  {
+                    id: '4',
+                    name: 'Augusto Campos Freire Guimarães',
+                    type: 'person',
+                    count: 21,
+                    actions: [
+                      { id: 'd1', label: 'Pesquisar tudo sobre a pessoa' },
+                    ],
+                  },
+                  {
+                    id: '5',
+                    name: 'Bitcompany LTDA ME',
+                    type: 'company',
+                    count: 21,
+                    actions: [
+                      { id: 'e1', label: 'Verificar vínculos societários' },
+                    ],
+                  },
+                ]}
+              />
+            </div>
+
+            {/* Grid de especificações */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Modal Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Painel Principal</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Largura:</strong> 451px</li>
+                  <li><strong>Border-radius:</strong> 12px</li>
+                  <li><strong>Padding:</strong> 24px</li>
+                  <li><strong>Margem da borda:</strong> 32px (direita)</li>
+                  <li><strong>Background:</strong> var(--recommendations-bg)</li>
+                </ul>
+              </div>
+              
+              {/* Header Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Header</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Padding top:</strong> 20px</li>
+                  <li><strong>Ícone olho:</strong> 24x18px (cor #72284B)</li>
+                  <li><strong>Gap ícone-texto:</strong> 16px</li>
+                  <li><strong>Título:</strong> 22px, font-medium, <strong>font-sans</strong> (EXCEÇÃO: não usa Cygnito)</li>
+                  <li><strong>Linha separadora:</strong> mt-3 (12px) / mb-5 (20px)</li>
+                </ul>
+              </div>
+              
+              {/* Accordion Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Itens Accordion</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Gap entre itens:</strong> 8px</li>
+                  <li><strong>Border-radius:</strong> 8px</li>
+                  <li><strong>Badge numérico:</strong> 22x22px (padrão pequeno)</li>
+                  <li><strong>Ícone tipo:</strong> 22x15.37px</li>
+                  <li><strong>Padding top conteúdo:</strong> 16px (pt-4)</li>
+                  <li><strong>BG colapsado:</strong> var(--recommendations-item-collapsed)</li>
+                  <li><strong>BG expandido:</strong> var(--recommendations-item-expanded)</li>
+                  <li><strong>BG hover:</strong> var(--recommendations-item-hover)</li>
+                </ul>
+              </div>
+              
+              {/* Actions Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Ações</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Gap entre ações:</strong> 15px</li>
+                  <li><strong>Ícone Play:</strong> 24px, #00FF73 (accent green)</li>
+                  <li><strong>Ícone Lixeira:</strong> 16x18px, #5D5B5B</li>
+                  <li><strong>Lixeira hover:</strong> #ff6b6b</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Novo Token: Accent Green */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Novo Token: Accent Green</h4>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-[#00FF73] flex items-center justify-center">
+                  <span className="text-black font-bold text-xs">PLAY</span>
+                </div>
+                <div className="text-sm text-text-secondary font-sans">
+                  <p><strong>#00FF73</strong> - Super accent para ações positivas (executar, play)</p>
+                  <p className="text-xs text-text-muted mt-1">Hover: #00cc5c</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Tokens CSS de Tema */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Tokens CSS (Light/Dark Mode)</h4>
+              <div className="text-sm text-text-secondary font-sans space-y-2">
+                <p>O painel usa tokens CSS para suporte automático a temas:</p>
+                <ul className="list-disc ml-4 space-y-1">
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-bg</code> - Background do painel</li>
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-item-collapsed</code> - BG item fechado</li>
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-item-expanded</code> - BG item aberto</li>
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-item-hover</code> - BG no hover</li>
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-badge-bg</code> - BG do badge</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Código de uso */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Uso do Componente</h4>
+              <pre className="text-xs text-text-secondary font-mono bg-background p-3 rounded-lg overflow-x-auto">
+{`import { RecommendationsPanel } from '@/components/snap/recommendations-panel'
+
+<RecommendationsPanel 
+  entities={[
+    {
+      id: '1',
+      name: 'Luiz Henrique Borges',
+      type: 'person', // 'person' | 'company'
+      count: 21,
+      actions: [
+        { id: 'a1', label: 'Pesquisar tudo sobre a pessoa' },
+        { id: 'a2', label: 'Analisar contratos públicos' },
+      ],
+    },
+  ]}
+  onActionExecute={(entityId, actionId) => console.log('Executar', entityId, actionId)}
+  onActionDelete={(entityId, actionId) => console.log('Deletar', entityId, actionId)}
 />`}
               </pre>
             </div>
@@ -987,7 +1163,7 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
                   
                   {/* Node 1: TECHBIZ (topo esquerda) - VÍNCULO DESCOBERTO */}
                   <div className="absolute" style={{ left: '32px', top: '24px' }}>
-                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-white">
+                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-canvas-node-highlight">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#7c8db0]" />
                         <div className="flex-1 p-4">
@@ -1053,7 +1229,7 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
                   
                   {/* Node 4: TELEFONE (baixo direita) - VÍNCULO DESCOBERTO */}
                   <div className="absolute" style={{ left: '368px', top: '404px' }}>
-                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-white">
+                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-canvas-node-highlight">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#6b9490]" />
                         <div className="flex-1 p-4">
