@@ -50,7 +50,7 @@ export function GraphSidebar({
       {/* Ícone Recomendações (Olho) com Badge - 25x20px */}
       <button
         onClick={onRecommendationsClick}
-        className="relative flex items-center justify-center text-white hover:text-white/80 transition-colors"
+        className="relative flex items-center justify-center text-foreground hover:opacity-80 transition-opacity"
         aria-label="Recomendações"
       >
         <Eye style={{ width: '25px', height: '20px' }} strokeWidth={2} />
@@ -73,7 +73,7 @@ export function GraphSidebar({
       {/* Ícone Adicionar - 22x22px */}
       <button
         onClick={onAddClick}
-        className="flex items-center justify-center text-white hover:text-white/80 transition-colors"
+        className="flex items-center justify-center text-foreground hover:opacity-80 transition-opacity"
         aria-label="Adicionar entidade"
       >
         <Plus style={{ width: '22px', height: '22px' }} strokeWidth={2} />
@@ -82,7 +82,7 @@ export function GraphSidebar({
       {/* Ícone Configurações (Sliders) - 22x21px - inativo por enquanto */}
       <button
         onClick={onOptionsClick}
-        className="flex items-center justify-center text-[#696969] hover:text-white/80 transition-colors"
+        className="flex items-center justify-center text-[#696969] hover:opacity-80 transition-opacity"
         aria-label="Opções"
         disabled={!onOptionsClick}
       >
