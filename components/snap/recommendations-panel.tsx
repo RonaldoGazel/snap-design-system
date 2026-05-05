@@ -59,28 +59,31 @@ export function RecommendationsPanel({
   return (
     <div
       className={cn(
-        "w-[451px] bg-card-elevated rounded-[12px] p-6 overflow-hidden",
+        "w-[451px] rounded-[12px] overflow-hidden",
         "border border-border-subtle",
         className
       )}
+      style={{ backgroundColor: '#0F0F10' }}
     >
-      {/* Header */}
-      <div className="flex items-center" style={{ gap: '16px' }}>
-        <Eye 
-          className="text-[#72284B] flex-shrink-0" 
-          style={{ width: '24px', height: '18.45px' }} 
-          strokeWidth={2}
-        />
-        <h2 className="text-lg font-medium text-foreground font-sans normal-case tracking-normal">
-          Recomendações
-        </h2>
+      {/* Header - padding top 24px, gap 16px, mb 12px até a linha */}
+      <div className="px-6 pt-6">
+        <div className="flex items-center" style={{ gap: '16px' }}>
+          <Eye 
+            className="text-[#72284B] flex-shrink-0" 
+            style={{ width: '24px', height: '18.45px' }} 
+            strokeWidth={2}
+          />
+          <span className="text-lg font-medium text-foreground" style={{ fontFamily: 'var(--font-sans)', textTransform: 'none', letterSpacing: 'normal' }}>
+            Recomendações
+          </span>
+        </div>
+
+        {/* Linha separadora - 12px acima, 20px abaixo */}
+        <div className="h-px bg-border-subtle mt-3 mb-5" />
       </div>
 
-      {/* Linha separadora */}
-      <div className="h-px bg-border-subtle my-5" />
-
       {/* Lista de Entidades (Accordion) */}
-      <div className="flex flex-col" style={{ gap: '8px' }}>
+      <div className="px-6 pb-6 flex flex-col" style={{ gap: '8px' }}>
         {entities.map((entity) => (
           <AccordionItem
             key={entity.id}
@@ -147,7 +150,7 @@ function AccordionItem({
         />
 
         {/* Nome da entidade */}
-        <span className="flex-1 text-left text-foreground font-sans text-sm truncate">
+        <span className="flex-1 text-left text-foreground text-sm truncate" style={{ fontFamily: 'var(--font-sans)', textTransform: 'none' }}>
           {entity.name}
         </span>
 
@@ -202,7 +205,7 @@ function ActionItem({ action, onExecute, onDelete }: ActionItemProps) {
       </button>
 
       {/* Label da ação */}
-      <span className="flex-1 text-foreground font-sans text-sm font-medium">
+      <span className="flex-1 text-foreground text-sm font-medium" style={{ fontFamily: 'var(--font-sans)', textTransform: 'none' }}>
         {action.label}
       </span>
 
