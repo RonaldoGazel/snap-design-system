@@ -23,9 +23,11 @@ export function useTheme() {
     }
   }, [])
 
-  // Aplica a classe no <html>
+  // Aplica a classe no <html> (com guard para SSR)
   const applyTheme = (newTheme: Theme) => {
+    if (typeof window === 'undefined') return
     const root = document.documentElement
+    if (!root) return
     if (newTheme === 'dark') {
       root.classList.add('dark')
       root.classList.remove('light')
