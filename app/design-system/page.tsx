@@ -1321,7 +1321,7 @@ export default function DesignSystemPage() {
                 <li><strong>Alert box:</strong> Background #2A2B35, borda verde (success), border-radius 6px</li>
                 <li><strong>Card de dados:</strong> Background #000000, borda #2A2B35</li>
                 <li><strong>Botões:</strong> Sempre alinhados à <strong>DIREITA</strong>, border-radius <strong>6px</strong>, layout interno: ícone à ESQUERDA + texto à DIREITA (justify-between)</li>
-                <li><strong>Margem botões:</strong> Mínimo de <strong>36px</strong> entre o conteúdo acima e os botões de ação</li>
+                <li><strong>Margem botões:</strong> Mínimo de <strong>36px</strong> entre o conteúdo acima e os bot��es de ação</li>
                 <li><strong>Botão Cancelar:</strong> OUTLINE - background transparente, borda #676C70 (cinza claro)</li>
                 <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b), texto bold</li>
                 <li><strong>Overlay:</strong> Background #000000 com opacidade 50%</li>
@@ -1411,56 +1411,6 @@ export default function DesignSystemPage() {
                     <SnapButton variant="primary" size="modal" icon={<Check className="w-4 h-4" />}>
                       Confirmar
                     </SnapButton>
-                  </div>
-                </div>
-              </div>
-                    <button className="p-1 rounded hover:bg-border transition-colors">
-                      <X className="w-5 h-5 text-text-muted" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Linha separadora do header - mesma cor da borda */}
-                <div className="h-[1px] bg-border" />
-
-                {/* Conte������do */}
-                <div className="p-6">
-                  {/* Mensagem com check verde */}
-                  <div className="flex items-start gap-3 mb-4">
-                    <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
-                    <p className="text-foreground text-sm font-sans">
-                      A entidade não foi encontrada no banco de dados! <strong className="text-foreground cursor-pointer hover:underline">Deseja criar uma nova?</strong>
-                    </p>
-                  </div>
-
-                  {/* Card de dados */}
-                  <div className="bg-background rounded-lg border border-border overflow-hidden mb-4">
-                    <div className="text-sm font-sans divide-y divide-border">
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">UF:</span><span className="text-text-muted">MG</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">CEP:</span><span className="text-text-muted">30.431-214</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Bairro:</span><span className="text-text-muted">Barro Preto</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Cidade:</span><span className="text-text-muted">Belo Horizonte</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Número:</span><span className="text-text-muted">37</span></div>
-                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Logradouro:</span><span className="text-text-muted">Belo Horizonte</span></div>
-                    </div>
-                  </div>
-
-                  {/* Link Ver detalhes - margem de 36px (mb-9) antes dos botões */}
-                  <div className="flex items-center gap-2 mb-9">
-                    <Search className="w-4 h-4 text-text-muted" />
-                    <span className="text-sm text-text-muted cursor-pointer hover:underline font-sans">Ver detalhes</span>
-                  </div>
-
-                  {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
-                  <div className="flex items-center justify-end gap-4">
-                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-border transition-colors">
-                      <X className="w-4 h-4" />
-                      <span>Cancelar</span>
-                    </button>
-                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-[#72284b] text-white text-sm font-bold font-sans hover:bg-[#5a1f3c] transition-colors">
-                      <Check className="w-4 h-4" />
-                      <span>Confirmar</span>
-                    </button>
                   </div>
                 </div>
               </div>
