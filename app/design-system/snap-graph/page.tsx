@@ -290,7 +290,7 @@ export default function SnapGraphDesignSystem() {
                 <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Badge Numérico (Recomendações)</h4>
                 <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
                   <li><strong>Diâmetro:</strong> 32px</li>
-                  <li><strong>Cor:</strong> Cor da vertical ativa (#72284B para Inteligência)</li>
+                  <li><strong>Cor:</strong> Cor da vertical ativa (#72284B para Intelig��ncia)</li>
                   <li><strong>Texto:</strong> branco, font-bold, font-sans</li>
                   <li><strong>Posição:</strong> canto superior direito do ícone</li>
                   <li><strong>Max display:</strong> 99+ (se {">"}99)</li>
@@ -1145,7 +1145,7 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
                   
                   {/* Node 1: TECHBIZ (topo esquerda) - VÍNCULO DESCOBERTO */}
                   <div className="absolute" style={{ left: '32px', top: '24px' }}>
-                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-white">
+                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-canvas-node-highlight">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#7c8db0]" />
                         <div className="flex-1 p-4">
@@ -1211,7 +1211,7 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
                   
                   {/* Node 4: TELEFONE (baixo direita) - VÍNCULO DESCOBERTO */}
                   <div className="absolute" style={{ left: '368px', top: '404px' }}>
-                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-white">
+                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-canvas-node-highlight">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#6b9490]" />
                         <div className="flex-1 p-4">
