@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { Eye, Trash2, ChevronDown, ChevronUp, Users, Building2 } from "lucide-react"
+import { Trash2, ChevronDown, ChevronUp, Users, Building2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { PlayActionIcon } from "@/components/snap/icons/play-action"
+import { EyeRecommendationsIcon } from "@/components/snap/icons/eye-recommendations"
 
 // Tipos
 interface RecommendationAction {
@@ -69,11 +70,7 @@ export function RecommendationsPanel({
       {/* Header - padding top 24px, gap 16px, mb 12px até a linha */}
       <div className="px-6 pt-6">
         <div className="flex items-center" style={{ gap: '16px' }}>
-          <Eye 
-            className="text-[#72284B] flex-shrink-0" 
-            style={{ width: '24px', height: '18.45px' }} 
-            strokeWidth={2}
-          />
+          <EyeRecommendationsIcon className="text-[#72284B] flex-shrink-0" />
           <span className="font-medium text-foreground" style={{ fontFamily: 'var(--font-sans)', fontSize: '22px', textTransform: 'none', letterSpacing: 'normal' }}>
             Recomendações
           </span>
