@@ -162,7 +162,7 @@ function AccordionItem({
 
       {/* Conteúdo Expandido */}
       {isExpanded && (
-        <div className="px-4 pb-4 pt-2">
+        <div className="px-4 pb-4 pt-4">
           <div className="flex flex-col" style={{ gap: '15px' }}>
             {entity.actions.map((action) => (
               <ActionItem
