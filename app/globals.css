@@ -149,6 +149,15 @@
   --chart-3: #3f9f76;
   --chart-4: #ff9800;
   --chart-5: #ffc563;
+
+  /* ============================================
+     15. SNAP GRAPH CANVAS (área agnóstica)
+     ============================================ */
+  --canvas-background: #0a0a0a;
+  --canvas-grid-tile: url('/assets/snap-graph-grid.png');
+  --canvas-node-bg: #ffffff;
+  --canvas-node-border: #e0e0e0;
+  --canvas-edge-color: #696969;
 }
 
 /* ============================================
@@ -239,6 +248,28 @@
   --chart-3: #2e7d55;
   --chart-4: #e65100;
   --chart-5: #e6a000;
+
+  /* SNAP GRAPH CANVAS (área agnóstica - light mode) */
+  --canvas-background: #F5F7F8;
+  --canvas-grid-tile: url('/assets/grid-tile-light.png');
+  --canvas-node-bg: #ffffff;
+  --canvas-node-border: #d0d5d9;
+  --canvas-edge-color: #696969;
+}
+
+/* SNAP Canvas - área de visualização de grafos */
+.snap-canvas {
+  background-color: var(--canvas-background);
+  background-image: var(--canvas-grid-tile);
+  background-repeat: repeat;
+}
+
+.bg-canvas-node {
+  background-color: var(--canvas-node-bg);
+}
+
+.border-canvas-node-border {
+  border-color: var(--canvas-node-border);
 }
 
 @theme inline {

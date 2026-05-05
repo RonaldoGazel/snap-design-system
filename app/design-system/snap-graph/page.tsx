@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowLeft, Building, Car, X, Phone, User, CreditCard, FileText, MapPin, Mail, Sun, Moon } from 'lucide-react'
 import { SnapButton } from '@/components/snap/snap-button'
 import { SnapThemeToggle } from '@/components/snap/snap-theme-toggle'
+import { SnapLogo } from '@/components/snap/snap-logo'
 
 // Componente Section reutilizável
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -51,7 +52,7 @@ export default function SnapGraphDesignSystem() {
         <header className="mb-12">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
-              <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-8" />
+              <SnapLogo variant="snap-graph" height={32} />
               <div className="w-px h-8 bg-border" />
               <span className="text-sm text-text-muted font-sans uppercase tracking-wide">Documentação de Interface</span>
             </div>
@@ -116,32 +117,27 @@ export default function SnapGraphDesignSystem() {
             ============================================ */}
         <Section title="Canvas e Grid">
           <div className="space-y-6">
-            {/* Preview do Canvas */}
+            {/* Preview do Canvas - usa CSS variables para adaptar ao tema */}
             <div 
-              className="h-64 rounded-xl border border-border overflow-hidden"
-              style={{
-                backgroundColor: '#0a0a0a',
-                backgroundImage: 'url(/assets/snap-graph-grid.png)',
-                backgroundRepeat: 'repeat',
-              }}
+              className="snap-canvas h-64 rounded-xl border border-border overflow-hidden"
             >
               {/* Exemplo com nodes conectados */}
               <div className="w-full h-full relative p-8">
                 {/* Node A - Company */}
-                <div className="absolute w-64 bg-card-elevated rounded-lg overflow-hidden" style={{ left: '80px', top: '50%', transform: 'translateY(-50%)' }}>
+                <div className="absolute w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm" style={{ left: '80px', top: '50%', transform: 'translateY(-50%)' }}>
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
                       <div className="flex items-start gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
+                          <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                           <Building className="w-5 h-5 text-[#696969]" />
                         </div>
                       </div>
                       <div className="mt-4">
-                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#696969] rounded-full">Company SNAP</span>
                       </div>
                     </div>
                   </div>
@@ -166,20 +162,20 @@ export default function SnapGraphDesignSystem() {
                 </svg>
                 
                 {/* Node B - Person */}
-                <div className="absolute w-64 bg-card-elevated rounded-lg overflow-hidden" style={{ left: '416px', top: '50%', transform: 'translateY(-50%)' }}>
+                <div className="absolute w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm" style={{ left: '416px', top: '50%', transform: 'translateY(-50%)' }}>
                   <div className="flex h-full">
                     <div className="w-1 bg-[#9b7fb8]" />
                     <div className="flex-1 p-4">
                       <div className="flex items-start gap-3">
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Luiz Henrique de Souza Borges</p>
+                          <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Luiz Henrique de Souza Borges</p>
                         </div>
                         <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] overflow-hidden flex-shrink-0">
                           <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Foto" className="w-full h-full object-cover" />
                         </div>
                       </div>
                       <div className="mt-4">
-                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-full">Person SNAP</span>
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#72284B] rounded-full">Person SNAP</span>
                       </div>
                     </div>
                   </div>
@@ -192,21 +188,22 @@ export default function SnapGraphDesignSystem() {
               <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Especificações do Canvas</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-text-secondary font-sans">
                 <div>
-                  <p className="font-medium text-foreground mb-1">Background</p>
+                  <p className="font-medium text-foreground mb-1">Background (CSS Variables)</p>
                   <ul className="list-disc ml-4 space-y-1">
-                    <li><strong>Cor base:</strong> #0a0a0a</li>
-                    <li><strong>Grid:</strong> bitmap pontilhado (PNG)</li>
-                    <li><strong>Arquivo:</strong> /assets/snap-graph-grid.png</li>
-                    <li><strong>CSS:</strong> background-repeat: repeat</li>
+                    <li><strong>Dark:</strong> --canvas-background: #0a0a0a</li>
+                    <li><strong>Light:</strong> --canvas-background: #F5F7F8</li>
+                    <li><strong>Grid Dark:</strong> /assets/snap-graph-grid.png</li>
+                    <li><strong>Grid Light:</strong> /assets/grid-tile-light.png</li>
+                    <li><strong>Classe:</strong> .snap-canvas</li>
                   </ul>
                 </div>
                 <div>
-                  <p className="font-medium text-foreground mb-1">Interação</p>
+                  <p className="font-medium text-foreground mb-1">Entity Nodes</p>
                   <ul className="list-disc ml-4 space-y-1">
-                    <li><strong>Zoom:</strong> scroll do mouse ou pinch</li>
-                    <li><strong>Pan:</strong> arrastar com mouse ou touch</li>
-                    <li><strong>Limite zoom:</strong> 25% a 200%</li>
-                    <li><strong>Animação:</strong> ease-out 200ms</li>
+                    <li><strong>Background:</strong> --canvas-node-bg (branco em ambos)</li>
+                    <li><strong>Border:</strong> --canvas-node-border</li>
+                    <li><strong>Texto:</strong> text-foreground (adapta ao tema)</li>
+                    <li><strong>Shadow:</strong> shadow-sm para destaque</li>
                   </ul>
                 </div>
               </div>
@@ -224,7 +221,7 @@ export default function SnapGraphDesignSystem() {
               <div className="flex items-center justify-between px-6 py-4">
                 {/* Esquerda: Logo + Breadcrumb */}
                 <div className="flex items-center gap-4">
-                  <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-6 mr-4" />
+                  <SnapLogo variant="snap-graph" height={24} className="mr-4" />
                   <div className="w-px h-6 bg-[#696969] mr-4" />
                   {/* Breadcrumb */}
                   <div className="flex items-center gap-2 text-sm font-sans">
@@ -239,8 +236,8 @@ export default function SnapGraphDesignSystem() {
                     <span className="text-[#454545]">&gt;</span>
                     <span className="text-[#696969] font-medium">Processos/Documentos</span>
                     <span className="text-[#454545]">&gt;</span>
-                    {/* Item atual: branco + semibold */}
-                    <span className="text-white font-semibold">Relatório de Inteligência</span>
+                    {/* Item atual: foreground + semibold */}
+                    <span className="text-foreground font-semibold">Relatório de Inteligência</span>
                   </div>
                 </div>
                 
@@ -351,13 +348,13 @@ export default function SnapGraphDesignSystem() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Company Node */}
-              <div className="w-64 bg-card-elevated rounded-lg overflow-hidden" title="Techbiz Forense Digital LTDA">
+              <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm" title="Techbiz Forense Digital LTDA">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#7c8db0]" />
                   <div className="flex-1 p-4">
                     <div className="flex items-start gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
                       </div>
                       <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                         <Building className="w-5 h-5 text-[#696969]" />
@@ -371,13 +368,13 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Person Node */}
-              <div className="w-64 bg-card-elevated rounded-lg overflow-hidden" title="Luiz Henrique de Souza Borges da Silva e Santos">
+              <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm" title="Luiz Henrique de Souza Borges da Silva e Santos">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#9b7fb8]" />
                   <div className="flex-1 p-4">
                     <div className="flex items-start gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Luiz Henrique de Souza Borges da Silva e Santos</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Luiz Henrique de Souza Borges da Silva e Santos</p>
                       </div>
                       <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] overflow-hidden flex-shrink-0">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Foto" className="w-full h-full object-cover" />
@@ -391,13 +388,13 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Phone Node */}
-              <div className="w-64 bg-card-elevated rounded-lg overflow-hidden" title="(31) 92332-2122 Telefone celular">
+              <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm" title="(31) 92332-2122 Telefone celular">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#6b9490]" />
                   <div className="flex-1 p-4">
                     <div className="flex items-start gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">(31) 92332-2122 Telefone celular</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">(31) 92332-2122 Telefone celular</p>
                       </div>
                       <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                         <Phone className="w-5 h-5 text-[#696969]" />
@@ -411,13 +408,13 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Vehicle Node */}
-              <div className="w-64 bg-card-elevated rounded-lg overflow-hidden" title="ABC-1234 Veículo Honda Civic 2020">
+              <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm" title="ABC-1234 Veículo Honda Civic 2020">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#7a9098]" />
                   <div className="flex-1 p-4">
                     <div className="flex items-start gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">ABC-1234 Veículo Honda Civic 2020</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">ABC-1234 Veículo Honda Civic 2020</p>
                       </div>
                       <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                         <Car className="w-5 h-5 text-[#696969]" />
@@ -435,13 +432,13 @@ export default function SnapGraphDesignSystem() {
             <p className="text-sm text-text-muted font-sans uppercase tracking-wide mt-8">Mais tipos de entidade</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* CPF Node */}
-              <div className="w-64 bg-card-elevated rounded-lg overflow-hidden" title="123.456.789-00">
+              <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm" title="123.456.789-00">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#a87070]" />
                   <div className="flex-1 p-4">
                     <div className="flex items-start gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">123.456.789-00</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">123.456.789-00</p>
                       </div>
                       <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                         <CreditCard className="w-5 h-5 text-[#696969]" />
@@ -455,13 +452,13 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Documento Node */}
-              <div className="w-64 bg-card-elevated rounded-lg overflow-hidden" title="Relatório de Inteligência #2024-001">
+              <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm" title="Relatório de Inteligência #2024-001">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#a89870]" />
                   <div className="flex-1 p-4">
                     <div className="flex items-start gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Relatório de Inteligência #2024-001</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Relatório de Inteligência #2024-001</p>
                       </div>
                       <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                         <FileText className="w-5 h-5 text-[#696969]" />
@@ -475,13 +472,13 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Endereço Node */}
-              <div className="w-64 bg-card-elevated rounded-lg overflow-hidden" title="Av. Brasil, 1500 Centro, Belo Horizonte - MG">
+              <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm" title="Av. Brasil, 1500 Centro, Belo Horizonte - MG">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#666666]" />
                   <div className="flex-1 p-4">
                     <div className="flex items-start gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Av. Brasil, 1500 Centro, Belo Horizonte - MG</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Av. Brasil, 1500 Centro, Belo Horizonte - MG</p>
                       </div>
                       <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                         <MapPin className="w-5 h-5 text-[#696969]" />
@@ -495,13 +492,13 @@ export default function SnapGraphDesignSystem() {
               </div>
 
               {/* Email Node - demonstra break-words para strings longas sem espaço */}
-              <div className="w-64 bg-card-elevated rounded-lg overflow-hidden" title="contato@empresa.com.br">
+              <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm" title="contato@empresa.com.br">
                 <div className="flex h-full">
                   <div className="w-1 bg-[#666666]" />
                   <div className="flex-1 p-4">
                     <div className="flex items-start gap-3">
                       <div className="flex-1 min-w-0">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-all">contato@empresa.com.br</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-all">contato@empresa.com.br</p>
                       </div>
                       <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                         <Mail className="w-5 h-5 text-[#696969]" />
@@ -808,7 +805,7 @@ export default function SnapGraphDesignSystem() {
                         <div className="flex-1 p-4">
                           <div className="flex items-start gap-3">
                             <div className="flex-1 min-w-0">
-                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
+                              <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Techbiz Forense Digital LTDA</p>
                             </div>
                             <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                               <Building className="w-5 h-5 text-[#696969]" />
@@ -830,7 +827,7 @@ export default function SnapGraphDesignSystem() {
                         <div className="flex-1 p-4">
                           <div className="flex items-start gap-3">
                             <div className="flex-1 min-w-0">
-                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Inspect Segurança Digital Tecnologia</p>
+                              <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Inspect Segurança Digital Tecnologia</p>
                             </div>
                             <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                               <Building className="w-5 h-5 text-[#696969]" />
@@ -852,7 +849,7 @@ export default function SnapGraphDesignSystem() {
                         <div className="flex-1 p-4">
                           <div className="flex items-start gap-3">
                             <div className="flex-1 min-w-0">
-                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Luiz Henrique de Souza Borges</p>
+                              <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">Luiz Henrique de Souza Borges</p>
                             </div>
                             <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] overflow-hidden flex-shrink-0">
                               <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Foto" className="w-full h-full object-cover" />
@@ -874,7 +871,7 @@ export default function SnapGraphDesignSystem() {
                         <div className="flex-1 p-4">
                           <div className="flex items-start gap-3">
                             <div className="flex-1 min-w-0">
-                              <p className="text-white text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">(31) 92332-2122 Telefone celular</p>
+                              <p className="text-foreground text-base font-medium font-sans leading-[1.3] line-clamp-2 break-words">(31) 92332-2122 Telefone celular</p>
                             </div>
                             <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center flex-shrink-0">
                               <Phone className="w-5 h-5 text-[#696969]" />
@@ -1136,7 +1133,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
                       <div className="flex items-start justify-between gap-3">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade Normal</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3]">Entidade Normal</p>
                         <div className="w-11 h-11 rounded-full border-[3px] border-[#696969] flex items-center justify-center">
                           <Building className="w-5 h-5 text-[#696969]" />
                         </div>
@@ -1157,7 +1154,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
                       <div className="flex items-start justify-between gap-3">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade Hover</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3]">Entidade Hover</p>
                         <div className="w-11 h-11 rounded-full border-[3px] border-[#888888] flex items-center justify-center">
                           <Building className="w-5 h-5 text-[#888888]" />
                         </div>
@@ -1178,7 +1175,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
                       <div className="flex items-start justify-between gap-3">
-                        <p className="text-white text-base font-medium font-sans leading-[1.3]">Entidade Selecionada</p>
+                        <p className="text-foreground text-base font-medium font-sans leading-[1.3]">Entidade Selecionada</p>
                         <div className="w-11 h-11 rounded-full border-[3px] border-white flex items-center justify-center">
                           <Building className="w-5 h-5 text-white" />
                         </div>
