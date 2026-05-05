@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon } from "lucide-react"
 import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
 import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
+import { SnapLogo } from "@/components/snap/snap-logo"
 import { useTheme } from "@/hooks/use-theme"
 
 /* ============================================
@@ -837,20 +838,49 @@ export default function DesignSystemPage() {
             ============================================ */}
         <Section title="MARCA SNAP">
           <p className="text-text-secondary mb-4 font-sans">
-            Logo principal do Ecossistema SNAP. Aplicável em todas as verticais e áreas do sistema.
+            Logo principal do Ecossistema SNAP. Aplicável em todas as verticais e áreas do sistema. 
+            <strong className="text-foreground"> O logo alterna automaticamente entre versões dark/light.</strong>
           </p>
-          <div className="flex items-center gap-8 p-6 bg-card rounded-xl border border-border">
-            <div className="flex flex-col items-center gap-3">
-              <div className="p-6 bg-background rounded-lg">
-                <img src="/assets/snap-logo.svg" alt="SNAP" className="h-8" />
+          
+          {/* Preview dinâmico com SnapLogo */}
+          <div className="mb-6 p-6 bg-card rounded-xl border border-border">
+            <p className="text-xs text-text-muted mb-3 font-sans uppercase tracking-wide">Preview (alterna com o tema)</p>
+            <div className="p-6 bg-background rounded-lg inline-block">
+              <SnapLogo variant="snap" height={32} />
+            </div>
+          </div>
+          
+          {/* Documentação das duas versões */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Dark mode version */}
+            <div className="p-4 bg-[#0a0a0a] rounded-xl border border-border">
+              <p className="text-xs text-[#888] mb-3 font-sans uppercase tracking-wide">Dark Mode</p>
+              <div className="flex items-center gap-4">
+                <img src="/assets/snap-logo.svg" alt="SNAP Dark" className="h-8" />
+                <div className="text-sm text-[#a0a0a0] font-sans space-y-1">
+                  <p><strong className="text-white">Arquivo:</strong> /assets/snap-logo.svg</p>
+                  <p><strong className="text-white">Cor:</strong> Branco (#FFFFFF)</p>
+                </div>
               </div>
-              <code className="text-xs text-text-muted font-mono">/assets/snap-logo.svg</code>
             </div>
-            <div className="flex-1 text-sm text-text-secondary font-sans space-y-2">
-              <p><strong>Formato:</strong> SVG vetorial</p>
-              <p><strong>Cor:</strong> Branco (#FFFFFF) sobre fundo escuro</p>
-              <p><strong>Uso:</strong> Headers, splashscreens, documentos oficiais</p>
+            
+            {/* Light mode version */}
+            <div className="p-4 bg-[#F5F7F8] rounded-xl border border-[#d0d5d9]">
+              <p className="text-xs text-[#6a6a6a] mb-3 font-sans uppercase tracking-wide">Light Mode</p>
+              <div className="flex items-center gap-4">
+                <img src="/assets/snap-logo-light.svg" alt="SNAP Light" className="h-8" />
+                <div className="text-sm text-[#4a4a4a] font-sans space-y-1">
+                  <p><strong className="text-black">Arquivo:</strong> /assets/snap-logo-light.svg</p>
+                  <p><strong className="text-black">Cor:</strong> Preto (#000000)</p>
+                </div>
+              </div>
             </div>
+          </div>
+          
+          {/* Uso do componente */}
+          <div className="mt-4 p-4 bg-muted rounded-lg">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Uso no código</p>
+            <code className="text-sm text-foreground font-mono">{'<SnapLogo variant="snap" height={32} />'}</code>
           </div>
         </Section>
 
@@ -1321,7 +1351,7 @@ export default function DesignSystemPage() {
                 <li><strong>Alert box:</strong> Background #2A2B35, borda verde (success), border-radius 6px</li>
                 <li><strong>Card de dados:</strong> Background #000000, borda #2A2B35</li>
                 <li><strong>Botões:</strong> Sempre alinhados à <strong>DIREITA</strong>, border-radius <strong>6px</strong>, layout interno: ícone à ESQUERDA + texto à DIREITA (justify-between)</li>
-                <li><strong>Margem botões:</strong> Mínimo de <strong>36px</strong> entre o conteúdo acima e os bot��es de ação</li>
+                <li><strong>Margem botões:</strong> Mínimo de <strong>36px</strong> entre o conteúdo acima e os bot����es de ação</li>
                 <li><strong>Botão Cancelar:</strong> OUTLINE - background transparente, borda #676C70 (cinza claro)</li>
                 <li><strong>Botão Primário:</strong> Background cor da vertical (#72284b), texto bold</li>
                 <li><strong>Overlay:</strong> Background #000000 com opacidade 50%</li>
@@ -1758,7 +1788,7 @@ export default function DesignSystemPage() {
                 <li><strong>Altura de row:</strong> 40-48px</li>
                 <li><strong>Hover:</strong> Background sutil (#1a1a1a para #242424)</li>
                 <li><strong>Ações:</strong> Sempre alinhadas à direita</li>
-                <li><strong>Ícones de ação:</strong> Visualizar/Download = cinza | Excluir = rosa #72284b</li>
+                <li><strong>Ícones de aç��o:</strong> Visualizar/Download = cinza | Excluir = rosa #72284b</li>
                 <li><strong>Checkbox:</strong> Se houver seleção, à esquerda de cada row</li>
               </ul>
             </div>

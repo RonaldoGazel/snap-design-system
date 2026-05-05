@@ -10,28 +10,38 @@ interface SnapLogoProps {
 
 /**
  * Componente de logo SNAP que alterna automaticamente entre versões dark/light
- * - Dark mode: logos brancos/claros
- * - Light mode: logos escuros (positivo)
+ * - Dark mode: logos brancos/claros (/assets/snap-logo.svg, /assets/snap-graph-logo.svg)
+ * - Light mode: logos escuros (/assets/snap-logo-light.svg, /assets/snap-graph-logo-light.svg)
+ * 
+ * Renderiza ambas versões e usa CSS para mostrar apenas a correta, evitando flash.
  */
 export function SnapLogo({ variant = "snap", className, height = 24 }: SnapLogoProps) {
-  const { theme } = useTheme()
+  const darkLogo = variant === "snap-graph" 
+    ? "/assets/snap-graph-logo.svg" 
+    : "/assets/snap-logo.svg"
   
-  const logoSrc = variant === "snap-graph"
-    ? theme === "light" 
-      ? "/assets/snap-graph-logo-light.svg"
-      : "/assets/snap-graph-logo.svg"
-    : theme === "light"
-      ? "/assets/snap-logo-light.svg"
-      : "/assets/snap-logo.svg"
+  const lightLogo = variant === "snap-graph" 
+    ? "/assets/snap-graph-logo-light.svg" 
+    : "/assets/snap-logo-light.svg"
   
   const altText = variant === "snap-graph" ? "SNAP Graph" : "SNAP"
   
   return (
-    <img 
-      src={logoSrc} 
-      alt={altText} 
-      className={className}
-      style={{ height: `${height}px` }}
-    />
+    <span className={`snap-logo-container ${className || ''}`} style={{ height: `${height}px`, display: 'inline-block' }}>
+      {/* Logo para dark mode - visível apenas quando .dark está no html */}
+      <img 
+        src={darkLogo} 
+        alt={altText} 
+        className="snap-logo-dark"
+        style={{ height: `${height}px` }}
+      />
+      {/* Logo para light mode - visível apenas quando .light está no html */}
+      <img 
+        src={lightLogo} 
+        alt={altText} 
+        className="snap-logo-light"
+        style={{ height: `${height}px` }}
+      />
+    </span>
   )
 }

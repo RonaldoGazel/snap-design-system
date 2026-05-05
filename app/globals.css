@@ -272,6 +272,33 @@
   border-color: var(--canvas-node-border);
 }
 
+/* ============================================
+   SNAP LOGO TOGGLE
+   Alterna entre versões dark/light dos logos
+   - Dark mode: mostra logos claros (para fundo escuro)
+   - Light mode: mostra logos escuros (para fundo claro)
+   ============================================ */
+.snap-logo-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Default: esconde ambos até o tema ser aplicado */
+.snap-logo-dark,
+.snap-logo-light {
+  display: none;
+}
+
+/* Dark mode: mostra logo claro */
+.dark .snap-logo-dark {
+  display: inline-block;
+}
+
+/* Light mode: mostra logo escuro */
+.light .snap-logo-light {
+  display: inline-block;
+}
+
 @theme inline {
   /* Fonts */
   --font-sans: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
