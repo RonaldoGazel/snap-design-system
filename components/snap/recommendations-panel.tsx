@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Eye, Play, Trash2, ChevronDown, ChevronUp, User, Building } from "lucide-react"
+import { Eye, PlayCircle, Trash2, ChevronDown, ChevronUp, Users, Building2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 // Tipos
@@ -65,9 +65,9 @@ export function RecommendationsPanel({
       )}
     >
       {/* Header */}
-      <div className="flex items-center mb-6" style={{ gap: '16px' }}>
+      <div className="flex items-center" style={{ gap: '16px' }}>
         <Eye 
-          className="text-foreground flex-shrink-0" 
+          className="text-[#72284B] flex-shrink-0" 
           style={{ width: '24px', height: '18.45px' }} 
           strokeWidth={2}
         />
@@ -75,6 +75,9 @@ export function RecommendationsPanel({
           Recomendações
         </h2>
       </div>
+
+      {/* Linha separadora */}
+      <div className="h-px bg-border-subtle my-5" />
 
       {/* Lista de Entidades (Accordion) */}
       <div className="flex flex-col" style={{ gap: '8px' }}>
@@ -109,7 +112,7 @@ function AccordionItem({
   onActionExecute,
   onActionDelete,
 }: AccordionItemProps) {
-  const TypeIcon = entity.type === 'person' ? User : Building
+  const TypeIcon = entity.type === 'person' ? Users : Building2
 
   return (
     <div
@@ -185,15 +188,16 @@ interface ActionItemProps {
 function ActionItem({ action, onExecute, onDelete }: ActionItemProps) {
   return (
     <div className="flex items-center" style={{ gap: '12px' }}>
-      {/* Botão Play */}
+      {/* Botão Play - círculo com seta */}
       <button
         onClick={onExecute}
         className="flex-shrink-0 hover:scale-110 transition-transform"
         aria-label={`Executar: ${action.label}`}
       >
-        <Play 
-          className="fill-[#00FF73] text-[#00FF73]" 
+        <PlayCircle 
+          className="text-[#00FF73] fill-[#00FF73]" 
           style={{ width: '24px', height: '24px' }}
+          strokeWidth={0}
         />
       </button>
 
