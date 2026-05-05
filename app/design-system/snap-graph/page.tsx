@@ -476,7 +476,7 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
                   <li><strong>Border-radius:</strong> 12px</li>
                   <li><strong>Padding:</strong> 24px</li>
                   <li><strong>Margem da borda:</strong> 32px (direita)</li>
-                  <li><strong>Background:</strong> bg-card-elevated</li>
+                  <li><strong>Background:</strong> var(--recommendations-bg)</li>
                 </ul>
               </div>
               
@@ -484,9 +484,11 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
               <div className="p-4 bg-card rounded-lg border border-border">
                 <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Header</h4>
                 <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
-                  <li><strong>Ícone olho:</strong> 24x18.45px</li>
+                  <li><strong>Padding top:</strong> 20px</li>
+                  <li><strong>Ícone olho:</strong> 24x18px (cor #72284B)</li>
                   <li><strong>Gap ícone-texto:</strong> 16px</li>
-                  <li><strong>Título:</strong> 18px, font-medium, font-sans</li>
+                  <li><strong>Título:</strong> 22px, font-medium, <strong>font-sans</strong> (EXCEÇÃO: não usa Cygnito)</li>
+                  <li><strong>Linha separadora:</strong> mt-3 (12px) / mb-5 (20px)</li>
                 </ul>
               </div>
               
@@ -498,9 +500,10 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
                   <li><strong>Border-radius:</strong> 8px</li>
                   <li><strong>Badge numérico:</strong> 22x22px (padrão pequeno)</li>
                   <li><strong>Ícone tipo:</strong> 22x15.37px</li>
-                  <li><strong>BG colapsado:</strong> #1e2122</li>
-                  <li><strong>BG expandido:</strong> #16191A</li>
-                  <li><strong>BG item hover:</strong> #373c3f</li>
+                  <li><strong>Padding top conteúdo:</strong> 16px (pt-4)</li>
+                  <li><strong>BG colapsado:</strong> var(--recommendations-item-collapsed)</li>
+                  <li><strong>BG expandido:</strong> var(--recommendations-item-expanded)</li>
+                  <li><strong>BG hover:</strong> var(--recommendations-item-hover)</li>
                 </ul>
               </div>
               
@@ -527,6 +530,21 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
                   <p><strong>#00FF73</strong> - Super accent para ações positivas (executar, play)</p>
                   <p className="text-xs text-text-muted mt-1">Hover: #00cc5c</p>
                 </div>
+              </div>
+            </div>
+
+            {/* Tokens CSS de Tema */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Tokens CSS (Light/Dark Mode)</h4>
+              <div className="text-sm text-text-secondary font-sans space-y-2">
+                <p>O painel usa tokens CSS para suporte automático a temas:</p>
+                <ul className="list-disc ml-4 space-y-1">
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-bg</code> - Background do painel</li>
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-item-collapsed</code> - BG item fechado</li>
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-item-expanded</code> - BG item aberto</li>
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-item-hover</code> - BG no hover</li>
+                  <li><code className="text-xs bg-background px-1 rounded">--recommendations-badge-bg</code> - BG do badge</li>
+                </ul>
               </div>
             </div>
 

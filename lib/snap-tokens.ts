@@ -261,9 +261,12 @@ export const snapGraph = {
     
     // Header
     header: {
+      paddingTop: '20px',
       gapIconText: '16px',
-      icon: { width: '24px', height: '18.45px' },
-      titleFontSize: '18px',
+      icon: { width: '24px', height: '18px' },
+      titleFontSize: '22px', // EXCEÇÃO: usa font-sans, não Cygnito
+      separatorMarginTop: '12px', // mt-3
+      separatorMarginBottom: '20px', // mb-5
     },
     
     // Itens accordion
@@ -283,20 +286,26 @@ export const snapGraph = {
       // Ícone de tipo (pessoa/empresa)
       typeIcon: { width: '22px', height: '15.37px' },
       
-      // Backgrounds
+      // Backgrounds (usar tokens CSS para suporte light/dark mode)
       background: {
-        collapsed: '#1e2122',
-        expanded: '#16191A',
-        itemHover: '#373c3f',
+        collapsed: 'var(--recommendations-item-collapsed)', // #121415 dark / #f5f5f5 light
+        expanded: 'var(--recommendations-item-expanded)', // #16191A dark / #e8e8e8 light
+        itemHover: 'var(--recommendations-item-hover)', // #373c3f dark / #dcdcdc light
       },
     },
     
+    // Conteúdo expandido
+    expandedContent: {
+      paddingTop: '16px', // pt-4 - espaço entre header e primeira ação
+    },
+
     // Ações dentro do accordion expandido
     actions: {
       gap: '15px',
       playIcon: {
         size: '24px',
-        color: '#00FF73', // Accent verde (novo token)
+        color: '#00FF73', // Accent verde
+        component: 'PlayActionIcon', // Usar componente customizado
       },
       deleteIcon: {
         width: '16px',
