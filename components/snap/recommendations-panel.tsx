@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { Eye, PlayCircle, Trash2, ChevronDown, ChevronUp, Users, Building2 } from "lucide-react"
+import { Eye, Trash2, ChevronDown, ChevronUp, Users, Building2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { PlayActionIcon } from "@/components/snap/icons/play-action"
 
 // Tipos
 interface RecommendationAction {
@@ -73,7 +74,7 @@ export function RecommendationsPanel({
             style={{ width: '24px', height: '18.45px' }} 
             strokeWidth={2}
           />
-          <span className="text-lg font-medium text-foreground" style={{ fontFamily: 'var(--font-sans)', textTransform: 'none', letterSpacing: 'normal' }}>
+          <span className="font-medium text-foreground" style={{ fontFamily: 'var(--font-sans)', fontSize: '22px', textTransform: 'none', letterSpacing: 'normal' }}>
             Recomendações
           </span>
         </div>
@@ -191,17 +192,13 @@ interface ActionItemProps {
 function ActionItem({ action, onExecute, onDelete }: ActionItemProps) {
   return (
     <div className="flex items-center" style={{ gap: '12px' }}>
-      {/* Botão Play - círculo com seta */}
+      {/* Botão Play - círculo verde com seta */}
       <button
         onClick={onExecute}
         className="flex-shrink-0 hover:scale-110 transition-transform"
         aria-label={`Executar: ${action.label}`}
       >
-        <PlayCircle 
-          className="text-[#00FF73] fill-[#00FF73]" 
-          style={{ width: '24px', height: '24px' }}
-          strokeWidth={0}
-        />
+        <PlayActionIcon size={24} />
       </button>
 
       {/* Label da ação */}
