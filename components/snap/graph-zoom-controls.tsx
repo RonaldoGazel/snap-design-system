@@ -19,10 +19,11 @@ interface GraphZoomControlsProps {
  * 
  * Especificações:
  * - Ícones: 20px cada
- * - Gap entre ícones: 12px
+ * - Gap entre ícones: 24px
  * - Hover: branco puro
  * - Sem box ao redor (ícones soltos)
  * - Posicionado 36px abaixo da sidebar
+ * - Centralizado com a sidebar (largura 64px)
  */
 export function GraphZoomControls({
   onZoomIn,
@@ -31,16 +32,17 @@ export function GraphZoomControls({
   className,
 }: GraphZoomControlsProps) {
   const buttonClasses = cn(
-    "w-5 h-5 flex items-center justify-center",
+    "flex items-center justify-center",
     "text-[#696969] hover:text-white transition-colors cursor-pointer"
   )
 
   return (
     <div
       className={cn(
-        "flex flex-col items-center gap-3", // gap-3 = 12px
+        "w-[64px] flex flex-col items-center", // mesma largura da sidebar para centralizar
         className
       )}
+      style={{ gap: '24px' }}
     >
       {/* Zoom In */}
       <button

@@ -1,6 +1,6 @@
 "use client"
 
-import { Eye, Plus, Settings } from "lucide-react"
+import { Eye, Plus, SlidersHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface GraphSidebarProps {
@@ -23,10 +23,12 @@ interface GraphSidebarProps {
  * 
  * Especificações:
  * - Largura: 64px
+ * - Altura: 144px
+ * - Padding interno: 20px
  * - Border-radius: 12px
  * - Gap entre ícones: 24px
  * - Badge: 32px de diâmetro
- * - Background: segue padrão do design system (card-elevated)
+ * - Ícones: Olho 25x20, Plus 22x22, Sliders 22x21
  */
 export function GraphSidebar({
   recommendationsCount = 0,
@@ -39,23 +41,24 @@ export function GraphSidebar({
   return (
     <div
       className={cn(
-        "w-[64px] bg-card-elevated rounded-[12px] flex flex-col items-center py-4",
+        "w-[64px] h-[144px] bg-card-elevated rounded-[12px] flex flex-col items-center justify-center p-[20px]",
         "border border-border-subtle",
         className
       )}
+      style={{ gap: '24px' }}
     >
-      {/* Ícone Recomendações (Olho) com Badge */}
+      {/* Ícone Recomendações (Olho) com Badge - 25x20px */}
       <button
         onClick={onRecommendationsClick}
-        className="relative w-10 h-10 flex items-center justify-center text-white hover:text-white/80 transition-colors"
+        className="relative flex items-center justify-center text-white hover:text-white/80 transition-colors"
         aria-label="Recomendações"
       >
-        <Eye className="w-6 h-6" strokeWidth={2} />
+        <Eye style={{ width: '25px', height: '20px' }} strokeWidth={2} />
         
         {/* Badge numérico - 32px, posicionado no canto superior direito */}
         {recommendationsCount > 0 && (
           <span
-            className="absolute -top-2 -right-2 w-[32px] h-[32px] rounded-full flex items-center justify-center text-white text-sm font-bold font-sans"
+            className="absolute -top-3 -right-4 w-[32px] h-[32px] rounded-full flex items-center justify-center text-white text-sm font-bold font-sans"
             style={{ backgroundColor: badgeColor }}
           >
             {recommendationsCount > 99 ? "99+" : recommendationsCount}
@@ -63,29 +66,23 @@ export function GraphSidebar({
         )}
       </button>
 
-      {/* Gap de 24px */}
-      <div className="h-6" />
-
-      {/* Ícone Adicionar */}
+      {/* Ícone Adicionar - 22x22px */}
       <button
         onClick={onAddClick}
-        className="w-10 h-10 flex items-center justify-center text-white hover:text-white/80 transition-colors"
+        className="flex items-center justify-center text-white hover:text-white/80 transition-colors"
         aria-label="Adicionar entidade"
       >
-        <Plus className="w-6 h-6" strokeWidth={2} />
+        <Plus style={{ width: '22px', height: '22px' }} strokeWidth={2} />
       </button>
 
-      {/* Gap de 24px */}
-      <div className="h-6" />
-
-      {/* Ícone Opções (inativo por enquanto) */}
+      {/* Ícone Configurações (Sliders) - 22x21px - inativo por enquanto */}
       <button
         onClick={onOptionsClick}
-        className="w-10 h-10 flex items-center justify-center text-[#696969] hover:text-white/80 transition-colors"
+        className="flex items-center justify-center text-[#696969] hover:text-white/80 transition-colors"
         aria-label="Opções"
         disabled={!onOptionsClick}
       >
-        <Settings className="w-6 h-6" strokeWidth={2} />
+        <SlidersHorizontal style={{ width: '22px', height: '21px' }} strokeWidth={2} />
       </button>
     </div>
   )

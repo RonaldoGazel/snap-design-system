@@ -273,6 +273,8 @@ export default function SnapGraphDesignSystem() {
                 <h4 className="text-sm font-bold text-foreground mb-3 font-sans">GraphSidebar (Menu Principal)</h4>
                 <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
                   <li><strong>Largura:</strong> 64px</li>
+                  <li><strong>Altura:</strong> 144px</li>
+                  <li><strong>Padding interno:</strong> 20px</li>
                   <li><strong>Border-radius:</strong> 12px</li>
                   <li><strong>Background:</strong> bg-card-elevated</li>
                   <li><strong>Border:</strong> 1px border-border-subtle</li>
@@ -297,11 +299,11 @@ export default function SnapGraphDesignSystem() {
               <div className="p-4 bg-card rounded-lg border border-border">
                 <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Ícones da Sidebar</h4>
                 <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
-                  <li><strong>1. Olho (Eye):</strong> Recomendações - com badge numérico</li>
-                  <li><strong>2. Plus (+):</strong> Adicionar entidade</li>
-                  <li><strong>3. Settings:</strong> Opções gerais (inativo, abre modal futuro)</li>
-                  <li><strong>Tamanho ícones:</strong> 24x24px (w-6 h-6)</li>
+                  <li><strong>1. Olho (Eye):</strong> Recomendações - 25x20px, com badge</li>
+                  <li><strong>2. Plus (+):</strong> Adicionar entidade - 22x22px</li>
+                  <li><strong>3. Sliders:</strong> Configurações (inativo) - 22x21px</li>
                   <li><strong>Cor:</strong> branco (hover: 80% opacity)</li>
+                  <li><strong>3º ícone inativo:</strong> #696969</li>
                 </ul>
               </div>
               
@@ -311,7 +313,8 @@ export default function SnapGraphDesignSystem() {
                 <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
                   <li><strong>Posição:</strong> 36px abaixo da sidebar</li>
                   <li><strong>Tamanho ícones:</strong> 20x20px</li>
-                  <li><strong>Gap entre ícones:</strong> 12px</li>
+                  <li><strong>Gap entre ícones:</strong> 24px</li>
+                  <li><strong>Largura container:</strong> 64px (centralizado)</li>
                   <li><strong>Cor normal:</strong> #696969</li>
                   <li><strong>Cor hover:</strong> branco puro (#ffffff)</li>
                   <li><strong>Sem box:</strong> ícones soltos (sem container)</li>
@@ -1097,7 +1100,7 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
               <div className="mt-6 p-6 bg-[#12121a] border border-[#72284B] rounded-lg">
                 <h4 className="text-lg font-bold text-[#72284B] mb-4 font-sans">Use Case: Descoberta de Vínculo Oculto</h4>
                 <p className="text-sm text-text-muted font-sans mb-4 italic">
-                  Este cenário é a base para o protótipo interativo no Kiro.
+                  Este cenário é a base para o prot��tipo interativo no Kiro.
                 </p>
                 
                 <div className="space-y-4 text-sm text-text-secondary font-sans">
