@@ -166,7 +166,16 @@
   --toast-text: #ffffff;
 
   /* ============================================
-     15. SNAP GRAPH CANVAS (área agnóstica)
+     15. PAINEL DE RECOMENDAÇÕES
+     ============================================ */
+  --recommendations-bg: #0F0F10;
+  --recommendations-item-collapsed: #121415;
+  --recommendations-item-expanded: #16191A;
+  --recommendations-item-hover: #373c3f;
+  --recommendations-badge-bg: #2a2b35;
+
+  /* ============================================
+     16. SNAP GRAPH CANVAS (área agnóstica)
      ============================================ */
   --canvas-background: #0a0a0a;
   --canvas-grid-tile: url('/assets/snap-graph-grid.png');
@@ -289,6 +298,13 @@
   --canvas-edge-color: #696969;
   --canvas-edge-normal: #888888;
   --canvas-edge-discovery: #333333;
+
+  /* PAINEL DE RECOMENDAÇÕES (light mode) */
+  --recommendations-bg: #ffffff;
+  --recommendations-item-collapsed: #f5f5f5;
+  --recommendations-item-expanded: #e8e8e8;
+  --recommendations-item-hover: #dcdcdc;
+  --recommendations-badge-bg: #e0e0e0;
 }
 
 /* SNAP Canvas - área de visualização de grafos */

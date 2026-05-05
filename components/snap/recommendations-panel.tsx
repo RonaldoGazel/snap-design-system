@@ -65,7 +65,7 @@ export function RecommendationsPanel({
         "border border-border-subtle",
         className
       )}
-      style={{ backgroundColor: '#0F0F10' }}
+      style={{ backgroundColor: 'var(--recommendations-bg)' }}
     >
       {/* Header - padding top 20px, gap 16px, mb 12px até a linha */}
       <div className="px-6" style={{ paddingTop: '20px' }}>
@@ -117,25 +117,28 @@ function AccordionItem({
 
   return (
     <div
-      className={cn(
-        "rounded-lg overflow-hidden transition-colors duration-200",
-        isExpanded ? "bg-[#16191A]" : "bg-[#121415]"
-      )}
+      className="rounded-lg overflow-hidden transition-colors duration-200"
+      style={{ 
+        backgroundColor: isExpanded 
+          ? 'var(--recommendations-item-expanded)' 
+          : 'var(--recommendations-item-collapsed)' 
+      }}
     >
       {/* Header do Item */}
       <button
         onClick={onToggle}
-        className={cn(
-          "w-full flex items-center px-4 py-3 transition-colors duration-200",
-          "hover:bg-[#373c3f]",
-          isExpanded && "bg-[#373c3f]"
-        )}
-        style={{ gap: '12px' }}
+        className="w-full flex items-center px-4 py-3 transition-colors duration-200"
+        style={{ 
+          gap: '12px',
+          backgroundColor: isExpanded ? 'var(--recommendations-item-hover)' : 'transparent'
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--recommendations-item-hover)'}
+        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = isExpanded ? 'var(--recommendations-item-hover)' : 'transparent'}
       >
         {/* Badge numérico pequeno (22x22) */}
         <div 
-          className="flex-shrink-0 rounded-[6px] flex items-center justify-center bg-[#2a2b35] text-white font-semibold font-sans"
-          style={{ width: '22px', height: '22px', fontSize: '11px' }}
+          className="flex-shrink-0 rounded-[6px] flex items-center justify-center text-white font-semibold font-sans"
+          style={{ width: '22px', height: '22px', fontSize: '11px', backgroundColor: 'var(--recommendations-badge-bg)' }}
         >
           {entity.count > 99 ? '99' : entity.count}
         </div>
