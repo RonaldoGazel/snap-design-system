@@ -52,7 +52,7 @@ const SnapModal = forwardRef<HTMLDivElement, SnapModalProps>(
         <div
           ref={ref}
           className={cn(
-            "bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md w-full overflow-hidden z-50",
+            "bg-card rounded-xl border border-border max-w-md w-full overflow-hidden z-50",
             className
           )}
           onClick={(e) => e.stopPropagation()}
@@ -79,21 +79,21 @@ const SnapModalHeader = forwardRef<HTMLDivElement, SnapModalHeaderProps>(
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {icon && <span className="text-[#72284b]">{icon}</span>}
-            <span className="font-title text-[18px] uppercase">{title}</span>
+            {icon && <span className="text-primary">{icon}</span>}
+            <span className="font-title text-[18px] uppercase text-foreground">{title}</span>
           </div>
           {onClose && (
             <button 
               onClick={onClose}
-              className="p-1 rounded hover:bg-[#2a2b35] transition-colors"
+              className="p-1 rounded hover:bg-muted transition-colors"
             >
-              <X className="w-5 h-5 text-[#898c9d]" />
+              <X className="w-5 h-5 text-muted-foreground" />
             </button>
           )}
         </div>
       </div>
       {/* Linha separadora full-width */}
-      <div className="h-[1px] bg-[#2a2b35]" />
+      <div className="h-[1px] bg-border" />
     </div>
   )
 )
@@ -141,7 +141,7 @@ const SnapModalInline = forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md overflow-hidden",
+      "bg-card rounded-xl border border-border max-w-md overflow-hidden",
       className
     )}
     {...props}

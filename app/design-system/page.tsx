@@ -168,8 +168,8 @@ function DifusaoAccordion() {
             {/* Header do Accordion */}
             <button
               onClick={() => toggleAccordion(section.id)}
-              className={`w-full flex items-center gap-3 p-2 hover:bg-[#2a2b35] transition-colors cursor-pointer ${
-                isOpen ? 'bg-[#2a2b35] rounded-t-lg' : 'rounded-lg'
+              className={`w-full flex items-center gap-3 p-2 hover:bg-border transition-colors cursor-pointer ${
+                isOpen ? 'bg-border rounded-t-lg' : 'rounded-lg'
               }`}
             >
               <svg 
@@ -188,7 +188,7 @@ function DifusaoAccordion() {
             
             {/* Conteúdo expandido */}
             {isOpen && (
-              <div className="bg-[#1a1b1e] border-x border-b border-[#2a2b35] rounded-b-lg max-h-[140px] overflow-y-auto scrollbar-minimal">
+              <div className="bg-muted border-x border-b border-border rounded-b-lg max-h-[140px] overflow-y-auto scrollbar-minimal">
                 <div className="p-2 space-y-1">
                   {section.items.map((item) => {
                     const isChecked = checkedItems[item.id] || item.checked
@@ -196,7 +196,7 @@ function DifusaoAccordion() {
                       <label 
                         key={item.id}
                         onClick={() => toggleCheckbox(item.id, item.disabled)}
-                        className={`flex items-center gap-3 p-2 hover:bg-[#2a2b35] rounded ${item.disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}`}
+                        className={`flex items-center gap-3 p-2 hover:bg-border rounded ${item.disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}`}
                       >
                         <div className={`w-4 h-4 rounded border flex items-center justify-center ${
                           isChecked 
@@ -287,7 +287,7 @@ function DifusaoTabsComponent() {
   return (
     <div className="relative">
       {/* Linha base */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-border z-0" />
       <div className="flex gap-6">
         {difusaoTabs.map((tab, index) => {
           const isActive = activeTab === tab.id
@@ -344,7 +344,7 @@ function TramitarModal() {
   }, [activeTab])
 
   return (
-    <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
+    <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
       {/* Header compacto */}
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
@@ -354,14 +354,14 @@ function TramitarModal() {
             </svg>
             <span className="font-title text-[18px]">TRAMITAR PROCESSO</span>
           </div>
-          <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
+          <button className="p-1 rounded hover:bg-border transition-colors">
             <X className="w-5 h-5 text-text-muted" />
           </button>
         </div>
       </div>
       
       {/* Linha separadora do header */}
-      <div className="h-[1px] bg-[#2a2b35]" />
+      <div className="h-[1px] bg-border" />
 
       {/* Conteúdo */}
       <div className="p-6">
@@ -370,10 +370,10 @@ function TramitarModal() {
           <label className="text-sm text-foreground mb-2 block font-sans">
             Selecione um destinatário <span className="text-foreground">*</span>
           </label>
-          <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg overflow-hidden">
+          <div className="bg-border border border-border rounded-lg overflow-hidden">
             <button
               onClick={() => setSelectOpen(!selectOpen)}
-              className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#3a3b45] transition-colors"
+              className="w-full px-4 py-3 flex items-center justify-between hover:bg-muted transition-colors"
             >
               <span className="text-text-secondary text-sm font-sans">{selectedDestinatario}</span>
               <svg 
@@ -388,8 +388,8 @@ function TramitarModal() {
             
             {/* Dropdown estilo Accordion */}
             <div 
-              className={`bg-[#1a1b1e] overflow-hidden transition-all duration-200 ease-out ${
-                selectOpen ? 'max-h-[160px] border-t border-[#2a2b35]' : 'max-h-0'
+              className={`bg-muted overflow-hidden transition-all duration-200 ease-out ${
+                selectOpen ? 'max-h-[160px] border-t border-border' : 'max-h-0'
               }`}
             >
               <div className="overflow-y-auto max-h-[160px] scrollbar-minimal">
@@ -397,9 +397,9 @@ function TramitarModal() {
                   <button
                     key={option}
                     onClick={() => handleSelectOption(option)}
-                    className={`w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#2a2b35] transition-colors ${
+                    className={`w-full text-left px-4 py-3 text-sm font-sans hover:bg-border transition-colors ${
                       option === selectedDestinatario 
-                        ? 'text-foreground bg-[#2a2b35]' 
+                        ? 'text-foreground bg-border' 
                         : 'text-text-muted'
                     }`}
                   >
@@ -414,7 +414,7 @@ function TramitarModal() {
         {/* Tabs Animadas - Barrinha segue largura real da tab */}
         <div className="mb-6 relative">
           {/* Linha base */}
-          <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
+          <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-border z-0" />
           
           <div className="flex gap-6 relative">
             {tramitarTabs.map((tab, index) => {
@@ -458,7 +458,7 @@ function TramitarModal() {
             <span className="text-foreground"> *</span>
           </label>
           <textarea 
-            className="w-full bg-[#000000] border border-[#2a2b35] rounded-lg px-4 py-3 text-sm text-text-secondary font-sans resize-none focus:border-[#72284b] focus:outline-none transition-colors"
+            className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-text-secondary font-sans resize-none focus:border-[#72284b] focus:outline-none transition-colors"
             rows={5}
             placeholder={
               activeTab === 'confeccionar' ? 'Descreva o motivo da tramitação...' :
@@ -471,7 +471,7 @@ function TramitarModal() {
 
         {/* Botões */}
         <div className="flex items-center justify-end gap-4">
-          <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+          <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-border transition-colors">
             <X className="w-4 h-4" />
             <span>Cancelar</span>
           </button>
@@ -537,7 +537,7 @@ function ExampleTabs() {
   return (
     <div className="relative">
       {/* Linha base */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2a2b35] z-0" />
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-border z-0" />
       <div className="flex gap-6">
         {exampleTabs.map((tab, index) => {
           const isActive = activeTab === tab.id
@@ -841,7 +841,7 @@ export default function DesignSystemPage() {
           </p>
           <div className="flex items-center gap-8 p-6 bg-card rounded-xl border border-border">
             <div className="flex flex-col items-center gap-3">
-              <div className="p-6 bg-[#0a0a0a] rounded-lg">
+              <div className="p-6 bg-background rounded-lg">
                 <img src="/assets/snap-logo.svg" alt="SNAP" className="h-8" />
               </div>
               <code className="text-xs text-text-muted font-mono">/assets/snap-logo.svg</code>
@@ -1290,7 +1290,7 @@ export default function DesignSystemPage() {
               <input 
                 type="text" 
                 placeholder="Buscar pessoa..."
-                className="w-full bg-[#000000] border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-text-subtle font-sans focus:outline-none focus:ring-2 focus:ring-[#72284b]"
+                className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-text-subtle font-sans focus:outline-none focus:ring-2 focus:ring-[#72284b]"
               />
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
             </div>
@@ -1357,25 +1357,25 @@ export default function DesignSystemPage() {
             {/* Exemplo de Modal - Verificação de Entidade */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade</p>
-              {/* Modal: background #101112, borda #2A2B35, 1px */}
-              <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
+{/* Modal: usa CSS variables para adaptar ao tema */}
+              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <AlertTriangle className="w-5 h-5 text-[#72284b]" />
-                      <span className="font-title text-[18px]">VERIFICACAO DE ENTIDADE</span>
+                      <AlertTriangle className="w-5 h-5 text-primary" />
+                      <span className="font-title text-[18px] text-foreground">VERIFICACAO DE ENTIDADE</span>
                     </div>
-                    <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
+                    <button className="p-1 rounded hover:bg-muted transition-colors">
                       <X className="w-5 h-5 text-text-muted" />
                     </button>
                   </div>
                 </div>
 
                 {/* Linha separadora do header - mesma cor da borda */}
-                <div className="h-[1px] bg-[#2a2b35]" />
+                <div className="h-[1px] bg-border" />
 
-                {/* Conte������do */}
+                {/* Conteúdo */}
                 <div className="p-6">
                   {/* Mensagem com check verde */}
                   <div className="flex items-start gap-3 mb-4">
@@ -1386,8 +1386,8 @@ export default function DesignSystemPage() {
                   </div>
 
                   {/* Card de dados */}
-                  <div className="bg-[#000000] rounded-lg border border-[#2a2b35] overflow-hidden mb-4">
-                    <div className="text-sm font-sans divide-y divide-[#2a2b35]">
+                  <div className="bg-background rounded-lg border border-border overflow-hidden mb-4">
+                    <div className="text-sm font-sans divide-y divide-border">
                       <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">UF:</span><span className="text-text-muted">MG</span></div>
                       <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">CEP:</span><span className="text-text-muted">30.431-214</span></div>
                       <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Bairro:</span><span className="text-text-muted">Barro Preto</span></div>
@@ -1405,7 +1405,55 @@ export default function DesignSystemPage() {
 
                   {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
                   <div className="flex items-center justify-end gap-4">
-                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+                    <SnapButton variant="secondary" size="modal" icon={<X className="w-4 h-4" />}>
+                      Cancelar
+                    </SnapButton>
+                    <SnapButton variant="primary" size="modal" icon={<Check className="w-4 h-4" />}>
+                      Confirmar
+                    </SnapButton>
+                  </div>
+                </div>
+              </div>
+                    <button className="p-1 rounded hover:bg-border transition-colors">
+                      <X className="w-5 h-5 text-text-muted" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Linha separadora do header - mesma cor da borda */}
+                <div className="h-[1px] bg-border" />
+
+                {/* Conte������do */}
+                <div className="p-6">
+                  {/* Mensagem com check verde */}
+                  <div className="flex items-start gap-3 mb-4">
+                    <Check className="w-6 h-6 text-success shrink-0 mt-0.5" />
+                    <p className="text-foreground text-sm font-sans">
+                      A entidade não foi encontrada no banco de dados! <strong className="text-foreground cursor-pointer hover:underline">Deseja criar uma nova?</strong>
+                    </p>
+                  </div>
+
+                  {/* Card de dados */}
+                  <div className="bg-background rounded-lg border border-border overflow-hidden mb-4">
+                    <div className="text-sm font-sans divide-y divide-border">
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">UF:</span><span className="text-text-muted">MG</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">CEP:</span><span className="text-text-muted">30.431-214</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Bairro:</span><span className="text-text-muted">Barro Preto</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Cidade:</span><span className="text-text-muted">Belo Horizonte</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Número:</span><span className="text-text-muted">37</span></div>
+                      <div className="flex px-4 py-3"><span className="text-foreground font-medium w-28">Logradouro:</span><span className="text-text-muted">Belo Horizonte</span></div>
+                    </div>
+                  </div>
+
+                  {/* Link Ver detalhes - margem de 36px (mb-9) antes dos botões */}
+                  <div className="flex items-center gap-2 mb-9">
+                    <Search className="w-4 h-4 text-text-muted" />
+                    <span className="text-sm text-text-muted cursor-pointer hover:underline font-sans">Ver detalhes</span>
+                  </div>
+
+                  {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
+                  <div className="flex items-center justify-end gap-4">
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-border transition-colors">
                       <X className="w-4 h-4" />
                       <span>Cancelar</span>
                     </button>
@@ -1422,7 +1470,7 @@ export default function DesignSystemPage() {
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Difusão de Processo</p>
               {/* Modal: background #101112, borda #2A2B35, 1px */}
-              <div className="bg-[#101112] rounded-xl border border-[#2a2b35] max-w-md mx-auto overflow-hidden">
+              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
@@ -1433,14 +1481,14 @@ export default function DesignSystemPage() {
                       </svg>
                       <span className="font-title text-[18px]">DIFUSAO DE PROCESSO</span>
                     </div>
-                    <button className="p-1 rounded hover:bg-[#2a2b35] transition-colors">
+                    <button className="p-1 rounded hover:bg-border transition-colors">
                       <X className="w-5 h-5 text-text-muted" />
                     </button>
                   </div>
                 </div>
 
                 {/* Linha separadora do header - mesma cor da borda */}
-                <div className="h-[1px] bg-[#2a2b35]" />
+                <div className="h-[1px] bg-border" />
 
                 {/* Conteúdo */}
                 <div className="p-6">
@@ -1450,14 +1498,14 @@ export default function DesignSystemPage() {
                   </div>
 
                   {/* Alert box - com borda verde */}
-                  <div className="bg-[#2a2b35] rounded-[6px] border border-success p-4 mb-4">
+                  <div className="bg-border rounded-[6px] border border-success p-4 mb-4">
                     <p className="text-sm text-text-secondary font-sans">
                       SUBSEC e SUP-CONTRA-INTEL são obrigatórios e não podem ser desmarcados.
                     </p>
                   </div>
 
                   {/* Search input */}
-                  <div className="bg-[#000000] border border-[#2a2b35] rounded-lg px-4 py-3 flex items-center gap-2 mb-4">
+                  <div className="bg-background border border-border rounded-lg px-4 py-3 flex items-center gap-2 mb-4">
                     <span className="text-text-muted text-sm font-sans">Buscar pessoa</span>
                     <Search className="w-4 h-4 text-text-muted ml-auto" />
                   </div>
@@ -1469,7 +1517,7 @@ export default function DesignSystemPage() {
 
                   {/* Botões - SEMPRE à direita, radius 6px, ícone esquerda + texto direita */}
                   <div className="flex items-center justify-end gap-4">
-                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+                    <button className="w-[130px] flex items-center justify-between px-4 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-sm font-bold font-sans hover:bg-border transition-colors">
                       <X className="w-4 h-4" />
                       <span>Cancelar</span>
                     </button>
@@ -1577,7 +1625,7 @@ export default function DesignSystemPage() {
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Card de Entidade (Endereço)</p>
               
               {/* Card */}
-              <div className="bg-[#0f0f10] rounded-xl border border-[#2a2b35] w-[340px] overflow-hidden">
+              <div className="bg-card rounded-xl border border-border w-[340px] overflow-hidden">
                 {/* Header - pt-4 (16px) do topo, pb-3 (12px) até a linha */}
                 <div className="px-5 pt-4 pb-3">
                   <div className="flex items-center gap-2">
@@ -1587,12 +1635,12 @@ export default function DesignSystemPage() {
                 </div>
                 
                 {/* Linha separadora com margem horizontal de 20px */}
-                <div className="mx-5 h-[1px] bg-[#2a2b35]" />
+                <div className="mx-5 h-[1px] bg-border" />
 
                 {/* Conteúdo */}
                 <div className="p-5">
                   {/* Área de destaque */}
-                  <div className="bg-[#222222] rounded-lg px-3 py-2 mb-4">
+                  <div className="bg-muted rounded-lg px-3 py-2 mb-4">
                     <p className="text-text-secondary text-xs font-sans italic leading-relaxed">
                       Nome: João Francisco Santo Pereira Salviano Bernardo Guimarães Aversa, CPF: 013.511.976-65
                     </p>
@@ -1628,7 +1676,7 @@ export default function DesignSystemPage() {
 
                   {/* Botões - alinhados à ESQUERDA, margem de 24px (mb-6 acima) */}
                   <div className="flex items-center justify-start gap-4">
-                    <button className="w-[110px] flex items-center justify-between px-3 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-xs font-bold font-sans hover:bg-[#2a2b35] transition-colors">
+                    <button className="w-[110px] flex items-center justify-between px-3 py-2 rounded-[6px] bg-transparent border border-[#676c70] text-foreground text-xs font-bold font-sans hover:bg-border transition-colors">
                       <X className="w-3.5 h-3.5" />
                       <span>Ignorar</span>
                     </button>
@@ -1983,7 +2031,7 @@ export default function DesignSystemPage() {
             {/* Estrutura de Arquivos */}
             <div className="p-4 rounded-xl bg-card border border-border">
               <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Estrutura de Arquivos</h4>
-              <pre className="text-xs text-text-secondary font-mono bg-[#0f0f10] p-4 rounded-lg overflow-x-auto">
+              <pre className="text-xs text-text-secondary font-mono bg-card p-4 rounded-lg overflow-x-auto">
 {`/components/snap/
   ├── index.ts              # Exports centralizados (inclui verticais)
   ├── snap-badge.tsx        # SnapBadge, RiskBadge, StatusBadge, CategoryTag
@@ -2008,7 +2056,7 @@ export default function DesignSystemPage() {
             {/* Exemplo de Uso */}
             <div className="p-4 rounded-xl bg-card border border-border">
               <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Exemplo de Uso</h4>
-              <pre className="text-xs text-text-secondary font-mono bg-[#0f0f10] p-4 rounded-lg overflow-x-auto">
+              <pre className="text-xs text-text-secondary font-mono bg-card p-4 rounded-lg overflow-x-auto">
 {`import { 
   SnapCard, 
   SnapCardHeader, 
