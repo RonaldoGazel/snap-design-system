@@ -155,21 +155,22 @@
      ============================================ */
   --canvas-background: #0a0a0a;
   --canvas-grid-tile: url('/assets/snap-graph-grid.png');
-  --canvas-node-bg: #ffffff;
-  --canvas-node-border: #e0e0e0;
+  --canvas-node-bg: #2c2c2c;
+  --canvas-node-border: #3a3a3a;
+  --canvas-node-hover: #3a3a3a;
   --canvas-edge-color: #696969;
 }
 
 /* ============================================
    LIGHT MODE TOKENS
-   Off-white: #F5F7F8 (sutil, levemente azulado)
+   Off-white: #ECEEEF
    Textos: Preto puro #000000
    Cores das verticais: INALTERADAS
    ============================================ */
 
 .light {
   /* Backgrounds */
-  --background: #F5F7F8;
+  --background: #ECEEEF;
   --foreground: #000000;
   --card: #ffffff;
   --card-foreground: #000000;
@@ -250,10 +251,11 @@
   --chart-5: #e6a000;
 
   /* SNAP GRAPH CANVAS (área agnóstica - light mode) */
-  --canvas-background: #F5F7F8;
+  --canvas-background: #ECEEEF;
   --canvas-grid-tile: url('/assets/grid-tile-light.png');
   --canvas-node-bg: #ffffff;
   --canvas-node-border: #d0d5d9;
+  --canvas-node-hover: #f0f0f0;
   --canvas-edge-color: #696969;
 }
 
@@ -270,6 +272,10 @@
 
 .border-canvas-node-border {
   border-color: var(--canvas-node-border);
+}
+
+.bg-canvas-node-hover {
+  background-color: var(--canvas-node-hover);
 }
 
 /* ============================================

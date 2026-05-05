@@ -1146,10 +1146,10 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                 </div>
               </div>
 
-              {/* Estado Hover */}
+              {/* Estado Hover - usa token canvas-node-hover */}
               <div>
                 <p className="text-sm text-text-muted font-sans mb-3 uppercase tracking-wide">Hover</p>
-                <div className="w-64 bg-[#363636] rounded-lg overflow-hidden ring-1 ring-[#696969]">
+                <div className="w-64 bg-canvas-node-hover rounded-lg overflow-hidden ring-1 ring-[#696969]">
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
@@ -1160,7 +1160,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                         </div>
                       </div>
                       <div className="mt-4">
-                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#696969] rounded-full">Company SNAP</span>
                       </div>
                     </div>
                   </div>
