@@ -151,6 +151,96 @@
   --chart-5: #ffc563;
 }
 
+/* ============================================
+   LIGHT MODE TOKENS
+   Off-white: #F5F7F8 (sutil, levemente azulado)
+   Textos: Preto puro #000000
+   Cores das verticais: INALTERADAS
+   ============================================ */
+
+.light {
+  /* Backgrounds */
+  --background: #F5F7F8;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --card-elevated: #ffffff;
+  --card-hover: #eef1f3;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --input: #ffffff;
+
+  /* Cores primárias - INALTERADAS (verticais) */
+  --primary: #72284b;
+  --primary-foreground: #ffffff;
+  --primary-dark: #5a1f3c;
+
+  /* Status - INALTERADAS */
+  --success: #3f9f76;
+  --success-dark: #2d7a5a;
+  --warning: #e6a000;
+  --warning-dark: #c78f00;
+  --info: #0097a7;
+  --error: #e53935;
+  --destructive: #e53935;
+  --destructive-foreground: #ffffff;
+
+  /* Secondary / Muted / Accent */
+  --secondary: #e8ebed;
+  --secondary-foreground: #000000;
+  --muted: #eef1f3;
+  --muted-foreground: #5a5a5a;
+  --accent: #e8ebed;
+  --accent-foreground: #000000;
+
+  /* Entidades - ajustadas para contraste em fundo claro */
+  --entity-person: #72284b;
+  --entity-address: #b38600;
+  --entity-vehicle: #0097a7;
+  --entity-company: #0097a7;
+
+  /* Riscos - WCAG: ajustados para contraste em fundo claro */
+  --risk-critical: #d32f2f;
+  --risk-high: #e65100;
+  --risk-medium: #f9a825;
+  --risk-low: #2e7d55;
+
+  /* Tags - INALTERADAS (já são cores de fundo) */
+  --tag-preso: #72284b;
+  --tag-visitante: #0097a7;
+  --tag-advogado: #2e7d55;
+  --tag-familiar: #e6a000;
+  --tag-ex-preso: #e65100;
+
+  /* Hierarquia de Texto */
+  --text-primary: #000000;
+  --text-secondary: #4a4a4a;
+  --text-muted: #6a6a6a;
+  --text-subtle: #8a8a8a;
+
+  /* Bordas */
+  --border: #d0d5d9;
+  --border-subtle: #e0e5e8;
+  --ring: #72284b;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #72284b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef1f3;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #d0d5d9;
+  --sidebar-ring: #72284b;
+
+  /* Charts - ajustados para contraste */
+  --chart-1: #72284b;
+  --chart-2: #0097a7;
+  --chart-3: #2e7d55;
+  --chart-4: #e65100;
+  --chart-5: #e6a000;
+}
+
 @theme inline {
   /* Fonts */
   --font-sans: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;

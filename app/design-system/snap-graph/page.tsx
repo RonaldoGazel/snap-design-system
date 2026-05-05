@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, Building, Car, X, Phone, User, CreditCard, FileText, MapPin, Mail } from 'lucide-react'
+import { ArrowLeft, Building, Car, X, Phone, User, CreditCard, FileText, MapPin, Mail, Sun, Moon } from 'lucide-react'
 import { SnapButton } from '@/components/snap/snap-button'
+import { SnapThemeToggle } from '@/components/snap/snap-theme-toggle'
 
 // Componente Section reutilizável
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -48,10 +49,14 @@ export default function SnapGraphDesignSystem() {
         
         {/* Header */}
         <header className="mb-12">
-          <div className="flex items-center gap-4 mb-4">
-            <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-8" />
-            <div className="w-px h-8 bg-border" />
-            <span className="text-sm text-text-muted font-sans uppercase tracking-wide">Documentação de Interface</span>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-4">
+              <img src="/assets/snap-graph-logo.svg" alt="SNAP Graph" className="h-8" />
+              <div className="w-px h-8 bg-border" />
+              <span className="text-sm text-text-muted font-sans uppercase tracking-wide">Documentação de Interface</span>
+            </div>
+            {/* Theme Toggle */}
+            <SnapThemeToggle />
           </div>
           
           <h1 className="text-4xl font-bold text-foreground font-sans">

@@ -1,8 +1,10 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw } from "lucide-react"
+import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon } from "lucide-react"
 import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
+import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
+import { useTheme } from "@/hooks/use-theme"
 
 /* ============================================
    SNAP DESIGN SYSTEM
@@ -788,12 +790,18 @@ export default function DesignSystemPage() {
               <h1 className="font-title text-3xl text-foreground tracking-wide">SNAP DESIGN SYSTEM</h1>
               <p className="text-sm text-text-muted font-sans mt-1">Documentação base do Ecossistema SNAP</p>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#FE473C]" title="Investigação" />
-              <div className="w-3 h-3 rounded-full bg-[#72284B]" title="Inteligência" />
-              <div className="w-3 h-3 rounded-full bg-[#889EA3]" title="Cooperação" />
-              <div className="w-3 h-3 rounded-full bg-[#287266]" title="Infraestrutura" />
-              <div className="w-3 h-3 rounded-full bg-[#333540]" title="Administração" />
+            <div className="flex items-center gap-4">
+              {/* Theme Toggle */}
+              <SnapThemeToggle />
+              
+              {/* Verticais */}
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#FE473C]" title="Investigação" />
+                <div className="w-3 h-3 rounded-full bg-[#72284B]" title="Inteligência" />
+                <div className="w-3 h-3 rounded-full bg-[#889EA3]" title="Cooperação" />
+                <div className="w-3 h-3 rounded-full bg-[#287266]" title="Infraestrutura" />
+                <div className="w-3 h-3 rounded-full bg-[#333540]" title="Administração" />
+              </div>
             </div>
           </div>
         </div>
