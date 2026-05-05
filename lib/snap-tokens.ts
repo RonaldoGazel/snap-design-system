@@ -207,6 +207,50 @@ export const snapGraph = {
     paddingX: '16px',
     fontSize: '13px',
   },
+
+  // Sidebar (Menu Principal)
+  sidebar: {
+    width: '64px',
+    height: '144px',
+    padding: '20px',
+    borderRadius: '12px',
+    gapBetweenIcons: '24px',
+    marginFromEdge: '32px', // Margem das bordas da tela
+    
+    icons: {
+      eye: { width: '25px', height: '20px' }, // Recomendações
+      plus: { width: '22px', height: '22px' }, // Adicionar
+      sliders: { width: '22px', height: '21px' }, // Configurações
+      color: '#ffffff',
+      colorInactive: '#696969',
+      hoverOpacity: '0.8',
+    },
+    
+    // Badge numérico (notificações)
+    badge: {
+      size: '32px',
+      fontSize: '14px',
+      fontWeight: '700',
+      color: '#ffffff',
+      // backgroundColor: cor da vertical ativa
+      positionTop: '-20px',
+      positionRight: '-18px',
+      maxDisplay: '99+', // Se maior que 99
+    },
+  },
+
+  // Zoom Controls (Controles de Navegação)
+  zoomControls: {
+    width: '64px', // Mesma largura da sidebar para alinhamento
+    gapFromSidebar: '36px', // Distância vertical da sidebar
+    gapBetweenIcons: '24px',
+    
+    icons: {
+      size: '20px',
+      color: '#696969',
+      colorHover: '#ffffff',
+    },
+  },
 } as const
 
 // ===========================================
