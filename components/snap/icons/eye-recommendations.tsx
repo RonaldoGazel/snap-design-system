@@ -13,16 +13,17 @@ export function EyeRecommendationsIcon({ className }: EyeRecommendationsIconProp
   return (
     <svg 
       width="24" 
-      height="19" 
-      viewBox="0 0 24 19" 
+      height="18" 
+      viewBox="0 0 24 18" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      style={{ display: 'block' }}
     >
       {/* Contorno do olho */}
       <path 
-        d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 11.5C21.27 7.11 17 4 12 4Z" 
-        stroke="currentColor" 
+        d="M12 2C7 2 2.73 5.11 1 9.5C2.73 13.89 7 17 12 17C17 17 21.27 13.89 23 9.5C21.27 5.11 17 2 12 2Z" 
+        stroke="#72284B" 
         strokeWidth="2" 
         strokeLinecap="round" 
         strokeLinejoin="round"
@@ -31,9 +32,9 @@ export function EyeRecommendationsIcon({ className }: EyeRecommendationsIconProp
       {/* Círculo interno (pupila) */}
       <circle 
         cx="12" 
-        cy="11.5" 
+        cy="9.5" 
         r="3" 
-        stroke="currentColor" 
+        stroke="#72284B" 
         strokeWidth="2"
         fill="none"
       />

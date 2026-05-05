@@ -67,10 +67,10 @@ export function RecommendationsPanel({
       )}
       style={{ backgroundColor: '#0F0F10' }}
     >
-      {/* Header - padding top 24px, gap 16px, mb 12px até a linha */}
-      <div className="px-6 pt-6">
+      {/* Header - padding top 20px, gap 16px, mb 12px até a linha */}
+      <div className="px-6" style={{ paddingTop: '20px' }}>
         <div className="flex items-center" style={{ gap: '16px' }}>
-          <EyeRecommendationsIcon className="text-[#72284B] flex-shrink-0" />
+          <EyeRecommendationsIcon className="flex-shrink-0" />
           <span className="font-medium text-foreground" style={{ fontFamily: 'var(--font-sans)', fontSize: '22px', textTransform: 'none', letterSpacing: 'normal' }}>
             Recomendações
           </span>
