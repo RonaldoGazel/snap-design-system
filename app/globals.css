@@ -110,6 +110,7 @@
      ============================================ */
   --border: #2a2a2a;
   --border-subtle: #333333;
+  --border-strong: #676c70;
   --ring: #72284b;
 
   /* ============================================
@@ -233,6 +234,7 @@
   /* Bordas */
   --border: #d0d5d9;
   --border-subtle: #e0e5e8;
+  --border-strong: #676c70;
   --ring: #72284b;
 
   /* Sidebar */
@@ -573,7 +575,7 @@ h3, h4, h5, h6 {
   background-color: #4a4b55;
 }
 
-/* Remove as setinhas/botões da scrollbar */
+/* Remove as setinhas/bot��es da scrollbar */
 .scrollbar-minimal::-webkit-scrollbar-button {
   display: none;
   width: 0;

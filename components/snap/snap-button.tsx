@@ -25,8 +25,8 @@ const snapButtonVariants = cva(
         // Ação primária (cor da vertical)
         primary: "bg-[#72284b] text-white hover:bg-[#5a1f3c]",
         
-        // Ação secundária/cancelar (outline)
-        secondary: "bg-transparent border border-[#676c70] text-white hover:bg-[#2a2b35]",
+        // Ação secundária/cancelar (outline) - usa text-foreground para adaptar ao tema
+        secondary: "bg-transparent border border-border-strong text-foreground hover:bg-muted",
         
         // Ação destrutiva (vermelho coral - para exclusões/remoções críticas)
         destructive: "bg-[#fe473c] text-white hover:bg-[#e03c32]",
