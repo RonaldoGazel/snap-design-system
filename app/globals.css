@@ -110,6 +110,7 @@
      ============================================ */
   --border: #2a2a2a;
   --border-subtle: #333333;
+  --border-strong: #676c70;
   --ring: #72284b;
 
   /* ============================================
@@ -149,13 +150,240 @@
   --chart-3: #3f9f76;
   --chart-4: #ff9800;
   --chart-5: #ffc563;
+
+  /* ============================================
+     14.5 TOASTS (dark mode)
+     ============================================ */
+  --toast-success-bg: #1a4d3a;
+  --toast-success-border: #5b9781;
+  --toast-success-icon: #1a4d3a;
+  --toast-error-bg: #5c1a1a;
+  --toast-error-border: #a15050;
+  --toast-error-icon: #5c1a1a;
+  --toast-warning-bg: #4d3a1a;
+  --toast-warning-border: #9a7a50;
+  --toast-warning-icon: #4d3a1a;
+  --toast-text: #ffffff;
+
+  /* ============================================
+     15. SNAP GRAPH CANVAS (área agnóstica)
+     ============================================ */
+  --canvas-background: #0a0a0a;
+  --canvas-grid-tile: url('/assets/snap-graph-grid.png');
+  --canvas-node-bg: #2c2c2c;
+  --canvas-node-border: #3a3a3a;
+  --canvas-node-hover: #3a3a3a;
+  --canvas-edge-color: #696969;
+  --canvas-edge-normal: #454545;
+  --canvas-edge-discovery: #ffffff;
+}
+
+/* ============================================
+   LIGHT MODE TOKENS
+   Off-white: #ECEEEF
+   Textos: Preto puro #000000
+   Cores das verticais: INALTERADAS
+   ============================================ */
+
+.light {
+  /* Backgrounds */
+  --background: #ECEEEF;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --card-elevated: #ffffff;
+  --card-hover: #eef1f3;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --input: #ffffff;
+
+  /* Cores primárias - INALTERADAS (verticais) */
+  --primary: #72284b;
+  --primary-foreground: #ffffff;
+  --primary-dark: #5a1f3c;
+
+  /* Status - INALTERADAS */
+  --success: #3f9f76;
+  --success-dark: #2d7a5a;
+  --warning: #e6a000;
+  --warning-dark: #c78f00;
+  --info: #0097a7;
+  --error: #e53935;
+  --destructive: #e53935;
+  --destructive-foreground: #ffffff;
+
+  /* Secondary / Muted / Accent */
+  --secondary: #e8ebed;
+  --secondary-foreground: #000000;
+  --muted: #eef1f3;
+  --muted-foreground: #5a5a5a;
+  --accent: #e8ebed;
+  --accent-foreground: #000000;
+
+  /* Entidades - ajustadas para contraste em fundo claro */
+  --entity-person: #72284b;
+  --entity-address: #b38600;
+  --entity-vehicle: #0097a7;
+  --entity-company: #0097a7;
+
+  /* Riscos - WCAG: ajustados para contraste em fundo claro */
+  --risk-critical: #d32f2f;
+  --risk-high: #e65100;
+  --risk-medium: #f9a825;
+  --risk-low: #2e7d55;
+
+  /* Tags - INALTERADAS (já são cores de fundo) */
+  --tag-preso: #72284b;
+  --tag-visitante: #0097a7;
+  --tag-advogado: #2e7d55;
+  --tag-familiar: #e6a000;
+  --tag-ex-preso: #e65100;
+
+  /* Hierarquia de Texto */
+  --text-primary: #000000;
+  --text-secondary: #4a4a4a;
+  --text-muted: #6a6a6a;
+  --text-subtle: #8a8a8a;
+
+  /* Bordas */
+  --border: #d0d5d9;
+  --border-subtle: #e0e5e8;
+  --border-strong: #676c70;
+  --ring: #72284b;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #72284b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef1f3;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #d0d5d9;
+  --sidebar-ring: #72284b;
+
+  /* Charts - ajustados para contraste */
+  --chart-1: #72284b;
+  --chart-2: #0097a7;
+  --chart-3: #2e7d55;
+  --chart-4: #e65100;
+  --chart-5: #e6a000;
+
+  /* TOASTS (light mode - cores mais claras/suaves) */
+  --toast-success-bg: #e8f5e9;
+  --toast-success-border: #4caf50;
+  --toast-success-icon: #2e7d32;
+  --toast-error-bg: #ffebee;
+  --toast-error-border: #ef5350;
+  --toast-error-icon: #c62828;
+  --toast-warning-bg: #fff8e1;
+  --toast-warning-border: #ffc107;
+  --toast-warning-icon: #f57c00;
+  --toast-text: #1a1a1a;
+
+  /* SNAP GRAPH CANVAS (área agnóstica - light mode) */
+  --canvas-background: #ECEEEF;
+  --canvas-grid-tile: url('/assets/grid-tile-light.png');
+  --canvas-node-bg: #ffffff;
+  --canvas-node-border: #d0d5d9;
+  --canvas-node-hover: #f0f0f0;
+  --canvas-edge-color: #696969;
+  --canvas-edge-normal: #888888;
+  --canvas-edge-discovery: #333333;
+}
+
+/* SNAP Canvas - área de visualização de grafos */
+.snap-canvas {
+  background-color: var(--canvas-background);
+  background-image: var(--canvas-grid-tile);
+  background-repeat: repeat;
+}
+
+.bg-canvas-node {
+  background-color: var(--canvas-node-bg);
+}
+
+.border-canvas-node-border {
+  border-color: var(--canvas-node-border);
+}
+
+.bg-canvas-node-hover {
+  background-color: var(--canvas-node-hover);
+}
+
+/* SVG Edge colors - para conexões do grafo */
+.stroke-edge-normal {
+  stroke: var(--canvas-edge-normal);
+}
+.stroke-edge-discovery {
+  stroke: var(--canvas-edge-discovery);
+}
+.fill-edge-normal {
+  fill: var(--canvas-edge-normal);
+}
+.fill-edge-discovery {
+  fill: var(--canvas-edge-discovery);
+}
+
+/* Toast utility classes */
+.bg-toast-success {
+  background-color: var(--toast-success-bg);
+}
+.border-toast-success-border {
+  border-color: var(--toast-success-border);
+}
+.text-toast-success-icon {
+  color: var(--toast-success-icon);
+}
+.bg-toast-error {
+  background-color: var(--toast-error-bg);
+}
+.border-toast-error-border {
+  border-color: var(--toast-error-border);
+}
+.text-toast-error-icon {
+  color: var(--toast-error-icon);
+}
+.bg-toast-warning {
+  background-color: var(--toast-warning-bg);
+}
+.border-toast-warning-border {
+  border-color: var(--toast-warning-border);
+}
+.text-toast-warning-icon {
+  color: var(--toast-warning-icon);
+}
+.text-toast {
+  color: var(--toast-text);
+}
+
+/* ============================================
+   SNAP LOGO TOGGLE
+   Alterna entre versões dark/light dos logos
+   - Dark mode: mostra logos claros (para fundo escuro)
+   - Light mode: mostra logos escuros (para fundo claro)
+   ============================================ */
+
+/* Dark mode: mostra logo dark, esconde logo light */
+.dark .snap-logo-dark {
+  display: inline-block !important;
+}
+.dark .snap-logo-light {
+  display: none !important;
+}
+
+/* Light mode: mostra logo light, esconde logo dark */
+.light .snap-logo-dark {
+  display: none !important;
+}
+.light .snap-logo-light {
+  display: inline-block !important;
 }
 
 @theme inline {
   /* Fonts */
   --font-sans: var(--font-inter-tight), 'Inter Tight', system-ui, sans-serif;
-  --font-mono: 'Cygnito Mono', ui-monospace, monospace;
-  --font-title: 'Cygnito Mono', ui-monospace, monospace;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; /* Monospace padrão para código */
+  --font-title: 'Cygnito Mono', ui-monospace, monospace; /* Cygnito APENAS para títulos >= 18px */
   
   /* Cores das Verticais */
   --color-vertical-investigacao: var(--vertical-investigacao);
@@ -405,7 +633,7 @@ h3, h4, h5, h6 {
   background-color: #4a4b55;
 }
 
-/* Remove as setinhas/botões da scrollbar */
+/* Remove as setinhas/bot��es da scrollbar */
 .scrollbar-minimal::-webkit-scrollbar-button {
   display: none;
   width: 0;
