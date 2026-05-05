@@ -1720,35 +1720,35 @@ export default function DesignSystemPage() {
               
               <div className="flex flex-col gap-4 max-w-md">
                 {/* Toast Sucesso - Regular */}
-                <div className="bg-[#1a4d3a] rounded-[8px] border-2 border-[#5b9781] px-5 py-4 flex items-center gap-4">
+                <div className="bg-toast-success rounded-[8px] border-2 border-toast-success-border px-5 py-4 flex items-center gap-4">
                   <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0">
-                    <Check className="w-5 h-5 text-[#1a4d3a]" />
+                    <Check className="w-5 h-5 text-toast-success-icon" />
                   </div>
-                  <span className="text-white text-base font-sans">Processo criado com sucesso.</span>
+                  <span className="text-toast text-base font-sans">Processo criado com sucesso.</span>
                 </div>
 
                 {/* Toast Sucesso - Compacto */}
-                <div className="bg-[#1a4d3a] rounded-[6px] border-2 border-[#5b9781] px-4 py-3 flex items-center gap-3">
+                <div className="bg-toast-success rounded-[6px] border-2 border-toast-success-border px-4 py-3 flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0">
-                    <Check className="w-4 h-4 text-[#1a4d3a]" />
+                    <Check className="w-4 h-4 text-toast-success-icon" />
                   </div>
-                  <span className="text-white text-sm font-sans">Processo criado com sucesso.</span>
+                  <span className="text-toast text-sm font-sans">Processo criado com sucesso.</span>
                 </div>
 
                 {/* Toast Erro - Regular */}
-                <div className="bg-[#5c1a1a] rounded-[8px] border-2 border-[#a15050] px-5 py-4 flex items-center gap-4">
+                <div className="bg-toast-error rounded-[8px] border-2 border-toast-error-border px-5 py-4 flex items-center gap-4">
                   <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0">
-                    <X className="w-5 h-5 text-[#5c1a1a]" />
+                    <X className="w-5 h-5 text-toast-error-icon" />
                   </div>
-                  <span className="text-white text-base font-sans">Erro ao criar processo. Tente novamente.</span>
+                  <span className="text-toast text-base font-sans">Erro ao criar processo. Tente novamente.</span>
                 </div>
 
                 {/* Toast Warning - Regular */}
-                <div className="bg-[#4d3a1a] rounded-[8px] border-2 border-[#9a7a50] px-5 py-4 flex items-center gap-4">
+                <div className="bg-toast-warning rounded-[8px] border-2 border-toast-warning-border px-5 py-4 flex items-center gap-4">
                   <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center shrink-0">
-                    <AlertTriangle className="w-5 h-5 text-[#4d3a1a]" />
+                    <AlertTriangle className="w-5 h-5 text-toast-warning-icon" />
                   </div>
-                  <span className="text-white text-base font-sans">Atenção: campos obrigatórios não preenchidos.</span>
+                  <span className="text-toast text-base font-sans">Atenção: campos obrigatórios não preenchidos.</span>
                 </div>
               </div>
             </div>

@@ -152,6 +152,20 @@
   --chart-5: #ffc563;
 
   /* ============================================
+     14.5 TOASTS (dark mode)
+     ============================================ */
+  --toast-success-bg: #1a4d3a;
+  --toast-success-border: #5b9781;
+  --toast-success-icon: #1a4d3a;
+  --toast-error-bg: #5c1a1a;
+  --toast-error-border: #a15050;
+  --toast-error-icon: #5c1a1a;
+  --toast-warning-bg: #4d3a1a;
+  --toast-warning-border: #9a7a50;
+  --toast-warning-icon: #4d3a1a;
+  --toast-text: #ffffff;
+
+  /* ============================================
      15. SNAP GRAPH CANVAS (área agnóstica)
      ============================================ */
   --canvas-background: #0a0a0a;
@@ -254,6 +268,18 @@
   --chart-4: #e65100;
   --chart-5: #e6a000;
 
+  /* TOASTS (light mode - cores mais claras/suaves) */
+  --toast-success-bg: #e8f5e9;
+  --toast-success-border: #4caf50;
+  --toast-success-icon: #2e7d32;
+  --toast-error-bg: #ffebee;
+  --toast-error-border: #ef5350;
+  --toast-error-icon: #c62828;
+  --toast-warning-bg: #fff8e1;
+  --toast-warning-border: #ffc107;
+  --toast-warning-icon: #f57c00;
+  --toast-text: #1a1a1a;
+
   /* SNAP GRAPH CANVAS (área agnóstica - light mode) */
   --canvas-background: #ECEEEF;
   --canvas-grid-tile: url('/assets/grid-tile-light.png');
@@ -296,6 +322,38 @@
 }
 .fill-edge-discovery {
   fill: var(--canvas-edge-discovery);
+}
+
+/* Toast utility classes */
+.bg-toast-success {
+  background-color: var(--toast-success-bg);
+}
+.border-toast-success-border {
+  border-color: var(--toast-success-border);
+}
+.text-toast-success-icon {
+  color: var(--toast-success-icon);
+}
+.bg-toast-error {
+  background-color: var(--toast-error-bg);
+}
+.border-toast-error-border {
+  border-color: var(--toast-error-border);
+}
+.text-toast-error-icon {
+  color: var(--toast-error-icon);
+}
+.bg-toast-warning {
+  background-color: var(--toast-warning-bg);
+}
+.border-toast-warning-border {
+  border-color: var(--toast-warning-border);
+}
+.text-toast-warning-icon {
+  color: var(--toast-warning-icon);
+}
+.text-toast {
+  color: var(--toast-text);
 }
 
 /* ============================================
