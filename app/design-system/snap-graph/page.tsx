@@ -7,6 +7,7 @@ import { SnapThemeToggle } from '@/components/snap/snap-theme-toggle'
 import { SnapLogo } from '@/components/snap/snap-logo'
 import { GraphSidebar } from '@/components/snap/graph-sidebar'
 import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
+import { RecommendationsPanel } from '@/components/snap/recommendations-panel'
 
 // Componente Section reutilizável
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -26,6 +27,7 @@ const indice = [
   { titulo: 'Visão Geral', id: 'visão-geral' },
   { titulo: 'Canvas e Grid', id: 'canvas-e-grid' },
   { titulo: 'Sidebar e Zoom Controls', id: 'sidebar-e-zoom-controls' },
+  { titulo: 'Painel de Recomendações', id: 'painel-de-recomendações' },
   { titulo: 'Header', id: 'header' },
   { titulo: 'Entity Nodes', id: 'entity-nodes' },
   { titulo: 'Labels de Categoria', id: 'labels-de-categoria' },
@@ -393,6 +395,162 @@ import { GraphZoomControls } from '@/components/snap/graph-zoom-controls'
   onZoomIn={() => {}}
   onZoomOut={() => {}}
   onFit={() => {}}
+/>`}
+              </pre>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            PAINEL DE RECOMENDAÇÕES
+            ============================================ */}
+        <Section title="Painel de Recomendações">
+          <div className="space-y-6">
+            <p className="text-sm text-text-secondary font-sans">
+              Painel lateral que exibe recomendações de ações para entidades do grafo. Usa formato accordion para organizar ações por entidade.
+            </p>
+            
+            {/* Preview do Componente */}
+            <div className="flex justify-center p-8 bg-background rounded-xl border border-border">
+              <RecommendationsPanel 
+                entities={[
+                  {
+                    id: '1',
+                    name: 'Luiz Henrique Borges',
+                    type: 'person',
+                    count: 21,
+                    actions: [
+                      { id: 'a1', label: 'Pesquisar tudo sobre a pessoa' },
+                      { id: 'a2', label: 'Analisar contratos públicos' },
+                      { id: 'a3', label: 'Verificar vínculos societários' },
+                      { id: 'a4', label: 'Pesquisa tudo sobre a pessoa' },
+                    ],
+                  },
+                  {
+                    id: '2',
+                    name: 'Alysson Rainer',
+                    type: 'person',
+                    count: 21,
+                    actions: [
+                      { id: 'b1', label: 'Pesquisar tudo sobre a pessoa' },
+                    ],
+                  },
+                  {
+                    id: '3',
+                    name: 'Masterclass Tecnologia',
+                    type: 'company',
+                    count: 21,
+                    actions: [
+                      { id: 'c1', label: 'Analisar contratos públicos' },
+                    ],
+                  },
+                  {
+                    id: '4',
+                    name: 'Augusto Campos Freire Guimarães',
+                    type: 'person',
+                    count: 21,
+                    actions: [
+                      { id: 'd1', label: 'Pesquisar tudo sobre a pessoa' },
+                    ],
+                  },
+                  {
+                    id: '5',
+                    name: 'Bitcompany LTDA ME',
+                    type: 'company',
+                    count: 21,
+                    actions: [
+                      { id: 'e1', label: 'Verificar vínculos societários' },
+                    ],
+                  },
+                ]}
+              />
+            </div>
+
+            {/* Grid de especificações */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Modal Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Painel Principal</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Largura:</strong> 451px</li>
+                  <li><strong>Border-radius:</strong> 12px</li>
+                  <li><strong>Padding:</strong> 24px</li>
+                  <li><strong>Margem da borda:</strong> 32px (direita)</li>
+                  <li><strong>Background:</strong> bg-card-elevated</li>
+                </ul>
+              </div>
+              
+              {/* Header Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Header</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Ícone olho:</strong> 24x18.45px</li>
+                  <li><strong>Gap ícone-texto:</strong> 16px</li>
+                  <li><strong>Título:</strong> 18px, font-medium, font-sans</li>
+                </ul>
+              </div>
+              
+              {/* Accordion Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Itens Accordion</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Gap entre itens:</strong> 8px</li>
+                  <li><strong>Border-radius:</strong> 8px</li>
+                  <li><strong>Badge numérico:</strong> 22x22px (padrão pequeno)</li>
+                  <li><strong>Ícone tipo:</strong> 22x15.37px</li>
+                  <li><strong>BG colapsado:</strong> #1e2122</li>
+                  <li><strong>BG expandido:</strong> #16191A</li>
+                  <li><strong>BG item hover:</strong> #373c3f</li>
+                </ul>
+              </div>
+              
+              {/* Actions Specs */}
+              <div className="p-4 bg-card rounded-lg border border-border">
+                <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Ações</h4>
+                <ul className="text-sm text-text-secondary font-sans list-disc ml-4 space-y-1">
+                  <li><strong>Gap entre ações:</strong> 15px</li>
+                  <li><strong>Ícone Play:</strong> 24px, #00FF73 (accent green)</li>
+                  <li><strong>Ícone Lixeira:</strong> 16x18px, #5D5B5B</li>
+                  <li><strong>Lixeira hover:</strong> #ff6b6b</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Novo Token: Accent Green */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Novo Token: Accent Green</h4>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-[#00FF73] flex items-center justify-center">
+                  <span className="text-black font-bold text-xs">PLAY</span>
+                </div>
+                <div className="text-sm text-text-secondary font-sans">
+                  <p><strong>#00FF73</strong> - Super accent para ações positivas (executar, play)</p>
+                  <p className="text-xs text-text-muted mt-1">Hover: #00cc5c</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Código de uso */}
+            <div className="p-4 bg-card rounded-lg border border-border">
+              <h4 className="text-sm font-bold text-foreground mb-3 font-sans">Uso do Componente</h4>
+              <pre className="text-xs text-text-secondary font-mono bg-background p-3 rounded-lg overflow-x-auto">
+{`import { RecommendationsPanel } from '@/components/snap/recommendations-panel'
+
+<RecommendationsPanel 
+  entities={[
+    {
+      id: '1',
+      name: 'Luiz Henrique Borges',
+      type: 'person', // 'person' | 'company'
+      count: 21,
+      actions: [
+        { id: 'a1', label: 'Pesquisar tudo sobre a pessoa' },
+        { id: 'a2', label: 'Analisar contratos públicos' },
+      ],
+    },
+  ]}
+  onActionExecute={(entityId, actionId) => console.log('Executar', entityId, actionId)}
+  onActionDelete={(entityId, actionId) => console.log('Deletar', entityId, actionId)}
 />`}
               </pre>
             </div>

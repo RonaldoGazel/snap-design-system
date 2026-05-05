@@ -251,6 +251,67 @@ export const snapGraph = {
       colorHover: '#ffffff',
     },
   },
+
+  // Painel de Recomendações
+  recommendationsPanel: {
+    width: '451px',
+    borderRadius: '12px',
+    marginFromEdge: '32px', // Margem das bordas da tela
+    padding: '24px',
+    
+    // Header
+    header: {
+      gapIconText: '16px',
+      icon: { width: '24px', height: '18.45px' },
+      titleFontSize: '18px',
+    },
+    
+    // Itens accordion
+    accordion: {
+      gapBetweenItems: '8px',
+      borderRadius: '8px',
+      
+      // Badge numérico pequeno (22x22) - padrão menor
+      badgeSmall: {
+        size: '22px',
+        fontSize: '11px',
+        fontWeight: '600',
+        background: '#2a2b35',
+        color: '#ffffff',
+      },
+      
+      // Ícone de tipo (pessoa/empresa)
+      typeIcon: { width: '22px', height: '15.37px' },
+      
+      // Backgrounds
+      background: {
+        collapsed: '#1e2122',
+        expanded: '#16191A',
+        itemHover: '#373c3f',
+      },
+    },
+    
+    // Ações dentro do accordion expandido
+    actions: {
+      gap: '15px',
+      playIcon: {
+        size: '24px',
+        color: '#00FF73', // Accent verde (novo token)
+      },
+      deleteIcon: {
+        width: '16px',
+        height: '18px',
+        color: '#5D5B5B',
+        colorHover: '#ff6b6b',
+      },
+    },
+  },
+
+  // Cores de Accent (novas)
+  accent: {
+    green: '#00FF73', // Super accent - ações positivas/play
+    greenHover: '#00cc5c',
+  },
 } as const
 
 // ===========================================
