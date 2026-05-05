@@ -159,6 +159,8 @@
   --canvas-node-border: #3a3a3a;
   --canvas-node-hover: #3a3a3a;
   --canvas-edge-color: #696969;
+  --canvas-edge-normal: #454545;
+  --canvas-edge-discovery: #ffffff;
 }
 
 /* ============================================
@@ -257,6 +259,8 @@
   --canvas-node-border: #d0d5d9;
   --canvas-node-hover: #f0f0f0;
   --canvas-edge-color: #696969;
+  --canvas-edge-normal: #888888;
+  --canvas-edge-discovery: #333333;
 }
 
 /* SNAP Canvas - área de visualização de grafos */
@@ -276,6 +280,20 @@
 
 .bg-canvas-node-hover {
   background-color: var(--canvas-node-hover);
+}
+
+/* SVG Edge colors - para conexões do grafo */
+.stroke-edge-normal {
+  stroke: var(--canvas-edge-normal);
+}
+.stroke-edge-discovery {
+  stroke: var(--canvas-edge-discovery);
+}
+.fill-edge-normal {
+  fill: var(--canvas-edge-normal);
+}
+.fill-edge-discovery {
+  fill: var(--canvas-edge-discovery);
 }
 
 /* ============================================

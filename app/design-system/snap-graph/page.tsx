@@ -734,7 +734,7 @@ export default function SnapGraphDesignSystem() {
                 {/* SVG para as conexões */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
                   <defs>
-                    {/* Seta cinza (conexões normais) */}
+                    {/* Seta (conexões normais) - usa CSS variable via classe */}
                     <marker
                       id="arrow-normal"
                       markerWidth="12"
@@ -744,10 +744,10 @@ export default function SnapGraphDesignSystem() {
                       orient="auto"
                       markerUnits="userSpaceOnUse"
                     >
-                      <polygon points="0,0 12,6 0,12" fill="#454545" />
+                      <polygon points="0,0 12,6 0,12" className="fill-edge-normal" />
                     </marker>
                     
-                    {/* Seta branca (vínculo descoberto) */}
+                    {/* Seta (vínculo descoberto) - usa CSS variable via classe */}
                     <marker
                       id="arrow-discovery"
                       markerWidth="12"
@@ -757,7 +757,7 @@ export default function SnapGraphDesignSystem() {
                       orient="auto"
                       markerUnits="userSpaceOnUse"
                     >
-                      <polygon points="0,0 12,6 0,12" fill="#ffffff" />
+                      <polygon points="0,0 12,6 0,12" className="fill-edge-discovery" />
                     </marker>
                   </defs>
                   
@@ -767,7 +767,7 @@ export default function SnapGraphDesignSystem() {
                     y1="134"
                     x2="496"
                     y2="202"
-                    stroke="#454545"
+                    className="stroke-edge-normal"
                     strokeWidth="2"
                     markerEnd="url(#arrow-normal)"
                   />
@@ -778,7 +778,7 @@ export default function SnapGraphDesignSystem() {
                     y1="324"
                     x2="496"
                     y2="392"
-                    stroke="#454545"
+                    className="stroke-edge-normal"
                     strokeWidth="2"
                     markerEnd="url(#arrow-normal)"
                   />
@@ -788,7 +788,7 @@ export default function SnapGraphDesignSystem() {
                   <path
                     d="M 368 459 L 160 459 L 160 146"
                     fill="none"
-                    stroke="#ffffff"
+                    className="stroke-edge-discovery"
                     strokeWidth="2"
                     markerEnd="url(#arrow-discovery)"
                   />
