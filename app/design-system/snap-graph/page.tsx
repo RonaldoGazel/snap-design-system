@@ -799,7 +799,7 @@ export default function SnapGraphDesignSystem() {
                   
                   {/* Node 1: TECHBIZ (topo esquerda) - VÍNCULO DESCOBERTO */}
                   <div className="absolute" style={{ left: '32px', top: '24px' }}>
-                    <div className="w-64 bg-card-elevated rounded-lg overflow-hidden outline outline-4 outline-white">
+                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-white">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#7c8db0]" />
                         <div className="flex-1 p-4">
@@ -812,7 +812,7 @@ export default function SnapGraphDesignSystem() {
                             </div>
                           </div>
                           <div className="mt-4">
-                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
+                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#696969] rounded-full">Company SNAP</span>
                           </div>
                         </div>
                       </div>
@@ -821,7 +821,7 @@ export default function SnapGraphDesignSystem() {
                   
                   {/* Node 2: INSPECT (topo direita) */}
                   <div className="absolute" style={{ left: '368px', top: '24px' }}>
-                    <div className="w-64 bg-card-elevated rounded-lg overflow-hidden">
+                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#7c8db0]" />
                         <div className="flex-1 p-4">
@@ -834,7 +834,7 @@ export default function SnapGraphDesignSystem() {
                             </div>
                           </div>
                           <div className="mt-4">
-                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
+                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#696969] rounded-full">Company SNAP</span>
                           </div>
                         </div>
                       </div>
@@ -843,7 +843,7 @@ export default function SnapGraphDesignSystem() {
                   
                   {/* Node 3: LUIZ HENRIQUE (meio direita) */}
                   <div className="absolute" style={{ left: '368px', top: '214px' }}>
-                    <div className="w-64 bg-card-elevated rounded-lg overflow-hidden">
+                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#9b7fb8]" />
                         <div className="flex-1 p-4">
@@ -856,7 +856,7 @@ export default function SnapGraphDesignSystem() {
                             </div>
                           </div>
                           <div className="mt-4">
-                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e8e0f0] bg-[#5c4a6b] rounded-full">Person SNAP</span>
+                            <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#72284B] rounded-full">Person SNAP</span>
                           </div>
                         </div>
                       </div>
@@ -865,7 +865,7 @@ export default function SnapGraphDesignSystem() {
                   
                   {/* Node 4: TELEFONE (baixo direita) - VÍNCULO DESCOBERTO */}
                   <div className="absolute" style={{ left: '368px', top: '404px' }}>
-                    <div className="w-64 bg-card-elevated rounded-lg overflow-hidden outline outline-4 outline-white">
+                    <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm outline outline-4 outline-white">
                       <div className="flex h-full">
                         <div className="w-1 bg-[#6b9490]" />
                         <div className="flex-1 p-4">
@@ -1128,7 +1128,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
               {/* Estado Normal */}
               <div>
                 <p className="text-sm text-text-muted font-sans mb-3 uppercase tracking-wide">Normal</p>
-                <div className="w-64 bg-card-elevated rounded-lg overflow-hidden">
+                <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm">
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
@@ -1139,7 +1139,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                         </div>
                       </div>
                       <div className="mt-4">
-                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#696969] rounded-full">Company SNAP</span>
                       </div>
                     </div>
                   </div>
@@ -1149,7 +1149,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
               {/* Estado Hover - usa token canvas-node-hover */}
               <div>
                 <p className="text-sm text-text-muted font-sans mb-3 uppercase tracking-wide">Hover</p>
-                <div className="w-64 bg-canvas-node-hover rounded-lg overflow-hidden ring-1 ring-[#696969]">
+                <div className="w-64 bg-canvas-node-hover border border-canvas-node-border rounded-lg overflow-hidden shadow-sm ring-1 ring-[#696969]">
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
@@ -1170,18 +1170,18 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
               {/* Estado Selecionado */}
               <div>
                 <p className="text-sm text-text-muted font-sans mb-3 uppercase tracking-wide">Selecionado</p>
-                <div className="w-64 bg-card-elevated rounded-lg overflow-hidden ring-2 ring-white">
+                <div className="w-64 bg-canvas-node border border-canvas-node-border rounded-lg overflow-hidden shadow-sm ring-2 ring-foreground">
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
                       <div className="flex items-start justify-between gap-3">
                         <p className="text-foreground text-base font-medium font-sans leading-[1.3]">Entidade Selecionada</p>
-                        <div className="w-11 h-11 rounded-full border-[3px] border-white flex items-center justify-center">
-                          <Building className="w-5 h-5 text-white" />
+                        <div className="w-11 h-11 rounded-full border-[3px] border-foreground flex items-center justify-center">
+                          <Building className="w-5 h-5 text-foreground" />
                         </div>
                       </div>
                       <div className="mt-4">
-                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-[#e2e8f0] bg-[#4a5568] rounded-full">Company SNAP</span>
+                        <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#696969] rounded-full">Company SNAP</span>
                       </div>
                     </div>
                   </div>
