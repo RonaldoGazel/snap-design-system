@@ -223,26 +223,27 @@ export default function UsuariosPage() {
             }}
           >
             <nav className="flex-1 flex flex-col items-center gap-2">
-              {/* Ícone ativo - cor da vertical */}
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: VERTICAL_COLOR }}>
+              {/* Ícone ativo - branco #FFFFFF */}
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
                 <Search className="w-5 h-5" />
               </button>
-              {/* Ícones inativos - cor branca #FFFFFF */}
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
+              {/* Ícones inativos - cinza escuro #333333 */}
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#333333' }}>
                 <Home className="w-5 h-5" />
               </button>
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#333333' }}>
                 <FileText className="w-5 h-5" />
               </button>
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#333333' }}>
                 <LinkIcon className="w-5 h-5" />
               </button>
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#333333' }}>
                 <ShareIcon className="w-5 h-5" />
               </button>
             </nav>
             <div className="w-8 my-2" style={{ borderTop: '1px solid #2A2B35' }} />
-            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
+            {/* Engrenagem - cinza escuro #333333 */}
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#333333' }}>
               <Settings className="w-5 h-5" />
             </button>
           </aside>
