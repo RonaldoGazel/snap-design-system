@@ -9,16 +9,35 @@ import { verticals, type Vertical } from "@/lib/snap-tokens"
  * SNAP Header Global
  * 
  * MEDIDAS EXATAS DO FIGMA:
- * - Margem superior: 32px
- * - Margem esquerda do ícone grid: 51px
- * - Tamanho do ícone grid: 24x24px
- * - Gap ícone grid → logo SNAP: 70px
+ * - Margem superior (topo até logo SNAP): 32px
+ * - Margem inferior (logo SNAP até faixa colorida): 32px
+ * - Faixa colorida da vertical: 8px de altura
+ * - Gap entre ícone grid e logo SNAP: 70px
+ * - Ícone grid: 24x24px
+ * - Logo SNAP: 24px de altura
  * 
  * Regras do Breadcrumb:
  * - Primeiro item = Vertical (cor da vertical + ícone casinha + font-medium)
  * - Itens intermediários = #696969 + font-medium
  * - Item atual (último) = text-foreground + font-semibold
  */
+
+// Ícone do Menu de Verticais (grid 3x3) - SVG exato do Figma, 24x24px
+function MenuVerticaisIcon({ color = "#505050" }: { color?: string }) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.66667 5.33333C4.1394 5.33333 5.33333 4.1394 5.33333 2.66667C5.33333 1.19391 4.1394 0 2.66667 0C1.19391 0 0 1.19391 0 2.66667C0 4.1394 1.19391 5.33333 2.66667 5.33333Z" fill={color}/>
+      <path d="M12 5.33333C13.4727 5.33333 14.6667 4.1394 14.6667 2.66667C14.6667 1.19391 13.4727 0 12 0C10.5273 0 9.33333 1.19391 9.33333 2.66667C9.33333 4.1394 10.5273 5.33333 12 5.33333Z" fill={color}/>
+      <path d="M21.3333 5.33333C22.8061 5.33333 24 4.1394 24 2.66667C24 1.19391 22.8061 0 21.3333 0C19.8606 0 18.6667 1.19391 18.6667 2.66667C18.6667 4.1394 19.8606 5.33333 21.3333 5.33333Z" fill={color}/>
+      <path d="M2.66667 14.6667C4.1394 14.6667 5.33333 13.4727 5.33333 12C5.33333 10.5273 4.1394 9.33333 2.66667 9.33333C1.19391 9.33333 0 10.5273 0 12C0 13.4727 1.19391 14.6667 2.66667 14.6667Z" fill={color}/>
+      <path d="M12 14.6667C13.4727 14.6667 14.6667 13.4727 14.6667 12C14.6667 10.5273 13.4727 9.33333 12 9.33333C10.5273 9.33333 9.33333 10.5273 9.33333 12C9.33333 13.4727 10.5273 14.6667 12 14.6667Z" fill={color}/>
+      <path d="M21.3333 14.6667C22.8061 14.6667 24 13.4727 24 12C24 10.5273 22.8061 9.33333 21.3333 9.33333C19.8606 9.33333 18.6667 10.5273 18.6667 12C18.6667 13.4727 19.8606 14.6667 21.3333 14.6667Z" fill={color}/>
+      <path d="M2.66667 24C4.1394 24 5.33333 22.8061 5.33333 21.3333C5.33333 19.8606 4.1394 18.6667 2.66667 18.6667C1.19391 18.6667 0 19.8606 0 21.3333C0 22.8061 1.19391 24 2.66667 24Z" fill={color}/>
+      <path d="M12 24C13.4727 24 14.6667 22.8061 14.6667 21.3333C14.6667 19.8606 13.4727 18.6667 12 18.6667C10.5273 18.6667 9.33333 19.8606 9.33333 21.3333C9.33333 22.8061 10.5273 24 12 24Z" fill={color}/>
+      <path d="M21.3333 24C22.8061 24 24 22.8061 24 21.3333C24 19.8606 22.8061 18.6667 21.3333 18.6667C19.8606 18.6667 18.6667 19.8606 18.6667 21.3333C18.6667 22.8061 19.8606 24 21.3333 24Z" fill={color}/>
+    </svg>
+  )
+}
 
 interface BreadcrumbItem {
   label: string
@@ -27,21 +46,13 @@ interface BreadcrumbItem {
 }
 
 interface SnapHeaderProps {
-  /** Vertical ativa (define a cor da linha separadora e primeiro breadcrumb) */
   vertical?: Vertical
-  /** Itens do breadcrumb (primeiro item será a vertical automaticamente) */
   breadcrumb?: BreadcrumbItem[]
-  /** Nome da organização */
   organizacao?: string
-  /** Subtítulo da organização */
   organizacaoSubtitulo?: string
-  /** Iniciais do usuário para o avatar */
   userInitials?: string
-  /** Número de notificações */
   notificationCount?: number
-  /** Número secundário (badge ao lado do tema) */
   secondaryBadge?: number
-  /** Callback ao clicar no app switcher */
   onAppSwitcherClick?: () => void
 }
 
@@ -61,42 +72,39 @@ export function SnapHeader({
 
   return (
     <header className="w-full bg-background">
-      {/* Barra principal - margem superior 32px */}
+      {/* 
+        Container principal do header
+        - Margem superior: 32px (topo da página até os elementos)
+        - Margem inferior: 32px (elementos até a faixa colorida)
+      */}
       <div 
         className="flex items-center justify-between"
-        style={{ marginTop: '32px' }}
+        style={{ 
+          paddingTop: '32px',
+          paddingBottom: '32px'
+        }}
       >
-        {/* Lado esquerdo: App Switcher + Logo + Separador + Breadcrumb */}
+        {/* Lado esquerdo: Ícone Grid + Logo + Separador + Breadcrumb */}
         <div className="flex items-center">
-          {/* App Switcher - margem esquerda 51px, ícone 24x24px */}
+          {/* 
+            Ícone Menu Verticais (grid 3x3)
+            - Tamanho: 24x24px (fixo no SVG)
+            - Cor: #505050 (cinza)
+            - Sem margem esquerda aqui - a margem será no container pai
+          */}
           <button
             onClick={onAppSwitcherClick}
             className="hover:opacity-80 transition-opacity"
             aria-label="Abrir menu de aplicativos"
-            style={{ marginLeft: '51px' }}
           >
-            <svg 
-              viewBox="0 0 24 24" 
-              fill="currentColor"
-              style={{ 
-                width: '24px', 
-                height: '24px',
-                color: 'var(--text-muted)'
-              }}
-            >
-              <circle cx="5" cy="5" r="2" />
-              <circle cx="12" cy="5" r="2" />
-              <circle cx="19" cy="5" r="2" />
-              <circle cx="5" cy="12" r="2" />
-              <circle cx="12" cy="12" r="2" />
-              <circle cx="19" cy="12" r="2" />
-              <circle cx="5" cy="19" r="2" />
-              <circle cx="12" cy="19" r="2" />
-              <circle cx="19" cy="19" r="2" />
-            </svg>
+            <MenuVerticaisIcon color="#505050" />
           </button>
 
-          {/* Logo SNAP - gap de 70px do ícone */}
+          {/* 
+            Logo SNAP
+            - Gap de 70px entre o ícone e o logo
+            - Altura: 24px
+          */}
           <div style={{ marginLeft: '70px' }}>
             <SnapLogo variant="snap" height={24} />
           </div>
@@ -236,8 +244,8 @@ export function SnapHeader({
         </div>
       </div>
 
-      {/* Linha separadora com cor da vertical */}
-      <div style={{ height: '4px', marginTop: '16px', backgroundColor: verticalColor }} />
+      {/* Faixa colorida da vertical - 8px de altura */}
+      <div style={{ height: '8px', backgroundColor: verticalColor }} />
     </header>
   )
 }
