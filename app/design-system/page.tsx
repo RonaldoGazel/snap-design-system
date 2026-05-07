@@ -16,11 +16,11 @@ import { useTheme } from "@/hooks/use-theme"
 
 // Verticais do Ecossistema SNAP (cores oficiais)
 const verticais = [
-{ name: "INVESTIGAÇÃO", color: "#FE473C", colorName: "Coral", icon: "Lupa", href: null },
-{ name: "INTELIGÊNCIA", color: "#72284B", colorName: "Bordô", icon: "Cabeça/Cérebro", href: null },
-{ name: "COOPERAÇÃO", color: "#889EA3", colorName: "Grey Ahead", icon: "Pessoas", href: null },
-{ name: "INFRAESTRUTURA", color: "#287266", colorName: "Petroleum Blue", icon: "Nós conectados", href: null },
-{ name: "ADMINISTRAÇÃO", color: "#333540", colorName: "Deep Gray Blue", icon: "Pessoa com engrenagem", href: "/design-system/administracao" },
+{ name: "INVESTIGAÇÃO", color: "#FE473C", colorName: "Coral", icon: "Lupa" },
+{ name: "INTELIGÊNCIA", color: "#72284B", colorName: "Bordô", icon: "Cabeça/Cérebro" },
+{ name: "COOPERAÇÃO", color: "#889EA3", colorName: "Grey Ahead", icon: "Pessoas" },
+{ name: "INFRAESTRUTURA", color: "#287266", colorName: "Petroleum Blue", icon: "Nós conectados" },
+{ name: "ADMINISTRAÇÃO", color: "#333540", colorName: "Deep Gray Blue", icon: "Pessoa com engrenagem" },
 ]
 
 // Cores Base
@@ -1011,6 +1011,29 @@ export default function DesignSystemPage() {
         </Section>
 
         {/* ============================================
+            TELAS DAS VERTICAIS
+            ============================================ */}
+        <Section title="TELAS DAS VERTICAIS">
+          <p className="text-text-secondary mb-4 font-sans">
+            Documentação visual das telas de cada vertical do ecossistema SNAP.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link 
+              href="/design-system/administracao"
+              className="bg-card rounded-xl border border-border p-6 hover:bg-card-hover transition-colors group"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#333540' }} />
+                <h3 className="font-title text-lg text-foreground group-hover:opacity-80">ADMINISTRAÇÃO</h3>
+              </div>
+              <p className="text-sm text-text-muted font-sans">
+                Usuários, Grupos, Papéis, Convites, Auditoria, Organizações
+              </p>
+            </Link>
+          </div>
+        </Section>
+
+        {/* ============================================
             VERTICAIS DO ECOSSISTEMA SNAP
             ============================================ */}
         <Section title="VERTICAIS DO ECOSSISTEMA SNAP">
@@ -1025,20 +1048,9 @@ export default function DesignSystemPage() {
                   <p className="font-title text-lg">{v.name}</p>
                 </div>
                 <div className="h-2" style={{ backgroundColor: v.color }} />
-                <div className="px-4 py-2 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded" style={{ backgroundColor: v.color }} />
-                    <code className="text-xs text-text-muted font-mono">{v.color}</code>
-                  </div>
-                  {v.href && (
-                    <Link 
-                      href={v.href}
-                      className="text-xs font-sans px-2 py-1 rounded-lg border border-border hover:bg-muted transition-colors"
-                      style={{ color: v.color }}
-                    >
-                      Ver telas
-                    </Link>
-                  )}
+                <div className="px-4 py-2 flex items-center gap-2">
+                  <div className="w-4 h-4 rounded" style={{ backgroundColor: v.color }} />
+                  <code className="text-xs text-text-muted font-mono">{v.color}</code>
                 </div>
               </div>
             ))}
