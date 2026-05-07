@@ -280,16 +280,22 @@ export default function UsuariosPage() {
             </div>
 
             {/* Tabela - Exatamente igual ao padrão do Design System */}
-            <div className="rounded-xl border border-border overflow-hidden mb-6">
+            <div className="mb-6">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-border">
+                  <tr>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Email</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Status</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nível de Acesso</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Criado em</th>
                     <th className="text-right py-3 px-4 text-text-muted font-medium text-sm font-sans">Ações</th>
+                  </tr>
+                  {/* Linha tracejada separadora - cor da vertical */}
+                  <tr>
+                    <th colSpan={6} className="p-0">
+                      <div style={{ borderTop: `1px dashed ${VERTICAL_COLOR}` }} />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
