@@ -224,8 +224,8 @@ export function SnapHeader({
         </div>
       </div>
 
-      {/* Faixa colorida da vertical - 8px de altura, começa a 144px da borda (alinhada com logo SNAP) */}
-      <div style={{ height: '8px', backgroundColor: verticalColor, marginLeft: '144px' }} />
+      {/* Faixa colorida da vertical - 8px de altura, começa a 144px da borda esquerda, termina a 32px da borda direita */}
+      <div style={{ height: '8px', backgroundColor: verticalColor, marginLeft: '144px', marginRight: '32px' }} />
     </header>
   )
 }
