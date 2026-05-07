@@ -251,7 +251,8 @@ export default function UsuariosPage() {
           {/* Área de Conteúdo - margem esquerda 51px da sidebar */}
           <main className="flex-1 py-8 pr-8" style={{ marginLeft: '51px' }}>
             {/* Header: Título + Filtros + Botão */}
-            <div className="flex items-center justify-between mb-6">
+            {/* px-4 para alinhar com o padding interno da tabela */}
+            <div className="flex items-center justify-between mb-6 px-4">
               {/* Título com ícone */}
               <div className="flex items-center gap-3">
                 <Users className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
@@ -306,7 +307,7 @@ export default function UsuariosPage() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left py-3 pr-4 text-text-muted font-medium text-sm font-sans">Nome</th>
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Email</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Status</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nível de Acesso</th>
@@ -322,7 +323,7 @@ export default function UsuariosPage() {
                       style={{ height: "48px" }}
                       onClick={() => setSelectedUser(user)}
                     >
-                      <td className="py-3 pr-4 text-foreground text-sm font-sans">{user.nome}</td>
+                      <td className="py-3 px-4 text-foreground text-sm font-sans">{user.nome}</td>
                       <td className="py-3 px-4 text-text-secondary text-sm font-sans">{user.email}</td>
                       <td className="py-3 px-4"><StatusBadge status={user.status} /></td>
                       <td className="py-3 px-4 text-text-secondary text-sm font-sans">{user.nivelAcesso}</td>
