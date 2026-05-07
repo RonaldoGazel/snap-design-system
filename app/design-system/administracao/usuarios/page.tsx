@@ -199,10 +199,16 @@ export default function UsuariosPage() {
 
         {/* ============================================
             LAYOUT: SIDEBAR + CONTEÚDO
+            Medidas:
+            - Sidebar: margem esquerda 32px, fundo arredondado
+            - Gap sidebar → conteúdo: 51px
             ============================================ */}
         <div className="flex flex-1">
-          {/* Sidebar Colapsada (64px) - Padrão Ouro */}
-          <aside className="w-16 min-h-full bg-sidebar flex flex-col items-center py-4 border-r border-sidebar-border">
+          {/* Sidebar Colapsada - margem esquerda 32px, arredondada */}
+          <aside 
+            className="flex flex-col items-center py-4 bg-sidebar rounded-xl"
+            style={{ marginLeft: '32px', width: '64px', minWidth: '64px' }}
+          >
             <nav className="flex-1 flex flex-col items-center gap-2">
               <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors" style={{ color: VERTICAL_COLOR }}>
                 <Search className="w-5 h-5" />
@@ -226,8 +232,8 @@ export default function UsuariosPage() {
             </button>
           </aside>
 
-          {/* Área de Conteúdo - Padding de 32px (p-8) */}
-          <main className="flex-1 p-8">
+          {/* Área de Conteúdo - margem esquerda 51px da sidebar */}
+          <main className="flex-1 py-8 pr-8" style={{ marginLeft: '51px' }}>
             {/* Header: Título + Filtros + Botão */}
             <div className="flex items-center justify-between mb-6">
               {/* Título com ícone */}
