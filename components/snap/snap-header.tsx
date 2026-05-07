@@ -52,7 +52,6 @@ interface SnapHeaderProps {
   organizacaoSubtitulo?: string
   userInitials?: string
   notificationCount?: number
-  secondaryBadge?: number
   onAppSwitcherClick?: () => void
 }
 
@@ -63,7 +62,6 @@ export function SnapHeader({
   organizacaoSubtitulo = "Penitenciária do Rio de Janeiro",
   userInitials = "VD",
   notificationCount = 35,
-  secondaryBadge = 35,
   onAppSwitcherClick,
 }: SnapHeaderProps) {
   const { theme, toggleTheme } = useTheme()
@@ -197,24 +195,6 @@ export function SnapHeader({
               <Moon style={{ width: '20px', height: '20px', color: 'var(--foreground)' }} />
             )}
           </button>
-
-          {/* Badge secundário */}
-          {secondaryBadge !== undefined && (
-            <span 
-              className="flex items-center justify-center text-white font-bold font-sans"
-              style={{ 
-                minWidth: '24px', 
-                height: '24px', 
-                borderRadius: '12px',
-                fontSize: '12px',
-                paddingLeft: '6px',
-                paddingRight: '6px',
-                backgroundColor: verticalColor 
-              }}
-            >
-              {secondaryBadge}
-            </span>
-          )}
 
           {/* Separador */}
           <div 
