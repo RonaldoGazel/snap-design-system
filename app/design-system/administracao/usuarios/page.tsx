@@ -39,23 +39,6 @@ import { useTheme } from "@/hooks/use-theme"
 
 const VERTICAL_COLOR = "#333540" // Deep Gray Blue - Administração
 
-// Ícone do App Switcher (grid 3x3) - 24x24px
-function AppSwitcherIcon({ style }: { style?: React.CSSProperties }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" style={style}>
-      <circle cx="5" cy="5" r="2" />
-      <circle cx="12" cy="5" r="2" />
-      <circle cx="19" cy="5" r="2" />
-      <circle cx="5" cy="12" r="2" />
-      <circle cx="12" cy="12" r="2" />
-      <circle cx="19" cy="12" r="2" />
-      <circle cx="5" cy="19" r="2" />
-      <circle cx="12" cy="19" r="2" />
-      <circle cx="19" cy="19" r="2" />
-    </svg>
-  )
-}
-
 // Ícone de Link (corrente)
 function LinkIcon({ className }: { className?: string }) {
   return (
@@ -221,17 +204,36 @@ export default function UsuariosPage() {
             - Ícone grid: 24x24px, cinza
             - Gap ícone → logo: 70px
             ============================================ */}
-        <header className="w-full bg-background" style={{ paddingTop: '32px' }}>
-          <div className="flex items-center justify-between">
+        <header className="w-full bg-background">
+          <div className="flex items-center justify-between" style={{ marginTop: '32px' }}>
             {/* Lado esquerdo: App Switcher + Logo + Breadcrumb */}
             <div className="flex items-center">
               {/* App Switcher - margem esquerda 51px, ícone 24x24 */}
-              <div style={{ paddingLeft: '51px' }}>
-                <AppSwitcherIcon style={{ width: '24px', height: '24px', color: 'var(--text-muted)' }} />
-              </div>
+              <svg 
+                viewBox="0 0 24 24" 
+                fill="currentColor" 
+                style={{ 
+                  width: '24px', 
+                  height: '24px', 
+                  minWidth: '24px',
+                  minHeight: '24px',
+                  marginLeft: '51px',
+                  color: 'var(--text-muted)' 
+                }}
+              >
+                <circle cx="5" cy="5" r="2" />
+                <circle cx="12" cy="5" r="2" />
+                <circle cx="19" cy="5" r="2" />
+                <circle cx="5" cy="12" r="2" />
+                <circle cx="12" cy="12" r="2" />
+                <circle cx="19" cy="12" r="2" />
+                <circle cx="5" cy="19" r="2" />
+                <circle cx="12" cy="19" r="2" />
+                <circle cx="19" cy="19" r="2" />
+              </svg>
 
               {/* Gap de 70px até o Logo SNAP */}
-              <div style={{ paddingLeft: '70px' }}>
+              <div style={{ marginLeft: '70px' }}>
                 <SnapLogo variant="snap" height={24} />
               </div>
 
@@ -460,15 +462,34 @@ export default function UsuariosPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header - mesmas medidas EXATAS do Figma */}
-      <header className="w-full bg-background" style={{ paddingTop: '32px' }}>
-        <div className="flex items-center justify-between">
+      <header className="w-full bg-background">
+        <div className="flex items-center justify-between" style={{ marginTop: '32px' }}>
           <div className="flex items-center">
             {/* App Switcher - margem esquerda 51px, ícone 24x24 */}
-            <div style={{ paddingLeft: '51px' }}>
-              <AppSwitcherIcon style={{ width: '24px', height: '24px', color: 'var(--text-muted)' }} />
-            </div>
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="currentColor" 
+              style={{ 
+                width: '24px', 
+                height: '24px', 
+                minWidth: '24px',
+                minHeight: '24px',
+                marginLeft: '51px',
+                color: 'var(--text-muted)' 
+              }}
+            >
+              <circle cx="5" cy="5" r="2" />
+              <circle cx="12" cy="5" r="2" />
+              <circle cx="19" cy="5" r="2" />
+              <circle cx="5" cy="12" r="2" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="19" cy="12" r="2" />
+              <circle cx="5" cy="19" r="2" />
+              <circle cx="12" cy="19" r="2" />
+              <circle cx="19" cy="19" r="2" />
+            </svg>
             {/* Gap de 70px até o Logo SNAP */}
-            <div style={{ paddingLeft: '70px' }}>
+            <div style={{ marginLeft: '70px' }}>
               <SnapLogo variant="snap" height={24} />
             </div>
             {/* Separador vertical */}
