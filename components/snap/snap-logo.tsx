@@ -27,20 +27,37 @@ export function SnapLogo({ variant = "snap", className, height = 24 }: SnapLogoP
   const altText = variant === "snap-graph" ? "SNAP Graph" : "SNAP"
   
   return (
-    <span className={`snap-logo-container ${className || ''}`} style={{ height: `${height}px`, display: 'inline-block' }}>
+    <span 
+      className={`snap-logo-container ${className || ''}`} 
+      style={{ 
+        height: `${height}px`, 
+        minHeight: `${height}px`, 
+        maxHeight: `${height}px`, 
+        display: 'inline-flex',
+        alignItems: 'center'
+      }}
+    >
       {/* Logo para dark mode - visível apenas quando .dark está no html */}
       <img 
         src={darkLogo} 
         alt={altText} 
         className="snap-logo-dark"
-        style={{ height: `${height}px` }}
+        style={{ 
+          height: `${height}px`, 
+          minHeight: `${height}px`, 
+          maxHeight: `${height}px` 
+        }}
       />
       {/* Logo para light mode - visível apenas quando .light está no html */}
       <img 
         src={lightLogo} 
         alt={altText} 
         className="snap-logo-light"
-        style={{ height: `${height}px` }}
+        style={{ 
+          height: `${height}px`, 
+          minHeight: `${height}px`, 
+          maxHeight: `${height}px` 
+        }}
       />
     </span>
   )
