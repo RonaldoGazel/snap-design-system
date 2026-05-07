@@ -204,30 +204,45 @@ export default function UsuariosPage() {
             - Gap sidebar → conteúdo: 51px
             ============================================ */}
         <div className="flex flex-1">
-          {/* Sidebar Colapsada - margem esquerda 32px, arredondada */}
+          {/* Sidebar Colapsada - Tokens:
+              - Fundo: #0F0F10 (colors.background.page)
+              - Borda: #2A2B35 (colors.border.DEFAULT)
+              - Ícones: #FFFFFF (colors.text.primary)
+              - Corner radius: 12px (borders.radius.lg)
+              - Margem esquerda: 32px
+          */}
           <aside 
-            className="flex flex-col items-center py-4 bg-sidebar rounded-xl"
-            style={{ marginLeft: '32px', width: '64px', minWidth: '64px' }}
+            className="flex flex-col items-center py-4"
+            style={{ 
+              marginLeft: '32px', 
+              width: '64px', 
+              minWidth: '64px',
+              backgroundColor: '#0F0F10',
+              border: '1px solid #2A2B35',
+              borderRadius: '12px'
+            }}
           >
             <nav className="flex-1 flex flex-col items-center gap-2">
-              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors" style={{ color: VERTICAL_COLOR }}>
+              {/* Ícone ativo - cor da vertical */}
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: VERTICAL_COLOR }}>
                 <Search className="w-5 h-5" />
               </button>
-              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-foreground">
+              {/* Ícones inativos - cor branca #FFFFFF */}
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
                 <Home className="w-5 h-5" />
               </button>
-              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70">
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
                 <FileText className="w-5 h-5" />
               </button>
-              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70">
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
                 <LinkIcon className="w-5 h-5" />
               </button>
-              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70">
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
                 <ShareIcon className="w-5 h-5" />
               </button>
             </nav>
-            <div className="w-8 border-t border-sidebar-border my-2" />
-            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70">
+            <div className="w-8 my-2" style={{ borderTop: '1px solid #2A2B35' }} />
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
               <Settings className="w-5 h-5" />
             </button>
           </aside>
