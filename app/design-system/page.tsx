@@ -5,6 +5,7 @@ import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, E
 import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
 import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
 import { SnapLogo } from "@/components/snap/snap-logo"
+import { SnapHeader } from "@/components/snap/snap-header"
 import { useTheme } from "@/hooks/use-theme"
 
 /* ============================================
@@ -881,6 +882,130 @@ export default function DesignSystemPage() {
           <div className="mt-4 p-4 bg-muted rounded-lg">
             <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Uso no código</p>
             <code className="text-sm text-foreground font-mono">{'<SnapLogo variant="snap" height={32} />'}</code>
+          </div>
+        </Section>
+
+        {/* ============================================
+            HEADER GLOBAL (SnapHeader)
+            ============================================ */}
+        <Section title="HEADER GLOBAL">
+          <p className="text-text-secondary mb-4 font-sans">
+            Componente de cabeçalho global utilizado em todas as telas do ecossistema SNAP. Contém navegação, breadcrumb, notificações e informações do usuário.
+          </p>
+
+          {/* Medidas do Header */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">MEDIDAS EXATAS (FIGMA)</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm font-sans">
+              <div>
+                <span className="text-text-muted">Margem superior:</span>
+                <span className="text-foreground ml-2">32px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Margem inferior:</span>
+                <span className="text-foreground ml-2">24px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Margem esquerda ícone:</span>
+                <span className="text-foreground ml-2">51px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Gap ícone → logo:</span>
+                <span className="text-foreground ml-2">70px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Faixa colorida altura:</span>
+                <span className="text-foreground ml-2">8px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Faixa marginLeft:</span>
+                <span className="text-foreground ml-2">144px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Faixa marginRight:</span>
+                <span className="text-foreground ml-2">32px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Gaps lado direito:</span>
+                <span className="text-foreground ml-2">32px (todos)</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Preview do Header - Administração */}
+          <div className="mb-6">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Vertical: Administração</p>
+            <div className="bg-background rounded-xl border border-border overflow-hidden">
+              <SnapHeader 
+                vertical="administracao"
+                breadcrumb={[{ label: "Usuários" }]}
+                userName="Analista de Contrainteligência"
+                userRole="Administrador"
+                userInitials="VD"
+                notificationCount={35}
+              />
+            </div>
+          </div>
+
+          {/* Preview do Header - Inteligência */}
+          <div className="mb-6">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Vertical: Inteligência</p>
+            <div className="bg-background rounded-xl border border-border overflow-hidden">
+              <SnapHeader 
+                vertical="inteligencia"
+                breadcrumb={[{ label: "Processos" }, { label: "Documentos" }]}
+                userName="Coordenador de Inteligência"
+                userRole="Supervisor"
+                userInitials="RC"
+                notificationCount={12}
+              />
+            </div>
+          </div>
+
+          {/* Props do Componente */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">PROPS DO COMPONENTE</p>
+            <div className="space-y-2 text-sm font-sans">
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">vertical</code>
+                <span className="text-text-muted">Define a cor da vertical (administracao, inteligencia, investigacao, cooperacao, infraestrutura)</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">breadcrumb</code>
+                <span className="text-text-muted">{"Array de { label, href? } para navegação"}</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">userName</code>
+                <span className="text-text-muted">Nome do usuário logado</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">userRole</code>
+                <span className="text-text-muted">Role/cargo do usuário</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">userInitials</code>
+                <span className="text-text-muted">Iniciais para o avatar</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">notificationCount</code>
+                <span className="text-text-muted">Número de notificações no badge</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Uso no código */}
+          <div className="p-4 bg-muted rounded-lg">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Uso no código</p>
+            <pre className="text-sm text-foreground font-mono overflow-x-auto">
+{`<SnapHeader 
+  vertical="administracao"
+  breadcrumb={[{ label: "Usuários" }]}
+  userName="Analista de Contrainteligência"
+  userRole="Administrador"
+  userInitials="VD"
+  notificationCount={35}
+/>`}
+            </pre>
           </div>
         </Section>
 
