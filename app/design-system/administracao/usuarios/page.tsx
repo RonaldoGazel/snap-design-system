@@ -16,14 +16,10 @@ import {
   Users,
   Home,
   FileText,
-  Settings,
-  Bell,
-  Sun,
-  Moon
+  Settings
 } from "lucide-react"
-import { SnapLogo } from "@/components/snap/snap-logo"
+import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
-import { useTheme } from "@/hooks/use-theme"
 
 /**
  * TELA: Usuários (Listagem + Detalhe)
@@ -181,7 +177,6 @@ function GroupBadge({ group }: { group: string }) {
 }
 
 export default function UsuariosPage() {
-  const { theme, toggleTheme } = useTheme()
   const [statusFilter, setStatusFilter] = useState("")
   const [statusSelectOpen, setStatusSelectOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
@@ -196,106 +191,11 @@ export default function UsuariosPage() {
   if (!selectedUser) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
-        {/* ============================================
-            HEADER - Padrão Ouro
-            Medidas EXATAS do Figma:
-            - Margem superior: 32px (regra inegociável)
-            - Margem esquerda: 51px
-            - Ícone grid: 24x24px, cinza
-            - Gap ícone → logo: 70px
-            ============================================ */}
-        <header className="w-full bg-background">
-          <div className="flex items-center justify-between" style={{ marginTop: '32px' }}>
-            {/* Lado esquerdo: App Switcher + Logo + Breadcrumb */}
-            <div className="flex items-center">
-              {/* App Switcher - margem esquerda 51px, ícone 24x24 */}
-              <svg 
-                viewBox="0 0 24 24" 
-                fill="currentColor" 
-                style={{ 
-                  width: '24px', 
-                  height: '24px', 
-                  minWidth: '24px',
-                  minHeight: '24px',
-                  marginLeft: '51px',
-                  color: 'var(--text-muted)' 
-                }}
-              >
-                <circle cx="5" cy="5" r="2" />
-                <circle cx="12" cy="5" r="2" />
-                <circle cx="19" cy="5" r="2" />
-                <circle cx="5" cy="12" r="2" />
-                <circle cx="12" cy="12" r="2" />
-                <circle cx="19" cy="12" r="2" />
-                <circle cx="5" cy="19" r="2" />
-                <circle cx="12" cy="19" r="2" />
-                <circle cx="19" cy="19" r="2" />
-              </svg>
-
-              {/* Gap de 70px até o Logo SNAP */}
-              <div style={{ marginLeft: '70px' }}>
-                <SnapLogo variant="snap" height={24} />
-              </div>
-
-              {/* Separador vertical - com margem */}
-              <div className="w-px h-6 bg-border mx-6" />
-
-              {/* Breadcrumb */}
-              <nav className="flex items-center gap-2">
-                <Home className="w-4 h-4" style={{ color: VERTICAL_COLOR }} />
-                <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>
-                  Administração
-                </span>
-                <span className="text-text-muted">&gt;</span>
-                <span className="font-sans text-sm font-semibold text-foreground">
-                  Usuários
-                </span>
-              </nav>
-            </div>
-
-            {/* Lado direito: Notificações + Tema + Org + Avatar */}
-            <div className="flex items-center gap-4">
-              <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
-                <Bell className="w-5 h-5 text-foreground" />
-                <span 
-                  className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center text-[10px] font-bold text-white px-1"
-                  style={{ backgroundColor: VERTICAL_COLOR }}
-                >
-                  35
-                </span>
-              </button>
-
-              <button onClick={toggleTheme} className="p-2 rounded-lg hover:bg-muted transition-colors">
-                {theme === 'dark' ? <Sun className="w-5 h-5 text-foreground" /> : <Moon className="w-5 h-5 text-foreground" />}
-              </button>
-
-              <span 
-                className="min-w-[24px] h-[24px] rounded-full flex items-center justify-center text-xs font-bold text-white px-1"
-                style={{ backgroundColor: VERTICAL_COLOR }}
-              >
-                35
-              </span>
-
-              <div className="w-px h-6 bg-border" />
-
-              <div className="flex items-center gap-3">
-                <div className="text-right">
-                  <div className="font-sans text-xs text-text-muted">SEAP - Secretaria da Administração</div>
-                  <div className="font-sans text-xs text-text-muted">Penitenciária do Rio de Janeiro</div>
-                </div>
-                <div 
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-sans text-white shrink-0"
-                  style={{ backgroundColor: VERTICAL_COLOR }}
-                >
-                  VD
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Linha colorida da vertical */}
-          <div className="h-1" style={{ backgroundColor: VERTICAL_COLOR }} />
-        </header>
+        {/* Header - Usando componente SnapHeader */}
+        <SnapHeader 
+          vertical="administracao"
+          breadcrumb={[{ label: "Usuários" }]}
+        />
 
         {/* ============================================
             LAYOUT: SIDEBAR + CONTEÚDO
@@ -461,71 +361,14 @@ export default function UsuariosPage() {
   // ============================================
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header - mesmas medidas EXATAS do Figma */}
-      <header className="w-full bg-background">
-        <div className="flex items-center justify-between" style={{ marginTop: '32px' }}>
-          <div className="flex items-center">
-            {/* App Switcher - margem esquerda 51px, ícone 24x24 */}
-            <svg 
-              viewBox="0 0 24 24" 
-              fill="currentColor" 
-              style={{ 
-                width: '24px', 
-                height: '24px', 
-                minWidth: '24px',
-                minHeight: '24px',
-                marginLeft: '51px',
-                color: 'var(--text-muted)' 
-              }}
-            >
-              <circle cx="5" cy="5" r="2" />
-              <circle cx="12" cy="5" r="2" />
-              <circle cx="19" cy="5" r="2" />
-              <circle cx="5" cy="12" r="2" />
-              <circle cx="12" cy="12" r="2" />
-              <circle cx="19" cy="12" r="2" />
-              <circle cx="5" cy="19" r="2" />
-              <circle cx="12" cy="19" r="2" />
-              <circle cx="19" cy="19" r="2" />
-            </svg>
-            {/* Gap de 70px até o Logo SNAP */}
-            <div style={{ marginLeft: '70px' }}>
-              <SnapLogo variant="snap" height={24} />
-            </div>
-            {/* Separador vertical */}
-            <div className="w-px h-6 bg-border mx-6" />
-            {/* Breadcrumb */}
-            <nav className="flex items-center gap-2">
-              <Home className="w-4 h-4" style={{ color: VERTICAL_COLOR }} />
-              <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
-              <span className="text-text-muted">&gt;</span>
-              <span className="font-sans text-sm font-medium text-[#696969]">Usuários</span>
-              <span className="text-text-muted">&gt;</span>
-              <span className="font-sans text-sm font-semibold text-foreground">{selectedUser.nome}</span>
-            </nav>
-          </div>
-          <div className="flex items-center gap-4 pr-8">
-            <button className="relative hover:opacity-80 transition-opacity">
-              <Bell className="w-5 h-5 text-foreground" />
-              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center text-[10px] font-bold text-white px-1" style={{ backgroundColor: VERTICAL_COLOR }}>35</span>
-            </button>
-            <button onClick={toggleTheme} className="hover:opacity-80 transition-opacity">
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-foreground" /> : <Moon className="w-5 h-5 text-foreground" />}
-            </button>
-            <span className="min-w-[24px] h-[24px] rounded-full flex items-center justify-center text-xs font-bold text-white px-1" style={{ backgroundColor: VERTICAL_COLOR }}>35</span>
-            <div className="w-px h-6 bg-border" />
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <div className="font-sans text-xs text-text-muted">SEAP - Secretaria da Administração</div>
-                <div className="font-sans text-xs text-text-muted">Penitenciária do Rio de Janeiro</div>
-              </div>
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-sans text-white shrink-0" style={{ backgroundColor: VERTICAL_COLOR }}>VD</div>
-            </div>
-          </div>
-        </div>
-        {/* Linha colorida da vertical - com margem superior */}
-        <div className="h-1 mt-4" style={{ backgroundColor: VERTICAL_COLOR }} />
-      </header>
+      {/* Header - Usando componente SnapHeader */}
+      <SnapHeader 
+        vertical="administracao"
+        breadcrumb={[
+          { label: "Usuários" },
+          { label: selectedUser.nome }
+        ]}
+      />
 
       {/* Layout */}
       <div className="flex flex-1">

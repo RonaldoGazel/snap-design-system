@@ -1,6 +1,6 @@
 "use client"
 
-import { Bell, Sun, Moon, ChevronRight } from "lucide-react"
+import { Bell, Sun, Moon, ChevronRight, Home } from "lucide-react"
 import { SnapLogo } from "./snap-logo"
 import { useTheme } from "@/hooks/use-theme"
 import { verticals, type Vertical } from "@/lib/snap-tokens"
@@ -8,15 +8,14 @@ import { verticals, type Vertical } from "@/lib/snap-tokens"
 /**
  * SNAP Header Global
  * 
- * Componentes:
- * - App Switcher (grid 9 pontos) à esquerda
- * - Logo SNAP
- * - Breadcrumb com separadores
- * - Área direita: notificações, toggle tema, info organização, avatar
- * - Linha separadora com cor da vertical ativa
+ * MEDIDAS EXATAS DO FIGMA:
+ * - Margem superior: 32px
+ * - Margem esquerda do ícone grid: 51px
+ * - Tamanho do ícone grid: 24x24px
+ * - Gap ícone grid → logo SNAP: 70px
  * 
  * Regras do Breadcrumb:
- * - Primeiro item = Vertical (cor da vertical + ícone + font-medium)
+ * - Primeiro item = Vertical (cor da vertical + ícone casinha + font-medium)
  * - Itens intermediários = #696969 + font-medium
  * - Item atual (último) = text-foreground + font-semibold
  */
@@ -34,54 +33,26 @@ interface SnapHeaderProps {
   breadcrumb?: BreadcrumbItem[]
   /** Nome da organização */
   organizacao?: string
-  /** Sigla da organização (exibida no badge) */
-  organizacaoSigla?: string
+  /** Subtítulo da organização */
+  organizacaoSubtitulo?: string
   /** Iniciais do usuário para o avatar */
   userInitials?: string
   /** Número de notificações */
   notificationCount?: number
+  /** Número secundário (badge ao lado do tema) */
+  secondaryBadge?: number
   /** Callback ao clicar no app switcher */
   onAppSwitcherClick?: () => void
-}
-
-// Ícone App Switcher (grid 3x3)
-function AppSwitcherIcon({ className }: { className?: string }) {
-  return (
-    <svg 
-      viewBox="0 0 24 24" 
-      fill="currentColor" 
-      className={className}
-    >
-      <circle cx="5" cy="5" r="2" />
-      <circle cx="12" cy="5" r="2" />
-      <circle cx="19" cy="5" r="2" />
-      <circle cx="5" cy="12" r="2" />
-      <circle cx="12" cy="12" r="2" />
-      <circle cx="19" cy="12" r="2" />
-      <circle cx="5" cy="19" r="2" />
-      <circle cx="12" cy="19" r="2" />
-      <circle cx="19" cy="19" r="2" />
-    </svg>
-  )
-}
-
-// Ícone Home (casinha)
-function HomeIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} style={style}>
-      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-      <polyline points="9,22 9,12 15,12 15,22" />
-    </svg>
-  )
 }
 
 export function SnapHeader({
   vertical = "administracao",
   breadcrumb = [],
-  organizacao = "Organização",
-  organizacaoSigla = "ORG",
-  userInitials = "US",
-  notificationCount = 0,
+  organizacao = "SEAP - Secretaria da Administração",
+  organizacaoSubtitulo = "Penitenciária do Rio de Janeiro",
+  userInitials = "VD",
+  notificationCount = 35,
+  secondaryBadge = 35,
   onAppSwitcherClick,
 }: SnapHeaderProps) {
   const { theme, toggleTheme } = useTheme()
@@ -89,28 +60,60 @@ export function SnapHeader({
   const verticalColor = verticalData.hex
 
   return (
-    <header className="w-full">
-      {/* Barra principal */}
-      <div className="h-14 px-4 flex items-center justify-between bg-background border-b border-border">
-        {/* Lado esquerdo: App Switcher + Logo + Breadcrumb */}
-        <div className="flex items-center gap-4">
-          {/* App Switcher */}
+    <header className="w-full bg-background">
+      {/* Barra principal - margem superior 32px */}
+      <div 
+        className="flex items-center justify-between"
+        style={{ marginTop: '32px' }}
+      >
+        {/* Lado esquerdo: App Switcher + Logo + Separador + Breadcrumb */}
+        <div className="flex items-center">
+          {/* App Switcher - margem esquerda 51px, ícone 24x24px */}
           <button
             onClick={onAppSwitcherClick}
-            className="p-2 rounded-lg hover:bg-muted transition-colors"
+            className="hover:opacity-80 transition-opacity"
             aria-label="Abrir menu de aplicativos"
+            style={{ marginLeft: '51px' }}
           >
-            <AppSwitcherIcon className="w-5 h-5 text-foreground" />
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="currentColor"
+              style={{ 
+                width: '24px', 
+                height: '24px',
+                color: 'var(--text-muted)'
+              }}
+            >
+              <circle cx="5" cy="5" r="2" />
+              <circle cx="12" cy="5" r="2" />
+              <circle cx="19" cy="5" r="2" />
+              <circle cx="5" cy="12" r="2" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="19" cy="12" r="2" />
+              <circle cx="5" cy="19" r="2" />
+              <circle cx="12" cy="19" r="2" />
+              <circle cx="19" cy="19" r="2" />
+            </svg>
           </button>
 
+          {/* Logo SNAP - gap de 70px do ícone */}
+          <div style={{ marginLeft: '70px' }}>
+            <SnapLogo variant="snap" height={24} />
+          </div>
+
           {/* Separador vertical */}
-          <div className="w-px h-6 bg-border" />
+          <div 
+            className="bg-border" 
+            style={{ width: '1px', height: '24px', marginLeft: '24px', marginRight: '24px' }} 
+          />
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2" aria-label="Breadcrumb">
             {/* Item da Vertical (primeiro) */}
             <div className="flex items-center gap-2">
-              <HomeIcon className="w-4 h-4" style={{ color: verticalColor }} />
+              <Home 
+                style={{ width: '16px', height: '16px', color: verticalColor }} 
+              />
               <span 
                 className="font-sans text-sm font-medium"
                 style={{ color: verticalColor }}
@@ -145,18 +148,28 @@ export function SnapHeader({
           </nav>
         </div>
 
-        {/* Lado direito: Notificações + Tema + Organização + Avatar */}
-        <div className="flex items-center gap-4">
+        {/* Lado direito: Notificações + Tema + Badge + Separador + Org + Avatar */}
+        <div className="flex items-center gap-4" style={{ marginRight: '32px' }}>
           {/* Notificações */}
           <button
-            className="relative p-2 rounded-lg hover:bg-muted transition-colors"
+            className="relative hover:opacity-80 transition-opacity"
             aria-label={`${notificationCount} notificações`}
           >
-            <Bell className="w-5 h-5 text-foreground" />
+            <Bell style={{ width: '20px', height: '20px', color: 'var(--foreground)' }} />
             {notificationCount > 0 && (
               <span 
-                className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center text-[10px] font-bold text-white px-1"
-                style={{ backgroundColor: verticalColor }}
+                className="absolute flex items-center justify-center text-white font-bold font-sans"
+                style={{ 
+                  top: '-4px', 
+                  right: '-8px', 
+                  minWidth: '18px', 
+                  height: '18px', 
+                  borderRadius: '9px',
+                  fontSize: '10px',
+                  paddingLeft: '4px',
+                  paddingRight: '4px',
+                  backgroundColor: verticalColor 
+                }}
               >
                 {notificationCount > 99 ? "99+" : notificationCount}
               </span>
@@ -166,32 +179,56 @@ export function SnapHeader({
           {/* Toggle Tema */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-muted transition-colors"
+            className="hover:opacity-80 transition-opacity"
             aria-label={`Alternar para modo ${theme === 'dark' ? 'claro' : 'escuro'}`}
           >
             {theme === 'dark' ? (
-              <Sun className="w-5 h-5 text-foreground" />
+              <Sun style={{ width: '20px', height: '20px', color: 'var(--foreground)' }} />
             ) : (
-              <Moon className="w-5 h-5 text-foreground" />
+              <Moon style={{ width: '20px', height: '20px', color: 'var(--foreground)' }} />
             )}
           </button>
 
-          {/* Separador */}
-          <div className="w-px h-6 bg-border" />
+          {/* Badge secundário */}
+          {secondaryBadge !== undefined && (
+            <span 
+              className="flex items-center justify-center text-white font-bold font-sans"
+              style={{ 
+                minWidth: '24px', 
+                height: '24px', 
+                borderRadius: '12px',
+                fontSize: '12px',
+                paddingLeft: '6px',
+                paddingRight: '6px',
+                backgroundColor: verticalColor 
+              }}
+            >
+              {secondaryBadge}
+            </span>
+          )}
 
-          {/* Info Organização */}
+          {/* Separador */}
+          <div 
+            className="bg-border" 
+            style={{ width: '1px', height: '24px' }} 
+          />
+
+          {/* Info Organização + Avatar */}
           <div className="flex items-center gap-3">
             <div className="text-right">
-              <div className="font-sans text-xs text-text-muted">{organizacaoSigla}</div>
-              <div className="font-sans text-sm text-foreground truncate max-w-[150px]">
-                {organizacao}
-              </div>
+              <div className="font-sans text-xs text-text-muted">{organizacao}</div>
+              <div className="font-sans text-xs text-text-muted">{organizacaoSubtitulo}</div>
             </div>
 
-            {/* Avatar */}
+            {/* Avatar - 32x32px */}
             <div 
-              className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-sans text-white shrink-0"
-              style={{ backgroundColor: verticalColor }}
+              className="flex items-center justify-center text-xs font-bold font-sans text-white shrink-0"
+              style={{ 
+                width: '32px', 
+                height: '32px', 
+                borderRadius: '16px',
+                backgroundColor: verticalColor 
+              }}
             >
               {userInitials}
             </div>
@@ -200,7 +237,7 @@ export function SnapHeader({
       </div>
 
       {/* Linha separadora com cor da vertical */}
-      <div className="h-1" style={{ backgroundColor: verticalColor }} />
+      <div style={{ height: '4px', marginTop: '16px', backgroundColor: verticalColor }} />
     </header>
   )
 }
