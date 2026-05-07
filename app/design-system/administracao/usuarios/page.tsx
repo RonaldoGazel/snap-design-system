@@ -301,8 +301,8 @@ export default function UsuariosPage() {
               </div>
             </div>
 
-            {/* Tabela */}
-            <div className="mb-6">
+            {/* Tabela - com borda arredondada */}
+            <div className="rounded-xl border border-border overflow-hidden mb-6">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border">
