@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import Link from "next/link"
 import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon } from "lucide-react"
 import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
 import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
@@ -15,11 +16,11 @@ import { useTheme } from "@/hooks/use-theme"
 
 // Verticais do Ecossistema SNAP (cores oficiais)
 const verticais = [
-  { name: "INVESTIGAÇÃO", color: "#FE473C", colorName: "Coral", icon: "Lupa" },
-  { name: "INTELIGÊNCIA", color: "#72284B", colorName: "Bordô", icon: "Cabeça/Cérebro" },
-  { name: "COOPERAÇÃO", color: "#889EA3", colorName: "Grey Ahead", icon: "Pessoas" },
-  { name: "INFRAESTRUTURA", color: "#287266", colorName: "Petroleum Blue", icon: "Nós conectados" },
-  { name: "ADMINISTRAÇÃO", color: "#333540", colorName: "Deep Gray Blue", icon: "Pessoa com engrenagem" },
+{ name: "INVESTIGAÇÃO", color: "#FE473C", colorName: "Coral", icon: "Lupa", href: null },
+{ name: "INTELIGÊNCIA", color: "#72284B", colorName: "Bordô", icon: "Cabeça/Cérebro", href: null },
+{ name: "COOPERAÇÃO", color: "#889EA3", colorName: "Grey Ahead", icon: "Pessoas", href: null },
+{ name: "INFRAESTRUTURA", color: "#287266", colorName: "Petroleum Blue", icon: "Nós conectados", href: null },
+{ name: "ADMINISTRAÇÃO", color: "#333540", colorName: "Deep Gray Blue", icon: "Pessoa com engrenagem", href: "/design-system/administracao" },
 ]
 
 // Cores Base
@@ -1024,9 +1025,20 @@ export default function DesignSystemPage() {
                   <p className="font-title text-lg">{v.name}</p>
                 </div>
                 <div className="h-2" style={{ backgroundColor: v.color }} />
-                <div className="px-4 py-2 flex items-center gap-2">
-                  <div className="w-4 h-4 rounded" style={{ backgroundColor: v.color }} />
-                  <code className="text-xs text-text-muted font-mono">{v.color}</code>
+                <div className="px-4 py-2 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded" style={{ backgroundColor: v.color }} />
+                    <code className="text-xs text-text-muted font-mono">{v.color}</code>
+                  </div>
+                  {v.href && (
+                    <Link 
+                      href={v.href}
+                      className="text-xs font-sans px-2 py-1 rounded-lg border border-border hover:bg-muted transition-colors"
+                      style={{ color: v.color }}
+                    >
+                      Ver telas
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}
