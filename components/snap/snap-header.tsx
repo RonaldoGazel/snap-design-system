@@ -91,7 +91,7 @@ export function SnapHeader({
             onClick={onAppSwitcherClick}
             className="hover:opacity-80 transition-opacity"
             aria-label="Abrir menu de aplicativos"
-            style={{ marginLeft: '51px', padding: 0, border: 'none', background: 'none' }}
+            style={{ marginLeft: '51px', marginTop: '2px', padding: 0, border: 'none', background: 'none' }}
           >
             <MenuVerticaisIcon color="#505050" />
           </button>
