@@ -251,8 +251,7 @@ export default function UsuariosPage() {
           {/* Área de Conteúdo - margem esquerda 51px da sidebar */}
           <main className="flex-1 py-8 pr-8" style={{ marginLeft: '51px' }}>
             {/* Header: Título + Filtros + Botão */}
-            {/* px-4 para alinhar com o padding interno da tabela */}
-            <div className="flex items-center justify-between mb-6 px-4">
+            <div className="flex items-center justify-between mb-6">
               {/* Título com ícone */}
               <div className="flex items-center gap-3">
                 <Users className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
@@ -302,8 +301,8 @@ export default function UsuariosPage() {
               </div>
             </div>
 
-            {/* Tabela - Exatamente igual ao padrão do Design System */}
-            <div className="rounded-xl border border-border overflow-hidden mb-6">
+            {/* Tabela */}
+            <div className="mb-6">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border">
