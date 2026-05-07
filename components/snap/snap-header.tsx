@@ -48,8 +48,8 @@ interface BreadcrumbItem {
 interface SnapHeaderProps {
   vertical?: Vertical
   breadcrumb?: BreadcrumbItem[]
-  organizacao?: string
-  organizacaoSubtitulo?: string
+  userName?: string
+  userRole?: string
   userInitials?: string
   notificationCount?: number
   onAppSwitcherClick?: () => void
@@ -58,8 +58,8 @@ interface SnapHeaderProps {
 export function SnapHeader({
   vertical = "administracao",
   breadcrumb = [],
-  organizacao = "SEAP - Secretaria da Administração",
-  organizacaoSubtitulo = "Penitenciária do Rio de Janeiro",
+  userName = "Analista de Contrainteligência",
+  userRole = "Admin",
   userInitials = "VD",
   notificationCount = 35,
   onAppSwitcherClick,
@@ -201,11 +201,11 @@ export function SnapHeader({
             style={{ width: '1px', height: '24px', marginLeft: '32px' }} 
           />
 
-          {/* Info Organização + Avatar - gap de 32px do separador */}
+          {/* Info Usuário + Avatar - gap de 32px do separador */}
           <div className="flex items-center gap-3" style={{ marginLeft: '32px' }}>
             <div className="text-right">
-              <div className="font-sans text-xs text-text-muted">{organizacao}</div>
-              <div className="font-sans text-xs text-text-muted">{organizacaoSubtitulo}</div>
+              <div className="font-sans text-xs text-foreground font-medium">{userName}</div>
+              <div className="font-sans text-xs text-text-muted">{userRole}</div>
             </div>
 
             {/* Avatar - 32x32px */}
