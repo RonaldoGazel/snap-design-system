@@ -75,13 +75,13 @@ export function SnapHeader({
       {/* 
         Container principal do header
         - Margem superior: 32px (topo da página até os elementos)
-        - Margem inferior: 32px (elementos até a faixa colorida)
+        - Margem inferior: 24px (elementos até a faixa colorida)
       */}
       <div 
         className="flex items-center justify-between"
         style={{ 
-          paddingTop: '32px',
-          paddingBottom: '32px'
+          marginTop: '32px',
+          marginBottom: '24px'
         }}
       >
         {/* Lado esquerdo: Ícone Grid + Logo + Separador + Breadcrumb */}
