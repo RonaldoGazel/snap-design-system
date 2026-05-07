@@ -90,12 +90,13 @@ export function SnapHeader({
             Ícone Menu Verticais (grid 3x3)
             - Tamanho: 24x24px (fixo no SVG)
             - Cor: #505050 (cinza)
-            - Sem margem esquerda aqui - a margem será no container pai
+            - Margem esquerda: 51px
           */}
           <button
             onClick={onAppSwitcherClick}
             className="hover:opacity-80 transition-opacity"
             aria-label="Abrir menu de aplicativos"
+            style={{ marginLeft: '51px' }}
           >
             <MenuVerticaisIcon color="#505050" />
           </button>
@@ -244,8 +245,8 @@ export function SnapHeader({
         </div>
       </div>
 
-      {/* Faixa colorida da vertical - 8px de altura */}
-      <div style={{ height: '8px', backgroundColor: verticalColor }} />
+      {/* Faixa colorida da vertical - 8px de altura, começa a 144px da borda (alinhada com logo SNAP) */}
+      <div style={{ height: '8px', backgroundColor: verticalColor, marginLeft: '144px' }} />
     </header>
   )
 }
