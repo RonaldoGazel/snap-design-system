@@ -69,18 +69,15 @@ export function SnapHeader({
   const verticalColor = verticalData.hex
 
   return (
-    <header className="w-full bg-background">
+    <header className="w-full bg-background" style={{ paddingTop: '32px' }}>
       {/* 
         Container principal do header
-        - Margem superior: 32px (topo da página até os elementos)
+        - Margem superior: 32px (aplicada no header via paddingTop)
         - Margem inferior: 24px (elementos até a faixa colorida)
       */}
       <div 
         className="flex items-center justify-between"
-        style={{ 
-          marginTop: '32px',
-          marginBottom: '24px'
-        }}
+        style={{ marginBottom: '24px' }}
       >
         {/* Lado esquerdo: Ícone Grid + Logo + Separador + Breadcrumb */}
         <div className="flex items-center">
