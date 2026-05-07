@@ -217,11 +217,11 @@ export default function UsuariosPage() {
             HEADER - Padrão Ouro
             Medidas exatas do Figma:
             - Ícone grid: 24px, cinza
-            - Margem superior: 32px
+            - Margem superior: 52px
             - Margem esquerda: 51px
             - Gap ícone → logo: 70px
             ============================================ */}
-        <header className="w-full pt-8 bg-background">
+        <header className="w-full pt-[52px] bg-background">
           <div className="flex items-center justify-between">
             {/* Lado esquerdo: App Switcher + Logo + Breadcrumb */}
             <div className="flex items-center">
@@ -461,8 +461,8 @@ export default function UsuariosPage() {
   // ============================================
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header - mesmas medidas do Figma */}
-      <header className="w-full pt-8 bg-background">
+      {/* Header - mesmas medidas do Figma: margem superior 52px, margem esquerda 51px, gap 70px */}
+      <header className="w-full pt-[52px] bg-background">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             {/* App Switcher - margem esquerda 51px */}
