@@ -279,23 +279,17 @@ export default function UsuariosPage() {
               </div>
             </div>
 
-            {/* Tabela - Regras do Design System */}
-            <div className="mb-6">
+            {/* Tabela - Exatamente igual ao padrão do Design System */}
+            <div className="rounded-xl border border-border overflow-hidden mb-6">
               <table className="w-full">
                 <thead>
-                  <tr>
+                  <tr className="border-b border-border">
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Email</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Status</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nível de Acesso</th>
                     <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Criado em</th>
                     <th className="text-right py-3 px-4 text-text-muted font-medium text-sm font-sans">Ações</th>
-                  </tr>
-                  {/* Linha separadora tracejada - cor da vertical */}
-                  <tr>
-                    <th colSpan={6} className="p-0">
-                      <div style={{ borderTop: `1px dashed ${VERTICAL_COLOR}` }} />
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -330,38 +324,28 @@ export default function UsuariosPage() {
               </table>
             </div>
 
-            {/* Paginação - Padrão Ouro */}
+            {/* Paginação - Exatamente igual ao padrão do Design System */}
             <div className="flex items-center justify-between">
-              {/* Botão Página anterior - texto com cor da vertical, sem fundo */}
-              <button 
-                className="flex items-center gap-2 px-4 py-2 text-sm font-sans border border-border rounded-lg hover:opacity-80 transition-opacity"
-                style={{ color: VERTICAL_COLOR }}
-              >
+              <button className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary hover:text-foreground font-sans">
                 <ArrowLeft className="w-4 h-4" />
                 Página anterior
               </button>
-              
               <div className="flex items-center gap-1">
                 <span className="px-3 py-1 text-sm text-text-muted font-sans">1</span>
                 <span className="px-2 text-text-muted">...</span>
-                {[3, 4, 5, 6].map((num) => (
-                  <span key={num} className="px-3 py-1 text-sm text-text-muted font-sans cursor-pointer hover:text-foreground">{num}</span>
-                ))}
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">3</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">4</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">5</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">6</span>
                 <span className="px-3 py-1 text-sm text-foreground font-bold font-sans bg-muted rounded">7</span>
-                {[8, 9].map((num) => (
-                  <span key={num} className="px-3 py-1 text-sm text-text-muted font-sans cursor-pointer hover:text-foreground">{num}</span>
-                ))}
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">8</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">9</span>
                 <span className="px-2 text-text-muted">...</span>
                 <span className="px-3 py-1 text-sm text-text-muted font-sans">25</span>
               </div>
-              
-              {/* Botão Próxima página - texto com cor da vertical, sem fundo */}
-              <button 
-                className="flex items-center gap-2 px-4 py-2 text-sm font-sans border border-border rounded-lg hover:opacity-80 transition-opacity"
-                style={{ color: VERTICAL_COLOR }}
-              >
+              <button className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary hover:text-foreground font-sans">
                 Próxima página
-                <ArrowRight className="w-4 h-4" />
+                <ArrowLeft className="w-4 h-4 rotate-180" />
               </button>
             </div>
           </main>
