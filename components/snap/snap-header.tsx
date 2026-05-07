@@ -152,8 +152,9 @@ export function SnapHeader({
           </nav>
         </div>
 
-        {/* Lado direito: Notificações + Tema + Badge + Separador + Org + Avatar */}
-        <div className="flex items-center gap-4" style={{ marginRight: '32px' }}>
+        {/* Lado direito: Notificações + Tema + Separador + Org + Avatar */}
+        {/* Gaps: sininho→sol: 32px, sol→separador: 32px, separador→nome: 32px */}
+        <div className="flex items-center" style={{ marginRight: '32px' }}>
           {/* Notificações */}
           <button
             className="relative hover:opacity-80 transition-opacity"
@@ -164,8 +165,8 @@ export function SnapHeader({
               <span 
                 className="absolute flex items-center justify-center text-white font-bold font-sans"
                 style={{ 
-                  top: '-4px', 
-                  right: '-8px', 
+                  top: '-6px', 
+                  right: '-12px', 
                   minWidth: '18px', 
                   height: '18px', 
                   borderRadius: '9px',
@@ -180,11 +181,12 @@ export function SnapHeader({
             )}
           </button>
 
-          {/* Toggle Tema */}
+          {/* Toggle Tema - gap de 32px do sininho */}
           <button
             onClick={toggleTheme}
             className="hover:opacity-80 transition-opacity"
             aria-label={`Alternar para modo ${theme === 'dark' ? 'claro' : 'escuro'}`}
+            style={{ marginLeft: '32px' }}
           >
             {theme === 'dark' ? (
               <Sun style={{ width: '20px', height: '20px', color: 'var(--foreground)' }} />
@@ -193,14 +195,14 @@ export function SnapHeader({
             )}
           </button>
 
-          {/* Separador */}
+          {/* Separador - gap de 32px do solzinho */}
           <div 
             className="bg-border" 
-            style={{ width: '1px', height: '24px' }} 
+            style={{ width: '1px', height: '24px', marginLeft: '32px' }} 
           />
 
-          {/* Info Organização + Avatar */}
-          <div className="flex items-center gap-3">
+          {/* Info Organização + Avatar - gap de 32px do separador */}
+          <div className="flex items-center gap-3" style={{ marginLeft: '32px' }}>
             <div className="text-right">
               <div className="font-sans text-xs text-text-muted">{organizacao}</div>
               <div className="font-sans text-xs text-text-muted">{organizacaoSubtitulo}</div>
