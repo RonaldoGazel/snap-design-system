@@ -69,7 +69,7 @@ export function SnapHeader({
   const verticalColor = verticalData.hex
 
   return (
-    <header className="w-full bg-background" style={{ paddingTop: '32px' }}>
+    <header className="w-full bg-background" style={{ paddingTop: '26px' }}>
       {/* 
         Container principal do header
         - Margem superior: 32px (aplicada no header via paddingTop)
