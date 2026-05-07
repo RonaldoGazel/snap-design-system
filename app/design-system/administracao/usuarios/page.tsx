@@ -1,41 +1,88 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { 
   Plus, 
   Search, 
-  Edit2, 
+  Eye,
+  Pencil,
   Trash2, 
   Key,
   Ban,
   Lock,
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
   ChevronDown,
   ArrowLeft,
-  Users as UsersIcon
+  ArrowRight,
+  Users,
+  Home,
+  FileText,
+  Settings,
+  Bell,
+  Sun,
+  Moon
 } from "lucide-react"
-import { SnapHeader } from "@/components/snap/snap-header"
-import { SnapSidebar, SnapSidebarCollapsed } from "@/components/snap/snap-sidebar"
+import { SnapLogo } from "@/components/snap/snap-logo"
 import { SnapButton } from "@/components/snap/snap-button"
-import { verticals } from "@/lib/snap-tokens"
+import { useTheme } from "@/hooks/use-theme"
 
 /**
  * TELA: Usuários (Listagem + Detalhe)
  * Vertical: Administração (#333540)
  * 
- * Baseado nas telas provisórias do Figma:
- * - Listagem: tabela com Nome, Email, Status, Nível de Acesso, Criado em
- * - Detalhe: card com dados completos + ações + permissões
+ * PADRÃO OURO seguido:
+ * - Header com logo SNAP + breadcrumb + linha colorida
+ * - Sidebar colapsada (64px) com ícones específicos
+ * - Padding de 32px (p-8) na área de conteúdo
+ * - Tabela seguindo regras do design system
+ * - Paginação com "Página anterior" e "Próxima página"
  */
+
+const VERTICAL_COLOR = "#333540" // Deep Gray Blue - Administração
+
+// Ícone do App Switcher (grid 3x3)
+function AppSwitcherIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <circle cx="5" cy="5" r="2" />
+      <circle cx="12" cy="5" r="2" />
+      <circle cx="19" cy="5" r="2" />
+      <circle cx="5" cy="12" r="2" />
+      <circle cx="12" cy="12" r="2" />
+      <circle cx="19" cy="12" r="2" />
+      <circle cx="5" cy="19" r="2" />
+      <circle cx="12" cy="19" r="2" />
+      <circle cx="19" cy="19" r="2" />
+    </svg>
+  )
+}
+
+// Ícone de Link (corrente)
+function LinkIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </svg>
+  )
+}
+
+// Ícone de Share
+function ShareIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="18" cy="5" r="3" />
+      <circle cx="6" cy="12" r="3" />
+      <circle cx="18" cy="19" r="3" />
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+    </svg>
+  )
+}
 
 // Dados mockados para a tabela
 const mockUsers = [
   { 
-    id: "dd595bd0-363a-4a8a-bad5-7f2af1af5186",
+    id: "1",
     nome: "admin", 
     email: "admin@snap.local", 
     status: "Ativo",
@@ -57,7 +104,7 @@ const mockUsers = [
     ]
   },
   { 
-    id: "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    id: "2",
     nome: "Maria Santos", 
     email: "maria.santos@snap.local", 
     status: "Ativo",
@@ -71,7 +118,7 @@ const mockUsers = [
     permissoes: ["*: read", "*: comment", "*: create"]
   },
   { 
-    id: "b2c3d4e5-6789-01bc-defg-2345678901bc",
+    id: "3",
     nome: "Pedro Costa", 
     email: "pedro.costa@snap.local", 
     status: "Inativo",
@@ -85,7 +132,7 @@ const mockUsers = [
     permissoes: ["*: read"]
   },
   { 
-    id: "c3d4e5f6-7890-12cd-efgh-3456789012cd",
+    id: "4",
     nome: "Ana Oliveira", 
     email: "ana.oliveira@snap.local", 
     status: "Bloqueado",
@@ -98,19 +145,31 @@ const mockUsers = [
     grupos: ["Supervisores"],
     permissoes: ["*: read", "*: approve", "*: reject"]
   },
+  { 
+    id: "5",
+    nome: "Carlos Ferreira", 
+    email: "carlos.ferreira@snap.local", 
+    status: "Ativo",
+    nivelAcesso: 1,
+    idAuthExterna: "ef899693-efad-8db8-f894-j500670eccba",
+    organizacao: "96c84e31-0f15-4f1f-aa06-810679572b1e",
+    versaoIdentidade: 1,
+    criadoEm: "Feb 10, 2026, 11:00:00 AM",
+    atualizadoEm: "May 2, 2026, 4:30:00 PM",
+    grupos: ["Analistas"],
+    permissoes: ["*: read", "*: comment"]
+  },
 ]
 
-// Tipo para usuário
 type User = typeof mockUsers[0]
 
-// Componente de Badge de Status
+// Badge de Status
 function StatusBadge({ status }: { status: string }) {
   const config: Record<string, { bg: string; text: string }> = {
-    "Ativo": { bg: "bg-[#3f9f76]", text: "text-white" },
-    "Inativo": { bg: "bg-[#6b6e7a]", text: "text-white" },
-    "Bloqueado": { bg: "bg-[#fe473c]", text: "text-white" },
+    "Ativo": { bg: "bg-success", text: "text-white" },
+    "Inativo": { bg: "bg-muted", text: "text-text-muted" },
+    "Bloqueado": { bg: "bg-error", text: "text-white" },
   }
-  
   const style = config[status] || config["Inativo"]
   
   return (
@@ -120,182 +179,267 @@ function StatusBadge({ status }: { status: string }) {
   )
 }
 
-// Componente de Badge de Permissão
+// Badge de Permissão
 function PermissionBadge({ permission }: { permission: string }) {
   return (
-    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-sans font-medium border border-[#4a4d61] text-[#b1b3c2] bg-transparent">
+    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-sans font-medium border border-border text-text-secondary bg-transparent">
       {permission}
     </span>
   )
 }
 
-// Componente de Grupo Badge
+// Badge de Grupo
 function GroupBadge({ group }: { group: string }) {
   return (
-    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-sans font-medium border border-[#4a4d61] text-white bg-transparent">
+    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-sans font-medium border border-border text-foreground bg-transparent">
       {group}
     </span>
   )
 }
 
 export default function UsuariosPage() {
-  const router = useRouter()
-  const [sidebarExpanded, setSidebarExpanded] = useState(false)
+  const { theme, toggleTheme } = useTheme()
   const [statusFilter, setStatusFilter] = useState("")
-  const [pageSize, setPageSize] = useState(50)
+  const [statusSelectOpen, setStatusSelectOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-
-  const vertical = verticals.administracao
-
-  const handleItemClick = (verticalKey: string, itemId: string, href?: string) => {
-    if (href) {
-      router.push(href)
-    }
-  }
 
   const filteredUsers = mockUsers.filter(user => 
     statusFilter === "" || user.status === statusFilter
   )
 
-  // Tela de Listagem
+  // ============================================
+  // TELA DE LISTAGEM
+  // ============================================
   if (!selectedUser) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
-        {/* Header */}
-        <SnapHeader
-          vertical="administracao"
-          breadcrumb={[
-            { label: "Usuários", icon: <UsersIcon className="w-4 h-4" /> }
-          ]}
-          organizacao="SNAP"
-          organizacaoSigla="SNAP"
-          userInitials="PA"
-          notificationCount={3}
-        />
+        {/* ============================================
+            HEADER - Padrão Ouro
+            ============================================ */}
+        <header className="w-full">
+          <div className="h-14 px-6 flex items-center justify-between bg-background">
+            {/* Lado esquerdo: App Switcher + Logo + Breadcrumb */}
+            <div className="flex items-center gap-4">
+              {/* App Switcher */}
+              <button className="p-2 rounded-lg hover:bg-muted transition-colors">
+                <AppSwitcherIcon className="w-5 h-5 text-foreground" />
+              </button>
 
-        {/* Layout principal */}
-        <div className="flex-1 flex">
-          {/* Sidebar */}
-          {sidebarExpanded ? (
-            <SnapSidebar
-              expanded={true}
-              activeVertical="administracao"
-              activeItem="usuarios"
-              onItemClick={handleItemClick}
-              onToggleExpand={() => setSidebarExpanded(false)}
-            />
-          ) : (
-            <SnapSidebarCollapsed
-              activeVertical="administracao"
-              onVerticalClick={() => setSidebarExpanded(true)}
-            />
-          )}
+              {/* Logo SNAP */}
+              <SnapLogo variant="snap" height={24} />
 
-          {/* Conteúdo principal */}
-          <main className="flex-1 p-8 overflow-auto">
-            {/* Título da página */}
-            <h1 className="text-2xl font-sans font-bold text-foreground mb-6">
-              Usuários
-            </h1>
+              {/* Separador vertical */}
+              <div className="w-px h-6 bg-border" />
 
-            {/* Barra de filtros e ações */}
-            <div className="bg-[#1a1a1e] rounded-xl border border-[#2a2b35] p-4 mb-0">
-              <div className="flex items-center justify-between">
-                {/* Filtro de Status */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-xs font-sans text-[#898c9d]">Status</label>
-                  <div className="relative">
-                    <select 
-                      value={statusFilter}
-                      onChange={(e) => setStatusFilter(e.target.value)}
-                      className="appearance-none bg-[#0f0f10] border border-[#2a2b35] rounded-lg px-4 py-2 pr-10 font-sans text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-[#333540] min-w-[140px]"
-                    >
-                      <option value="">Status</option>
-                      <option value="Ativo">Ativo</option>
-                      <option value="Inativo">Inativo</option>
-                      <option value="Bloqueado">Bloqueado</option>
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#898c9d] pointer-events-none" />
-                  </div>
+              {/* Breadcrumb */}
+              <nav className="flex items-center gap-2">
+                <Home className="w-4 h-4" style={{ color: VERTICAL_COLOR }} />
+                <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>
+                  Administração
+                </span>
+                <span className="text-text-muted">&gt;</span>
+                <span className="font-sans text-sm font-semibold text-foreground">
+                  Usuários
+                </span>
+              </nav>
+            </div>
+
+            {/* Lado direito: Notificações + Tema + Org + Avatar */}
+            <div className="flex items-center gap-4">
+              <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
+                <Bell className="w-5 h-5 text-foreground" />
+                <span 
+                  className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center text-[10px] font-bold text-white px-1"
+                  style={{ backgroundColor: VERTICAL_COLOR }}
+                >
+                  35
+                </span>
+              </button>
+
+              <button onClick={toggleTheme} className="p-2 rounded-lg hover:bg-muted transition-colors">
+                {theme === 'dark' ? <Sun className="w-5 h-5 text-foreground" /> : <Moon className="w-5 h-5 text-foreground" />}
+              </button>
+
+              <span 
+                className="min-w-[24px] h-[24px] rounded-full flex items-center justify-center text-xs font-bold text-white px-1"
+                style={{ backgroundColor: VERTICAL_COLOR }}
+              >
+                35
+              </span>
+
+              <div className="w-px h-6 bg-border" />
+
+              <div className="flex items-center gap-3">
+                <div className="text-right">
+                  <div className="font-sans text-xs text-text-muted">SEAP - Secretaria da Administração</div>
+                  <div className="font-sans text-xs text-text-muted">Penitenciária do Rio de Janeiro</div>
+                </div>
+                <div 
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-sans text-white shrink-0"
+                  style={{ backgroundColor: VERTICAL_COLOR }}
+                >
+                  VD
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Linha colorida da vertical */}
+          <div className="h-1" style={{ backgroundColor: VERTICAL_COLOR }} />
+        </header>
+
+        {/* ============================================
+            LAYOUT: SIDEBAR + CONTEÚDO
+            ============================================ */}
+        <div className="flex flex-1">
+          {/* Sidebar Colapsada (64px) - Padrão Ouro */}
+          <aside className="w-16 min-h-full bg-sidebar flex flex-col items-center py-4 border-r border-sidebar-border">
+            <nav className="flex-1 flex flex-col items-center gap-2">
+              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors" style={{ color: VERTICAL_COLOR }}>
+                <Search className="w-5 h-5" />
+              </button>
+              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-foreground">
+                <Home className="w-5 h-5" />
+              </button>
+              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70">
+                <FileText className="w-5 h-5" />
+              </button>
+              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70">
+                <LinkIcon className="w-5 h-5" />
+              </button>
+              <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70">
+                <ShareIcon className="w-5 h-5" />
+              </button>
+            </nav>
+            <div className="w-8 border-t border-sidebar-border my-2" />
+            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70">
+              <Settings className="w-5 h-5" />
+            </button>
+          </aside>
+
+          {/* Área de Conteúdo - Padding de 32px (p-8) */}
+          <main className="flex-1 p-8">
+            {/* Header: Título + Filtros + Botão */}
+            <div className="flex items-center justify-between mb-6">
+              {/* Título com ícone */}
+              <div className="flex items-center gap-3">
+                <Users className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
+                <h1 className="font-title text-2xl text-foreground">USUÁRIOS</h1>
+              </div>
+
+              {/* Filtros e Ação */}
+              <div className="flex items-center gap-4">
+                {/* Select de Status */}
+                <div className="relative">
+                  <button
+                    onClick={() => setStatusSelectOpen(!statusSelectOpen)}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-card hover:bg-card-hover transition-colors min-w-[120px]"
+                  >
+                    <span className="font-sans text-sm text-text-secondary">
+                      {statusFilter === "" ? "Status" : statusFilter}
+                    </span>
+                    <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${statusSelectOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {statusSelectOpen && (
+                    <div className="absolute top-full left-0 mt-1 w-full bg-card border border-border rounded-lg shadow-lg z-10 overflow-hidden">
+                      {["", "Ativo", "Inativo", "Bloqueado"].map((option) => (
+                        <button
+                          key={option || "todos"}
+                          onClick={() => { setStatusFilter(option); setStatusSelectOpen(false) }}
+                          className={`w-full text-left px-4 py-2 text-sm font-sans hover:bg-muted transition-colors ${
+                            statusFilter === option ? 'text-foreground bg-muted' : 'text-text-muted'
+                          }`}
+                        >
+                          {option === "" ? "Todos" : option}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {/* Botão Criar Usuário */}
-                <SnapButton
-                  variant="primary"
+                {/* Botão Novo Usuário */}
+                <SnapButton 
+                  variant="primary" 
                   size="default"
                   icon={<Plus className="w-4 h-4" />}
-                  className="bg-[#4a90a4] hover:bg-[#3d7a8c]"
+                  className="!bg-[#333540] hover:!bg-[#252730]"
                 >
-                  Criar Usuário
+                  Novo usuário
                 </SnapButton>
               </div>
             </div>
 
-            {/* Tabela de usuários */}
-            <div className="bg-[#1a1a1e] rounded-b-xl border border-t-0 border-[#2a2b35] overflow-hidden">
-              {/* Header da tabela */}
-              <div className="grid grid-cols-[1.5fr_2fr_1fr_1fr_1.5fr] gap-4 px-6 py-3 border-b border-[#2a2b35]">
-                <span className="font-sans text-sm font-medium text-foreground">Nome</span>
-                <span className="font-sans text-sm font-medium text-foreground">Email</span>
-                <span className="font-sans text-sm font-medium text-foreground">Status</span>
-                <span className="font-sans text-sm font-medium text-foreground">Nível de Acesso</span>
-                <span className="font-sans text-sm font-medium text-foreground">Criado em</span>
-              </div>
+            {/* Tabela - Regras do Design System */}
+            <div className="rounded-xl border border-border overflow-hidden mb-6">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Email</th>
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Status</th>
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nível de Acesso</th>
+                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Criado em</th>
+                    <th className="text-right py-3 px-4 text-text-muted font-medium text-sm font-sans">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredUsers.map((user) => (
+                    <tr 
+                      key={user.id} 
+                      className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
+                      style={{ height: "48px" }}
+                      onClick={() => setSelectedUser(user)}
+                    >
+                      <td className="py-3 px-4 text-foreground text-sm font-sans">{user.nome}</td>
+                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{user.email}</td>
+                      <td className="py-3 px-4"><StatusBadge status={user.status} /></td>
+                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{user.nivelAcesso}</td>
+                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{user.criadoEm}</td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
+                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                            <Eye className="w-4 h-4 text-text-muted" />
+                          </button>
+                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                            <Pencil className="w-4 h-4 text-text-muted" />
+                          </button>
+                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                            <Trash2 className="w-4 h-4" style={{ color: VERTICAL_COLOR }} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-              {/* Linhas da tabela */}
-              {filteredUsers.map((user) => (
-                <div 
-                  key={user.id}
-                  onClick={() => setSelectedUser(user)}
-                  className="grid grid-cols-[1.5fr_2fr_1fr_1fr_1.5fr] gap-4 px-6 py-4 border-b border-[#2a2b35] last:border-b-0 hover:bg-[#222226] transition-colors cursor-pointer"
-                >
-                  <span className="font-sans text-sm text-foreground">
-                    {user.nome}
-                  </span>
-                  <span className="font-sans text-sm text-[#b1b3c2]">
-                    {user.email}
-                  </span>
-                  <span>
-                    <StatusBadge status={user.status} />
-                  </span>
-                  <span className="font-sans text-sm text-foreground">
-                    {user.nivelAcesso}
-                  </span>
-                  <span className="font-sans text-sm text-[#b1b3c2]">
-                    {user.criadoEm}
-                  </span>
-                </div>
-              ))}
-
-              {/* Paginação */}
-              <div className="flex items-center justify-center gap-2 px-6 py-4 border-t border-[#2a2b35]">
-                <button className="p-2 text-[#898c9d] hover:text-foreground transition-colors">
-                  <ChevronsLeft className="w-4 h-4" />
-                </button>
-                <button className="p-2 text-[#898c9d] hover:text-foreground transition-colors">
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button className="p-2 text-[#898c9d] hover:text-foreground transition-colors">
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-                <button className="p-2 text-[#898c9d] hover:text-foreground transition-colors">
-                  <ChevronsRight className="w-4 h-4" />
-                </button>
-                
-                <div className="relative ml-4">
-                  <select 
-                    value={pageSize}
-                    onChange={(e) => setPageSize(Number(e.target.value))}
-                    className="appearance-none bg-[#2a2b35] border border-[#3a3b45] rounded-lg px-3 py-1.5 pr-8 font-sans text-sm text-foreground focus:outline-none"
-                  >
-                    <option value={10}>10</option>
-                    <option value={25}>25</option>
-                    <option value={50}>50</option>
-                    <option value={100}>100</option>
-                  </select>
-                  <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-[#898c9d] pointer-events-none" />
-                </div>
+            {/* Paginação - Padrão Ouro */}
+            <div className="flex items-center justify-between">
+              <button className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary hover:text-foreground font-sans border border-border rounded-lg hover:bg-muted transition-colors">
+                <ArrowLeft className="w-4 h-4" />
+                Página anterior
+              </button>
+              
+              <div className="flex items-center gap-1">
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">1</span>
+                <span className="px-2 text-text-muted">. . .</span>
+                {[2, 3, 4, 5, 6].map((num) => (
+                  <span key={num} className="px-3 py-1 text-sm text-text-muted font-sans cursor-pointer hover:text-foreground">{num}</span>
+                ))}
+                <span className="px-3 py-1 text-sm text-foreground font-bold font-sans bg-muted rounded">7</span>
+                {[8, 9, 10, 11].map((num) => (
+                  <span key={num} className="px-3 py-1 text-sm text-text-muted font-sans cursor-pointer hover:text-foreground">{num}</span>
+                ))}
+                <span className="px-2 text-text-muted">. . .</span>
+                <span className="px-3 py-1 text-sm text-text-muted font-sans">25</span>
               </div>
+              
+              <button className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary hover:text-foreground font-sans border border-border rounded-lg hover:bg-muted transition-colors">
+                Próxima página
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </main>
         </div>
@@ -303,112 +447,116 @@ export default function UsuariosPage() {
     )
   }
 
-  // Tela de Detalhe do Usuário
+  // ============================================
+  // TELA DE DETALHE DO USUÁRIO
+  // ============================================
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <SnapHeader
-        vertical="administracao"
-        breadcrumb={[
-          { label: "Usuários", href: "/design-system/administracao/usuarios" },
-          { label: selectedUser.id }
-        ]}
-        organizacao="SNAP"
-        organizacaoSigla="SNAP"
-        userInitials="PA"
-        notificationCount={3}
-      />
+      <header className="w-full">
+        <div className="h-14 px-6 flex items-center justify-between bg-background">
+          <div className="flex items-center gap-4">
+            <button className="p-2 rounded-lg hover:bg-muted transition-colors">
+              <AppSwitcherIcon className="w-5 h-5 text-foreground" />
+            </button>
+            <SnapLogo variant="snap" height={24} />
+            <div className="w-px h-6 bg-border" />
+            <nav className="flex items-center gap-2">
+              <Home className="w-4 h-4" style={{ color: VERTICAL_COLOR }} />
+              <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
+              <span className="text-text-muted">&gt;</span>
+              <span className="font-sans text-sm font-medium text-[#696969]">Usuários</span>
+              <span className="text-text-muted">&gt;</span>
+              <span className="font-sans text-sm font-semibold text-foreground">{selectedUser.nome}</span>
+            </nav>
+          </div>
+          <div className="flex items-center gap-4">
+            <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
+              <Bell className="w-5 h-5 text-foreground" />
+              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center text-[10px] font-bold text-white px-1" style={{ backgroundColor: VERTICAL_COLOR }}>35</span>
+            </button>
+            <button onClick={toggleTheme} className="p-2 rounded-lg hover:bg-muted transition-colors">
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-foreground" /> : <Moon className="w-5 h-5 text-foreground" />}
+            </button>
+            <span className="min-w-[24px] h-[24px] rounded-full flex items-center justify-center text-xs font-bold text-white px-1" style={{ backgroundColor: VERTICAL_COLOR }}>35</span>
+            <div className="w-px h-6 bg-border" />
+            <div className="flex items-center gap-3">
+              <div className="text-right">
+                <div className="font-sans text-xs text-text-muted">SEAP - Secretaria da Administração</div>
+                <div className="font-sans text-xs text-text-muted">Penitenciária do Rio de Janeiro</div>
+              </div>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-sans text-white shrink-0" style={{ backgroundColor: VERTICAL_COLOR }}>VD</div>
+            </div>
+          </div>
+        </div>
+        <div className="h-1" style={{ backgroundColor: VERTICAL_COLOR }} />
+      </header>
 
-      {/* Layout principal */}
-      <div className="flex-1 flex">
+      {/* Layout */}
+      <div className="flex flex-1">
         {/* Sidebar */}
-        {sidebarExpanded ? (
-          <SnapSidebar
-            expanded={true}
-            activeVertical="administracao"
-            activeItem="usuarios"
-            onItemClick={handleItemClick}
-            onToggleExpand={() => setSidebarExpanded(false)}
-          />
-        ) : (
-          <SnapSidebarCollapsed
-            activeVertical="administracao"
-            onVerticalClick={() => setSidebarExpanded(true)}
-          />
-        )}
+        <aside className="w-16 min-h-full bg-sidebar flex flex-col items-center py-4 border-r border-sidebar-border">
+          <nav className="flex-1 flex flex-col items-center gap-2">
+            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors" style={{ color: VERTICAL_COLOR }}><Search className="w-5 h-5" /></button>
+            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-foreground"><Home className="w-5 h-5" /></button>
+            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70"><FileText className="w-5 h-5" /></button>
+            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70"><LinkIcon className="w-5 h-5" /></button>
+            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70"><ShareIcon className="w-5 h-5" /></button>
+          </nav>
+          <div className="w-8 border-t border-sidebar-border my-2" />
+          <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70"><Settings className="w-5 h-5" /></button>
+        </aside>
 
-        {/* Conteúdo principal */}
-        <main className="flex-1 p-8 overflow-auto">
-          {/* Botão Voltar + Título */}
+        {/* Conteúdo - Padding de 32px */}
+        <main className="flex-1 p-8">
+          {/* Voltar + Título */}
           <div className="flex items-center gap-4 mb-6">
-            <button 
-              onClick={() => setSelectedUser(null)}
-              className="flex items-center gap-2 text-[#b1b3c2] hover:text-foreground transition-colors font-sans text-sm"
-            >
+            <button onClick={() => setSelectedUser(null)} className="flex items-center gap-2 text-text-secondary hover:text-foreground transition-colors font-sans text-sm">
               <ArrowLeft className="w-4 h-4" />
               Voltar
             </button>
-            <h1 className="text-2xl font-sans font-bold text-foreground">
-              Detalhe do Usuário
-            </h1>
+            <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
           </div>
 
-          {/* Card de dados do usuário */}
-          <div className="bg-[#1a1a1e] rounded-xl border border-[#2a2b35] p-6 mb-6">
+          {/* Card de Dados */}
+          <div className="bg-card rounded-xl border border-border p-6 mb-6">
             <div className="grid grid-cols-5 gap-6">
-              {/* Coluna 1: Nome de Exibição */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">Nome de Exibição</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">Nome de Exibição</label>
                 <span className="font-sans text-sm text-foreground">{selectedUser.nome}</span>
               </div>
-              
-              {/* Coluna 2: Email */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">Email</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">Email</label>
                 <span className="font-sans text-sm text-foreground">{selectedUser.email}</span>
               </div>
-              
-              {/* Coluna 3: Status */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">Status</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">Status</label>
                 <StatusBadge status={selectedUser.status} />
               </div>
-              
-              {/* Coluna 4: Nível de Acesso */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">Nível de Acesso</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">Nível de Acesso</label>
                 <span className="font-sans text-sm text-foreground">{selectedUser.nivelAcesso}</span>
               </div>
-              
-              {/* Coluna 5: ID de Autenticação Externa */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">ID de Autenticação Externa</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
                 <span className="font-sans text-sm text-foreground break-all">{selectedUser.idAuthExterna}</span>
               </div>
             </div>
-
             <div className="grid grid-cols-4 gap-6 mt-6">
-              {/* Organização */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">Organização</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">Organização</label>
                 <span className="font-sans text-sm text-foreground break-all">{selectedUser.organizacao}</span>
               </div>
-              
-              {/* Versão da Identidade */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">Versão da Identidade</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">Versão da Identidade</label>
                 <span className="font-sans text-sm text-foreground">{selectedUser.versaoIdentidade}</span>
               </div>
-              
-              {/* Criado em */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">Criado em</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">Criado em</label>
                 <span className="font-sans text-sm text-foreground">{selectedUser.criadoEm}</span>
               </div>
-              
-              {/* Atualizado em */}
               <div>
-                <label className="block text-xs font-sans text-[#898c9d] mb-1">Atualizado em</label>
+                <label className="block text-xs font-sans text-text-muted mb-1">Atualizado em</label>
                 <span className="font-sans text-sm text-foreground">{selectedUser.atualizadoEm}</span>
               </div>
             </div>
@@ -416,79 +564,34 @@ export default function UsuariosPage() {
 
           {/* Botões de Ação */}
           <div className="flex items-center gap-4 mb-8">
-            <SnapButton
-              variant="outline"
-              size="default"
-              icon={<Edit2 className="w-4 h-4" />}
-              className="border-[#3f9f76] text-[#3f9f76] hover:bg-[#3f9f76]/10"
-            >
-              Editar
-            </SnapButton>
-            
-            <SnapButton
-              variant="outline"
-              size="default"
-              icon={<Key className="w-4 h-4" />}
-              className="border-[#4a90a4] text-[#4a90a4] hover:bg-[#4a90a4]/10"
-            >
-              Redefinir Senha
-            </SnapButton>
-            
-            <SnapButton
-              variant="outline"
-              size="default"
-              icon={<Ban className="w-4 h-4" />}
-              className="border-[#ffc563] text-[#ffc563] hover:bg-[#ffc563]/10"
-            >
-              Desativar
-            </SnapButton>
-            
-            <SnapButton
-              variant="outline"
-              size="default"
-              icon={<Lock className="w-4 h-4" />}
-              className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10"
-            >
-              Bloquear
-            </SnapButton>
-            
-            <SnapButton
-              variant="outline"
-              size="default"
-              icon={<Trash2 className="w-4 h-4" />}
-              className="border-[#fe473c] text-[#fe473c] hover:bg-[#fe473c]/10"
-            >
-              Excluir
-            </SnapButton>
+            <SnapButton variant="outline" size="default" icon={<Pencil className="w-4 h-4" />} className="border-success text-success hover:bg-success/10">Editar</SnapButton>
+            <SnapButton variant="outline" size="default" icon={<Key className="w-4 h-4" />} className="border-info text-info hover:bg-info/10">Redefinir Senha</SnapButton>
+            <SnapButton variant="outline" size="default" icon={<Ban className="w-4 h-4" />} className="border-warning text-warning hover:bg-warning/10">Desativar</SnapButton>
+            <SnapButton variant="outline" size="default" icon={<Lock className="w-4 h-4" />} className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10">Bloquear</SnapButton>
+            <SnapButton variant="outline" size="default" icon={<Trash2 className="w-4 h-4" />} className="border-error text-error hover:bg-error/10">Excluir</SnapButton>
           </div>
 
-          {/* Seção de Grupos */}
+          {/* Grupos */}
           <div className="mb-8">
             <h2 className="font-sans text-lg font-semibold text-foreground mb-4">Grupos</h2>
             <div className="flex flex-wrap gap-2">
-              {selectedUser.grupos.map((grupo, index) => (
-                <GroupBadge key={index} group={grupo} />
-              ))}
+              {selectedUser.grupos.map((grupo, i) => <GroupBadge key={i} group={grupo} />)}
             </div>
           </div>
 
-          {/* Seção de Permissões Efetivas */}
+          {/* Permissões Efetivas */}
           <div className="mb-8">
             <h2 className="font-sans text-lg font-semibold text-foreground mb-4">Permissões Efetivas</h2>
             <div className="flex flex-wrap gap-2">
-              {selectedUser.permissoes.map((permissao, index) => (
-                <PermissionBadge key={index} permission={permissao} />
-              ))}
+              {selectedUser.permissoes.map((perm, i) => <PermissionBadge key={i} permission={perm} />)}
             </div>
           </div>
 
-          {/* Botão Mostrar Rastreio */}
-          <div>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#2a2b35] text-[#b1b3c2] hover:text-foreground hover:border-[#3a3b45] transition-colors font-sans text-sm">
-              <Search className="w-4 h-4" />
-              Mostrar rastreio
-            </button>
-          </div>
+          {/* Mostrar Rastreio */}
+          <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-text-secondary hover:text-foreground hover:border-border-subtle transition-colors font-sans text-sm">
+            <Search className="w-4 h-4" />
+            Mostrar rastreio
+          </button>
         </main>
       </div>
     </div>
