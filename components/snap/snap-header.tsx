@@ -59,7 +59,7 @@ export function SnapHeader({
   vertical = "administracao",
   breadcrumb = [],
   userName = "Analista de Contrainteligência",
-  userRole = "Admin",
+  userRole = "Administrador",
   userInitials = "VD",
   notificationCount = 35,
   onAppSwitcherClick,
