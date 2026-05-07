@@ -28,6 +28,9 @@ const snapButtonVariants = cva(
         // Ação secundária/cancelar (outline) - usa text-foreground para adaptar ao tema
         secondary: "bg-transparent border border-border-strong text-foreground hover:bg-muted",
         
+        // Outline (borda colorida customizável via className)
+        outline: "bg-transparent border",
+        
         // Ação destrutiva (vermelho coral - para exclusões/remoções críticas)
         destructive: "bg-[#fe473c] text-white hover:bg-[#e03c32]",
         
