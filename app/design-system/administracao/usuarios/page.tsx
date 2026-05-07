@@ -215,21 +215,30 @@ export default function UsuariosPage() {
       <div className="min-h-screen bg-background flex flex-col">
         {/* ============================================
             HEADER - Padrão Ouro
+            Medidas exatas do Figma:
+            - Ícone grid: 24px, cinza
+            - Margem superior: 32px
+            - Margem esquerda: 51px
+            - Gap ícone → logo: 70px
             ============================================ */}
-        <header className="w-full">
-          <div className="h-14 px-6 flex items-center justify-between bg-background">
+        <header className="w-full pt-8 bg-background">
+          <div className="flex items-center justify-between">
             {/* Lado esquerdo: App Switcher + Logo + Breadcrumb */}
-            <div className="flex items-center gap-4">
-              {/* App Switcher */}
-              <button className="p-2 rounded-lg hover:bg-muted transition-colors">
-                <AppSwitcherIcon className="w-5 h-5 text-foreground" />
-              </button>
+            <div className="flex items-center">
+              {/* App Switcher - margem esquerda 51px */}
+              <div className="pl-[51px]">
+                <button className="hover:opacity-80 transition-opacity">
+                  <AppSwitcherIcon className="w-6 h-6 text-text-muted" />
+                </button>
+              </div>
 
-              {/* Logo SNAP */}
-              <SnapLogo variant="snap" height={24} />
+              {/* Gap de 70px até o Logo SNAP */}
+              <div className="pl-[70px]">
+                <SnapLogo variant="snap" height={24} />
+              </div>
 
-              {/* Separador vertical */}
-              <div className="w-px h-6 bg-border" />
+              {/* Separador vertical - com margem */}
+              <div className="w-px h-6 bg-border mx-6" />
 
               {/* Breadcrumb */}
               <nav className="flex items-center gap-2">
@@ -452,15 +461,23 @@ export default function UsuariosPage() {
   // ============================================
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <header className="w-full">
-        <div className="h-14 px-6 flex items-center justify-between bg-background">
-          <div className="flex items-center gap-4">
-            <button className="p-2 rounded-lg hover:bg-muted transition-colors">
-              <AppSwitcherIcon className="w-5 h-5 text-foreground" />
-            </button>
-            <SnapLogo variant="snap" height={24} />
-            <div className="w-px h-6 bg-border" />
+      {/* Header - mesmas medidas do Figma */}
+      <header className="w-full pt-8 bg-background">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            {/* App Switcher - margem esquerda 51px */}
+            <div className="pl-[51px]">
+              <button className="hover:opacity-80 transition-opacity">
+                <AppSwitcherIcon className="w-6 h-6 text-text-muted" />
+              </button>
+            </div>
+            {/* Gap de 70px até o Logo SNAP */}
+            <div className="pl-[70px]">
+              <SnapLogo variant="snap" height={24} />
+            </div>
+            {/* Separador vertical */}
+            <div className="w-px h-6 bg-border mx-6" />
+            {/* Breadcrumb */}
             <nav className="flex items-center gap-2">
               <Home className="w-4 h-4" style={{ color: VERTICAL_COLOR }} />
               <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
@@ -470,12 +487,12 @@ export default function UsuariosPage() {
               <span className="font-sans text-sm font-semibold text-foreground">{selectedUser.nome}</span>
             </nav>
           </div>
-          <div className="flex items-center gap-4">
-            <button className="relative p-2 rounded-lg hover:bg-muted transition-colors">
+          <div className="flex items-center gap-4 pr-8">
+            <button className="relative hover:opacity-80 transition-opacity">
               <Bell className="w-5 h-5 text-foreground" />
               <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full flex items-center justify-center text-[10px] font-bold text-white px-1" style={{ backgroundColor: VERTICAL_COLOR }}>35</span>
             </button>
-            <button onClick={toggleTheme} className="p-2 rounded-lg hover:bg-muted transition-colors">
+            <button onClick={toggleTheme} className="hover:opacity-80 transition-opacity">
               {theme === 'dark' ? <Sun className="w-5 h-5 text-foreground" /> : <Moon className="w-5 h-5 text-foreground" />}
             </button>
             <span className="min-w-[24px] h-[24px] rounded-full flex items-center justify-center text-xs font-bold text-white px-1" style={{ backgroundColor: VERTICAL_COLOR }}>35</span>
@@ -489,7 +506,8 @@ export default function UsuariosPage() {
             </div>
           </div>
         </div>
-        <div className="h-1" style={{ backgroundColor: VERTICAL_COLOR }} />
+        {/* Linha colorida da vertical - com margem superior */}
+        <div className="h-1 mt-4" style={{ backgroundColor: VERTICAL_COLOR }} />
       </header>
 
       {/* Layout */}
