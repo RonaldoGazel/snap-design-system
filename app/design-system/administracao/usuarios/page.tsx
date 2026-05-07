@@ -39,10 +39,10 @@ import { useTheme } from "@/hooks/use-theme"
 
 const VERTICAL_COLOR = "#333540" // Deep Gray Blue - Administração
 
-// Ícone do App Switcher (grid 3x3)
-function AppSwitcherIcon({ className }: { className?: string }) {
+// Ícone do App Switcher (grid 3x3) - 24x24px
+function AppSwitcherIcon({ style }: { style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <svg viewBox="0 0 24 24" fill="currentColor" style={style}>
       <circle cx="5" cy="5" r="2" />
       <circle cx="12" cy="5" r="2" />
       <circle cx="19" cy="5" r="2" />
@@ -215,25 +215,23 @@ export default function UsuariosPage() {
       <div className="min-h-screen bg-background flex flex-col">
         {/* ============================================
             HEADER - Padrão Ouro
-            Medidas exatas do Figma:
-            - Ícone grid: 24px, cinza
-            - Margem superior: 52px
+            Medidas EXATAS do Figma:
+            - Margem superior: 32px (regra inegociável)
             - Margem esquerda: 51px
+            - Ícone grid: 24x24px, cinza
             - Gap ícone → logo: 70px
             ============================================ */}
-        <header className="w-full pt-[52px] bg-background">
+        <header className="w-full bg-background" style={{ paddingTop: '32px' }}>
           <div className="flex items-center justify-between">
             {/* Lado esquerdo: App Switcher + Logo + Breadcrumb */}
             <div className="flex items-center">
-              {/* App Switcher - margem esquerda 51px */}
-              <div className="pl-[51px]">
-                <button className="hover:opacity-80 transition-opacity">
-                  <AppSwitcherIcon className="w-6 h-6 text-text-muted" />
-                </button>
+              {/* App Switcher - margem esquerda 51px, ícone 24x24 */}
+              <div style={{ paddingLeft: '51px' }}>
+                <AppSwitcherIcon style={{ width: '24px', height: '24px', color: 'var(--text-muted)' }} />
               </div>
 
               {/* Gap de 70px até o Logo SNAP */}
-              <div className="pl-[70px]">
+              <div style={{ paddingLeft: '70px' }}>
                 <SnapLogo variant="snap" height={24} />
               </div>
 
@@ -461,18 +459,16 @@ export default function UsuariosPage() {
   // ============================================
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header - mesmas medidas do Figma: margem superior 52px, margem esquerda 51px, gap 70px */}
-      <header className="w-full pt-[52px] bg-background">
+      {/* Header - mesmas medidas EXATAS do Figma */}
+      <header className="w-full bg-background" style={{ paddingTop: '32px' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            {/* App Switcher - margem esquerda 51px */}
-            <div className="pl-[51px]">
-              <button className="hover:opacity-80 transition-opacity">
-                <AppSwitcherIcon className="w-6 h-6 text-text-muted" />
-              </button>
+            {/* App Switcher - margem esquerda 51px, ícone 24x24 */}
+            <div style={{ paddingLeft: '51px' }}>
+              <AppSwitcherIcon style={{ width: '24px', height: '24px', color: 'var(--text-muted)' }} />
             </div>
             {/* Gap de 70px até o Logo SNAP */}
-            <div className="pl-[70px]">
+            <div style={{ paddingLeft: '70px' }}>
               <SnapLogo variant="snap" height={24} />
             </div>
             {/* Separador vertical */}
