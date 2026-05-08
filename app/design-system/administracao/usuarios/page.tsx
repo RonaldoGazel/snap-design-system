@@ -22,7 +22,8 @@ import {
   Building,
   UsersRound,
   Mail,
-  Home
+  Home,
+  X
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
