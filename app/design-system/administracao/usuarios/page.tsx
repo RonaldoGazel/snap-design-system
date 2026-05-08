@@ -962,8 +962,7 @@ export default function UsuariosPage() {
               variant="solid"
               size="modal"
               icon={<Check className="w-4 h-4" />}
-              style={{ backgroundColor: VERTICAL_COLOR }}
-              className="hover:opacity-90"
+              className="bg-foreground text-background hover:opacity-90"
             >
               Salvar
             </SnapButton>
