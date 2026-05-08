@@ -3,18 +3,17 @@
 import { useState } from "react"
 import { 
   Plus, 
-  Search, 
   Eye,
   Pencil,
   Trash2, 
   Key,
   Ban,
   Lock,
+  Shield,
   ChevronDown,
   ArrowLeft,
   ArrowRight,
   Users,
-  Home,
   FileText,
   Settings
 } from "lucide-react"
@@ -223,13 +222,14 @@ export default function UsuariosPage() {
             }}
           >
             <nav className="flex-1 flex flex-col items-center gap-2">
-              {/* Ícone ativo - branco #FFFFFF */}
+              {/* Ícone ativo - branco #FFFFFF (Escudo = Inteligência) */}
               <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
-                <Search className="w-5 h-5" />
+                <Shield className="w-5 h-5" />
               </button>
               {/* Ícones inativos - cinza escuro #3B3B3B */}
+              {/* Cadeado = Administração */}
               <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
-                <Home className="w-5 h-5" />
+                <Lock className="w-5 h-5" />
               </button>
               <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
                 <FileText className="w-5 h-5" />
