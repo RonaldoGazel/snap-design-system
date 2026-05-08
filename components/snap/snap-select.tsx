@@ -10,7 +10,7 @@ import { ChevronDown } from "lucide-react"
  * Regras:
  * - Chevron sempre alinhado à direita do container (justify-between)
  * - Chevron rotaciona 180 graus quando aberto
- * - Suporta light/dark mode via tokens CSS
+ * - Visual consistente com o design system SNAP
  * 
  * Variantes:
  * - default: largura total, dropdown accordion (para modais/formulários)
@@ -64,7 +64,8 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [isOpen, variant])
 
-    // Variante INLINE - dropdown flutuante (visual igual ao modal)
+    // Variante INLINE - dropdown flutuante (para toolbars/páginas)
+    // Visual IDÊNTICO ao default, apenas com position absolute no dropdown
     if (variant === 'inline') {
       return (
         <div 
@@ -73,31 +74,33 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           style={{ width: minWidth }}
         >
           {label && (
-            <label className="text-sm text-foreground mb-2 block font-sans">
-              {label} {required && <span className="text-foreground">*</span>}
+            <label className="text-sm text-white mb-2 block font-sans">
+              {label} {required && <span className="text-white">*</span>}
             </label>
           )}
           
-          {/* Trigger - mesmo visual do select do modal */}
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-3 flex items-center justify-between rounded-lg transition-colors bg-[#f0f0f0] dark:bg-[#2a2b35] border border-[#e0e0e0] dark:border-[#2a2b35] hover:bg-[#e8e8e8] dark:hover:bg-[#3a3b45]"
-          >
-            <span className="text-[#666666] dark:text-[#b1b3c2] text-sm font-sans">
-              {selectedOption?.label || placeholder || "Selecione..."}
-            </span>
-            <ChevronDown 
-              className={cn(
-                "w-4 h-4 text-[#888888] dark:text-[#898c9d] transition-transform duration-200",
-                isOpen && "rotate-180"
-              )}
-            />
-          </button>
+          <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg overflow-hidden">
+            {/* Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#3a3b45] transition-colors"
+            >
+              <span className="text-[#b1b3c2] text-sm font-sans">
+                {selectedOption?.label || placeholder || "Selecione..."}
+              </span>
+              <ChevronDown 
+                className={cn(
+                  "w-4 h-4 text-[#898c9d] transition-transform duration-200",
+                  isOpen && "rotate-180"
+                )}
+              />
+            </button>
+          </div>
           
-          {/* Dropdown Flutuante - mesmo visual do dropdown do modal */}
+          {/* Dropdown Flutuante - position absolute para passar por cima do conteúdo */}
           {isOpen && (
-            <div className="absolute top-full left-0 mt-1 w-full rounded-lg shadow-lg z-50 overflow-hidden bg-[#f5f5f5] dark:bg-[#1a1b1e] border border-[#e0e0e0] dark:border-[#2a2b35]">
+            <div className="absolute top-full left-0 mt-0 w-full bg-[#1a1b1e] border border-[#2a2b35] rounded-b-lg shadow-lg z-50 overflow-hidden">
               <div className="overflow-y-auto max-h-[200px] scrollbar-minimal">
                 {options.map((option) => (
                   <button
@@ -105,10 +108,10 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
                     type="button"
                     onClick={() => handleSelect(option.value)}
                     className={cn(
-                      "w-full text-left px-4 py-3 text-sm font-sans transition-colors",
+                      "w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#2a2b35] transition-colors",
                       option.value === value 
-                        ? "text-[#333333] dark:text-white bg-[#e8e8e8] dark:bg-[#2a2b35]" 
-                        : "text-[#666666] dark:text-[#898c9d] hover:bg-[#e8e8e8] dark:hover:bg-[#2a2b35]"
+                        ? "text-white bg-[#2a2b35]" 
+                        : "text-[#898c9d]"
                     )}
                   >
                     {option.label}
@@ -128,24 +131,24 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
         className={cn("w-full", className)}
       >
         {label && (
-          <label className="text-sm text-[#333333] dark:text-white mb-2 block font-sans">
-            {label} {required && <span className="text-[#333333] dark:text-white">*</span>}
+          <label className="text-sm text-white mb-2 block font-sans">
+            {label} {required && <span className="text-white">*</span>}
           </label>
         )}
         
-        <div className="bg-[#f0f0f0] dark:bg-[#2a2b35] border border-[#e0e0e0] dark:border-[#2a2b35] rounded-lg overflow-hidden">
+        <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg overflow-hidden">
           {/* Trigger */}
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#e8e8e8] dark:hover:bg-[#3a3b45] transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#3a3b45] transition-colors"
           >
-            <span className="text-[#666666] dark:text-[#b1b3c2] text-sm font-sans">
+            <span className="text-[#b1b3c2] text-sm font-sans">
               {selectedOption?.label || placeholder || "Selecione..."}
             </span>
             <ChevronDown 
               className={cn(
-                "w-4 h-4 text-[#888888] dark:text-[#898c9d] transition-transform duration-200",
+                "w-4 h-4 text-[#898c9d] transition-transform duration-200",
                 isOpen && "rotate-180"
               )}
             />
@@ -154,8 +157,8 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           {/* Dropdown Accordion */}
           <div 
             className={cn(
-              "bg-[#f5f5f5] dark:bg-[#1a1b1e] overflow-hidden transition-all duration-200 ease-out",
-              isOpen ? "max-h-[160px] border-t border-[#e0e0e0] dark:border-[#2a2b35]" : "max-h-0"
+              "bg-[#1a1b1e] overflow-hidden transition-all duration-200 ease-out",
+              isOpen ? "max-h-[160px] border-t border-[#2a2b35]" : "max-h-0"
             )}
           >
             <div className="overflow-y-auto max-h-[160px] scrollbar-minimal">
@@ -165,10 +168,10 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
                   type="button"
                   onClick={() => handleSelect(option.value)}
                   className={cn(
-                    "w-full text-left px-4 py-3 text-sm font-sans transition-colors",
+                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#2a2b35] transition-colors",
                     option.value === value 
-                      ? "text-[#333333] dark:text-white bg-[#e8e8e8] dark:bg-[#2a2b35]" 
-                      : "text-[#666666] dark:text-[#898c9d] hover:bg-[#e8e8e8] dark:hover:bg-[#2a2b35]"
+                      ? "text-white bg-[#2a2b35]" 
+                      : "text-[#898c9d]"
                   )}
                 >
                   {option.label}
