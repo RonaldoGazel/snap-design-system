@@ -2,6 +2,7 @@
 
 import { Bell, Sun, Moon, ChevronRight, Home } from "lucide-react"
 import { SnapLogo } from "./snap-logo"
+import Link from "next/link"
 import { useTheme } from "@/hooks/use-theme"
 import { verticals, type Vertical } from "@/lib/snap-tokens"
 
@@ -100,10 +101,15 @@ export function SnapHeader({
             Logo SNAP
             - Gap de 70px entre o ícone e o logo
             - Altura: 24px
+            - Clicável: redireciona para /design-system (atalho de debug)
           */}
-          <div style={{ marginLeft: '70px' }}>
+          <Link 
+            href="/design-system" 
+            style={{ marginLeft: '70px' }}
+            className="hover:opacity-80 transition-opacity"
+          >
             <SnapLogo variant="snap" height={24} />
-          </div>
+          </Link>
 
           {/* Separador vertical */}
           <div 
