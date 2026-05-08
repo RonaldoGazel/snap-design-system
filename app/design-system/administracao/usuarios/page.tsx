@@ -216,6 +216,7 @@ export default function UsuariosPage() {
   const [newPassword, setNewPassword] = useState('')
   const [showDeactivateModal, setShowDeactivateModal] = useState(false)
   const [showBlockModal, setShowBlockModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   // Delay para mostrar conteúdo após sidebar expandir
   const handleSidebarOpen = () => {
@@ -911,7 +912,13 @@ export default function UsuariosPage() {
                 className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10"
                 onClick={() => setShowBlockModal(true)}
               >Bloquear</SnapButton>
-              <SnapButton variant="outline" size="default" icon={<Trash2 className="w-4 h-4" />} className="border-error text-error hover:bg-error/10">Excluir</SnapButton>
+              <SnapButton 
+                variant="solid" 
+                size="default" 
+                icon={<Trash2 className="w-4 h-4" />} 
+                className="bg-error text-white hover:opacity-90"
+                onClick={() => setShowDeleteModal(true)}
+              >Excluir</SnapButton>
             </div>
             {/* Mostrar Rastreio - alinhado à direita */}
             <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-text-secondary hover:text-foreground hover:border-border-subtle transition-colors font-sans text-sm">
@@ -1127,6 +1134,46 @@ export default function UsuariosPage() {
               size="modal"
               icon={<X className="w-4 h-4" />}
               onClick={() => setShowBlockModal(false)}
+            >
+              Cancelar
+            </SnapButton>
+          </SnapModalFooter>
+        </SnapModalContent>
+      </SnapModal>
+
+      {/* Modal Excluir Usuário */}
+      <SnapModal open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
+        <SnapModalHeader 
+          icon={<Trash2 className="w-5 h-5" />}
+          title="Excluir usuário" 
+          onClose={() => setShowDeleteModal(false)} 
+        />
+        <SnapModalContent>
+          {/* Pergunta de confirmação */}
+          <p className="text-base font-sans text-foreground mb-4">
+            Tem certeza que deseja excluir este usuário?
+          </p>
+          
+          {/* Aviso de ação irreversível */}
+          <p className="text-sm font-sans text-text-muted mb-6">
+            Esta ação é irreversível. O usuário será removido permanentemente. Esta ação será registrada no log de auditoria.
+          </p>
+          
+          {/* Botões */}
+          <SnapModalFooter>
+            <SnapButton
+              variant="solid"
+              size="modal"
+              icon={<Trash2 className="w-4 h-4" />}
+              className="bg-error text-white hover:opacity-90"
+            >
+              Excluir
+            </SnapButton>
+            <SnapButton
+              variant="outline"
+              size="modal"
+              icon={<X className="w-4 h-4" />}
+              onClick={() => setShowDeleteModal(false)}
             >
               Cancelar
             </SnapButton>
