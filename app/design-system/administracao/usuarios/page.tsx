@@ -792,7 +792,7 @@ export default function UsuariosPage() {
               {/* ID Auth Externa */}
               <div className="flex-1">
                 <label className="block text-sm font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
                   <span className="font-sans text-base text-foreground">{selectedUser.idAuthExterna}</span>
                   <button 
                     className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0"
