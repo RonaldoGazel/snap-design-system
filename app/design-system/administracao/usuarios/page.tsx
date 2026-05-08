@@ -708,21 +708,20 @@ export default function UsuariosPage() {
           </div>
 
           {/* Card de Dados - Design com Avatar */}
-          <div className="bg-[#1a1a1a] rounded-xl border border-border mb-6">
+          <div className="bg-[#141414] rounded-xl border border-border mb-6">
             {/* Linha 1: Avatar + Dados COM separadores verticais */}
             <div className="flex items-center p-6">
-              {/* Avatar circular */}
-              <div className="w-[72px] h-[72px] rounded-full bg-[#0d0d0d] border border-border flex items-center justify-center flex-shrink-0">
-                <span className="font-title text-xl text-foreground">
+              {/* Avatar circular - maior */}
+              <div className="w-[88px] h-[88px] rounded-full bg-[#0a0a0a] border border-border flex items-center justify-center flex-shrink-0">
+                <span className="font-title text-2xl text-foreground">
                   {selectedUser.nome.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
                 </span>
               </div>
               
-              {/* Separador */}
-              <div className="w-px h-16 bg-border mx-6" />
+              {/* SEM separador entre avatar e Nome/Email - apenas ml para espaçamento */}
               
               {/* Nome + Email */}
-              <div className="w-[160px]">
+              <div className="w-[160px] ml-6">
                 <label className="block text-sm font-sans text-text-muted mb-1">Nome de Exibição</label>
                 <span className="block font-sans text-base text-foreground font-semibold mb-3">{selectedUser.nome}</span>
                 <label className="block text-sm font-sans text-text-muted mb-1">Email</label>
