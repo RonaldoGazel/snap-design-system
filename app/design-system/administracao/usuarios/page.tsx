@@ -852,12 +852,19 @@ export default function UsuariosPage() {
           </div>
 
           {/* Botões de Ação */}
-          <div className="flex items-center gap-4 mb-8">
-            <SnapButton variant="outline" size="default" icon={<Pencil className="w-4 h-4" />} className="border-success text-success hover:bg-success/10">Editar</SnapButton>
-            <SnapButton variant="outline" size="default" icon={<Key className="w-4 h-4" />} className="border-info text-info hover:bg-info/10">Redefinir Senha</SnapButton>
-            <SnapButton variant="outline" size="default" icon={<Ban className="w-4 h-4" />} className="border-warning text-warning hover:bg-warning/10">Desativar</SnapButton>
-            <SnapButton variant="outline" size="default" icon={<Lock className="w-4 h-4" />} className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10">Bloquear</SnapButton>
-            <SnapButton variant="outline" size="default" icon={<Trash2 className="w-4 h-4" />} className="border-error text-error hover:bg-error/10">Excluir</SnapButton>
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <SnapButton variant="outline" size="default" icon={<Pencil className="w-4 h-4" />} className="border-success text-success hover:bg-success/10">Editar</SnapButton>
+              <SnapButton variant="outline" size="default" icon={<Key className="w-4 h-4" />} className="border-info text-info hover:bg-info/10">Redefinir Senha</SnapButton>
+              <SnapButton variant="outline" size="default" icon={<Ban className="w-4 h-4" />} className="border-warning text-warning hover:bg-warning/10">Desativar</SnapButton>
+              <SnapButton variant="outline" size="default" icon={<Lock className="w-4 h-4" />} className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10">Bloquear</SnapButton>
+              <SnapButton variant="outline" size="default" icon={<Trash2 className="w-4 h-4" />} className="border-error text-error hover:bg-error/10">Excluir</SnapButton>
+            </div>
+            {/* Mostrar Rastreio - alinhado à direita */}
+            <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-text-secondary hover:text-foreground hover:border-border-subtle transition-colors font-sans text-sm">
+              <Search className="w-4 h-4" />
+              Mostrar rastreio
+            </button>
           </div>
 
           {/* Grupos */}
@@ -875,12 +882,6 @@ export default function UsuariosPage() {
               {selectedUser.permissoes.map((perm, i) => <PermissionBadge key={i} permission={perm} />)}
             </div>
           </div>
-
-          {/* Mostrar Rastreio */}
-          <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-text-secondary hover:text-foreground hover:border-border-subtle transition-colors font-sans text-sm">
-            <Search className="w-4 h-4" />
-            Mostrar rastreio
-          </button>
         </main>
       </div>
     </div>
