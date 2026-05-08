@@ -212,6 +212,8 @@ export default function UsuariosPage() {
     nomeExibicao: '',
     nivelAcesso: 'restricted'
   })
+  const [showResetPasswordModal, setShowResetPasswordModal] = useState(false)
+  const [newPassword, setNewPassword] = useState('')
 
   // Delay para mostrar conteúdo após sidebar expandir
   const handleSidebarOpen = () => {
@@ -883,7 +885,16 @@ export default function UsuariosPage() {
                   setShowEditModal(true)
                 }}
               >Editar</SnapButton>
-              <SnapButton variant="outline" size="default" icon={<Key className="w-4 h-4" />} className="border-info text-info hover:bg-info/10">Redefinir Senha</SnapButton>
+              <SnapButton 
+                variant="outline" 
+                size="default" 
+                icon={<Key className="w-4 h-4" />} 
+                className="border-info text-info hover:bg-info/10"
+                onClick={() => {
+                  setNewPassword('')
+                  setShowResetPasswordModal(true)
+                }}
+              >Redefinir Senha</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Ban className="w-4 h-4" />} className="border-warning text-warning hover:bg-warning/10">Desativar</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Lock className="w-4 h-4" />} className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10">Bloquear</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Trash2 className="w-4 h-4" />} className="border-error text-error hover:bg-error/10">Excluir</SnapButton>
@@ -975,6 +986,53 @@ export default function UsuariosPage() {
               size="modal"
               icon={<X className="w-4 h-4" />}
               onClick={() => setShowEditModal(false)}
+            >
+              Cancelar
+            </SnapButton>
+          </SnapModalFooter>
+        </SnapModalContent>
+      </SnapModal>
+
+      {/* Modal Redefinir Senha */}
+      <SnapModal open={showResetPasswordModal} onClose={() => setShowResetPasswordModal(false)}>
+        <SnapModalHeader 
+          icon={<Key className="w-5 h-5" />}
+          title="Redefinir Senha" 
+          onClose={() => setShowResetPasswordModal(false)} 
+        />
+        <SnapModalContent>
+          {/* Campo Nova Senha */}
+          <div className="mb-4">
+            <label className="block text-sm font-sans text-text-muted mb-2">Nova Senha</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="w-full px-4 py-3 bg-muted dark:bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-foreground/50 placeholder:text-text-muted"
+              placeholder="Digite a nova senha"
+            />
+          </div>
+          
+          {/* Aviso de auditoria */}
+          <p className="text-sm font-sans text-text-muted mb-6">
+            Esta ação será registrada no log de auditoria
+          </p>
+          
+          {/* Botões */}
+          <SnapModalFooter>
+            <SnapButton
+              variant="solid"
+              size="modal"
+              icon={<Check className="w-4 h-4" />}
+              className="bg-foreground text-background hover:opacity-90"
+            >
+              Redefinir
+            </SnapButton>
+            <SnapButton
+              variant="outline"
+              size="modal"
+              icon={<X className="w-4 h-4" />}
+              onClick={() => setShowResetPasswordModal(false)}
             >
               Cancelar
             </SnapButton>
