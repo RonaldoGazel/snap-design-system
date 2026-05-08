@@ -687,8 +687,8 @@ export default function UsuariosPage() {
           )}
         </aside>
 
-        {/* Conteúdo - Mesmo padding e margem da listagem */}
-        <main className="flex-1" style={{ marginLeft: 'calc(32px + 64px + 51px)', paddingTop: '32px', paddingRight: '32px' }}>
+        {/* Conteúdo - Mesmo padding e margem da listagem (py-8 = 32px top/bottom) */}
+        <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 51}px` }}>
           {/* Voltar + Título */}
           <div className="flex items-center gap-3 mb-6">
             <button 
