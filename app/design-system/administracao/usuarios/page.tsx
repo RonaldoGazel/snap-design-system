@@ -689,8 +689,8 @@ export default function UsuariosPage() {
 
         {/* Conteúdo - Mesmo padding e margem da listagem (py-8 = 32px top/bottom) */}
         <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 51}px` }}>
-          {/* Voltar + Título - MESMA estrutura da listagem (gap-6 no wrapper externo, gap-3 no interno) */}
-          <div className="flex items-center justify-between mb-6">
+          {/* Voltar + Título - mt-1 compensa a diferença visual do botão circular vs ícone */}
+          <div className="flex items-center justify-between mb-6 mt-1">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-3">
                 <button 
