@@ -41,10 +41,19 @@ SnapModalOverlay.displayName = "SnapModalOverlay"
 interface SnapModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean
   onClose?: () => void
+  /** Tamanho do modal: sm (384px), md (448px - default), lg (640px), xl (768px) */
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+}
+
+const sizeClasses = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-2xl',
+  xl: 'max-w-3xl'
 }
 
 const SnapModal = forwardRef<HTMLDivElement, SnapModalProps>(
-  ({ className, open, onClose, children, ...props }, ref) => {
+  ({ className, open, onClose, size = 'md', children, ...props }, ref) => {
     if (!open) return null
     
     return (
@@ -52,7 +61,8 @@ const SnapModal = forwardRef<HTMLDivElement, SnapModalProps>(
         <div
           ref={ref}
           className={cn(
-            "bg-card rounded-xl border border-border max-w-md w-full overflow-hidden z-50",
+            "bg-card rounded-xl border border-border w-full overflow-hidden z-50",
+            sizeClasses[size],
             className
           )}
           onClick={(e) => e.stopPropagation()}

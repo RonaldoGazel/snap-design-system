@@ -26,7 +26,9 @@ import {
   X,
   ChevronLeft,
   Copy,
-  Clock
+  Clock,
+  User,
+  EyeOff
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
@@ -217,6 +219,16 @@ export default function UsuariosPage() {
   const [showDeactivateModal, setShowDeactivateModal] = useState(false)
   const [showBlockModal, setShowBlockModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showCreateUserModal, setShowCreateUserModal] = useState(false)
+  const [createUserForm, setCreateUserForm] = useState({
+    nomeUsuario: '',
+    nomeExibicao: '',
+    email: '',
+    senha: '',
+    nivelAcesso: 'public',
+    papel: '',
+    grupo: ''
+  })
 
   // Delay para mostrar conteúdo após sidebar expandir
   const handleSidebarOpen = () => {
@@ -488,6 +500,18 @@ export default function UsuariosPage() {
                   size="default"
                   icon={<Plus className="w-4 h-4" />}
                   className="!bg-[#333540] hover:!bg-[#252730]"
+                  onClick={() => {
+                    setCreateUserForm({
+                      nomeUsuario: '',
+                      nomeExibicao: '',
+                      email: '',
+                      senha: '',
+                      nivelAcesso: 'public',
+                      papel: '',
+                      grupo: ''
+                    })
+                    setShowCreateUserModal(true)
+                  }}
                 >
                   Novo usuário
                 </SnapButton>
@@ -1174,6 +1198,165 @@ export default function UsuariosPage() {
               size="modal"
               icon={<X className="w-4 h-4" />}
               onClick={() => setShowDeleteModal(false)}
+            >
+              Cancelar
+            </SnapButton>
+          </SnapModalFooter>
+        </SnapModalContent>
+      </SnapModal>
+
+      {/* Modal Criar Usuário - Layout 2 Colunas com Seções */}
+      <SnapModal open={showCreateUserModal} onClose={() => setShowCreateUserModal(false)} size="lg">
+        <SnapModalHeader 
+          icon={<UserPlus className="w-5 h-5" />}
+          title="Criar Usuário" 
+          onClose={() => setShowCreateUserModal(false)} 
+        />
+        <SnapModalContent>
+          <div className="grid grid-cols-2 gap-6">
+            {/* Coluna Esquerda - Identificação */}
+            <div className="border border-border rounded-lg p-4">
+              {/* Header da Seção */}
+              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-border">
+                <User className="w-4 h-4 text-text-muted" />
+                <span className="font-sans text-xs font-medium text-text-muted uppercase tracking-wider">Identificação</span>
+              </div>
+              
+              {/* Campo Nome de Usuário */}
+              <div className="mb-4">
+                <label className="block text-sm font-sans text-text-muted mb-2">Nome de Usuário <span className="text-error">*</span></label>
+                <input
+                  type="text"
+                  value={createUserForm.nomeUsuario}
+                  onChange={(e) => setCreateUserForm(prev => ({ ...prev, nomeUsuario: e.target.value }))}
+                  className="w-full px-4 py-3 bg-muted dark:bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-foreground/50 placeholder:text-text-muted"
+                  placeholder="Digite o nome de usuário"
+                />
+              </div>
+              
+              {/* Campo Nome de Exibição */}
+              <div className="mb-4">
+                <label className="block text-sm font-sans text-text-muted mb-2">Nome de Exibição <span className="text-error">*</span></label>
+                <input
+                  type="text"
+                  value={createUserForm.nomeExibicao}
+                  onChange={(e) => setCreateUserForm(prev => ({ ...prev, nomeExibicao: e.target.value }))}
+                  className="w-full px-4 py-3 bg-muted dark:bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-foreground/50 placeholder:text-text-muted"
+                  placeholder="Digite o nome de exibição"
+                />
+              </div>
+              
+              {/* Campo Email */}
+              <div>
+                <label className="block text-sm font-sans text-text-muted mb-2">Email <span className="text-error">*</span></label>
+                <input
+                  type="email"
+                  value={createUserForm.email}
+                  onChange={(e) => setCreateUserForm(prev => ({ ...prev, email: e.target.value }))}
+                  className="w-full px-4 py-3 bg-muted dark:bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-foreground/50 placeholder:text-text-muted"
+                  placeholder="Digite o email"
+                />
+              </div>
+            </div>
+            
+            {/* Coluna Direita - Segurança + Acesso */}
+            <div className="flex flex-col gap-6">
+              {/* Seção Segurança */}
+              <div className="border border-border rounded-lg p-4">
+                {/* Header da Seção */}
+                <div className="flex items-center gap-2 mb-4 pb-3 border-b border-border">
+                  <Lock className="w-4 h-4 text-text-muted" />
+                  <span className="font-sans text-xs font-medium text-text-muted uppercase tracking-wider">Segurança</span>
+                </div>
+                
+                {/* Campo Senha */}
+                <div>
+                  <label className="block text-sm font-sans text-text-muted mb-2">Senha <span className="text-error">*</span></label>
+                  <div className="relative">
+                    <input
+                      type="password"
+                      value={createUserForm.senha}
+                      onChange={(e) => setCreateUserForm(prev => ({ ...prev, senha: e.target.value }))}
+                      className="w-full px-4 py-3 pr-12 bg-muted dark:bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-foreground/50 placeholder:text-text-muted"
+                      placeholder="Digite a senha"
+                    />
+                    <button 
+                      type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-foreground transition-colors"
+                    >
+                      <Eye className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Seção Acesso */}
+              <div className="border border-border rounded-lg p-4 flex-1">
+                {/* Header da Seção */}
+                <div className="flex items-center gap-2 mb-4 pb-3 border-b border-border">
+                  <Shield className="w-4 h-4 text-text-muted" />
+                  <span className="font-sans text-xs font-medium text-text-muted uppercase tracking-wider">Acesso</span>
+                </div>
+                
+                {/* Nível de Acesso e Papel - lado a lado */}
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <SnapSelect
+                    label="Nível de Acesso"
+                    value={createUserForm.nivelAcesso}
+                    onChange={(value) => setCreateUserForm(prev => ({ ...prev, nivelAcesso: value }))}
+                    options={[
+                      { value: 'public', label: 'Público' },
+                      { value: 'restricted', label: 'Restrito' },
+                      { value: 'elevated', label: 'Elevado' },
+                      { value: 'admin', label: 'Administrador' }
+                    ]}
+                  />
+                  <SnapSelect
+                    label={<>Papel <span className="text-error">*</span></>}
+                    value={createUserForm.papel}
+                    onChange={(value) => setCreateUserForm(prev => ({ ...prev, papel: value }))}
+                    placeholder="Selecione um papel"
+                    options={[
+                      { value: 'analista', label: 'Analista' },
+                      { value: 'operador', label: 'Operador' },
+                      { value: 'supervisor', label: 'Supervisor' },
+                      { value: 'admin', label: 'Administrador' }
+                    ]}
+                  />
+                </div>
+                
+                {/* Grupo */}
+                <SnapSelect
+                  label={<>Grupo <span className="text-error">*</span></>}
+                  value={createUserForm.grupo}
+                  onChange={(value) => setCreateUserForm(prev => ({ ...prev, grupo: value }))}
+                  placeholder="Selecione um grupo"
+                  options={[
+                    { value: 'diretoria', label: 'Diretoria Geral' },
+                    { value: 'analistas', label: 'Analistas' },
+                    { value: 'operacoes', label: 'Operações' },
+                    { value: 'suporte', label: 'Suporte' }
+                  ]}
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* Botões */}
+          <SnapModalFooter withTopMargin>
+            <SnapButton
+              variant="solid"
+              size="modal"
+              icon={<Check className="w-4 h-4" />}
+              className="bg-foreground text-background hover:opacity-90"
+            >
+              Criar
+            </SnapButton>
+            <SnapButton
+              variant="outline"
+              size="modal"
+              icon={<X className="w-4 h-4" />}
+              onClick={() => setShowCreateUserModal(false)}
             >
               Cancelar
             </SnapButton>
