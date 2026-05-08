@@ -279,11 +279,13 @@ export default function UsuariosPage() {
                 <div className="mb-2">
                   <button 
                     onClick={() => setInteligenciaExpanded(!inteligenciaExpanded)}
-                    className="w-full flex items-center justify-between py-2 pr-3 rounded-lg hover:opacity-80 transition-opacity"
-                    style={{ paddingLeft: '19px' }}
+                    className="w-full flex items-center justify-between py-3 pr-3 rounded-lg hover:opacity-80 transition-opacity"
+                    style={{ paddingLeft: '10px' }}
                   >
                     <div className="flex items-center gap-3">
-                      <Shield className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-11 flex justify-center">
+                        <Shield className="w-5 h-5 text-muted-foreground" />
+                      </div>
                       <span className="font-sans text-sm font-medium text-muted-foreground">Inteligência</span>
                     </div>
                     {inteligenciaExpanded ? (
@@ -294,7 +296,7 @@ export default function UsuariosPage() {
                   </button>
                   
                   {inteligenciaExpanded && (
-                    <div className="mt-1 space-y-1" style={{ marginLeft: '45px' }}>
+                    <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
                         <UsersRound className="w-4 h-4 text-muted-foreground" />
                         <span className="font-sans text-sm text-muted-foreground">Pessoas</span>
@@ -315,11 +317,13 @@ export default function UsuariosPage() {
                 <div className="mb-2">
                   <button 
                     onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
-                    className="w-full flex items-center justify-between py-2 pr-3 rounded-lg hover:opacity-80 transition-opacity"
-                    style={{ paddingLeft: '19px' }}
+                    className="w-full flex items-center justify-between py-3 pr-3 rounded-lg hover:opacity-80 transition-opacity"
+                    style={{ paddingLeft: '10px' }}
                   >
                     <div className="flex items-center gap-3">
-                      <Lock className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />
+                      <div className="w-11 flex justify-center">
+                        <Lock className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />
+                      </div>
                       <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
                     </div>
                     {administracaoExpanded ? (
@@ -330,7 +334,7 @@ export default function UsuariosPage() {
                   </button>
                   
                   {administracaoExpanded && (
-                    <div className="mt-1 space-y-1" style={{ marginLeft: '45px' }}>
+                    <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
                       {/* Usuários - PÁGINA ATUAL = fundo da cor da vertical */}
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
                         <Users className="w-4 h-4 text-white" />
@@ -368,10 +372,12 @@ export default function UsuariosPage() {
 
                 {/* Configurações */}
                 <button 
-                  className="flex items-center gap-3 py-2 rounded-lg hover:bg-muted transition-colors"
-                  style={{ paddingLeft: '19px' }}
+                  className="flex items-center gap-3 py-3 rounded-lg hover:bg-muted transition-colors"
+                  style={{ paddingLeft: '10px' }}
                 >
-                  <Settings className="w-5 h-5 text-muted-foreground" />
+                  <div className="w-11 flex justify-center">
+                    <Settings className="w-5 h-5 text-muted-foreground" />
+                  </div>
                   <span className="font-sans text-sm text-muted-foreground">Configurações</span>
                 </button>
               </div>
