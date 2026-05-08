@@ -1071,7 +1071,7 @@ export default function UsuariosPage() {
               variant="solid"
               size="modal"
               icon={<Ban className="w-4 h-4" />}
-              className="bg-warning text-white hover:opacity-90"
+              className="bg-warning text-black hover:opacity-90"
             >
               Desativar
             </SnapButton>
