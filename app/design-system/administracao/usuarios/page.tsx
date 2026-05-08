@@ -30,6 +30,9 @@ import {
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
+import { SnapModal, SnapModalHeader, SnapModalContent, SnapModalFooter } from "@/components/snap/snap-modal"
+import { SnapSelect } from "@/components/snap/snap-select"
+import { Check } from "lucide-react"
 
 /**
  * TELA: Usuários (Listagem + Detalhe)
@@ -201,6 +204,14 @@ export default function UsuariosPage() {
   const [sidebarContentVisible, setSidebarContentVisible] = useState(false)
   const [inteligenciaExpanded, setInteligenciaExpanded] = useState(true)
   const [administracaoExpanded, setAdministracaoExpanded] = useState(true)
+  
+  // Estados dos modais
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [editForm, setEditForm] = useState({
+    email: '',
+    nomeExibicao: '',
+    nivelAcesso: 'restricted'
+  })
 
   // Delay para mostrar conteúdo após sidebar expandir
   const handleSidebarOpen = () => {
@@ -854,7 +865,20 @@ export default function UsuariosPage() {
           {/* Botões de Ação */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
-              <SnapButton variant="outline" size="default" icon={<Pencil className="w-4 h-4" />} className="border-success text-success hover:bg-success/10">Editar</SnapButton>
+              <SnapButton 
+                variant="outline" 
+                size="default" 
+                icon={<Pencil className="w-4 h-4" />} 
+                className="border-success text-success hover:bg-success/10"
+                onClick={() => {
+                  setEditForm({
+                    email: selectedUser.email,
+                    nomeExibicao: selectedUser.nome,
+                    nivelAcesso: 'restricted'
+                  })
+                  setShowEditModal(true)
+                }}
+              >Editar</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Key className="w-4 h-4" />} className="border-info text-info hover:bg-info/10">Redefinir Senha</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Ban className="w-4 h-4" />} className="border-warning text-warning hover:bg-warning/10">Desativar</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Lock className="w-4 h-4" />} className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10">Bloquear</SnapButton>
@@ -884,6 +908,76 @@ export default function UsuariosPage() {
           </div>
         </main>
       </div>
+
+      {/* Modal Editar Detalhes */}
+      <SnapModal open={showEditModal} onClose={() => setShowEditModal(false)}>
+        <SnapModalHeader 
+          icon={<Pencil className="w-5 h-5" />}
+          title="Editar detalhes" 
+          onClose={() => setShowEditModal(false)} 
+        />
+        <SnapModalContent>
+          {/* Campo Email */}
+          <div className="mb-4">
+            <label className="block text-sm font-sans text-text-muted mb-2">Email</label>
+            <input
+              type="email"
+              value={editForm.email}
+              onChange={(e) => setEditForm(prev => ({ ...prev, email: e.target.value }))}
+              className="w-full px-4 py-3 bg-[#2a2b35] border border-[#2a2b35] rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-primary"
+              placeholder="Digite o email"
+            />
+          </div>
+          
+          {/* Campo Nome de Exibição */}
+          <div className="mb-4">
+            <label className="block text-sm font-sans text-text-muted mb-2">Nome de Exibição</label>
+            <input
+              type="text"
+              value={editForm.nomeExibicao}
+              onChange={(e) => setEditForm(prev => ({ ...prev, nomeExibicao: e.target.value }))}
+              className="w-full px-4 py-3 bg-[#2a2b35] border border-[#2a2b35] rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-primary"
+              placeholder="Digite o nome de exibição"
+            />
+          </div>
+          
+          {/* Campo Nível de Acesso */}
+          <div className="mb-6">
+            <SnapSelect
+              label="Nível de Acesso"
+              value={editForm.nivelAcesso}
+              onChange={(value) => setEditForm(prev => ({ ...prev, nivelAcesso: value }))}
+              options={[
+                { value: 'restricted', label: 'Restrito' },
+                { value: 'standard', label: 'Padrão' },
+                { value: 'elevated', label: 'Elevado' },
+                { value: 'admin', label: 'Administrador' }
+              ]}
+            />
+          </div>
+          
+          {/* Botões */}
+          <SnapModalFooter withTopMargin>
+            <SnapButton
+              variant="solid"
+              size="modal"
+              icon={<Check className="w-4 h-4" />}
+              style={{ backgroundColor: VERTICAL_COLOR }}
+              className="hover:opacity-90"
+            >
+              Salvar
+            </SnapButton>
+            <SnapButton
+              variant="outline"
+              size="modal"
+              icon={<X className="w-4 h-4" />}
+              onClick={() => setShowEditModal(false)}
+            >
+              Cancelar
+            </SnapButton>
+          </SnapModalFooter>
+        </SnapModalContent>
+      </SnapModal>
     </div>
   )
 }
