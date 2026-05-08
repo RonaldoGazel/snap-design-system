@@ -708,11 +708,11 @@ export default function UsuariosPage() {
           </div>
 
           {/* Card de Dados - Design com Avatar */}
-          <div className="bg-[#141414] rounded-xl border border-border mb-6">
+          <div className="bg-card dark:bg-[#141414] rounded-xl border border-border mb-6">
             {/* Linha 1: Avatar + Dados COM separadores verticais */}
             <div className="flex items-center p-6">
               {/* Avatar circular - maior */}
-              <div className="w-[88px] h-[88px] rounded-full bg-[#0a0a0a] border border-border flex items-center justify-center flex-shrink-0">
+              <div className="w-[88px] h-[88px] rounded-full bg-muted dark:bg-[#0a0a0a] border border-border flex items-center justify-center flex-shrink-0">
                 <span className="font-title text-2xl text-foreground">
                   {selectedUser.nome.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
                 </span>
