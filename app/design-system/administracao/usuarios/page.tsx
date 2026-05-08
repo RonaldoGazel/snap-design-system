@@ -708,9 +708,9 @@ export default function UsuariosPage() {
           </div>
 
           {/* Card de Dados - Design com Avatar e separadores */}
-          <div className="bg-[#141414] rounded-xl border border-border p-6 mb-6">
+          <div className="bg-[#141414] rounded-xl border border-border p-8 mb-6">
             {/* Linha 1: Avatar + Dados principais com separadores verticais */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center">
               {/* Avatar circular grande */}
               <div className="w-20 h-20 rounded-full bg-[#0a0a0a] border border-border flex items-center justify-center flex-shrink-0">
                 <span className="font-title text-2xl text-foreground">
@@ -719,9 +719,9 @@ export default function UsuariosPage() {
               </div>
               
               {/* Dados principais com separadores */}
-              <div className="flex-1 flex items-center">
+              <div className="flex-1 flex items-center ml-8">
                 {/* Nome + Email agrupados */}
-                <div className="pr-6">
+                <div className="min-w-[160px]">
                   <label className="block text-xs font-sans text-text-muted mb-1">Nome de Exibição</label>
                   <span className="font-sans text-sm text-foreground font-medium">{selectedUser.nome}</span>
                   <label className="block text-xs font-sans text-text-muted mb-1 mt-3">Email</label>
@@ -729,42 +729,42 @@ export default function UsuariosPage() {
                 </div>
                 
                 {/* Separador vertical */}
-                <div className="w-px h-16 bg-border" />
+                <div className="w-px h-16 bg-border mx-8" />
                 
                 {/* Status */}
-                <div className="px-6">
+                <div className="min-w-[80px]">
                   <label className="block text-xs font-sans text-text-muted mb-1">Status</label>
                   <StatusBadge status={selectedUser.status} />
                 </div>
                 
                 {/* Separador vertical */}
-                <div className="w-px h-16 bg-border" />
+                <div className="w-px h-16 bg-border mx-8" />
                 
                 {/* Nível de Acesso */}
-                <div className="px-6">
+                <div className="min-w-[100px]">
                   <label className="block text-xs font-sans text-text-muted mb-1">Nível de Acesso</label>
-                  <span className="font-sans text-sm text-foreground">{selectedUser.nivelAcesso}</span>
+                  <span className="font-sans text-lg text-foreground">{selectedUser.nivelAcesso}</span>
                 </div>
                 
                 {/* Separador vertical */}
-                <div className="w-px h-16 bg-border" />
+                <div className="w-px h-16 bg-border mx-8" />
                 
                 {/* Versão da Identidade */}
-                <div className="px-6">
+                <div className="min-w-[130px]">
                   <label className="block text-xs font-sans text-text-muted mb-1">Versão da Identidade</label>
-                  <span className="font-sans text-sm text-foreground">{selectedUser.versaoIdentidade}</span>
+                  <span className="font-sans text-lg text-foreground">{selectedUser.versaoIdentidade}</span>
                 </div>
                 
                 {/* Separador vertical */}
-                <div className="w-px h-16 bg-border" />
+                <div className="w-px h-16 bg-border mx-8" />
                 
-                {/* ID Auth Externa com ícone copiar */}
-                <div className="pl-6 flex-1">
+                {/* ID Auth Externa com ícone copiar no canto */}
+                <div className="flex-1">
                   <label className="block text-xs font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="font-sans text-sm text-foreground break-all">{selectedUser.idAuthExterna}</span>
+                  <div className="flex items-center gap-4">
+                    <span className="font-sans text-sm text-foreground">{selectedUser.idAuthExterna}</span>
                     <button 
-                      className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0"
+                      className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0 ml-auto"
                       title="Copiar ID"
                       onClick={() => navigator.clipboard.writeText(selectedUser.idAuthExterna)}
                     >
@@ -776,12 +776,12 @@ export default function UsuariosPage() {
             </div>
             
             {/* Divisor horizontal */}
-            <div className="border-t border-border my-6" />
+            <div className="border-t border-border my-8" />
             
-            {/* Linha 2: Organização, Datas */}
-            <div className="flex items-center gap-6">
+            {/* Linha 2: Organização, Datas - 3 colunas distribuídas */}
+            <div className="grid grid-cols-3 gap-8">
               {/* Organização com ícone copiar */}
-              <div className="flex-1">
+              <div>
                 <label className="block text-xs font-sans text-text-muted mb-1">Organização</label>
                 <div className="flex items-center gap-2">
                   <span className="font-sans text-sm text-foreground">{selectedUser.organizacao}</span>
@@ -795,7 +795,7 @@ export default function UsuariosPage() {
                 </div>
               </div>
               {/* Criado em com ícone relógio */}
-              <div className="flex-1">
+              <div>
                 <label className="block text-xs font-sans text-text-muted mb-1">Criado em</label>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-text-muted flex-shrink-0" />
@@ -803,7 +803,7 @@ export default function UsuariosPage() {
                 </div>
               </div>
               {/* Atualizado em com ícone relógio */}
-              <div className="flex-1">
+              <div>
                 <label className="block text-xs font-sans text-text-muted mb-1">Atualizado em</label>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-text-muted flex-shrink-0" />
