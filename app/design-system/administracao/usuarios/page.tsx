@@ -707,64 +707,52 @@ export default function UsuariosPage() {
             </div>
           </div>
 
-          {/* Card de Dados - Design com Avatar e separadores */}
-          <div className="bg-[#141414] rounded-xl border border-border p-8 mb-6">
-            {/* Linha 1: Avatar + Dados principais com separadores verticais */}
-            <div className="flex items-center">
+          {/* Card de Dados - Design com Avatar */}
+          <div className="bg-[#1a1a1a] rounded-xl border border-border mb-6">
+            {/* Linha 1: Avatar + Dados principais SEM separadores verticais */}
+            <div className="flex items-start p-6">
               {/* Avatar circular grande */}
-              <div className="w-20 h-20 rounded-full bg-[#0a0a0a] border border-border flex items-center justify-center flex-shrink-0">
-                <span className="font-title text-2xl text-foreground">
+              <div className="w-[72px] h-[72px] rounded-full bg-[#0d0d0d] border border-border flex items-center justify-center flex-shrink-0">
+                <span className="font-title text-xl text-foreground">
                   {selectedUser.nome.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
                 </span>
               </div>
               
-              {/* Dados principais com separadores */}
-              <div className="flex-1 flex items-center ml-8">
-                {/* Nome + Email agrupados */}
-                <div className="min-w-[160px]">
-                  <label className="block text-xs font-sans text-text-muted mb-1">Nome de Exibição</label>
-                  <span className="font-sans text-sm text-foreground font-medium">{selectedUser.nome}</span>
-                  <label className="block text-xs font-sans text-text-muted mb-1 mt-3">Email</label>
-                  <span className="font-sans text-sm text-foreground">{selectedUser.email}</span>
+              {/* Dados principais - 5 colunas sem separadores */}
+              <div className="flex-1 flex items-start ml-6">
+                {/* Nome + Email */}
+                <div className="w-[180px]">
+                  <label className="block text-sm font-sans text-text-muted mb-1">Nome de Exibição</label>
+                  <span className="block font-sans text-base text-foreground font-semibold mb-3">{selectedUser.nome}</span>
+                  <label className="block text-sm font-sans text-text-muted mb-1">Email</label>
+                  <span className="block font-sans text-base text-foreground">{selectedUser.email}</span>
                 </div>
                 
-                {/* Separador vertical */}
-                <div className="w-px h-16 bg-border mx-8" />
-                
                 {/* Status */}
-                <div className="min-w-[80px]">
-                  <label className="block text-xs font-sans text-text-muted mb-1">Status</label>
+                <div className="w-[120px]">
+                  <label className="block text-sm font-sans text-text-muted mb-2">Status</label>
                   <StatusBadge status={selectedUser.status} />
                 </div>
                 
-                {/* Separador vertical */}
-                <div className="w-px h-16 bg-border mx-8" />
-                
                 {/* Nível de Acesso */}
-                <div className="min-w-[100px]">
-                  <label className="block text-xs font-sans text-text-muted mb-1">Nível de Acesso</label>
-                  <span className="font-sans text-lg text-foreground">{selectedUser.nivelAcesso}</span>
+                <div className="w-[140px]">
+                  <label className="block text-sm font-sans text-text-muted mb-1">Nível de Acesso</label>
+                  <span className="block font-sans text-2xl text-foreground">{selectedUser.nivelAcesso}</span>
                 </div>
-                
-                {/* Separador vertical */}
-                <div className="w-px h-16 bg-border mx-8" />
                 
                 {/* Versão da Identidade */}
-                <div className="min-w-[130px]">
-                  <label className="block text-xs font-sans text-text-muted mb-1">Versão da Identidade</label>
-                  <span className="font-sans text-lg text-foreground">{selectedUser.versaoIdentidade}</span>
+                <div className="w-[160px]">
+                  <label className="block text-sm font-sans text-text-muted mb-1">Versão da Identidade</label>
+                  <span className="block font-sans text-2xl text-foreground">{selectedUser.versaoIdentidade}</span>
                 </div>
                 
-                {/* Separador vertical */}
-                <div className="w-px h-16 bg-border mx-8" />
-                
-                {/* ID Auth Externa com ícone copiar no canto */}
+                {/* ID Auth Externa */}
                 <div className="flex-1">
-                  <label className="block text-xs font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
-                  <div className="flex items-center gap-4">
-                    <span className="font-sans text-sm text-foreground">{selectedUser.idAuthExterna}</span>
+                  <label className="block text-sm font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
+                  <div className="flex items-start justify-between">
+                    <span className="font-sans text-base text-foreground">{selectedUser.idAuthExterna}</span>
                     <button 
-                      className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0 ml-auto"
+                      className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0"
                       title="Copiar ID"
                       onClick={() => navigator.clipboard.writeText(selectedUser.idAuthExterna)}
                     >
@@ -776,15 +764,15 @@ export default function UsuariosPage() {
             </div>
             
             {/* Divisor horizontal */}
-            <div className="border-t border-border my-8" />
+            <div className="border-t border-border" />
             
-            {/* Linha 2: Organização, Datas - 3 colunas distribuídas */}
-            <div className="grid grid-cols-3 gap-8">
-              {/* Organização com ícone copiar */}
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">Organização</label>
+            {/* Linha 2: Organização | Criado em | Atualizado em - COM separadores verticais */}
+            <div className="flex items-start p-6">
+              {/* Organização */}
+              <div className="flex-1">
+                <label className="block text-sm font-sans text-text-muted mb-1">Organização</label>
                 <div className="flex items-center gap-2">
-                  <span className="font-sans text-sm text-foreground">{selectedUser.organizacao}</span>
+                  <span className="font-sans text-base text-foreground">{selectedUser.organizacao}</span>
                   <button 
                     className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0"
                     title="Copiar Organização"
@@ -794,20 +782,28 @@ export default function UsuariosPage() {
                   </button>
                 </div>
               </div>
-              {/* Criado em com ícone relógio */}
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">Criado em</label>
+              
+              {/* Separador vertical */}
+              <div className="w-px h-12 bg-border mx-6" />
+              
+              {/* Criado em */}
+              <div className="flex-1">
+                <label className="block text-sm font-sans text-text-muted mb-1">Criado em</label>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-text-muted flex-shrink-0" />
-                  <span className="font-sans text-sm text-foreground">{selectedUser.criadoEm}</span>
+                  <span className="font-sans text-base text-foreground">{selectedUser.criadoEm}</span>
                 </div>
               </div>
-              {/* Atualizado em com ícone relógio */}
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">Atualizado em</label>
+              
+              {/* Separador vertical */}
+              <div className="w-px h-12 bg-border mx-6" />
+              
+              {/* Atualizado em */}
+              <div className="flex-1">
+                <label className="block text-sm font-sans text-text-muted mb-1">Atualizado em</label>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-text-muted flex-shrink-0" />
-                  <span className="font-sans text-sm text-foreground">{selectedUser.atualizadoEm}</span>
+                  <span className="font-sans text-base text-foreground">{selectedUser.atualizadoEm}</span>
                 </div>
               </div>
             </div>
