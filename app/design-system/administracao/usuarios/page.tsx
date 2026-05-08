@@ -664,6 +664,7 @@ export default function UsuariosPage() {
                 
                 {administracaoExpanded && (
                   <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                    {/* Usuários - PÁGINA ATUAL = fundo da cor da vertical */}
                     <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
                       <Users className="w-4 h-4 text-white" />
                       <span className="font-sans text-sm text-white">Usuários</span>
@@ -672,19 +673,42 @@ export default function UsuariosPage() {
                       <UsersRound className="w-4 h-4 text-muted-foreground" />
                       <span className="font-sans text-sm text-muted-foreground">Grupos</span>
                     </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <Shield className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Papéis</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <Mail className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Convites</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <ClipboardList className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Auditoria</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <Building className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Organizações</span>
+                    </button>
                   </div>
                 )}
               </div>
-              
-              {/* Rodapé */}
-              <div className="mt-auto border-t border-border pt-2" style={{ paddingLeft: '10px', paddingRight: '16px' }}>
-                <button className="w-full flex items-center gap-3 py-2 rounded-lg hover:opacity-80 transition-opacity">
-                  <div className="w-11 flex justify-center">
-                    <Settings className="w-5 h-5 text-muted-foreground" />
-                  </div>
-                  <span className="font-sans text-sm text-muted-foreground">Configurações</span>
-                </button>
-              </div>
+
+              {/* Spacer */}
+              <div className="flex-1" />
+
+              {/* Linha separadora */}
+              <div className="mx-3 my-2 border-t border-border" />
+
+              {/* Configurações */}
+              <button 
+                className="flex items-center gap-3 py-3 rounded-lg hover:bg-muted transition-colors"
+                style={{ paddingLeft: '10px' }}
+              >
+                <div className="w-11 flex justify-center">
+                  <Settings className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <span className="font-sans text-sm text-muted-foreground">Configurações</span>
+              </button>
             </div>
           )}
         </aside>
