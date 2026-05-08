@@ -924,7 +924,7 @@ export default function UsuariosPage() {
               type="email"
               value={editForm.email}
               onChange={(e) => setEditForm(prev => ({ ...prev, email: e.target.value }))}
-              className="w-full px-4 py-3 bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-primary placeholder:text-text-muted"
+              className="w-full px-4 py-3 bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-white/50 placeholder:text-text-muted"
               placeholder="Digite o email"
             />
           </div>
@@ -936,7 +936,7 @@ export default function UsuariosPage() {
               type="text"
               value={editForm.nomeExibicao}
               onChange={(e) => setEditForm(prev => ({ ...prev, nomeExibicao: e.target.value }))}
-              className="w-full px-4 py-3 bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-primary placeholder:text-text-muted"
+              className="w-full px-4 py-3 bg-[#000000] border border-border rounded-lg text-foreground text-sm font-sans focus:outline-none focus:border-white/50 placeholder:text-text-muted"
               placeholder="Digite o nome de exibição"
             />
           </div>

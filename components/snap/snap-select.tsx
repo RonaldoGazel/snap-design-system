@@ -48,12 +48,12 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           </label>
         )}
         
-        <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg overflow-hidden">
+        <div className="bg-[#000000] border border-border rounded-lg overflow-hidden focus-within:border-white/50">
           {/* Trigger */}
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#3a3b45] transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#1a1a1a] transition-colors"
           >
             <span className="text-[#b1b3c2] text-sm font-sans">
               {selectedOption?.label || placeholder || "Selecione..."}
@@ -69,8 +69,8 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           {/* Dropdown (Accordion Style) */}
           <div 
             className={cn(
-              "bg-[#1a1b1e] overflow-hidden transition-all duration-200 ease-out",
-              isOpen ? "max-h-[160px] border-t border-[#2a2b35]" : "max-h-0"
+              "bg-[#0a0a0a] overflow-hidden transition-all duration-200 ease-out",
+              isOpen ? "max-h-[160px] border-t border-border" : "max-h-0"
             )}
           >
             <div className="overflow-y-auto max-h-[160px] scrollbar-minimal">
@@ -80,9 +80,9 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
                   type="button"
                   onClick={() => handleSelect(option.value)}
                   className={cn(
-                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#2a2b35] transition-colors",
+                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#1a1a1a] transition-colors",
                     option.value === value 
-                      ? "text-white bg-[#2a2b35]" 
+                      ? "text-white bg-[#1a1a1a]" 
                       : "text-[#898c9d]"
                   )}
                 >
