@@ -433,8 +433,6 @@ export default function UsuariosPage() {
                   variant="inline"
                   minWidth="120px"
                 />
-                  )}
-                </div>
 
                 {/* Botão Novo Usuário */}
                 <SnapButton 
