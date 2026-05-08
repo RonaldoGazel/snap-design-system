@@ -5,7 +5,14 @@ import { cn } from "@/lib/utils"
 import { ChevronDown } from "lucide-react"
 
 /**
- * SNAP Select Component
+ * SNAP Select Component - Design System Padronizado
+ * 
+ * Cores (hardcoded para consistência):
+ * - Trigger: bg-[#2a2b35], hover bg-[#3a3b45]
+ * - Dropdown: bg-[#1a1b1e]
+ * - Texto normal: text-[#898c9d]
+ * - Texto selecionado: text-white bg-[#2a2b35]
+ * - Chevron: text-[#898c9d]
  * 
  * Regras:
  * - Chevron sempre alinhado à direita do container (justify-between)
