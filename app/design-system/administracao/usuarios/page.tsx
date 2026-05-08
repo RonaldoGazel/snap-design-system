@@ -279,8 +279,8 @@ export default function UsuariosPage() {
                 <div className="mb-2">
                   <button 
                     onClick={() => setInteligenciaExpanded(!inteligenciaExpanded)}
-                    className="w-full flex items-center justify-between py-3 pr-3 rounded-lg hover:opacity-80 transition-opacity"
-                    style={{ paddingLeft: '10px' }}
+                    className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+                    style={{ paddingLeft: '10px', paddingRight: '16px' }}
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-11 flex justify-center">
@@ -317,8 +317,8 @@ export default function UsuariosPage() {
                 <div className="mb-2">
                   <button 
                     onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
-                    className="w-full flex items-center justify-between py-3 pr-3 rounded-lg hover:opacity-80 transition-opacity"
-                    style={{ paddingLeft: '10px' }}
+                    className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+                    style={{ paddingLeft: '10px', paddingRight: '16px' }}
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-11 flex justify-center">
