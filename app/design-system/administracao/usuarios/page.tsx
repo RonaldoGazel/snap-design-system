@@ -11,11 +11,17 @@ import {
   Lock,
   Shield,
   ChevronDown,
+  ChevronUp,
   ArrowLeft,
-  ArrowRight,
   Users,
   FileText,
-  Settings
+  Settings,
+  Search,
+  ClipboardList,
+  UserPlus,
+  Building,
+  UsersRound,
+  Mail
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
@@ -179,6 +185,11 @@ export default function UsuariosPage() {
   const [statusFilter, setStatusFilter] = useState("")
   const [statusSelectOpen, setStatusSelectOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
+  
+  // Estados da sidebar
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [inteligenciaExpanded, setInteligenciaExpanded] = useState(true)
+  const [administracaoExpanded, setAdministracaoExpanded] = useState(true)
 
   const filteredUsers = mockUsers.filter(user => 
     statusFilter === "" || user.status === statusFilter
@@ -199,57 +210,171 @@ export default function UsuariosPage() {
         {/* ============================================
             LAYOUT: SIDEBAR + CONTEÚDO
             Medidas:
-            - Sidebar: margem esquerda 32px, fundo arredondado
+            - Sidebar fechada: 64px / aberta: 280px
+            - Margem esquerda: 32px, fundo arredondado
             - Gap sidebar → conteúdo: 51px
+            - Sidebar aberta: position absolute, drop-shadow
             ============================================ */}
-        <div className="flex flex-1">
-          {/* Sidebar Colapsada - Tokens:
-              - Fundo: #0F0F10 (colors.background.page)
-              - Borda: #2A2B35 (colors.border.DEFAULT)
-              - Ícones: #FFFFFF (colors.text.primary)
-              - Corner radius: 12px (borders.radius.lg)
-              - Margem esquerda: 32px
-          */}
+        <div className="flex flex-1 relative">
+          {/* Sidebar - Fechada (64px) ou Aberta (280px, overlay) */}
           <aside 
-            className="flex flex-col items-center py-4"
+            className={`flex flex-col py-4 transition-all duration-300 ${
+              sidebarOpen 
+                ? 'absolute z-50 h-[calc(100%-32px)]' 
+                : ''
+            }`}
             style={{ 
-              marginLeft: '32px', 
-              width: '64px', 
-              minWidth: '64px',
+              marginLeft: '32px',
+              marginTop: sidebarOpen ? '0' : undefined,
+              width: sidebarOpen ? '280px' : '64px',
+              minWidth: sidebarOpen ? '280px' : '64px',
               backgroundColor: '#0F0F10',
               border: '1px solid #2A2B35',
-              borderRadius: '12px'
+              borderRadius: '12px',
+              boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.5)' : 'none'
             }}
           >
-            <nav className="flex-1 flex flex-col items-center gap-2">
-              {/* Ícone ativo - branco #FFFFFF (Escudo = Inteligência) */}
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#FFFFFF' }}>
-                <Shield className="w-5 h-5" />
-              </button>
-              {/* Ícones inativos - cinza escuro #3B3B3B */}
-              {/* Cadeado = Administração */}
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
-                <Lock className="w-5 h-5" />
-              </button>
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
-                <FileText className="w-5 h-5" />
-              </button>
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
-                <LinkIcon className="w-5 h-5" />
-              </button>
-              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
-                <ShareIcon className="w-5 h-5" />
-              </button>
-            </nav>
-            <div className="w-8 my-2" style={{ borderTop: '1px solid #2A2B35' }} />
-            {/* Engrenagem - cinza escuro #3B3B3B */}
-            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
-              <Settings className="w-5 h-5" />
-            </button>
+            {/* Sidebar Fechada */}
+            {!sidebarOpen && (
+              <>
+                <nav className="flex-1 flex flex-col items-center gap-2">
+                  {/* Clique para abrir */}
+                  <button 
+                    onClick={() => setSidebarOpen(true)}
+                    className="p-3 rounded-lg hover:opacity-80 transition-opacity" 
+                    style={{ color: '#FFFFFF' }}
+                  >
+                    <Shield className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setSidebarOpen(true)}
+                    className="p-3 rounded-lg hover:opacity-80 transition-opacity" 
+                    style={{ color: '#3B3B3B' }}
+                  >
+                    <Lock className="w-5 h-5" />
+                  </button>
+                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
+                    <FileText className="w-5 h-5" />
+                  </button>
+                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
+                    <LinkIcon className="w-5 h-5" />
+                  </button>
+                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#3B3B3B' }}>
+                    <ShareIcon className="w-5 h-5" />
+                  </button>
+                </nav>
+                <div className="w-8 mx-auto my-2" style={{ borderTop: '1px solid #2A2B35' }} />
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity mx-auto" style={{ color: '#3B3B3B' }}>
+                  <Settings className="w-5 h-5" />
+                </button>
+              </>
+            )}
+
+            {/* Sidebar Aberta */}
+            {sidebarOpen && (
+              <div className="flex flex-col h-full px-3">
+                {/* Vertical: Inteligência (expandida) */}
+                <div className="mb-2">
+                  <button 
+                    onClick={() => setInteligenciaExpanded(!inteligenciaExpanded)}
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:opacity-80 transition-opacity"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Search className="w-5 h-5" style={{ color: '#72284B' }} />
+                      <span className="font-sans text-sm font-medium" style={{ color: '#72284B' }}>Inteligência</span>
+                    </div>
+                    {inteligenciaExpanded ? (
+                      <ChevronUp className="w-4 h-4 text-text-muted" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-text-muted" />
+                    )}
+                  </button>
+                  
+                  {inteligenciaExpanded && (
+                    <div className="ml-4 mt-1 space-y-1">
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: '#72284B' }}>
+                        <UsersRound className="w-4 h-4 text-white" />
+                        <span className="font-sans text-sm text-white">Pessoas</span>
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                        <FileText className="w-4 h-4 text-text-muted" />
+                        <span className="font-sans text-sm text-text-muted">Documentos</span>
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                        <Settings className="w-4 h-4 text-text-muted" />
+                        <span className="font-sans text-sm text-text-muted">Fluxos de Trabalho</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Vertical: Administração */}
+                <div className="mb-2">
+                  <button 
+                    onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:opacity-80 transition-opacity"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Lock className="w-5 h-5 text-text-muted" />
+                      <span className="font-sans text-sm font-medium text-text-muted">Administração</span>
+                    </div>
+                    {administracaoExpanded ? (
+                      <ChevronUp className="w-4 h-4 text-text-muted" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-text-muted" />
+                    )}
+                  </button>
+                  
+                  {administracaoExpanded && (
+                    <div className="ml-4 mt-1 space-y-1">
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                        <Users className="w-4 h-4 text-text-muted" />
+                        <span className="font-sans text-sm text-text-muted">Usuários</span>
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                        <UsersRound className="w-4 h-4 text-text-muted" />
+                        <span className="font-sans text-sm text-text-muted">Grupos</span>
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                        <Shield className="w-4 h-4 text-text-muted" />
+                        <span className="font-sans text-sm text-text-muted">Papéis</span>
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                        <Mail className="w-4 h-4 text-text-muted" />
+                        <span className="font-sans text-sm text-text-muted">Convites</span>
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                        <ClipboardList className="w-4 h-4 text-text-muted" />
+                        <span className="font-sans text-sm text-text-muted">Auditoria</span>
+                      </button>
+                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                        <Building className="w-4 h-4 text-text-muted" />
+                        <span className="font-sans text-sm text-text-muted">Organizações</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Spacer */}
+                <div className="flex-1" />
+
+                {/* Linha separadora */}
+                <div className="mx-3 my-2" style={{ borderTop: '1px solid #2A2B35' }} />
+
+                {/* Configurações + Fechar */}
+                <button 
+                  onClick={() => setSidebarOpen(false)}
+                  className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors"
+                >
+                  <Settings className="w-5 h-5 text-text-muted" />
+                  <span className="font-sans text-sm text-text-muted">Configurações</span>
+                </button>
+              </div>
+            )}
           </aside>
 
-          {/* Área de Conteúdo - margem esquerda 51px da sidebar */}
-          <main className="flex-1 py-8 pr-8" style={{ marginLeft: '51px' }}>
+          {/* Área de Conteúdo - margem fixa da sidebar fechada (64px + 51px gap) */}
+          <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 51}px` }}>
             {/* Header: Título + Filtros + Botão */}
             <div className="flex items-center justify-between mb-6">
               {/* Título com ícone */}
