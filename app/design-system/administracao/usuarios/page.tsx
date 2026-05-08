@@ -676,7 +676,11 @@ export default function UsuariosPage() {
                 {administracaoExpanded && (
                   <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
                     {/* Usuários - PÁGINA ATUAL = fundo da cor da vertical */}
-                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
+                    <button 
+                      className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" 
+                      style={{ backgroundColor: VERTICAL_COLOR }}
+                      onClick={() => setSelectedUser(null)}
+                    >
                       <Users className="w-4 h-4 text-white" />
                       <span className="font-sans text-sm text-white">Usuários</span>
                     </button>
