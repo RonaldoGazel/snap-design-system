@@ -24,7 +24,9 @@ import {
   Mail,
   Home,
   X,
-  ChevronLeft
+  ChevronLeft,
+  Copy,
+  Clock
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
@@ -705,46 +707,92 @@ export default function UsuariosPage() {
             </div>
           </div>
 
-          {/* Card de Dados */}
+          {/* Card de Dados - Design com Avatar */}
           <div className="bg-card rounded-xl border border-border p-6 mb-6">
-            <div className="grid grid-cols-5 gap-6">
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">Nome de Exibição</label>
-                <span className="font-sans text-sm text-foreground">{selectedUser.nome}</span>
+            {/* Linha 1: Avatar + Dados principais */}
+            <div className="flex items-start gap-6">
+              {/* Avatar circular grande */}
+              <div className="w-20 h-20 rounded-full bg-[#1a1a1a] border border-border flex items-center justify-center flex-shrink-0">
+                <span className="font-title text-2xl text-foreground">
+                  {selectedUser.nome.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+                </span>
               </div>
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">Email</label>
-                <span className="font-sans text-sm text-foreground">{selectedUser.email}</span>
-              </div>
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">Status</label>
-                <StatusBadge status={selectedUser.status} />
-              </div>
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">Nível de Acesso</label>
-                <span className="font-sans text-sm text-foreground">{selectedUser.nivelAcesso}</span>
-              </div>
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
-                <span className="font-sans text-sm text-foreground break-all">{selectedUser.idAuthExterna}</span>
+              
+              {/* Grid de dados principais */}
+              <div className="flex-1 grid grid-cols-5 gap-6">
+                {/* Nome + Email agrupados */}
+                <div>
+                  <label className="block text-xs font-sans text-text-muted mb-1">Nome de Exibição</label>
+                  <span className="font-sans text-sm text-foreground font-medium">{selectedUser.nome}</span>
+                  <label className="block text-xs font-sans text-text-muted mb-1 mt-3">Email</label>
+                  <span className="font-sans text-sm text-foreground">{selectedUser.email}</span>
+                </div>
+                {/* Status */}
+                <div>
+                  <label className="block text-xs font-sans text-text-muted mb-1">Status</label>
+                  <StatusBadge status={selectedUser.status} />
+                </div>
+                {/* Nível de Acesso */}
+                <div>
+                  <label className="block text-xs font-sans text-text-muted mb-1">Nível de Acesso</label>
+                  <span className="font-sans text-sm text-foreground">{selectedUser.nivelAcesso}</span>
+                </div>
+                {/* Versão da Identidade */}
+                <div>
+                  <label className="block text-xs font-sans text-text-muted mb-1">Versão da Identidade</label>
+                  <span className="font-sans text-sm text-foreground">{selectedUser.versaoIdentidade}</span>
+                </div>
+                {/* ID Auth Externa com ícone copiar */}
+                <div>
+                  <label className="block text-xs font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
+                  <div className="flex items-start gap-2">
+                    <span className="font-sans text-sm text-foreground break-all">{selectedUser.idAuthExterna}</span>
+                    <button 
+                      className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0"
+                      title="Copiar ID"
+                      onClick={() => navigator.clipboard.writeText(selectedUser.idAuthExterna)}
+                    >
+                      <Copy className="w-4 h-4 text-text-muted" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="grid grid-cols-4 gap-6 mt-6">
+            
+            {/* Divisor */}
+            <div className="border-t border-border my-6" />
+            
+            {/* Linha 2: Organização, Datas */}
+            <div className="grid grid-cols-4 gap-6">
+              {/* Organização com ícone copiar */}
               <div>
                 <label className="block text-xs font-sans text-text-muted mb-1">Organização</label>
-                <span className="font-sans text-sm text-foreground break-all">{selectedUser.organizacao}</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-sans text-sm text-foreground break-all">{selectedUser.organizacao}</span>
+                  <button 
+                    className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0"
+                    title="Copiar Organização"
+                    onClick={() => navigator.clipboard.writeText(selectedUser.organizacao)}
+                  >
+                    <Copy className="w-4 h-4 text-text-muted" />
+                  </button>
+                </div>
               </div>
-              <div>
-                <label className="block text-xs font-sans text-text-muted mb-1">Versão da Identidade</label>
-                <span className="font-sans text-sm text-foreground">{selectedUser.versaoIdentidade}</span>
-              </div>
+              {/* Criado em com ícone relógio */}
               <div>
                 <label className="block text-xs font-sans text-text-muted mb-1">Criado em</label>
-                <span className="font-sans text-sm text-foreground">{selectedUser.criadoEm}</span>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-text-muted flex-shrink-0" />
+                  <span className="font-sans text-sm text-foreground">{selectedUser.criadoEm}</span>
+                </div>
               </div>
+              {/* Atualizado em com ícone relógio */}
               <div>
                 <label className="block text-xs font-sans text-text-muted mb-1">Atualizado em</label>
-                <span className="font-sans text-sm text-foreground">{selectedUser.atualizadoEm}</span>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-text-muted flex-shrink-0" />
+                  <span className="font-sans text-sm text-foreground">{selectedUser.atualizadoEm}</span>
+                </div>
               </div>
             </div>
           </div>
