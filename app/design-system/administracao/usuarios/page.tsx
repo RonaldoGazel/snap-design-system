@@ -188,8 +188,20 @@ export default function UsuariosPage() {
   
   // Estados da sidebar
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarContentVisible, setSidebarContentVisible] = useState(false)
   const [inteligenciaExpanded, setInteligenciaExpanded] = useState(true)
   const [administracaoExpanded, setAdministracaoExpanded] = useState(true)
+
+  // Delay para mostrar conteúdo após sidebar expandir
+  const handleSidebarOpen = () => {
+    setSidebarOpen(true)
+    setTimeout(() => setSidebarContentVisible(true), 200)
+  }
+  
+  const handleSidebarClose = () => {
+    setSidebarContentVisible(false)
+    setTimeout(() => setSidebarOpen(false), 50)
+  }
 
   const filteredUsers = mockUsers.filter(user => 
     statusFilter === "" || user.status === statusFilter
@@ -220,8 +232,8 @@ export default function UsuariosPage() {
         <div className="flex flex-1">
           {/* Sidebar - Posição fixa, hover para expandir */}
           <aside 
-            onMouseEnter={() => setSidebarOpen(true)}
-            onMouseLeave={() => setSidebarOpen(false)}
+            onMouseEnter={handleSidebarOpen}
+            onMouseLeave={handleSidebarClose}
             className="flex flex-col py-4 transition-all duration-300 absolute z-50"
             style={{ 
               marginLeft: '32px',
@@ -263,9 +275,9 @@ export default function UsuariosPage() {
               </>
             )}
 
-            {/* Sidebar Aberta */}
-            {sidebarOpen && (
-              <div className="flex flex-col h-full px-3">
+            {/* Sidebar Aberta - conteúdo aparece após expansão */}
+            {sidebarOpen && sidebarContentVisible && (
+              <div className="flex flex-col h-full px-3 animate-in fade-in duration-150">
                 {/* Vertical: Inteligência */}
                 <div className="mb-2">
                   <button 
