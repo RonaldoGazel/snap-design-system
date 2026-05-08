@@ -12,7 +12,7 @@ import { X } from "lucide-react"
  * - Linha separadora: full-width
  * - Botões: alinhados à DIREITA
  * - Margem botões: 36px (mb-9)
- * - Overlay: #000000 com 50% opacidade
+ * - Overlay: #000000 com 80% opacidade
  */
 
 // Modal Overlay
@@ -25,7 +25,7 @@ const SnapModalOverlay = forwardRef<HTMLDivElement, SnapModalOverlayProps>(
     <div
       ref={ref}
       className={cn(
-        "fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-4",
+        "fixed inset-0 bg-black/80 z-40 flex items-center justify-center p-4",
         className
       )}
       onClick={(e) => {
