@@ -214,6 +214,7 @@ export default function UsuariosPage() {
   })
   const [showResetPasswordModal, setShowResetPasswordModal] = useState(false)
   const [newPassword, setNewPassword] = useState('')
+  const [showDeactivateModal, setShowDeactivateModal] = useState(false)
 
   // Delay para mostrar conteúdo após sidebar expandir
   const handleSidebarOpen = () => {
@@ -895,7 +896,13 @@ export default function UsuariosPage() {
                   setShowResetPasswordModal(true)
                 }}
               >Redefinir Senha</SnapButton>
-              <SnapButton variant="outline" size="default" icon={<Ban className="w-4 h-4" />} className="border-warning text-warning hover:bg-warning/10">Desativar</SnapButton>
+              <SnapButton 
+                variant="outline" 
+                size="default" 
+                icon={<Ban className="w-4 h-4" />} 
+                className="border-warning text-warning hover:bg-warning/10"
+                onClick={() => setShowDeactivateModal(true)}
+              >Desativar</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Lock className="w-4 h-4" />} className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10">Bloquear</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Trash2 className="w-4 h-4" />} className="border-error text-error hover:bg-error/10">Excluir</SnapButton>
             </div>
@@ -1033,6 +1040,46 @@ export default function UsuariosPage() {
               size="modal"
               icon={<X className="w-4 h-4" />}
               onClick={() => setShowResetPasswordModal(false)}
+            >
+              Cancelar
+            </SnapButton>
+          </SnapModalFooter>
+        </SnapModalContent>
+      </SnapModal>
+
+      {/* Modal Desativar Usuário */}
+      <SnapModal open={showDeactivateModal} onClose={() => setShowDeactivateModal(false)}>
+        <SnapModalHeader 
+          icon={<Ban className="w-5 h-5" />}
+          title="Desativar usuário" 
+          onClose={() => setShowDeactivateModal(false)} 
+        />
+        <SnapModalContent>
+          {/* Pergunta de confirmação */}
+          <p className="text-base font-sans text-foreground mb-4">
+            Tem certeza que deseja desativar este usuário?
+          </p>
+          
+          {/* Aviso de auditoria */}
+          <p className="text-sm font-sans text-text-muted mb-6">
+            Esta ação será registrada no log de auditoria
+          </p>
+          
+          {/* Botões */}
+          <SnapModalFooter>
+            <SnapButton
+              variant="solid"
+              size="modal"
+              icon={<Ban className="w-4 h-4" />}
+              className="bg-warning text-white hover:opacity-90"
+            >
+              Desativar
+            </SnapButton>
+            <SnapButton
+              variant="outline"
+              size="modal"
+              icon={<X className="w-4 h-4" />}
+              onClick={() => setShowDeactivateModal(false)}
             >
               Cancelar
             </SnapButton>
