@@ -689,8 +689,11 @@ export default function UsuariosPage() {
         <main className="flex-1" style={{ marginLeft: 'calc(32px + 64px + 51px)', paddingTop: '32px', paddingRight: '32px' }}>
           {/* Voltar + Título */}
           <div className="flex items-center gap-4 mb-6">
-            <button onClick={() => setSelectedUser(null)} className="flex items-center gap-2 text-text-secondary hover:text-foreground transition-colors font-sans text-sm">
-              <ArrowLeft className="w-4 h-4" />
+            <button 
+              onClick={() => setSelectedUser(null)} 
+              className="flex items-center justify-between gap-3 px-4 py-2 rounded-[6px] border border-border bg-card hover:bg-card-hover transition-colors font-sans font-bold text-sm text-text-secondary min-w-[110px]"
+            >
+              <X className="w-4 h-4" />
               Voltar
             </button>
             <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
