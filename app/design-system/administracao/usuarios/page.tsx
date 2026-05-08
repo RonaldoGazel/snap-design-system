@@ -694,10 +694,10 @@ export default function UsuariosPage() {
             <div className="flex items-center gap-3">
               <button 
                 onClick={() => setSelectedUser(null)} 
-                className="w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
+                className="w-6 h-6 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
                 title="Voltar para lista de usuários"
               >
-                <ChevronLeft className="w-5 h-5 text-text-secondary" />
+                <ChevronLeft className="w-4 h-4 text-text-secondary" />
               </button>
               <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
             </div>
