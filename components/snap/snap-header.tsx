@@ -44,6 +44,7 @@ interface BreadcrumbItem {
   label: string
   href?: string
   icon?: React.ReactNode
+  onClick?: () => void
 }
 
 interface SnapHeaderProps {
@@ -135,9 +136,10 @@ export function SnapHeader({
             {/* Itens intermediários e final */}
             {breadcrumb.map((item, index) => {
               const isLast = index === breadcrumb.length - 1
-              return (
-                <div key={index} className="flex items-center gap-2">
-                  <ChevronRight className="w-4 h-4 text-[#696969]" />
+              const isClickable = !isLast && (item.href || item.onClick)
+              
+              const content = (
+                <>
                   {item.icon && (
                     <span className={isLast ? "text-foreground" : "text-[#696969]"}>
                       {item.icon}
@@ -148,10 +150,31 @@ export function SnapHeader({
                       isLast 
                         ? "text-foreground font-semibold" 
                         : "text-[#696969] font-medium"
-                    }`}
+                    } ${isClickable ? "hover:underline cursor-pointer" : ""}`}
                   >
                     {item.label}
                   </span>
+                </>
+              )
+              
+              return (
+                <div key={index} className="flex items-center gap-2">
+                  <ChevronRight className="w-4 h-4 text-[#696969]" />
+                  {isClickable ? (
+                    item.onClick ? (
+                      <button onClick={item.onClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        {content}
+                      </button>
+                    ) : (
+                      <Link href={item.href!} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        {content}
+                      </Link>
+                    )
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      {content}
+                    </div>
+                  )}
                 </div>
               )
             })}

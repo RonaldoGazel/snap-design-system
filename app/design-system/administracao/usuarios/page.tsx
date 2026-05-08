@@ -558,28 +558,135 @@ export default function UsuariosPage() {
       <SnapHeader 
         vertical="administracao"
         breadcrumb={[
-          { label: "Usuários" },
+          { label: "Usuários", href: "#", onClick: () => setSelectedUser(null) },
           { label: selectedUser.nome }
         ]}
       />
 
-      {/* Layout */}
+      {/* Layout - Mesma estrutura da listagem */}
       <div className="flex flex-1">
-        {/* Sidebar */}
-        <aside className="w-16 min-h-full bg-sidebar flex flex-col items-center py-4 border-r border-sidebar-border">
-          <nav className="flex-1 flex flex-col items-center gap-2">
-            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors" style={{ color: VERTICAL_COLOR }}><Search className="w-5 h-5" /></button>
-            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-foreground"><Home className="w-5 h-5" /></button>
-            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70"><FileText className="w-5 h-5" /></button>
-            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70"><LinkIcon className="w-5 h-5" /></button>
-            <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70"><ShareIcon className="w-5 h-5" /></button>
-          </nav>
-          <div className="w-8 border-t border-sidebar-border my-2" />
-          <button className="p-3 rounded-lg hover:bg-sidebar-accent transition-colors text-sidebar-foreground/70"><Settings className="w-5 h-5" /></button>
+        {/* Sidebar - Reutiliza a mesma sidebar da listagem */}
+        <aside 
+          onMouseEnter={handleSidebarOpen}
+          onMouseLeave={handleSidebarClose}
+          className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
+          style={{ 
+            marginLeft: '32px',
+            width: sidebarOpen ? '280px' : '64px',
+            minWidth: sidebarOpen ? '280px' : '64px',
+            height: 'calc(100vh - 140px)',
+            boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.25)' : 'none'
+          }}
+        >
+          {/* Sidebar Fechada */}
+          {!sidebarOpen && (
+            <>
+              <nav className="flex-1 flex flex-col items-center gap-2">
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+                  <Shield className="w-5 h-5" />
+                </button>
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: VERTICAL_COLOR }}>
+                  <Lock className="w-5 h-5" />
+                </button>
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+                  <FileText className="w-5 h-5" />
+                </button>
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+                  <LinkIcon className="w-5 h-5" />
+                </button>
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+                  <ShareIcon className="w-5 h-5" />
+                </button>
+              </nav>
+              <div className="w-8 mx-auto my-2 border-t border-border" />
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity mx-auto text-muted-foreground">
+                <Settings className="w-5 h-5" />
+              </button>
+            </>
+          )}
+
+          {/* Sidebar Aberta */}
+          {sidebarOpen && sidebarContentVisible && (
+            <div className="flex flex-col h-full animate-in fade-in duration-150">
+              {/* Vertical: Inteligência */}
+              <div className="mb-2">
+                <button 
+                  onClick={() => setInteligenciaExpanded(!inteligenciaExpanded)}
+                  className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+                  style={{ paddingLeft: '10px', paddingRight: '16px' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 flex justify-center">
+                      <Shield className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                    <span className="font-sans text-sm font-medium text-muted-foreground">Inteligência</span>
+                  </div>
+                  {inteligenciaExpanded ? (
+                    <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                  )}
+                </button>
+                
+                {inteligenciaExpanded && (
+                  <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <UsersRound className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Pessoas</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Vertical: Administração - ATIVA */}
+              <div className="mb-2">
+                <button 
+                  onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
+                  className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+                  style={{ paddingLeft: '10px', paddingRight: '16px' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 flex justify-center">
+                      <Lock className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />
+                    </div>
+                    <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
+                  </div>
+                  {administracaoExpanded ? (
+                    <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                  )}
+                </button>
+                
+                {administracaoExpanded && (
+                  <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
+                      <Users className="w-4 h-4 text-white" />
+                      <span className="font-sans text-sm text-white">Usuários</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <UsersRound className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Grupos</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+              
+              {/* Rodapé */}
+              <div className="mt-auto border-t border-border pt-2" style={{ paddingLeft: '10px', paddingRight: '16px' }}>
+                <button className="w-full flex items-center gap-3 py-2 rounded-lg hover:opacity-80 transition-opacity">
+                  <div className="w-11 flex justify-center">
+                    <Settings className="w-5 h-5 text-muted-foreground" />
+                  </div>
+                  <span className="font-sans text-sm text-muted-foreground">Configurações</span>
+                </button>
+              </div>
+            </div>
+          )}
         </aside>
 
-        {/* Conteúdo - Padding de 32px */}
-        <main className="flex-1 p-8">
+        {/* Conteúdo - Mesmo padding e margem da listagem */}
+        <main className="flex-1" style={{ marginLeft: 'calc(32px + 64px + 51px)', paddingTop: '32px', paddingRight: '32px' }}>
           {/* Voltar + Título */}
           <div className="flex items-center gap-4 mb-6">
             <button onClick={() => setSelectedUser(null)} className="flex items-center gap-2 text-text-secondary hover:text-foreground transition-colors font-sans text-sm">
@@ -644,7 +751,7 @@ export default function UsuariosPage() {
 
           {/* Grupos */}
           <div className="mb-8">
-            <h2 className="font-sans text-lg font-semibold text-foreground mb-4">Grupos</h2>
+            <h2 className="font-title text-lg text-foreground mb-4">GRUPOS</h2>
             <div className="flex flex-wrap gap-2">
               {selectedUser.grupos.map((grupo, i) => <GroupBadge key={i} group={grupo} />)}
             </div>
@@ -652,7 +759,7 @@ export default function UsuariosPage() {
 
           {/* Permissões Efetivas */}
           <div className="mb-8">
-            <h2 className="font-sans text-lg font-semibold text-foreground mb-4">Permissões Efetivas</h2>
+            <h2 className="font-title text-lg text-foreground mb-4">PERMISSÕES EFETIVAS</h2>
             <div className="flex flex-wrap gap-2">
               {selectedUser.permissoes.map((perm, i) => <PermissionBadge key={i} permission={perm} />)}
             </div>
