@@ -689,17 +689,19 @@ export default function UsuariosPage() {
 
         {/* Conteúdo - Mesmo padding e margem da listagem (py-8 = 32px top/bottom) */}
         <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 51}px` }}>
-          {/* Voltar + Título - mesma estrutura da listagem */}
+          {/* Voltar + Título - MESMA estrutura da listagem (gap-6 no wrapper externo, gap-3 no interno) */}
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <button 
-                onClick={() => setSelectedUser(null)} 
-                className="w-6 h-6 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
-                title="Voltar para lista de usuários"
-              >
-                <ChevronLeft className="w-4 h-4 text-text-secondary" />
-              </button>
-              <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3">
+                <button 
+                  onClick={() => setSelectedUser(null)} 
+                  className="w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
+                  title="Voltar para lista de usuários"
+                >
+                  <ChevronLeft className="w-5 h-5 text-text-secondary" />
+                </button>
+                <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
+              </div>
             </div>
           </div>
 
