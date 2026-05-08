@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon } from "lucide-react"
+import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon, Shield, Lock, ChevronDown, ChevronRight, Settings, Link2, Share2 } from "lucide-react"
 import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
 import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
 import { SnapLogo } from "@/components/snap/snap-logo"
@@ -137,6 +137,102 @@ const accordionData = [
     ]
   }
 ]
+
+// Componente Sidebar Demo para documentação
+function SidebarDemo() {
+  const [isHovered, setIsHovered] = useState(false)
+  const [expandedVertical, setExpandedVertical] = useState<string | null>('administracao')
+
+  const verticaisSidebar = [
+    { id: 'inteligencia', name: 'Inteligência', icon: Shield, color: '#72284B', items: ['Processos', 'Documentos', 'Pessoas'] },
+    { id: 'administracao', name: 'Administração', icon: Lock, color: '#333540', items: ['Usuários', 'Grupos', 'Papéis', 'Convites'] },
+  ]
+
+  return (
+    <div 
+      className="relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Sidebar */}
+      <div 
+        className={`
+          h-full rounded-xl border border-[#2A2B35] transition-all duration-300 overflow-hidden
+          ${isHovered ? 'w-[280px] shadow-[4px_0_24px_rgba(0,0,0,0.5)]' : 'w-[64px]'}
+        `}
+        style={{ backgroundColor: '#0F0F10' }}
+      >
+        <div className="p-3 flex flex-col gap-2">
+          {verticaisSidebar.map((vertical) => (
+            <div key={vertical.id}>
+              {/* Item da vertical */}
+              <button
+                onClick={() => setExpandedVertical(expandedVertical === vertical.id ? null : vertical.id)}
+                className={`
+                  w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors
+                  ${expandedVertical === vertical.id ? 'text-white' : 'text-[#717171] hover:text-[#999]'}
+                `}
+                style={expandedVertical === vertical.id ? { backgroundColor: vertical.color } : {}}
+              >
+                <vertical.icon className="w-5 h-5 shrink-0" />
+                {isHovered && (
+                  <>
+                    <span className="flex-1 text-left text-sm font-sans">{vertical.name}</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${expandedVertical === vertical.id ? 'rotate-180' : ''}`} />
+                  </>
+                )}
+              </button>
+              
+              {/* Subitens */}
+              {isHovered && expandedVertical === vertical.id && (
+                <div className="ml-8 mt-1 space-y-1">
+                  {vertical.items.map((item, idx) => (
+                    <button
+                      key={item}
+                      className={`
+                        w-full text-left px-3 py-1.5 rounded text-sm font-sans transition-colors
+                        ${idx === 0 ? 'text-white' : 'text-[#717171] hover:text-[#999]'}
+                      `}
+                      style={idx === 0 ? { color: vertical.color } : {}}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          
+          {/* Separador */}
+          <div className="my-2 border-t border-[#2A2B35]" />
+          
+          {/* Links fixos */}
+          {[
+            { icon: FileText, label: 'Documentos' },
+            { icon: Link2, label: 'Links' },
+            { icon: Share2, label: 'Compartilhar' },
+          ].map((item) => (
+            <button
+              key={item.label}
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[#717171] hover:text-[#999] transition-colors"
+            >
+              <item.icon className="w-5 h-5 shrink-0" />
+              {isHovered && <span className="text-sm font-sans">{item.label}</span>}
+            </button>
+          ))}
+        </div>
+        
+        {/* Configurações no rodapé */}
+        <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-[#2A2B35]">
+          <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[#717171] hover:text-[#999] transition-colors">
+            <Settings className="w-5 h-5 shrink-0" />
+            {isHovered && <span className="text-sm font-sans">Configurações</span>}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 // Componente Accordion Interativo para Modal Difusão
 function DifusaoAccordion() {
@@ -1006,6 +1102,179 @@ export default function DesignSystemPage() {
   userInitials="VD"
   notificationCount={35}
 />`}
+            </pre>
+          </div>
+        </Section>
+
+        {/* ============================================
+            SIDEBAR GLOBAL
+            ============================================ */}
+        <Section title="SIDEBAR GLOBAL">
+          <p className="text-text-secondary mb-4 font-sans">
+            Componente de navegação lateral utilizado em todas as telas do ecossistema SNAP. Comportamento de hover para expandir, com verticais colapsáveis.
+          </p>
+
+          {/* Medidas da Sidebar */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">MEDIDAS E REGRAS</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm font-sans">
+              <div>
+                <span className="text-text-muted">Largura fechada:</span>
+                <span className="text-foreground ml-2">64px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Largura aberta:</span>
+                <span className="text-foreground ml-2">280px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Margem esquerda:</span>
+                <span className="text-foreground ml-2">32px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Gap até conteúdo:</span>
+                <span className="text-foreground ml-2">51px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Background:</span>
+                <span className="text-foreground ml-2">#0F0F10</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Border-radius:</span>
+                <span className="text-foreground ml-2">12px</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Demo Interativa da Sidebar */}
+          <div className="mb-6">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Demo interativa (hover para expandir)</p>
+            <div className="flex gap-8 p-6 bg-background rounded-xl border border-border min-h-[400px]">
+              {/* Sidebar Demo - implementada inline */}
+              <SidebarDemo />
+              
+              {/* Conteúdo exemplo */}
+              <div className="flex-1 p-4">
+                <p className="text-sm text-text-muted font-sans">
+                  Passe o mouse sobre a sidebar para ver o comportamento de expansão.
+                  A sidebar abre como overlay, sem empurrar o conteúdo.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Comportamento */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">COMPORTAMENTO</p>
+            <ul className="space-y-2 text-sm font-sans text-text-secondary">
+              <li>• <strong>Hover</strong> para abrir/fechar (não clique)</li>
+              <li>• Sidebar aberta é <strong>overlay</strong> (position absolute), conteúdo não move</li>
+              <li>• Verticais são <strong>colapsáveis</strong> com chevron</li>
+              <li>• Drop-shadow quando aberta: <code className="text-[#72284b]">4px 0 24px rgba(0, 0, 0, 0.5)</code></li>
+            </ul>
+          </div>
+
+          {/* Cores dos Ícones */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">CORES DOS ÍCONES</p>
+            <div className="space-y-3 text-sm font-sans">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 rounded flex items-center justify-center" style={{ color: '#717171' }}>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                </div>
+                <span className="text-text-muted">Idle/default:</span>
+                <code className="text-foreground">#717171</code>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 rounded flex items-center justify-center" style={{ color: '#333540' }}>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                </div>
+                <span className="text-text-muted">Página atual:</span>
+                <code className="text-foreground">Cor da vertical</code>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 rounded flex items-center justify-center text-white" style={{ backgroundColor: '#333540' }}>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                </div>
+                <span className="text-text-muted">Item selecionado:</span>
+                <code className="text-foreground">Fundo cor da vertical, texto branco</code>
+              </div>
+            </div>
+          </div>
+
+          {/* Ícones por Vertical */}
+          <div className="p-4 bg-muted rounded-lg">
+            <p className="text-xs text-text-muted mb-3 font-sans uppercase tracking-wide">Ícones por vertical (Lucide)</p>
+            <div className="grid grid-cols-2 gap-3 text-sm font-sans">
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Inteligência:</span>
+                <code className="text-foreground">Shield</code>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Administração:</span>
+                <code className="text-foreground">Lock</code>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Investigação:</span>
+                <code className="text-foreground">Search</code>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Cooperação:</span>
+                <code className="text-foreground">Users</code>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Infraestrutura:</span>
+                <code className="text-foreground">Network</code>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            SELECTS (REGRAS GLOBAIS)
+            ============================================ */}
+        <Section title="SELECTS">
+          <p className="text-text-secondary mb-4 font-sans">
+            Regras para todos os selects do ecossistema SNAP. A setinha (chevron) sempre fica alinhada à direita do container.
+          </p>
+
+          {/* Regras */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">REGRAS DE LAYOUT</p>
+            <ul className="space-y-2 text-sm font-sans text-text-secondary">
+              <li>• Layout do botão: <code className="text-[#72284b]">flex items-center justify-between</code> (NUNCA gap-2)</li>
+              <li>• Texto à esquerda, setinha (chevron) alinhada à direita do container</li>
+              <li>• Largura mínima: definir <code className="text-[#72284b]">min-w-[Xpx]</code> para evitar select muito estreito</li>
+              <li>• Border-radius: <code className="text-[#72284b]">8px (rounded-lg)</code></li>
+              <li>• Chevron: rotação de 180° quando aberto (<code className="text-[#72284b]">rotate-180</code>)</li>
+            </ul>
+          </div>
+
+          {/* Dropdown Flutuante */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">DROPDOWN FLUTUANTE (FORA DE MODAIS)</p>
+            <ul className="space-y-2 text-sm font-sans text-text-secondary">
+              <li>• Container: <code className="text-[#72284b]">relative</code></li>
+              <li>• Dropdown: <code className="text-[#72284b]">absolute top-full left-0 mt-1 z-50</code></li>
+              <li>• Isso faz o dropdown flutuar SOBRE o conteúdo sem empurrar</li>
+            </ul>
+          </div>
+
+          {/* Código exemplo */}
+          <div className="p-4 bg-muted rounded-lg">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Exemplo de código</p>
+            <pre className="text-sm text-foreground font-mono overflow-x-auto whitespace-pre-wrap">
+{`<div className="relative">
+  <button className="flex items-center justify-between px-4 py-2 
+    rounded-lg border border-border bg-card min-w-[180px]">
+    <span>Opção selecionada</span>
+    <ChevronDown className="w-4 h-4 rotate-180" />
+  </button>
+  
+  <div className="absolute top-full left-0 mt-1 w-full 
+    bg-card border border-border rounded-lg z-50">
+    {/* Opções */}
+  </div>
+</div>`}
             </pre>
           </div>
         </Section>

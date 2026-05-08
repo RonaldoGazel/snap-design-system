@@ -201,21 +201,21 @@ export default function AdministracaoIndexPage() {
           })}
         </div>
 
-        {/* Documentação de Componentes */}
+        {/* Componentes Universais */}
         <div className="mt-12 p-6 rounded-xl border-2 border-[#333540]/30 bg-[#333540]/5">
           <div className="flex items-start justify-between">
             <div>
-              <h2 className="font-sans font-semibold text-foreground mb-2">Documentação de Componentes</h2>
+              <h2 className="font-sans font-semibold text-foreground mb-2">Componentes Universais</h2>
               <p className="font-sans text-sm text-text-secondary mb-4">
-                Referência visual e regras para todos os componentes: sidebar, selects, botões, badges, tabelas e mais.
+                Header, Sidebar, Selects e outros componentes universais estão documentados na página principal do Design System.
               </p>
             </div>
             <Link 
-              href="/design-system/administracao/componentes"
+              href="/design-system#sidebar-global"
               className="px-4 py-2 rounded-lg text-sm font-sans font-bold text-white transition-colors hover:opacity-90"
               style={{ backgroundColor: '#333540' }}
             >
-              Ver documentação
+              Ver Design System
             </Link>
           </div>
         </div>
