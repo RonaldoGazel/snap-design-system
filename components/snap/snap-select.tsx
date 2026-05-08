@@ -64,7 +64,7 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [isOpen, variant])
 
-    // Variante INLINE - dropdown flutuante
+    // Variante INLINE - dropdown flutuante (visual igual ao modal)
     if (variant === 'inline') {
       return (
         <div 
@@ -78,26 +78,26 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
             </label>
           )}
           
-          {/* Trigger */}
+          {/* Trigger - mesmo visual do select do modal */}
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-2 flex items-center justify-between bg-card border border-border rounded-lg hover:bg-muted transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between rounded-lg transition-colors bg-[#f0f0f0] dark:bg-[#2a2b35] border border-[#e0e0e0] dark:border-[#2a2b35] hover:bg-[#e8e8e8] dark:hover:bg-[#3a3b45]"
           >
-            <span className="text-muted-foreground text-sm font-sans">
+            <span className="text-[#666666] dark:text-[#b1b3c2] text-sm font-sans">
               {selectedOption?.label || placeholder || "Selecione..."}
             </span>
             <ChevronDown 
               className={cn(
-                "w-4 h-4 text-muted-foreground transition-transform duration-200",
+                "w-4 h-4 text-[#888888] dark:text-[#898c9d] transition-transform duration-200",
                 isOpen && "rotate-180"
               )}
             />
           </button>
           
-          {/* Dropdown Flutuante */}
+          {/* Dropdown Flutuante - mesmo visual do dropdown do modal */}
           {isOpen && (
-            <div className="absolute top-full left-0 mt-1 w-full bg-card border border-border rounded-lg shadow-lg z-50 overflow-hidden">
+            <div className="absolute top-full left-0 mt-1 w-full rounded-lg shadow-lg z-50 overflow-hidden bg-[#f5f5f5] dark:bg-[#1a1b1e] border border-[#e0e0e0] dark:border-[#2a2b35]">
               <div className="overflow-y-auto max-h-[200px] scrollbar-minimal">
                 {options.map((option) => (
                   <button
@@ -105,10 +105,10 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
                     type="button"
                     onClick={() => handleSelect(option.value)}
                     className={cn(
-                      "w-full text-left px-4 py-2 text-sm font-sans hover:bg-muted transition-colors",
+                      "w-full text-left px-4 py-3 text-sm font-sans transition-colors",
                       option.value === value 
-                        ? "text-foreground bg-muted" 
-                        : "text-muted-foreground"
+                        ? "text-[#333333] dark:text-white bg-[#e8e8e8] dark:bg-[#2a2b35]" 
+                        : "text-[#666666] dark:text-[#898c9d] hover:bg-[#e8e8e8] dark:hover:bg-[#2a2b35]"
                     )}
                   >
                     {option.label}
@@ -128,24 +128,24 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
         className={cn("w-full", className)}
       >
         {label && (
-          <label className="text-sm text-foreground mb-2 block font-sans">
-            {label} {required && <span className="text-foreground">*</span>}
+          <label className="text-sm text-[#333333] dark:text-white mb-2 block font-sans">
+            {label} {required && <span className="text-[#333333] dark:text-white">*</span>}
           </label>
         )}
         
-        <div className="bg-card border border-border rounded-lg overflow-hidden">
+        <div className="bg-[#f0f0f0] dark:bg-[#2a2b35] border border-[#e0e0e0] dark:border-[#2a2b35] rounded-lg overflow-hidden">
           {/* Trigger */}
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-muted transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#e8e8e8] dark:hover:bg-[#3a3b45] transition-colors"
           >
-            <span className="text-muted-foreground text-sm font-sans">
+            <span className="text-[#666666] dark:text-[#b1b3c2] text-sm font-sans">
               {selectedOption?.label || placeholder || "Selecione..."}
             </span>
             <ChevronDown 
               className={cn(
-                "w-4 h-4 text-muted-foreground transition-transform duration-200",
+                "w-4 h-4 text-[#888888] dark:text-[#898c9d] transition-transform duration-200",
                 isOpen && "rotate-180"
               )}
             />
@@ -154,8 +154,8 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           {/* Dropdown Accordion */}
           <div 
             className={cn(
-              "bg-background overflow-hidden transition-all duration-200 ease-out",
-              isOpen ? "max-h-[160px] border-t border-border" : "max-h-0"
+              "bg-[#f5f5f5] dark:bg-[#1a1b1e] overflow-hidden transition-all duration-200 ease-out",
+              isOpen ? "max-h-[160px] border-t border-[#e0e0e0] dark:border-[#2a2b35]" : "max-h-0"
             )}
           >
             <div className="overflow-y-auto max-h-[160px] scrollbar-minimal">
@@ -165,10 +165,10 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
                   type="button"
                   onClick={() => handleSelect(option.value)}
                   className={cn(
-                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-muted transition-colors",
+                    "w-full text-left px-4 py-3 text-sm font-sans transition-colors",
                     option.value === value 
-                      ? "text-foreground bg-muted" 
-                      : "text-muted-foreground"
+                      ? "text-[#333333] dark:text-white bg-[#e8e8e8] dark:bg-[#2a2b35]" 
+                      : "text-[#666666] dark:text-[#898c9d] hover:bg-[#e8e8e8] dark:hover:bg-[#2a2b35]"
                   )}
                 >
                   {option.label}
