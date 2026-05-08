@@ -215,6 +215,7 @@ export default function UsuariosPage() {
   const [showResetPasswordModal, setShowResetPasswordModal] = useState(false)
   const [newPassword, setNewPassword] = useState('')
   const [showDeactivateModal, setShowDeactivateModal] = useState(false)
+  const [showBlockModal, setShowBlockModal] = useState(false)
 
   // Delay para mostrar conteúdo após sidebar expandir
   const handleSidebarOpen = () => {
@@ -903,7 +904,13 @@ export default function UsuariosPage() {
                 className="border-warning text-warning hover:bg-warning/10"
                 onClick={() => setShowDeactivateModal(true)}
               >Desativar</SnapButton>
-              <SnapButton variant="outline" size="default" icon={<Lock className="w-4 h-4" />} className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10">Bloquear</SnapButton>
+              <SnapButton 
+                variant="outline" 
+                size="default" 
+                icon={<Lock className="w-4 h-4" />} 
+                className="border-[#d4789b] text-[#d4789b] hover:bg-[#d4789b]/10"
+                onClick={() => setShowBlockModal(true)}
+              >Bloquear</SnapButton>
               <SnapButton variant="outline" size="default" icon={<Trash2 className="w-4 h-4" />} className="border-error text-error hover:bg-error/10">Excluir</SnapButton>
             </div>
             {/* Mostrar Rastreio - alinhado à direita */}
@@ -1080,6 +1087,46 @@ export default function UsuariosPage() {
               size="modal"
               icon={<X className="w-4 h-4" />}
               onClick={() => setShowDeactivateModal(false)}
+            >
+              Cancelar
+            </SnapButton>
+          </SnapModalFooter>
+        </SnapModalContent>
+      </SnapModal>
+
+      {/* Modal Bloquear Usuário */}
+      <SnapModal open={showBlockModal} onClose={() => setShowBlockModal(false)}>
+        <SnapModalHeader 
+          icon={<Lock className="w-5 h-5" />}
+          title="Bloquear usuário" 
+          onClose={() => setShowBlockModal(false)} 
+        />
+        <SnapModalContent>
+          {/* Pergunta de confirmação */}
+          <p className="text-base font-sans text-foreground mb-4">
+            Tem certeza que deseja bloquear este usuário?
+          </p>
+          
+          {/* Aviso de auditoria */}
+          <p className="text-sm font-sans text-text-muted mb-6">
+            Esta ação será registrada no log de auditoria
+          </p>
+          
+          {/* Botões */}
+          <SnapModalFooter>
+            <SnapButton
+              variant="solid"
+              size="modal"
+              icon={<Lock className="w-4 h-4" />}
+              className="bg-[#d4789b] text-white hover:opacity-90"
+            >
+              Bloquear
+            </SnapButton>
+            <SnapButton
+              variant="outline"
+              size="modal"
+              icon={<X className="w-4 h-4" />}
+              onClick={() => setShowBlockModal(false)}
             >
               Cancelar
             </SnapButton>
