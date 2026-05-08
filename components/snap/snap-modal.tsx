@@ -25,7 +25,7 @@ const SnapModalOverlay = forwardRef<HTMLDivElement, SnapModalOverlayProps>(
     <div
       ref={ref}
       className={cn(
-        "fixed inset-0 bg-black/80 z-40 flex items-center justify-center p-4",
+        "fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4",
         className
       )}
       onClick={(e) => {

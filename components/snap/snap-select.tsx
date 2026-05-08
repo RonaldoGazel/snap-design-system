@@ -48,19 +48,19 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           </label>
         )}
         
-        <div className="bg-[#000000] border border-border rounded-lg overflow-hidden focus-within:border-white/50">
+        <div className="bg-muted dark:bg-[#000000] border border-border rounded-lg overflow-hidden focus-within:border-foreground/50">
           {/* Trigger */}
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#1a1a1a] transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between hover:bg-muted-foreground/10 transition-colors"
           >
-            <span className="text-[#b1b3c2] text-sm font-sans">
+            <span className="text-foreground text-sm font-sans">
               {selectedOption?.label || placeholder || "Selecione..."}
             </span>
             <ChevronRight 
               className={cn(
-                "w-4 h-4 text-[#898c9d] transition-transform duration-200",
+                "w-4 h-4 text-text-muted transition-transform duration-200",
                 isOpen && "rotate-90"
               )}
             />
@@ -69,7 +69,7 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           {/* Dropdown (Accordion Style) */}
           <div 
             className={cn(
-              "bg-[#0a0a0a] overflow-hidden transition-all duration-200 ease-out",
+              "bg-background dark:bg-[#0a0a0a] overflow-hidden transition-all duration-200 ease-out",
               isOpen ? "max-h-[160px] border-t border-border" : "max-h-0"
             )}
           >
@@ -80,10 +80,10 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
                   type="button"
                   onClick={() => handleSelect(option.value)}
                   className={cn(
-                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#1a1a1a] transition-colors",
+                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-muted transition-colors",
                     option.value === value 
-                      ? "text-white bg-[#1a1a1a]" 
-                      : "text-[#898c9d]"
+                      ? "text-foreground bg-muted" 
+                      : "text-text-muted"
                   )}
                 >
                   {option.label}
