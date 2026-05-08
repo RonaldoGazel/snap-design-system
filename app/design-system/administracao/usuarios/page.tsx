@@ -591,7 +591,7 @@ export default function UsuariosPage() {
         </div>
 
         {/* Modal Criar Usuário - Layout 2 Colunas com Seções */}
-        <SnapModal open={showCreateUserModal} onClose={() => setShowCreateUserModal(false)} size="xl">
+        <SnapModal open={showCreateUserModal} onClose={() => setShowCreateUserModal(false)} size="2xl">
           <SnapModalHeader 
             icon={<UserPlus className="w-5 h-5" />}
             title="Criar Usuário" 

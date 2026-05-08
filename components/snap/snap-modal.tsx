@@ -41,15 +41,16 @@ SnapModalOverlay.displayName = "SnapModalOverlay"
 interface SnapModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open?: boolean
   onClose?: () => void
-  /** Tamanho do modal: sm (384px), md (448px - default), lg (640px), xl (768px) */
-  size?: 'sm' | 'md' | 'lg' | 'xl'
+  /** Tamanho do modal: sm (384px), md (448px - default), lg (640px), xl (768px), 2xl (896px) */
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 }
 
 const sizeClasses = {
   sm: 'max-w-sm',
   md: 'max-w-md',
   lg: 'max-w-2xl',
-  xl: 'max-w-3xl'
+  xl: 'max-w-3xl',
+  '2xl': 'max-w-4xl'
 }
 
 const SnapModal = forwardRef<HTMLDivElement, SnapModalProps>(
