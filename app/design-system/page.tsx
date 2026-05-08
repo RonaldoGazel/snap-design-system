@@ -138,99 +138,142 @@ const accordionData = [
   }
 ]
 
-// Componente Sidebar Demo para documentação
+// Componente Sidebar Demo para documentação - IDÊNTICO à implementação real em /administracao/usuarios
 function SidebarDemo() {
-  const [isHovered, setIsHovered] = useState(false)
-  const [expandedVertical, setExpandedVertical] = useState<string | null>('administracao')
-
-  const verticaisSidebar = [
-    { id: 'inteligencia', name: 'Inteligência', icon: Shield, color: '#72284B', items: ['Processos', 'Documentos', 'Pessoas'] },
-    { id: 'administracao', name: 'Administração', icon: Lock, color: '#333540', items: ['Usuários', 'Grupos', 'Papéis', 'Convites'] },
-  ]
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarContentVisible, setSidebarContentVisible] = useState(false)
+  const [inteligenciaExpanded, setInteligenciaExpanded] = useState(true)
+  const [administracaoExpanded, setAdministracaoExpanded] = useState(true)
+  
+  const VERTICAL_COLOR = "#333540" // Deep Gray Blue - Administração
+  
+  const handleSidebarOpen = () => {
+    setSidebarOpen(true)
+    setTimeout(() => setSidebarContentVisible(true), 200)
+  }
+  
+  const handleSidebarClose = () => {
+    setSidebarContentVisible(false)
+    setTimeout(() => setSidebarOpen(false), 50)
+  }
 
   return (
-    <div 
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <aside 
+      onMouseEnter={handleSidebarOpen}
+      onMouseLeave={handleSidebarClose}
+      className="flex flex-col py-4 transition-all duration-300 border border-border rounded-xl bg-card dark:bg-[#0C0C0C] relative"
+      style={{ 
+        width: sidebarOpen ? '280px' : '64px',
+        minWidth: sidebarOpen ? '280px' : '64px',
+        height: '400px',
+        boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.25)' : 'none'
+      }}
     >
-      {/* Sidebar */}
-      <div 
-        className={`
-          h-full rounded-xl border border-[#2A2B35] transition-all duration-300 overflow-hidden
-          ${isHovered ? 'w-[280px] shadow-[4px_0_24px_rgba(0,0,0,0.5)]' : 'w-[64px]'}
-        `}
-        style={{ backgroundColor: '#0F0F10' }}
-      >
-        <div className="p-3 flex flex-col gap-2">
-          {verticaisSidebar.map((vertical) => (
-            <div key={vertical.id}>
-              {/* Item da vertical */}
-              <button
-                onClick={() => setExpandedVertical(expandedVertical === vertical.id ? null : vertical.id)}
-                className={`
-                  w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors
-                  ${expandedVertical === vertical.id ? 'text-white' : 'text-[#717171] hover:text-[#999]'}
-                `}
-                style={expandedVertical === vertical.id ? { backgroundColor: vertical.color } : {}}
-              >
-                <vertical.icon className="w-5 h-5 shrink-0" />
-                {isHovered && (
-                  <>
-                    <span className="flex-1 text-left text-sm font-sans">{vertical.name}</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${expandedVertical === vertical.id ? 'rotate-180' : ''}`} />
-                  </>
-                )}
-              </button>
-              
-              {/* Subitens */}
-              {isHovered && expandedVertical === vertical.id && (
-                <div className="ml-8 mt-1 space-y-1">
-                  {vertical.items.map((item, idx) => (
-                    <button
-                      key={item}
-                      className={`
-                        w-full text-left px-3 py-1.5 rounded text-sm font-sans transition-colors
-                        ${idx === 0 ? 'text-white' : 'text-[#717171] hover:text-[#999]'}
-                      `}
-                      style={idx === 0 ? { color: vertical.color } : {}}
-                    >
-                      {item}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-          
-          {/* Separador */}
-          <div className="my-2 border-t border-[#2A2B35]" />
-          
-          {/* Links fixos */}
-          {[
-            { icon: FileText, label: 'Documentos' },
-            { icon: Link2, label: 'Links' },
-            { icon: Share2, label: 'Compartilhar' },
-          ].map((item) => (
-            <button
-              key={item.label}
-              className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[#717171] hover:text-[#999] transition-colors"
-            >
-              <item.icon className="w-5 h-5 shrink-0" />
-              {isHovered && <span className="text-sm font-sans">{item.label}</span>}
+      {/* Sidebar Fechada */}
+      {!sidebarOpen && (
+        <>
+          <nav className="flex-1 flex flex-col items-center gap-2">
+            {/* Inteligência - idle */}
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+              <Shield className="w-5 h-5" />
             </button>
-          ))}
-        </div>
-        
-        {/* Configurações no rodapé */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-[#2A2B35]">
-          <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[#717171] hover:text-[#999] transition-colors">
-            <Settings className="w-5 h-5 shrink-0" />
-            {isHovered && <span className="text-sm font-sans">Configurações</span>}
+            {/* Administração - PÁGINA ATUAL = cor da vertical */}
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: VERTICAL_COLOR }}>
+              <Lock className="w-5 h-5" />
+            </button>
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+              <FileText className="w-5 h-5" />
+            </button>
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+              <Link2 className="w-5 h-5" />
+            </button>
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+              <Share2 className="w-5 h-5" />
+            </button>
+          </nav>
+          <div className="w-8 mx-auto my-2 border-t border-border" />
+          <button className="p-3 rounded-lg hover:opacity-80 transition-opacity mx-auto text-muted-foreground">
+            <Settings className="w-5 h-5" />
           </button>
+        </>
+      )}
+
+      {/* Sidebar Aberta - conteúdo aparece após expansão */}
+      {sidebarOpen && sidebarContentVisible && (
+        <div className="flex flex-col h-full animate-in fade-in duration-150">
+          {/* Vertical: Inteligência */}
+          <div className="mb-2">
+            <button 
+              onClick={() => setInteligenciaExpanded(!inteligenciaExpanded)}
+              className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+              style={{ paddingLeft: '10px', paddingRight: '16px' }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-11 flex justify-center">
+                  <Shield className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <span className="font-sans text-sm font-medium text-muted-foreground">Inteligência</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${inteligenciaExpanded ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {inteligenciaExpanded && (
+              <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                  <User className="w-4 h-4 text-muted-foreground" />
+                  <span className="font-sans text-sm text-muted-foreground">Pessoas</span>
+                </button>
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                  <FileText className="w-4 h-4 text-muted-foreground" />
+                  <span className="font-sans text-sm text-muted-foreground">Documentos</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Vertical: Administração - ATIVA */}
+          <div className="mb-2">
+            <button 
+              onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
+              className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+              style={{ paddingLeft: '10px', paddingRight: '16px' }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-11 flex justify-center">
+                  <Lock className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />
+                </div>
+                <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${administracaoExpanded ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {administracaoExpanded && (
+              <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                {/* Usuários - PÁGINA ATUAL = fundo da cor da vertical */}
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
+                  <User className="w-4 h-4 text-white" />
+                  <span className="font-sans text-sm text-white">Usuários</span>
+                </button>
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                  <User className="w-4 h-4 text-muted-foreground" />
+                  <span className="font-sans text-sm text-muted-foreground">Grupos</span>
+                </button>
+              </div>
+            )}
+          </div>
+          
+          {/* Rodapé */}
+          <div className="mt-auto border-t border-border pt-2" style={{ paddingLeft: '10px', paddingRight: '16px' }}>
+            <button className="w-full flex items-center gap-3 py-2 rounded-lg hover:opacity-80 transition-opacity">
+              <div className="w-11 flex justify-center">
+                <Settings className="w-5 h-5 text-muted-foreground" />
+              </div>
+              <span className="font-sans text-sm text-muted-foreground">Configurações</span>
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </aside>
   )
 }
 
@@ -1178,25 +1221,22 @@ export default function DesignSystemPage() {
             <p className="font-title text-lg mb-4">CORES DOS ÍCONES</p>
             <div className="space-y-3 text-sm font-sans">
               <div className="flex items-center gap-4">
-                <div className="w-8 h-8 rounded flex items-center justify-center" style={{ color: '#717171' }}>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                </div>
+                <Lock className="w-5 h-5 text-muted-foreground" />
                 <span className="text-text-muted">Idle/default:</span>
-                <code className="text-foreground">#717171</code>
+                <code className="text-foreground">text-muted-foreground</code>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-8 h-8 rounded flex items-center justify-center" style={{ color: '#333540' }}>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                </div>
-                <span className="text-text-muted">Página atual:</span>
+                <Lock className="w-5 h-5" style={{ color: '#333540' }} />
+                <span className="text-text-muted">Vertical ativa (sidebar fechada):</span>
                 <code className="text-foreground">Cor da vertical</code>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-8 h-8 rounded flex items-center justify-center text-white" style={{ backgroundColor: '#333540' }}>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                <div className="px-3 py-2 rounded-lg flex items-center gap-3" style={{ backgroundColor: '#333540' }}>
+                  <User className="w-4 h-4 text-white" />
+                  <span className="font-sans text-sm text-white">Usuários</span>
                 </div>
-                <span className="text-text-muted">Item selecionado:</span>
-                <code className="text-foreground">Fundo cor da vertical, texto branco</code>
+                <span className="text-text-muted">Item selecionado (aberta):</span>
+                <code className="text-foreground">Fundo cor vertical, texto branco</code>
               </div>
             </div>
           </div>
