@@ -2,16 +2,22 @@
 
 import { useState, forwardRef } from "react"
 import { cn } from "@/lib/utils"
-import { ChevronRight } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 
 /**
  * SNAP Select Component (Estilo Accordion)
  * 
  * Regras:
  * - Expande/contrai suavemente com animação de altura
- * - Seta lateral que rotaciona 90 graus quando aberto
+ * - Chevron que rotaciona 180 graus quando aberto
+ * - Chevron sempre alinhado à direita do container (justify-between)
  * - Max-height do dropdown: 160px
  * - Animação: 200ms ease-out
+ * - Suporta light/dark mode via tokens CSS
+ * 
+ * Variantes:
+ * - default: largura total, para formulários
+ * - inline: largura auto (min-w), para uso ao lado de títulos
  */
 
 interface SnapSelectOption {
@@ -26,11 +32,13 @@ interface SnapSelectProps {
   placeholder?: string
   label?: string
   required?: boolean
+  variant?: 'default' | 'inline'
+  minWidth?: string
   className?: string
 }
 
 export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
-  ({ value, onChange, options, placeholder, label, required, className }, ref) => {
+  ({ value, onChange, options, placeholder, label, required, variant = 'default', minWidth = '180px', className }, ref) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const selectedOption = options.find(opt => opt.value === value)
@@ -41,27 +49,34 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
     }
 
     return (
-      <div ref={ref} className={cn("w-full", className)}>
+      <div 
+        ref={ref} 
+        className={cn(
+          variant === 'default' ? 'w-full' : 'relative',
+          className
+        )}
+        style={variant === 'inline' ? { minWidth } : undefined}
+      >
         {label && (
-          <label className="text-sm text-white mb-2 block font-sans">
-            {label} {required && <span className="text-white">*</span>}
+          <label className="text-sm text-foreground mb-2 block font-sans">
+            {label} {required && <span className="text-foreground">*</span>}
           </label>
         )}
         
-        <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg overflow-hidden">
+        <div className="bg-card border border-border rounded-lg overflow-hidden">
           {/* Trigger */}
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#3a3b45] transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between hover:bg-muted transition-colors"
           >
-            <span className="text-[#b1b3c2] text-sm font-sans">
+            <span className="text-muted-foreground text-sm font-sans">
               {selectedOption?.label || placeholder || "Selecione..."}
             </span>
-            <ChevronRight 
+            <ChevronDown 
               className={cn(
-                "w-4 h-4 text-[#898c9d] transition-transform duration-200",
-                isOpen && "rotate-90"
+                "w-4 h-4 text-muted-foreground transition-transform duration-200",
+                isOpen && "rotate-180"
               )}
             />
           </button>
@@ -69,8 +84,8 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           {/* Dropdown (Accordion Style) */}
           <div 
             className={cn(
-              "bg-[#1a1b1e] overflow-hidden transition-all duration-200 ease-out",
-              isOpen ? "max-h-[160px] border-t border-[#2a2b35]" : "max-h-0"
+              "bg-background overflow-hidden transition-all duration-200 ease-out",
+              isOpen ? "max-h-[160px] border-t border-border" : "max-h-0"
             )}
           >
             <div className="overflow-y-auto max-h-[160px] scrollbar-minimal">
@@ -80,10 +95,10 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
                   type="button"
                   onClick={() => handleSelect(option.value)}
                   className={cn(
-                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#2a2b35] transition-colors",
+                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-muted transition-colors",
                     option.value === value 
-                      ? "text-white bg-[#2a2b35]" 
-                      : "text-[#898c9d]"
+                      ? "text-foreground bg-muted" 
+                      : "text-muted-foreground"
                   )}
                 >
                   {option.label}
