@@ -399,7 +399,7 @@ export default function UsuariosPage() {
               {/* Título com ícone + Select de Grupo */}
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-3">
-                  <Users className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
+                  <Users className="w-8 h-8" style={{ color: VERTICAL_COLOR }} />
                   <h1 className="font-title text-2xl text-foreground">USUÁRIOS</h1>
                 </div>
                 
