@@ -234,7 +234,7 @@ export default function UsuariosPage() {
           <aside 
             onMouseEnter={handleSidebarOpen}
             onMouseLeave={handleSidebarClose}
-            className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
+            className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-[#f0f0f0] dark:bg-[#0C0C0C]"
             style={{ 
               marginLeft: '32px',
               width: sidebarOpen ? '280px' : '64px',
