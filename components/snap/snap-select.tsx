@@ -24,7 +24,7 @@ interface SnapSelectProps {
   onChange: (value: string) => void
   options: SnapSelectOption[]
   placeholder?: string
-  label?: string
+  label?: React.ReactNode
   required?: boolean
   className?: string
 }
@@ -43,8 +43,8 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
     return (
       <div ref={ref} className={cn("w-full", className)}>
         {label && (
-          <label className="text-sm text-white mb-2 block font-sans">
-            {label} {required && <span className="text-white">*</span>}
+          <label className="text-sm text-text-muted mb-2 block font-sans">
+            {label} {required && <span className="text-error">*</span>}
           </label>
         )}
         
