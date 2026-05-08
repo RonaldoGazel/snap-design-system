@@ -25,7 +25,6 @@ import {
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
-import { SnapSelect } from "@/components/snap/snap-select"
 
 /**
  * TELA: Usuários (Listagem + Detalhe)
@@ -182,26 +181,10 @@ function GroupBadge({ group }: { group: string }) {
   )
 }
 
-// Opções para os selects
-const grupoOptions = [
-  { value: 'visao-plataforma', label: 'Visão plataforma' },
-  { value: 'administradores', label: 'Administradores' },
-  { value: 'analistas', label: 'Analistas' },
-  { value: 'operadores', label: 'Operadores' },
-  { value: 'convidados', label: 'Convidados' },
-]
-
-const statusOptions = [
-  { value: '', label: 'Todos' },
-  { value: 'Ativo', label: 'Ativo' },
-  { value: 'Inativo', label: 'Inativo' },
-  { value: 'Bloqueado', label: 'Bloqueado' },
-]
-
 export default function UsuariosPage() {
   const [statusFilter, setStatusFilter] = useState("")
+  const [statusSelectOpen, setStatusSelectOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [grupoSelecionado, setGrupoSelecionado] = useState('visao-plataforma')
   
   // Estados da sidebar
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -251,7 +234,7 @@ export default function UsuariosPage() {
           <aside 
             onMouseEnter={handleSidebarOpen}
             onMouseLeave={handleSidebarClose}
-            className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-[#f0f0f0] dark:bg-[#0C0C0C]"
+            className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
             style={{ 
               marginLeft: '32px',
               width: sidebarOpen ? '280px' : '64px',
@@ -405,34 +388,42 @@ export default function UsuariosPage() {
           <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 51}px` }}>
             {/* Header: Título + Filtros + Botão */}
             <div className="flex items-center justify-between mb-6">
-              {/* Título com ícone + Select de Grupo */}
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3">
-                  <Users className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
-                  <h1 className="font-title text-2xl text-foreground">USUÁRIOS</h1>
-                </div>
-                
-                {/* Select de Grupo/Visão - usando SnapSelect */}
-                <SnapSelect
-                  value={grupoSelecionado}
-                  onChange={setGrupoSelecionado}
-                  options={grupoOptions}
-                  variant="inline"
-                  minWidth="180px"
-                />
+              {/* Título com ícone */}
+              <div className="flex items-center gap-3">
+                <Users className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
+                <h1 className="font-title text-2xl text-foreground">USUÁRIOS</h1>
               </div>
 
               {/* Filtros e Ação */}
               <div className="flex items-center gap-4">
-                {/* Select de Status - usando SnapSelect */}
-                <SnapSelect
-                  value={statusFilter}
-                  onChange={setStatusFilter}
-                  options={statusOptions}
-                  placeholder="Status"
-                  variant="inline"
-                  minWidth="120px"
-                />
+                {/* Select de Status */}
+                <div className="relative">
+                  <button
+                    onClick={() => setStatusSelectOpen(!statusSelectOpen)}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-card hover:bg-card-hover transition-colors min-w-[120px]"
+                  >
+                    <span className="font-sans text-sm text-text-secondary">
+                      {statusFilter === "" ? "Status" : statusFilter}
+                    </span>
+                    <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${statusSelectOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {statusSelectOpen && (
+                    <div className="absolute top-full left-0 mt-1 w-full bg-card border border-border rounded-lg shadow-lg z-10 overflow-hidden">
+                      {["", "Ativo", "Inativo", "Bloqueado"].map((option) => (
+                        <button
+                          key={option || "todos"}
+                          onClick={() => { setStatusFilter(option); setStatusSelectOpen(false) }}
+                          className={`w-full text-left px-4 py-2 text-sm font-sans hover:bg-muted transition-colors ${
+                            statusFilter === option ? 'text-foreground bg-muted' : 'text-text-muted'
+                          }`}
+                        >
+                          {option === "" ? "Todos" : option}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
                 {/* Botão Novo Usuário */}
                 <SnapButton 
