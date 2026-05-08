@@ -23,7 +23,8 @@ import {
   UsersRound,
   Mail,
   Home,
-  X
+  X,
+  ChevronLeft
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
@@ -689,13 +690,13 @@ export default function UsuariosPage() {
         {/* Conteúdo - Mesmo padding e margem da listagem */}
         <main className="flex-1" style={{ marginLeft: 'calc(32px + 64px + 51px)', paddingTop: '32px', paddingRight: '32px' }}>
           {/* Voltar + Título */}
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-3 mb-6">
             <button 
               onClick={() => setSelectedUser(null)} 
-              className="flex items-center justify-between gap-3 px-4 py-2 rounded-[6px] border border-border bg-card hover:bg-card-hover transition-colors font-sans font-bold text-sm text-text-secondary min-w-[110px]"
+              className="w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
+              title="Voltar para lista de usuários"
             >
-              <X className="w-4 h-4" />
-              Voltar
+              <ChevronLeft className="w-5 h-5 text-text-secondary" />
             </button>
             <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
           </div>
