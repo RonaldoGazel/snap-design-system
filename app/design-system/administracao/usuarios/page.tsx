@@ -709,56 +709,75 @@ export default function UsuariosPage() {
 
           {/* Card de Dados - Design com Avatar */}
           <div className="bg-[#1a1a1a] rounded-xl border border-border mb-6">
-            {/* Linha 1: Avatar + Dados principais SEM separadores verticais */}
-            <div className="flex items-start p-6">
-              {/* Avatar circular grande */}
+            {/* Linha 1: Avatar + Dados COM separadores verticais */}
+            <div className="flex items-center p-6">
+              {/* Avatar circular */}
               <div className="w-[72px] h-[72px] rounded-full bg-[#0d0d0d] border border-border flex items-center justify-center flex-shrink-0">
                 <span className="font-title text-xl text-foreground">
                   {selectedUser.nome.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
                 </span>
               </div>
               
-              {/* Dados principais - 5 colunas sem separadores */}
-              <div className="flex-1 flex items-start ml-6">
-                {/* Nome + Email */}
-                <div className="w-[180px]">
-                  <label className="block text-sm font-sans text-text-muted mb-1">Nome de Exibição</label>
-                  <span className="block font-sans text-base text-foreground font-semibold mb-3">{selectedUser.nome}</span>
-                  <label className="block text-sm font-sans text-text-muted mb-1">Email</label>
-                  <span className="block font-sans text-base text-foreground">{selectedUser.email}</span>
-                </div>
-                
-                {/* Status */}
-                <div className="w-[120px]">
-                  <label className="block text-sm font-sans text-text-muted mb-2">Status</label>
-                  <StatusBadge status={selectedUser.status} />
-                </div>
-                
-                {/* Nível de Acesso */}
-                <div className="w-[140px]">
-                  <label className="block text-sm font-sans text-text-muted mb-1">Nível de Acesso</label>
-                  <span className="block font-sans text-2xl text-foreground">{selectedUser.nivelAcesso}</span>
-                </div>
-                
-                {/* Versão da Identidade */}
-                <div className="w-[160px]">
-                  <label className="block text-sm font-sans text-text-muted mb-1">Versão da Identidade</label>
-                  <span className="block font-sans text-2xl text-foreground">{selectedUser.versaoIdentidade}</span>
-                </div>
-                
-                {/* ID Auth Externa */}
-                <div className="flex-1">
-                  <label className="block text-sm font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
-                  <div className="flex items-start justify-between">
-                    <span className="font-sans text-base text-foreground">{selectedUser.idAuthExterna}</span>
-                    <button 
-                      className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0"
-                      title="Copiar ID"
-                      onClick={() => navigator.clipboard.writeText(selectedUser.idAuthExterna)}
-                    >
-                      <Copy className="w-4 h-4 text-text-muted" />
-                    </button>
-                  </div>
+              {/* Separador */}
+              <div className="w-px h-16 bg-border mx-6" />
+              
+              {/* Nome + Email */}
+              <div className="w-[160px]">
+                <label className="block text-sm font-sans text-text-muted mb-1">Nome de Exibição</label>
+                <span className="block font-sans text-base text-foreground font-semibold mb-3">{selectedUser.nome}</span>
+                <label className="block text-sm font-sans text-text-muted mb-1">Email</label>
+                <span className="block font-sans text-base text-foreground">{selectedUser.email}</span>
+              </div>
+              
+              {/* Separador */}
+              <div className="w-px h-16 bg-border mx-6" />
+              
+              {/* Status - botão largo */}
+              <div className="w-[100px]">
+                <label className="block text-sm font-sans text-text-muted mb-2">Status</label>
+                <span className={`inline-flex items-center justify-center w-full px-4 py-1.5 rounded-full text-sm font-sans font-medium ${
+                  selectedUser.status === 'Ativo' 
+                    ? 'bg-[#22c55e] text-white' 
+                    : 'bg-[#ef4444] text-white'
+                }`}>
+                  {selectedUser.status === 'Ativo' && <span className="w-2 h-2 bg-white rounded-full mr-2" />}
+                  {selectedUser.status}
+                </span>
+              </div>
+              
+              {/* Separador */}
+              <div className="w-px h-16 bg-border mx-6" />
+              
+              {/* Nível de Acesso */}
+              <div className="w-[120px]">
+                <label className="block text-sm font-sans text-text-muted mb-1">Nível de Acesso</label>
+                <span className="block font-sans text-2xl text-foreground">{selectedUser.nivelAcesso}</span>
+              </div>
+              
+              {/* Separador */}
+              <div className="w-px h-16 bg-border mx-6" />
+              
+              {/* Versão da Identidade */}
+              <div className="w-[140px]">
+                <label className="block text-sm font-sans text-text-muted mb-1">Versão da Identidade</label>
+                <span className="block font-sans text-2xl text-foreground">{selectedUser.versaoIdentidade}</span>
+              </div>
+              
+              {/* Separador */}
+              <div className="w-px h-16 bg-border mx-6" />
+              
+              {/* ID Auth Externa */}
+              <div className="flex-1">
+                <label className="block text-sm font-sans text-text-muted mb-1">ID de Autenticação Externa</label>
+                <div className="flex items-center justify-between">
+                  <span className="font-sans text-base text-foreground">{selectedUser.idAuthExterna}</span>
+                  <button 
+                    className="p-1 hover:bg-muted rounded transition-colors flex-shrink-0"
+                    title="Copiar ID"
+                    onClick={() => navigator.clipboard.writeText(selectedUser.idAuthExterna)}
+                  >
+                    <Copy className="w-4 h-4 text-text-muted" />
+                  </button>
                 </div>
               </div>
             </div>
