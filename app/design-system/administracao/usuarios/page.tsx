@@ -186,6 +186,11 @@ export default function UsuariosPage() {
   const [statusSelectOpen, setStatusSelectOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   
+  // Estado do select de grupos (visão)
+  const [grupoSelecionado, setGrupoSelecionado] = useState('Visão plataforma')
+  const [grupoSelectOpen, setGrupoSelectOpen] = useState(false)
+  const gruposDisponiveis = ['Visão plataforma', 'Administradores', 'Analistas', 'Operadores', 'Convidados']
+  
   // Estados da sidebar
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarContentVisible, setSidebarContentVisible] = useState(false)
@@ -388,10 +393,41 @@ export default function UsuariosPage() {
           <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 51}px` }}>
             {/* Header: Título + Filtros + Botão */}
             <div className="flex items-center justify-between mb-6">
-              {/* Título com ícone */}
-              <div className="flex items-center gap-3">
-                <Users className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
-                <h1 className="font-title text-2xl text-foreground">USUÁRIOS</h1>
+              {/* Título com ícone + Select de Grupo */}
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3">
+                  <Users className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
+                  <h1 className="font-title text-2xl text-foreground">USUÁRIOS</h1>
+                </div>
+                
+                {/* Select de Grupo/Visão - dropdown flutuante (z-50) */}
+                <div className="relative">
+                  <button
+                    onClick={() => setGrupoSelectOpen(!grupoSelectOpen)}
+                    className="flex items-center justify-between px-4 py-2 rounded-lg border border-border bg-card hover:bg-card-hover transition-colors min-w-[180px]"
+                  >
+                    <span className="font-sans text-sm text-text-secondary">
+                      {grupoSelecionado}
+                    </span>
+                    <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${grupoSelectOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {grupoSelectOpen && (
+                    <div className="absolute top-full left-0 mt-1 w-full bg-card border border-border rounded-lg shadow-lg z-50 overflow-hidden">
+                      {gruposDisponiveis.map((grupo) => (
+                        <button
+                          key={grupo}
+                          onClick={() => { setGrupoSelecionado(grupo); setGrupoSelectOpen(false) }}
+                          className={`w-full text-left px-4 py-2 text-sm font-sans hover:bg-muted transition-colors ${
+                            grupoSelecionado === grupo ? 'text-foreground bg-muted' : 'text-text-muted'
+                          }`}
+                        >
+                          {grupo}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Filtros e Ação */}
@@ -400,7 +436,7 @@ export default function UsuariosPage() {
                 <div className="relative">
                   <button
                     onClick={() => setStatusSelectOpen(!statusSelectOpen)}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-card hover:bg-card-hover transition-colors min-w-[120px]"
+                    className="flex items-center justify-between px-4 py-2 rounded-lg border border-border bg-card hover:bg-card-hover transition-colors min-w-[120px]"
                   >
                     <span className="font-sans text-sm text-text-secondary">
                       {statusFilter === "" ? "Status" : statusFilter}
