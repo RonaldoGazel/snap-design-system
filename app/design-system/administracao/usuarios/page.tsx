@@ -234,42 +234,39 @@ export default function UsuariosPage() {
           <aside 
             onMouseEnter={handleSidebarOpen}
             onMouseLeave={handleSidebarClose}
-            className="flex flex-col py-4 transition-all duration-300 absolute z-50"
+            className="flex flex-col py-4 transition-all duration-300 absolute z-50 bg-card border border-border rounded-xl"
             style={{ 
               marginLeft: '32px',
               width: sidebarOpen ? '280px' : '64px',
               minWidth: sidebarOpen ? '280px' : '64px',
               height: 'calc(100vh - 140px)',
-              backgroundColor: '#0F0F10',
-              border: '1px solid #2A2B35',
-              borderRadius: '12px',
-              boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.5)' : 'none'
+              boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.25)' : 'none'
             }}
           >
             {/* Sidebar Fechada */}
             {!sidebarOpen && (
               <>
                 <nav className="flex-1 flex flex-col items-center gap-2">
-                  {/* Inteligência - idle #717171 */}
-                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#717171' }}>
+                  {/* Inteligência - idle */}
+                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
                     <Shield className="w-5 h-5" />
                   </button>
-                  {/* Administração - PÁGINA ATUAL = cor da vertical #333540 */}
+                  {/* Administração - PÁGINA ATUAL = cor da vertical */}
                   <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: VERTICAL_COLOR }}>
                     <Lock className="w-5 h-5" />
                   </button>
-                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#717171' }}>
+                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
                     <FileText className="w-5 h-5" />
                   </button>
-                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#717171' }}>
+                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
                     <LinkIcon className="w-5 h-5" />
                   </button>
-                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: '#717171' }}>
+                  <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
                     <ShareIcon className="w-5 h-5" />
                   </button>
                 </nav>
-                <div className="w-8 mx-auto my-2" style={{ borderTop: '1px solid #2A2B35' }} />
-                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity mx-auto" style={{ color: '#717171' }}>
+                <div className="w-8 mx-auto my-2 border-t border-border" />
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity mx-auto text-muted-foreground">
                   <Settings className="w-5 h-5" />
                 </button>
               </>
@@ -285,29 +282,29 @@ export default function UsuariosPage() {
                     className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:opacity-80 transition-opacity"
                   >
                     <div className="flex items-center gap-3">
-                      <Shield className="w-5 h-5" style={{ color: '#717171' }} />
-                      <span className="font-sans text-sm font-medium" style={{ color: '#717171' }}>Inteligência</span>
+                      <Shield className="w-5 h-5 text-muted-foreground" />
+                      <span className="font-sans text-sm font-medium text-muted-foreground">Inteligência</span>
                     </div>
                     {inteligenciaExpanded ? (
-                      <ChevronUp className="w-4 h-4" style={{ color: '#717171' }} />
+                      <ChevronUp className="w-4 h-4 text-muted-foreground" />
                     ) : (
-                      <ChevronDown className="w-4 h-4" style={{ color: '#717171' }} />
+                      <ChevronDown className="w-4 h-4 text-muted-foreground" />
                     )}
                   </button>
                   
                   {inteligenciaExpanded && (
                     <div className="ml-4 mt-1 space-y-1">
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                        <UsersRound className="w-4 h-4" style={{ color: '#717171' }} />
-                        <span className="font-sans text-sm" style={{ color: '#717171' }}>Pessoas</span>
+                        <UsersRound className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-sans text-sm text-muted-foreground">Pessoas</span>
                       </button>
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                        <FileText className="w-4 h-4" style={{ color: '#717171' }} />
-                        <span className="font-sans text-sm" style={{ color: '#717171' }}>Documentos</span>
+                        <FileText className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-sans text-sm text-muted-foreground">Documentos</span>
                       </button>
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                        <Settings className="w-4 h-4" style={{ color: '#717171' }} />
-                        <span className="font-sans text-sm" style={{ color: '#717171' }}>Fluxos de Trabalho</span>
+                        <Settings className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-sans text-sm text-muted-foreground">Fluxos de Trabalho</span>
                       </button>
                     </div>
                   )}
@@ -324,9 +321,9 @@ export default function UsuariosPage() {
                       <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
                     </div>
                     {administracaoExpanded ? (
-                      <ChevronUp className="w-4 h-4" style={{ color: '#717171' }} />
+                      <ChevronUp className="w-4 h-4 text-muted-foreground" />
                     ) : (
-                      <ChevronDown className="w-4 h-4" style={{ color: '#717171' }} />
+                      <ChevronDown className="w-4 h-4 text-muted-foreground" />
                     )}
                   </button>
                   
@@ -338,24 +335,24 @@ export default function UsuariosPage() {
                         <span className="font-sans text-sm text-white">Usuários</span>
                       </button>
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                        <UsersRound className="w-4 h-4" style={{ color: '#717171' }} />
-                        <span className="font-sans text-sm" style={{ color: '#717171' }}>Grupos</span>
+                        <UsersRound className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-sans text-sm text-muted-foreground">Grupos</span>
                       </button>
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                        <Shield className="w-4 h-4" style={{ color: '#717171' }} />
-                        <span className="font-sans text-sm" style={{ color: '#717171' }}>Papéis</span>
+                        <Shield className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-sans text-sm text-muted-foreground">Papéis</span>
                       </button>
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                        <Mail className="w-4 h-4" style={{ color: '#717171' }} />
-                        <span className="font-sans text-sm" style={{ color: '#717171' }}>Convites</span>
+                        <Mail className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-sans text-sm text-muted-foreground">Convites</span>
                       </button>
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                        <ClipboardList className="w-4 h-4" style={{ color: '#717171' }} />
-                        <span className="font-sans text-sm" style={{ color: '#717171' }}>Auditoria</span>
+                        <ClipboardList className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-sans text-sm text-muted-foreground">Auditoria</span>
                       </button>
                       <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                        <Building className="w-4 h-4" style={{ color: '#717171' }} />
-                        <span className="font-sans text-sm" style={{ color: '#717171' }}>Organizações</span>
+                        <Building className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-sans text-sm text-muted-foreground">Organizações</span>
                       </button>
                     </div>
                   )}
@@ -365,12 +362,12 @@ export default function UsuariosPage() {
                 <div className="flex-1" />
 
                 {/* Linha separadora */}
-                <div className="mx-3 my-2" style={{ borderTop: '1px solid #2A2B35' }} />
+                <div className="mx-3 my-2 border-t border-border" />
 
                 {/* Configurações */}
                 <button className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
-                  <Settings className="w-5 h-5" style={{ color: '#717171' }} />
-                  <span className="font-sans text-sm" style={{ color: '#717171' }}>Configurações</span>
+                  <Settings className="w-5 h-5 text-muted-foreground" />
+                  <span className="font-sans text-sm text-muted-foreground">Configurações</span>
                 </button>
               </div>
             )}
