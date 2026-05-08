@@ -21,7 +21,10 @@ import {
   UserPlus,
   Building,
   UsersRound,
-  Mail
+  Mail,
+  Home,
+  Link as LinkIcon,
+  Share2 as ShareIcon
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
