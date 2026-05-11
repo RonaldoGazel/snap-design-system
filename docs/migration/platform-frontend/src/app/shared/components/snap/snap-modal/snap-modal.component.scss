@@ -1,0 +1,71 @@
+// ===========================================
+// SNAP MODAL - BEM + SMACSS
+// ===========================================
+
+.snap-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  animation: snap-modal-fade-in 0.2s ease;
+}
+
+.snap-modal {
+  background-color: var(--snap-surface-1);
+  border: 1px solid var(--snap-border-default);
+  border-radius: var(--snap-radius-xl);
+  width: 100%;
+  overflow: hidden;
+  animation: snap-modal-slide-up 0.2s ease;
+  
+  // ------------------------------------------
+  // SIZE MODIFIERS
+  // ------------------------------------------
+  
+  &--sm {
+    max-width: 384px; // 24rem
+  }
+  
+  &--md {
+    max-width: 448px; // 28rem
+  }
+  
+  &--lg {
+    max-width: 640px; // 40rem
+  }
+  
+  &--xl {
+    max-width: 768px; // 48rem
+  }
+  
+  &--2xl {
+    max-width: 896px; // 56rem
+  }
+}
+
+// ------------------------------------------
+// ANIMATIONS
+// ------------------------------------------
+
+@keyframes snap-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes snap-modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

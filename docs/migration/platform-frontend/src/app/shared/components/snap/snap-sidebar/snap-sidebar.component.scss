@@ -1,0 +1,111 @@
+// ===========================================
+// SNAP SIDEBAR - BEM + SMACSS
+// ===========================================
+
+.snap-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: var(--snap-surface-1);
+  border-right: 1px solid var(--snap-border-default);
+  z-index: 40;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  
+  // ------------------------------------------
+  // STATE MODIFIERS
+  // ------------------------------------------
+  
+  &--collapsed {
+    width: 64px;
+    
+    .snap-sidebar__item {
+      justify-content: center;
+      padding: var(--snap-spacing-3);
+    }
+  }
+  
+  &--expanded {
+    width: 240px;
+    
+    .snap-sidebar__item {
+      justify-content: flex-start;
+      padding: var(--snap-spacing-3) var(--snap-spacing-4);
+    }
+  }
+  
+  // ------------------------------------------
+  // ELEMENTS
+  // ------------------------------------------
+  
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--snap-spacing-1);
+    padding: var(--snap-spacing-4) var(--snap-spacing-2);
+    margin-top: 80px; // Espaco para o header
+  }
+  
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--snap-spacing-3);
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: var(--snap-text-secondary);
+    font-family: var(--snap-font-sans);
+    font-size: var(--snap-text-sm);
+    font-weight: var(--snap-font-medium);
+    text-decoration: none;
+    border-radius: var(--snap-radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: var(--snap-surface-2);
+      color: var(--snap-text-primary);
+    }
+    
+    &--active {
+      background-color: var(--snap-surface-3);
+      color: var(--snap-text-primary);
+      
+      .snap-sidebar__icon {
+        color: var(--snap-vertical-administracao);
+      }
+    }
+  }
+  
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  
+  &__label {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  &__badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background-color: var(--snap-feedback-error);
+    color: white;
+    font-size: 11px;
+    font-weight: var(--snap-font-bold);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
