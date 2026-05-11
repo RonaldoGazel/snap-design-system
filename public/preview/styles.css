@@ -1,248 +1,217 @@
-/* ===========================================
-   SNAP Design System - Preview Estático
-   Stack: HTML + CSS Puro (BEM + SMACSS)
-   =========================================== */
+/* ========================================
+   SNAP Design System - Preview Estatico
+   Tokens seguindo styles-pack
+   ======================================== */
 
-/* -------------------------------------------
-   TOKENS (CSS Custom Properties)
-   ------------------------------------------- */
 :root {
-  /* Cores Base */
-  --snap-white: #ffffff;
-  --snap-black: #000000;
+  /* Cores - Light */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --muted: #f4f4f5;
+  --border: #e4e4e7;
+  --text-muted: #71717a;
+  --text-secondary: #a1a1aa;
   
-  /* Superficies */
-  --snap-surface-1: #0a0a0a;
-  --snap-surface-2: #141414;
-  --snap-surface-3: #1a1a1a;
-  --snap-surface-4: #262626;
+  /* Semanticas */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --pink: #d4789b;
   
-  /* Texto */
-  --snap-text-primary: #fafafa;
-  --snap-text-secondary: #a1a1a1;
-  --snap-text-muted: #6b6b6b;
+  /* Vertical Administracao */
+  --vertical: #333540;
   
-  /* Bordas */
-  --snap-border-default: #333333;
-  --snap-border-subtle: #262626;
-  
-  /* Status */
-  --snap-error: #ef4444;
-  --snap-warning: #eab308;
-  --snap-success: #22c55e;
-  
-  /* Verticais */
-  --snap-vertical-administracao: #333540;
-  --snap-vertical-inteligencia: #72284B;
-  --snap-vertical-investigacao: #FE473C;
-  
-  /* Acoes */
-  --snap-action-pink: #d4789b;
-  
-  /* Tipografia */
-  --snap-font-sans: 'Inter', system-ui, sans-serif;
-  --snap-font-title: 'Oswald', sans-serif;
-  
-  /* Espacamentos */
-  --snap-spacing-1: 4px;
-  --snap-spacing-2: 8px;
-  --snap-spacing-3: 12px;
-  --snap-spacing-4: 16px;
-  --snap-spacing-5: 20px;
-  --snap-spacing-6: 24px;
-  --snap-spacing-8: 32px;
-  
-  /* Raios */
-  --snap-radius-sm: 4px;
-  --snap-radius-md: 6px;
-  --snap-radius-lg: 8px;
-  --snap-radius-xl: 12px;
-  
-  /* Sombras */
-  --snap-shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  /* Fontes */
+  --font-title: 'Archivo', sans-serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
-/* Tema Light */
-.theme-light {
-  --snap-surface-1: #ffffff;
-  --snap-surface-2: #f5f5f5;
-  --snap-surface-3: #e5e5e5;
-  --snap-surface-4: #d4d4d4;
-  --snap-text-primary: #0a0a0a;
-  --snap-text-secondary: #525252;
-  --snap-text-muted: #737373;
-  --snap-border-default: #e5e5e5;
-  --snap-border-subtle: #f5f5f5;
+[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --card: #141414;
+  --muted: #27272a;
+  --border: #2a2b35;
+  --text-muted: #a1a1aa;
+  --text-secondary: #71717a;
 }
 
-/* -------------------------------------------
-   BASE
-   ------------------------------------------- */
-*, *::before, *::after {
-  box-sizing: border-box;
+* {
   margin: 0;
   padding: 0;
-}
-
-html, body {
-  height: 100%;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: var(--snap-font-sans);
-  font-size: 14px;
+  font-family: var(--font-sans);
+  background: var(--background);
+  color: var(--foreground);
   line-height: 1.5;
-  color: var(--snap-text-primary);
-  background-color: var(--snap-surface-1);
+  min-height: 100vh;
 }
 
-/* -------------------------------------------
-   LAYOUT
-   ------------------------------------------- */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 64px;
-  height: 100vh;
-  background-color: var(--snap-surface-2);
-  border-right: 1px solid var(--snap-border-subtle);
+/* ========================================
+   Layout Principal
+   ======================================== */
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-top: var(--snap-spacing-6);
+  margin-left: 64px;
+}
+
+/* ========================================
+   Sidebar (64px colapsada)
+   ======================================== */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 64px;
+  height: 100vh;
+  background: var(--card);
+  border-right: 1px solid var(--border);
   z-index: 100;
-  transition: width 0.2s ease;
-}
-
-.sidebar--expanded {
-  width: 200px;
-  align-items: flex-start;
-  padding-left: var(--snap-spacing-4);
-}
-
-.sidebar__logo {
-  margin-bottom: var(--snap-spacing-8);
-}
-
-.sidebar__logo-img {
-  width: 24px;
-  height: 24px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
 }
 
 .sidebar__nav {
   display: flex;
   flex-direction: column;
-  gap: var(--snap-spacing-2);
-  width: 100%;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0;
 }
 
 .sidebar__item {
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-3);
-  padding: var(--snap-spacing-3);
-  color: var(--snap-text-secondary);
-  text-decoration: none;
-  border-radius: var(--snap-radius-md);
-  transition: all 0.15s ease;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .sidebar__item:hover {
-  background-color: var(--snap-surface-3);
-  color: var(--snap-text-primary);
+  background: var(--muted);
+  color: var(--foreground);
 }
 
 .sidebar__item--active {
-  background-color: var(--snap-vertical-administracao);
-  color: var(--snap-white);
+  background: var(--vertical);
+  color: white;
 }
 
-.sidebar__icon {
-  flex-shrink: 0;
+.sidebar__item--active:hover {
+  background: var(--vertical);
+  color: white;
 }
 
-.sidebar__label {
-  font-size: 13px;
-  font-weight: 500;
-}
+/* ========================================
+   Header (medidas exatas do Figma)
+   ======================================== */
 
-.main {
-  margin-left: 200px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* -------------------------------------------
-   HEADER
-   ------------------------------------------- */
 .header {
+  height: 80px;
+  padding: 26px 32px 0 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 26px var(--snap-spacing-8) var(--snap-spacing-6);
-  background-color: var(--snap-surface-1);
+  align-items: flex-start;
+  background: var(--background);
 }
 
 .header__left {
   display: flex;
   align-items: center;
+  margin-left: 51px;
   gap: 70px;
 }
 
-.header__menu-btn {
+.header__menu {
+  width: 24px;
+  height: 24px;
   background: none;
   border: none;
-  color: var(--snap-text-secondary);
+  color: var(--text-muted);
   cursor: pointer;
-  padding: var(--snap-spacing-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header__logo {
-  height: 24px;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--foreground);
 }
 
 .header__right {
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-8);
+  gap: 32px;
 }
 
-.header__notifications {
+.header__icon-btn {
   position: relative;
-  color: var(--snap-text-secondary);
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__icon-btn:hover {
+  color: var(--foreground);
 }
 
 .header__badge {
   position: absolute;
-  top: -8px;
+  top: -6px;
   right: -8px;
-  background-color: var(--snap-vertical-inteligencia);
-  color: var(--snap-white);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--error);
+  color: white;
   font-size: 10px;
   font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 10px;
-}
-
-.header__theme-btn {
-  background: none;
-  border: none;
-  color: var(--snap-text-secondary);
-  cursor: pointer;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header__separator {
   width: 1px;
   height: 32px;
-  background-color: var(--snap-border-default);
+  background: var(--border);
 }
 
 .header__user {
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-3);
+  gap: 12px;
 }
 
 .header__user-info {
@@ -252,252 +221,243 @@ body {
 }
 
 .header__user-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  color: var(--snap-text-primary);
+  color: var(--foreground);
 }
 
 .header__user-role {
-  font-size: 11px;
-  color: var(--snap-text-muted);
+  font-size: 12px;
+  color: var(--text-muted);
 }
 
 .header__avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: var(--snap-vertical-inteligencia);
-  color: var(--snap-white);
+  background: var(--vertical);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
 }
 
-/* -------------------------------------------
-   VERTICAL BAR
-   ------------------------------------------- */
+/* ========================================
+   Barra da Vertical (8px)
+   ======================================== */
+
 .vertical-bar {
   height: 8px;
+  background: var(--vertical);
   margin-left: 144px;
+  margin-top: 24px;
 }
 
-.vertical-bar--administracao {
-  background-color: var(--snap-vertical-administracao);
-}
+/* ========================================
+   Breadcrumb
+   ======================================== */
 
-.vertical-bar--inteligencia {
-  background-color: var(--snap-vertical-inteligencia);
-}
-
-/* -------------------------------------------
-   BREADCRUMB
-   ------------------------------------------- */
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-2);
-  padding: var(--snap-spacing-4) var(--snap-spacing-8);
-  padding-left: calc(144px + var(--snap-spacing-8));
-  font-size: 13px;
+  gap: 8px;
+  padding: 16px 32px;
+  margin-left: 112px;
+  font-size: 14px;
 }
 
 .breadcrumb__item {
-  color: var(--snap-text-muted);
-  text-decoration: none;
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-2);
+  gap: 6px;
+  text-decoration: none;
+  color: #696969;
   font-weight: 500;
 }
 
 .breadcrumb__item--vertical {
-  color: var(--snap-vertical-administracao);
+  color: var(--vertical);
 }
 
 .breadcrumb__item--current {
-  color: var(--snap-text-primary);
+  color: var(--foreground);
   font-weight: 600;
 }
 
-.breadcrumb__separator {
-  color: var(--snap-text-muted);
+.breadcrumb__sep {
+  color: var(--text-muted);
 }
 
-/* -------------------------------------------
-   CONTENT
-   ------------------------------------------- */
+/* ========================================
+   Content Area
+   ======================================== */
+
 .content {
   flex: 1;
-  padding: var(--snap-spacing-8);
-  padding-left: calc(144px + var(--snap-spacing-8) - 53px);
+  padding: 32px;
+  margin-left: 115px;
 }
 
-/* -------------------------------------------
-   PAGE HEADER
-   ------------------------------------------- */
+/* ========================================
+   Page Header
+   ======================================== */
+
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--snap-spacing-6);
+  margin-bottom: 24px;
 }
 
-.page-header__left {
-  display: flex;
-  align-items: center;
-  gap: var(--snap-spacing-3);
-}
-
-.page-header__icon {
-  color: var(--snap-text-secondary);
-}
-
-.page-header__title {
-  font-family: var(--snap-font-title);
+.page-title {
+  font-family: var(--font-title);
   font-size: 24px;
   font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--snap-text-primary);
+  letter-spacing: 0.02em;
+  color: var(--foreground);
 }
 
-.page-header__actions {
+.page-actions {
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-4);
+  gap: 16px;
 }
 
-/* -------------------------------------------
-   SELECT
-   ------------------------------------------- */
+/* ========================================
+   Select
+   ======================================== */
+
 .select {
-  display: inline-flex;
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--snap-spacing-2);
-  padding: var(--snap-spacing-3) var(--snap-spacing-4);
-  background-color: var(--snap-surface-2);
-  border: 1px solid var(--snap-border-default);
-  border-radius: var(--snap-radius-md);
-  color: var(--snap-text-primary);
-  font-size: 14px;
-  cursor: pointer;
+  gap: 8px;
   min-width: 120px;
+  height: 40px;
+  padding: 0 16px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .select--full {
   width: 100%;
 }
 
-.select__value {
-  flex: 1;
+.select__text {
+  font-size: 14px;
+  color: var(--foreground);
 }
 
-.select__value--placeholder {
-  color: var(--snap-text-muted);
+.select__text--placeholder {
+  color: var(--text-muted);
 }
 
-.select__arrow {
-  color: var(--snap-text-muted);
+.select__chevron {
+  color: var(--text-muted);
+  transition: transform 0.2s;
 }
 
-/* -------------------------------------------
-   BUTTONS
-   ------------------------------------------- */
+.select--open .select__chevron {
+  transform: rotate(180deg);
+}
+
+.select__dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.select--open .select__dropdown {
+  display: block;
+}
+
+.select__option {
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.select__option:hover {
+  background: var(--muted);
+}
+
+/* ========================================
+   Buttons
+   ======================================== */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--snap-spacing-3);
-  padding: var(--snap-spacing-3) var(--snap-spacing-4);
-  border: 1px solid transparent;
-  border-radius: var(--snap-radius-md);
-  font-family: var(--snap-font-sans);
+  gap: 12px;
+  min-width: 130px;
+  height: 40px;
+  padding: 0 16px;
+  font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 700;
+  border-radius: 6px;
+  border: none;
   cursor: pointer;
-  transition: all 0.15s ease;
-  min-width: 130px;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
 
 .btn--primary {
-  background-color: var(--snap-vertical-administracao);
-  color: var(--snap-white);
-}
-
-.btn--primary:hover {
-  opacity: 0.9;
+  background: var(--vertical);
+  color: white;
 }
 
 .btn--solid {
-  background-color: var(--snap-text-primary);
-  color: var(--snap-surface-1);
-}
-
-.btn--solid:hover {
-  opacity: 0.9;
+  background: var(--foreground);
+  color: var(--background);
 }
 
 .btn--outline {
-  background-color: transparent;
-  border-color: var(--snap-border-default);
-  color: var(--snap-text-primary);
-}
-
-.btn--outline:hover {
-  background-color: var(--snap-surface-3);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
 }
 
 .btn--danger {
-  background-color: var(--snap-error);
-  color: var(--snap-white);
-}
-
-.btn--danger:hover {
-  opacity: 0.9;
+  background: var(--error);
+  color: white;
 }
 
 .btn--pink {
-  background-color: var(--snap-action-pink);
-  color: var(--snap-white);
-}
-
-.btn--pink:hover {
-  opacity: 0.9;
+  background: var(--pink);
+  color: white;
 }
 
 .btn--warning {
-  background-color: var(--snap-warning);
-  color: var(--snap-black);
+  background: var(--warning);
+  color: black;
 }
 
-.icon-btn {
-  background: none;
-  border: none;
-  padding: var(--snap-spacing-2);
-  color: var(--snap-text-secondary);
-  cursor: pointer;
-  border-radius: var(--snap-radius-sm);
-  transition: all 0.15s ease;
-}
+/* ========================================
+   Table
+   ======================================== */
 
-.icon-btn:hover {
-  background-color: var(--snap-surface-3);
-  color: var(--snap-text-primary);
-}
-
-.icon-btn--danger:hover {
-  color: var(--snap-error);
-}
-
-/* -------------------------------------------
-   TABLE
-   ------------------------------------------- */
-.table-container {
-  background-color: var(--snap-surface-2);
-  border: 1px solid var(--snap-border-default);
-  border-radius: var(--snap-radius-lg);
+.table-wrapper {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -506,353 +466,413 @@ body {
   border-collapse: collapse;
 }
 
-.table th {
+.table th,
+.table td {
+  padding: 12px 16px;
   text-align: left;
-  padding: var(--snap-spacing-4);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--snap-text-muted);
-  background-color: var(--snap-surface-3);
-  border-bottom: 1px solid var(--snap-border-default);
+  font-size: 14px;
+}
+
+.table th {
+  background: var(--muted);
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
 }
 
 .table td {
-  padding: var(--snap-spacing-4);
-  border-bottom: 1px solid var(--snap-border-subtle);
-  color: var(--snap-text-secondary);
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
 }
 
 .table tr:last-child td {
   border-bottom: none;
 }
 
-.table tr:hover {
-  background-color: var(--snap-surface-3);
+.table tr:hover td {
+  background: var(--muted);
+}
+
+/* Table Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  border-radius: 6px;
   cursor: pointer;
 }
 
-.table__actions {
-  display: flex;
-  gap: var(--snap-spacing-1);
+.action-btn:hover {
+  background: var(--muted);
+  color: var(--foreground);
 }
 
-.user-cell {
-  display: flex;
-  align-items: center;
-  gap: var(--snap-spacing-3);
+.action-btn--danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error);
 }
 
-.user-cell__info {
-  display: flex;
-  flex-direction: column;
-}
+/* ========================================
+   Badge
+   ======================================== */
 
-.user-cell__name {
-  font-weight: 500;
-  color: var(--snap-text-primary);
-}
-
-.user-cell__visibility {
-  font-size: 12px;
-  color: var(--snap-text-muted);
-}
-
-/* -------------------------------------------
-   AVATAR
-   ------------------------------------------- */
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
+.badge {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 4px 12px;
   font-size: 12px;
-  font-weight: 600;
-  color: var(--snap-white);
+  font-weight: 500;
+  border-radius: 9999px;
 }
 
-.avatar--purple {
-  background-color: var(--snap-vertical-inteligencia);
+.badge--success {
+  background: var(--success);
+  color: white;
 }
 
-.avatar--blue {
-  background-color: #3b82f6;
+.badge--muted {
+  background: var(--muted);
+  color: var(--text-muted);
 }
 
-.avatar--green {
-  background-color: var(--snap-success);
+.badge--error {
+  background: var(--error);
+  color: white;
 }
 
-/* -------------------------------------------
-   MODAL
-   ------------------------------------------- */
+/* ========================================
+   Pagination
+   ======================================== */
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding: 16px 0;
+}
+
+.pagination__info {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.pagination__btns {
+  display: flex;
+  gap: 8px;
+}
+
+.pagination__btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.pagination__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination__btn:not(:disabled):hover {
+  background: var(--muted);
+}
+
+/* ========================================
+   Modal
+   ======================================== */
+
 .modal {
+  display: none;
   position: fixed;
   inset: 0;
-  display: flex;
+  z-index: 1000;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s ease;
 }
 
 .modal--open {
-  opacity: 1;
-  visibility: visible;
+  display: flex;
 }
 
-.modal__overlay {
+.modal__backdrop {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
 }
 
-.modal__container {
+.modal__box {
   position: relative;
-  background-color: var(--snap-surface-2);
-  border: 1px solid var(--snap-border-default);
-  border-radius: var(--snap-radius-xl);
+  width: 100%;
   max-width: 448px;
-  width: 90%;
-  max-height: 90vh;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: var(--snap-shadow-modal);
+  z-index: 1;
 }
 
-.modal__container--2xl {
+.modal__box--2xl {
   max-width: 896px;
 }
 
+/* Modal Header */
 .modal__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--snap-spacing-4) var(--snap-spacing-6);
-  border-bottom: 1px solid var(--snap-border-default);
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
 }
 
 .modal__header-left {
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-3);
+  gap: 12px;
 }
 
-.modal__header-icon {
-  color: var(--snap-text-primary);
+.modal__icon {
+  color: var(--foreground);
 }
 
-.modal__header--danger .modal__header-icon {
-  color: var(--snap-error);
+.modal__header--error .modal__icon {
+  color: var(--error);
 }
 
-.modal__header--pink .modal__header-icon {
-  color: var(--snap-action-pink);
+.modal__header--pink .modal__icon {
+  color: var(--pink);
 }
 
 .modal__title {
-  font-family: var(--snap-font-title);
-  font-size: 18px;
+  font-family: var(--font-title);
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.05em;
-  color: var(--snap-text-primary);
+  text-transform: uppercase;
+  color: var(--foreground);
 }
 
 .modal__close {
-  background: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
   border: none;
-  color: var(--snap-text-muted);
+  color: var(--text-muted);
+  border-radius: 6px;
   cursor: pointer;
-  padding: var(--snap-spacing-2);
-  border-radius: var(--snap-radius-sm);
-  transition: all 0.15s ease;
 }
 
 .modal__close:hover {
-  background-color: var(--snap-surface-3);
-  color: var(--snap-text-primary);
+  background: var(--muted);
+  color: var(--foreground);
 }
 
-.modal__content {
-  padding: var(--snap-spacing-6);
+/* Modal Body */
+.modal__body {
+  padding: 24px;
 }
 
-.modal__text {
+.modal__question {
+  font-size: 16px;
+  color: var(--foreground);
+  margin-bottom: 12px;
+}
+
+.modal__warning {
   font-size: 14px;
-  color: var(--snap-text-primary);
-  margin-bottom: var(--snap-spacing-4);
+  color: var(--text-muted);
 }
 
-.modal__text--muted {
-  color: var(--snap-text-muted);
-  font-size: 13px;
-}
-
-.modal__footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--snap-spacing-4);
-  padding: var(--snap-spacing-6);
-  padding-top: 0;
-}
-
+/* Modal Grid (2 colunas) */
 .modal__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--snap-spacing-6);
+  gap: 24px;
 }
 
-.modal__right-column {
+.modal__right {
   display: flex;
   flex-direction: column;
-  gap: var(--snap-spacing-6);
+  gap: 24px;
 }
 
-/* -------------------------------------------
-   CARD (Secoes do Modal)
-   ------------------------------------------- */
-.card {
-  border: 1px solid var(--snap-border-default);
-  border-radius: var(--snap-radius-lg);
-  padding: var(--snap-spacing-4);
+/* Modal Footer */
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
 }
 
-.card__header {
+/* ========================================
+   Section Card (dentro do modal)
+   ======================================== */
+
+.section-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.section-card--flex {
+  flex: 1;
+}
+
+.section-card__header {
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-2);
-  padding-bottom: var(--snap-spacing-3);
-  margin-bottom: var(--snap-spacing-4);
-  border-bottom: 1px solid var(--snap-border-default);
-}
-
-.card__header svg {
-  color: var(--snap-text-muted);
-}
-
-.card__header-title {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--snap-text-muted);
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.card__body {
+.section-card__body {
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: var(--snap-spacing-4);
+  gap: 16px;
 }
 
-/* -------------------------------------------
-   FORM
-   ------------------------------------------- */
-.form-group {
+/* ========================================
+   Form Fields
+   ======================================== */
+
+.field {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
-.form-label {
-  font-size: 13px;
-  color: var(--snap-text-muted);
-  margin-bottom: var(--snap-spacing-2);
-}
-
-.required {
-  color: var(--snap-error);
-}
-
-.form-input {
-  padding: var(--snap-spacing-3) var(--snap-spacing-4);
-  background-color: var(--snap-surface-1);
-  border: 1px solid var(--snap-border-default);
-  border-radius: var(--snap-radius-md);
-  color: var(--snap-text-primary);
-  font-size: 14px;
-  font-family: var(--snap-font-sans);
-  transition: border-color 0.15s ease;
-}
-
-.form-input::placeholder {
-  color: var(--snap-text-muted);
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--snap-text-secondary);
-}
-
-.form-row {
+.field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--snap-spacing-4);
+  gap: 16px;
 }
 
-.input-with-icon {
+.field__label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.field__req {
+  color: var(--error);
+}
+
+.field__input {
+  width: 100%;
+  height: 44px;
+  padding: 0 16px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--foreground);
+}
+
+.field__input::placeholder {
+  color: var(--text-muted);
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--foreground);
+}
+
+.field__input-wrap {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.input-with-icon .form-input {
+.field__input-wrap .field__input {
   padding-right: 48px;
 }
 
-.input-icon-btn {
+.field__icon-btn {
   position: absolute;
   right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
   background: none;
   border: none;
-  color: var(--snap-text-muted);
+  color: var(--text-muted);
   cursor: pointer;
-  transition: color 0.15s ease;
 }
 
-.input-icon-btn:hover {
-  color: var(--snap-text-primary);
+.field__icon-btn:hover {
+  color: var(--foreground);
 }
 
-/* -------------------------------------------
-   PREVIEW NAV (Navegacao de Exemplos)
-   ------------------------------------------- */
-.preview-nav {
+/* ========================================
+   Demo Controls
+   ======================================== */
+
+.demo {
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: var(--snap-spacing-3);
-  padding: var(--snap-spacing-3) var(--snap-spacing-4);
-  background-color: var(--snap-surface-2);
-  border: 1px solid var(--snap-border-default);
-  border-radius: var(--snap-radius-lg);
-  box-shadow: var(--snap-shadow-modal);
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   z-index: 500;
 }
 
-.preview-nav__label {
-  font-size: 12px;
-  color: var(--snap-text-muted);
-  font-weight: 500;
+.demo__label {
+  font-size: 14px;
+  color: var(--text-muted);
 }
 
-.preview-nav__btn {
-  padding: var(--snap-spacing-2) var(--snap-spacing-3);
-  background-color: var(--snap-surface-3);
-  border: 1px solid var(--snap-border-default);
-  border-radius: var(--snap-radius-sm);
-  color: var(--snap-text-primary);
-  font-size: 12px;
+.demo__btn {
+  padding: 8px 16px;
+  font-size: 13px;
   font-weight: 500;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--foreground);
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
-.preview-nav__btn:hover {
-  background-color: var(--snap-surface-4);
+.demo__btn:hover {
+  background: var(--border);
+}
+
+.demo__btn--pink {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: white;
+}
+
+.demo__btn--danger {
+  background: var(--error);
+  border-color: var(--error);
+  color: white;
 }

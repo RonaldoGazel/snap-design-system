@@ -1,329 +1,348 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SNAP Design System - Preview Estático</title>
+  <title>SNAP Design System - Preview</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body class="theme-dark">
-  <!-- Sidebar -->
-  <aside class="sidebar sidebar--expanded">
-    <div class="sidebar__logo">
-      <img src="https://placehold.co/24x24/696969/white?text=S" alt="SNAP" class="sidebar__logo-img">
-    </div>
-    <nav class="sidebar__nav">
-      <a href="#" class="sidebar__item sidebar__item--active" title="Usuários">
-        <svg class="sidebar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
-        <span class="sidebar__label">Usuários</span>
-      </a>
-      <a href="#" class="sidebar__item" title="Grupos">
-        <svg class="sidebar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
-        <span class="sidebar__label">Grupos</span>
-      </a>
-      <a href="#" class="sidebar__item" title="Papéis">
-        <svg class="sidebar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-        <span class="sidebar__label">Papéis</span>
-      </a>
-    </nav>
-  </aside>
-
-  <!-- Main Content -->
-  <div class="main">
-    <!-- Header -->
-    <header class="header">
-      <div class="header__left">
-        <button class="header__menu-btn">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <circle cx="4" cy="4" r="2"></circle>
-            <circle cx="12" cy="4" r="2"></circle>
-            <circle cx="4" cy="12" r="2"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
+<body>
+  <div class="app">
+    <!-- Sidebar Colapsada (64px) -->
+    <aside class="sidebar">
+      <nav class="sidebar__nav">
+        <button class="sidebar__item sidebar__item--active" title="Usuarios">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
           </svg>
         </button>
-        <img src="https://placehold.co/80x24/333540/white?text=SNAP" alt="SNAP" class="header__logo">
-      </div>
-      <div class="header__right">
-        <div class="header__notifications">
+        <button class="sidebar__item" title="Grupos">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-          <span class="header__badge">35</span>
-        </div>
-        <button class="header__theme-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
           </svg>
         </button>
-        <div class="header__separator"></div>
-        <div class="header__user">
-          <div class="header__user-info">
-            <span class="header__user-name">Analista de Contrainteligência</span>
-            <span class="header__user-role">Administrador</span>
-          </div>
-          <div class="header__avatar">VD</div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Vertical Bar -->
-    <div class="vertical-bar vertical-bar--administracao"></div>
-
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb">
-      <a href="#" class="breadcrumb__item breadcrumb__item--vertical">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-        Administração
-      </a>
-      <span class="breadcrumb__separator">/</span>
-      <span class="breadcrumb__item breadcrumb__item--current">Usuários</span>
-    </nav>
-
-    <!-- Page Content -->
-    <main class="content">
-      <!-- Page Header -->
-      <div class="page-header">
-        <div class="page-header__left">
-          <svg class="page-header__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        <button class="sidebar__item" title="Papeis">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
-          <h1 class="page-header__title">USUÁRIOS</h1>
-        </div>
-        <div class="page-header__actions">
-          <div class="select">
-            <span class="select__value">Status</span>
-            <svg class="select__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 12 15 18 9"></polyline>
+        </button>
+        <button class="sidebar__item" title="Auditoria">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14,2 14,8 20,8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+      <!-- Header -->
+      <header class="header">
+        <div class="header__left">
+          <button class="header__menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="5" cy="5" r="2"/>
+              <circle cx="12" cy="5" r="2"/>
+              <circle cx="19" cy="5" r="2"/>
+              <circle cx="5" cy="12" r="2"/>
+              <circle cx="12" cy="12" r="2"/>
+              <circle cx="19" cy="12" r="2"/>
+              <circle cx="5" cy="19" r="2"/>
+              <circle cx="12" cy="19" r="2"/>
+              <circle cx="19" cy="19" r="2"/>
             </svg>
-          </div>
-          <button class="btn btn--primary" onclick="openModal('modal-create')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            Novo usuário
           </button>
+          <span class="header__logo">SNAP</span>
         </div>
-      </div>
+        <div class="header__right">
+          <button class="header__icon-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span class="header__badge">35</span>
+          </button>
+          <button class="header__icon-btn" onclick="toggleTheme()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </button>
+          <div class="header__separator"></div>
+          <div class="header__user">
+            <div class="header__user-info">
+              <span class="header__user-name">Analista de Contrainteligencia</span>
+              <span class="header__user-role">Administrador</span>
+            </div>
+            <div class="header__avatar">VD</div>
+          </div>
+        </div>
+      </header>
 
-      <!-- Table -->
-      <div class="table-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Visibilidade</th>
-              <th>Email</th>
-              <th>Atualizado em</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr onclick="showDetail()">
-              <td>
-                <div class="user-cell">
-                  <div class="avatar avatar--purple">VD</div>
-                  <div class="user-cell__info">
-                    <span class="user-cell__name">Vitor Developer</span>
-                    <span class="user-cell__visibility">plataforma</span>
+      <!-- Barra da Vertical (8px altura) -->
+      <div class="vertical-bar"></div>
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="#" class="breadcrumb__item breadcrumb__item--vertical">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9,22 9,12 15,12 15,22"/>
+          </svg>
+          Administracao
+        </a>
+        <span class="breadcrumb__sep">/</span>
+        <span class="breadcrumb__item breadcrumb__item--current">Usuarios</span>
+      </nav>
+
+      <!-- Content -->
+      <main class="content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1 class="page-title">USUARIOS</h1>
+          <div class="page-actions">
+            <div class="select" onclick="this.classList.toggle('select--open')">
+              <span class="select__text">Status</span>
+              <svg class="select__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6,9 12,15 18,9"/>
+              </svg>
+              <div class="select__dropdown">
+                <div class="select__option">Todos</div>
+                <div class="select__option">Ativo</div>
+                <div class="select__option">Inativo</div>
+                <div class="select__option">Bloqueado</div>
+              </div>
+            </div>
+            <button class="btn btn--primary" onclick="openModal('create')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Novo usuario
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabela -->
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Criado em</th>
+                <th>Atualizado em</th>
+                <th>Acoes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>admin</td>
+                <td>admin@snap.local</td>
+                <td><span class="badge badge--success">Ativo</span></td>
+                <td>May 7, 2026, 2:17:14 PM</td>
+                <td>May 7, 2026, 2:19:31 PM</td>
+                <td>
+                  <div class="actions">
+                    <button class="action-btn" title="Ver"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                    <button class="action-btn" title="Editar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="action-btn action-btn--danger" title="Excluir" onclick="openModal('delete')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                   </div>
-                </div>
-              </td>
-              <td>admin@snap.local</td>
-              <td>May 7, 2026, 5:17:14 PM</td>
-              <td>
-                <div class="table__actions">
-                  <button class="icon-btn" title="Ver"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
-                  <button class="icon-btn" title="Editar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
-                  <button class="icon-btn icon-btn--danger" title="Excluir"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="user-cell">
-                  <div class="avatar avatar--blue">MS</div>
-                  <div class="user-cell__info">
-                    <span class="user-cell__name">Maria Santos</span>
-                    <span class="user-cell__visibility">restrito</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Maria Santos</td>
+                <td>maria.santos@snap.local</td>
+                <td><span class="badge badge--success">Ativo</span></td>
+                <td>May 5, 2026, 10:30:00 AM</td>
+                <td>May 6, 2026, 09:15:22 AM</td>
+                <td>
+                  <div class="actions">
+                    <button class="action-btn" title="Ver"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                    <button class="action-btn" title="Editar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="action-btn action-btn--danger" title="Excluir"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                   </div>
-                </div>
-              </td>
-              <td>maria.santos@snap.local</td>
-              <td>May 7, 2026, 3:30:45 PM</td>
-              <td>
-                <div class="table__actions">
-                  <button class="icon-btn" title="Ver"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
-                  <button class="icon-btn" title="Editar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
-                  <button class="icon-btn icon-btn--danger" title="Excluir"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="user-cell">
-                  <div class="avatar avatar--green">PC</div>
-                  <div class="user-cell__info">
-                    <span class="user-cell__name">Pedro Costa</span>
-                    <span class="user-cell__visibility">elevado</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Pedro Costa</td>
+                <td>pedro.costa@snap.local</td>
+                <td><span class="badge badge--muted">Inativo</span></td>
+                <td>Apr 20, 2026, 3:45:00 PM</td>
+                <td>May 1, 2026, 11:00:00 AM</td>
+                <td>
+                  <div class="actions">
+                    <button class="action-btn" title="Ver"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                    <button class="action-btn" title="Editar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="action-btn action-btn--danger" title="Excluir"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                   </div>
-                </div>
-              </td>
-              <td>pedro.costa@snap.local</td>
-              <td>May 6, 2026, 8:45:00 AM</td>
-              <td>
-                <div class="table__actions">
-                  <button class="icon-btn" title="Ver"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
-                  <button class="icon-btn" title="Editar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
-                  <button class="icon-btn icon-btn--danger" title="Excluir"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
+                </td>
+              </tr>
+              <tr>
+                <td>Ana Oliveira</td>
+                <td>ana.oliveira@snap.local</td>
+                <td><span class="badge badge--error">Bloqueado</span></td>
+                <td>Mar 15, 2026, 9:00:00 AM</td>
+                <td>May 3, 2026, 2:30:00 PM</td>
+                <td>
+                  <div class="actions">
+                    <button class="action-btn" title="Ver"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                    <button class="action-btn" title="Editar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="action-btn action-btn--danger" title="Excluir"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Carlos Ferreira</td>
+                <td>carlos.ferreira@snap.local</td>
+                <td><span class="badge badge--success">Ativo</span></td>
+                <td>Feb 10, 2026, 11:00:00 AM</td>
+                <td>May 2, 2026, 4:30:00 PM</td>
+                <td>
+                  <div class="actions">
+                    <button class="action-btn" title="Ver"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                    <button class="action-btn" title="Editar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="action-btn action-btn--danger" title="Excluir"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Paginacao -->
+        <div class="pagination">
+          <span class="pagination__info">1-5 de 5</span>
+          <div class="pagination__btns">
+            <button class="pagination__btn" disabled>Pagina anterior</button>
+            <button class="pagination__btn" disabled>Proxima pagina</button>
+          </div>
+        </div>
+      </main>
+    </div>
   </div>
 
-  <!-- Modal: Criar Usuario -->
-  <div id="modal-create" class="modal">
-    <div class="modal__overlay" onclick="closeModal('modal-create')"></div>
-    <div class="modal__container modal__container--2xl">
+  <!-- Modal Criar Usuario -->
+  <div class="modal" id="modal-create">
+    <div class="modal__backdrop" onclick="closeModal('create')"></div>
+    <div class="modal__box modal__box--2xl">
       <div class="modal__header">
         <div class="modal__header-left">
-          <svg class="modal__header-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="8.5" cy="7" r="4"></circle>
-            <line x1="20" y1="8" x2="20" y2="14"></line>
-            <line x1="23" y1="11" x2="17" y2="11"></line>
+          <svg class="modal__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="8.5" cy="7" r="4"/>
+            <line x1="20" y1="8" x2="20" y2="14"/>
+            <line x1="23" y1="11" x2="17" y2="11"/>
           </svg>
-          <h2 class="modal__title">CRIAR USUÁRIO</h2>
+          <h2 class="modal__title">CRIAR USUARIO</h2>
         </div>
-        <button class="modal__close" onclick="closeModal('modal-create')">
+        <button class="modal__close" onclick="closeModal('create')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
       </div>
-      <div class="modal__content">
+      <div class="modal__body">
         <div class="modal__grid">
-          <!-- Coluna Esquerda - Identificacao -->
-          <div class="card">
-            <div class="card__header">
+          <!-- Coluna Esquerda -->
+          <div class="section-card">
+            <div class="section-card__header">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
               </svg>
-              <span class="card__header-title">IDENTIFICAÇÃO</span>
+              <span>IDENTIFICACAO</span>
             </div>
-            <div class="card__body">
-              <div class="form-group">
-                <label class="form-label">Nome de Usuário <span class="required">*</span></label>
-                <input type="text" class="form-input" placeholder="Digite o nome de usuário">
+            <div class="section-card__body">
+              <div class="field">
+                <label class="field__label">Nome de Usuario <span class="field__req">*</span></label>
+                <input type="text" class="field__input" placeholder="Digite o nome de usuario">
               </div>
-              <div class="form-group">
-                <label class="form-label">Nome de Exibição <span class="required">*</span></label>
-                <input type="text" class="form-input" placeholder="Digite o nome de exibição">
+              <div class="field">
+                <label class="field__label">Nome de Exibicao <span class="field__req">*</span></label>
+                <input type="text" class="field__input" placeholder="Digite o nome de exibicao">
               </div>
-              <div class="form-group">
-                <label class="form-label">Email <span class="required">*</span></label>
-                <input type="email" class="form-input" placeholder="Digite o email">
+              <div class="field">
+                <label class="field__label">Email <span class="field__req">*</span></label>
+                <input type="email" class="field__input" placeholder="Digite o email">
               </div>
             </div>
           </div>
-
-          <!-- Coluna Direita - Seguranca + Acesso -->
-          <div class="modal__right-column">
-            <!-- Seguranca -->
-            <div class="card">
-              <div class="card__header">
+          <!-- Coluna Direita -->
+          <div class="modal__right">
+            <div class="section-card">
+              <div class="section-card__header">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
-                <span class="card__header-title">SEGURANÇA</span>
+                <span>SEGURANCA</span>
               </div>
-              <div class="card__body">
-                <div class="form-group">
-                  <label class="form-label">Senha <span class="required">*</span></label>
-                  <div class="input-with-icon">
-                    <input type="password" class="form-input" placeholder="Digite a senha">
-                    <button class="input-icon-btn">
+              <div class="section-card__body">
+                <div class="field">
+                  <label class="field__label">Senha <span class="field__req">*</span></label>
+                  <div class="field__input-wrap">
+                    <input type="password" class="field__input" placeholder="Digite a senha">
+                    <button class="field__icon-btn">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
                       </svg>
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-
-            <!-- Acesso -->
-            <div class="card">
-              <div class="card__header">
+            <div class="section-card section-card--flex">
+              <div class="section-card__header">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
-                <span class="card__header-title">ACESSO</span>
+                <span>ACESSO</span>
               </div>
-              <div class="card__body">
-                <div class="form-row">
-                  <div class="form-group">
-                    <label class="form-label">Nível de Acesso</label>
+              <div class="section-card__body">
+                <div class="field-row">
+                  <div class="field">
+                    <label class="field__label">Nivel de Acesso</label>
                     <div class="select select--full">
-                      <span class="select__value">Público</span>
-                      <svg class="select__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
+                      <span class="select__text">Publico</span>
+                      <svg class="select__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="form-label">Papel <span class="required">*</span></label>
+                  <div class="field">
+                    <label class="field__label">Papel <span class="field__req">*</span></label>
                     <div class="select select--full">
-                      <span class="select__value select__value--placeholder">Selecione um papel</span>
-                      <svg class="select__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
+                      <span class="select__text select__text--placeholder">Selecione um papel</span>
+                      <svg class="select__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Grupo <span class="required">*</span></label>
+                <div class="field">
+                  <label class="field__label">Grupo <span class="field__req">*</span></label>
                   <div class="select select--full">
-                    <span class="select__value select__value--placeholder">Selecione um grupo</span>
-                    <svg class="select__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
+                    <span class="select__text select__text--placeholder">Selecione um grupo</span>
+                    <svg class="select__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
                   </div>
                 </div>
               </div>
@@ -333,129 +352,115 @@
       </div>
       <div class="modal__footer">
         <button class="btn btn--solid">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg>
           Criar
         </button>
-        <button class="btn btn--outline" onclick="closeModal('modal-create')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+        <button class="btn btn--outline" onclick="closeModal('create')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           Cancelar
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Excluir Usuario -->
-  <div id="modal-delete" class="modal">
-    <div class="modal__overlay" onclick="closeModal('modal-delete')"></div>
-    <div class="modal__container">
-      <div class="modal__header modal__header--danger">
+  <!-- Modal Excluir -->
+  <div class="modal" id="modal-delete">
+    <div class="modal__backdrop" onclick="closeModal('delete')"></div>
+    <div class="modal__box">
+      <div class="modal__header modal__header--error">
         <div class="modal__header-left">
-          <svg class="modal__header-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="3 6 5 6 21 6"></polyline>
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          <svg class="modal__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3,6 5,6 21,6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
           </svg>
-          <h2 class="modal__title">EXCLUIR USUÁRIO</h2>
+          <h2 class="modal__title">EXCLUIR USUARIO</h2>
         </div>
-        <button class="modal__close" onclick="closeModal('modal-delete')">
+        <button class="modal__close" onclick="closeModal('delete')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
       </div>
-      <div class="modal__content">
-        <p class="modal__text">Tem certeza que deseja excluir este usuário?</p>
-        <p class="modal__text modal__text--muted">Esta ação é irreversível. O usuário será removido permanentemente. Esta ação será registrada no log de auditoria.</p>
+      <div class="modal__body">
+        <p class="modal__question">Tem certeza que deseja excluir este usuario?</p>
+        <p class="modal__warning">Esta acao e irreversivel. O usuario sera removido permanentemente. Esta acao sera registrada no log de auditoria.</p>
       </div>
       <div class="modal__footer">
         <button class="btn btn--danger">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="3 6 5 6 21 6"></polyline>
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
           Excluir
         </button>
-        <button class="btn btn--outline" onclick="closeModal('modal-delete')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+        <button class="btn btn--outline" onclick="closeModal('delete')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           Cancelar
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Bloquear Usuario -->
-  <div id="modal-block" class="modal">
-    <div class="modal__overlay" onclick="closeModal('modal-block')"></div>
-    <div class="modal__container">
+  <!-- Modal Bloquear -->
+  <div class="modal" id="modal-block">
+    <div class="modal__backdrop" onclick="closeModal('block')"></div>
+    <div class="modal__box">
       <div class="modal__header modal__header--pink">
         <div class="modal__header-left">
-          <svg class="modal__header-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          <svg class="modal__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          <h2 class="modal__title">BLOQUEAR USUÁRIO</h2>
+          <h2 class="modal__title">BLOQUEAR USUARIO</h2>
         </div>
-        <button class="modal__close" onclick="closeModal('modal-block')">
+        <button class="modal__close" onclick="closeModal('block')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
       </div>
-      <div class="modal__content">
-        <p class="modal__text">Tem certeza que deseja bloquear este usuário?</p>
-        <p class="modal__text modal__text--muted">Esta ação será registrada no log de auditoria.</p>
+      <div class="modal__body">
+        <p class="modal__question">Tem certeza que deseja bloquear este usuario?</p>
+        <p class="modal__warning">Esta acao sera registrada no log de auditoria.</p>
       </div>
       <div class="modal__footer">
         <button class="btn btn--pink">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           Bloquear
         </button>
-        <button class="btn btn--outline" onclick="closeModal('modal-block')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+        <button class="btn btn--outline" onclick="closeModal('block')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           Cancelar
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Navegacao de Exemplos -->
-  <nav class="preview-nav">
-    <span class="preview-nav__label">Modais:</span>
-    <button class="preview-nav__btn" onclick="openModal('modal-create')">Criar Usuário</button>
-    <button class="preview-nav__btn" onclick="openModal('modal-delete')">Excluir</button>
-    <button class="preview-nav__btn" onclick="openModal('modal-block')">Bloquear</button>
-    <button class="preview-nav__btn" onclick="toggleTheme()">Alternar Tema</button>
-  </nav>
+  <!-- Demo Controls -->
+  <div class="demo">
+    <span class="demo__label">Testar modais:</span>
+    <button class="demo__btn" onclick="openModal('create')">Criar Usuario</button>
+    <button class="demo__btn demo__btn--pink" onclick="openModal('block')">Bloquear</button>
+    <button class="demo__btn demo__btn--danger" onclick="openModal('delete')">Excluir</button>
+  </div>
 
   <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    }
     function openModal(id) {
-      document.getElementById(id).classList.add('modal--open');
+      document.getElementById('modal-' + id).classList.add('modal--open');
+      document.body.style.overflow = 'hidden';
     }
     function closeModal(id) {
-      document.getElementById(id).classList.remove('modal--open');
+      document.getElementById('modal-' + id).classList.remove('modal--open');
+      document.body.style.overflow = '';
     }
-    function showDetail() {
-      alert('Na versão real, isso abre a tela de Detalhe do Usuário');
-    }
-    function toggleTheme() {
-      document.body.classList.toggle('theme-dark');
-      document.body.classList.toggle('theme-light');
-    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.select')) {
+        document.querySelectorAll('.select--open').forEach(s => s.classList.remove('select--open'));
+      }
+    });
   </script>
 </body>
 </html>
