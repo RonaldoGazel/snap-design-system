@@ -1,0 +1,1347 @@
+<!-- ── Title Bar ── -->
+<div class="pr-title-bar">
+  <div class="pr-title-bar__left">
+    <button class="pr-title-bar__back" (click)="voltar()" aria-label="Voltar">
+      <i class="pi pi-arrow-left"></i>
+    </button>
+    @if (!isLoading() && !httpStatus() && !errorSignal()) {
+    <h1 class="pr-title-bar__name">{{ person().name }}</h1>
+    <span class="pr-title-bar__chip">Prontuário</span>
+    }
+  </div>
+  <div class="pr-title-bar__actions">
+    @if (!isLoading() && !httpStatus() && !errorSignal()) {
+    @if (isProduction && hasGraphPermission()) {
+    <button pButton [label]="'person.profile.openGraph' | translate" icon="pi pi-share-alt" [outlined]="true"
+      size="small" (click)="openGraph()" [disabled]="!personId()"></button>
+    }
+    <button class="pr-title-bar__btn" (click)="toggleSources()">
+      <i class="pi pi-arrows-h"></i>
+      {{ toggleSourcesLabel() }}
+    </button>
+    <button class="pr-title-bar__btn" aria-label="Exportar">
+      <i class="pi pi-download"></i> Exportar
+    </button>
+    <button class="pr-title-bar__btn" aria-label="Compartilhar">
+      <i class="pi pi-share-alt"></i> Compartilhar
+    </button>
+    <button class="pr-title-bar__btn pr-title-bar__btn--primary" aria-label="Criar documento">
+      <i class="pi pi-file-plus"></i> Criar documento
+    </button>
+    }
+  </div>
+</div>
+
+<!-- ── Scrollable body (everything below the sticky title bar) ── -->
+<div class="pr-body">
+
+  <!-- ── Loading Skeleton ── -->
+  @if (isLoading()) {
+  <div class="pr-skeleton">
+    <div class="pr-skeleton__header">
+      <div class="pr-skeleton__photo"></div>
+      <div class="pr-skeleton__header-body">
+        <div class="pr-skeleton__line pr-skeleton__line--title"></div>
+        <div class="pr-skeleton__line pr-skeleton__line--subtitle"></div>
+        <div class="pr-skeleton__tags">
+          <div class="pr-skeleton__tag"></div>
+          <div class="pr-skeleton__tag"></div>
+          <div class="pr-skeleton__tag"></div>
+        </div>
+        <div class="pr-skeleton__line pr-skeleton__line--short"></div>
+        <div class="pr-skeleton__line pr-skeleton__line--medium"></div>
+      </div>
+    </div>
+    <div class="pr-skeleton__content">
+      <div class="pr-skeleton__col">
+        <div class="pr-skeleton__card">
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--medium"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--short"></div>
+        </div>
+        <div class="pr-skeleton__card">
+          <div class="pr-skeleton__line pr-skeleton__line--medium"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+        </div>
+      </div>
+      <div class="pr-skeleton__col">
+        <div class="pr-skeleton__card">
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--medium"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--short"></div>
+        </div>
+        <div class="pr-skeleton__card">
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--medium"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+        </div>
+      </div>
+      <div class="pr-skeleton__col">
+        <div class="pr-skeleton__card">
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--medium"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--short"></div>
+          <div class="pr-skeleton__line pr-skeleton__line--full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+
+  <!-- ── 404 State ── -->
+  @if (httpStatus() === 404) {
+  <div class="pr-state">
+    <div class="pr-state__icon pr-state__icon--404">
+      <i class="pi pi-search"></i>
+    </div>
+    <h2 class="pr-state__title">Pessoa não encontrada</h2>
+    <p class="pr-state__body">O prontuário solicitado não existe ou foi removido do sistema.</p>
+    <div class="pr-state__actions">
+      <button pButton label="Voltar" icon="pi pi-arrow-left" [outlined]="true" (click)="voltar()"></button>
+    </div>
+  </div>
+  }
+
+  <!-- ── 403 State ── -->
+  @if (httpStatus() === 403) {
+  <div class="pr-state">
+    <div class="pr-state__icon pr-state__icon--403">
+      <i class="pi pi-lock"></i>
+    </div>
+    <h2 class="pr-state__title">Acesso negado</h2>
+    <p class="pr-state__body">Você não tem permissão para visualizar este prontuário. Solicite acesso ao administrador
+      do
+      sistema.</p>
+    <div class="pr-state__actions">
+      <button pButton label="Voltar" icon="pi pi-arrow-left" [outlined]="true" (click)="voltar()"></button>
+    </div>
+  </div>
+  }
+
+  <!-- ── Generic Error State ── -->
+  @if (errorSignal()) {
+  <div class="pr-state">
+    <div class="pr-state__icon pr-state__icon--error">
+      <i class="pi pi-exclamation-circle"></i>
+    </div>
+    <h2 class="pr-state__title">Erro ao carregar prontuário</h2>
+    <p class="pr-state__body">{{ errorSignal() }}</p>
+    <div class="pr-state__actions">
+      <button pButton label="Voltar" icon="pi pi-arrow-left" [outlined]="true" (click)="voltar()"></button>
+    </div>
+  </div>
+  }
+
+  <!-- ── Profile Content (hidden during loading / error states) ── -->
+  @if (!isLoading() && !httpStatus() && !errorSignal()) {
+
+  <!-- ── Critical Alert Banner ── -->
+  @if (person().criticalAlert.title) {
+  <div class="pr-critical">
+    <div class="pr-critical__icon">
+      <i class="pi pi-exclamation-circle"></i>
+    </div>
+    <div class="pr-critical__body">
+      <div class="pr-critical__header">
+        <span class="pr-critical__title">{{ person().criticalAlert.title }}</span>
+        <span class="pr-critical__time">{{ person().criticalAlert.time }}</span>
+      </div>
+      <p class="pr-critical__text">{{ person().criticalAlert.body }}</p>
+      <div class="pr-critical__actions">
+        @for (action of person().criticalAlert.actions; track action) {
+        <button class="pr-critical__action">
+          {{ action }} <i class="pi pi-external-link"></i>
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+  }
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- ── 3-Column Layout ──────────────────────────────────── -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="pr-layout">
+
+    <!-- ── LEFT: Identity Sidebar ── -->
+    <aside class="pr-left">
+      <div class="pr-left__card">
+        <!-- Photo + PRESO badge -->
+        <div class="pr-left__photo-wrap" (click)="goToPhotos()" (mousemove)="onPhotoMouseMove($event)"
+          (mouseleave)="photoTooltipVisible.set(false)" (mouseenter)="photoTooltipVisible.set(true)">
+          @if (person().photo) {
+          <img [src]="person().photo" [alt]="person().name" class="pr-left__photo" />
+          } @else {
+          <div class="pr-left__photo-placeholder">
+            <i class="pi pi-user"></i>
+          </div>
+          }
+          <div class="pr-left__photo-top-badges">
+            <span class="pr-left__badge pr-left__badge--risk"><span class="pr-left__risk-dot"></span>ALTO RISCO</span>
+            <span class="pr-left__badge pr-left__badge--monitored">MONITORADO</span>
+          </div>
+          <div class="pr-left__photo-overlay">
+            <span class="pr-left__badge pr-left__badge--preso">PRESO</span>
+            <h2 class="pr-left__name">{{ person().name }}</h2>
+            <div class="pr-left__aliases">{{ person().aliases.join(', ') }}</div>
+          </div>
+          @if (photoTooltipVisible()) {
+          <span class="pr-left__tooltip" [style.left.px]="photoTooltipX()" [style.top.px]="photoTooltipY()">Ver mais
+            fotos</span>
+          }
+        </div>
+
+        <!-- Tags (excluding Monitorado and Alto risco which are on the photo) -->
+        <div class="pr-left__tags">
+          @for (tag of person().tags; track tag.t) {
+          @if (tag.t !== 'Monitorado' && tag.t !== 'Alto risco') {
+          <span class="pr-left__tag" [ngClass]="'pr-left__tag--' + tag.tone">{{ tag.t }}</span>
+          }
+          }
+        </div>
+
+        <!-- CPF / RG / SIPEN -->
+        <div class="pr-left__ids">
+          <div class="pr-left__id-row">
+            <span class="pr-left__id-label">CPF</span>
+            <span class="pr-left__id-value">{{ person().cpf }}</span>
+          </div>
+          <div class="pr-left__id-row">
+            <span class="pr-left__id-label">RG</span>
+            <span class="pr-left__id-value">{{ person().rg }}</span>
+          </div>
+          <div class="pr-left__id-row">
+            <span class="pr-left__id-label">SIPEN</span>
+            <span class="pr-left__id-value">{{ person().matriculaSipen }}</span>
+          </div>
+        </div>
+
+        <!-- Situação atual -->
+        <div class="pr-left__section">
+          <h3 class="pr-left__section-title"><i class="pi pi-shield"></i> Custódia atual</h3>
+          <span class="pr-left__section-meta">Última atualização {{ person().situation.ultimaAtualizacao }}</span>
+
+          <!-- Status + Regime (side by side) -->
+          <div class="pr-left__field-row">
+            <div class="pr-left__field-col">
+              <span class="pr-left__field-label">Status</span>
+              <span class="pr-left__field-value">{{ person().situation.status }}</span>
+            </div>
+            <div class="pr-left__field-col pr-left__field-col--right">
+              <span class="pr-left__field-label">Regime</span>
+              <span class="pr-left__field-value">{{ person().situation.regime }}</span>
+            </div>
+          </div>
+
+          <!-- Unidade -->
+          <div class="pr-left__field-col">
+            <span class="pr-left__field-label">Unidade</span>
+            <span class="pr-left__field-value">{{ person().situation.unidade }}</span>
+          </div>
+
+          <!-- Local atual -->
+          <div class="pr-left__field-col">
+            <span class="pr-left__field-label">Local atual</span>
+            <span class="pr-left__field-value">{{ person().situation.localAtual }}</span>
+          </div>
+
+          <!-- Entrada no sistema -->
+          <div class="pr-left__field">
+            <span class="pr-left__field-label">Entrada</span>
+            <span class="pr-left__field-value">{{ person().situation.entradaSistema }}</span>
+          </div>
+        </div>
+
+      </div><!-- /.pr-left__card -->
+    </aside>
+
+
+    <!-- ── CENTER: Tab Panel ── -->
+    <main class="pr-center">
+      <!-- Tab bar -->
+      <div class="pr-tabs" role="tablist">
+        <button class="pr-tab" [ngClass]="{'pr-tab--active': activeTab() === 0}" (click)="selectTab(0)" role="tab">Visão
+          Geral</button>
+        <button class="pr-tab" [ngClass]="{'pr-tab--active': activeTab() === 1}" (click)="selectTab(1)"
+          role="tab">Documentos</button>
+        <button class="pr-tab" [ngClass]="{'pr-tab--active': activeTab() === 2}" (click)="selectTab(2)"
+          role="tab">Custódia</button>
+        <button class="pr-tab" [ngClass]="{'pr-tab--active': activeTab() === 3}" (click)="selectTab(3)"
+          role="tab">Jurídico</button>
+        <button class="pr-tab" [ngClass]="{'pr-tab--active': activeTab() === 4}" (click)="selectTab(4)"
+          role="tab">Fontes
+          Abertas</button>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!-- TAB 0: Visão Geral                                  -->
+      <!-- ════════════════════════════════════════════════════ -->
+      @if (activeTab() === 0) {
+      <div class="pr-overview">
+        <!-- Scroll-spy anchor nav -->
+        <nav class="pr-anchor" aria-label="Seções">
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-ai'}"
+            (click)="scrollToSection('sec-ai')">
+            <i class="pi pi-sparkles"></i> Resumo IA
+          </button>
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-id'}"
+            (click)="scrollToSection('sec-id')">
+            <i class="pi pi-id-card"></i> ID Civil
+          </button>
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-sipen'}"
+            (click)="scrollToSection('sec-sipen')">
+            <i class="pi pi-database"></i> ID Prisional
+          </button>
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-aliases'}"
+            (click)="scrollToSection('sec-aliases')">
+            <i class="pi pi-tag"></i> Vulgos
+          </button>
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-photos'}"
+            (click)="scrollToSection('sec-photos')">
+            <i class="pi pi-camera"></i> Fotografias
+          </button>
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-marks'}"
+            (click)="scrollToSection('sec-marks')">
+            <i class="pi pi-search"></i> Marcas Físicas
+          </button>
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-contacts'}"
+            (click)="scrollToSection('sec-contacts')">
+            <i class="pi pi-phone"></i> Contatos
+          </button>
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-addr'}"
+            (click)="scrollToSection('sec-addr')">
+            <i class="pi pi-map-marker"></i> Localizações
+          </button>
+          <button class="pr-anchor__item" [ngClass]="{'pr-anchor__item--active': activeAnchor() === 'sec-source'}"
+            (click)="scrollToSection('sec-source')">
+            <i class="pi pi-sitemap"></i> Fontes de Dados
+          </button>
+        </nav>
+
+        <!-- Sections body -->
+        <div class="pr-sections">
+
+          <!-- §1 Resumo por IA -->
+          <section id="sec-ai" class="pr-card">
+            <div class="pr-ai-header">
+              <h3 class="pr-card__title"><i class="pi pi-sparkles"></i> Resumo por IA</h3>
+              <button class="pr-btn pr-btn--ghost"><i class="pi pi-refresh"></i> Gerar novamente</button>
+            </div>
+            <div class="pr-ai-collapse" [ngClass]="{'pr-ai-collapse--expanded': aiExpanded()}">
+              <div class="pr-ai-body">
+                <span class="pr-ai-body__icon"><i class="pi pi-sparkles"></i></span>
+                <div class="pr-ai-body__content">
+                  @for (p of person().aiSummary.paragraphs; track $index) {
+                  <p class="pr-card__text">{{ p }}</p>
+                  }
+                </div>
+              </div>
+            </div>
+            <button class="pr-ai-toggle" (click)="toggleAiExpanded()">
+              <i class="pi" [ngClass]="aiExpanded() ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
+              {{ aiExpanded() ? 'Ler menos' : 'Ler mais' }}
+            </button>
+            <div class="pr-card__sources">
+              <span class="pr-card__sources-label">Fontes consultadas:</span>
+              @for (src of person().aiSummary.sources; track src) {
+              <span class="pr-source-chip">{{ src }}</span>
+              }
+            </div>
+          </section>
+
+          <!-- §2 ID Civil -->
+          <section id="sec-id" class="pr-card">
+            <h3 class="pr-card__title"><i class="pi pi-id-card"></i> ID Civil</h3>
+            <div class="pr-fieldgrid">
+              @for (field of person().identification; track field.label) {
+              <div class="pr-fieldgrid__item">
+                <span class="pr-fieldgrid__label">{{ field.label }}</span>
+                <span class="pr-fieldgrid__value">{{ field.value }}</span>
+                <span class="pr-source-chip">{{ field.source }}</span>
+                @if (field.conflict) {
+                <span class="pr-conflict-chip"
+                  [pTooltip]="'Conflito com ' + field.conflict.otherSource + ': ' + field.conflict.otherValue">
+                  <i class="pi pi-exclamation-triangle"></i> Conflito
+                </span>
+                }
+              </div>
+              }
+              @for (field of person().biography; track field.label) {
+              <div class="pr-fieldgrid__item">
+                <span class="pr-fieldgrid__label">{{ field.label }}</span>
+                <span class="pr-fieldgrid__value">{{ field.value }}</span>
+                <span class="pr-source-chip">{{ field.source }}</span>
+                @if (field.conflict) {
+                <span class="pr-conflict-chip"
+                  [pTooltip]="'Conflito com ' + field.conflict.otherSource + ': ' + field.conflict.otherValue">
+                  <i class="pi pi-exclamation-triangle"></i> Conflito
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </section>
+
+          <!-- §4 Códigos SIPEN e origem -->
+          <section id="sec-sipen" class="pr-card">
+            <h3 class="pr-card__title"><i class="pi pi-database"></i> ID Prisional</h3>
+            <div class="pr-fieldgrid">
+              @for (field of person().sipenCodes; track field.label) {
+              <div class="pr-fieldgrid__item">
+                <span class="pr-fieldgrid__label">{{ field.label }}</span>
+                <span class="pr-fieldgrid__value">{{ field.value }}</span>
+                <span class="pr-source-chip">{{ field.source }}</span>
+              </div>
+              }
+            </div>
+          </section>
+
+          <!-- §5 Vulgos -->
+          <section id="sec-aliases" class="pr-card">
+            <h3 class="pr-card__title"><i class="pi pi-tag"></i> Vulgos</h3>
+            <div class="pr-aliases">
+              @for (alias of person().aliases; track alias) {
+              <span class="pr-alias">{{ alias }}</span>
+              }
+            </div>
+          </section>
+
+
+          <!-- §6 Fotografias -->
+          <section id="sec-photos" class="pr-card">
+            <h3 class="pr-card__title"><i class="pi pi-camera"></i> Fotografias</h3>
+            <div class="pr-gallery">
+              @for (photo of visiblePhotos(); track photo.label + $index; let i = $index) {
+              <div class="pr-gallery__item" (click)="openLightbox(i)">
+                <img [src]="photo.url" [alt]="photo.label" class="pr-gallery__img" />
+                <span class="pr-gallery__label">{{ photo.label }}</span>
+              </div>
+              }
+              @if (!photosExpanded() && hiddenPhotosCount() > 0) {
+              <button class="pr-gallery__item pr-gallery__item--more" (click)="togglePhotos()">
+                <span class="pr-gallery__more-text">+{{ hiddenPhotosCount() }} ver todas</span>
+              </button>
+              }
+            </div>
+          </section>
+
+          <!-- §7 Marcas Físicas -->
+          <section id="sec-marks" class="pr-card">
+            <h3 class="pr-card__title"><i class="pi pi-search"></i> Marcas Físicas</h3>
+            <div class="pr-marks">
+              @for (mark of person().marks; track $index) {
+              <div class="pr-mark">
+                <div class="pr-mark__icon"><i class="pi pi-search"></i></div>
+                <div class="pr-mark__body">
+                  <span class="pr-mark__type">{{ mark.type }}</span>
+                  <span class="pr-mark__desc">{{ mark.desc }}</span>
+                  <span class="pr-mark__area">{{ mark.area }}</span>
+                </div>
+              </div>
+              }
+            </div>
+          </section>
+
+          <!-- §8 Contatos -->
+          <section id="sec-contacts" class="pr-card">
+            <h3 class="pr-card__title"><i class="pi pi-phone"></i> Contatos</h3>
+
+            <!-- Telefones -->
+            <h4 class="pr-card__subtitle">Telefones</h4>
+            <table class="pr-table">
+              <thead>
+                <tr>
+                  <th>Número</th>
+                  <th>Tipo</th>
+                  <th>Operadora</th>
+                  <th>Fonte</th>
+                  <th>Atualizado</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (phone of person().contacts.phones; track phone.n) {
+                <tr>
+                  <td>{{ phone.n }}</td>
+                  <td>{{ phone.kind }}</td>
+                  <td>{{ phone.op }}</td>
+                  <td><span class="pr-source-chip">{{ phone.source }}</span></td>
+                  <td>{{ phone.updated }}</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+
+            <!-- E-mails -->
+            <h4 class="pr-card__subtitle">E-mails</h4>
+            <table class="pr-table">
+              <thead>
+                <tr>
+                  <th>Endereço</th>
+                  <th>Tipo</th>
+                  <th>Fonte</th>
+                  <th>Atualizado</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (email of person().contacts.emails; track email.e) {
+                <tr>
+                  <td>{{ email.e }}</td>
+                  <td>{{ email.kind }}</td>
+                  <td><span class="pr-source-chip">{{ email.source }}</span></td>
+                  <td>{{ email.updated }}</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </section>
+
+          <!-- §9 Localizações -->
+          <section id="sec-addr" class="pr-card">
+            <h3 class="pr-card__title"><i class="pi pi-map-marker"></i> Localizações</h3>
+            <div class="pr-addr-map" #addrMap></div>
+            <div class="pr-addresses">
+              @for (addr of person().addresses; track $index) {
+              <div class="pr-addr">
+                <div class="pr-addr__header">
+                  <span class="pr-addr__label">{{ addr.label }}</span>
+                  <span class="pr-source-chip">{{ addr.source }}</span>
+                  @if (addr.conflict) {
+                  <span class="pr-conflict-chip"
+                    [pTooltip]="'Conflito com ' + addr.conflict.otherSource + ': ' + addr.conflict.otherValue">
+                    <i class="pi pi-exclamation-triangle"></i> Conflito
+                  </span>
+                  }
+                </div>
+                <span class="pr-addr__street">{{ addr.line.split(' — ')[0] }}</span>
+                <span class="pr-addr__city">{{ addr.line.split(' — ').slice(1).join(' — ') }}</span>
+                <span class="pr-addr__updated">Atualizado em {{ addr.updated }}</span>
+              </div>
+              }
+            </div>
+          </section>
+
+          <!-- §10 Fontes de Dados -->
+          <section id="sec-source" class="pr-card">
+            <h3 class="pr-card__title"><i class="pi pi-sitemap"></i> Fontes de Dados</h3>
+            <div class="pr-fieldgrid">
+              <div class="pr-fieldgrid__item">
+                <span class="pr-fieldgrid__label">Fontes integradas</span>
+                <span class="pr-fieldgrid__value">{{ person().sourceInfo.sources.join(' · ') }}</span>
+              </div>
+              <div class="pr-fieldgrid__item">
+                <span class="pr-fieldgrid__label">Nível de confiança</span>
+                <span class="pr-fieldgrid__value">{{ person().sourceInfo.confidence }}</span>
+              </div>
+              <div class="pr-fieldgrid__item">
+                <span class="pr-fieldgrid__label">Última sincronização SIPEN</span>
+                <span class="pr-fieldgrid__value">{{ person().sourceInfo.lastSyncSipen }}</span>
+              </div>
+              <div class="pr-fieldgrid__item">
+                <span class="pr-fieldgrid__label">Última sincronização SNAP</span>
+                <span class="pr-fieldgrid__value">{{ person().sourceInfo.lastSyncSnap }}</span>
+              </div>
+              <div class="pr-fieldgrid__item">
+                <span class="pr-fieldgrid__label">Conflitos detectados</span>
+                <span class="pr-fieldgrid__value pr-fieldgrid__value--warning">{{ person().sourceInfo.conflicts }}
+                  registros em divergência</span>
+              </div>
+            </div>
+          </section>
+
+        </div><!-- /.pr-sections -->
+      </div><!-- /.pr-overview -->
+      }
+
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!-- TAB 1: Documentos                                   -->
+      <!-- ════════════════════════════════════════════════════ -->
+      @if (activeTab() === 1) {
+      <div class="pr-docs">
+        <!-- Filter bar -->
+        <div class="pr-docs-filters">
+          <div class="pr-docs-filters__search">
+            <i class="pi pi-search"></i>
+            <input type="text" placeholder="Buscar documentos..." class="pr-docs-filters__input" />
+          </div>
+          <select class="pr-docs-filters__select">
+            <option>Todos os tipos</option>
+            <option>RELINT</option>
+            <option>RB</option>
+            <option>OB</option>
+            <option>PB</option>
+            <option>SUMINFO</option>
+            <option>MSG</option>
+          </select>
+          <select class="pr-docs-filters__select">
+            <option>Todas as origens</option>
+            <option>NUCINTGER</option>
+            <option>Superintendência</option>
+            <option>Ações Especializadas</option>
+          </select>
+          <select class="pr-docs-filters__select">
+            <option>Qualquer data</option>
+            <option>Últimos 7 dias</option>
+            <option>Últimos 30 dias</option>
+            <option>Este ano</option>
+          </select>
+          <button class="pr-btn pr-btn--ghost"><i class="pi pi-sliders-h"></i> Mais filtros</button>
+        </div>
+
+        <!-- Document list -->
+        <div class="pr-docs__list">
+          @for (doc of person().documents; track doc.number; let i = $index) {
+          <div class="pr-doc" [ngClass]="{'pr-doc--expanded': expandedDocIndex() === i}">
+            <button class="pr-doc__header" (click)="toggleDoc(i)">
+              <span class="pr-doc__type">{{ doc.type }}</span>
+              <div class="pr-doc__info">
+                <span class="pr-doc__title">{{ doc.title }}</span>
+                <span class="pr-doc__meta">
+                  <span class="pr-doc__number">{{ doc.number }}</span> · {{ doc.origin }} · {{ doc.date }}
+                </span>
+              </div>
+              <span class="pr-doc__status" [ngClass]="{'pr-doc__status--vinculada': doc.status === 'Vínculo'}">{{
+                doc.status }}</span>
+            </button>
+            @if (expandedDocIndex() === i) {
+            <div class="pr-doc__body">
+              <blockquote class="pr-doc__excerpt">{{ doc.excerpt }}</blockquote>
+              <div class="pr-doc__actions">
+                <button class="pr-btn pr-btn--ghost"><i class="pi pi-external-link"></i> Abrir documento</button>
+                <button class="pr-btn pr-btn--ghost"><i class="pi pi-download"></i> Baixar</button>
+                <button class="pr-btn pr-btn--ghost"><i class="pi pi-link"></i> Copiar referência</button>
+              </div>
+            </div>
+            }
+          </div>
+          }
+        </div>
+      </div>
+      }
+
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!-- TAB 2: Custódia e Trajetória                        -->
+      <!-- ════════════════════════════════════════════════════ -->
+      @if (activeTab() === 2) {
+      <div class="pr-custody">
+
+        <!-- Timeline -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-flag"></i> Linha do tempo da custódia</h3>
+          <div class="pr-tl">
+            <div class="pr-tl__track"></div>
+            @for (evt of person().custody.timeline; track evt.date) {
+            <div class="pr-tl__event" [ngClass]="'pr-tl__event--' + evt.kind">
+              <span class="pr-tl__label">{{ evt.label }}</span>
+              <span class="pr-tl__dot"></span>
+              <span class="pr-tl__date">{{ evt.date }}</span>
+              <span class="pr-tl__unit">{{ evt.unit }}</span>
+            </div>
+            }
+          </div>
+          <div class="pr-card__actions">
+            <button class="pr-btn pr-btn--ghost"><i class="pi pi-window-maximize"></i> Expandir</button>
+          </div>
+        </section>
+
+        <!-- Localização atual -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-map-marker"></i> Localização atual</h3>
+          <div class="pr-map">
+            <div class="pr-map__placeholder">
+              <i class="pi pi-map-marker pr-map__pin"></i>
+            </div>
+            <div class="pr-map__overlay">
+              <span class="pr-map__unit">{{ person().custody.mapLocation.unit }}</span>
+              <span class="pr-map__address">{{ person().custody.mapLocation.address }}</span>
+              <span class="pr-source-chip">SIPEN</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Movimentações e transferências -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-arrow-right-arrow-left"></i> Movimentações e transferências</h3>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Trajeto</th>
+                <th>Motivo</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (t of person().custody.transfers; track t.date) {
+              <tr>
+                <td>{{ t.date }}</td>
+                <td>{{ t.route }}</td>
+                <td>{{ t.reason }}</td>
+                <td>{{ t.status }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+
+          <h4 class="pr-card__subtitle">Histórico de locais</h4>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Período</th>
+                <th>Unidade</th>
+                <th>Local</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (loc of person().custody.locationHistory; track loc.from) {
+              <tr [ngClass]="{'pr-table__row--current': loc.current}">
+                <td>{{ loc.from }} → {{ loc.to }}</td>
+                <td>
+                  <span class="pr-table__bold">{{ loc.unit }}</span>
+                  @if (loc.current) {
+                  <span class="pr-table__badge">ATUAL</span>
+                  }
+                </td>
+                <td>{{ loc.detail }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Ocorrências e incidentes -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-exclamation-triangle"></i> Ocorrências e incidentes</h3>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tipo</th>
+                <th>Unidade / Servidor</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (inc of person().custody.incidents; track inc.date) {
+              <tr>
+                <td>{{ inc.date }}</td>
+                <td>
+                  <span class="pr-table__bold">{{ inc.type }}</span>
+                  <span class="pr-table__sub">{{ inc.desc }}</span>
+                </td>
+                <td>{{ inc.unit }}</td>
+                <td>{{ inc.status }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Atividades -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-briefcase"></i> Atividades</h3>
+
+          <h4 class="pr-card__subtitle">Laboral</h4>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Função / Programa</th>
+                <th>Desde</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (lab of person().custody.activities.labor; track lab.role) {
+              <tr>
+                <td>
+                  <span class="pr-table__bold">{{ lab.role }}</span>
+                  <span class="pr-table__sub">{{ lab.program }}</span>
+                </td>
+                <td>{{ lab.since }}</td>
+                <td>{{ lab.status }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+
+          <h4 class="pr-card__subtitle">Educação</h4>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Curso</th>
+                <th>Período</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (edu of person().custody.activities.education; track edu.course) {
+              <tr>
+                <td>{{ edu.course }}</td>
+                <td>{{ edu.period }}</td>
+                <td>{{ edu.status }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Remições de pena -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-hourglass"></i> Remições de pena</h3>
+          <div class="pr-remissions">
+            @for (rem of person().custody.remissions; track rem.kind) {
+            <div class="pr-remission">
+              <div class="pr-remission__header">
+                <span class="pr-remission__kind">{{ rem.kind }} · {{ rem.days }} dias</span>
+                <span class="pr-remission__status">{{ rem.status }}</span>
+              </div>
+              <div class="pr-bar">
+                <div class="pr-bar__fill" [style.width.%]="rem.ratio * 100"></div>
+              </div>
+              <span class="pr-remission__meta">Desde {{ rem.since }} · {{ rem.ratio * 100 | number:'1.0-0' }}%</span>
+            </div>
+            }
+          </div>
+        </section>
+
+      </div>
+      }
+
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!-- TAB 3: Jurídico                                     -->
+      <!-- ════════════════════════════════════════════════════ -->
+      @if (activeTab() === 3) {
+      <div class="pr-legal">
+
+        <!-- Pena Summary Hero -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-balance-scale"></i> Resumo da pena</h3>
+          <div class="pr-pena-hero">
+            <!-- Ring chart -->
+            <div class="pr-ring">
+              <svg viewBox="0 0 160 160" class="pr-ring__svg">
+                <circle cx="80" cy="80" r="66" fill="none" stroke="var(--snap-border-subtle)" stroke-width="12" />
+                <circle cx="80" cy="80" r="66" fill="none" stroke="var(--snap-pillar-color)" stroke-width="12"
+                  stroke-linecap="round" stroke-dasharray="414.69"
+                  [attr.stroke-dashoffset]="414.69 - (person().legal.penaSummary.percentCumprido / 100) * 414.69"
+                  transform="rotate(-90 80 80)" />
+                <text x="80" y="74" text-anchor="middle" class="pr-ring__percent">{{
+                  person().legal.penaSummary.percentCumprido }}%</text>
+                <text x="80" y="94" text-anchor="middle" class="pr-ring__label">Pena cumprida</text>
+              </svg>
+            </div>
+            <!-- Stat cards -->
+            <div class="pr-pena-stats">
+              <div class="pr-pena-stat">
+                <span class="pr-pena-stat__label">Total da sentença</span>
+                <span class="pr-pena-stat__value">{{ person().legal.penaSummary.totalSentenca.years }}a {{
+                  person().legal.penaSummary.totalSentenca.months }}m</span>
+                <span class="pr-pena-stat__sub">até {{ person().legal.penaSummary.terminoPena }}</span>
+              </div>
+              <div class="pr-pena-stat">
+                <span class="pr-pena-stat__label">Cumprido</span>
+                <span class="pr-pena-stat__value">{{ person().legal.penaSummary.tempoCumprido.years }}a {{
+                  person().legal.penaSummary.tempoCumprido.months }}m</span>
+                <span class="pr-pena-stat__sub">desde {{ person().legal.penaSummary.dataPrisao }}</span>
+              </div>
+              <div class="pr-pena-stat">
+                <span class="pr-pena-stat__label">A cumprir</span>
+                <span class="pr-pena-stat__value">{{ person().legal.penaSummary.tempoACumprir.years }}a {{
+                  person().legal.penaSummary.tempoACumprir.months }}m</span>
+                <span class="pr-pena-stat__sub">{{ person().legal.penaSummary.diasTrabalhados }} dias trabalhados</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Marcos de benefício -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-flag"></i> Marcos de benefício</h3>
+          <div class="pr-pena-timeline">
+            <div class="pr-pena-timeline__track">
+              <div class="pr-pena-timeline__fill" [style.width.%]="person().legal.penaSummary.percentCumprido"></div>
+            </div>
+            <div class="pr-pena-timeline__marks">
+              @for (b of person().legal.benefits; track b.mark) {
+              <div class="pr-pena-timeline__mark">
+                <span class="pr-pena-timeline__fraction">{{ b.mark }}</span>
+                <span class="pr-pena-timeline__dot"></span>
+                <span class="pr-pena-timeline__date">{{ b.date }}</span>
+              </div>
+              }
+            </div>
+          </div>
+          <span class="pr-source-chip">SIPEN · Cálculo automático</span>
+        </section>
+
+        <!-- Processos judiciais -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-file"></i> Processos judiciais</h3>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Número</th>
+                <th>Vara</th>
+                <th>Tipificação</th>
+                <th>Status</th>
+                <th>Fonte</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (proc of person().legal.processes; track proc.number) {
+              <tr>
+                <td>
+                  <span class="pr-table__bold">{{ proc.number }}</span>
+                  <span class="pr-table__sub">Distribuído em {{ proc.filed }}</span>
+                </td>
+                <td>{{ proc.court }}</td>
+                <td>{{ proc.crimes }}</td>
+                <td>{{ proc.status }}</td>
+                <td><span class="pr-source-chip">{{ proc.source }}</span></td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Mandados (BNMP) -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-file-excel"></i> Mandados (BNMP)</h3>
+          <div class="pr-warrants">
+            @for (w of person().legal.warrants; track w.n) {
+            <div class="pr-warrant">
+              <div class="pr-warrant__header">
+                <span class="pr-warrant__number">{{ w.n }}</span>
+                <span class="pr-warrant__status">{{ w.status }}</span>
+              </div>
+              <div class="pr-fieldgrid">
+                <div class="pr-fieldgrid__item">
+                  <span class="pr-fieldgrid__label">Tipo</span>
+                  <span class="pr-fieldgrid__value">{{ w.kind }}</span>
+                </div>
+                <div class="pr-fieldgrid__item">
+                  <span class="pr-fieldgrid__label">Regime</span>
+                  <span class="pr-fieldgrid__value">{{ w.regime }}</span>
+                </div>
+                <div class="pr-fieldgrid__item">
+                  <span class="pr-fieldgrid__label">Pena</span>
+                  <span class="pr-fieldgrid__value">{{ w.pena }}</span>
+                </div>
+                <div class="pr-fieldgrid__item">
+                  <span class="pr-fieldgrid__label">Validade</span>
+                  <span class="pr-fieldgrid__value">{{ w.validity }}</span>
+                </div>
+                <div class="pr-fieldgrid__item pr-fieldgrid__item--span2">
+                  <span class="pr-fieldgrid__label">Tipificações</span>
+                  <span class="pr-fieldgrid__value">{{ w.typifications }}</span>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        </section>
+
+        <!-- Tipificações penais -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-book"></i> Tipificações penais</h3>
+          <div class="pr-crimes">
+            @for (crime of person().legal.crimes; track crime.code) {
+            <span class="pr-crime-chip">
+              <span class="pr-crime-chip__code">{{ crime.code }}</span> · {{ crime.label }}
+            </span>
+            }
+          </div>
+        </section>
+
+      </div>
+      }
+
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!-- TAB 4: Vida Pública                                 -->
+      <!-- ════════════════════════════════════════════════════ -->
+      @if (activeTab() === 4) {
+      <div class="pr-public">
+
+        <!-- Perfis digitais -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-globe"></i> Perfis digitais</h3>
+          <div class="pr-profiles">
+            @for (profile of person().publicLife.profiles; track profile.net) {
+            <div class="pr-profile">
+              <div class="pr-profile__icon" [ngClass]="'pr-profile__icon--' + profile.icon">
+                <i class="pi pi-globe"></i>
+              </div>
+              <div class="pr-profile__body">
+                <span class="pr-profile__net">{{ profile.net }}</span>
+                <span class="pr-profile__alias">{{ profile.alias }}</span>
+                <a [href]="profile.url" class="pr-profile__url" target="_blank" rel="noopener">{{ profile.url }}</a>
+              </div>
+            </div>
+            }
+          </div>
+        </section>
+
+        <!-- Diários oficiais -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-inbox"></i> Diários oficiais</h3>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Publicação</th>
+                <th>Local</th>
+                <th>Detalhe</th>
+                <th>Fonte</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (g of person().publicLife.gazettes; track g.date) {
+              <tr>
+                <td class="pr-table__bold">{{ g.kind }}</td>
+                <td>{{ g.place }}</td>
+                <td>{{ g.detail }}</td>
+                <td><span class="pr-source-chip">{{ g.origin }}</span></td>
+                <td>{{ g.date }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Dados eleitorais -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-check-square"></i> Dados eleitorais</h3>
+          <div class="pr-fieldgrid">
+            <div class="pr-fieldgrid__item">
+              <span class="pr-fieldgrid__label">Partido</span>
+              <span class="pr-fieldgrid__value">{{ person().publicLife.electoral.party.name }} · {{
+                person().publicLife.electoral.party.uf }}</span>
+            </div>
+            <div class="pr-fieldgrid__item">
+              <span class="pr-fieldgrid__label">Filiação</span>
+              <span class="pr-fieldgrid__value">{{ person().publicLife.electoral.party.registration }}</span>
+            </div>
+            <div class="pr-fieldgrid__item">
+              <span class="pr-fieldgrid__label">Situação</span>
+              <span class="pr-fieldgrid__value">{{ person().publicLife.electoral.party.status }}</span>
+            </div>
+            <div class="pr-fieldgrid__item">
+              <span class="pr-fieldgrid__label">Vínculo</span>
+              <span class="pr-fieldgrid__value">{{ person().publicLife.electoral.party.kind }}</span>
+            </div>
+          </div>
+
+          <h4 class="pr-card__subtitle">Candidaturas</h4>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Ano</th>
+                <th>Cargo</th>
+                <th>Número</th>
+                <th>Partido</th>
+                <th>Unidade</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (c of person().publicLife.electoral.candidacies; track c.year) {
+              <tr>
+                <td>{{ c.year }}</td>
+                <td>{{ c.role }}</td>
+                <td>{{ c.number }}</td>
+                <td>{{ c.party }}</td>
+                <td>{{ c.unit }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+
+          <h4 class="pr-card__subtitle">Vínculos eleitorais</h4>
+          @for (tie of person().publicLife.electoral.ties; track tie.date) {
+          <div class="pr-electoral-tie">
+            <span class="pr-electoral-tie__kind">{{ tie.kind }} · {{ tie.role }}</span>
+            <span class="pr-electoral-tie__value">{{ tie.value }}</span>
+            <span class="pr-electoral-tie__meta">{{ tie.date }} · {{ tie.desc }}</span>
+          </div>
+          }
+        </section>
+
+        <!-- Transparência pública -->
+        <section class="pr-card">
+          <h3 class="pr-card__title"><i class="pi pi-building"></i> Transparência pública</h3>
+
+          <h4 class="pr-card__subtitle">Cargos públicos</h4>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Órgão</th>
+                <th>Lotação</th>
+                <th>Matrícula</th>
+                <th>Tempo</th>
+                <th>Fonte</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (s of person().publicLife.transparency.servants; track s.matricula) {
+              <tr>
+                <td>{{ s.entity }}</td>
+                <td>{{ s.body }}</td>
+                <td>{{ s.matricula }}</td>
+                <td>{{ s.tenure }}</td>
+                <td><span class="pr-source-chip">{{ s.source }}</span></td>
+              </tr>
+              }
+            </tbody>
+          </table>
+
+          <h4 class="pr-card__subtitle">Despesas vinculadas</h4>
+          <table class="pr-table">
+            <thead>
+              <tr>
+                <th>Credor</th>
+                <th>Órgão</th>
+                <th>Classificação</th>
+                <th>Empenho</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (exp of person().publicLife.transparency.expenses; track exp.ref) {
+              <tr>
+                <td>
+                  <span class="pr-table__bold">{{ exp.creditor }}</span>
+                  <span class="pr-table__sub">{{ exp.date }}</span>
+                </td>
+                <td>{{ exp.entity }}</td>
+                <td>{{ exp.classification }}</td>
+                <td>{{ exp.ref }}</td>
+                <td class="pr-table__bold">{{ exp.value }}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+
+      </div>
+      }
+
+    </main><!-- /.pr-center -->
+
+
+    <!-- ── RIGHT: Relations Panel ── -->
+    <aside class="pr-right">
+      <!-- Header -->
+      <div class="pr-right__head">
+        <div class="pr-right__title-row">
+          <h3 class="pr-right__title"><i class="pi pi-sitemap"></i> Relações</h3>
+          @if (isProduction && hasGraphPermission()) {
+          <button class="pr-right__graph" (click)="openGraph()" [disabled]="!personId()"><i class="pi pi-share-alt"></i>
+            Grafo</button>
+          }
+        </div>
+
+        <!-- Search -->
+        <div class="pr-right__search">
+          <i class="pi pi-search"></i>
+          <input type="text" placeholder="Buscar em relações..." [value]="relSearch()" (input)="onRelSearch($event)" />
+        </div>
+
+        <!-- Filter chips -->
+        <div class="pr-right__filters">
+          <button class="pr-right__chip" [ngClass]="{'pr-right__chip--active': relFilter() === 'all'}"
+            (click)="setRelFilter('all')">Todas</button>
+          <button class="pr-right__chip" [ngClass]="{'pr-right__chip--active': relFilter() === 'faction'}"
+            (click)="setRelFilter('faction')">CV</button>
+          <button class="pr-right__chip" [ngClass]="{'pr-right__chip--active': relFilter() === 'familiar'}"
+            (click)="setRelFilter('familiar')">Família</button>
+          <button class="pr-right__chip" [ngClass]="{'pr-right__chip--active': relFilter() === 'advogado'}"
+            (click)="setRelFilter('advogado')">Advog.</button>
+          <button class="pr-right__chip" [ngClass]="{'pr-right__chip--active': relFilter() === 'empresa'}"
+            (click)="setRelFilter('empresa')">Empresas</button>
+        </div>
+      </div>
+
+      <!-- Grouped list -->
+      <div class="pr-right__list">
+        @for (group of groupedRelations(); track group.key) {
+        <div class="pr-right__group">
+          <div class="pr-right__group-header">
+            <i class="pi" [ngClass]="group.icon"></i>
+            <span class="pr-right__group-label">{{ group.label }}</span>
+            <span class="pr-right__group-dot">·</span>
+            <span class="pr-right__group-count">{{ group.items.length }}</span>
+            <span class="pr-right__group-line"></span>
+          </div>
+          @for (item of group.items; track item.id) {
+          <button class="pr-rel" [ngClass]="{'pr-rel--faction': item.faction}" (click)="openDrawer(item)">
+            <!-- Avatar -->
+            @if (item.type === 'empresa') {
+            <span class="pr-rel__avatar pr-rel__avatar--empresa">
+              <i class="pi pi-building"></i>
+            </span>
+            } @else if (item.photo) {
+            <img [src]="item.photo" [alt]="item.name" class="pr-rel__avatar" />
+            } @else {
+            <span class="pr-rel__avatar pr-rel__avatar--initials">{{ getInitials(item.name) }}</span>
+            }
+            <!-- Body -->
+            <div class="pr-rel__body">
+              <span class="pr-rel__name">
+                {{ item.name }}
+                @if (item.faction) {
+                <span class="pr-rel__faction">{{ item.faction }}</span>
+                }
+              </span>
+              <span class="pr-rel__role">
+                {{ item.role }}
+                @if (item.alias) {
+                <span> · {{ '"' + item.alias + '"' }}</span>
+                }
+              </span>
+              <span class="pr-rel__status" [ngClass]="{
+                    'pr-rel__status--monitorado': item.status === 'Preso monitorado',
+                    'pr-rel__status--prioritario': item.status === 'Alvo prioritário'
+                  }">{{ item.status }}</span>
+            </div>
+            <!-- Chevron -->
+            <span class="pr-rel__chev"><i class="pi pi-chevron-right"></i></span>
+          </button>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Footer -->
+      <div class="pr-right__footer">
+        <span>Total {{ person().relations.items.length }} vínculos</span>
+        @if (isProduction && hasGraphPermission()) {
+        <button class="pr-right__see-more" (click)="openGraph()" [disabled]="!personId()">Ver grafo ({{
+          person().relations.graphTotal }})</button>
+        }
+      </div>
+    </aside>
+
+  </div><!-- /.pr-layout -->
+
+  } <!-- /@if profile content -->
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- ── Relation Detail Drawer ───────────────────────────── -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  @if (drawerOpen() && drawerItem()) {
+  <!-- Backdrop -->
+  <div class="pr-drawer-backdrop" (click)="closeDrawer()"></div>
+
+  <!-- Drawer -->
+  <div class="pr-drawer">
+    <button class="pr-drawer__close" (click)="closeDrawer()" aria-label="Fechar">
+      <i class="pi pi-times"></i>
+    </button>
+
+    <!-- Avatar -->
+    <div class="pr-drawer__avatar-wrap">
+      @if (drawerItem()!.type === 'empresa') {
+      <span class="pr-drawer__avatar pr-drawer__avatar--empresa">
+        <i class="pi pi-building"></i>
+      </span>
+      } @else if (drawerItem()!.photo) {
+      <img [src]="drawerItem()!.photo" [alt]="drawerItem()!.name" class="pr-drawer__avatar" />
+      } @else {
+      <span class="pr-drawer__avatar pr-drawer__avatar--initials">{{ getInitials(drawerItem()!.name) }}</span>
+      }
+    </div>
+
+    <!-- Info -->
+    <h3 class="pr-drawer__name">{{ drawerItem()!.name }}</h3>
+    @if (drawerItem()!.alias) {
+    <span class="pr-drawer__alias">{{ drawerItem()!.alias }}</span>
+    }
+
+    <div class="pr-drawer__details">
+      <div class="pr-drawer__field">
+        <span class="pr-drawer__field-label">Papel</span>
+        <span class="pr-drawer__field-value">{{ drawerItem()!.role }}</span>
+      </div>
+      <div class="pr-drawer__field">
+        <span class="pr-drawer__field-label">Status</span>
+        <span class="pr-drawer__field-value">{{ drawerItem()!.status }}</span>
+      </div>
+      <div class="pr-drawer__field">
+        <span class="pr-drawer__field-label">Confirmado</span>
+        <span class="pr-drawer__field-value">{{ drawerItem()!.confirmed ? 'Sim' : 'Não' }}</span>
+      </div>
+      @if (drawerItem()!.faction) {
+      <div class="pr-drawer__field">
+        <span class="pr-drawer__field-label">Facção</span>
+        <span class="pr-drawer__field-value">{{ drawerItem()!.faction }}</span>
+      </div>
+      }
+    </div>
+
+    <!-- Actions -->
+    <div class="pr-drawer__actions">
+      <button class="pr-btn pr-btn--primary"><i class="pi pi-user"></i> Abrir prontuário</button>
+      @if (isProduction && hasGraphPermission()) {
+      <button class="pr-btn pr-btn--ghost" (click)="openGraph()" [disabled]="!personId()"><i
+          class="pi pi-share-alt"></i> Ver no grafo</button>
+      }
+    </div>
+  </div>
+  }
+
+</div><!-- /.pr-body -->
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ── Photo Lightbox ───────────────────────────────────── -->
+<!-- ══════════════════════════════════════════════════════════ -->
+@if (lightboxOpen()) {
+<div class="pr-lightbox" (click)="closeLightbox()" (keydown)="onLightboxKeydown($event)" tabindex="0" #lightboxEl>
+
+  <!-- Close button -->
+  <button class="pr-lightbox__close" (click)="closeLightbox()" aria-label="Fechar">
+    <i class="pi pi-times"></i>
+  </button>
+
+  <!-- Main image area -->
+  <div class="pr-lightbox__stage" (click)="$event.stopPropagation()">
+
+    <!-- Prev -->
+    <button class="pr-lightbox__nav pr-lightbox__nav--prev" (click)="lightboxPrev()" aria-label="Anterior">
+      <i class="pi pi-chevron-left"></i>
+    </button>
+
+    <!-- Image -->
+    <div class="pr-lightbox__img-wrap">
+      <img [src]="person().photos[lightboxIndex()].url" [alt]="person().photos[lightboxIndex()].label"
+        class="pr-lightbox__img" />
+      <span class="pr-lightbox__caption">
+        {{ person().photos[lightboxIndex()].label }}
+        <span class="pr-lightbox__counter">{{ lightboxIndex() + 1 }} / {{ person().photos.length }}</span>
+      </span>
+    </div>
+
+    <!-- Next -->
+    <button class="pr-lightbox__nav pr-lightbox__nav--next" (click)="lightboxNext()" aria-label="Próxima">
+      <i class="pi pi-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="pr-lightbox__thumbs" (click)="$event.stopPropagation()">
+    @for (photo of person().photos; track photo.label + $index; let i = $index) {
+    <button class="pr-lightbox__thumb" [ngClass]="{'pr-lightbox__thumb--active': lightboxIndex() === i}"
+      (click)="lightboxIndex.set(i)">
+      <img [src]="photo.url" [alt]="photo.label" />
+    </button>
+    }
+  </div>
+</div>
+}

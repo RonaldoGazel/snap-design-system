@@ -1,0 +1,12 @@
+.step-catalog-form__header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+.step-catalog-form__description { font-size: 0.88rem; color: var(--text-color-secondary); margin-bottom: 1.5rem; max-width: 680px; padding: 0.75rem; background: var(--surface-ground); border-radius: 6px; border-left: 3px solid var(--primary-color); }
+.step-catalog-form__body { display: flex; flex-direction: column; gap: 1.25rem; max-width: 680px; }
+.step-catalog-form__field { display: flex; flex-direction: column; gap: 0.25rem; }
+.step-catalog-form__field--checkbox { flex-direction: row; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.step-catalog-form__hint { font-size: 0.78rem; color: var(--text-color-secondary); }
+.step-catalog-form__error { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--red-50); color: var(--red-700); border-radius: 6px; margin-bottom: 1rem; }
+.step-catalog-form__actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+.required { color: var(--red-500); }
+
+.step-catalog-form__permissions { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem; }
+.step-catalog-form__permission-item { display: flex; align-items: center; gap: 0.5rem; }

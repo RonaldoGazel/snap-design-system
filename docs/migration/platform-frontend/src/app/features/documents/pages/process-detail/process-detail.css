@@ -1,0 +1,156 @@
+/* Block: .process-detail */
+
+.l-process-detail {
+  padding: 1.5rem;
+}
+
+.process-detail__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 3rem;
+  color: var(--text-color-secondary);
+}
+
+.process-detail__error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: var(--text-color-secondary);
+}
+
+.process-detail__header {
+  margin-bottom: 1.5rem;
+}
+
+.process-detail__header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.process-detail__nup {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.process-detail__title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-color-secondary);
+}
+
+.process-detail__description {
+  margin: 0;
+  color: var(--text-color-secondary);
+}
+
+.process-detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.process-detail__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.process-detail__meta-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+  text-transform: uppercase;
+}
+
+.process-detail__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.process-detail__doc-section-title {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.process-detail__tree-node {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.process-detail__tree-node.is-archived {
+  opacity: 0.5;
+}
+
+.process-detail__tree-node-title {
+  font-weight: 500;
+}
+
+.process-detail__tree-node-type {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+}
+
+.process-detail__tree-node-version {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+}
+
+.process-detail__tree-node-archived {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+  font-style: italic;
+}
+
+.process-detail__empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color-secondary);
+}
+
+.process-detail__metadata-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 0;
+}
+
+.process-detail__metadata-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.process-detail__metadata-label {
+  min-width: 120px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+}
+
+.process-detail__tramitation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.process-detail__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.process-detail__form-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+}

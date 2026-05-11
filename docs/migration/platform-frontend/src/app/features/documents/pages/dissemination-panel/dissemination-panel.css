@@ -1,0 +1,81 @@
+.dissemination-panel {
+  padding: 1.5rem;
+}
+
+.dissemination-panel__title {
+  margin-bottom: 1rem;
+}
+
+.dissemination-panel__form-section {
+  margin-bottom: 1.5rem;
+}
+
+.dissemination-panel__section-title {
+  margin-bottom: 0.75rem;
+}
+
+.dissemination-panel__form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.dissemination-panel__form-label {
+  font-weight: 600;
+}
+
+.dissemination-panel__form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.dissemination-panel__list-section {
+  margin-top: 1.5rem;
+}
+
+.dissemination-panel__empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color-secondary);
+}
+
+.dissemination-panel__internal-row {
+  /* standard table row for internal disseminations */
+}
+
+.dissemination-panel__external-row {
+  /* standard table row for external disseminations */
+}
+
+.dissemination-panel__trail-section {
+  margin-top: 2rem;
+}
+
+.dissemination-panel__trail-event {
+  padding: 0.5rem 0;
+}
+
+.dissemination-panel__trail-label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.dissemination-panel__trail-detail {
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.dissemination-panel__trail-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+}
+
+.dissemination-panel__full-width {
+  width: 100%;
+}

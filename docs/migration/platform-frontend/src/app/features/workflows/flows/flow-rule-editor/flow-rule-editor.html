@@ -1,0 +1,98 @@
+<div class="flow-rule-editor">
+  <div class="flow-rule-editor__header">
+    <div>
+      <h3>Regras do Fluxo</h3>
+      <p class="flow-rule-editor__description">As <strong>regras</strong> controlam quem pode executar cada acao no fluxo. Uma regra de Criacao define quem pode iniciar um documento. Uma regra de Tramitacao define quem pode enviar e para quem. Uma regra de Difusao define quem pode distribuir o documento. Cada regra tem uma origem (quem age) e um destino (para quem), ambos definidos por combinacao de unidade + perfil.</p>
+    </div>
+    <div class="flow-rule-editor__actions">
+      <button pButton label="Adicionar Regra" icon="pi pi-plus" class="p-button-outlined p-button-sm" (click)="openForm()"></button>
+      <button pButton label="Salvar Tudo" icon="pi pi-save" class="p-button-sm" (click)="saveAll()"></button>
+    </div>
+  </div>
+
+  @if (showForm()) {
+    <div class="flow-rule-editor__form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="flow-rule-editor__form-grid">
+          <div class="flow-rule-editor__field">
+            <label>Nome <span class="required">*</span></label>
+            <small class="flow-rule-editor__hint">Nome descritivo da regra. Ex: "Analista pode criar RELINT".</small>
+            <input pInputText formControlName="name" placeholder="Ex: Analista pode criar RELINT" [class.ng-invalid]="isInvalid('name')" />
+          </div>
+          <div class="flow-rule-editor__field">
+            <label>Tipo <span class="required">*</span></label>
+            <small class="flow-rule-editor__hint">Criacao: quem inicia. Tramitacao: quem envia e para quem. Formalizacao: quem formaliza. Difusao Interna/Externa: quem distribui.</small>
+            <p-select formControlName="type" [options]="ruleTypeOptions" optionLabel="label" optionValue="value" />
+          </div>
+          <div class="flow-rule-editor__field">
+            <label>Escopo <span class="required">*</span></label>
+            <small class="flow-rule-editor__hint">Permissao: autoriza. Restricao: limita a condicoes. Vedacao: proibe absolutamente.</small>
+            <p-select formControlName="scope" [options]="ruleScopeOptions" optionLabel="label" optionValue="value" />
+          </div>
+          <div class="flow-rule-editor__field">
+            <label>Acao Esperada</label>
+            <small class="flow-rule-editor__hint">Acao que o destinatario deve executar. Ex: REVISAO, FORMALIZACAO, CIENCIA.</small>
+            <input pInputText formControlName="action" placeholder="Ex: REVISAO, FORMALIZACAO" />
+          </div>
+          <div class="flow-rule-editor__field">
+            <label>Prioridade</label>
+            <small class="flow-rule-editor__hint">Maior numero = maior prioridade quando multiplas regras se aplicam.</small>
+            <p-inputNumber formControlName="priority" [showButtons]="false" placeholder="0" />
+          </div>
+          <div class="flow-rule-editor__field flow-rule-editor__field--checkbox">
+            <p-checkbox formControlName="is_active" [binary]="true" inputId="rule_is_active" />
+            <label for="rule_is_active">Regra ativa</label>
+          </div>
+        </div>
+        <div class="flow-rule-editor__org-sections">
+          <div class="flow-rule-editor__field">
+            <label>Origem (quem executa a acao)</label>
+            <small class="flow-rule-editor__hint">Unidade + perfil que pode executar esta acao. Deixe em branco para qualquer ator.</small>
+            <app-org-selector [multiple]="false" [selectedCombos]="sourceCombo()" (selectionChange)="onSourceChange($event)" />
+          </div>
+          <div class="flow-rule-editor__field">
+            <label>Destino (para quem a acao e direcionada)</label>
+            <small class="flow-rule-editor__hint">Unidade + perfil que recebe a acao. Aplicavel em tramitacao e difusao. Deixe em branco para qualquer destino.</small>
+            <app-org-selector [multiple]="false" [selectedCombos]="targetCombo()" (selectionChange)="onTargetChange($event)" />
+          </div>
+        </div>
+        <div class="flow-rule-editor__form-actions">
+          <button pButton type="button" label="Cancelar" class="p-button-outlined p-button-sm" (click)="closeForm()"></button>
+          <button pButton type="submit" [label]="editingId() ? 'Atualizar Regra' : 'Adicionar Regra'" class="p-button-sm"></button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <div class="flow-rule-editor__list">
+    @for (rule of rules(); track rule.id) {
+      <div class="flow-rule-editor__rule">
+        <div class="flow-rule-editor__rule-info">
+          <span class="font-medium">{{ rule.name }}</span>
+          <div class="flow-rule-editor__rule-meta">
+            <p-tag [value]="ruleTypeName(rule.type) | translate" severity="info" />
+            <p-tag [value]="ruleScopeName(rule.scope) | translate" severity="secondary" />
+            @if (rule.source_unit_id && rule.source_profile_id) {
+              <small class="text-color-secondary">
+                {{ unitName(rule.source_unit_id) }}/{{ profileName(rule.source_profile_id) }}
+                @if (rule.target_unit_id && rule.target_profile_id) {
+                  {{ " -> " }}{{ unitName(rule.target_unit_id) }}/{{ profileName(rule.target_profile_id) }}
+                }
+              </small>
+            }
+          </div>
+        </div>
+        <div class="flow-rule-editor__rule-actions">
+          <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="openForm(rule)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" (click)="removeRule(rule.id)"></button>
+        </div>
+      </div>
+    }
+    @if (rules().length === 0) {
+      <div class="flow-rule-editor__empty">
+        <i class="pi pi-info-circle"></i>
+        <span>Nenhuma regra adicionada. Sem regras, qualquer usuario autenticado podera executar qualquer acao no fluxo.</span>
+      </div>
+    }
+  </div>
+</div>

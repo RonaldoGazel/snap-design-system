@@ -1,0 +1,51 @@
+# =============================================================================
+# azure-pipelines.yml — platform-frontend CI Pipeline
+# =============================================================================
+# Single-stage pipeline:
+#   1. Validate (PR & Branch) — build and test validation
+# =============================================================================
+
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - main
+
+variables:
+  nodeVersion: "22.x"
+
+pool:
+  vmImage: "ubuntu-latest"
+
+# ---------------------------------------------------------------------------
+# Stage 1: Validate — runs on every PR and branch push
+# ---------------------------------------------------------------------------
+stages:
+  - stage: Validate
+    displayName: "Validate (PR & Branch)"
+    jobs:
+      - job: ValidateBuild
+        displayName: "Build & Test"
+        steps:
+          - task: NodeTool@0
+            displayName: "Install Node.js $(nodeVersion)"
+            inputs:
+              versionSpec: "$(nodeVersion)"
+
+          - script: |
+              corepack enable
+              corepack prepare pnpm@latest --activate
+            displayName: "Enable pnpm via corepack"
+
+          - script: pnpm install --frozen-lockfile
+            displayName: "Install dependencies"
+
+          - script: pnpm build
+            displayName: "Build validation"
+
+          - script: pnpm test -- --run
+            displayName: "Run unit tests"

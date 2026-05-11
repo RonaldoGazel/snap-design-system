@@ -1,0 +1,23 @@
+{
+  "page.title": "Tasks",
+  "filter.status": "Status",
+  "filter.sourceType": "Type",
+  "filter.createdAfter": "Created after",
+  "filter.createdBefore": "Created before",
+  "filter.apply": "Apply",
+  "filter.clear": "Clear",
+  "table.createdAt": "Created",
+  "table.description": "Description",
+  "table.status": "Status",
+  "table.sourceType": "Type",
+  "table.requestedBy": "Requested by",
+  "table.duration": "Duration",
+  "table.empty": "No tasks found",
+  "status.ACCEPTED": "Accepted",
+  "status.FETCHING_SOURCE": "Fetching data",
+  "status.UPLOADING_REPORT": "Uploading report",
+  "status.QUEUED_FOR_INGESTION": "Queued",
+  "status.INGESTING": "Processing",
+  "status.COMPLETED": "Completed",
+  "status.FAILED": "Failed"
+}

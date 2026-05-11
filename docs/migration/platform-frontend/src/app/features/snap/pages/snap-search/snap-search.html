@@ -1,0 +1,64 @@
+<div class="snap-search">
+    <div class="snap-search__header">
+        <h2 class="snap-search__title">{{ 'snap.title' | translate }}</h2>
+        <p class="snap-search__subtitle">{{ 'snap.subtitle' | translate }}</p>
+    </div>
+
+    <div class="snap-search__bar">
+        <label for="cpf-input" class="snap-search__label">{{ 'snap.cpfLabel' | translate }}</label>
+        <div class="snap-search__input-group">
+            <input pInputText id="cpf-input" [value]="cpfInput()" (input)="onCpfInput($event)" (keyup.enter)="search()"
+                [placeholder]="'snap.cpfPlaceholder' | translate" maxlength="14"
+                [attr.aria-label]="'snap.cpfLabel' | translate" [disabled]="loading()" />
+            <p-button [label]="'snap.searchButton' | translate" icon="pi pi-search" [loading]="loading()"
+                [disabled]="!isValid() || loading()" (onClick)="search()" />
+        </div>
+    </div>
+
+    <div class="snap-search__visibility">
+        <label class="snap-search__label">{{ 'snap.targetGraph' | translate }}</label>
+        <div class="snap-search__toggle">
+            <button type="button" class="snap-search__toggle-btn"
+                [class.snap-search__toggle-btn--active]="targetVisibility() === 'public'"
+                (click)="targetVisibility.set('public')">
+                {{ 'snap.public' | translate }}
+            </button>
+            <button type="button" class="snap-search__toggle-btn"
+                [class.snap-search__toggle-btn--active]="targetVisibility() === 'private'"
+                (click)="targetVisibility.set('private')">
+                {{ 'snap.private' | translate }}
+            </button>
+        </div>
+    </div>
+
+    @if (error(); as err) {
+    <p-message severity="error" [text]="'snap.error.' + err.code | translate" styleClass="w-full" />
+    @if (err.retryable) {
+    <p-button [label]="'snap.error.retry' | translate" severity="secondary" [outlined]="true" icon="pi pi-refresh"
+        (onClick)="retry()" styleClass="snap-search__retry" />
+    }
+    }
+
+    @if (loading()) {
+    <div class="snap-search__loading">
+        <p-progressSpinner strokeWidth="4" />
+        <p>{{ 'snap.loading' | translate }}</p>
+    </div>
+    }
+
+    @if (result(); as res) {
+    <div class="snap-search__result">
+        <h3>{{ 'snap.result.title' | translate }}</h3>
+        <div class="snap-search__result-fields">
+            <div class="snap-search__result-field">
+                <span class="snap-search__result-label">{{ 'snap.result.status' | translate }}</span>
+                <span class="snap-search__result-value">{{ res.status }}</span>
+            </div>
+            <div class="snap-search__result-field">
+                <span class="snap-search__result-label">{{ 'snap.result.message' | translate }}</span>
+                <span class="snap-search__result-value">{{ res.message }}</span>
+            </div>
+        </div>
+    </div>
+    }
+</div>

@@ -1,0 +1,231 @@
+// ============================================================
+// Registration Form — Component Styles (DS-002 Compliant)
+// Ported from prototype person-registration.css
+// Property ordering: Positioning → Box Model → Typography → Visuals
+//
+// NOTE: Platform-level CSS rules that affect this component:
+//   - html { font-size: 18px } — inflates all rem-based PrimeNG sizing
+//   - h2 { font-size: var(--text-4xl); font-weight: 600 } — overrides title
+//   - PrimeNG p-inputtext does not default to width: 100%
+//   - PrimeNG button primary uses steel (blue-gray), not pillar (pink)
+// ============================================================
+
+// ── Module: Form Side (container) ────────────────────────────
+
+.preg-form-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  padding: 36px 36px 40px;
+
+  &.is-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+}
+
+// ── Module: Title ────────────────────────────────────────────
+// Override global h2 { font-size; font-weight; margin-bottom }
+
+.preg-title {
+  margin: 0 0 6px;
+  font-family: var(--font-ui);
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--snap-text-primary);
+
+  .accent {
+    font-weight: 700;
+    color: var(--snap-pillar-color);
+  }
+}
+
+// ── Module: Subtitle ─────────────────────────────────────────
+
+.preg-subtitle {
+  margin: 0 0 36px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--snap-text-muted);
+}
+
+// ── Module: Form ─────────────────────────────────────────────
+
+.preg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+// ── Layout: Row ──────────────────────────────────────────────
+
+.preg-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.preg-row--nome-uf {
+  grid-template-columns: 1fr 80px;
+}
+
+// ── Module: Field ────────────────────────────────────────────
+
+.preg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0; // prevent grid blowout
+}
+
+// ── Module: Label ────────────────────────────────────────────
+
+.preg-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+}
+
+// ── PrimeNG Input Overrides ──────────────────────────────────
+// PrimeNG inputs don't stretch to 100% by default and the
+// platform's 18px root font-size inflates rem-based sizing.
+
+:host ::ng-deep {
+  // Force all text inputs to fill their container
+  .p-inputtext {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    font-size: 14px;
+    line-height: 1;
+    background: var(--snap-surface-1);
+    border-color: var(--snap-border-default);
+    border-radius: var(--radius-md);
+    color: var(--snap-text-primary);
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: var(--snap-text-muted);
+    }
+
+    &:focus {
+      border-color: var(--snap-pillar-color);
+      box-shadow: 0 0 0 3px var(--snap-focus-ring);
+    }
+  }
+
+  // Force p-select to fill container and match input height
+  .p-select {
+    width: 100%;
+    height: 42px;
+    font-size: 14px;
+    background: var(--snap-surface-1);
+    border-color: var(--snap-border-default);
+    border-radius: var(--radius-md);
+
+    .p-select-label {
+      padding: 0 14px;
+      font-size: 14px;
+      line-height: 42px;
+      color: var(--snap-text-primary);
+    }
+
+    &.p-placeholder .p-select-label {
+      color: var(--snap-text-muted);
+    }
+  }
+
+  // Submit button — use pillar color instead of PrimeNG primary (steel)
+  .preg-actions .p-button:not(.p-button-secondary) {
+    height: 46px;
+    padding: 0 28px;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--snap-pillar-color);
+    border-color: var(--snap-pillar-color);
+    color: #fff;
+    border-radius: var(--radius-md);
+
+    &:hover:not(:disabled) {
+      background: var(--snap-pillar-dark);
+      border-color: var(--snap-pillar-dark);
+    }
+
+    &:disabled {
+      opacity: 0.38;
+    }
+  }
+
+  // Cancel button — transparent with border
+  .preg-actions .p-button-secondary {
+    height: 46px;
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid var(--snap-border-default);
+    border-radius: var(--radius-md);
+    color: var(--snap-text-secondary);
+
+    &:hover:not(:disabled) {
+      background: var(--snap-surface-3);
+      border-color: var(--snap-text-muted);
+      color: var(--snap-text-primary);
+    }
+  }
+}
+
+// ── Dark mode input overrides ────────────────────────────────
+
+:host-context(.p-dark) ::ng-deep {
+  .p-inputtext {
+    background: var(--snap-surface-3);
+    border-color: var(--snap-border-default);
+    color: var(--snap-text-primary);
+
+    &::placeholder {
+      color: var(--snap-text-muted);
+    }
+  }
+
+  .p-select {
+    background: var(--snap-surface-3);
+    border-color: var(--snap-border-default);
+  }
+}
+
+// ── Module: Validation ───────────────────────────────────────
+
+.preg-validation {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--snap-danger);
+}
+
+// ── Module: Actions ──────────────────────────────────────────
+
+.preg-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+// ── State: Filled inputs ─────────────────────────────────────
+
+:host ::ng-deep .is-filled.p-inputtext,
+:host ::ng-deep .is-filled .p-inputtext {
+  border-color: color-mix(in oklab, var(--snap-pillar-color) 50%, var(--snap-border-default));
+}

@@ -1,0 +1,116 @@
+.painel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.filtro-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--text-color);
+    }
+}
+
+.acoes-section {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.notificacoes-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.notificacao-item {
+    position: relative;
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    padding: 1rem;
+    background-color: var(--surface-50);
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: var(--surface-100);
+    }
+
+    &.nao-lida {
+        background-color: var(--primary-50);
+        border-left: 4px solid var(--primary-color);
+    }
+}
+
+.notif-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+
+    .notif-date {
+        font-size: 0.8rem;
+        color: var(--text-color-secondary);
+    }
+}
+
+.notif-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.notif-titulo {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.notif-descricao {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-color-secondary);
+}
+
+.notif-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 8px;
+    height: 8px;
+    color: var(--primary-color);
+    font-size: 0.5rem;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--text-color-secondary);
+
+    i {
+        font-size: 2rem;
+        color: var(--primary-300);
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+}
+
+:deep(.p-select) {
+    width: 100%;
+}

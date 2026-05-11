@@ -1,0 +1,227 @@
+// ============================================================
+// Registration Results — visual parity with PrototipoPOI
+// ============================================================
+
+@keyframes preg-slide-in {
+  0%   { opacity: 0; transform: translateX(60px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.preg-results {
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 480px;
+  z-index: 1;
+
+  &.is-visible {
+    display: flex;
+    animation: preg-slide-in 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+.preg-results__group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.preg-results__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px;
+  margin: 0;
+  font-family: var(--font-accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+
+  i {
+    font-size: 14px;
+    color: var(--snap-pillar-color);
+  }
+}
+
+// Action bar (next to person cards) -----------------------------------
+
+.preg-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  margin-top: 4px;
+  border-top: 1px solid var(--snap-border-subtle);
+}
+
+:host ::ng-deep .preg-actions-bar__btn.p-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  background: var(--snap-surface-2);
+  border: 1px solid var(--snap-border-default);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--snap-text-primary);
+  line-height: 1;
+
+  &:hover:not(:disabled) {
+    background: var(--snap-surface-3);
+  }
+
+  .p-button-icon {
+    font-size: 13px;
+    color: var(--snap-text-secondary);
+  }
+
+  &.is-primary {
+    background: var(--snap-pillar-color);
+    border-color: var(--snap-pillar-color);
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background: var(--snap-pillar-dark);
+      border-color: var(--snap-pillar-dark);
+    }
+
+    .p-button-icon {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+// Manual registration fallback ---------------------------------------
+
+.preg-manual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 28px 24px;
+  background: var(--snap-surface-2);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.preg-manual__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--snap-surface-3);
+  color: var(--snap-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.preg-manual__msg {
+  margin: 0;
+  max-width: 360px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--snap-text-secondary);
+}
+
+.preg-manual__hint {
+  margin: 0;
+  max-width: 360px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--snap-text-muted);
+}
+
+.preg-manual__generate-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+:host ::ng-deep .preg-manual__btn.p-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 20px;
+  background: var(--snap-surface-2);
+  border: 1px solid var(--snap-border-default);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--snap-text-primary);
+  line-height: 1;
+
+  &:hover:not(:disabled) {
+    background: var(--snap-surface-3);
+  }
+
+  .p-button-icon {
+    font-size: 14px;
+    color: var(--snap-text-secondary);
+  }
+
+  &.is-primary {
+    background: var(--snap-pillar-color);
+    border-color: var(--snap-pillar-color);
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background: var(--snap-pillar-dark);
+      border-color: var(--snap-pillar-dark);
+    }
+
+    .p-button-icon {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+// Error display -------------------------------------------------------
+
+.preg-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 24px;
+  text-align: center;
+  background: color-mix(in oklab, var(--snap-danger) 4%, var(--snap-surface-2));
+  border: 1px solid color-mix(in oklab, var(--snap-danger) 20%, var(--snap-border-subtle));
+  border-radius: var(--radius-md);
+}
+
+.preg-error__icon {
+  font-size: 18px;
+  color: var(--snap-danger);
+}
+
+.preg-error__msg {
+  margin: 0;
+  max-width: 360px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--snap-text-secondary);
+}
+
+// Dark mode -----------------------------------------------------------
+
+:host-context(.p-dark) {
+  .preg-manual {
+    background: var(--snap-surface-2);
+    border-color: var(--snap-border-default);
+  }
+
+  .preg-error {
+    background: color-mix(in oklab, var(--snap-danger) 10%, var(--snap-surface-2));
+    border-color: color-mix(in oklab, var(--snap-danger) 20%, var(--snap-border-default));
+  }
+}

@@ -1,0 +1,160 @@
+<div class="formalization-panel">
+  <h2 class="formalization-panel__title">Painel de Formalização</h2>
+
+  <p-toast />
+
+  @if (loading()) {
+  <div class="formalization-panel__loading">Carregando documento...</div>
+  }
+
+  @if (error()) {
+  <div class="formalization-panel__error">
+    <i class="pi pi-exclamation-triangle"></i>
+    <span>{{ error() }}</span>
+    <p-button label="Tentar Novamente" icon="pi pi-refresh" (onClick)="loadDocument(document()?.id ?? '')"
+      [text]="true" />
+  </div>
+  }
+
+  @if (document(); as doc) {
+  <!-- Document Data -->
+  <p-card header="Dados do Documento" class="formalization-panel__document-card">
+    <div class="formalization-panel__info-group">
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Título:</span>
+        <span class="formalization-panel__info-value">{{ doc.title }}</span>
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Tipo:</span>
+        <span class="formalization-panel__info-value">{{ doc.type }}</span>
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Versão:</span>
+        <span class="formalization-panel__info-value">{{ doc.version }}</span>
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Classificação:</span>
+        <app-classification-badge [classification]="doc.securityClassification" />
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Status:</span>
+        <app-status-badge [status]="doc.status" context="document" />
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Processo:</span>
+        <span class="formalization-panel__info-value">{{ doc.processId }}</span>
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Autor:</span>
+        <span class="formalization-panel__info-value">{{ doc.creatorId }}</span>
+      </div>
+    </div>
+
+    <div class="formalization-panel__content-readonly" [innerHTML]="doc.content ?? ''"></div>
+  </p-card>
+
+  <!-- Formalized Lock Indicator -->
+  @if (isFormalized()) {
+  <div class="formalization-panel__formalized-indicator">
+    <i class="pi pi-lock"></i>
+    <span>Documento Formalizado — Imutável</span>
+  </div>
+  }
+
+  <!-- Pre-Formalization Checklist -->
+  @if (!isFormalized()) {
+  <p-card header="Verificação Pré-Formalização" class="formalization-panel__checklist-card">
+    <div class="formalization-panel__checklist">
+      <div class="formalization-panel__checklist-item">
+        <p-checkbox [(ngModel)]="checkApproved" [binary]="true" inputId="checkApproved" />
+        <label class="formalization-panel__checklist-label" for="checkApproved">Documento aprovado em revisão</label>
+      </div>
+      <div class="formalization-panel__checklist-item">
+        <p-checkbox [(ngModel)]="checkVersionConfirmed" [binary]="true" inputId="checkVersionConfirmed" />
+        <label class="formalization-panel__checklist-label" for="checkVersionConfirmed">Versão final confirmada</label>
+      </div>
+      <div class="formalization-panel__checklist-item">
+        <p-checkbox [(ngModel)]="checkClassificationDefined" [binary]="true" inputId="checkClassificationDefined" />
+        <label class="formalization-panel__checklist-label" for="checkClassificationDefined">Classificação
+          definida</label>
+      </div>
+      <div class="formalization-panel__checklist-item">
+        <p-checkbox [(ngModel)]="checkMetadataComplete" [binary]="true" inputId="checkMetadataComplete" />
+        <label class="formalization-panel__checklist-label" for="checkMetadataComplete">Metadados completos</label>
+      </div>
+    </div>
+
+    <div class="formalization-panel__formalize-action">
+      <p-button label="Formalizar Documento" icon="pi pi-check-circle" [disabled]="!allChecked() || formalizing()"
+        [loading]="formalizing()" (onClick)="formalizeDocument()" />
+    </div>
+  </p-card>
+  }
+
+  <!-- Final Artifact Data -->
+  @if (artifact(); as art) {
+  <p-card header="Artefato Final" class="formalization-panel__artifact-card">
+    <div class="formalization-panel__info-group">
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Versão:</span>
+        <span class="formalization-panel__info-value">{{ art.version }}</span>
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Hash SHA-256 (Conteúdo):</span>
+        <span class="formalization-panel__info-value formalization-panel__hash-value">{{ art.contentHash }}</span>
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Hash SHA-256 (Metadados):</span>
+        <span class="formalization-panel__info-value formalization-panel__hash-value">{{ art.metadataHash }}</span>
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Data de Formalização:</span>
+        <span class="formalization-panel__info-value">{{ art.formalizedAt | dateFormat }}</span>
+      </div>
+      <div class="formalization-panel__info-row">
+        <span class="formalization-panel__info-label">Responsável:</span>
+        <span class="formalization-panel__info-value">{{ art.formalizedBy }}</span>
+      </div>
+    </div>
+  </p-card>
+  }
+
+  <!-- Integrity Verification -->
+  @if (isFormalized()) {
+  <div class="formalization-panel__integrity-section">
+    <p-button label="Verificar Integridade" icon="pi pi-shield" severity="info" [loading]="verifying()"
+      (onClick)="verifyIntegrity()" />
+
+    @if (integrityResult(); as result) {
+    <div class="formalization-panel__integrity-result" [class.is-intact]="result.isIntact"
+      [class.is-compromised]="!result.isIntact">
+      @if (result.isIntact) {
+      <i class="pi pi-check-circle"></i>
+      <span>Documento íntegro — Hashes conferem</span>
+      } @else {
+      <i class="pi pi-exclamation-triangle"></i>
+      <span>Documento comprometido — Integridade violada</span>
+      }
+    </div>
+
+    <div class="formalization-panel__integrity-details">
+      <div class="formalization-panel__detail-row">
+        <span>Conteúdo:</span>
+        <span [class.formalization-panel__detail-match]="result.contentHashMatch"
+          [class.formalization-panel__detail-mismatch]="!result.contentHashMatch">
+          {{ result.contentHashMatch ? 'Confere' : 'Divergente' }}
+        </span>
+      </div>
+      <div class="formalization-panel__detail-row">
+        <span>Metadados:</span>
+        <span [class.formalization-panel__detail-match]="result.metadataHashMatch"
+          [class.formalization-panel__detail-mismatch]="!result.metadataHashMatch">
+          {{ result.metadataHashMatch ? 'Confere' : 'Divergente' }}
+        </span>
+      </div>
+    </div>
+    }
+  </div>
+  }
+  }
+</div>

@@ -1,0 +1,97 @@
+# Implementation Plan
+
+- [x] 1. Write bug condition exploration test
+  - **Property 1: Bug Condition** - Standalone OIDC Auth Fails With Nginx-Proxied .env Values
+  - **CRITICAL**: This test MUST FAIL on unfixed code — failure confirms the bug exists
+  - **DO NOT attempt to fix the test or the code when it fails**
+  - **NOTE**: This test encodes the expected behavior — it will validate the fix when it passes after implementation
+  - **GOAL**: Surface counterexamples that demonstrate the documentation/configuration gap causes auth failure
+  - **Scoped PBT Approach**: Scope the property to the concrete failing case — `.env.example` lacks mode documentation and `.env` has Nginx-proxied values while `environment.ts` expects standalone values
+  - Write a test (e.g., `standalone-auth-fix.spec.ts` in `platform-frontend/`) that:
+    - Reads `platform-runtime/.env.example` and parses the Keycloak section
+    - Asserts the file contains a mode documentation block explaining standalone vs Nginx-proxied modes (from design: "Add mode documentation header")
+    - Asserts the file contains a comment/uncomment pattern with both standalone and Nginx-proxied values clearly labeled
+    - Asserts the file documents the realm import caveat (Keycloak imports realm on first startup only; switching requires volume deletion)
+    - Reads `platform-frontend/README.md` and asserts it contains standalone development documentation (not just Angular CLI boilerplate)
+    - Bug condition from design: `isBugCondition(envConfig, frontendConfig)` — `.env` has `KEYCLOAK_EXTERNAL_URL=https://localhost/auth` while `environment.ts` has `keycloak.baseUrl=http://localhost:8180`
+    - Expected behavior from design: `.env.example` SHALL contain clearly documented sections showing both modes (Req 2.3) and README SHALL contain standalone dev guide
+  - Run test on UNFIXED code
+  - **EXPECTED OUTCOME**: Test FAILS (this is correct — `.env.example` currently lacks mode documentation and README is boilerplate)
+  - Document counterexamples found (e.g., "`.env.example` Keycloak section has no mode documentation header", "README.md contains only Angular CLI boilerplate")
+  - Mark task complete when test is written, run, and failure is documented
+  - _Requirements: 1.3, 1.4, 2.3, 2.4_
+
+- [x] 2. Write preservation property tests (BEFORE implementing fix)
+  - **Property 2: Preservation** - Existing Standalone Defaults and Application Code Unchanged
+  - **IMPORTANT**: Follow observation-first methodology
+  - Observe on UNFIXED code:
+    - `platform-runtime/.env.example` active (uncommented) `KEYCLOAK_EXTERNAL_URL` is `http://localhost:8180` (standalone-friendly)
+    - `platform-runtime/.env.example` active (uncommented) `FRONTEND_URL` is `http://localhost:4200` (standalone-friendly)
+    - `platform-runtime/.env.example` active (uncommented) `API_GATEWAY_URL` is `http://localhost:8080`
+    - `platform-frontend/src/environments/environment.ts` has `keycloak.baseUrl = 'http://localhost:8180'`
+    - `platform-frontend/src/environments/environment.ts` has `keycloak.redirectUri = 'http://localhost:4200/auth/callback'`
+  - Write property-based tests that assert:
+    - `.env.example` active (uncommented) values for `KEYCLOAK_EXTERNAL_URL`, `FRONTEND_URL`, `API_GATEWAY_URL` remain standalone-friendly defaults (from Preservation Requirements in design: "The `.env.example` active (uncommented) defaults must remain standalone-friendly")
+    - No files in `platform-frontend/src/` are modified by the fix (from design Property 3: "fix SHALL NOT modify file content in `platform-frontend/src/`")
+    - `environment.ts` keycloak config values remain unchanged (from Req 3.2: config.json fallback behavior unchanged)
+    - `.env.example` still contains all original non-Keycloak-mode variables (no accidental deletions)
+  - Verify tests PASS on UNFIXED code
+  - **EXPECTED OUTCOME**: Tests PASS (this confirms baseline behavior to preserve)
+  - Mark task complete when tests are written, run, and passing on unfixed code
+  - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
+
+- [x] 3. Fix for standalone OIDC authentication documentation gap
+  - [x] 3.1 Update `platform-runtime/.env.example` with mode documentation
+    - Add a mode documentation section at the top of the Keycloak block explaining:
+      - Two modes: **Standalone** (frontend on port 4200, direct Keycloak access) vs **Nginx-proxied** (full stack behind Nginx reverse proxy)
+      - Comment/uncomment instructions for switching between modes
+    - Add comment/uncomment pattern for mode-dependent variables:
+      - `KEYCLOAK_EXTERNAL_URL`: active `http://localhost:8180` (standalone), commented `# KEYCLOAK_EXTERNAL_URL=https://localhost/auth` (Nginx-proxied)
+      - `FRONTEND_URL`: active `http://localhost:4200` (standalone), commented `# FRONTEND_URL=https://localhost` (Nginx-proxied)
+      - `API_GATEWAY_URL`: active `http://localhost:8080` (standalone), commented `# API_GATEWAY_URL=https://localhost/api` (Nginx-proxied)
+    - Keep existing standalone-friendly defaults as the active (uncommented) values — do NOT replace or remove them
+    - Add realm import caveat note: Keycloak imports `platform-realm.json.template` on first startup only; switching modes after import requires `docker compose down -v` to delete the Keycloak volume, then re-up so the realm is re-imported with new values
+    - _Bug_Condition: isBugCondition(envConfig, frontendConfig) where envConfig.KEYCLOAK_EXTERNAL_URL != frontendConfig.keycloak.baseUrl AND frontendMode == 'standalone'_
+    - _Expected_Behavior: .env.example SHALL contain clearly documented sections showing both modes with comment/uncomment instructions (Req 2.3, 2.4)_
+    - _Preservation: Active (uncommented) defaults remain standalone-friendly; all non-Keycloak-mode variables unchanged (Req 3.5)_
+    - _Requirements: 1.3, 1.4, 2.3, 2.4, 3.1, 3.5_
+
+  - [x] 3.2 Update `platform-frontend/README.md` with standalone development guide
+    - Replace Angular CLI boilerplate with project-specific documentation
+    - Document prerequisites: infrastructure stack must be running (`make up-core` or `docker compose -f docker-compose.infra.yml --profile core up -d` in `platform-runtime/`)
+    - Document .env configuration: explain the relationship between `platform-runtime/.env` values (`KEYCLOAK_EXTERNAL_URL`, `FRONTEND_URL`) and frontend authentication behavior
+    - Document standalone startup procedure: `pnpm start` → `http://localhost:4200`
+    - Document the auth flow: `environment.ts` → `RuntimeConfigService` (config.json fallback) → `OidcDiscoveryService` (OIDC discovery + issuer validation) → Keycloak
+    - Document troubleshooting: common auth errors and their `.env`-related causes:
+      - Issuer mismatch (`KEYCLOAK_EXTERNAL_URL` doesn't match `environment.ts` `keycloak.baseUrl`)
+      - Redirect URI rejection (`FRONTEND_URL` doesn't match frontend origin)
+      - CORS errors (web origins mismatch from `FRONTEND_URL`)
+    - Document mode switching: how to switch between standalone and Nginx-proxied modes (comment/uncomment in `.env`, realm import caveat)
+    - Document the realm import caveat: Keycloak imports realm on first startup only; switching modes after import requires volume deletion (`docker compose down -v` for Keycloak) or manual Keycloak admin console update
+    - _Bug_Condition: README.md is Angular CLI boilerplate with no project-specific standalone development instructions_
+    - _Expected_Behavior: README.md SHALL contain standalone dev guide with prerequisites, auth flow, troubleshooting, and mode switching documentation_
+    - _Preservation: No application code files modified (Req 3.2, 3.3, 3.4)_
+    - _Requirements: 1.3, 1.4, 2.1, 2.2, 2.3, 2.4, 3.1_
+
+  - [x] 3.3 Verify bug condition exploration test now passes
+    - **Property 1: Expected Behavior** - Standalone OIDC Auth Configuration Documented
+    - **IMPORTANT**: Re-run the SAME test from task 1 — do NOT write a new test
+    - The test from task 1 encodes the expected behavior (mode documentation in `.env.example`, standalone guide in README)
+    - When this test passes, it confirms the documentation gap is filled
+    - Run bug condition exploration test from step 1
+    - **EXPECTED OUTCOME**: Test PASSES (confirms the documentation fix resolves the bug condition)
+    - _Requirements: 2.1, 2.2, 2.3, 2.4_
+
+  - [x] 3.4 Verify preservation tests still pass
+    - **Property 2: Preservation** - Existing Standalone Defaults and Application Code Unchanged
+    - **IMPORTANT**: Re-run the SAME tests from task 2 — do NOT write new tests
+    - Run preservation property tests from step 2
+    - **EXPECTED OUTCOME**: Tests PASS (confirms no regressions — standalone defaults preserved, no source code modified)
+    - Confirm all tests still pass after fix (no regressions)
+
+- [x] 4. Checkpoint - Ensure all tests pass
+  - Run the full test suite to confirm both exploration and preservation tests pass
+  - Verify `.env.example` has mode documentation, comment/uncomment pattern, and realm import caveat
+  - Verify `README.md` has standalone dev guide with prerequisites, auth flow, troubleshooting, and mode switching
+  - Verify no files in `platform-frontend/src/`, `shared-infra/config/`, or `platform-runtime/docker-compose*.yml` were modified
+  - Ensure all tests pass, ask the user if questions arise

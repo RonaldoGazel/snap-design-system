@@ -1,0 +1,71 @@
+<div class="step-catalog-list">
+  <div class="step-catalog-list__header">
+    <h2>Catálogo de Etapas</h2>
+    <button pButton label="Nova Etapa" icon="pi pi-plus" (click)="navigateToNew()"></button>
+  </div>
+
+  <div class="step-catalog-list__filters">
+    <input
+      pInputText
+      type="text"
+      placeholder="Buscar por nome..."
+      [ngModel]="searchText()"
+      (ngModelChange)="searchText.set($event)"
+    />
+    <p-select
+      [options]="activeOptions"
+      [ngModel]="filterActive()"
+      (ngModelChange)="filterActive.set($event)"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Status"
+    />
+  </div>
+
+  <p-table [value]="filteredSteps()" [paginator]="true" [rows]="15">
+    <ng-template #header>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-step>
+      <tr>
+        <td>{{ ('workflows.' + step.name | translate) !== ('workflows.' + step.name) ? ('workflows.' + step.name | translate) : step.name }}</td>
+        <td>{{ ('workflows.' + step.description | translate) !== ('workflows.' + step.description) ? ('workflows.' + step.description | translate) : step.description }}</td>
+        <td>
+          @if (step.is_active) {
+            <p-tag [value]="'workflows.status.published' | translate" severity="success" />
+          } @else {
+            <p-tag [value]="'workflows.status.archived' | translate" severity="danger" />
+          }
+        </td>
+        <td>
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-text p-button-sm"
+            (click)="navigateToEdit(step)"
+            title="Editar"
+          ></button>
+          <button
+            pButton
+            [icon]="step.is_active ? 'pi pi-ban' : 'pi pi-check'"
+            class="p-button-text p-button-sm"
+            [class.p-button-danger]="step.is_active"
+            [class.p-button-success]="!step.is_active"
+            (click)="toggleActive(step)"
+            [title]="step.is_active ? 'Desativar' : 'Ativar'"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="4" class="text-center text-color-secondary">{{ 'workflows.stepCatalogList.noStepsFound' | translate }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

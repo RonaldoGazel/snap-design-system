@@ -1,0 +1,141 @@
+// ============================================================
+// Secrecy Selector — visual parity with PrototipoPOI
+// ============================================================
+
+.preg-secrecy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preg-secrecy__title {
+  margin: 0;
+  padding-bottom: 4px;
+  font-family: var(--font-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+  border-bottom: 1px solid var(--snap-border-subtle);
+}
+
+// Option card ---------------------------------------------------
+
+.preg-secrecy__option {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  background: var(--snap-surface-2);
+  border: 1px solid var(--snap-border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+
+  &:hover {
+    background: var(--snap-surface-3);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--snap-focus-ring);
+    outline-offset: 2px;
+  }
+
+  &.is-selected {
+    border-color: var(--snap-pillar-color);
+    background: color-mix(in oklab, var(--snap-pillar-color) 6%, var(--snap-surface-2));
+  }
+}
+
+// Header row (radio + label) ------------------------------------
+
+.preg-secrecy__radio {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--snap-border-default);
+  border-radius: 50%;
+  transition: border-color 120ms ease;
+
+  .is-selected & {
+    border-color: var(--snap-pillar-color);
+  }
+}
+
+.preg-secrecy__radio-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--snap-pillar-color);
+  border-radius: 50%;
+}
+
+.preg-secrecy__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.preg-secrecy__option-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--snap-text-primary);
+}
+
+// The radio dot is rendered inside the content label in the template,
+// so give the label its own radio-style row.
+.preg-secrecy__option .preg-secrecy__radio {
+  margin-top: 0;
+}
+
+.preg-secrecy__option-desc {
+  padding-left: 24px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--snap-text-muted);
+}
+
+// Sector info (visible for RESERVADO) ---------------------------
+
+.preg-secrecy__sector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  margin-left: 24px;
+  background: var(--snap-surface-3);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--snap-text-primary);
+
+  i {
+    font-size: 14px;
+    color: var(--snap-pillar-color);
+  }
+}
+
+// Dark mode -----------------------------------------------------
+
+:host-context(.p-dark) {
+  .preg-secrecy__option {
+    border-color: var(--snap-border-default);
+
+    &:hover {
+      background: var(--snap-surface-3);
+    }
+
+    &.is-selected {
+      background: color-mix(in oklab, var(--snap-pillar-color) 8%, var(--snap-surface-2));
+    }
+  }
+}

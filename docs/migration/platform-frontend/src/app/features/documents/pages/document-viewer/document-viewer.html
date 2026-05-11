@@ -1,0 +1,58 @@
+@if (!document()) {
+<div class="document-viewer__empty">
+    <i class="pi pi-file-o document-viewer__empty-icon"></i>
+    <p>Selecione um documento na árvore</p>
+</div>
+} @else {
+<div class="l-document-viewer">
+    <div class="document-viewer__header">
+        <div class="document-viewer__meta">
+            <h3 class="document-viewer__title">{{ document()!.title }}</h3>
+            <div class="document-viewer__badges">
+                <p-tag [value]="document()!.type" severity="info" />
+                <p-tag [value]="document()!.status" [severity]="statusSeverity(document()!.status)" />
+                <app-security-badge [classification]="document()!.security_classification" />
+                <span class="document-viewer__version">v{{ document()!.version }}</span>
+            </div>
+            <div class="document-viewer__info">
+                <span>Criado por: <strong>{{ document()!.creator?.name ?? '—' }}</strong></span>
+                <span>{{ document()!.updated_at | dateFormat:'long' }}</span>
+            </div>
+        </div>
+    </div>
+
+    <p-tabs [value]="activeTab()" (valueChange)="setActiveTab($event)">
+        <p-tablist>
+            <p-tab value="preview">Prévia</p-tab>
+            @if (canEdit()) {
+            <p-tab value="edit">Edição</p-tab>
+            }
+            <p-tab value="versions">Versões</p-tab>
+            <p-tab value="attachments">Anexos</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+            <p-tabpanel value="preview">
+                @if (document()!.content) {
+                <div class="document-viewer__preview-content" [innerHTML]="document()!.content"></div>
+                } @else {
+                <div class="document-viewer__no-content">
+                    <i class="pi pi-file-o"></i>
+                    <p>Documento sem conteúdo</p>
+                </div>
+                }
+            </p-tabpanel>
+            @if (canEdit()) {
+            <p-tabpanel value="edit">
+                <app-collabora-editor [resourceType]="'document'" [resourceId]="document()!.id" />
+            </p-tabpanel>
+            }
+            <p-tabpanel value="versions">
+                <app-version-history [documentId]="document()!.id" />
+            </p-tabpanel>
+            <p-tabpanel value="attachments">
+                <app-attachment-viewer [documentId]="document()!.id" [canUpload]="canEdit()" />
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
+</div>
+}

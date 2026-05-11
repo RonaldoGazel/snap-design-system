@@ -1,0 +1,63 @@
+<div class="flow-form">
+  <div class="flow-form__header">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    <h2>Novo Fluxo</h2>
+  </div>
+
+  <div class="flow-form__description">
+    <p>Um <strong>Fluxo</strong> define o ciclo de vida de um documento: quais etapas ele percorre, quem pode agir em cada etapa, quais transições são permitidas e quais regras controlam a tramitação, formalização e difusão. Após criar o fluxo, acesse o detalhe para adicionar etapas, transições, papéis e regras.</p>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="flow-form__error">
+      <i class="pi pi-exclamation-triangle"></i>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flow-form__body">
+    <div class="flow-form__field">
+      <label for="name">Nome <span class="required">*</span></label>
+      <small class="flow-form__hint">Nome descritivo do fluxo. Ex: "Fluxo de Relatório de Inteligência".</small>
+      <input id="name" pInputText formControlName="name" placeholder="Ex: Fluxo de Relatório de Inteligência" [class.ng-invalid]="isInvalid('name')" />
+      @if (isInvalid('name')) { <small class="p-error">Nome é obrigatório.</small> }
+    </div>
+
+    <div class="flow-form__field">
+      <label for="code">Código <span class="required">*</span></label>
+      <small class="flow-form__hint">Identificador único do fluxo, usado internamente para referência. Ex: "FLUXO-RELINT".</small>
+      <input id="code" pInputText formControlName="code" placeholder="Ex: FLUXO-RELINT" [class.ng-invalid]="isInvalid('code')" />
+      @if (isInvalid('code')) { <small class="p-error">Código é obrigatório.</small> }
+    </div>
+
+    <div class="flow-form__field">
+      <label for="description">Descrição</label>
+      <small class="flow-form__hint">Explique o propósito do fluxo e em quais situações ele deve ser utilizado.</small>
+      <textarea id="description" pTextarea formControlName="description" placeholder="Descreva o propósito e contexto de uso deste fluxo" rows="3"></textarea>
+    </div>
+
+    <div class="flow-form__field">
+      <label for="scope">Escopo Institucional</label>
+      <small class="flow-form__hint">Área ou setor da organização ao qual este fluxo se aplica. Ex: "Superintendência de Inteligência".</small>
+      <input id="scope" pInputText formControlName="scope" placeholder="Ex: Superintendência de Inteligência" />
+    </div>
+
+    <div class="flow-form__field">
+      <label for="status">Status <span class="required">*</span></label>
+      <small class="flow-form__hint">{{ 'workflows.flowForm.statusHint' | translate }}</small>
+      <p-select inputId="status" formControlName="status" [options]="statusOptions" optionLabel="label" optionValue="value" placeholder="Selecione o status" [class.ng-invalid]="isInvalid('status')" />
+      @if (isInvalid('status')) { <small class="p-error">Status é obrigatório.</small> }
+    </div>
+
+    <div class="flow-form__field">
+      <label for="document_type_ids">Tipos Documentais</label>
+      <small class="flow-form__hint">Selecione quais tipos de documento este fluxo governa. Um fluxo pode cobrir múltiplos tipos documentais da mesma natureza.</small>
+      <p-multiselect inputId="document_type_ids" formControlName="document_type_ids" [options]="docTypes()" optionLabel="name" optionValue="id" placeholder="Selecione os tipos documentais" display="chip" />
+    </div>
+
+    <div class="flow-form__actions">
+      <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="goBack()"></button>
+      <button pButton type="submit" label="Criar Fluxo" [disabled]="saving()"></button>
+    </div>
+  </form>
+</div>

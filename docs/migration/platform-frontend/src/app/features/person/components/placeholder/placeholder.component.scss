@@ -1,0 +1,91 @@
+:host {
+  // Box Model
+  display: block;
+  padding: var(--space-8);
+}
+
+.placeholder-card {
+  // Box Model
+  max-width: 720px;
+  padding: var(--space-8);
+  margin: 0 auto;
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-xl);
+  // Visuals
+  background: var(--snap-surface-2);
+}
+
+.placeholder-header {
+  // Box Model
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
+}
+
+.placeholder-number {
+  // Box Model
+  min-width: 3rem;
+  // Typography
+  font-family: 'Cygnito Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  color: var(--snap-pillar-color);
+}
+
+.placeholder-titles {
+  // Box Model
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+}
+
+.placeholder-title {
+  // Box Model
+  margin: 0;
+  // Typography
+  font-size: var(--text-4xl);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--snap-text-primary);
+}
+
+.placeholder-block {
+  // Typography
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--snap-text-secondary);
+}
+
+.placeholder-destinations {
+  // Box Model
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--snap-border-subtle);
+}
+
+.destinations__label {
+  // Box Model
+  display: block;
+  margin-bottom: var(--space-3-5);
+  // Typography
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+}
+
+.destinations__list {
+  // Box Model
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2-5);
+}
+
+.destinations__link {
+  // Typography
+  text-decoration: none;
+}

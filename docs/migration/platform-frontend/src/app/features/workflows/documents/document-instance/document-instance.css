@@ -1,0 +1,24 @@
+.doc-instance { padding: 1.5rem; max-width: 960px; margin: 0 auto; }
+.doc-instance__header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+.doc-instance__title { flex: 1; }
+.doc-instance__title h2 { margin: 0.25rem 0 0; font-size: 1.25rem; }
+.doc-instance__nup { font-size: 0.8rem; color: var(--text-color-secondary); font-weight: 600; letter-spacing: 0.04em; }
+.doc-instance__form-description { font-size: 0.88rem; color: var(--text-color-secondary); margin-bottom: 1.5rem; padding: 0.75rem; background: var(--surface-ground); border-radius: 6px; border-left: 3px solid var(--primary-color); }
+.doc-instance__error { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--red-50); color: var(--red-700); border-radius: 6px; margin-bottom: 1rem; }
+.doc-instance__form { display: flex; flex-direction: column; gap: 1.25rem; max-width: 680px; }
+.doc-instance__field { display: flex; flex-direction: column; gap: 0.4rem; }
+.doc-instance__field label { font-weight: 500; font-size: 0.9rem; }
+.doc-instance__field--inline { flex-direction: row; align-items: center; gap: 0.6rem; }
+.doc-instance__hint { color: var(--text-color-secondary); font-size: 0.78rem; }
+.required { color: var(--red-500); }
+.doc-instance__actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+.doc-instance__loading, .doc-instance__not-found { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem; gap: 1rem; }
+.doc-instance__meta-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.doc-instance__meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.doc-instance__label { font-size: 0.75rem; font-weight: 600; color: var(--text-color-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.doc-instance__content { white-space: pre-wrap; font-family: inherit; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+.doc-instance__timeline-item { display: flex; flex-direction: column; gap: 0.15rem; padding-bottom: 0.5rem; }
+.doc-instance__timeline-title { font-weight: 600; }
+.doc-instance__timeline-notes { font-size: 0.85rem; color: var(--text-color-secondary); }
+.doc-instance__timeline-date { font-size: 0.75rem; color: var(--text-color-secondary); }
+.doc-instance__timeline-marker { color: var(--primary-color); font-size: 0.6rem; }

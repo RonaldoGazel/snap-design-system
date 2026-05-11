@@ -1,0 +1,53 @@
+<div class="org-selector">
+  <div class="org-selector__search">
+    <span class="p-input-icon-left w-full">
+      <i class="pi pi-search"></i>
+      <input
+        pInputText
+        type="text"
+        placeholder="Buscar unidade ou perfil..."
+        class="w-full"
+        [ngModel]="searchText()"
+        (ngModelChange)="searchText.set($event)"
+      />
+    </span>
+  </div>
+
+  <div class="org-selector__content">
+    <div class="org-selector__tree">
+      <p-tree
+        [value]="treeNodes()"
+        selectionMode="single"
+        [selection]="treeSelection()"
+        (onNodeSelect)="onNodeSelect($event)"
+        styleClass="w-full"
+      />
+    </div>
+
+    @if (selectedUnit()) {
+      <div class="org-selector__profiles">
+        <div class="org-selector__unit-path">
+          <small class="text-color-secondary">{{ getUnitPath(selectedUnit()!.id) }}</small>
+        </div>
+        <div class="org-selector__profile-list">
+          @for (up of unitProfiles(); track up.id) {
+            <div
+              class="org-selector__profile-item"
+              [class.selected]="isProfileSelected(up.profile_id)"
+              (click)="onProfileSelect(up)"
+              (keydown.enter)="onProfileSelect(up)"
+              tabindex="0"
+              role="button"
+            >
+              <p-tag
+                [value]="up.profile?.name ?? up.profile_id"
+                [severity]="isProfileSelected(up.profile_id) ? 'success' : 'secondary'"
+              />
+              <small class="text-color-secondary">Nível {{ up.profile?.hierarchy_level }}</small>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="validation-panel">
+  <div class="validation-header">
+    <div class="validation-title-row">
+      <h3>Pendências</h3>
+      @if (count() > 0) {
+        <span class="validation-badge">{{ count() }}</span>
+      }
+    </div>
+    <p-button
+      icon="pi pi-times"
+      [rounded]="true"
+      [text]="true"
+      severity="secondary"
+      (onClick)="close.emit()"
+    />
+  </div>
+
+  @if (errors().length === 0) {
+    <div class="validation-success">
+      <i class="pi pi-check-circle"></i>
+      <span>Nenhum erro encontrado. O fluxo está válido.</span>
+    </div>
+  } @else {
+    <ul class="validation-error-list">
+      @for (error of errors(); track error.code + (error.entity_id ?? '')) {
+        <li>
+          <i [class]="getIcon(error)"></i>
+          <span>{{ error.message }}</span>
+        </li>
+      }
+    </ul>
+  }
+</div>

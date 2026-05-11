@@ -1,0 +1,177 @@
+// ============================================================
+// Registration Overlay — Component Styles
+// Visual parity with PrototipoPOI person-registration.css
+// ============================================================
+
+:host {
+  display: contents;
+}
+
+.preg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 36px;
+  background: color-mix(in oklab, var(--snap-surface-2) 85%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+
+  &.is-visible {
+    display: flex;
+  }
+}
+
+.preg-overlay__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 360px;
+  padding: 16px 0;
+  opacity: 0.35;
+  transition: opacity 300ms ease;
+
+  & + & {
+    border-top: 1px solid var(--snap-border-subtle);
+  }
+
+  &.is-active,
+  &.is-done,
+  &.is-error {
+    opacity: 1;
+  }
+}
+
+.preg-overlay__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--snap-surface-3);
+  color: var(--snap-text-muted);
+  transition: background 200ms ease, color 200ms ease;
+
+  i {
+    font-size: 20px;
+  }
+}
+
+.preg-overlay__item.is-active .preg-overlay__icon {
+  background: color-mix(in oklab, var(--snap-pillar-color) 12%, var(--snap-surface-2));
+  color: var(--snap-pillar-color);
+}
+
+.preg-overlay__item.is-done .preg-overlay__icon {
+  background: color-mix(in oklab, var(--snap-success) 12%, var(--snap-surface-2));
+  color: var(--snap-success);
+}
+
+.preg-overlay__item.is-done.is-empty .preg-overlay__icon {
+  background: var(--snap-surface-3);
+  color: var(--snap-text-muted);
+}
+
+.preg-overlay__item.is-error .preg-overlay__icon {
+  background: color-mix(in oklab, var(--snap-danger) 12%, var(--snap-surface-2));
+  color: var(--snap-danger);
+}
+
+.preg-overlay__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.preg-overlay__title {
+  font-family: var(--font-accent);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--snap-text-primary);
+}
+
+.preg-overlay__bar {
+  width: 100%;
+  height: 3px;
+  background: var(--snap-surface-3);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.preg-overlay__bar-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--snap-pillar-color) 40%,
+    var(--snap-pillar-light) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: preg-shimmer 1.8s ease-in-out infinite;
+}
+
+// Stagger shimmer start per source
+.preg-overlay__item:nth-child(1) .preg-overlay__bar-fill { animation-delay: 0s; }
+.preg-overlay__item:nth-child(2) .preg-overlay__bar-fill { animation-delay: 0.4s; }
+.preg-overlay__item:nth-child(3) .preg-overlay__bar-fill { animation-delay: 0.8s; }
+
+.preg-overlay__msg {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--snap-text-secondary);
+}
+
+.preg-overlay__item.is-error .preg-overlay__msg {
+  color: var(--snap-danger);
+}
+
+.preg-overlay__status-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    font-size: 16px;
+  }
+}
+
+.preg-overlay__item.is-done .preg-overlay__status-icon {
+  color: var(--snap-success);
+}
+
+.preg-overlay__item.is-done.is-empty .preg-overlay__status-icon {
+  color: var(--snap-text-muted);
+}
+
+.preg-overlay__item.is-error .preg-overlay__status-icon {
+  color: var(--snap-danger);
+}
+
+// Dark mode — slightly stronger backdrop
+:host-context(.p-dark) .preg-overlay {
+  background: color-mix(in oklab, var(--snap-surface-2) 90%, transparent);
+}
+
+@keyframes preg-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

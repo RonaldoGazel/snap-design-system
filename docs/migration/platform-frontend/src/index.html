@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PlatformFrontend</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!--
+      CSP is enforced via HTTP headers at the API Gateway / reverse proxy in production.
+      A <meta> CSP tag is NOT used because:
+        - frame-ancestors is ignored in <meta> tags (spec limitation)
+        - Inline scripts (Vite HMR, frame-busting) conflict with strict script-src
+        - Production uses strict-dynamic + nonce, which requires server-side header injection
+
+      Production headers (API Gateway config):
+        Content-Security-Policy: default-src 'self'; script-src 'strict-dynamic' 'nonce-{SERVER_NONCE}'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://auth.example.com https://api.example.com; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'none'
+        X-Content-Type-Options: nosniff
+        X-Frame-Options: DENY
+        Referrer-Policy: strict-origin-when-cross-origin
+    -->
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

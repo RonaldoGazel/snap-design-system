@@ -1,0 +1,631 @@
+/* ===================================================================
+   Module: document-view
+   SMACSS category: Module (BEM notation)
+   Uses SNAP design tokens — matches person module visual language.
+   =================================================================== */
+
+.document-view {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  /* Typography */
+  color: var(--snap-text-primary);
+}
+
+/* ── Loading ───────────────────────────────────────────────────────── */
+
+.document-view__loading {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-10);
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-text-muted);
+}
+
+/* ── Header ────────────────────────────────────────────────────────── */
+
+.document-view__header {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--snap-border-subtle);
+}
+
+.document-view__header-left {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+}
+
+.document-view__title {
+  /* Box Model */
+  margin: 0;
+  /* Typography */
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  color: var(--snap-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.document-view__title-input {
+  /* Box Model */
+  flex: 1;
+  /* Typography */
+  font-size: var(--text-3xl);
+  font-weight: 600;
+}
+
+.document-view__header-actions {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-2-5);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ── PrimeNG button overrides ──────────────────────────────────────── */
+
+:host ::ng-deep .document-view__header-actions .p-button:not(.p-button-text):not(.p-button-outlined) {
+  background: var(--snap-pillar-color);
+  border-color: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .document-view__header-actions .p-button:not(.p-button-text):not(.p-button-outlined):hover {
+  background: var(--snap-pillar-dark);
+  border-color: var(--snap-pillar-dark);
+}
+
+:host ::ng-deep .document-view__header-actions .p-button-outlined {
+  color: var(--snap-pillar-color);
+  border-color: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .document-view__header-actions .p-button-outlined:hover {
+  background: color-mix(in srgb, var(--snap-pillar-color) 8%, transparent);
+}
+
+/* ── Metadata strip ────────────────────────────────────────────────── */
+
+.document-view__meta-strip {
+  /* Box Model */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5) var(--space-7);
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: var(--snap-surface-2);
+}
+
+.document-view__meta-item {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.document-view__meta-label {
+  /* Typography */
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+}
+
+.document-view__meta-value {
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-text-primary);
+}
+
+.document-view__meta-value--mono {
+  /* Typography */
+  font-family: 'Cygnito Mono', monospace;
+  font-size: var(--text-base);
+  color: var(--snap-text-secondary);
+}
+
+/* ── Classification badge ──────────────────────────────────────────── */
+
+.document-view__classification {
+  /* Box Model */
+  display: inline-block;
+  padding: var(--space-1) var(--space-2-5);
+  border-radius: var(--radius-sm);
+  /* Typography */
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.document-view__classification[data-level="SIGILOSO"] {
+  color: var(--snap-danger);
+  background: color-mix(in srgb, var(--snap-danger) 12%, transparent);
+}
+
+.document-view__classification[data-level="RESERVADO"] {
+  color: var(--snap-warning);
+  background: color-mix(in srgb, var(--snap-warning) 12%, transparent);
+}
+
+.document-view__classification[data-level="PUBLICO"] {
+  color: var(--snap-success);
+  background: color-mix(in srgb, var(--snap-success) 12%, transparent);
+}
+
+/* ── Workflow Stepper section ───────────────────────────────────────── */
+
+.document-view__stepper-section {
+  /* Box Model */
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: var(--snap-surface-2);
+}
+
+/* ── Sync badge ────────────────────────────────────────────────────── */
+
+.document-view__sync-badge {
+  /* Box Model */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  /* Typography */
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--snap-warning);
+}
+
+/* ── Formalized banner ─────────────────────────────────────────────── */
+
+.document-view__formalized-banner {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Typography */
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--snap-success);
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-success) 8%, transparent);
+}
+
+/* ── Tracking-only banner ──────────────────────────────────────────── */
+
+.document-view__tracking-banner {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Typography */
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--snap-info);
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-info) 8%, transparent);
+}
+
+.document-view__formalized-hash {
+  /* Box Model */
+  margin-left: auto;
+  /* Typography */
+  font-family: 'Cygnito Mono', monospace;
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--snap-text-muted);
+}
+
+/* ── Description ───────────────────────────────────────────────────── */
+
+.document-view__description-field {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.document-view__description {
+  /* Box Model */
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-5);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: var(--snap-surface-2);
+}
+
+.document-view__description p {
+  /* Box Model */
+  margin: var(--space-2) 0 0;
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-text-secondary);
+}
+
+.document-view__field-label {
+  /* Typography */
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+}
+
+/* ── Editor / Content area ─────────────────────────────────────────── */
+
+.document-view__editor-area {
+  /* Box Model */
+  min-height: 350px;
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  overflow: hidden;
+}
+
+.document-view__content-readonly {
+  /* Box Model */
+  padding: var(--space-7);
+  /* Typography */
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--snap-text-primary);
+}
+
+.document-view__content-readonly h1,
+.document-view__content-readonly h2,
+.document-view__content-readonly h3 {
+  color: var(--snap-text-primary);
+}
+
+.document-view__content-readonly p {
+  margin: 0 0 var(--space-5);
+}
+
+/* ── Panel (shared for tabs) ───────────────────────────────────────── */
+
+.document-view__panel {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-5) 0;
+}
+
+.document-view__panel-title {
+  /* Box Model */
+  margin: 0;
+  /* Typography */
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--snap-text-primary);
+}
+
+/* ── Review actions ────────────────────────────────────────────────── */
+
+.document-view__review-actions {
+  /* Box Model */
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* ── Formalization checklist ───────────────────────────────────────── */
+
+.document-view__checklist {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: var(--snap-surface-2);
+}
+
+.document-view__check-item {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-text-primary);
+}
+
+.document-view__formalize-action {
+  /* Box Model */
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Dissemination actions ─────────────────────────────────────────── */
+
+.document-view__dissemination-actions {
+  /* Box Model */
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ── Dialog form ───────────────────────────────────────────────────── */
+
+.document-view__dialog-form {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-top: var(--space-5);
+}
+
+/* ── Timeline ──────────────────────────────────────────────────────── */
+
+.document-view__timeline-event {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.document-view__timeline-desc {
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-text-primary);
+}
+
+.document-view__timeline-date {
+  /* Typography */
+  font-family: 'Cygnito Mono', monospace;
+  font-size: var(--text-base);
+  color: var(--snap-text-muted);
+}
+
+/* ── PrimeNG tabs override ─────────────────────────────────────────── */
+
+:host ::ng-deep .p-tabs .p-tab.p-tab-active {
+  color: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .p-tabs .p-tablist-active-bar {
+  background: var(--snap-pillar-color);
+}
+
+/* ===================================================================
+   PrimeNG component overrides — pillar color alignment
+   =================================================================== */
+
+/* ── All outlined buttons in the document view use pillar color ────── */
+
+:host ::ng-deep .document-view .p-button-outlined {
+  color: var(--snap-pillar-color);
+  border-color: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .document-view .p-button-outlined:hover {
+  background: color-mix(in srgb, var(--snap-pillar-color) 8%, transparent);
+}
+
+/* ── Primary (non-outlined, non-text) buttons use pillar color ─────── */
+
+:host ::ng-deep .document-view .p-button:not(.p-button-outlined):not(.p-button-text):not(.p-button-success):not(.p-button-warn):not(.p-button-danger):not(.p-button-secondary):not(.p-button-info) {
+  background: var(--snap-pillar-color);
+  border-color: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .document-view .p-button:not(.p-button-outlined):not(.p-button-text):not(.p-button-success):not(.p-button-warn):not(.p-button-danger):not(.p-button-secondary):not(.p-button-info):hover {
+  background: var(--snap-pillar-dark);
+  border-color: var(--snap-pillar-dark);
+}
+
+/* ── p-tag: status tag uses SNAP tokens ────────────────────────────── */
+
+:host ::ng-deep .document-view__header-left .p-tag-secondary {
+  background: var(--snap-surface-3);
+  color: var(--snap-text-secondary);
+}
+
+:host ::ng-deep .document-view__header-left .p-tag-warn {
+  background: color-mix(in srgb, var(--snap-warning) 15%, transparent);
+  color: var(--snap-warning);
+}
+
+:host ::ng-deep .document-view__header-left .p-tag-success {
+  background: color-mix(in srgb, var(--snap-success) 15%, transparent);
+  color: var(--snap-success);
+}
+
+:host ::ng-deep .document-view__header-left .p-tag-danger {
+  background: color-mix(in srgb, var(--snap-danger) 15%, transparent);
+  color: var(--snap-danger);
+}
+
+:host ::ng-deep .document-view__header-left .p-tag-info {
+  background: color-mix(in srgb, var(--snap-info) 15%, transparent);
+  color: var(--snap-info);
+}
+
+/* ── p-timeline marker uses pillar color ───────────────────────────── */
+
+:host ::ng-deep .p-timeline-event-marker {
+  border-color: var(--snap-pillar-color) !important;
+  background: var(--snap-pillar-color) !important;
+}
+
+:host ::ng-deep .p-timeline-event-connector {
+  background: var(--snap-border-subtle);
+}
+
+/* ── Back button (rounded text) — no border, pillar on hover ───────── */
+
+:host ::ng-deep .document-view__header-left .p-button-rounded.p-button-text {
+  color: var(--snap-text-secondary);
+  border: none;
+}
+
+:host ::ng-deep .document-view__header-left .p-button-rounded.p-button-text:hover {
+  color: var(--snap-pillar-color);
+  background: color-mix(in srgb, var(--snap-pillar-color) 8%, transparent);
+}
+
+/* ── p-checkbox uses pillar color when checked ─────────────────────── */
+
+:host ::ng-deep .p-checkbox.p-checkbox-checked .p-checkbox-box {
+  background: var(--snap-pillar-color);
+  border-color: var(--snap-pillar-color);
+}
+
+/* ── p-dialog header and footer alignment ──────────────────────────── */
+
+:host ::ng-deep .p-dialog .p-dialog-footer .p-button:not(.p-button-secondary):not(.p-button-text):not(.p-button-success):not(.p-button-warn):not(.p-button-danger) {
+  background: var(--snap-pillar-color);
+  border-color: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .p-dialog .p-dialog-footer .p-button:not(.p-button-secondary):not(.p-button-text):not(.p-button-success):not(.p-button-warn):not(.p-button-danger):hover {
+  background: var(--snap-pillar-dark);
+  border-color: var(--snap-pillar-dark);
+}
+
+/* ── Focus ring for inputs inside document view ────────────────────── */
+
+:host ::ng-deep .document-view .p-inputtext:focus,
+:host ::ng-deep .document-view .p-select.p-focus,
+:host ::ng-deep .document-view .p-textarea:focus {
+  border-color: var(--snap-pillar-color);
+  box-shadow: 0 0 0 1px var(--snap-focus-ring);
+}
+
+/* ── Histórico tab — Timeline entries ──────────────────────────────── */
+
+.document-view__empty-timeline {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-10);
+  /* Typography */
+  color: var(--snap-text-muted);
+  font-size: var(--text-lg);
+}
+
+.document-view__empty-timeline i {
+  font-size: 2.5rem;
+}
+
+.timeline-entry {
+  /* Box Model */
+  padding: var(--space-2) 0;
+}
+
+.timeline-entry__action {
+  /* Typography */
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--snap-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.timeline-entry__feedback,
+.timeline-entry__justification {
+  /* Typography */
+  font-size: var(--text-sm);
+  color: var(--snap-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.timeline-entry__feedback i,
+.timeline-entry__justification i {
+  margin-right: var(--space-1);
+}
+
+.timeline-entry__date {
+  /* Typography */
+  font-family: 'Cygnito Mono', monospace;
+  font-size: var(--text-xs);
+  color: var(--snap-text-muted);
+}
+
+.timeline-entry__step {
+  /* Typography */
+  color: var(--snap-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ── PDF Viewer (dissemination step) ───────────────────────────────── */
+
+.document-view__pdf-area {
+  /* Box Model */
+  flex: 1;
+  min-height: 600px;
+}
+
+.document-view__pdf-viewer {
+  /* Box Model */
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+/* ── Dissemination sections ────────────────────────────────────────── */
+
+.document-view__dissemination-section {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: var(--snap-surface-2);
+}
+
+.document-view__dissemination-section h4 {
+  /* Typography */
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--snap-text-primary);
+}
+
+.document-view__recipient-tags {
+  /* Box Model */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.document-view__email-input {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}

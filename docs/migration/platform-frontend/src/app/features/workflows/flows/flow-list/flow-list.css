@@ -1,0 +1,19 @@
+.flow-list__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.flow-list__filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.flow-list__filters input,
+.flow-list__filters p-select {
+  flex: 1;
+  min-width: 160px;
+}

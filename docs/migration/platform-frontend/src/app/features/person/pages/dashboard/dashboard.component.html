@@ -1,0 +1,450 @@
+<!-- Conteúdo principal: duas colunas contínuas -->
+<section class="pd-layout">
+  <!-- Coluna esquerda: Título + Busca + Monitorados -->
+  <div class="pd-main">
+    <!-- Título da seção (dentro da coluna esquerda) -->
+    <div class="pd-title-bar">
+      <div class="pd-title-bar__left">
+        <i class="pi pi-users pd-title-bar__icon"></i>
+        <span class="pd-title-bar__title font-accent">{{ 'person.dashboard.sectionTitle' | translate }}</span>
+      </div>
+      <div class="pd-title-bar__right">
+        <p-select [options]="categoriasPessoa" [placeholder]="'person.dashboard.listPersons' | translate"
+          optionLabel="label" optionValue="value" [ngModel]="categoriaSelecionada()"
+          (ngModelChange)="listarPorCategoria($event)" class="select-listar pd-select" />
+        <button pButton [label]="'person.dashboard.newPerson' | translate" icon="pi pi-plus" (click)="navegarCadastro()"
+          class="pd-cta"></button>
+      </div>
+    </div>
+
+    <!-- Hero busca -->
+    <div class="pd-hero">
+      <h1 class="pd-hero__title">
+        {{ 'person.dashboard.heroTitle' | translate }}
+        <span class="accent">{{ 'person.dashboard.heroTitleHighlight' | translate }}</span>
+      </h1>
+      <p class="pd-hero__subtitle">{{ 'person.dashboard.heroSubtitle' | translate }}</p>
+
+      <div class="pd-searchrow">
+        <label class="pd-search" [class.is-active]="buscaAtiva()">
+          <i class="pi pi-search pd-search__icon"></i>
+          <input type="text" [ngModel]="termoBusca()" (ngModelChange)="termoBusca.set($event)"
+            (keydown.enter)="buscar()" [placeholder]="'person.dashboard.searchPlaceholder' | translate"
+            autocomplete="off" />
+        </label>
+        <button class="pd-filter-btn" [class.is-active]="totalFiltrosAvancados() > 0"
+          [pTooltip]="'person.dashboard.filtersAdvanced' | translate" tooltipPosition="bottom"
+          (click)="toggleFiltros()">
+          <i class="pi pi-sliders-h"></i>
+          @if (totalFiltrosAvancados() > 0) {
+          <span class="pd-filter-btn__badge">{{ totalFiltrosAvancados() }}</span>
+          }
+        </button>
+      </div>
+    </div>
+
+    <!-- Advanced filters -->
+    <div class="pd-advanced" [class.is-open]="filtrosAbertos()">
+      <div class="pd-advanced__header">
+        <span class="pd-advanced__title font-accent">{{ 'person.dashboard.filtersAdvanced' | translate }}</span>
+        <button class="pd-advanced__collapse" [attr.aria-label]="'Recolher'" (click)="toggleFiltros()">
+          <i class="pi pi-chevron-up"></i>
+        </button>
+      </div>
+      <div class="pd-advanced__row">
+        <div class="pd-advanced__field">
+          <label>{{ 'person.dashboard.filtersProfile' | translate }}</label>
+          <p-multiselect [options]="opcoesPerfil" [ngModel]="filtroPerfil()" (ngModelChange)="filtroPerfil.set($event)"
+            optionLabel="label" optionValue="value" [placeholder]="'person.dashboard.filtersSelect' | translate"
+            [showClear]="true" styleClass="pd-multi-ng" />
+        </div>
+        <div class="pd-advanced__field">
+          <label>{{ 'person.dashboard.filtersFaction' | translate }}</label>
+          <p-multiselect [options]="opcoesFaccao" [ngModel]="filtroFaccao()" (ngModelChange)="filtroFaccao.set($event)"
+            optionLabel="label" optionValue="value" [placeholder]="'person.dashboard.filtersSelect' | translate"
+            [showClear]="true" styleClass="pd-multi-ng" />
+        </div>
+        <div class="pd-advanced__field">
+          <label>{{ 'person.dashboard.filtersUnit' | translate }}</label>
+          <p-multiselect [options]="opcoesUnidade" [ngModel]="filtroUnidade()"
+            (ngModelChange)="filtroUnidade.set($event)" optionLabel="label" optionValue="value"
+            [placeholder]="'person.dashboard.filtersSelect' | translate" [showClear]="true" styleClass="pd-multi-ng" />
+        </div>
+      </div>
+      <div class="pd-advanced__actions">
+        <button class="pd-advanced__apply" (click)="aplicarFiltros()">
+          {{ 'person.dashboard.filtersApply' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabs bar (Monitorados) -->
+    <div class="pd-tabs">
+      <div class="pd-tabs__list">
+        <button class="pd-tab is-active" type="button">
+          <i class="pi pi-eye pd-tab__icon"></i>
+          <span>{{ 'person.dashboard.monitored' | translate }}</span>
+          <span class="pd-tab__count">{{ monitoradosFiltrados().length }}</span>
+        </button>
+      </div>
+      <div class="pd-tabs__toolbar">
+        <button class="pd-toolbar-btn" [class.is-active]="ordenacao() === 'data'" (click)="toggleOrdenacaoData()"
+          [attr.title]="'Ordenar por data'">
+          <i class="pi pi-calendar"></i>
+        </button>
+        <button class="pd-toolbar-btn" [class.is-active]="ordenacao() === 'az' || ordenacao() === 'za'"
+          (click)="toggleOrdenacaoAlfa()" [attr.title]="'Ordenar alfabeticamente'">
+          <i class="pi pi-sort-alpha-down"></i>
+        </button>
+        <span class="pd-toolbar-divider"></span>
+        <p-multiselect [options]="opcoesRisco" [ngModel]="filtroRisco()"
+          (ngModelChange)="filtroRisco.set($event); paginaMonitorados.set(0)" optionLabel="label" optionValue="value"
+          [placeholder]="'person.dashboard.filtersRisk' | translate" [maxSelectedLabels]="1"
+          [selectedItemsLabel]="'{0} riscos'" [showHeader]="false" styleClass="pd-toolbar-multi" />
+        <p-multiselect [options]="opcoesPerfil" [ngModel]="filtroPerfil()"
+          (ngModelChange)="filtroPerfil.set($event); paginaMonitorados.set(0)" optionLabel="label" optionValue="value"
+          [placeholder]="'person.dashboard.filtersProfile' | translate" [maxSelectedLabels]="1"
+          [selectedItemsLabel]="'{0} perfis'" [showHeader]="false" styleClass="pd-toolbar-multi" />
+      </div>
+    </div>
+
+    <!-- Grid de cards -->
+    @if (personData.isLoading()) {
+    <div class="pd-grid">
+      @for (s of skeletonArray; track $index) {
+      <article class="pcard is-skeleton">
+        <div class="pcard__head">
+          <div class="pcard__photo-wrap">
+            <div class="sk"></div>
+          </div>
+          <div class="pcard__body">
+            <div class="sk sk--line sk--line-short"></div>
+            <div class="sk sk--line sk--line-long"></div>
+            <div class="sk sk--line sk--line-med"></div>
+          </div>
+        </div>
+        <div class="pcard__tags">
+          <div class="sk sk--tag"></div>
+          <div class="sk sk--tag sk--tag-lg"></div>
+        </div>
+        <div class="pcard__divider"></div>
+        <div class="pcard__alert">
+          <div class="sk sk--dot"></div>
+          <div class="pcard__alert-body">
+            <div class="sk sk--line sk--line-short"></div>
+            <div class="sk sk--line sk--line-long"></div>
+          </div>
+        </div>
+      </article>
+      }
+    </div>
+    } @else if (personData.error()) {
+    <div class="pd-error">
+      <i class="pi pi-exclamation-triangle pd-error__icon"></i>
+      <span class="pd-error__text">
+        {{ 'person.dashboard.errorBanner' | translate }}: {{ personData.error() }}
+      </span>
+      <button pButton [label]="'person.dashboard.retry' | translate" icon="pi pi-refresh" [text]="true"
+        (click)="retryLoad()"></button>
+    </div>
+    } @else if (monitorados().length === 0) {
+    <div class="pd-empty">
+      <i class="pi pi-inbox pd-empty__icon"></i>
+      <p class="pd-empty__text">{{ 'person.dashboard.emptyState' | translate }}</p>
+    </div>
+    } @else if (carregandoPagina()) {
+    <div class="pd-grid">
+      @for (s of skeletonArray; track $index) {
+      <article class="pcard is-skeleton">
+        <div class="pcard__head">
+          <div class="pcard__photo-wrap">
+            <div class="sk"></div>
+          </div>
+          <div class="pcard__body">
+            <div class="sk sk--line sk--line-short"></div>
+            <div class="sk sk--line sk--line-long"></div>
+            <div class="sk sk--line sk--line-med"></div>
+          </div>
+        </div>
+        <div class="pcard__tags">
+          <div class="sk sk--tag"></div>
+          <div class="sk sk--tag sk--tag-lg"></div>
+        </div>
+        <div class="pcard__divider"></div>
+        <div class="pcard__alert">
+          <div class="sk sk--dot"></div>
+          <div class="pcard__alert-body">
+            <div class="sk sk--line sk--line-short"></div>
+            <div class="sk sk--line sk--line-long"></div>
+          </div>
+        </div>
+      </article>
+      }
+    </div>
+    } @else {
+    <div class="pd-grid">
+      @for (m of monitoradosPagina(); track m.id) {
+      <article class="pcard" (click)="navegarPessoa(m.id)">
+        @if (m.alertas.length > 0) {
+        <span class="pcard__alertbadge">{{ m.alertas.length }}</span>
+        }
+        <div class="pcard__head" [class.is-no-photo]="!m.fotoUrl">
+          @if (m.fotoUrl) {
+          <div class="pcard__photo-wrap">
+            <img [src]="m.fotoUrl" [alt]="m.nome" />
+            <span class="pcard__profile-tag" [class]="'is-' + m.perfilPrincipal">
+              {{ m.perfilPrincipal }}
+            </span>
+          </div>
+          } @else {
+          <div class="pcard__photo-wrap">
+            <span class="pcard__photo-initials">{{ iniciais(m.nome) }}</span>
+            <span class="pcard__profile-tag" [class]="'is-' + m.perfilPrincipal">
+              {{ m.perfilPrincipal }}
+            </span>
+          </div>
+          }
+          <div class="pcard__body">
+            <div class="pcard__risk font-accent">
+              <span class="pcard__risk-dot" [class]="'is-' + m.nivelRisco"></span>
+              <span>Risco {{ m.nivelRisco }}</span>
+            </div>
+            <h3 class="pcard__name" [title]="m.nome">{{ m.nome }}</h3>
+            @if (m.vulgo) {
+            <span class="pcard__alias">"{{ m.vulgo }}"</span>
+            }
+            @if (m.sourceDisplayName || (m.mergedFrom && m.mergedFrom > 1)) {
+            <div class="pcard__provenance">
+              @if (m.sourceDisplayName) {
+              <span class="pcard__source-badge"
+                [pTooltip]="('person.dashboard.provenanceSource' | translate) + ': ' + m.sourceDisplayName"
+                tooltipPosition="bottom">
+                <i class="pi pi-database"></i> {{ m.sourceDisplayName }}
+              </span>
+              }
+              @if (m.mergedFrom && m.mergedFrom > 1) {
+              <span class="pcard__merge-badge"
+                [pTooltip]="'person.dashboard.provenanceMerged' | translate:{ count: m.mergedFrom }"
+                tooltipPosition="bottom">
+                <i class="pi pi-link"></i> {{ m.mergedFrom }}
+              </span>
+              }
+            </div>
+            }
+          </div>
+        </div>
+        <div class="pcard__tags">
+          @for (t of m.tags; track t.rotulo) {
+          <span class="ptag font-accent" [class.kind-faction]="isTagFaccao(t.rotulo, t.categoria)">
+            {{ t.rotulo }}
+          </span>
+          }
+        </div>
+        <div class="pcard__divider"></div>
+        <div class="pcard__alert">
+          <i class="pi pi-bell pcard__alert-icon"></i>
+          @if (isBuscando(m.id)) {
+          <div class="pcard__alert-body is-searching">
+            <span class="pcard__alert-text">{{ 'person.dashboard.searchingAlerts' | translate }}</span>
+          </div>
+          } @else if (m.alertas.length === 0) {
+          <div class="pcard__alert-body">
+            <span class="pcard__alert-text is-empty">{{ 'person.dashboard.noAlerts' | translate }}</span>
+          </div>
+          <button class="pcard__alert-refresh" [attr.title]="'Verificar novamente'"
+            (click)="simularBusca(m.id, $event)">
+            <i class="pi pi-refresh"></i>
+          </button>
+          } @else {
+          <div class="pcard__alert-body" [class]="getAnimacao(m.id)">
+            <span class="pcard__alert-date font-accent">{{ formatarDataCurta(m.alertas[getAlertaIndex(m.id)].data)
+              }}</span>
+            <span class="pcard__alert-text">{{ m.alertas[getAlertaIndex(m.id)].texto }}</span>
+          </div>
+          @if (m.alertas.length > 1) {
+          <div class="pcard__alert-nav">
+            <button [disabled]="getAlertaIndex(m.id) === 0" (click)="alertaAnterior(m.id, m.alertas.length, $event)">
+              <i class="pi pi-chevron-up"></i>
+            </button>
+            <button [disabled]="getAlertaIndex(m.id) === m.alertas.length - 1"
+              (click)="alertaProximo(m.id, m.alertas.length, $event)">
+              <i class="pi pi-chevron-down"></i>
+            </button>
+          </div>
+          }
+          }
+        </div>
+      </article>
+      } @empty {
+      <div class="pd-empty-grid">{{ 'person.dashboard.noMonitored' | translate }}</div>
+      }
+    </div>
+
+    <!-- Paginação -->
+    <div class="pd-pagination">
+      <button class="pd-pagination__btn" [disabled]="paginaSimulada() === 1 || carregandoPagina()"
+        (click)="paginaSimuladaAnterior()">
+        <i class="pi pi-arrow-left"></i>
+        <span>Página anterior</span>
+      </button>
+      <div class="pd-pagination__pages">
+        @for (p of opcoesPagina; track p.value) {
+        <button class="pd-pagination__page font-accent" [class.is-active]="paginaSimulada() === p.value"
+          (click)="irParaPagina(p.value)">
+          {{ p.value }}
+        </button>
+        }
+      </div>
+      <button class="pd-pagination__btn" [disabled]="paginaSimulada() === totalPaginasSimuladas || carregandoPagina()"
+        (click)="paginaSimuladaProxima()">
+        <span>Próxima página</span>
+        <i class="pi pi-arrow-right"></i>
+      </button>
+    </div>
+    }
+  </div>
+
+  <!-- Coluna direita: distribuição + alertas + pendências -->
+  <aside class="pd-side">
+    <!-- Distribuição -->
+    <div class="pd-side-card pd-distrib">
+      <div class="pd-distrib__total">
+        <i class="pi pi-users"></i>
+        <span class="pd-distrib__total-num font-accent">{{ formatarNumero(totalBase) }}</span>
+        <span class="pd-distrib__total-label">{{ 'person.dashboard.personsInBase' | translate }}</span>
+      </div>
+      <div class="pd-distrib__bar">
+        @for (p of distribuicaoPerfis; track p.perfil) {
+        <div class="pd-distrib__bar-seg" [style.flex]="p.percentual"
+          [style.background-color]="'var(--snap-perfil-' + p.perfil + ')'"
+          [title]="p.rotulo + ': ' + formatarNumero(p.total)"></div>
+        }
+      </div>
+      <div class="pd-distrib__legend">
+        @for (p of distribuicaoPerfis; track p.perfil) {
+        <div class="pd-distrib__legend-item">
+          <div class="pd-distrib__legend-head">
+            <span class="pd-distrib__legend-dot"
+              [style.background-color]="'var(--snap-perfil-' + p.perfil + ')'"></span>
+            <span>{{ p.rotulo }}</span>
+          </div>
+          <span class="pd-distrib__legend-count font-accent">{{ formatarNumero(p.total) }}</span>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Alertas recentes -->
+    <div class="pd-side-card">
+      <div class="pd-side-card__header">
+        <span class="pd-side-card__title font-accent">
+          <i class="pi pi-bell"></i>{{ 'person.dashboard.recentAlerts' | translate }}
+        </span>
+        <span class="pd-side-card__badge">8</span>
+      </div>
+      <div class="pd-alert-list">
+        @for (a of alertasRecentes(); track a.id) {
+        <div class="pd-alert-item" (click)="navegarPessoa(a.pessoaId)">
+          @if (a.fotoUrl) {
+          <img class="pd-alert-item__photo" [src]="a.fotoUrl" alt="" />
+          } @else {
+          <div class="pd-alert-item__photo pd-alert-item__photo--placeholder">
+            <span>{{ iniciais(a.nomePessoa) }}</span>
+          </div>
+          }
+          <div class="pd-alert-item__body">
+            <span class="pd-alert-item__name">{{ a.nomePessoa }}</span>
+            <span class="pd-alert-item__type">{{ a.tipo | titlecase }}</span>
+            <div class="pd-alert-item__meta">
+              <span class="pd-alert-item__source font-accent" [class]="'is-' + a.fonte">{{ a.fonte }}</span>
+              <span class="pd-alert-item__time font-accent">{{ formatarDataHora(a.dataGeracao) }}</span>
+            </div>
+          </div>
+          <a class="pd-alert-item__action font-accent">
+            {{ 'person.dashboard.viewPerson' | translate }}
+            <i class="pi pi-arrow-right"></i>
+          </a>
+        </div>
+        } @empty {
+        <p class="pd-empty-msg">{{ 'person.dashboard.noAlerts' | translate }}</p>
+        }
+      </div>
+    </div>
+
+    <!-- Pendências -->
+    <div class="pd-side-card">
+      <div class="pd-side-card__header">
+        <span class="pd-side-card__title font-accent">
+          <i class="pi pi-inbox"></i>{{ 'person.dashboard.pendencies' | translate }}
+        </span>
+        <span class="pd-side-card__badge">5</span>
+      </div>
+      <div class="pd-pend__chips">
+        @for (cat of categorias; track cat.valor) {
+        <button class="pd-pend__chip" [class.is-active]="categoriaFiltro() === cat.valor"
+          (click)="selecionarCategoria(cat.valor)">
+          {{ cat.rotulo }}
+        </button>
+        }
+      </div>
+      <table class="pd-pend__table">
+        <thead>
+          <tr>
+            <th>{{ 'person.dashboard.pendencyCategory' | translate }}</th>
+            <th>{{ 'person.dashboard.pendencyDate' | translate }}</th>
+            <th>{{ 'person.dashboard.pendencyPerson' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (pend of pendenciasFiltradas(); track pend.id) {
+          <tr (click)="navegarPendencia(pend)">
+            <td>
+              <span class="pend-cat font-accent" [class]="'is-' + pend.categoria">
+                {{ categoriaLabel(pend.categoria) }}
+              </span>
+            </td>
+            <td>
+              <span class="pend-date font-accent">{{ formatarData(pend.data) }}</span>
+            </td>
+            <td>
+              <div class="pend-person">
+                @if (pend.pessoaDuplicada) {
+                <div class="pend-person__avatar-stack">
+                  <div class="pend-person__avatar">
+                    @if (pend.pessoa.fotoUrl) {
+                    <img [src]="pend.pessoa.fotoUrl" alt="" />
+                    } @else {
+                    <span>{{ iniciais(pend.pessoa.nome) }}</span>
+                    }
+                  </div>
+                  <div class="pend-person__avatar">
+                    @if (pend.pessoaDuplicada.fotoUrl) {
+                    <img [src]="pend.pessoaDuplicada.fotoUrl" alt="" />
+                    } @else {
+                    <span>{{ iniciais(pend.pessoaDuplicada.nome) }}</span>
+                    }
+                  </div>
+                </div>
+                } @else {
+                <div class="pend-person__avatar">
+                  @if (pend.pessoa.fotoUrl) {
+                  <img [src]="pend.pessoa.fotoUrl" alt="" />
+                  } @else {
+                  <span>{{ iniciais(pend.pessoa.nome) }}</span>
+                  }
+                </div>
+                }
+                <span class="pend-person__name">{{ pend.pessoa.nome }}</span>
+              </div>
+            </td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="3" class="pd-empty-msg">{{ 'person.dashboard.noPendencies' | translate }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </aside>
+</section>

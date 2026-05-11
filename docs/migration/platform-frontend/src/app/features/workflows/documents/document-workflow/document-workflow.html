@@ -1,0 +1,78 @@
+<div class="doc-workflow">
+  <h3>Acoes do Workflow</h3>
+
+  @if (availableTransitions().length > 0) {
+    <div class="doc-workflow__section">
+      <h4>Transicoes Disponiveis</h4>
+      <div class="doc-workflow__transitions">
+        @for (t of availableTransitions(); track t.id) {
+          <button pButton [label]="t.name" [severity]="transitionSeverity(t.type)" class="p-button-outlined" (click)="openTransitionForm(t)"></button>
+        }
+      </div>
+    </div>
+  } @else {
+    <p class="text-color-secondary">Nenhuma transicao disponivel para este ator.</p>
+  }
+
+  @if (canFormalize()) {
+    <div class="doc-workflow__section">
+      <h4>Formalizacao</h4>
+      <button pButton label="Formalizar Documento" icon="pi pi-check-circle" severity="success" (click)="formalize()"></button>
+      <small class="text-color-secondary">Gera versao final imutavel e habilita difusao.</small>
+    </div>
+  }
+
+  @if (canDisseminateInternal()) {
+    <div class="doc-workflow__section">
+      <h4>Difusao Interna</h4>
+      <button pButton label="Difundir Internamente" icon="pi pi-send" severity="info" class="p-button-outlined" (click)="openDisseminationForm('INTERNAL')"></button>
+    </div>
+  }
+
+  @if (canDisseminateExternal()) {
+    <div class="doc-workflow__section">
+      <h4>Difusao Externa</h4>
+      <button pButton label="Difundir Externamente" icon="pi pi-external-link" severity="warn" class="p-button-outlined" (click)="openDisseminationForm('EXTERNAL')"></button>
+      <small class="text-color-secondary">Documento deve estar formalizado. Executado pelo Protocolo.</small>
+    </div>
+  }
+
+  @if (showTransitionForm() && selectedTransition()) {
+    <div class="doc-workflow__dialog">
+      <h4>{{ selectedTransition()!.name }}</h4>
+      <p-tag [value]="transitionTypeLabel(selectedTransition()!.type)" [severity]="transitionSeverity(selectedTransition()!.type)" />
+      <div class="doc-workflow__field">
+        <label>Observacoes</label>
+        <textarea pTextarea [ngModel]="transitionNotes()" (ngModelChange)="transitionNotes.set($event)" rows="3" placeholder="Observacoes opcionais"></textarea>
+      </div>
+      <div class="doc-workflow__actions">
+        <button pButton label="Cancelar" class="p-button-outlined" (click)="showTransitionForm.set(false)"></button>
+        <button pButton label="Confirmar" severity="success" (click)="executeTransition()"></button>
+      </div>
+    </div>
+  }
+
+  @if (showDisseminationForm()) {
+    <div class="doc-workflow__dialog">
+      <h4>{{ disseminationType() === 'INTERNAL' ? 'workflows.stepType.internal_dissemination' : 'workflows.stepType.external_dissemination' }}</h4>
+      <div class="doc-workflow__field">
+        <label>Destinatarios</label>
+        <app-org-selector [multiple]="true" [selectedCombos]="disseminationTargets()" (selectionChange)="onTargetSelectionChange($event)" />
+      </div>
+      <div class="doc-workflow__field">
+        <label>Observacoes</label>
+        <textarea pTextarea [ngModel]="disseminationNotes()" (ngModelChange)="disseminationNotes.set($event)" rows="2" placeholder="Observacoes opcionais"></textarea>
+      </div>
+      @if (disseminationType() === 'EXTERNAL') {
+        <div class="doc-workflow__field">
+          <label>Comprovante (mockado)</label>
+          <textarea pTextarea [ngModel]="disseminationReceipt()" (ngModelChange)="disseminationReceipt.set($event)" rows="2" placeholder="Numero de protocolo ou referencia"></textarea>
+        </div>
+      }
+      <div class="doc-workflow__actions">
+        <button pButton label="Cancelar" class="p-button-outlined" (click)="showDisseminationForm.set(false)"></button>
+        <button pButton label="Confirmar Difusao" severity="info" (click)="executeDissemination()"></button>
+      </div>
+    </div>
+  }
+</div>

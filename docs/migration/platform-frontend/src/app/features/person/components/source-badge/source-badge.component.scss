@@ -1,0 +1,31 @@
+.source-badge {
+  // Box Model
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2-5);
+  border-radius: var(--radius-sm);
+  // Typography
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  &[data-fonte='sipen'] {
+    // Visuals
+    background: color-mix(in srgb, var(--snap-pillar-color) 15%, transparent);
+    color: var(--snap-pillar-color);
+  }
+
+  &[data-fonte='snap'] {
+    // Visuals
+    background: color-mix(in srgb, var(--snap-info) 15%, transparent);
+    color: var(--snap-info);
+  }
+
+  &[data-fonte='manual'] {
+    // Visuals
+    background: color-mix(in srgb, var(--snap-text-muted) 15%, transparent);
+    color: var(--snap-text-secondary);
+  }
+}

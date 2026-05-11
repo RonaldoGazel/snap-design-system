@@ -1,0 +1,45 @@
+@if (visible()) {
+  <div class="ctx-backdrop" (click)="close()"></div>
+  <div class="ctx-menu" #menuEl [style.left.px]="posX()" [style.top.px]="posY()">
+    <div class="ctx-header">
+      <span class="ctx-title">{{ profile()?.unit_profile?.profile?.name }}</span>
+      <span class="ctx-subtitle">{{ profile()?.unit_profile?.unit?.acronym }}</span>
+    </div>
+
+    <div class="ctx-section">
+      <span class="ctx-section-title">
+        Permissões
+        @if (isCustomized()) {
+          <span class="ctx-badge">customizado</span>
+        }
+      </span>
+      <div class="ctx-permissions">
+        @for (perm of availablePermissions; track perm) {
+          <label class="ctx-perm-item">
+            <p-checkbox
+              [binary]="true"
+              [ngModel]="isSelected(perm)"
+              (onChange)="togglePermission(perm)"
+            />
+            <span>{{ perm }}</span>
+          </label>
+        }
+      </div>
+    </div>
+
+    <div class="ctx-actions">
+      @if (isCustomized()) {
+        <button pButton type="button" label="Restaurar da etapa" icon="pi pi-refresh"
+                class="p-button-text p-button-sm" (click)="restoreDefaults()"></button>
+      }
+      <button pButton type="button" label="Salvar" icon="pi pi-check"
+              class="p-button-sm" (click)="save()"></button>
+    </div>
+
+    <div class="ctx-divider"></div>
+
+    <button class="ctx-delete-btn" (click)="deleteProfile()">
+      <i class="pi pi-trash"></i> Excluir perfil da etapa
+    </button>
+  </div>
+}

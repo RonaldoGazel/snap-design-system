@@ -1,0 +1,41 @@
+<p-dialog header="Novo Documento" [(visible)]="visible" [modal]="true" [style]="{ width: '520px' }"
+    [closable]="!saving()">
+    <div class="document-form-dialog__body">
+        <div class="document-form-dialog__field">
+            <label class="document-form-dialog__label">Título <span
+                    class="document-form-dialog__required">*</span></label>
+            <input pInputText [ngModel]="form().title" (ngModelChange)="patch({ title: $event })"
+                placeholder="Título do documento" class="w-full" />
+        </div>
+
+        <div class="document-form-dialog__row">
+            <div class="document-form-dialog__field">
+                <label class="document-form-dialog__label">Distribuição</label>
+                <p-select [options]="[{ label: distributionLabel(), value: process().distribution }]"
+                    [ngModel]="process().distribution" [disabled]="true" optionLabel="label" optionValue="value" fluid
+                    appendTo="body" />
+            </div>
+            <div class="document-form-dialog__field">
+                <label class="document-form-dialog__label">Tipo <span
+                        class="document-form-dialog__required">*</span></label>
+                <p-select [options]="docTypeOptions()" [ngModel]="form().doc_type"
+                    (ngModelChange)="onDocTypeChange($event)" optionLabel="label" optionValue="value"
+                    placeholder="Selecione o tipo" fluid appendTo="body" />
+            </div>
+        </div>
+
+        <div class="document-form-dialog__field">
+            <label class="document-form-dialog__label">Template</label>
+            <p-select [options]="templateOptions()" [ngModel]="form().template_key"
+                (ngModelChange)="onTemplateChange($event)" optionLabel="label" optionValue="value"
+                [disabled]="!form().doc_type" fluid appendTo="body" />
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button label="Cancelar" severity="secondary" [outlined]="true" [disabled]="saving()"
+            (onClick)="visible.set(false)" />
+        <p-button label="Criar" icon="pi pi-check" [loading]="saving()"
+            [disabled]="!form().title.trim() || !form().doc_type" (onClick)="submit()" />
+    </ng-template>
+</p-dialog>

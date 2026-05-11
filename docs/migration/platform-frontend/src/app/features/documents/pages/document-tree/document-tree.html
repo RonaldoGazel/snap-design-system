@@ -1,0 +1,23 @@
+<div class="l-document-tree">
+    <div class="document-tree__header">
+        <span class="document-tree__title">Documentos</span>
+        @if (canCreate()) {
+        <p-button icon="pi pi-plus" label="Novo" size="small" severity="secondary" [outlined]="true"
+            (onClick)="createRequested.emit(undefined)" />
+        }
+    </div>
+
+    @if (loading()) {
+    <div class="document-tree__loading">
+        <i class="pi pi-spin pi-spinner"></i>
+    </div>
+    } @else if (nodes().length === 0) {
+    <div class="document-tree__empty">
+        <i class="pi pi-folder-open"></i>
+        <span>Nenhum documento</span>
+    </div>
+    } @else {
+    <p-tree [value]="nodes()" selectionMode="single" [(selection)]="selectedNode" (onNodeSelect)="onNodeSelect($event)"
+        styleClass="document-tree__tree-widget" />
+    }
+</div>

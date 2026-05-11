@@ -1,0 +1,132 @@
+<div class="document-home">
+  <p-toast />
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
+  <div class="document-home__header">
+    <div class="section-heading">
+      <h2 class="section-heading__name">
+        <i class="pi pi-file-edit section-heading__icon"></i>
+        Documentos
+      </h2>
+      <div class="section-heading__actions">
+        <p-button label="Caixa de Entrada" icon="pi pi-inbox" [outlined]="true"
+          (onClick)="navigateToInbox()" />
+        <p-button label="Novo Documento" icon="pi pi-plus" class="document-home__cta"
+          (onClick)="navigateToNewDocument()" />
+      </div>
+    </div>
+  </div>
+
+  @if (error()) {
+  <div class="document-home__error">
+    <i class="pi pi-exclamation-triangle"></i>
+    <span>{{ error() }}</span>
+    <p-button label="Tentar Novamente" icon="pi pi-refresh" [text]="true" (onClick)="loadDashboard()" />
+  </div>
+  }
+
+  <!-- ── KPI Strip ───────────────────────────────────────────────── -->
+  <div class="document-home__kpi-strip">
+    @for (kpi of kpis(); track kpi.label) {
+    <div class="kpi-card" [class.is-clickable]="!!kpi.route" (click)="onKpiClick(kpi)">
+      <span class="kpi-card__value">{{ kpi.value }}</span>
+      <span class="kpi-card__label">{{ kpi.label }}</span>
+    </div>
+    }
+  </div>
+
+  <!-- ── Work Queue ──────────────────────────────────────────────── -->
+  <section class="document-home__section">
+    <div class="section-heading__row">
+      <h3 class="document-home__section-name">
+        Fila de Trabalho
+        @if (workQueueItems().length > 0) {
+        <span class="count-badge">{{ workQueueItems().length }}</span>
+        }
+      </h3>
+    </div>
+
+    @if (loading()) {
+    <div class="document-home__loading">
+      <i class="pi pi-spin pi-spinner"></i>
+      <span>Carregando...</span>
+    </div>
+    } @else if (workQueueItems().length > 0) {
+    <p-table [value]="workQueueItems()" [rowHover]="true" dataKey="assignmentId">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Documento</th>
+          <th>Etapa</th>
+          <th>Ação Esperada</th>
+          <th>Prioridade</th>
+          <th>Tipo Documental</th>
+          <th>Criado em</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr (click)="onWorkQueueItemClick(item)" class="document-home__row">
+          <td>{{ item.documentTitle }}</td>
+          <td>{{ item.stepName }}</td>
+          <td>{{ item.expectedAction ?? '—' }}</td>
+          <td>
+            <p-tag [value]="item.priority" [severity]="prioritySeverity(item.priority)" />
+          </td>
+          <td>{{ item.documentTypeName }}</td>
+          <td class="document-home__date">{{ item.createdAt | dateFormat }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    } @else {
+    <div class="document-home__empty">
+      <div class="empty-icon-wrapper"><i class="pi pi-check-circle"></i></div>
+      <span class="empty-label">Nenhuma tarefa pendente.</span>
+      <span class="hint">Sua fila de trabalho está vazia.</span>
+    </div>
+    }
+  </section>
+
+  <!-- ── My Initiated Documents ──────────────────────────────────── -->
+  <section class="document-home__section">
+    <div class="section-heading__row">
+      <h3 class="document-home__section-name">
+        Meus Documentos
+        @if (myDocuments().length > 0) {
+        <span class="count-badge">{{ myDocuments().length }}</span>
+        }
+      </h3>
+    </div>
+
+    @if (myDocuments().length > 0) {
+    <p-table [value]="myDocuments()" [rowHover]="true" dataKey="documentId">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Documento</th>
+          <th>Etapa Atual</th>
+          <th>Status</th>
+          <th>Prioridade</th>
+          <th>Criado em</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr (click)="onWorkQueueItemClick(item)" class="document-home__row">
+          <td>{{ item.documentTitle }}</td>
+          <td>{{ item.currentStepName }}</td>
+          <td>
+            <p-tag [value]="item.status" severity="info" />
+          </td>
+          <td>
+            <p-tag [value]="item.priority" [severity]="prioritySeverity(item.priority)" />
+          </td>
+          <td class="document-home__date">{{ item.createdAt | dateFormat }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    } @else {
+    <div class="document-home__empty">
+      <div class="empty-icon-wrapper"><i class="pi pi-folder-open"></i></div>
+      <span class="empty-label">Nenhum documento iniciado.</span>
+      <span class="hint">Crie um novo documento para começar.</span>
+    </div>
+    }
+  </section>
+</div>

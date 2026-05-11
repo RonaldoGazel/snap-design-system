@@ -1,0 +1,2 @@
+# Depth of Applicability
+The "depth of applicability" refers to the number of generations in the HTML tree that a CSS selector targets. Deeply nested selectors (e.g., `#sidebar div ul li`) create tight coupling between CSS and HTML, making components difficult to move or reuse. SMACSS advocates for minimizing this depth by using shallow selectors and specific class names (e.g., `.pod-body` instead of `.pod > ul`). This approach strikes a balance between avoiding "classitis" and ensuring the CSS remains flexible and easy to maintain.

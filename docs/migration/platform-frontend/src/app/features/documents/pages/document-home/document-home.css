@@ -1,0 +1,326 @@
+/* ===================================================================
+   Module: document-home
+   SMACSS category: Module (BEM notation)
+   Follows person module visual patterns with SNAP design tokens.
+   =================================================================== */
+
+/* Block */
+.document-home {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  /* Typography */
+  color: var(--snap-text-primary);
+}
+
+/* ── Header ────────────────────────────────────────────────────────── */
+
+.document-home__header .section-heading {
+  /* Box Model — reuse global .section-heading from person module */
+  padding: var(--space-3-5) 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--snap-border-subtle);
+}
+
+.document-home__cta {
+  /* Typography */
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+:host ::ng-deep .document-home__cta .p-button {
+  /* Box Model */
+  padding: var(--space-2) var(--space-3-5);
+  border-color: var(--snap-pillar-color);
+  /* Typography */
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  /* Visuals */
+  background: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .document-home__cta .p-button:hover {
+  /* Visuals */
+  border-color: var(--snap-pillar-dark);
+  background: var(--snap-pillar-dark);
+}
+
+/* ── Error ─────────────────────────────────────────────────────────── */
+
+.document-home__error {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--snap-danger);
+  border-radius: var(--radius-lg);
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-danger);
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-danger) 8%, transparent);
+}
+
+/* ── KPI Strip ─────────────────────────────────────────────────────── */
+
+.document-home__kpi-strip {
+  /* Box Model */
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.document-home__kpi-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.kpi-card {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 120px;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: var(--snap-surface-2);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.kpi-card.is-clickable {
+  /* Typography */
+  cursor: pointer;
+}
+
+.kpi-card.is-clickable:hover {
+  /* Box Model */
+  border-color: var(--snap-pillar-light);
+  /* Visuals */
+  background: var(--snap-surface-3);
+}
+
+.kpi-card__value {
+  /* Typography */
+  font-family: 'Cygnito Mono', monospace;
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--snap-text-primary);
+}
+
+.kpi-card__label {
+  /* Typography */
+  font-size: var(--text-sm);
+  color: var(--snap-text-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ── Sections ──────────────────────────────────────────────────────── */
+
+.document-home__section {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+}
+
+.document-home__section-name {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-2-5);
+  margin: 0;
+  /* Typography */
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--snap-text-primary);
+}
+
+/* ── Count badge — matches person module .count-badge ──────────────── */
+
+.count-badge {
+  /* Box Model */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-lg);
+  /* Typography */
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  /* Visuals */
+  background: var(--snap-pillar-color);
+}
+
+/* ── Table rows ────────────────────────────────────────────────────── */
+
+.document-home__row {
+  /* Typography */
+  cursor: pointer;
+}
+
+.document-home__title-cell {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-2-5);
+}
+
+.document-home__sync-icon {
+  /* Typography */
+  font-size: var(--text-base);
+  color: var(--snap-warning);
+}
+
+.document-home__date {
+  /* Typography */
+  font-family: 'Cygnito Mono', monospace;
+  font-size: var(--text-base);
+  color: var(--snap-text-secondary);
+}
+
+/* ── Classification badge ──────────────────────────────────────────── */
+
+.document-home__classification {
+  /* Box Model */
+  display: inline-block;
+  padding: var(--space-1) var(--space-2-5);
+  border-radius: var(--radius-sm);
+  /* Typography */
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.document-home__classification[data-level="SIGILOSO"] {
+  /* Typography */
+  color: var(--snap-danger);
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-danger) 12%, transparent);
+}
+
+.document-home__classification[data-level="RESERVADO"] {
+  /* Typography */
+  color: var(--snap-warning);
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-warning) 12%, transparent);
+}
+
+.document-home__classification[data-level="PUBLICO"] {
+  /* Typography */
+  color: var(--snap-success);
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-success) 12%, transparent);
+}
+
+/* ── Empty states ──────────────────────────────────────────────────── */
+
+.document-home__empty {
+  /* Box Model — reuses global .table-empty-state pattern */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2-5);
+  padding: var(--space-9) var(--space-5);
+  border: 1px dashed var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.document-home__empty .empty-icon-wrapper {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-pillar-color) 12%, transparent);
+}
+
+.document-home__empty .empty-icon-wrapper i {
+  /* Typography */
+  font-size: var(--text-4xl);
+  color: var(--snap-pillar-color);
+}
+
+.document-home__empty-text {
+  /* Box Model */
+  padding: var(--space-5);
+  /* Typography */
+  font-size: var(--text-lg);
+  text-align: center;
+  color: var(--snap-text-muted);
+}
+
+/* ── Notifications ─────────────────────────────────────────────────── */
+
+.document-home__notification-list {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5);
+}
+
+.document-home__notification {
+  /* Box Model */
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Typography */
+  cursor: pointer;
+  /* Visuals */
+  background: var(--snap-surface-2);
+  transition: background 0.15s;
+}
+
+.document-home__notification:hover {
+  /* Visuals */
+  background: var(--snap-surface-3);
+}
+
+.document-home__notification.is-unread {
+  /* Box Model */
+  border-left: 3px solid var(--snap-pillar-color);
+}
+
+.document-home__notification-header {
+  /* Box Model */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-1);
+}
+
+.document-home__notification-title {
+  /* Typography */
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--snap-text-primary);
+}
+
+.document-home__notification-date {
+  /* Typography */
+  font-family: 'Cygnito Mono', monospace;
+  font-size: var(--text-base);
+  color: var(--snap-text-muted);
+}
+
+.document-home__notification-message {
+  /* Box Model */
+  margin: 0;
+  /* Typography */
+  font-size: var(--text-base);
+  color: var(--snap-text-secondary);
+}

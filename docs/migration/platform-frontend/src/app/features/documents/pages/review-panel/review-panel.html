@@ -1,0 +1,46 @@
+<p-toast />
+
+<div class="review-panel">
+  <div class="review-panel__header">
+    <h2>Revisões Pendentes</h2>
+    <p class="hint">Documentos aguardando sua revisão. Clique para abrir e tomar uma decisão.</p>
+  </div>
+
+  @if (loading()) {
+  <div class="review-panel__loading">
+    <i class="pi pi-spin pi-spinner"></i>
+    <span>Carregando...</span>
+  </div>
+  } @else if (items().length === 0) {
+  <div class="review-panel__empty">
+    <i class="pi pi-check-circle"></i>
+    <span>Nenhuma revisão pendente.</span>
+  </div>
+  } @else {
+  <p-table [value]="items()" [rowHover]="true" dataKey="assignmentId">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Documento</th>
+        <th>Etapa</th>
+        <th>Prioridade</th>
+        <th>Tipo Documental</th>
+        <th>Criado em</th>
+        <th style="width: 8rem"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.documentId | slice:0:8 }}...</td>
+        <td>{{ item.stepName }}</td>
+        <td><p-tag [value]="item.priority" /></td>
+        <td>{{ item.documentType }}</td>
+        <td>{{ item.createdAt | dateFormat }}</td>
+        <td>
+          <p-button label="Revisar" icon="pi pi-eye" [outlined]="true" size="small"
+            (onClick)="openDocument(item)" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  }
+</div>

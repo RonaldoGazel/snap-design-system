@@ -1,0 +1,147 @@
+.snap-search {
+  // Box Model
+  max-width: 640px;
+  padding: var(--space-8) var(--space-5);
+  margin: 0 auto;
+
+  &__header {
+    // Box Model
+    margin-bottom: var(--space-7);
+  }
+
+  &__title {
+    // Box Model
+    margin: 0 0 var(--space-1-5);
+    // Typography
+    font-size: var(--text-4xl);
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    // Box Model
+    margin: 0;
+    // Typography
+    color: var(--p-text-muted-color);
+  }
+
+  &__label {
+    // Box Model
+    display: block;
+    margin-bottom: var(--space-2-5);
+    // Typography
+    font-weight: 500;
+  }
+
+  &__input-group {
+    // Box Model
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2-5);
+
+    input {
+      flex: 1;
+    }
+  }
+
+  &__loading {
+    // Box Model
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3-5);
+    margin-top: var(--space-7);
+
+    p {
+      margin: 0;
+      color: var(--p-text-muted-color);
+    }
+  }
+
+  &__retry {
+    // Box Model
+    margin-top: var(--space-2-5);
+  }
+
+  &__visibility {
+    // Box Model
+    margin-top: var(--space-5);
+  }
+
+  &__toggle {
+    // Box Model
+    display: inline-flex;
+    border: 1px solid var(--p-surface-border);
+    border-radius: var(--p-border-radius);
+    overflow: hidden;
+  }
+
+  &__toggle-btn {
+    // Box Model
+    padding: var(--space-2) var(--space-4);
+    border: none;
+    // Typography
+    font-size: var(--text-sm);
+    font-weight: 500;
+    // Visuals
+    background: transparent;
+    color: var(--p-text-muted-color);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+
+    &--active {
+      background: var(--p-primary-color);
+      color: var(--p-primary-contrast-color);
+    }
+
+    &:hover:not(&--active) {
+      background: var(--p-surface-hover);
+    }
+  }
+
+  &__result {
+    // Box Model
+    padding: var(--space-5);
+    margin-top: var(--space-7);
+    border: 1px solid var(--p-surface-border);
+    border-radius: var(--p-border-radius);
+    // Visuals
+    background: var(--p-surface-card);
+
+    h3 {
+      margin: 0 0 var(--space-5);
+      font-size: var(--text-2xl);
+      font-weight: 600;
+    }
+  }
+
+  &__result-fields {
+    // Box Model
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3-5);
+  }
+
+  &__result-field {
+    // Box Model
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  &__result-label {
+    // Typography
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--p-text-muted-color);
+  }
+
+  &__result-value {
+    // Typography
+    word-break: break-all;
+  }
+}
+
+:host {
+  // Box Model
+  display: block;
+}

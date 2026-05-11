@@ -1,0 +1,60 @@
+.l-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--snap-surface-1, var(--p-surface-ground));
+}
+
+.l-shell__main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    padding-top: var(--shell-header-height);
+    overflow: hidden;
+}
+
+.l-shell__scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.l-shell__breadcrumb {
+    display: block;
+    padding: 12px 32px 0;
+    padding-right: calc(32px + 16px); // 16px reserved for floating-sidebar right-margin symmetry
+}
+
+.l-shell__content {
+    flex: 1;
+    min-height: 0;
+    padding: 0 32px 40px;
+    padding-right: calc(32px + 16px); // Match prototype's --shell-side-margin right reserve
+    display: flex;
+    flex-direction: column;
+}
+
+/* Federated mode: content fills the host container with no shell chrome */
+.l-shell__content--federated {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-y: auto;
+}
+
+/* Tablet: reduce content padding */
+@media (min-width: 744px) and (max-width: 1279px) {
+    .l-shell__breadcrumb {
+        padding: 8px 20px 0;
+    }
+
+    .l-shell__content {
+        padding: 0 20px 20px;
+    }
+}

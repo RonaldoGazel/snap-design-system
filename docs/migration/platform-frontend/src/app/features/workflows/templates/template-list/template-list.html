@@ -1,0 +1,51 @@
+<div class="template-list">
+  <div class="template-list__header">
+    <h2>Templates Documentais</h2>
+    <button pButton icon="pi pi-plus" label="Novo Template" (click)="navigateToNew()"></button>
+  </div>
+
+  <div class="template-list__filters">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input pInputText [ngModel]="searchText()" (ngModelChange)="searchText.set($event)" placeholder="Buscar por nome..." />
+    </span>
+  </div>
+
+  <p-table [value]="filteredTemplates()" [paginator]="true" [rows]="20" styleClass="p-datatable-sm">
+    <ng-template #header>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Versão</th>
+        <th>DOCX</th>
+        <th>Status</th>
+        <th style="width: 100px">Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-t>
+      <tr>
+        <td>{{ t.name }}</td>
+        <td>{{ t.description || '—' }}</td>
+        <td>v{{ t.version }}</td>
+        <td>
+          @if (t.has_docx) {
+            <p-tag severity="success" value="Sim" icon="pi pi-file-word" />
+          } @else {
+            <p-tag severity="secondary" value="Não" />
+          }
+        </td>
+        <td>
+          <p-tag [severity]="statusSeverity(t.status)" [value]="t.status === 'active' ? 'Ativo' : 'Inativo'" />
+        </td>
+        <td>
+          <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="navigateToEdit(t)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="6" class="text-center p-4">Nenhum template encontrado.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

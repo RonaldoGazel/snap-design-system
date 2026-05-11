@@ -1,0 +1,24 @@
+<div class="collabora-editor">
+    @if (loading()) {
+    <div class="collabora-editor__loading">
+        <i class="pi pi-spin pi-spinner"></i>
+        <span>Carregando editor...</span>
+    </div>
+    }
+
+    @if (error()) {
+    <div class="collabora-editor__error">
+        <i class="pi pi-exclamation-circle"></i>
+        <span>{{ error() }}</span>
+        <button pButton class="p-button-text p-button-sm" label="Tentar novamente" (click)="retry()"></button>
+    </div>
+    }
+
+    @if (collaboraUrl()) {
+    <div class="collabora-editor__container">
+        <iframe [src]="collaboraUrl()!" class="collabora-iframe"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+            allowfullscreen></iframe>
+    </div>
+    }
+</div>

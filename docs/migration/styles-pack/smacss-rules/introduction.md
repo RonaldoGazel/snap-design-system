@@ -1,0 +1,2 @@
+# Introduction
+SMACSS (Scalable and Modular Architecture for CSS) is a flexible style guide rather than a rigid framework or library. It provides a consistent approach to organizing CSS, making it easier to build and maintain projects of any size. The methodology focuses on identifying patterns in design to create a structured workflow that adapts to the needs of the developer and the project.

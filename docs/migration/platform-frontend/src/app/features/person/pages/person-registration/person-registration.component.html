@@ -1,0 +1,43 @@
+<!-- ─────────────────────────────────────────────────────────────────────── -->
+<!-- Person Registration — Page Template                                     -->
+<!-- ─────────────────────────────────────────────────────────────────────── -->
+
+<!-- Title Bar -->
+<div class="preg-title-bar">
+    <div class="preg-title-bar__left">
+        <button class="preg-title-bar__back" aria-label="Voltar" (click)="goBack()">
+            <i class="pi pi-arrow-left"></i>
+        </button>
+        <h1 class="preg-title-bar__heading">Cadastrar nova pessoa</h1>
+        <span class="preg-title-bar__chip">Novo registro</span>
+    </div>
+</div>
+
+<!-- Two-Column Layout -->
+<div class="l-preg-layout"
+    [class.is-results-visible]="flowService.resultGroups().length > 0 || flowService.summary() !== null">
+    <!-- Left Column: Form Card -->
+    <div class="preg-card">
+        <app-registration-form [isDisabled]="flowService.isFormDisabled()" (formSubmit)="onFormSubmit($event)" />
+
+        <app-registration-overlay [isVisible]="flowService.isOverlayVisible()"
+            [sourceStatuses]="flowService.sourceStatuses()" />
+    </div>
+
+    <!-- Right Column: Results Panel — only rendered when there's something to show -->
+    @if (flowService.resultGroups().length > 0 || flowService.summary() !== null) {
+    <div class="preg-results-panel">
+        <app-registration-results [resultGroups]="flowService.resultGroups()"
+            [hasValidCPF]="flowService.formData()?.hasValidCPF ?? false" (personSelected)="onPersonSelected($event)"
+            (advanceRequested)="onAdvanceRequested($event)" (generateRequested)="onGenerateRequested($event)" />
+
+        @if (flowService.summary()) {
+        <app-registration-summary [summary]="flowService.summary()" />
+        }
+    </div>
+    }
+</div>
+
+<!-- Review Drawer (outside layout flow) -->
+<app-review-drawer [(isOpen)]="drawerOpen" [person]="flowService.selectedPerson()"
+    (registerConfirmed)="onRegisterConfirmed($event)" />

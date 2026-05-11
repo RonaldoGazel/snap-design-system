@@ -1,0 +1,168 @@
+/* Block: .document-viewer */
+
+.document-viewer__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3rem;
+  color: var(--p-text-muted-color);
+}
+
+.document-viewer__empty-icon {
+  font-size: 3rem;
+}
+
+.l-document-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.document-viewer__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--p-surface-border);
+  gap: 1rem;
+}
+
+.document-viewer__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.document-viewer__badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.document-viewer__version {
+  font-size: 0.75rem;
+  color: var(--p-text-muted-color);
+  font-family: monospace;
+}
+
+.document-viewer__info {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--p-text-muted-color);
+}
+
+.document-viewer__content {
+  padding: 1.5rem;
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
+
+.document-viewer__no-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  color: var(--p-text-muted-color);
+}
+
+.document-viewer__tab-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  color: var(--p-text-muted-color);
+}
+
+.document-viewer__tab-icon {
+  font-size: 2rem;
+}
+
+/*
+ * Preview tab — rendered HTML content.
+ * Bare element selectors below are EXEMPT from BEM conversion because they
+ * target innerHTML-rendered markup where we cannot add classes.
+ * They are scoped under .document-viewer__preview-content.
+ */
+.document-viewer__preview-content {
+  padding: 1.5rem;
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
+
+.document-viewer__preview-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem;
+}
+
+.document-viewer__preview-content h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem;
+}
+
+.document-viewer__preview-content h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0.875rem 0 0.4rem;
+}
+
+.document-viewer__preview-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.35rem;
+}
+
+.document-viewer__preview-content h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.625rem 0 0.3rem;
+}
+
+.document-viewer__preview-content h6 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.document-viewer__preview-content ul,
+.document-viewer__preview-content ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.document-viewer__preview-content blockquote {
+  border-left: 3px solid var(--p-surface-300);
+  padding: 0.25rem 0 0.25rem 1rem;
+  margin: 0.75rem 0;
+  color: var(--p-text-muted-color);
+}
+
+.document-viewer__preview-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.75rem 0;
+}
+
+.document-viewer__preview-content td,
+.document-viewer__preview-content th {
+  border: 1px solid var(--p-surface-300);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+
+.document-viewer__preview-content th {
+  background: var(--p-surface-100);
+  font-weight: 700;
+}
+
+.document-viewer__preview-content img {
+  max-width: 100%;
+  height: auto;
+}

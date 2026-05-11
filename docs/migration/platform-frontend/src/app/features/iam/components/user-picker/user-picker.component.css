@@ -1,0 +1,12 @@
+.user-suggestion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.user-name {
+  font-weight: 500;
+}
+.user-email {
+  font-size: 0.85rem;
+  color: var(--p-text-muted-color);
+}

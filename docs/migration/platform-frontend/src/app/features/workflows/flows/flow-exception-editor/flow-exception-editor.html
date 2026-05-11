@@ -1,0 +1,98 @@
+<div class="flow-exception-editor">
+  <div class="flow-exception-editor__header">
+    <div>
+      <h3>Excecoes do Fluxo</h3>
+      <p class="flow-exception-editor__description">Uma <strong>excecao</strong> substitui ou complementa uma regra geral para combinacoes especificas de origem e destino. Use excecoes para tratar casos como: um setor administrativamente externo que e funcionalmente autorizado a receber documentos, ou uma vedacao absoluta para uma combinacao especifica. Excecoes tem prioridade sobre as regras gerais.</p>
+    </div>
+    <div class="flow-exception-editor__actions">
+      <button pButton label="Adicionar Excecao" icon="pi pi-plus" class="p-button-outlined p-button-sm" (click)="openForm()"></button>
+      <button pButton label="Salvar Tudo" icon="pi pi-save" class="p-button-sm" (click)="saveAll()"></button>
+    </div>
+  </div>
+
+  @if (showForm()) {
+    <div class="flow-exception-editor__form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="flow-exception-editor__form-grid">
+          <div class="flow-exception-editor__field">
+            <label>Nome <span class="required">*</span></label>
+            <small class="flow-exception-editor__hint">Nome descritivo da excecao. Ex: "Protocolo pode receber documentos externos".</small>
+            <input pInputText formControlName="name" placeholder="Ex: Protocolo pode receber documentos externos" [class.ng-invalid]="isInvalid('name')" />
+          </div>
+          <div class="flow-exception-editor__field">
+            <label>Tipo <span class="required">*</span></label>
+            <small class="flow-exception-editor__hint">Tipo de acao que esta excecao afeta.</small>
+            <p-select formControlName="type" [options]="ruleTypeOptions" optionLabel="label" optionValue="value" />
+          </div>
+          <div class="flow-exception-editor__field">
+            <label>Escopo <span class="required">*</span></label>
+            <small class="flow-exception-editor__hint">Permissao: autoriza a excecao. Restricao: limita. Vedacao: proibe absolutamente esta combinacao especifica.</small>
+            <p-select formControlName="scope" [options]="ruleScopeOptions" optionLabel="label" optionValue="value" />
+          </div>
+          <div class="flow-exception-editor__field">
+            <label>Acao</label>
+            <small class="flow-exception-editor__hint">Acao especifica que esta excecao cobre. Deixe em branco para cobrir todas as acoes do tipo selecionado.</small>
+            <input pInputText formControlName="action" placeholder="Opcional" />
+          </div>
+          <div class="flow-exception-editor__field">
+            <label>Prioridade</label>
+            <small class="flow-exception-editor__hint">Maior numero = maior prioridade. Excecoes geralmente tem prioridade maior que regras gerais.</small>
+            <p-inputNumber formControlName="priority" [showButtons]="false" placeholder="10" />
+          </div>
+          <div class="flow-exception-editor__field flow-exception-editor__field--checkbox">
+            <p-checkbox formControlName="is_active" [binary]="true" inputId="exception_is_active" />
+            <label for="exception_is_active">Excecao ativa</label>
+          </div>
+        </div>
+        <div class="flow-exception-editor__org-sections">
+          <div class="flow-exception-editor__field">
+            <label>Origem (quem executa)</label>
+            <small class="flow-exception-editor__hint">Unidade + perfil ao qual esta excecao se aplica como origem.</small>
+            <app-org-selector [multiple]="false" [selectedCombos]="sourceCombo()" (selectionChange)="onSourceChange($event)" />
+          </div>
+          <div class="flow-exception-editor__field">
+            <label>Destino (para quem)</label>
+            <small class="flow-exception-editor__hint">Unidade + perfil ao qual esta excecao se aplica como destino.</small>
+            <app-org-selector [multiple]="false" [selectedCombos]="targetCombo()" (selectionChange)="onTargetChange($event)" />
+          </div>
+        </div>
+        <div class="flow-exception-editor__form-actions">
+          <button pButton type="button" label="Cancelar" class="p-button-outlined p-button-sm" (click)="closeForm()"></button>
+          <button pButton type="submit" [label]="editingId() ? 'Atualizar Excecao' : 'Adicionar Excecao'" class="p-button-sm"></button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <div class="flow-exception-editor__list">
+    @for (exception of exceptions(); track exception.id) {
+      <div class="flow-exception-editor__rule" [class.flow-exception-editor__rule--vedacao]="isVedacao(exception.scope)">
+        <div class="flow-exception-editor__rule-info">
+          <span class="font-medium">{{ exception.name }}</span>
+          <div class="flow-exception-editor__rule-meta">
+            <p-tag [value]="ruleTypeName(exception.type) | translate" severity="info" />
+            <p-tag [value]="ruleScopeName(exception.scope) | translate" [severity]="isVedacao(exception.scope) ? 'danger' : 'secondary'" />
+            @if (exception.source_unit_id && exception.source_profile_id) {
+              <small class="text-color-secondary">
+                {{ unitName(exception.source_unit_id) }}/{{ profileName(exception.source_profile_id) }}
+                @if (exception.target_unit_id && exception.target_profile_id) {
+                  {{ " -> " }}{{ unitName(exception.target_unit_id) }}/{{ profileName(exception.target_profile_id) }}
+                }
+              </small>
+            }
+          </div>
+        </div>
+        <div class="flow-exception-editor__rule-actions">
+          <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="openForm(exception)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" (click)="removeException(exception.id)"></button>
+        </div>
+      </div>
+    }
+    @if (exceptions().length === 0) {
+      <div class="flow-exception-editor__empty">
+        <i class="pi pi-info-circle"></i>
+        <span>Nenhuma excecao adicionada. Excecoes sao opcionais e so sao necessarias quando as regras gerais nao cobrem casos especificos.</span>
+      </div>
+    }
+  </div>
+</div>

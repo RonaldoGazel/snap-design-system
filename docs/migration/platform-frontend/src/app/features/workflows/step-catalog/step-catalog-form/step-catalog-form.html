@@ -1,0 +1,65 @@
+<div class="step-catalog-form">
+  <div class="step-catalog-form__header">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    <h2>{{ isEditMode() ? 'Editar Etapa' : 'Nova Etapa' }}</h2>
+  </div>
+
+  <div class="step-catalog-form__description">
+    <p>{{ 'workflows.stepCatalogForm.description' | translate }}</p>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="step-catalog-form__error">
+      <i class="pi pi-exclamation-triangle"></i>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="step-catalog-form__body">
+    <div class="step-catalog-form__field">
+      <label for="name">Nome <span class="required">*</span></label>
+      <small class="step-catalog-form__hint">Nome único da etapa. Ex: 'workflows.stepType.production', 'Revisão Técnica', 'workflows.stepType.formalization'.</small>
+      <input id="name" pInputText formControlName="name" [placeholder]="'workflows.stepCatalogForm.namePlaceholder' | translate" [class.ng-invalid]="isInvalid('name')" />
+      @if (isInvalid('name')) { <small class="p-error">Nome é obrigatório.</small> }
+      @if (form.get('name')?.touched && isDuplicateName()) { <small class="p-error">Já existe uma etapa com este nome.</small> }
+    </div>
+
+    <div class="step-catalog-form__field">
+      <label for="description">Descrição</label>
+      <small class="step-catalog-form__hint">Descrição opcional para detalhar o propósito desta etapa.</small>
+      <textarea id="description" pTextarea formControlName="description" rows="4" placeholder="Descreva o propósito desta etapa..."></textarea>
+    </div>
+
+    <div class="step-catalog-form__field">
+      <label>Permissões</label>
+      <small class="step-catalog-form__hint">Selecione as permissões que esta etapa concede dentro de um fluxo.</small>
+      <div class="step-catalog-form__permissions">
+        @for (perm of availablePermissions; track perm) {
+          <div class="step-catalog-form__permission-item">
+            <p-checkbox
+              [binary]="true"
+              [ngModel]="isPermissionSelected(perm)"
+              [ngModelOptions]="{ standalone: true }"
+              (onChange)="togglePermission(perm)"
+              [inputId]="'perm_' + perm"
+            />
+            <label [for]="'perm_' + perm">{{ 'workflows.capability.' + perm | translate }}</label>
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (isEditMode()) {
+      <div class="step-catalog-form__field step-catalog-form__field--checkbox">
+        <p-checkbox formControlName="is_active" [binary]="true" inputId="is_active" />
+        <label for="is_active">Etapa ativa</label>
+        <small class="step-catalog-form__hint">Etapas inativas não ficam disponíveis para seleção ao configurar fluxos.</small>
+      </div>
+    }
+
+    <div class="step-catalog-form__actions">
+      <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="goBack()"></button>
+      <button pButton type="submit" [label]="isEditMode() ? 'Salvar' : 'Criar Etapa'" [disabled]="saving()"></button>
+    </div>
+  </form>
+</div>

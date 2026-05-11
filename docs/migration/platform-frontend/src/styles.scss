@@ -1,0 +1,473 @@
+@use '@fontsource-variable/inter-tight';
+
+/* PrimeNG Icons */
+@use 'primeicons/primeicons.css';
+
+/* Design Tokens */
+@use './styles/tokens/index';
+
+/* Base Rules */
+@use './styles/base';
+
+/* ===== Typography Utility Classes ===== */
+
+.h1 {
+  // Typography
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.h2 {
+  // Typography
+  font-size: var(--text-4xl);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.h3 {
+  // Typography
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.h4 {
+  // Typography
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.h5 {
+  // Typography
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.h6 {
+  // Typography
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.text-small {
+  // Typography
+  font-size: var(--text-lg);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.text-caption {
+  // Typography
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--p-text-muted-color);
+}
+
+.text-large {
+  // Typography
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.text-mono {
+  // Typography
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/*
+ * Aura v4 compatibility aliases.
+ * Maps semantic surface tokens that Aura no longer ships by default.
+ */
+:root {
+  --p-surface-ground: var(--p-surface-100);
+  --p-surface-card: var(--p-surface-0);
+  --p-surface-section: var(--p-surface-50);
+  --p-surface-border: var(--p-content-border-color);
+  --p-surface-hover: var(--p-content-hover-background);
+  --p-surface-overlay: var(--p-surface-0);
+
+  --breakpoint-tablet-min: 744px;
+  --breakpoint-tablet-max: 1279px;
+  --breakpoint-form-collapse: 900px;
+}
+
+.p-dark {
+  --p-surface-ground: var(--p-surface-950);
+  --p-surface-card: var(--p-surface-900);
+  --p-surface-section: var(--p-surface-800);
+  --p-surface-border: var(--p-content-border-color);
+  --p-surface-hover: var(--p-content-hover-background);
+  --p-surface-overlay: var(--p-surface-900);
+}
+
+/* ===== Global Form & Dialog Styles ===== */
+
+.field {
+  // Box Model
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5);
+}
+
+.field label {
+  // Typography
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--p-text-color);
+}
+
+.l-form-row {
+  // Box Model
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3-5);
+}
+
+.user-form,
+.process-form,
+.sector-form,
+.group-form {
+  // Box Model
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.l-form-grid {
+  // Box Model
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3-5);
+}
+
+.col-span-2 {
+  // Box Model
+  grid-column: span 2;
+}
+
+.dialog__body {
+  // Box Model
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-2-5) 0;
+}
+
+.dialog__footer {
+  // Box Model
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2-5);
+  padding-top: var(--space-5);
+}
+
+.content-header {
+  // Box Model
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.required {
+  // Typography
+  color: var(--p-red-500);
+}
+
+.section-label {
+  // Box Model
+  padding-bottom: var(--space-1-5);
+  margin: var(--space-5) 0 var(--space-2-5);
+  border-bottom: 1px solid var(--p-content-border-color);
+  // Typography
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--p-text-muted-color);
+}
+
+/* ===== Filter bars on list pages ===== */
+
+.filters-bar {
+  // Box Model
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3-5);
+}
+
+.filter-search {
+  // Box Model
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ===== Page layout helpers ===== */
+
+.l-page {
+  // Box Model
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.l-page__header {
+  // Box Model
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-title {
+  // Box Model
+  margin: 0;
+  // Typography
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--p-text-color);
+}
+
+.page-max-width {
+  // Box Model
+  max-width: 960px;
+}
+
+.action-buttons {
+  // Box Model
+  display: flex;
+  gap: var(--space-1-5);
+}
+
+/* ===== Utility ===== */
+
+.w-full {
+  // Box Model
+  width: 100%;
+}
+
+.hint {
+  // Typography
+  font-size: var(--text-base);
+  color: var(--p-text-muted-color);
+}
+
+.hint.error {
+  // Typography
+  color: var(--p-red-500);
+}
+
+/* ===== Global Empty State Styles ===== */
+
+.table-empty-state {
+  // Box Model
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2-5);
+  padding: 2.5rem var(--space-5);
+}
+
+.table-empty-state .empty-icon-wrapper {
+  // Box Model
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  // Visuals
+  background: var(--p-primary-50);
+}
+
+.table-empty-state .empty-icon-wrapper i {
+  // Typography
+  font-size: var(--text-4xl);
+  color: var(--p-primary-color);
+}
+
+.table-empty-state .empty-label {
+  // Typography
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--p-text-muted-color);
+}
+
+/* ===== Tablet Responsive Media Queries ===== */
+
+@media (max-width: 899px) {
+  .l-form-grid,
+  .l-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .col-span-2 {
+    grid-column: span 1;
+  }
+}
+
+@media (min-width: 744px) and (max-width: 1279px) {
+  .filter-search {
+    flex: 1 1 100%;
+  }
+
+  .p-dialog {
+    min-width: 90vw;
+  }
+
+  .dialog__body .l-form-grid,
+  .dialog__body .l-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .p-datatable-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ===== Cygnito Mono — Accent Font ===== */
+
+@font-face {
+  font-family: 'Cygnito Mono';
+  src: url('/fonts/cygnito-mono-2.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-accent {
+  // Typography
+  font-family: 'Cygnito Mono', monospace;
+}
+
+/* ===== PrimeNG Global Overrides — SNAP Pillar Focus & Highlight ===== */
+
+.p-select:focus,
+.p-select.p-focus,
+.p-select-open {
+  // Visuals
+  border-color: var(--snap-pillar-color) !important;
+  box-shadow: 0 0 0 1px var(--snap-focus-ring) !important;
+}
+
+.p-inputtext:focus {
+  // Visuals
+  border-color: var(--snap-pillar-color) !important;
+  box-shadow: 0 0 0 1px var(--snap-focus-ring) !important;
+}
+
+.p-multiselect-overlay,
+.p-multiselect-panel,
+.p-component-overlay,
+body {
+  .p-multiselect-option.p-highlight,
+  .p-multiselect-item.p-highlight,
+  .p-listbox-option.p-highlight,
+  p-multiselect-option[data-p-highlight="true"],
+  li[data-p-highlight="true"],
+  .p-multiselect-list .p-highlight {
+    background: color-mix(in srgb, var(--snap-pillar-color) 15%, transparent) !important;
+    color: var(--snap-text-primary) !important;
+  }
+
+  .p-checkbox.p-highlight .p-checkbox-box,
+  .p-checkbox-checked .p-checkbox-box,
+  .p-checkbox[data-p-highlight="true"] .p-checkbox-box {
+    background: var(--snap-pillar-color) !important;
+    border-color: var(--snap-pillar-color) !important;
+  }
+}
+
+/* ===== PrimeNG Override — Select sizing in title bar ===== */
+
+.select-listar .p-select {
+  // Box Model
+  padding: 0.3rem var(--space-2-5) !important;
+  // Typography
+  font-size: 0.7rem !important;
+  --p-select-font-size: 0.7rem;
+}
+
+body .select-listar .p-select .p-select-label {
+  // Box Model
+  padding: 0 !important;
+  // Typography
+  font-size: 0.7rem !important;
+  line-height: 1.2 !important;
+}
+
+body .select-listar span[data-pc-section="label"] {
+  // Box Model
+  padding-top: var(--space-2) !important;
+  // Typography
+  font-size: 0.7rem !important;
+}
+
+.select-listar .p-select .p-select-dropdown {
+  // Box Model
+  width: 1.5rem !important;
+}
+
+.select-listar .p-select .p-select-dropdown .p-icon {
+  // Box Model
+  width: 0.7rem !important;
+  height: 0.7rem !important;
+}
+
+/* ===== Query dialog — header separator ===== */
+
+.query-dialog .p-dialog-header {
+  // Box Model
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--snap-border-subtle);
+}
+
+.query-dialog .p-dialog-content {
+  // Box Model
+  padding-top: var(--space-5);
+}
+
+/* ===== Query dialog — semi-transparent background ===== */
+
+.query-dialog[data-pc-section="root"] {
+  // Visuals
+  background: color-mix(in srgb, var(--snap-surface-2) 90%, transparent) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ===== Query dialog — blur backdrop ===== */
+
+.query-dialog-mask.p-dialog-mask {
+  // Visuals
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ===== p-tag — remove bold globally ===== */
+
+.p-tag .p-tag-label {
+  // Typography
+  font-weight: 400;
+}
+
+/* ===== p-card — consistent border in l-dashboard__aside ===== */
+
+.l-dashboard__aside [data-pc-section="root"][data-pc-name="card"] {
+  // Box Model
+  border: 1px solid var(--snap-border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+}
+
+/* ===== p-avatar — 3x4 photos aligned to top ===== */
+
+.p-avatar img {
+  // Visuals
+  object-fit: cover;
+  object-position: center top;
+}

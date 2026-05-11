@@ -1,0 +1,23 @@
+<div class="placeholder-card">
+    <div class="placeholder-header">
+        <span class="placeholder-number">{{ telaNumero() | number: '2.0-0' }}</span>
+        <div class="placeholder-titles">
+            <h2 class="placeholder-title">{{ titulo() }}</h2>
+            <span class="placeholder-block">{{ bloco() }}</span>
+        </div>
+    </div>
+
+    @if (destinos().length > 0) {
+    <div class="placeholder-destinations">
+        <span class="destinations__label">Destinos</span>
+        <div class="destinations__list">
+            @for (destino of destinos(); track destino.telaNumero) {
+            <a [routerLink]="destino.route" class="destinations__link">
+                <p-button [label]="destino.telaNumero + ' — ' + destino.label" severity="secondary" [text]="true"
+                    size="small" />
+            </a>
+            }
+        </div>
+    </div>
+    }
+</div>

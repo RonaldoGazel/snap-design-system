@@ -1,0 +1,152 @@
+:host {
+  display: block;
+}
+
+.stage-config-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section */
+.panel-section {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--p-content-border-color);
+}
+
+.section-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.section-hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  color: var(--p-text-muted-color);
+}
+
+/* Catalog list */
+.catalog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.catalog-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.375rem;
+  transition: background 0.15s;
+}
+
+.catalog-item:hover {
+  background: var(--p-surface-hover);
+}
+
+.catalog-name {
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalog-empty {
+  font-size: 0.85rem;
+  color: var(--p-text-muted-color);
+  padding: 0.5rem 0;
+}
+
+/* Stage list (drag-drop) */
+.stage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stage-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 0.375rem;
+  background: var(--p-surface-card);
+  cursor: pointer;
+}
+
+.stage-item:hover {
+  background: var(--p-surface-hover);
+}
+
+.stage-drag-handle {
+  cursor: grab;
+  color: var(--p-text-muted-color);
+  display: flex;
+  align-items: center;
+  padding: 0 0.25rem;
+}
+
+.stage-drag-handle:active {
+  cursor: grabbing;
+}
+
+.stage-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow: hidden;
+}
+
+.stage-order {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--p-text-muted-color);
+  min-width: 1.25rem;
+}
+
+.stage-name {
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stage-badge {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 1rem;
+  background: var(--p-primary-100);
+  color: var(--p-primary-700);
+  white-space: nowrap;
+}
+
+/* CDK drag-drop styles */
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border: 1px solid var(--p-primary-color);
+  border-radius: 0.375rem;
+  background: var(--p-surface-card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.4;
+}
+
+.cdk-drag-animating {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.stage-list.cdk-drop-list-dragging .stage-item:not(.cdk-drag-placeholder) {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}

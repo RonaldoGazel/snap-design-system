@@ -1,0 +1,46 @@
+/* Block: .document-tree */
+
+.l-document-tree {
+    border: 1px solid var(--p-surface-border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.document-tree__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--p-surface-section);
+    border-bottom: 1px solid var(--p-surface-border);
+}
+
+.document-tree__title {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.document-tree__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    color: var(--p-text-muted-color);
+    font-size: 0.875rem;
+}
+
+.document-tree__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    color: var(--p-text-muted-color);
+    font-size: 0.875rem;
+}
+
+:host ::ng-deep .document-tree__tree-widget {
+    border: none;
+    padding: 0.5rem;
+}

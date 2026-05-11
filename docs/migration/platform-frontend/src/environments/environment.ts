@@ -1,0 +1,31 @@
+export const environment = {
+  production: false,
+  useMocks: false,
+  keycloak: {
+    baseUrl: 'http://localhost:8180',
+    realm: 'platform',
+    clientId: 'platform-frontend',
+    redirectUri: 'http://localhost:4200/auth/callback',
+    postLogoutRedirectUri: 'http://localhost:4200',
+  },
+  identityServiceUrl: '/api/v1/identity',
+  permissionServiceUrl: '/api/v1/permissions',
+  auditServiceUrl: '/api/v1/audit',
+  poiServiceUrl: '/api/v1/poi',
+  personServiceUrl: '/api/v1/poi',
+  workflowServiceUrl: '/api/v1/workflows',
+  trustedOrigins: [] as string[],
+  auth: {
+    refreshBufferSeconds: 60,
+    clockSkewToleranceSeconds: 30,
+    idleTimeoutMinutes: 15,
+    maxSessionLifetimeHours: 8,
+    interceptorReplayLimit: 5,
+    redirectLoopThreshold: 3,
+    redirectLoopWindowMs: 10_000,
+  },
+  credentialStrategy: 'bearer' as const,
+  csp: {
+    reportUri: '',
+  },
+};

@@ -1,0 +1,13 @@
+.doc-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.doc-navigation__breadcrumbs {
+  margin-bottom: 0.5rem;
+}
+
+.doc-navigation__sidebar {
+  min-width: 220px;
+}

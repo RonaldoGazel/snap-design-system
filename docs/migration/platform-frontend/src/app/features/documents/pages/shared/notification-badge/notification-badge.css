@@ -1,0 +1,95 @@
+.notification-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.notification-badge__count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  pointer-events: none;
+}
+
+.notification-badge__panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+  min-width: 320px;
+  max-width: 380px;
+  background: var(--surface-overlay);
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-top: 0.25rem;
+}
+
+.notification-badge__panel-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.notification-badge__empty {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--text-color-secondary);
+}
+
+.notification-badge__list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.notification-badge__item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--surface-border);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.notification-badge__item:last-child {
+  border-bottom: none;
+}
+
+.notification-badge__item:hover {
+  background-color: var(--surface-hover);
+}
+
+.notification-badge__item.is-unread {
+  background-color: color-mix(in srgb, var(--primary-color) 5%, transparent);
+}
+
+.notification-badge__item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notification-badge__title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.notification-badge__unread-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.notification-badge__message {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notification-badge__date {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+}

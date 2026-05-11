@@ -1,0 +1,139 @@
+<div class="visual-flow-form">
+  <div class="visual-flow-form__header">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    <h2>{{ isEditMode() ? 'Editar Fluxo Visual' : 'Novo Fluxo Visual' }}</h2>
+  </div>
+
+  <div class="visual-flow-form__description">
+    <p>Um <strong>Fluxo Visual</strong> define a tramitação de documentos baseada em um template. Selecione as etapas e defina a ordem antes de configurar perfis e conexões no construtor visual.</p>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="visual-flow-form__error">
+      <i class="pi pi-exclamation-triangle"></i>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="visual-flow-form__body">
+    <div class="visual-flow-form__field">
+      <label for="name">Nome <span class="required">*</span></label>
+      <small class="visual-flow-form__hint">{{ 'workflows.flowForm.nameHint' | translate }}</small>
+      <input id="name" pInputText formControlName="name" [placeholder]="'workflows.flowForm.namePlaceholder' | translate" [class.ng-invalid]="isInvalid('name')" />
+      @if (isInvalid('name')) { <small class="p-error">Nome é obrigatório (máx. 200 caracteres).</small> }
+    </div>
+
+    <div class="visual-flow-form__field">
+      <label for="description">Descrição</label>
+      <small class="visual-flow-form__hint">Descrição opcional para detalhar o propósito deste fluxo.</small>
+      <textarea id="description" pTextarea formControlName="description" rows="3" placeholder="Descreva o propósito deste fluxo..."></textarea>
+    </div>
+
+    <div class="visual-flow-form__field">
+      <label for="document_type_id">Tipo Documental <span class="required">*</span></label>
+      <small class="visual-flow-form__hint">Selecione o tipo de documento que este fluxo produz. O template é definido no tipo documental.</small>
+      <p-select
+        id="document_type_id"
+        formControlName="document_type_id"
+        [options]="documentTypeOptions()"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecione um tipo documental"
+        [class.ng-invalid]="isInvalid('document_type_id')"
+      />
+      @if (isInvalid('document_type_id')) { <small class="p-error">Tipo documental é obrigatório.</small> }
+    </div>
+
+    @if (isEditMode()) {
+      <div class="visual-flow-form__field">
+        <label for="status">Status</label>
+        <p-select
+          id="status"
+          formControlName="status"
+          [options]="statusOptions"
+          optionLabel="label"
+          optionValue="value"
+        />
+      </div>
+    }
+
+    <!-- Stage Selection Section -->
+    <div class="visual-flow-form__stages">
+      <label>Etapas do Fluxo <span class="required">*</span></label>
+      <small class="visual-flow-form__hint">Selecione as etapas que compõem o fluxo e defina a ordem. Arraste para reordenar.</small>
+
+      <!-- Available catalog steps -->
+      <div class="stages-catalog">
+        <small class="stages-catalog__label">Etapas disponíveis:</small>
+        <div class="stages-catalog__list">
+          @for (step of activeCatalogSteps(); track step.id) {
+            <button
+              pButton
+              type="button"
+              [label]="'workflows.' + step.name | translate"
+              icon="pi pi-plus"
+              class="p-button-outlined p-button-sm"
+              [disabled]="isAddDisabled(step.id)"
+              (click)="addStage(step)"
+              [pTooltip]="isStepAlreadyAdded(step.id) ? ('workflows.visualBpms.alreadyAdded' | translate) : !canAddStage() ? ('workflows.visualBpms.stageLimit' | translate) : ''"
+            ></button>
+          } @empty {
+            <small class="text-color-secondary">{{ 'workflows.visualBpms.noStagesAvailable' | translate }}</small>
+          }
+        </div>
+      </div>
+
+      <!-- Selected stages (drag-and-drop reorderable) -->
+      @if (selectedStages().length > 0) {
+        <div cdkDropList class="stages-selected" (cdkDropListDropped)="onDrop($event)">
+          @for (stage of selectedStages(); track stage.step_catalog_id; let i = $index) {
+            <div cdkDrag [cdkDragDisabled]="isInitiationStep(i)" class="stage-item" [class.stage-item--locked]="isInitiationStep(i)">
+              @if (!isInitiationStep(i)) {
+                <div class="stage-drag-handle" cdkDragHandle>
+                  <i class="pi pi-bars"></i>
+                </div>
+              } @else {
+                <div class="stage-lock-icon">
+                  <i class="pi pi-lock"></i>
+                </div>
+              }
+              <span class="stage-order">{{ i + 1 }}.</span>
+              <span class="stage-name">
+                {{ 'workflows.' + stage.name | translate }}
+              </span>
+              @if (isInitiationStep(i)) {
+                <span class="stage-auto-badge">{{ 'workflows.common.required' | translate }}</span>
+              }
+              @if (stage.hasBindings && !isInitiationStep(i)) {
+                <span class="stage-locked-badge">
+                  <i class="pi pi-link"></i> {{ 'workflows.visualBpms.linkedBadge' | translate }}
+                </span>
+              }
+              @if (!isInitiationStep(i)) {
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-trash"
+                  class="p-button-text p-button-sm p-button-danger"
+                  [disabled]="stage.hasBindings"
+                  (click)="removeStage(i)"
+                  [pTooltip]="stage.hasBindings ? ('workflows.visualBpms.linkedTooltip' | translate) : ('workflows.visualBpms.removeStage' | translate)"
+                ></button>
+              }
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="stages-empty">
+          <i class="pi pi-info-circle"></i>
+          <span>{{ 'workflows.visualBpms.noStagesSelected' | translate }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="visual-flow-form__actions">
+      <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="goBack()"></button>
+      <button pButton type="submit" [label]="isEditMode() ? 'Salvar' : 'Criar Fluxo'" [disabled]="saving() || selectedStages().length === 0"></button>
+    </div>
+  </form>
+</div>

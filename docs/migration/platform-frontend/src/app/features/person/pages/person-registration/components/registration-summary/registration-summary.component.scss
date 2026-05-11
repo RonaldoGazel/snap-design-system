@@ -1,0 +1,79 @@
+// ============================================================
+// Registration Summary — visual parity with PrototipoPOI
+// ============================================================
+
+.preg-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  background: color-mix(in oklab, var(--snap-success) 6%, var(--snap-surface-2));
+  border: 1px solid color-mix(in oklab, var(--snap-success) 25%, transparent);
+  border-radius: var(--radius-md);
+}
+
+.preg-summary__icon {
+  align-self: center;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in oklab, var(--snap-success) 14%, var(--snap-surface-2));
+  border-radius: 50%;
+  color: var(--snap-success);
+
+  i {
+    font-size: 24px;
+  }
+}
+
+.preg-summary__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--snap-text-primary);
+}
+
+.preg-summary__items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.preg-summary__item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  padding: 0;
+  border: 0;
+}
+
+.preg-summary__label {
+  font-family: var(--font-accent);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+}
+
+.preg-summary__value {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--snap-text-primary);
+}
+
+// Dark mode
+:host-context(.p-dark) .preg-summary {
+  background: color-mix(in oklab, var(--snap-success) 8%, var(--snap-surface-2));
+  border-color: color-mix(in oklab, var(--snap-success) 20%, var(--snap-border-default));
+}

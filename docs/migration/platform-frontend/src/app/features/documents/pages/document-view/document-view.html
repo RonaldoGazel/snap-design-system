@@ -1,0 +1,232 @@
+<p-toast />
+
+<div class="document-view">
+  @if (loading()) {
+  <div class="document-view__loading">
+    <i class="pi pi-spin pi-spinner"></i>
+    <span>Carregando documento...</span>
+  </div>
+  } @else if (document(); as doc) {
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
+  <div class="document-view__header">
+    <div class="document-view__header-left">
+      <p-button icon="pi pi-arrow-left" [text]="true" [rounded]="true" (onClick)="goBack()" />
+      <h2 class="document-view__title">{{ doc.title }}</h2>
+      <p-tag [value]="statusLabel()" [severity]="statusSeverity()" />
+    </div>
+    <div class="document-view__header-actions">
+      @if (!isTrackingOnly()) {
+        @if (canMoveBackward()) {
+        <p-button label="Devolver" icon="pi pi-arrow-left" severity="warn" [outlined]="true"
+          (onClick)="showReturnDialog.set(true)" />
+        }
+        @if (isDisseminationStep()) {
+        <p-button label="Disseminar" icon="pi pi-send" [loading]="saving()"
+          [disabled]="!canDisseminate()"
+          (onClick)="executeDissemination()" />
+        } @else {
+          @if (canMoveForward()) {
+          <p-button label="Avançar" icon="pi pi-arrow-right" [loading]="saving()"
+            (onClick)="moveForward()" />
+          }
+        }
+      }
+    </div>
+  </div>
+
+  <!-- ── Workflow Stepper ──────────────────────────────────────────── -->
+  @if (stepperSteps().length > 0) {
+  <div class="document-view__stepper-section">
+    <app-workflow-stepper [steps]="stepperSteps()" [currentStepId]="currentStepId()" />
+  </div>
+  }
+
+  <!-- ── Metadata strip ──────────────────────────────────────────── -->
+  <div class="document-view__meta-strip">
+    <div class="document-view__meta-item">
+      <span class="document-view__meta-label">Etapa Atual</span>
+      <span class="document-view__meta-value">{{ currentStepName() }}</span>
+    </div>
+    <div class="document-view__meta-item">
+      <span class="document-view__meta-label">Nível de Segurança</span>
+      <span class="document-view__meta-value">{{ doc.securityLevel }}</span>
+    </div>
+    <div class="document-view__meta-item">
+      <span class="document-view__meta-label">Criado em</span>
+      <span class="document-view__meta-value document-view__meta-value--mono">{{ doc.createdAt | dateFormat }}</span>
+    </div>
+    @if (isTrackingOnly()) {
+    <div class="document-view__meta-item">
+      <span class="document-view__meta-label">Modo</span>
+      <span class="document-view__meta-value"><i class="pi pi-eye"></i> Acompanhamento</span>
+    </div>
+    } @else if (canEditDocument()) {
+    <div class="document-view__meta-item">
+      <span class="document-view__meta-label">Modo</span>
+      <span class="document-view__meta-value"><i class="pi pi-pencil"></i> Edição</span>
+    </div>
+    } @else {
+    <div class="document-view__meta-item">
+      <span class="document-view__meta-label">Modo</span>
+      <span class="document-view__meta-value"><i class="pi pi-eye"></i> Visualização</span>
+    </div>
+    }
+  </div>
+
+  <!-- ── Formalized banner ───────────────────────────────────────── -->
+  @if (isFormalized()) {
+  <div class="document-view__formalized-banner">
+    <i class="pi pi-lock"></i>
+    <span>Documento Formalizado — Edição Bloqueada</span>
+  </div>
+  }
+
+  <!-- ── Tabs: Documento / Histórico ─────────────────────────────── -->
+  <p-tabs [value]="activeTab()" (valueChange)="onTabChange($event)">
+    <p-tablist>
+      <p-tab value="documento">Documento</p-tab>
+      <p-tab value="historico">Histórico</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="documento">
+        @if (isDisseminationStep()) {
+        <!-- Document preview for dissemination step (read-only Collabora) -->
+        <div class="document-view__editor-area">
+          <app-collabora-editor
+            [resourceType]="'document'"
+            [resourceId]="doc.id"
+            [readonly]="true" />
+        </div>
+
+        <!-- Internal recipients section -->
+        @if (hasDisseminateInternal()) {
+        <div class="document-view__dissemination-section">
+          <h4>Destinatários Internos</h4>
+          <app-org-selector [multiple]="true" [selectedCombos]="[]"
+            (selectionChange)="onInternalRecipientsChange($event)" />
+          <div class="document-view__recipient-tags">
+            @for (r of internalRecipients(); track r.section_id + r.role_id) {
+              <p-chip [label]="r.label" [removable]="true" (onRemove)="removeInternalRecipient(r)" />
+            }
+          </div>
+        </div>
+        }
+
+        <!-- External recipients section -->
+        @if (hasDisseminateExternal()) {
+        <div class="document-view__dissemination-section">
+          <h4>Destinatários Externos</h4>
+          <div class="document-view__email-input">
+            <input pInputText [ngModel]="emailInput()" (ngModelChange)="emailInput.set($event)"
+              (keydown.enter)="addEmail()" (keydown.,)="addEmail()"
+              placeholder="Digite o email e pressione Enter" class="w-full" />
+            @if (emailError()) {
+              <small class="p-error">{{ emailError() }}</small>
+            }
+          </div>
+          <div class="document-view__recipient-tags">
+            @for (r of externalRecipients(); track r.email) {
+              <p-chip [label]="r.email" [removable]="true" (onRemove)="removeExternalRecipient(r)" />
+            }
+          </div>
+        </div>
+        }
+
+        } @else if (isTrackingOnly()) {
+        <!-- ── Tracking-only banner ──────────────────────────────── -->
+        <div class="document-view__tracking-banner">
+          <i class="pi pi-eye"></i>
+          <span>Documento em tramitação — apenas acompanhamento</span>
+        </div>
+        } @else {
+        <!-- ── Document Content (Collabora) ──────────────────────── -->
+        <div class="document-view__editor-area">
+          <app-collabora-editor
+            [resourceType]="'document'"
+            [resourceId]="doc.id"
+            [readonly]="!canEditDocument()" />
+        </div>
+        }
+      </p-tabpanel>
+      <p-tabpanel value="historico">
+        @if (timelineLoading()) {
+        <div class="document-view__loading">
+          <i class="pi pi-spin pi-spinner"></i>
+          <span>Carregando histórico...</span>
+        </div>
+        } @else if (timelineEntries().length === 0) {
+        <div class="document-view__empty-timeline">
+          <i class="pi pi-history"></i>
+          <span>Nenhum registro de histórico</span>
+        </div>
+        } @else {
+        <p-timeline [value]="timelineEntries()" styleClass="document-view-timeline">
+          <ng-template pTemplate="content" let-entry>
+            <div class="timeline-entry">
+              <div class="timeline-entry__action">{{ formatAction(entry) }}</div>
+              @if (entry.feedback?.reason) {
+              <div class="timeline-entry__feedback">
+                <i class="pi pi-comment"></i> {{ entry.feedback.reason }}
+              </div>
+              }
+              @if (entry.justification) {
+              <div class="timeline-entry__justification">
+                <i class="pi pi-info-circle"></i> {{ entry.justification }}
+              </div>
+              }
+              <div class="timeline-entry__date">{{ entry.createdAt | dateFormat }}</div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="opposite" let-entry>
+            <small class="timeline-entry__step">{{ resolveStepName(entry.stepId) }}</small>
+          </ng-template>
+        </p-timeline>
+        }
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+
+  <!-- ── Return Dialog ───────────────────────────────────────────── -->
+  <p-dialog header="Devolver Documento" [(visible)]="showReturnDialog" [modal]="true"
+    [style]="{ width: '450px' }">
+    <div class="document-view__dialog-form">
+      <div class="field">
+        <label>Observação *</label>
+        <textarea pTextarea class="w-full" [ngModel]="returnObservation()"
+          (ngModelChange)="returnObservation.set($event)" rows="4"
+          placeholder="Descreva o motivo da devolução"></textarea>
+      </div>
+    </div>
+    <ng-template #footer>
+      <p-button label="Cancelar" severity="secondary" (onClick)="showReturnDialog.set(false)" />
+      <p-button label="Devolver" icon="pi pi-arrow-left" severity="warn" [disabled]="!returnObservation()"
+        [loading]="saving()" (onClick)="executeReturn()" />
+    </ng-template>
+  </p-dialog>
+
+  <!-- ── Active Editors Warning Dialog ───────────────────────────── -->
+  <p-dialog header="Atenção — Editores Ativos" [(visible)]="showActiveEditorsWarning" [modal]="true"
+    [style]="{ width: '500px' }">
+    <div class="document-view__dialog-form">
+      <div class="document-view__warning-content">
+        <i class="pi pi-exclamation-triangle" style="font-size: 2rem; color: var(--orange-500);"></i>
+        <p>Os seguintes usuários estão editando este documento:</p>
+        <ul>
+          @for (name of activeEditorNames(); track name) {
+            <li><strong>{{ name }}</strong></li>
+          }
+        </ul>
+        <p>Ao avançar, a sessão de edição será interrompida e <strong>trabalho não salvo poderá ser perdido</strong>.</p>
+        <p>Deseja continuar?</p>
+      </div>
+    </div>
+    <ng-template #footer>
+      <p-button label="Cancelar" severity="secondary" (onClick)="showActiveEditorsWarning.set(false)" />
+      <p-button label="Avançar mesmo assim" icon="pi pi-arrow-right" severity="warn"
+        [loading]="saving()" (onClick)="confirmMoveForward()" />
+    </ng-template>
+  </p-dialog>
+
+  }
+</div>

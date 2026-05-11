@@ -1,0 +1,72 @@
+<div class="flow-transition-editor">
+  <div class="flow-transition-editor__header">
+    <div>
+      <h3>Transições do Fluxo</h3>
+      <p class="flow-transition-editor__description">{{ 'workflows.transitionEditor.description' | translate }}</p>
+    </div>
+    <div class="flow-transition-editor__actions">
+      <button pButton label="Adicionar Transição" icon="pi pi-plus" class="p-button-outlined p-button-sm" (click)="openForm()"></button>
+      <button pButton label="Salvar Tudo" icon="pi pi-save" class="p-button-sm" (click)="saveAll()"></button>
+    </div>
+  </div>
+
+  @if (showForm()) {
+    <div class="flow-transition-editor__form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="flow-transition-editor__form-grid">
+          <div class="flow-transition-editor__field">
+            <label>Nome <span class="required">*</span></label>
+            <small class="flow-transition-editor__hint">{{ 'workflows.transitionEditor.nameHint' | translate }}</small>
+            <input pInputText formControlName="name" [placeholder]="'workflows.transitionEditor.namePlaceholder' | translate" [class.ng-invalid]="isInvalid('name')" />
+          </div>
+          <div class="flow-transition-editor__field">
+            <label>Tipo <span class="required">*</span></label>
+            <small class="flow-transition-editor__hint">{{ 'workflows.transitionEditor.typeHint' | translate }}</small>
+            <p-select formControlName="type" [options]="transitionTypeOptions" optionLabel="label" optionValue="value" />
+          </div>
+          <div class="flow-transition-editor__field">
+            <label>Etapa de Origem <span class="required">*</span></label>
+            <small class="flow-transition-editor__hint">Etapa em que o documento está quando esta transição pode ser executada.</small>
+            <p-select formControlName="from_step_id" [options]="steps()" optionLabel="name" optionValue="id" placeholder="Selecione a etapa de origem" [class.ng-invalid]="isInvalid('from_step_id')" />
+          </div>
+          <div class="flow-transition-editor__field">
+            <label>Etapa de Destino <span class="required">*</span></label>
+            <small class="flow-transition-editor__hint">Etapa para a qual o documento será movido após esta transição.</small>
+            <p-select formControlName="to_step_id" [options]="steps()" optionLabel="name" optionValue="id" placeholder="Selecione a etapa de destino" [class.ng-invalid]="isInvalid('to_step_id')" />
+          </div>
+        </div>
+        <div class="flow-transition-editor__field">
+          <label>Descrição</label>
+          <small class="flow-transition-editor__hint">Descreva as condições ou contexto em que esta transição deve ser usada.</small>
+          <textarea pTextarea formControlName="description" rows="2" placeholder="Descreva quando e como esta transição deve ser usada"></textarea>
+        </div>
+        <div class="flow-transition-editor__form-actions">
+          <button pButton type="button" label="Cancelar" class="p-button-outlined p-button-sm" (click)="closeForm()"></button>
+          <button pButton type="submit" [label]="editingId() ? 'Atualizar Transição' : 'Adicionar Transição'" class="p-button-sm"></button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <div class="flow-transition-editor__list">
+    @for (transition of transitions(); track transition.id) {
+      <div class="flow-transition-editor__item">
+        <div class="flow-transition-editor__item-info">
+          <span class="font-medium">{{ transition.name }}</span>
+          <small class="text-color-secondary">{{ stepName(transition.from_step_id) }} → {{ stepName(transition.to_step_id) }}</small>
+        </div>
+        <div class="flow-transition-editor__item-actions">
+          <p-tag [value]="transitionTypeLabel(transition.type) | translate" severity="info" />
+          <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="openForm(transition)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" (click)="removeTransition(transition.id)"></button>
+        </div>
+      </div>
+    }
+    @if (transitions().length === 0) {
+      <div class="flow-transition-editor__empty">
+        <i class="pi pi-info-circle"></i>
+        <span>Nenhuma transição adicionada. Certifique-se de ter etapas cadastradas antes de criar transições.</span>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,2 @@
+# Theme Rules
+Theme rules define the colors and images that create the specific look and feel of an application. By separating these styles into a dedicated theme file, developers can easily swap or redefine them without altering the core structural CSS. Themes can influence all other categories—Base, Layout, Module, and State. This chapter also addresses typography, noting that font rules should be treated similarly to themes and kept to a limited set (ideally 3–6 sizes) to ensure maintainability and visual consistency.

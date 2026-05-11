@@ -1,0 +1,9 @@
+.doc-type-form__header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+.doc-type-form__description { font-size: 0.88rem; color: var(--text-color-secondary); margin-bottom: 1.5rem; max-width: 680px; padding: 0.75rem; background: var(--surface-ground); border-radius: 6px; border-left: 3px solid var(--primary-color); }
+.doc-type-form__body { display: flex; flex-direction: column; gap: 1.25rem; max-width: 680px; }
+.doc-type-form__field { display: flex; flex-direction: column; gap: 0.25rem; }
+.doc-type-form__field--checkbox { flex-direction: row; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.doc-type-form__hint { font-size: 0.78rem; color: var(--text-color-secondary); }
+.doc-type-form__error { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--red-50); color: var(--red-700); border-radius: 6px; margin-bottom: 1rem; }
+.doc-type-form__actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+.required { color: var(--red-500); }

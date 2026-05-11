@@ -1,0 +1,99 @@
+<div class="flow-detail">
+  <div class="flow-detail__header">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    @if (flow()) {
+      <div class="flow-detail__title">
+        <h2>{{ flow()!.name }}</h2>
+        <p-tag [value]="statusLabel(flow()!.status) | translate" [severity]="statusSeverity(flow()!.status)" />
+        <small class="text-color-secondary">{{ flow()!.code }}</small>
+      </div>
+    }
+  </div>
+
+  @if (!flow()) {
+    <p class="text-color-secondary">Carregando fluxo...</p>
+  } @else {
+    <div class="flow-detail__content">
+      <div class="flow-detail__main">
+        <p-tabs>
+          <p-tablist>
+            <p-tab value="0">Versões</p-tab>
+            <p-tab value="1">Etapas ({{ steps().length }})</p-tab>
+            <p-tab value="2">Transições ({{ transitions().length }})</p-tab>
+            <p-tab value="3">Papéis ({{ roles().length }})</p-tab>
+            <p-tab value="4">Regras ({{ rules().length }})</p-tab>
+            <p-tab value="5">Exceções</p-tab>
+            <p-tab value="6">Diagrama</p-tab>
+          </p-tablist>
+
+          <p-tabpanels>
+            <!-- Versões -->
+            <p-tabpanel value="0">
+              @if (flow()!.id) {
+                <app-flow-version-list [flowId]="flow()!.id" />
+              }
+            </p-tabpanel>
+
+            <!-- Etapas -->
+            <p-tabpanel value="1">
+              @if (version()) {
+                <app-flow-step-editor />
+              } @else {
+                <p class="text-color-secondary">Crie uma versão do fluxo antes de adicionar etapas.</p>
+              }
+            </p-tabpanel>
+
+            <!-- Transições -->
+            <p-tabpanel value="2">
+              @if (version()) {
+                <app-flow-transition-editor />
+              } @else {
+                <p class="text-color-secondary">Crie uma versão do fluxo antes de adicionar transições.</p>
+              }
+            </p-tabpanel>
+
+            <!-- Papéis -->
+            <p-tabpanel value="3">
+              @if (version()) {
+                <app-flow-role-editor />
+              } @else {
+                <p class="text-color-secondary">Crie uma versão do fluxo antes de adicionar papéis.</p>
+              }
+            </p-tabpanel>
+
+            <!-- Regras -->
+            <p-tabpanel value="4">
+              @if (version()) {
+                <app-flow-rule-editor />
+              } @else {
+                <p class="text-color-secondary">Crie uma versão do fluxo antes de adicionar regras.</p>
+              }
+            </p-tabpanel>
+
+            <!-- Exceções -->
+            <p-tabpanel value="5">
+              @if (version()) {
+                <app-flow-exception-editor />
+              } @else {
+                <p class="text-color-secondary">Crie uma versão do fluxo antes de adicionar exceções.</p>
+              }
+            </p-tabpanel>
+
+            <!-- Diagrama -->
+            <p-tabpanel value="6">
+              <app-flow-diagram
+                [steps]="steps()"
+                [transitions]="transitions()"
+                [orphanStepIds]="orphanStepIds()"
+              />
+            </p-tabpanel>
+          </p-tabpanels>
+        </p-tabs>
+      </div>
+
+      <div class="flow-detail__sidebar">
+        <app-progressive-summary />
+      </div>
+    </div>
+  }
+</div>

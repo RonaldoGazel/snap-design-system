@@ -1,0 +1,82 @@
+<div class="flow-step-editor">
+  <div class="flow-step-editor__header">
+    <div>
+      <h3>Etapas do Fluxo</h3>
+      <p class="flow-step-editor__description">Uma <strong>etapa</strong> representa um estado do documento dentro do fluxo — por exemplo, "workflows.docStatus.inProduction", "workflows.docStatus.inReview" ou "workflows.docStatus.formalized". Cada etapa tem um tipo que define o que pode acontecer nela e um papel responsável principal. Após criar as etapas, vá para a aba <em>Transições</em> para conectá-las.</p>
+    </div>
+    <div class="flow-step-editor__actions">
+      <button pButton label="Adicionar Etapa" icon="pi pi-plus" class="p-button-outlined p-button-sm" (click)="openForm()"></button>
+      <button pButton label="Salvar Tudo" icon="pi pi-save" class="p-button-sm" (click)="saveAll()" title="Persiste todas as etapas no banco de dados"></button>
+    </div>
+  </div>
+
+  @if (showForm()) {
+    <div class="flow-step-editor__form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="flow-step-editor__form-grid">
+          <div class="flow-step-editor__field">
+            <label>Nome <span class="required">*</span></label>
+            <small class="flow-step-editor__hint">{{ 'workflows.stepEditor.nameHint' | translate }}</small>
+            <input pInputText formControlName="name" [placeholder]="'workflows.stepEditor.namePlaceholder' | translate" [class.ng-invalid]="isInvalid('name')" />
+          </div>
+          <div class="flow-step-editor__field">
+            <label>Código <span class="required">*</span></label>
+            <small class="flow-step-editor__hint">Identificador único da etapa dentro do fluxo. Ex: "PRODUCAO", "REVISAO_CHEFE".</small>
+            <input pInputText formControlName="code" placeholder="Ex: PRODUCAO" [class.ng-invalid]="isInvalid('code')" />
+          </div>
+          <div class="flow-step-editor__field">
+            <label>Tipo <span class="required">*</span></label>
+            <small class="flow-step-editor__hint">{{ 'workflows.stepEditor.typeHint' | translate }}</small>
+            <p-select formControlName="type" [options]="stepTypeOptions" optionLabel="label" optionValue="value" />
+          </div>
+          <div class="flow-step-editor__field">
+            <label>Ordem Lógica</label>
+            <small class="flow-step-editor__hint">Número que indica a posição desta etapa na sequência do fluxo. Usado apenas para ordenação visual.</small>
+            <input pInputText type="number" formControlName="order_index" />
+          </div>
+          <div class="flow-step-editor__field">
+            <label>Papel Responsável Principal</label>
+            <small class="flow-step-editor__hint">Papel de fluxo que é o responsável primário por esta etapa. Deve ser um papel já cadastrado na aba Papéis.</small>
+            <p-select formControlName="role_code" [options]="roleCodeOptions" optionLabel="label" optionValue="value" placeholder="Nenhum" />
+          </div>
+          <div class="flow-step-editor__field flow-step-editor__field--checkbox">
+            <p-checkbox formControlName="is_mandatory" [binary]="true" inputId="is_mandatory" />
+            <label for="is_mandatory">Etapa obrigatória</label>
+            <small class="flow-step-editor__hint">Se marcado, o documento não pode pular esta etapa.</small>
+          </div>
+        </div>
+        <div class="flow-step-editor__field">
+          <label>Descrição</label>
+          <small class="flow-step-editor__hint">Explique o que acontece nesta etapa e quais ações são esperadas do responsável.</small>
+          <textarea pTextarea formControlName="description" rows="2" placeholder="Descreva o que acontece nesta etapa"></textarea>
+        </div>
+        <div class="flow-step-editor__form-actions">
+          <button pButton type="button" label="Cancelar" class="p-button-outlined p-button-sm" (click)="closeForm()"></button>
+          <button pButton type="submit" [label]="editingId() ? 'Atualizar Etapa' : 'Adicionar Etapa'" class="p-button-sm"></button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <div class="flow-step-editor__list">
+    @for (step of steps(); track step.id) {
+      <div class="flow-step-editor__step">
+        <div class="flow-step-editor__step-info">
+          <span class="font-medium">{{ step.name }}</span>
+          <small class="text-color-secondary">{{ step.code }} — {{ stepTypeLabel(step.type) | translate }} — Ordem: {{ step.order_index }}</small>
+        </div>
+        <div class="flow-step-editor__step-actions">
+          @if (!step.is_mandatory) { <p-tag value="Opcional" severity="secondary" /> }
+          <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="openForm(step)" title="Editar etapa"></button>
+          <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" (click)="removeStep(step.id)" title="Remover etapa"></button>
+        </div>
+      </div>
+    }
+    @if (steps().length === 0) {
+      <div class="flow-step-editor__empty">
+        <i class="pi pi-info-circle"></i>
+        <span>{{ 'workflows.stepEditor.emptyMessage' | translate }}</span>
+      </div>
+    }
+  </div>
+</div>

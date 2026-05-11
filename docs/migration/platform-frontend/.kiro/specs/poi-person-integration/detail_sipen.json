@@ -1,0 +1,79 @@
+{
+    "uuid": "p1",
+    "nome": "CARLA EDUARDA MENTES",
+    "cpf": "12345678900",
+    "rg": "12345678-9",
+    "data_nascimento": "1985-03-12",
+    "sexo": "MASCULINO",
+    "mae": "SÔNIA MARIA MENDES",
+    "pai": "JOSÉ EDUARDO MENDES",
+    "nacionalidade": "BRASIL",
+    "naturalidade": "RIO DE JANEIRO-RJ",
+    "cor_pele": "NEGRO",
+    "estado_civil": "SOLTEIRO",
+    "grau_instrucao": "SUPERIOR INCOMPLETO",
+    "profissao": "MÚSICO",
+    "vulgos": [
+        "CARLOTA",
+        "CARLA MENDES"
+    ],
+    "sinais_caracteristicos": "[{\"mark_type\": \"TATUAGEM\", \"description\": \"Dragão tribal\", \"location\": \"BRACO_DIREITO\"}, {\"mark_type\": \"CICATRIZ\", \"description\": \"Cicatriz de corte 8cm\", \"location\": \"ABDOMEN_ESQUERDO\"}]",
+    "rotulos": "[\"Person\", \"Inmate\"]",
+    "fonte": "SIPEN",
+    "condenacoes": [
+        {
+            "uuid": "conviction-p1",
+            "data_sentenca": "2019-11-20",
+            "crime": "TRÁFICO DE DROGAS",
+            "artigos_legais": "Art. 33 c/c Art. 35 — Lei 11.343/06",
+            "pena_dias": 2555,
+            "dias_remicao": 120,
+            "data_beneficio_1_6": "2020-09-15",
+            "data_beneficio_1_3": "2022-03-15",
+            "data_beneficio_1_2": "2023-03-15",
+            "status": "ACTIVE",
+            "fonte": "SIPEN"
+        }
+    ],
+    "visitantes": [
+        {
+            "uuid": "person-v-p1-001",
+            "fonte": "SIPEN"
+        },
+        {
+            "uuid": "person-v-p1-002",
+            "fonte": "SIPEN"
+        }
+    ],
+    "fotos": [],
+    "eventos": [
+        {
+            "uuid": "event-p1-001",
+            "data": "2019-08-15T10:00:00",
+            "fonte": "SIPEN"
+        },
+        {
+            "uuid": "event-p1-002",
+            "data": "2021-03-10T14:30:00",
+            "fonte": "SIPEN"
+        }
+    ],
+    "id": "p1",
+    "perfis": [],
+    "fontes": [
+        {
+            "tipo": "SIPEN",
+            "status": "ativo"
+        }
+    ],
+    "resumoAnalitico": "",
+    "statusReconciliacao": "sem_divergencia",
+    "tagsRelevantes": [],
+    "_sources": [
+        {
+            "graph_id": "6b10e263-f1d0-439c-85b2-63a27b334bef",
+            "display_name": "Grafo Publico"
+        }
+    ],
+    "_merged_from": 1
+}

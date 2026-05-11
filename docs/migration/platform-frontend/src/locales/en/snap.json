@@ -1,0 +1,21 @@
+{
+  "title": "SNAP Search",
+  "subtitle": "Search for person reports by CPF",
+  "cpfLabel": "CPF",
+  "cpfPlaceholder": "000.000.000-00",
+  "searchButton": "Search",
+  "loading": "Submitting request...",
+  "result.title": "Request Accepted",
+  "result.status": "Status",
+  "result.message": "Message",
+  "error.invalidCpf": "Please enter a valid CPF with 11 digits.",
+  "error.badRequest": "Invalid CPF or request parameters.",
+  "error.forbidden": "You do not have permission to perform SNAP searches.",
+  "error.notFound": "No results found for the given CPF.",
+  "error.serviceUnavailable": "SNAP service is temporarily unavailable.",
+  "error.networkError": "Connection error. Please check your network.",
+  "error.retry": "Try again",
+  "targetGraph": "Target Graph",
+  "public": "Public",
+  "private": "Private"
+}

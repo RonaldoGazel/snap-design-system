@@ -1,0 +1,62 @@
+<div class="process-list">
+  <div class="process-list__header">
+    <h2>Processos</h2>
+    <button pButton label="Novo Processo" icon="pi pi-plus" (click)="navigateToNew()"></button>
+  </div>
+
+  <div class="process-list__filters">
+    <input
+      pInputText
+      type="text"
+      placeholder="Buscar por identificador ou assunto..."
+      [ngModel]="searchText()"
+      (ngModelChange)="searchText.set($event)"
+    />
+    <p-select
+      [options]="statusOptions"
+      [ngModel]="filterStatus()"
+      (ngModelChange)="filterStatus.set($event)"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Status"
+    />
+  </div>
+
+  <p-table [value]="filteredProcesses()" [paginator]="true" [rows]="15">
+    <ng-template #header>
+      <tr>
+        <th>Identificador</th>
+        <th>Assunto</th>
+        <th>Status</th>
+        <th>Documentos</th>
+        <th>Criado em</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-p>
+      <tr>
+        <td>{{ p.identifier }}</td>
+        <td>{{ p.subject }}</td>
+        <td>
+          <p-tag [value]="statusLabel(p.status) | translate" [severity]="statusSeverity(p.status)" />
+        </td>
+        <td>{{ documentCount(p) }}</td>
+        <td>{{ p.created_at | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <button
+            pButton
+            icon="pi pi-eye"
+            class="p-button-text p-button-sm"
+            (click)="navigateToDetail(p)"
+            title="Ver detalhe"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="6" class="text-center text-color-secondary">Nenhum processo encontrado.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

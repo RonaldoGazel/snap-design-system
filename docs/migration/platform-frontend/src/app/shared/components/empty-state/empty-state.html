@@ -1,0 +1,9 @@
+<div class="empty-state">
+    <div class="empty-state-icon-wrapper">
+        <i [class]="icon()" class="empty-state-icon"></i>
+    </div>
+    <h3 class="empty-state-title">{{ title() }}</h3>
+    @if (message()) {
+    <p class="empty-state-message">{{ message() }}</p>
+    }
+</div>

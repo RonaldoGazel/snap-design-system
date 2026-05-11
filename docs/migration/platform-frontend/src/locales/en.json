@@ -1,0 +1,710 @@
+{
+  "audit": {
+    "page": {
+      "title": "Audit Logs"
+    },
+    "table": {
+      "occurredAt": "Date/Time",
+      "eventType": "Event Type",
+      "actorId": "Actor",
+      "action": "Action",
+      "resourceType": "Resource Type",
+      "resourceId": "Resource ID",
+      "outcome": "Outcome",
+      "producer": "Producer",
+      "empty": "No records found.",
+      "totalRecords": "{{count}} records"
+    },
+    "filter": {
+      "eventType": "Event Type",
+      "resourceType": "Resource Type",
+      "outcome": "Outcome",
+      "producer": "Producer",
+      "actorId": "Actor ID",
+      "correlationId": "Correlation ID",
+      "resourceId": "Resource ID",
+      "occurredAfter": "From",
+      "occurredBefore": "To",
+      "apply": "Apply Filters",
+      "clear": "Clear",
+      "dateValidation": "End date must be after start date."
+    },
+    "outcome": {
+      "success": "Success",
+      "failure": "Failure"
+    },
+    "detail": {
+      "title": "Audit Event Detail",
+      "back": "Back to list",
+      "copied": "Copied to clipboard",
+      "metadata": "Metadata",
+      "metadataEmpty": "No metadata",
+      "failureReason": "Failure Reason",
+      "failureReasonEmpty": "N/A",
+      "sectionIdentification": "Event Identification",
+      "sectionTemporal": "Timestamps",
+      "sectionTraceability": "Traceability",
+      "sectionActor": "Actor & Action",
+      "sectionResource": "Resource",
+      "sectionOutcome": "Outcome"
+    },
+    "error": {
+      "forbidden": "You do not have permission to access audit logs.",
+      "forbiddenAction": "Return to home",
+      "badRequest": "Invalid query parameters. Please review your filters.",
+      "notFound": "Audit record not found.",
+      "serviceUnavailable": "Audit service is temporarily unavailable.",
+      "networkError": "Connection error. Please check your network.",
+      "retry": "Try again",
+      "unauthorized": "Authentication required. Please log in."
+    },
+    "export": {
+      "button": "Export",
+      "csv": "Export as CSV",
+      "json": "Export as JSON",
+      "error": "Export failed. Please try again.",
+      "truncated": "Export limited to 10,000 records."
+    }
+  },
+  "documents": {
+    "page": {
+      "title": "Documents",
+      "placeholder": "Documents module coming soon."
+    }
+  },
+  "snap": {
+    "title": "SNAP Search",
+    "subtitle": "Search for person reports by CPF",
+    "cpfLabel": "CPF",
+    "cpfPlaceholder": "000.000.000-00",
+    "searchButton": "Search",
+    "loading": "Generating report...",
+    "result": {
+      "title": "Report Generated",
+      "reportName": "Report Name",
+      "filePath": "File Path",
+      "bucket": "Storage Bucket"
+    },
+    "error": {
+      "invalidCpf": "Please enter a valid CPF with 11 digits.",
+      "badRequest": "Invalid CPF or request parameters.",
+      "forbidden": "You do not have permission to perform SNAP searches.",
+      "notFound": "No results found for the given CPF.",
+      "serviceUnavailable": "SNAP service is temporarily unavailable.",
+      "networkError": "Connection error. Please check your network.",
+      "retry": "Try again"
+    }
+  },
+  "shell": {
+    "nav": {
+      "intelligence": "Intelligence",
+      "snapSearch": "SNAP Search",
+      "poi": "Persons of Interest",
+      "documents": "Documents",
+      "administration": "Administration",
+      "audit": "Audit",
+      "expand": "Expand menu",
+      "poi": "POI",
+      "users": "Users",
+      "organizations": "Organizations",
+      "groups": "Groups",
+      "roles": "Roles",
+      "invitations": "Invitations",
+      "allUsers": "All Users"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "snap": "SNAP Search",
+      "audit": "Audit",
+      "auditDetail": "Event Detail",
+      "admin": "Administration",
+      "users": "Users",
+      "organizations": "Organizations",
+      "groups": "Groups",
+      "roles": "Roles",
+      "invitations": "Invitations",
+      "allUsers": "All Users",
+      "poi": "People of Interest",
+      "pessoas": "People",
+      "intelligence": "Intelligence",
+      "person": "Persons of Interest",
+      "dashboard": "Dashboard",
+      "profile": "Profile",
+      "registration": "Registration",
+      "documents": "Documents"
+    },
+    "userMenu": {
+      "signOut": "Sign Out"
+    },
+    "user": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Sign Out"
+    },
+    "brand": {
+      "name": "SNAP Apolo",
+      "subtitle": "Intelligence Platform"
+    }
+  },
+  "auth": {
+    "login": {
+      "redirecting": "Redirecting to login..."
+    },
+    "welcome": {
+      "greeting": "Welcome, {{name}}",
+      "logoutButton": "Logout"
+    },
+    "sessionExpired": {
+      "title": "Session Expired",
+      "message": "Your session has expired. Please log in again to continue.",
+      "loginButton": "Log In"
+    },
+    "error": {
+      "title": "Authentication Service Unavailable",
+      "message": "We could not connect to the authentication service. Please try again.",
+      "retryButton": "Retry"
+    },
+    "idle": {
+      "warning": "Your session will expire soon due to inactivity."
+    },
+    "errors": {
+      "networkError": "A network error occurred. Please check your connection.",
+      "refreshFailed": "Could not refresh your session. Please log in again."
+    }
+  },
+  "admin": {
+    "users": {
+      "title": "Users",
+      "create": "Create User",
+      "filter": {
+        "status": "Status"
+      },
+      "table": {
+        "displayName": "Display Name",
+        "email": "Email",
+        "status": "Status",
+        "clearanceLevel": "Clearance Level",
+        "createdAt": "Created",
+        "empty": "No users found."
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive",
+        "locked": "Locked"
+      },
+      "createDialog": {
+        "title": "Create User",
+        "externalAuthId": "External Auth ID",
+        "username": "Username",
+        "password": "Password",
+        "email": "Email",
+        "displayName": "Display Name",
+        "clearanceLevel": "Clearance Level",
+        "role": "Role",
+        "selectRole": "Select a role...",
+        "group": "Group",
+        "selectGroup": "Select a group...",
+        "usernameHint": "Username must be at least 3 characters",
+        "passwordHint": "Password must be at least 8 characters",
+        "cancel": "Cancel",
+        "save": "Create"
+      },
+      "keycloakError": {
+        "USER_ALREADY_EXISTS": "A user with this username or email already exists.",
+        "USERNAME_TAKEN": "This username is already taken.",
+        "EMAIL_TAKEN": "This email is already in use.",
+        "PASSWORD_TOO_SHORT": "Password is too short.",
+        "PASSWORD_NEEDS_SPECIAL_CHAR": "Password must contain at least 1 special character.",
+        "PASSWORD_NEEDS_UPPERCASE": "Password must contain at least 1 uppercase letter.",
+        "PASSWORD_NEEDS_LOWERCASE": "Password must contain at least 1 lowercase letter.",
+        "PASSWORD_NEEDS_DIGIT": "Password must contain at least 1 digit.",
+        "PASSWORD_POLICY_VIOLATION": "Password does not meet the security policy.",
+        "USER_CREATION_FAILED": "User creation failed. Please try again.",
+        "INVALID_CLEARANCE_LEVEL": "The selected clearance level is not valid. Please choose from the available levels."
+      },
+      "detail": {
+        "title": "User Detail",
+        "back": "Back to Users",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "deactivate": "Deactivate",
+        "lock": "Lock",
+        "unlock": "Unlock",
+        "reactivate": "Reactivate",
+        "confirmDelete": "Confirm User Deletion",
+        "confirmDeactivate": "Confirm User Deactivation",
+        "confirmLock": "Confirm User Lock",
+        "confirmUnlock": "Confirm User Unlock",
+        "confirmReactivate": "Confirm User Reactivation",
+        "auditHint": "This action will be recorded in the audit trail.",
+        "notFound": "User not found.",
+        "noOrg": "This user has no organizational linkage and has no operational access (ADM-044).",
+        "noRoles": "This user has no role assignments and has no effective permissions (ADM-045).",
+        "deleteWarning": "This user has {{roleCount}} active role(s) and {{groupCount}} group membership(s) that will be removed.",
+        "resetPassword": {
+          "button": "Reset Password",
+          "title": "Reset Password",
+          "password": "Temporary Password",
+          "auditHint": "This action will be recorded in the audit trail.",
+          "confirm": "Reset",
+          "success": "Password reset successfully."
+        },
+        "groups": {
+          "title": "Group Memberships",
+          "loading": "Loading groups...",
+          "empty": "No group memberships."
+        },
+        "sections": {
+          "title": "Groups",
+          "loading": "Loading groups...",
+          "empty": "No group memberships."
+        },
+        "effectivePermissions": {
+          "title": "Effective Permissions",
+          "loading": "Loading permissions...",
+          "unavailable": "Effective permissions are currently unavailable.",
+          "empty": "No effective permissions found.",
+          "showTrace": "Show Trace",
+          "hideTrace": "Hide Trace",
+          "traceTitle": "Permission Evaluation Trace"
+        },
+        "field": {
+          "displayName": "Display Name",
+          "email": "Email",
+          "status": "Status",
+          "clearanceLevel": "Clearance Level",
+          "externalAuthId": "External Auth ID",
+          "organizationId": "Organization ID",
+          "identityVersion": "Identity Version",
+          "createdAt": "Created",
+          "updatedAt": "Updated"
+        }
+      },
+      "error": {
+        "badRequest": "Invalid request. Please review the form fields.",
+        "serviceUnavailable": "User service is temporarily unavailable.",
+        "networkError": "Connection error. Please check your network.",
+        "retry": "Try again"
+      }
+    },
+    "organizations": {
+      "title": "Organizations",
+      "create": "Create Organization",
+      "table": {
+        "name": "Name",
+        "status": "Status",
+        "createdAt": "Created",
+        "updatedAt": "Updated",
+        "empty": "No organizations found."
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "createDialog": {
+        "title": "Create Organization",
+        "name": "Name",
+        "status": "Status",
+        "ownerEmail": "Initial Org Owner Email",
+        "cancel": "Cancel",
+        "save": "Create"
+      },
+      "bootstrapDialog": {
+        "title": "Bootstrap Organization",
+        "orgName": "Organization Name",
+        "ownerUsername": "Owner Username",
+        "ownerEmail": "Owner Email",
+        "ownerDisplayName": "Owner Display Name",
+        "ownerPassword": "Owner Password",
+        "auditHint": "This action will be recorded in the audit trail.",
+        "cancel": "Cancel",
+        "submit": "Bootstrap",
+        "retry": "Retry",
+        "validation": {
+          "orgNameRequired": "Organization name is required.",
+          "usernameRequired": "Username is required.",
+          "usernameMinLength": "Username must be at least 3 characters.",
+          "emailRequired": "Email is required.",
+          "emailInvalid": "Please enter a valid email address.",
+          "displayNameRequired": "Display name is required.",
+          "passwordRequired": "Password is required.",
+          "passwordMinLength": "Password must be at least 8 characters."
+        },
+        "errors": {
+          "USER_ALREADY_EXISTS": "A user with this username or email already exists.",
+          "USERNAME_TAKEN": "This username is already taken.",
+          "EMAIL_TAKEN": "This email is already registered.",
+          "PASSWORD_TOO_SHORT": "The password is too short. Please use a longer password.",
+          "PASSWORD_NEEDS_SPECIAL_CHAR": "The password must contain at least 1 special character.",
+          "PASSWORD_NEEDS_UPPERCASE": "The password must contain at least 1 uppercase letter.",
+          "PASSWORD_NEEDS_LOWERCASE": "The password must contain at least 1 lowercase letter.",
+          "PASSWORD_NEEDS_DIGIT": "The password must contain at least 1 digit.",
+          "PASSWORD_IN_HISTORY": "This password was used recently. Please choose a different one.",
+          "PASSWORD_IS_USERNAME": "The password cannot be the same as the username.",
+          "PASSWORD_POLICY_VIOLATION": "The password does not meet the security requirements.",
+          "USER_CREATION_FAILED": "User creation failed. Please check the information and try again.",
+          "GENERIC": "An unexpected error occurred. Please try again."
+        }
+      },
+      "detail": {
+        "title": "Organization Detail",
+        "back": "Back to Organizations",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "orgRecovery": "Org Recovery",
+        "transferOwnership": "Transfer Ownership",
+        "confirmDelete": "Confirm Organization Deletion",
+        "auditHint": "This action will be recorded in the audit trail.",
+        "notFound": "Organization not found.",
+        "field": {
+          "name": "Name",
+          "status": "Status",
+          "createdAt": "Created",
+          "updatedAt": "Updated"
+        },
+        "recoveryDialog": {
+          "title": "Org Recovery — Assign New Owner",
+          "targetUser": "New Org Owner",
+          "warning": "This is an administrative override. The current owner's Org Owner role will be revoked and reassigned to the selected user.",
+          "cancel": "Cancel",
+          "confirm": "Assign Owner"
+        },
+        "transferDialog": {
+          "title": "Transfer Ownership",
+          "targetUser": "Target User",
+          "revokeCheckbox": "Revoke my ownership after transfer",
+          "forbiddenMessage": "Only the current Org Owner can transfer ownership.",
+          "cancel": "Cancel",
+          "confirm": "Transfer"
+        },
+        "error": {
+          "conflict": "This organization has associated users and cannot be deleted."
+        }
+      },
+      "error": {
+        "badRequest": "Invalid request. Please review the form fields.",
+        "serviceUnavailable": "Organization service is temporarily unavailable.",
+        "networkError": "Connection error. Please check your network.",
+        "retry": "Try again"
+      }
+    },
+    "orgSwitcher": {
+      "platform": "Platform View",
+      "myOrg": "My Org",
+      "readOnly": "Read-only"
+    },
+    "groups": {
+      "title": "Groups",
+      "create": "Create Group",
+      "table": {
+        "name": "Name",
+        "description": "Description",
+        "version": "Version",
+        "createdAt": "Created",
+        "updatedAt": "Updated",
+        "empty": "No groups found."
+      },
+      "list": {
+        "hierarchyTooltip": "Organizational grouping — permissions are not inherited"
+      },
+      "createDialog": {
+        "title": "Create Group",
+        "name": "Name",
+        "description": "Description",
+        "parentGroup": "Parent Group",
+        "parentGroupPlaceholder": "None (top-level group)",
+        "cancel": "Cancel",
+        "save": "Create"
+      },
+      "detail": {
+        "title": "Group Detail",
+        "back": "Back to Groups",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "reload": "Reload",
+        "confirmDelete": "Confirm Group Deletion",
+        "auditHint": "This action will be recorded in the audit trail.",
+        "notFound": "Group not found.",
+        "noInheritance": "Group membership does not inherit permissions from parent groups (ADM-033/035).",
+        "organizationalInfo": "Groups are organizational units used to structure users into areas, sections, or teams. They do not grant permissions.",
+        "field": {
+          "name": "Name",
+          "description": "Description",
+          "parentGroup": "Parent Group",
+          "parentGroupPlaceholder": "None (top-level group)",
+          "version": "Version",
+          "createdAt": "Created",
+          "updatedAt": "Updated"
+        },
+        "childGroups": {
+          "title": "Child Groups"
+        },
+        "error": {
+          "conflict": "This resource was modified by another user. Please reload.",
+          "activeMembers": "This group has active members and cannot be deleted.",
+          "duplicateMember": "This member already exists in the group."
+        },
+        "members": {
+          "title": "Members",
+          "subjectId": "Subject ID",
+          "displayName": "Name",
+          "email": "Email",
+          "createdAt": "Added",
+          "actions": "Actions",
+          "add": "Add Member",
+          "searchUser": "Search user by name...",
+          "remove": "Remove",
+          "confirmRemove": "Confirm Member Removal",
+          "subjectIdPlaceholder": "Enter subject ID",
+          "empty": "No members found."
+        }
+      },
+      "error": {
+        "badRequest": "Invalid request. Please review the form fields.",
+        "serviceUnavailable": "Group service is temporarily unavailable.",
+        "networkError": "Connection error. Please check your network.",
+        "retry": "Try again"
+      }
+    },
+    "sections": {
+      "title": "Groups",
+      "create": "Create Group",
+      "table": {
+        "name": "Name",
+        "createdAt": "Created",
+        "updatedAt": "Updated",
+        "empty": "No groups found."
+      },
+      "list": {
+        "hierarchyTooltip": "Organizational grouping — data access is scoped by group membership"
+      },
+      "createDialog": {
+        "title": "Create Group",
+        "name": "Name",
+        "parentSection": "Parent Group",
+        "parentSectionPlaceholder": "None (top-level group)",
+        "cancel": "Cancel",
+        "save": "Create"
+      },
+      "detail": {
+        "title": "Group Detail",
+        "back": "Back to Groups",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "reload": "Reload",
+        "confirmDelete": "Confirm Group Deletion",
+        "auditHint": "This action will be recorded in the audit trail.",
+        "notFound": "Group not found.",
+        "dataSegregationInfo": "Groups are organizational units that control data visibility. Users can only see data belonging to their groups.",
+        "field": {
+          "name": "Name",
+          "parentSection": "Parent Group",
+          "parentSectionPlaceholder": "None (top-level group)",
+          "createdAt": "Created",
+          "updatedAt": "Updated"
+        },
+        "childSections": {
+          "title": "Child Groups"
+        },
+        "members": {
+          "title": "Members",
+          "displayName": "Name",
+          "email": "Email",
+          "actions": "Actions",
+          "add": "Add Member",
+          "searchUser": "Search user by name...",
+          "remove": "Remove",
+          "confirmRemove": "Confirm Member Removal",
+          "empty": "No members found."
+        }
+      },
+      "error": {
+        "badRequest": "Invalid request. Please review the form fields.",
+        "serviceUnavailable": "Group service is temporarily unavailable.",
+        "networkError": "Connection error. Please check your network.",
+        "retry": "Try again"
+      }
+    },
+    "roles": {
+      "title": "Roles",
+      "create": "Create Role",
+      "type": {
+        "platform": "Platform (Global)",
+        "service": "Service (Org-scoped)"
+      },
+      "table": {
+        "name": "Name",
+        "type": "Type",
+        "permissionCount": "Permissions",
+        "version": "Version",
+        "createdAt": "Created",
+        "empty": "No roles found."
+      },
+      "createDialog": {
+        "title": "Create Role",
+        "name": "Name",
+        "type": "Type",
+        "permissions": "Permissions",
+        "resourceType": "Resource Type",
+        "action": "Action",
+        "addPermission": "Add Permission",
+        "cancel": "Cancel",
+        "save": "Create"
+      },
+      "detail": {
+        "title": "Role Detail",
+        "back": "Back to Roles",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "reload": "Reload",
+        "confirmDelete": "Confirm Role Deletion",
+        "auditHint": "This action will be recorded in the audit trail.",
+        "notFound": "Role not found.",
+        "field": {
+          "name": "Name",
+          "type": "Type",
+          "version": "Version",
+          "createdAt": "Created",
+          "updatedAt": "Updated"
+        },
+        "permissions": {
+          "title": "Permissions",
+          "empty": "No permissions defined.",
+          "catalogUnavailable": "Permission catalog is currently unavailable.",
+          "retryCatalog": "Retry",
+          "refreshCatalog": "Refresh Catalog"
+        },
+        "error": {
+          "conflict": "This resource was modified by another user. Please reload.",
+          "activeAssignments": "This role has active assignments and cannot be deleted.",
+          "globalForbidden": "Only Platform Admins can assign GLOBAL-scoped roles.",
+          "duplicateAssignment": "This assignment already exists.",
+          "maxRoles": "Maximum number of role assignments exceeded.",
+          "lastOwner": "This role assignment cannot be revoked because the user is the last Org Owner."
+        },
+        "assignments": {
+          "title": "Assignments",
+          "displayName": "Name",
+          "email": "Email",
+          "user": "User",
+          "subjectId": "Subject ID",
+          "subjectIdPlaceholder": "Enter subject ID",
+          "scopeType": "Scope Type",
+          "scopeId": "Scope ID",
+          "createdAt": "Created",
+          "actions": "Actions",
+          "assign": "Assign Role",
+          "revoke": "Revoke",
+          "confirmRevoke": "Confirm Assignment Revocation",
+          "empty": "No assignments found."
+        }
+      },
+      "error": {
+        "badRequest": "Invalid request. Please review the form fields.",
+        "serviceUnavailable": "Role service is temporarily unavailable.",
+        "networkError": "Connection error. Please check your network.",
+        "retry": "Try again"
+      }
+    },
+    "invitations": {
+      "title": "Invitations",
+      "create": "Create Invitation",
+      "revoke": "Revoke",
+      "filter": {
+        "status": "Status"
+      },
+      "table": {
+        "email": "Email",
+        "status": "Status",
+        "invitedBy": "Invited By",
+        "expiresAt": "Expires",
+        "createdAt": "Created",
+        "actions": "Actions",
+        "empty": "No invitations found."
+      },
+      "status": {
+        "pending": "Pending",
+        "accepted": "Accepted",
+        "expired": "Expired",
+        "revoked": "Revoked"
+      },
+      "createDialog": {
+        "title": "Create Invitation",
+        "email": "Email",
+        "cancel": "Cancel",
+        "save": "Send Invitation"
+      },
+      "revokeDialog": {
+        "title": "Confirm Invitation Revocation",
+        "message": "Are you sure you want to revoke this invitation?",
+        "auditHint": "This action will be recorded in the audit trail.",
+        "cancel": "Cancel",
+        "confirm": "Revoke"
+      },
+      "error": {
+        "validation": "Invalid request. Please review the form fields.",
+        "serviceUnavailable": "Invitation service is temporarily unavailable.",
+        "networkError": "Connection error. Please check your network.",
+        "retry": "Try again"
+      }
+    },
+    "allUsers": {
+      "title": "All Users",
+      "filter": {
+        "organization": "Organization",
+        "status": "Status",
+        "search": "Search",
+        "searchPlaceholder": "Search by name or email"
+      },
+      "table": {
+        "displayName": "Display Name",
+        "email": "Email",
+        "status": "Status",
+        "organizationId": "Organization",
+        "clearanceLevel": "Clearance Level",
+        "createdAt": "Created",
+        "empty": "No users found."
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive",
+        "locked": "Locked"
+      },
+      "error": {
+        "serviceUnavailable": "User service is temporarily unavailable.",
+        "networkError": "Connection error. Please check your network.",
+        "retry": "Try again"
+      }
+    },
+    "userPicker": {
+      "placeholder": "Search users by name or email...",
+      "noResults": "No users found."
+    },
+    "warnings": {
+      "lastOwner": "This user is the last Org Owner. Removing or deactivating them would leave the organization without an owner.",
+      "userHasRoles": "This user has {{count}} active role assignment(s). Deleting the user will revoke all assignments.",
+      "userHasGroups": "This user is a member of {{count}} group(s). Deleting the user will remove all memberships."
+    }
+  },
+  "shared": {
+    "error": {
+      "forbidden": "You do not have permission to access this resource.",
+      "forbiddenAction": "Return to home"
+    }
+  },
+  "person": {
+    "profile": {
+      "openGraph": "Open Relationship Graph"
+    }
+  }
+}

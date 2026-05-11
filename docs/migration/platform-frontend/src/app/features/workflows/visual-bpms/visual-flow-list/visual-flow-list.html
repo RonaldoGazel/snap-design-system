@@ -1,0 +1,46 @@
+<div class="visual-flow-list">
+  <div class="visual-flow-list__header">
+    <h2>Visual BPMS</h2>
+    <button pButton label="Novo Fluxo Visual" icon="pi pi-plus" (click)="navigateToNew()"></button>
+  </div>
+
+  <div class="visual-flow-list__filters">
+    <input
+      pInputText
+      type="text"
+      placeholder="Buscar por nome..."
+      [ngModel]="searchText()"
+      (ngModelChange)="searchText.set($event)"
+    />
+  </div>
+
+  <p-table [value]="filteredFlows()" [paginator]="true" [rows]="15">
+    <ng-template #header>
+      <tr>
+        <th>Nome</th>
+        <th>Template</th>
+        <th>Status</th>
+        <th>Versão</th>
+        <th>Criado em</th>
+        <th>Atualizado em</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-flow>
+      <tr class="cursor-pointer" (click)="navigateToBuilder(flow)">
+        <td>{{ flow.name }}</td>
+        <td>{{ flow.template?.name }}</td>
+        <td>
+          <p-tag [value]="getStatusLabel(flow.status) | translate" [severity]="getStatusSeverity(flow.status)" />
+        </td>
+        <td>v{{ flow.version }}</td>
+        <td>{{ flow.created_at | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ flow.updated_at | date:'dd/MM/yyyy HH:mm' }}</td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="6" class="text-center text-color-secondary">Nenhum fluxo visual encontrado.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

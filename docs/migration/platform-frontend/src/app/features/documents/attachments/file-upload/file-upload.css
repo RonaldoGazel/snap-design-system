@@ -1,0 +1,23 @@
+/* =========================================================
+   File Upload — Component Styles (SMACSS+BEM)
+   Block: .file-upload
+   ========================================================= */
+
+.file-upload__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    color: var(--p-text-muted-color);
+    text-align: center;
+}
+
+.file-upload__icon {
+    font-size: 2.5rem;
+    color: var(--p-primary-color);
+}
+
+.file-upload__hint {
+    font-size: 0.75rem;
+}

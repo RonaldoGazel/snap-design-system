@@ -1,0 +1,84 @@
+<div class="document-list">
+  <div class="document-list__header">
+    <h2>Documentos</h2>
+    <button pButton label="Novo Documento" icon="pi pi-plus" (click)="navigateToNew()"></button>
+  </div>
+
+  <div class="document-list__filters">
+    <input
+      pInputText
+      type="text"
+      placeholder="Buscar por título, NUP, tipo documental ou template..."
+      [ngModel]="searchText()"
+      (ngModelChange)="searchText.set($event)"
+    />
+    <p-select
+      [options]="statusOptions"
+      [ngModel]="filterStatus()"
+      (ngModelChange)="filterStatus.set($event)"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Status"
+    />
+    <p-select
+      [options]="docTypeOptions()"
+      [ngModel]="filterDocTypeId()"
+      (ngModelChange)="filterDocTypeId.set($event)"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Tipo Documental"
+    />
+  </div>
+
+  <p-table
+    [value]="filteredInstances()"
+    [paginator]="true"
+    [rows]="15"
+    [sortField]="'created_at'"
+    [sortOrder]="-1"
+  >
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="title">Título <p-sortIcon field="title" /></th>
+        <th pSortableColumn="nup">NUP <p-sortIcon field="nup" /></th>
+        <th>Template</th>
+        <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+        <th>{{ 'workflows.documentList.formalizedColumn' | translate }}</th>
+        <th pSortableColumn="created_at">Criado em <p-sortIcon field="created_at" /></th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-inst>
+      <tr>
+        <td>{{ inst.title }}</td>
+        <td>{{ inst.nup ?? '—' }}</td>
+        <td>{{ inst.template?.name ?? '—' }}</td>
+        <td>
+          <p-tag [value]="statusLabel(inst.status) | translate" [severity]="statusSeverity(inst.status)" />
+        </td>
+        <td>
+          @if (inst.is_formalized) {
+            <p-tag value="Sim" severity="success" />
+          } @else {
+            <p-tag value="Não" severity="secondary" />
+          }
+        </td>
+        <td>{{ inst.created_at | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <button
+            pButton
+            icon="pi pi-eye"
+            class="p-button-text p-button-sm"
+            (click)="navigateToDetail(inst)"
+            title="Ver detalhe"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="7" class="text-center text-color-secondary">Nenhum documento encontrado.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

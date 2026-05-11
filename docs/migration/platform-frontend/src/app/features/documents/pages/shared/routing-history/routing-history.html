@@ -1,0 +1,35 @@
+@if (loading()) {
+<div class="routing-history__loading">
+  <i class="pi pi-spin pi-spinner"></i>
+  <span>Carregando histórico de tramitações...</span>
+</div>
+} @else if (sortedTramitations().length === 0) {
+<div class="routing-history__empty">
+  <div class="routing-history__empty-icon"><i class="pi pi-directions"></i></div>
+  <p class="routing-history__empty-text">Nenhuma tramitação registrada.</p>
+</div>
+} @else {
+<p-timeline [value]="sortedTramitations()" styleClass="routing-timeline">
+  <ng-template pTemplate="content" let-t>
+    <div class="routing-history__card" [ngClass]="getStatusColorClass(t.status)">
+      <div class="routing-history__card-header">
+        <strong>{{ t.fromSectorName ?? 'Setor origem' }}</strong>
+        <i class="pi pi-arrow-right"></i>
+        <strong>{{ t.toSectorName ?? 'Setor destino' }}</strong>
+        <p-tag [value]="getStatusLabel(t.status)" [severity]="getStatusSeverity(t.status)!" />
+      </div>
+      <div class="routing-history__meta">
+        <span class="routing-history__sender"><i class="pi pi-user routing-history__meta-icon"></i> {{ t.userName ??
+          'Desconhecido' }}</span>
+        <span class="routing-history__date"><i class="pi pi-calendar routing-history__meta-icon"></i> {{ t.sentAt |
+          dateFormat }}</span>
+      </div>
+      @if (t.observation) {
+      <div class="routing-history__observation">
+        <i class="pi pi-comment routing-history__observation-icon"></i> {{ t.observation }}
+      </div>
+      }
+    </div>
+  </ng-template>
+</p-timeline>
+}

@@ -1,0 +1,22 @@
+.visual-flow-list__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.visual-flow-list__filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.visual-flow-list__filters input {
+  flex: 1;
+  min-width: 160px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

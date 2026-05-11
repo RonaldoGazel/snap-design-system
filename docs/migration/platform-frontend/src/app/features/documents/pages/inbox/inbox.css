@@ -1,0 +1,41 @@
+.l-inbox {
+  padding: 1.5rem;
+}
+
+.inbox__title {
+  margin-bottom: 1rem;
+}
+
+.inbox__action-buttons {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.inbox__empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color-secondary);
+}
+
+.inbox__dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inbox__dialog-label {
+  font-weight: 600;
+}
+
+.inbox__textarea {
+  width: 100%;
+}
+
+.inbox__received-row {
+  cursor: pointer;
+}
+
+.inbox__received-row:hover {
+  background: var(--surface-hover);
+}

@@ -1,0 +1,103 @@
+<div class="preg-pcard" [class.is-clickable]="!isLocal()" (click)="onCardClick()"
+    [attr.role]="isLocal() ? null : 'button'" [attr.tabindex]="isLocal() ? null : 0"
+    [attr.aria-label]="'Detalhes de ' + person().fullName" (keydown.enter)="onCardClick()">
+    <!-- Photo column -->
+    <div class="preg-pcard__photo">
+        @if (person().photoUrl) {
+        <img [src]="person().photoUrl" [alt]="person().fullName" class="preg-pcard__photo-img" />
+        } @else {
+        <p-avatar [label]="getPersonInitials(person().fullName)" shape="circle" size="large" />
+        }
+    </div>
+
+    <!-- Body column -->
+    <div class="preg-pcard__body">
+        <span class="preg-pcard__name">{{ person().fullName }}</span>
+
+        <span class="preg-pcard__meta">
+            @if (person().cpf) {
+            <span class="preg-pcard__meta-item">{{ person().cpf }}</span>
+            }
+            @if (person().rg) {
+            <span class="preg-pcard__meta-item">RG {{ person().rg }}</span>
+            }
+            @if (person().uf) {
+            <span class="preg-pcard__meta-item">{{ person().uf }}</span>
+            }
+            @if (person().age) {
+            <span class="preg-pcard__meta-item">{{ person().age }} anos</span>
+            }
+        </span>
+
+        @if (person().aliases.length > 0) {
+        <span class="preg-pcard__aliases">
+            Vulgo: {{ person().aliases.join(', ') }}
+        </span>
+        }
+
+        @if (person().motherName || person().fatherName) {
+        <span class="preg-pcard__filiation">
+            @if (person().motherName) {
+            <span>Mãe: {{ person().motherName }}</span>
+            }
+            @if (person().fatherName) {
+            <span>Pai: {{ person().fatherName }}</span>
+            }
+        </span>
+        }
+
+        @if (person().source === 'SIPEN' && (person().prisonStatus || person().currentPrisonUnit)) {
+        <span class="preg-pcard__prison">
+            @if (person().prisonStatus) {
+            <span>{{ person().prisonStatus }}</span>
+            }
+            @if (person().currentPrisonUnit) {
+            <span>{{ person().currentPrisonUnit }}</span>
+            }
+        </span>
+        }
+
+        @if (person().source === 'SIPEN' && person().profileType) {
+        <span class="preg-pcard__profile-type">
+            {{ formatProfileType(person().profileType!) }}
+        </span>
+        }
+
+        <div class="preg-pcard__badges">
+            <span [class]="'preg-pcard__badge ' + sourceBadgeClass()">
+                {{ sourceLabel() }}
+            </span>
+
+            <span class="preg-pcard__score">
+                {{ formatConfidenceScore(person().confidenceScore) }}
+            </span>
+
+            <span class="preg-pcard__match">
+                {{ formatMatchType(person().matchType) }}
+            </span>
+
+            @if (person().alreadyRegistered) {
+            <span class="preg-pcard__dup preg-pcard__dup--registered">
+                Já cadastrado
+            </span>
+            }
+
+            @if (person().possibleLocalDuplicate) {
+            <span class="preg-pcard__dup preg-pcard__dup--possible">
+                Possível duplicata local
+            </span>
+            }
+        </div>
+    </div>
+
+    <!-- Actions column -->
+    <div class="preg-pcard__actions">
+        @if (isLocal()) {
+        <button pButton class="preg-pcard__action" label="Abrir prontuário" icon="pi pi-external-link"
+            severity="secondary" [text]="true" (click)="onOpenProfileClick($event)"></button>
+        } @else {
+        <button pButton class="preg-pcard__action is-primary" label="Cadastrar" icon="pi pi-user-plus"
+            (click)="onRegisterClick($event)"></button>
+        }
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="template-selector__grid">
+    @for (t of templates(); track t.type) {
+    <button class="template-selector__card" [class.is-selected]="selected()?.type === t.type" (click)="select(t)"
+        type="button">
+        <span class="template-selector__label">{{ t.label }}</span>
+        <span class="template-selector__desc">{{ t.description }}</span>
+    </button>
+    }
+</div>

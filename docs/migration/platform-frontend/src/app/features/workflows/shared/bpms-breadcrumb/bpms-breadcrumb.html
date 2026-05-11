@@ -1,0 +1,10 @@
+<nav class="bpms-breadcrumb" aria-label="Breadcrumb">
+  @for (item of items(); track item.label; let last = $last) {
+    @if (!last) {
+      <a [routerLink]="item.route" class="bpms-breadcrumb__link">{{ item.label }}</a>
+      <span class="bpms-breadcrumb__separator" aria-hidden="true">›</span>
+    } @else {
+      <span class="bpms-breadcrumb__current" aria-current="page">{{ item.label }}</span>
+    }
+  }
+</nav>

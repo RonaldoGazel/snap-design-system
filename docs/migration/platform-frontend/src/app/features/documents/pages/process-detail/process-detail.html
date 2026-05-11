@@ -1,0 +1,173 @@
+<p-toast />
+
+@if (loading()) {
+<div class="process-detail__loading">
+  <i class="pi pi-spin pi-spinner"></i>
+  <span>Carregando processo...</span>
+</div>
+} @else if (error()) {
+<div class="process-detail__error">
+  <i class="pi pi-exclamation-triangle"></i>
+  <span>{{ error() }}</span>
+  <p-button label="Voltar" icon="pi pi-arrow-left" (onClick)="navigateToProcessList()" [text]="true" />
+</div>
+} @else if (process(); as proc) {
+<div class="l-process-detail">
+  <div class="process-detail__header">
+    <div class="process-detail__header-top">
+      <div class="process-detail__header-info">
+        <h2 class="process-detail__nup">{{ proc.nup }}</h2>
+        <h3 class="process-detail__title">{{ proc.title }}</h3>
+        @if (proc.description) {
+        <p class="process-detail__description">{{ proc.description }}</p>
+        }
+      </div>
+      <div class="process-detail__header-actions">
+        <p-menu #actionMenu [model]="actionMenuItems" [popup]="true" />
+        <p-button label="Ações" icon="pi pi-ellipsis-v" (onClick)="actionMenu.toggle($event)" />
+      </div>
+    </div>
+
+    <div class="process-detail__meta">
+      <div class="process-detail__meta-item">
+        <span class="process-detail__meta-label">Classificação</span>
+        <app-classification-badge [classification]="proc.securityClassification" />
+      </div>
+      <div class="process-detail__meta-item">
+        <span class="process-detail__meta-label">Prioridade</span>
+        <span>{{ proc.priority }}</span>
+      </div>
+      <div class="process-detail__meta-item">
+        <span class="process-detail__meta-label">Status</span>
+        <app-status-badge [status]="proc.status" context="process" />
+      </div>
+      <div class="process-detail__meta-item">
+        <span class="process-detail__meta-label">Setor Atual</span>
+        <span>{{ proc.currentSectorId }}</span>
+      </div>
+      <div class="process-detail__meta-item">
+        <span class="process-detail__meta-label">Responsável</span>
+        <span>{{ proc.assignedUserId ?? '-' }}</span>
+      </div>
+      <div class="process-detail__meta-item">
+        <span class="process-detail__meta-label">Criação</span>
+        <span>{{ proc.createdAt | dateFormat }}</span>
+      </div>
+      <div class="process-detail__meta-item">
+        <span class="process-detail__meta-label">Atualização</span>
+        <span>{{ proc.updatedAt | dateFormat }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="process-detail__content">
+    <div class="process-detail__doc-section">
+      <h4 class="process-detail__doc-section-title">Documentos</h4>
+      @if (documentTree().length === 0) {
+      <div class="process-detail__empty-message">Nenhum documento neste processo.</div>
+      } @else {
+      <p-tree [value]="documentTree()" selectionMode="single" (onNodeSelect)="onNodeSelect($event)"
+        class="process-detail__tree">
+        <ng-template let-node pTemplate="default">
+          <div class="process-detail__tree-node" [class.is-archived]="!node.data.isActive">
+            <span class="process-detail__tree-node-title">{{ node.label }}</span>
+            <span class="process-detail__tree-node-type">{{ node.data.type }}</span>
+            <app-status-badge [status]="node.data.status" context="document" />
+            <span class="process-detail__tree-node-version">v{{ node.data.version }}</span>
+            @if (!node.data.isActive) {
+            <span class="process-detail__tree-node-archived">Arquivado</span>
+            }
+          </div>
+        </ng-template>
+      </p-tree>
+      }
+    </div>
+
+    <p-tabs value="0">
+      <p-tablist>
+        <p-tab value="0">Histórico de Tramitações</p-tab>
+        <p-tab value="1">Metadados</p-tab>
+      </p-tablist>
+      <p-tabpanels>
+        <p-tabpanel value="0">
+          <app-routing-history [processId]="proc.id" />
+        </p-tabpanel>
+        <p-tabpanel value="1">
+          <div class="process-detail__metadata-section">
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">ID</span>
+              <span>{{ proc.id }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">NUP</span>
+              <span>{{ proc.nup }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Título</span>
+              <span>{{ proc.title }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Descrição</span>
+              <span>{{ proc.description ?? '-' }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Classificação</span>
+              <app-classification-badge [classification]="proc.securityClassification" />
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Prioridade</span>
+              <span>{{ proc.priority }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Status</span>
+              <app-status-badge [status]="proc.status" context="process" />
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Setor Atual</span>
+              <span>{{ proc.currentSectorId }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Responsável</span>
+              <span>{{ proc.assignedUserId ?? '-' }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Criador</span>
+              <span>{{ proc.creatorId }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Criação</span>
+              <span>{{ proc.createdAt | dateFormat }}</span>
+            </div>
+            <div class="process-detail__metadata-row">
+              <span class="process-detail__metadata-label">Atualização</span>
+              <span>{{ proc.updatedAt | dateFormat }}</span>
+            </div>
+          </div>
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+</div>
+
+<p-dialog header="Tramitar Processo" [(visible)]="tramitationDialogVisible" [modal]="true" [style]="{ width: '500px' }">
+  <div class="process-detail__tramitation-form">
+    <div class="process-detail__form-field">
+      <label class="process-detail__form-label" for="toSector">Setor de Destino</label>
+      <p-select id="toSector" [options]="sectorOptions" [ngModel]="tramitationPayload().toSectorId"
+        (ngModelChange)="tramitationPayload.set({ ...tramitationPayload(), toSectorId: $event })" optionLabel="label"
+        optionValue="value" placeholder="Selecione o setor" />
+    </div>
+    <div class="process-detail__form-field">
+      <label class="process-detail__form-label" for="observation">Observação</label>
+      <textarea pTextarea id="observation" [ngModel]="tramitationPayload().observation"
+        (ngModelChange)="tramitationPayload.set({ ...tramitationPayload(), observation: $event })" rows="4"
+        placeholder="Observação (opcional)"></textarea>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button label="Cancelar" severity="secondary" (onClick)="tramitationDialogVisible.set(false)" />
+    <p-button label="Tramitar" icon="pi pi-send" (onClick)="submitTramitation()"
+      [disabled]="!tramitationPayload().toSectorId" />
+  </ng-template>
+</p-dialog>
+}

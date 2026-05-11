@@ -1,0 +1,11 @@
+<p-fileupload mode="advanced" [accept]="accept" [maxFileSize]="maxSize" [customUpload]="true"
+    (uploadHandler)="onUpload($event)" [auto]="true" chooseLabel="Selecionar arquivo" [showUploadButton]="false"
+    [showCancelButton]="false">
+    <ng-template pTemplate="empty">
+        <div class="file-upload__empty">
+            <i class="pi pi-cloud-upload file-upload__icon"></i>
+            <p>Arraste e solte um arquivo aqui ou clique para selecionar</p>
+            <p class="file-upload__hint">PDF, DOC, DOCX, JPG, PNG, GIF — máx. {{ maxSizeLabel }}</p>
+        </div>
+    </ng-template>
+</p-fileupload>

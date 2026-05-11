@@ -1,0 +1,86 @@
+/* Block: .version-history */
+
+.version-history__loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: var(--text-color-secondary);
+}
+
+.version-history__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  color: var(--text-color-secondary);
+}
+
+.version-history__empty-icon {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.version-history__card {
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: background-color 0.15s;
+}
+
+.version-history__card:hover {
+  background-color: var(--surface-hover);
+}
+
+.version-history__card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.version-history__current-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+}
+
+.version-history__card-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+}
+
+.version-history__card-meta-icon {
+  margin-right: 0.25rem;
+}
+
+.version-history__dialog-header {
+  margin-bottom: 0.5rem;
+}
+
+.version-history__dialog-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+}
+
+.version-history__dialog-meta-icon {
+  margin-right: 0.25rem;
+}
+
+.version-history__dialog-content {
+  padding: 1rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  background-color: var(--surface-ground);
+  max-height: 50vh;
+  overflow-y: auto;
+}

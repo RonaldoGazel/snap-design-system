@@ -1,0 +1,51 @@
+<header class="app-header">
+  <div class="app-header__left">
+    <img src="/snap-black.svg" alt="SNAP" class="app-header__snap-logo" />
+  </div>
+  <div class="app-header__right">
+    <div class="app-header__actions">
+      <div class="app-header__notification">
+        <button pButton [rounded]="true" [text]="true" class="app-header__action" pTooltip="Notificações"
+          tooltipPosition="bottom">
+          <i class="pi pi-bell"></i>
+        </button>
+        <span class="app-header__notification-badge">3</span>
+      </div>
+      <button pButton [rounded]="true" [text]="true" class="app-header__action"
+        [pTooltip]="theme.isDark() ? 'Modo claro' : 'Modo escuro'" tooltipPosition="bottom" (click)="theme.toggle()">
+        <i [class]="theme.isDark() ? 'pi pi-sun' : 'pi pi-moon'"></i>
+      </button>
+    </div>
+
+    <span class="app-header__separator"></span>
+
+    @if (orgName()) {
+    <div class="app-header__org">
+      <span class="app-header__org-sigla">{{ orgName() }}</span>
+      <span class="app-header__org-nome">{{ orgName() }}</span>
+    </div>
+    }
+
+    <p-avatar [label]="userInitials()" [pTooltip]="userName()" tooltipPosition="bottom"
+      [style]="{ 'background-color': 'var(--snap-pillar-color, var(--p-primary-color))', color: '#fff', 'font-weight': '700', 'font-size': '0.72rem' }"
+      shape="circle" class="app-header__avatar" (click)="userMenu.toggle($event)" />
+
+    <p-popover #userMenu>
+      <ul class="app-header__user-menu">
+        <li class="app-header__user-menu-item" (click)="userMenu.hide()">
+          <i class="pi pi-user"></i>
+          <span>{{ 'shell.user.profile' | translate }}</span>
+        </li>
+        <li class="app-header__user-menu-item" (click)="userMenu.hide()">
+          <i class="pi pi-cog"></i>
+          <span>{{ 'shell.user.settings' | translate }}</span>
+        </li>
+        <li class="app-header__user-menu-divider"></li>
+        <li class="app-header__user-menu-item" (click)="logout(); userMenu.hide()">
+          <i class="pi pi-sign-out"></i>
+          <span>{{ 'shell.user.logout' | translate }}</span>
+        </li>
+      </ul>
+    </p-popover>
+  </div>
+</header>

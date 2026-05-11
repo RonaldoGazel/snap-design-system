@@ -1,0 +1,47 @@
+/* Block: .process-list */
+
+.l-process-list {
+  padding: 1.5rem;
+}
+
+.process-list__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.process-list__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.process-list__filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.process-list__filter-item {
+  min-width: 180px;
+}
+
+.process-list__row {
+  cursor: pointer;
+}
+
+.process-list__empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color-secondary);
+}
+
+.process-list__error-state {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: var(--text-color-secondary);
+}

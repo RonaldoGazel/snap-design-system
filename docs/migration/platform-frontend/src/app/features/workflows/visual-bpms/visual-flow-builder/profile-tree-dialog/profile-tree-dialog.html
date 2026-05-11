@@ -1,0 +1,32 @@
+<p-dialog
+  [header]="'Perfis da Etapa: ' + (stage()?.step_catalog?.name ?? '')"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '600px', maxHeight: '80vh' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="profile-tree-dialog">
+    <p class="dialog-hint">
+      Selecione os perfis organizacionais que participam desta etapa.
+      Marque um setor para selecionar todos os perfis abaixo dele.
+    </p>
+
+    <p-tree
+      [value]="treeNodes()"
+      selectionMode="checkbox"
+      [(selection)]="selectedNodes"
+      [filter]="true"
+      filterPlaceholder="Buscar setor ou perfil..."
+      scrollHeight="400px"
+      class="profile-tree"
+    />
+  </div>
+
+  <ng-template #footer>
+    <div class="dialog-footer">
+      <button pButton label="Cancelar" class="p-button-outlined" (click)="onCancel()"></button>
+      <button pButton label="Confirmar" icon="pi pi-check" (click)="onConfirm()"></button>
+    </div>
+  </ng-template>
+</p-dialog>

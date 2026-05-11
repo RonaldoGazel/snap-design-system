@@ -1,0 +1,61 @@
+<div class="org-tree-page">
+  <div class="org-tree-page__header">
+    <h2>Estrutura Organizacional</h2>
+    <div class="org-tree-page__header-actions">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          placeholder="Buscar unidade..."
+          [ngModel]="searchText()"
+          (ngModelChange)="searchText.set($event)"
+        />
+      </span>
+    </div>
+  </div>
+
+  <div class="org-tree-page__content">
+    <div class="org-tree-page__tree">
+      <p-tree
+        [value]="treeNodes()"
+        selectionMode="single"
+        [selection]="treeSelection()"
+        (onNodeSelect)="onNodeSelect($event)"
+        styleClass="w-full"
+      />
+    </div>
+
+    @if (selectedUnit()) {
+      <div class="org-tree-page__detail">
+        <div class="org-tree-page__breadcrumb">
+          @for (u of unitPath(); track u.id; let last = $last) {
+            <span>{{ u.acronym }}</span>
+            @if (!last) { <i class="pi pi-chevron-right"></i> }
+          }
+        </div>
+
+        <h3>{{ selectedUnit()!.name }}</h3>
+        <p class="text-color-secondary">{{ selectedUnit()!.acronym }}</p>
+
+        <div class="org-tree-page__profiles">
+          <h4>Perfis</h4>
+          @for (up of unitProfiles(); track up.id) {
+            <div class="org-tree-page__profile">
+              <p-tag [value]="up.profile?.name ?? up.profile_id" severity="secondary" />
+              <small>Nível {{ up.profile?.hierarchy_level }}</small>
+            </div>
+          }
+        </div>
+
+        <button
+          class="p-button p-button-outlined mt-3"
+          (click)="navigateToDetail(selectedUnit()!)"
+        >
+          <i class="pi pi-external-link mr-2"></i>
+          Ver detalhes
+        </button>
+      </div>
+    }
+  </div>
+</div>

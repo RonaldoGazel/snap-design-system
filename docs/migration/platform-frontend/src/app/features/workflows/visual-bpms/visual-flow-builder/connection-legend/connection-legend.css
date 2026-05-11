@@ -1,0 +1,43 @@
+.legend-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-size: 0.8rem;
+  color: var(--p-text-muted-color);
+  box-shadow: none;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.legend-item input[type="checkbox"] {
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+  accent-color: var(--p-primary-color);
+}
+
+.legend-line {
+  display: inline-block;
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.legend-line.avanco { background: #22c55e; }
+
+.legend-line.retorno { background: #f97316; }
+
+.legend-line.intra-etapa { background: #3b82f6; }
+.legend-line.auto-referencia { background: #a855f7; }
+.legend-line.auto-link { background: #6b7280; }

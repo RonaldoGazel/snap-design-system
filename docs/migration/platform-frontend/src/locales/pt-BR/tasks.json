@@ -1,0 +1,23 @@
+{
+  "page.title": "Tarefas",
+  "filter.status": "Status",
+  "filter.sourceType": "Tipo",
+  "filter.createdAfter": "Criado após",
+  "filter.createdBefore": "Criado antes",
+  "filter.apply": "Aplicar",
+  "filter.clear": "Limpar",
+  "table.createdAt": "Criado em",
+  "table.description": "Descrição",
+  "table.status": "Status",
+  "table.sourceType": "Tipo",
+  "table.requestedBy": "Solicitado por",
+  "table.duration": "Duração",
+  "table.empty": "Nenhuma tarefa encontrada",
+  "status.ACCEPTED": "Aceita",
+  "status.FETCHING_SOURCE": "Buscando dados",
+  "status.UPLOADING_REPORT": "Enviando relatório",
+  "status.QUEUED_FOR_INGESTION": "Na fila",
+  "status.INGESTING": "Processando",
+  "status.COMPLETED": "Concluída",
+  "status.FAILED": "Falhou"
+}

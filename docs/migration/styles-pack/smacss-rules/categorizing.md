@@ -1,0 +1,2 @@
+# Categorizing CSS Rules
+The core of SMACSS is the categorization of CSS rules into five distinct types: Base, Layout, Module, State, and Theme. This system helps developers avoid the complexity of intertwined rules and promotes code reuse and consistency. The chapter also introduces naming conventions, such as using prefixes like `l-` for layout and `is-` for state, to make the role of each class immediately clear.

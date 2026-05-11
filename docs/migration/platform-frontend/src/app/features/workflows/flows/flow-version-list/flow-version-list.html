@@ -1,0 +1,55 @@
+<div class="flow-version-list">
+  <div class="flow-version-list__header">
+    <h3>Versões do Fluxo</h3>
+    <button pButton label="Nova Versão" icon="pi pi-plus" class="p-button-outlined p-button-sm" (click)="createVersion()"></button>
+  </div>
+
+  <p-table [value]="versions()" [paginator]="false">
+    <ng-template #header>
+      <tr>
+        <th>Versão</th>
+        <th>Status</th>
+        <th>Publicada em</th>
+        <th>Publicada por</th>
+        <th>Resumo</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-v>
+      <tr>
+        <td>v{{ v.version }}</td>
+        <td>
+          <p-tag [value]="statusLabel(v.status) | translate" [severity]="statusSeverity(v.status)" />
+        </td>
+        <td>{{ v.published_at ? (v.published_at | date:'dd/MM/yyyy HH:mm') : '—' }}</td>
+        <td>{{ v.published_by ?? '—' }}</td>
+        <td>{{ v.summary ?? '—' }}</td>
+        <td>
+          @if (canPublish(v)) {
+            <button
+              pButton
+              icon="pi pi-check"
+              class="p-button-text p-button-sm p-button-success"
+              (click)="publishVersion(v)"
+              title="Publicar"
+            ></button>
+          }
+          @if (canDeactivate(v)) {
+            <button
+              pButton
+              icon="pi pi-ban"
+              class="p-button-text p-button-sm p-button-danger"
+              (click)="deactivateVersion(v)"
+              title="Desativar"
+            ></button>
+          }
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="6" class="text-center text-color-secondary">Nenhuma versão criada.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

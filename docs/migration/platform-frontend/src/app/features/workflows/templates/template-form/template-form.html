@@ -1,0 +1,121 @@
+<div class="template-form">
+  <div class="template-form__header">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    <h2>{{ isEditMode() ? 'Editar Template' : 'Novo Template' }}</h2>
+  </div>
+
+  @if (errorMessage()) {
+  <div class="template-form__error">
+    <i class="pi pi-exclamation-triangle"></i>
+    {{ errorMessage() }}
+  </div>
+  }
+
+  <!-- ============================================================ -->
+  <!-- CREATE MODE                                                  -->
+  <!-- ============================================================ -->
+  @if (!isEditMode()) {
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="template-form__create-card">
+    <div class="template-form__create-fields">
+      <div class="template-form__field">
+        <label for="name">Nome <span class="required">*</span></label>
+        <input id="name" pInputText formControlName="name" placeholder="Ex: Relatório de Inteligência"
+          [class.ng-invalid]="isInvalid('name')" />
+        @if (isInvalid('name')) { <small class="p-error">Nome é obrigatório.</small> }
+      </div>
+      <div class="template-form__field">
+        <label for="description">Descrição</label>
+        <textarea id="description" pTextarea formControlName="description" rows="2"
+          placeholder="Descreva o propósito deste template..."></textarea>
+      </div>
+    </div>
+    <div class="template-form__create-actions">
+      <div class="template-form__create-file-row">
+        @if (pendingFile()) {
+        <div class="template-form__pending-file">
+          <i class="pi pi-file-word"></i>
+          <span>{{ pendingFile()!.name }}</span>
+        </div>
+        }
+        <p-fileUpload mode="basic" accept=".docx,.doc" [maxFileSize]="52428800"
+          [chooseLabel]="pendingFile() ? 'Trocar' : 'Arquivo DOC/DOCX'" chooseIcon="pi pi-upload"
+          (onSelect)="onFileSelect($event)" [auto]="false" styleClass="template-form__file-btn" />
+      </div>
+      <button pButton type="submit" label="Criar Template" icon="pi pi-plus" [disabled]="saving()"
+        [loading]="saving()"></button>
+    </div>
+  </form>
+  <div class="template-form__bottom-actions">
+    <button pButton type="button" label="Voltar" icon="pi pi-arrow-left" class="p-button-outlined p-button-sm"
+      (click)="goBack()"></button>
+  </div>
+  }
+
+  <!-- ============================================================ -->
+  <!-- EDIT MODE                                                    -->
+  <!-- ============================================================ -->
+  @if (isEditMode()) {
+  <!-- Metadata: name + description + status (compact, no button here) -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" id="metadataForm" class="template-form__metadata-card">
+    <div class="template-form__metadata-row">
+      <div class="template-form__field" style="flex:2">
+        <label for="name">Nome <span class="required">*</span></label>
+        <input id="name" pInputText formControlName="name" [class.ng-invalid]="isInvalid('name')" />
+      </div>
+      <div class="template-form__field" style="flex:2">
+        <label for="description">Descrição</label>
+        <input id="description" pInputText formControlName="description" placeholder="Descrição..." />
+      </div>
+      <div class="template-form__field" style="flex:0 0 auto">
+        <label for="status">Status</label>
+        <p-select inputId="status" formControlName="status" [options]="statusOptions" optionLabel="label"
+          optionValue="value" />
+      </div>
+    </div>
+  </form>
+
+  <!-- Action bar: file info + replace + save — all on one row -->
+  <div class="template-form__action-bar">
+    @if (currentTemplate()?.has_file) {
+    <div class="template-form__current-file">
+      <i class="pi pi-file-word"></i>
+      <span>{{ currentTemplate()?.original_filename ?? 'template.docx' }}</span>
+    </div>
+    <button pButton class="p-button-text p-button-sm" icon="pi pi-download" label="Baixar"
+      (click)="downloadDocx()"></button>
+    @if (currentTemplate()?.has_preview) {
+    <button pButton class="p-button-text p-button-sm" icon="pi pi-file-pdf" label="PDF"
+      (click)="openPreview()"></button>
+    }
+    }
+    <p-fileUpload mode="basic" accept=".docx,.doc" [maxFileSize]="52428800"
+      [chooseLabel]="currentTemplate()?.has_file ? 'Substituir' : 'Importar DOC/DOCX'" chooseIcon="pi pi-upload"
+      (onSelect)="onFileSelect($event)" [auto]="false" [disabled]="uploading()" styleClass="template-form__file-btn" />
+    @if (uploading()) {
+    <span class="template-form__uploading-hint">
+      <i class="pi pi-spin pi-spinner"></i> Enviando...
+    </span>
+    }
+    <span class="template-form__spacer"></span>
+    <button pButton type="submit" form="metadataForm" label="Salvar" icon="pi pi-check" [disabled]="saving()"
+      [loading]="saving()"></button>
+  </div>
+
+  <!-- Collabora editor -->
+  @if (currentTemplate()?.has_file) {
+  <app-collabora-editor [resourceType]="'template'" [resourceId]="editId()!" />
+  }
+
+  @if (!currentTemplate()?.has_file) {
+  <div class="template-form__preview-unavailable">
+    <i class="pi pi-info-circle"></i>
+    <span>Importe um arquivo DOC/DOCX para habilitar o editor.</span>
+  </div>
+  }
+
+  <div class="template-form__bottom-actions">
+    <button pButton type="button" label="Voltar" icon="pi pi-arrow-left" class="p-button-outlined p-button-sm"
+      (click)="goBack()"></button>
+  </div>
+  }
+</div>

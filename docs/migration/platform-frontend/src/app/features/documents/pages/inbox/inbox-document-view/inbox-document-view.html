@@ -1,0 +1,25 @@
+<div class="inbox-doc-view">
+  <div class="inbox-doc-view__header">
+    <p-button icon="pi pi-arrow-left" [text]="true" [rounded]="true" (onClick)="goBack()" />
+    <h2>{{ title() }}</h2>
+  </div>
+  <div class="inbox-doc-view__meta">
+    <span><strong>Protocolo:</strong> {{ protocolNumber() }}</span>
+    <span><strong>Recebido em:</strong> {{ receivedAt() | dateFormat }}</span>
+  </div>
+  @if (loading()) {
+    <div class="inbox-doc-view__loading">
+      <i class="pi pi-spin pi-spinner"></i>
+      <span>Carregando documento...</span>
+    </div>
+  } @else if (error()) {
+    <div class="inbox-doc-view__error">
+      <i class="pi pi-exclamation-triangle"></i>
+      <span>{{ error() }}</span>
+    </div>
+  } @else if (pdfUrl()) {
+    <object [data]="pdfUrl()" type="application/pdf" class="inbox-doc-view__pdf">
+      <p>Não foi possível carregar o PDF.</p>
+    </object>
+  }
+</div>

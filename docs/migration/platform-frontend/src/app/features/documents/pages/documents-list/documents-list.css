@@ -1,0 +1,37 @@
+:host {
+    display: block;
+    padding: var(--space-7);
+}
+
+.l-documents-list__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--space-3-5);
+    margin-bottom: var(--space-7);
+    border-bottom: 1px solid var(--snap-border-subtle);
+}
+
+.documents-list__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2-5);
+}
+
+.documents-list__icon {
+    font-size: var(--text-3xl);
+    color: var(--snap-text-muted);
+}
+
+.documents-list__heading {
+    margin: 0;
+    font-family: 'Cygnito Mono', monospace;
+    font-size: 1.0781rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.documents-list__placeholder {
+    color: var(--snap-text-secondary);
+}

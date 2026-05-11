@@ -1,0 +1,64 @@
+<div class="stage-config-panel">
+  <!-- Available catalog steps -->
+  <div class="panel-section">
+    <h3 class="section-title">Catálogo de Etapas</h3>
+    <p class="section-hint">
+      {{ stageCount() }}/{{ MAX_STAGES }} etapas adicionadas
+    </p>
+
+    <ul class="catalog-list">
+      @for (step of activeCatalogSteps(); track step.id) {
+        <li class="catalog-item">
+          <span class="catalog-name">{{ 'workflows.' + step.name | translate }}</span>
+          <p-button
+            icon="pi pi-plus"
+            [rounded]="true"
+            [text]="true"
+            severity="success"
+            size="small"
+            [disabled]="isAddDisabled(step.id)"
+            (onClick)="addStage(step.id)"
+            [pTooltip]="isStepAlreadyAdded(step.id) ? 'Já adicionada' : !canAddStage() ? 'Limite de etapas atingido' : 'Adicionar etapa'"
+          />
+        </li>
+      } @empty {
+        <li class="catalog-empty">{{ 'workflows.visualBpms.noStagesAvailable' | translate }}</li>
+      }
+    </ul>
+  </div>
+
+  <!-- Current flow stages (reorderable) -->
+  <div class="panel-section">
+    <h3 class="section-title">Etapas do Fluxo</h3>
+
+    @if (stages().length === 0) {
+      <p class="section-hint">{{ 'workflows.visualBpms.noStagesAdded' | translate }}</p>
+    } @else {
+      <div cdkDropList class="stage-list" (cdkDropListDropped)="onDrop($event)">
+        @for (stage of stages(); track stage.id; let i = $index) {
+          <div cdkDrag class="stage-item" (click)="selectStage(stage)">
+            <div class="stage-drag-handle" cdkDragHandle>
+              <i class="pi pi-bars"></i>
+            </div>
+            <div class="stage-info">
+              <span class="stage-order">{{ i + 1 }}.</span>
+              <span class="stage-name">{{ 'workflows.' + (stage.step_catalog?.name ?? 'unknown') | translate }}</span>
+              @if (hasProfilesOrConnections(stage)) {
+                <span class="stage-badge">{{ stage.profiles?.length ?? 0 }} perfis</span>
+              }
+            </div>
+            <p-button
+              icon="pi pi-trash"
+              [rounded]="true"
+              [text]="true"
+              severity="danger"
+              size="small"
+              (onClick)="removeStage(stage.id); $event.stopPropagation()"
+              pTooltip="Remover etapa"
+            />
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

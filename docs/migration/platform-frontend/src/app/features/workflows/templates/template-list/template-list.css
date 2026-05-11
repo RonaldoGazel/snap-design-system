@@ -1,0 +1,19 @@
+.template-list__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.template-list__filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.template-list__filters input,
+.template-list__filters p-select {
+  flex: 1;
+  min-width: 160px;
+}

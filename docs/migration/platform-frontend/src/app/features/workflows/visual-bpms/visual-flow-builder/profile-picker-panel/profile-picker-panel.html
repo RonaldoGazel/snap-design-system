@@ -1,0 +1,89 @@
+<div class="profile-picker-panel">
+  @if (!selectedStage()) {
+    <div class="panel-section">
+      <h3 class="section-title">Perfis</h3>
+      <p class="section-hint">Selecione uma etapa para gerenciar perfis.</p>
+    </div>
+  } @else {
+    <!-- Assigned profiles for selected stage -->
+    <div class="panel-section">
+      <h3 class="section-title">Perfis da Etapa: {{ selectedStage()!.step_catalog?.name }}</h3>
+      <p class="section-hint">{{ selectedStage()!.profiles?.length ?? 0 }} perfis atribuídos</p>
+
+      @if ((selectedStage()!.profiles ?? []).length === 0) {
+        <p class="empty-hint">Nenhum perfil atribuído. Adicione perfis abaixo.</p>
+      } @else {
+        <ul class="assigned-list">
+          @for (sp of selectedStage()!.profiles!; track sp.id) {
+            <li class="assigned-item">
+              <span class="assigned-name">{{ getDisplayName(sp.unit_profile!) }}</span>
+              <p-button
+                icon="pi pi-trash"
+                [rounded]="true"
+                [text]="true"
+                severity="danger"
+                size="small"
+                (onClick)="removeProfile(sp.id)"
+                pTooltip="Remover perfil"
+              />
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    <!-- Filters -->
+    <div class="panel-section">
+      <h3 class="section-title">Adicionar Perfil</h3>
+
+      <div class="filter-row">
+        <label class="filter-label">Setor</label>
+        <p-select
+          [options]="unitOptions()"
+          [ngModel]="filterUnit()"
+          (ngModelChange)="filterUnit.set($event)"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Todos"
+          [style]="{ width: '100%' }"
+        />
+      </div>
+
+      <div class="filter-row">
+        <label class="filter-label">Tipo de Perfil</label>
+        <p-select
+          [options]="profileOptions()"
+          [ngModel]="filterProfile()"
+          (ngModelChange)="filterProfile.set($event)"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Todos"
+          [style]="{ width: '100%' }"
+        />
+      </div>
+    </div>
+
+    <!-- Available profiles list -->
+    <div class="panel-section">
+      <ul class="available-list">
+        @for (up of filteredUnitProfiles(); track up.id) {
+          <li class="available-item">
+            <span class="available-name">{{ getDisplayName(up) }}</span>
+            <p-button
+              icon="pi pi-plus"
+              [rounded]="true"
+              [text]="true"
+              severity="success"
+              size="small"
+              [disabled]="isAlreadyAdded(up.id)"
+              (onClick)="addProfile(up.id)"
+              [pTooltip]="isAlreadyAdded(up.id) ? 'Já adicionado' : 'Adicionar perfil'"
+            />
+          </li>
+        } @empty {
+          <li class="empty-hint">Nenhum perfil encontrado com os filtros selecionados.</li>
+        }
+      </ul>
+    </div>
+  }
+</div>

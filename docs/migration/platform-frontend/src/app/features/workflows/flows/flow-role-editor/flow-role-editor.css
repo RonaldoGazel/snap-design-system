@@ -1,0 +1,14 @@
+.flow-role-editor__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.flow-role-editor__actions { display: flex; gap: 0.5rem; }
+.flow-role-editor__form { padding: 1rem; border: 1px solid var(--surface-border); border-radius: 6px; margin-bottom: 1rem; background-color: var(--surface-ground); }
+.flow-role-editor__form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+.flow-role-editor__field { display: flex; flex-direction: column; gap: 0.25rem; }
+.flow-role-editor__form-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.75rem; }
+.flow-role-editor__role { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-bottom: 1px solid var(--surface-border); }
+.flow-role-editor__role-info { display: flex; flex-direction: column; gap: 0.25rem; }
+.flow-role-editor__role-meta { display: flex; align-items: center; gap: 0.5rem; }
+.flow-role-editor__role-actions { display: flex; align-items: center; gap: 0.25rem; }
+
+.flow-role-editor__hint { font-size: 0.78rem; color: var(--text-color-secondary); margin-bottom: 0.2rem; }
+.flow-role-editor__description { font-size: 0.88rem; color: var(--text-color-secondary); margin: 0.25rem 0 0.75rem; max-width: 680px; }
+.flow-role-editor__empty { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.75rem; background: var(--surface-ground); border-radius: 4px; font-size: 0.85rem; color: var(--text-color-secondary); }
