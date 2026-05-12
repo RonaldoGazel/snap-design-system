@@ -277,7 +277,7 @@ export default function UsuariosPage() {
               marginLeft: '32px',
               width: sidebarOpen ? '280px' : '64px',
               minWidth: sidebarOpen ? '280px' : '64px',
-              height: 'calc(100vh - 140px)',
+              height: 'calc(100vh - 180px)',
               boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.25)' : 'none'
             }}
           >
@@ -777,7 +777,7 @@ export default function UsuariosPage() {
             marginLeft: '32px',
             width: sidebarOpen ? '280px' : '64px',
             minWidth: sidebarOpen ? '280px' : '64px',
-            height: 'calc(100vh - 140px)',
+            height: 'calc(100vh - 180px)',
             boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.25)' : 'none'
           }}
         >
