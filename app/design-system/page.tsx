@@ -916,24 +916,45 @@ const indice = [
 export default function DesignSystemPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header da Documentação - estrutura simples, sem sidebar */}
+      {/* Header da Documentação - padronizado niveis 1 e 2 */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="max-w-6xl mx-auto px-6 py-4">
+          {/* Linha 1: Titulo + Theme Toggle */}
+          <div className="flex items-center justify-between mb-3">
+            <h1 className="font-title text-2xl text-foreground tracking-wide">SNAP DESIGN SYSTEM</h1>
+            <SnapThemeToggle />
+          </div>
+          
+          {/* Linha 2: Breadcrumb + Links Verticais */}
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="font-title text-3xl text-foreground tracking-wide">SNAP DESIGN SYSTEM</h1>
-              <p className="text-sm text-text-muted font-sans mt-1">Documentação base do Ecossistema SNAP</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <SnapThemeToggle />
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#FE473C]" title="Investigação" />
-                <div className="w-3 h-3 rounded-full bg-[#72284B]" title="Inteligência" />
-                <div className="w-3 h-3 rounded-full bg-[#889EA3]" title="Cooperação" />
-                <div className="w-3 h-3 rounded-full bg-[#287266]" title="Infraestrutura" />
-                <div className="w-3 h-3 rounded-full bg-[#333540]" title="Administração" />
-              </div>
-            </div>
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-2 text-sm font-sans">
+              <span className="text-foreground font-semibold">Design System</span>
+            </nav>
+            
+            {/* Links das Verticais */}
+            <nav className="flex items-center gap-4">
+              <a href="/design-system/investigacao" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#FE473C] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#FE473C]" />
+                <span>Investigacao</span>
+              </a>
+              <a href="/design-system/inteligencia" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#72284B] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#72284B]" />
+                <span>Inteligencia</span>
+              </a>
+              <a href="/design-system/cooperacao" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#889EA3] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#889EA3]" />
+                <span>Cooperacao</span>
+              </a>
+              <a href="/design-system/infraestrutura" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#287266] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#287266]" />
+                <span>Infraestrutura</span>
+              </a>
+              <a href="/design-system/administracao" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#333540] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#333540]" />
+                <span>Administracao</span>
+              </a>
+            </nav>
           </div>
         </div>
       </header>

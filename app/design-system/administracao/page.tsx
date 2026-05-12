@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Users, FolderKey, Shield, Mail, FileSearch, Building2, FileText, ChevronRight, ArrowLeft, ExternalLink } from "lucide-react"
+import { Users, FolderKey, Shield, Mail, FileSearch, Building2, FileText, ChevronRight } from "lucide-react"
 import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
 
 /**
@@ -103,25 +103,52 @@ const statusConfig: Record<TelaStatus, { label: string; bg: string; text: string
 export default function AdministracaoDocsPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header da Documentacao - estrutura simples */}
+      {/* Header da Documentacao - padronizado niveis 1 e 2 */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="max-w-5xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link 
-                href="/design-system" 
-                className="flex items-center gap-2 text-text-muted hover:text-foreground transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span className="text-sm font-sans">Design System</span>
-              </Link>
-              <span className="text-border">|</span>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded bg-[#333540]" />
-                <h1 className="font-title text-xl text-foreground">ADMINISTRACAO</h1>
-              </div>
-            </div>
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          {/* Linha 1: Titulo + Theme Toggle */}
+          <div className="flex items-center justify-between mb-3">
+            <h1 className="font-title text-2xl text-foreground tracking-wide">SNAP DESIGN SYSTEM</h1>
             <SnapThemeToggle />
+          </div>
+          
+          {/* Linha 2: Breadcrumb + Links Verticais */}
+          <div className="flex items-center justify-between">
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-2 text-sm font-sans">
+              <Link href="/design-system" className="text-text-secondary hover:text-foreground transition-colors">
+                Design System
+              </Link>
+              <ChevronRight className="w-4 h-4 text-text-muted" />
+              <span className="text-foreground font-semibold flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#333540]" />
+                Administracao
+              </span>
+            </nav>
+            
+            {/* Links das Verticais */}
+            <nav className="flex items-center gap-4">
+              <Link href="/design-system/investigacao" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#FE473C] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#FE473C]" />
+                <span>Investigacao</span>
+              </Link>
+              <Link href="/design-system/inteligencia" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#72284B] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#72284B]" />
+                <span>Inteligencia</span>
+              </Link>
+              <Link href="/design-system/cooperacao" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#889EA3] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#889EA3]" />
+                <span>Cooperacao</span>
+              </Link>
+              <Link href="/design-system/infraestrutura" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#287266] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#287266]" />
+                <span>Infraestrutura</span>
+              </Link>
+              <Link href="/design-system/administracao" className="flex items-center gap-2 text-sm font-sans text-[#333540] font-medium">
+                <div className="w-3 h-3 rounded-full bg-[#333540]" />
+                <span>Administracao</span>
+              </Link>
+            </nav>
           </div>
         </div>
       </header>
@@ -130,7 +157,7 @@ export default function AdministracaoDocsPage() {
         {/* Descricao */}
         <div className="mb-8">
           <p className="font-sans text-text-secondary">
-            Telas do modulo de Administracao. Clique em uma tela para visualizar em nova janela.
+            Telas do modulo de Administracao. Clique em uma tela para visualiza-la.
           </p>
         </div>
 
@@ -164,7 +191,7 @@ export default function AdministracaoDocsPage() {
                     </p>
                   </div>
                   {isClickable && (
-                    <ExternalLink className="w-4 h-4 text-text-muted" />
+                    <ChevronRight className="w-4 h-4 text-text-muted" />
                   )}
                 </div>
               </>
@@ -172,15 +199,13 @@ export default function AdministracaoDocsPage() {
             
             if (isClickable) {
               return (
-                <a
+                <Link
                   key={tela.id}
                   href={tela.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="block p-6 rounded-lg border border-border bg-card hover:bg-card-hover hover:border-[#333540]/50 transition-all"
                 >
                   {CardContent}
-                </a>
+                </Link>
               )
             }
             
