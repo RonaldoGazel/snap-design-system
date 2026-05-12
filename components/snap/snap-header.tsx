@@ -19,7 +19,7 @@ import { verticals, type Vertical } from "@/lib/snap-tokens"
  * - Margem inferior (logo SNAP até faixa colorida): 24px
  * - Faixa colorida da vertical: 8px de altura, marginLeft: 128px (32 + 64 + 32)
  * - Breadcrumb: marginLeft: 128px, padding: 16px (top/bottom)
- * - Gap entre ícone grid e logo SNAP: 70px
+ * - Gap entre ícone grid e logo SNAP: 53px (alinha logo com faixa colorida)
  * - Ícone grid: 24x24px
  * - Logo SNAP: 24px de altura
  * - Gap sidebar -> conteudo: 32px
@@ -107,13 +107,14 @@ export function SnapHeader({
 
           {/* 
             Logo SNAP
-            - Gap de 70px entre o ícone e o logo
+            - Gap de 53px entre o ícone e o logo (alinha com faixa colorida em 128px)
+            - Calculo: 128px - 51px (margem icone) - 24px (largura icone) = 53px
             - Altura: 24px
             - Clicável: redireciona para /design-system (atalho de debug)
           */}
           <Link 
             href="/design-system" 
-            style={{ marginLeft: '70px' }}
+            style={{ marginLeft: '53px' }}
             className="hover:opacity-80 transition-opacity"
           >
             <SnapLogo variant="snap" height={24} />
