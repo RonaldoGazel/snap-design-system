@@ -1069,7 +1069,14 @@ export default function DesignSystemPage() {
                 <span className="text-text-muted">Gaps lado direito:</span>
                 <span className="text-foreground ml-2">32px (todos)</span>
               </div>
+              <div>
+                <span className="text-text-muted">Breadcrumb padding:</span>
+                <span className="text-foreground ml-2">16px (top/bottom)</span>
+              </div>
             </div>
+            <p className="text-xs text-text-muted mt-4 font-sans">
+              <strong>Estrutura:</strong> [Menu Grid] [Logo SNAP] ... [Notificações] [Tema] [Usuario] → Faixa colorida → Breadcrumb
+            </p>
           </div>
 
           {/* Preview do Header - Administração */}
