@@ -423,8 +423,8 @@ export default function UsuariosPage() {
             )}
           </aside>
 
-          {/* Área de Conteúdo - margem fixa (sidebar sempre no lugar, conteúdo não move) */}
-          <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 51}px` }}>
+          {/* Área de Conteúdo - margem fixa: 32 (sidebar margin) + 64 (sidebar width) + 32 (gap) = 128px */}
+          <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 32}px` }}>
             {/* Header: Título + Filtros + Botão */}
             <div className="flex items-center justify-between mb-6">
               {/* Título com ícone + Select de Grupo */}
@@ -918,8 +918,8 @@ export default function UsuariosPage() {
           )}
         </aside>
 
-        {/* Conteúdo - Mesmo padding e margem da listagem (py-8 = 32px top/bottom) */}
-        <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 51}px` }}>
+        {/* Conteúdo - margem fixa: 32 (sidebar margin) + 64 (sidebar width) + 32 (gap) = 128px */}
+        <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 32}px` }}>
           {/* Voltar + Título - mt-[3px] compensa a diferença visual do botão circular vs ícone */}
           <div className="flex items-center justify-between mb-6 mt-[3px]">
             <div className="flex items-center gap-6">

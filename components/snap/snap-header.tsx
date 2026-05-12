@@ -17,11 +17,12 @@ import { verticals, type Vertical } from "@/lib/snap-tokens"
  * MEDIDAS EXATAS DO FIGMA:
  * - Margem superior (topo até logo SNAP): 32px
  * - Margem inferior (logo SNAP até faixa colorida): 24px
- * - Faixa colorida da vertical: 8px de altura, marginLeft: 144px
- * - Breadcrumb: marginLeft: 144px, padding: 16px (top/bottom)
+ * - Faixa colorida da vertical: 8px de altura, marginLeft: 128px (32 + 64 + 32)
+ * - Breadcrumb: marginLeft: 128px, padding: 16px (top/bottom)
  * - Gap entre ícone grid e logo SNAP: 70px
  * - Ícone grid: 24x24px
  * - Logo SNAP: 24px de altura
+ * - Gap sidebar -> conteudo: 32px
  * 
  * Regras do Breadcrumb:
  * - Primeiro item = Vertical (cor da vertical + ícone casinha + font-medium)
@@ -191,15 +192,15 @@ export function SnapHeader({
         </div>
       </div>
 
-      {/* Faixa colorida da vertical - 8px de altura, começa a 144px da borda esquerda, termina a 32px da borda direita */}
-      <div style={{ height: '8px', backgroundColor: verticalColor, marginLeft: '144px', marginRight: '32px' }} />
+      {/* Faixa colorida da vertical - 8px de altura, começa a 128px da borda esquerda (32 + 64 + 32), termina a 32px da borda direita */}
+      <div style={{ height: '8px', backgroundColor: verticalColor, marginLeft: '128px', marginRight: '32px' }} />
 
-      {/* Breadcrumb - ABAIXO da faixa colorida */}
+      {/* Breadcrumb - ABAIXO da faixa colorida, marginLeft: 128px (32 + 64 + 32) */}
       {breadcrumb.length > 0 && (
         <nav 
           className="flex items-center gap-2" 
           aria-label="Breadcrumb"
-          style={{ marginLeft: '144px', marginRight: '32px', paddingTop: '16px', paddingBottom: '16px' }}
+          style={{ marginLeft: '128px', marginRight: '32px', paddingTop: '16px', paddingBottom: '16px' }}
         >
           {/* Item da Vertical (primeiro) */}
           <div className="flex items-center gap-2">
