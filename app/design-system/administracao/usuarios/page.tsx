@@ -274,6 +274,7 @@ export default function UsuariosPage() {
             onMouseLeave={handleSidebarClose}
             className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
             style={{ 
+              top: '40px',
               marginLeft: '32px',
               width: sidebarOpen ? '280px' : '64px',
               minWidth: sidebarOpen ? '280px' : '64px',
@@ -774,6 +775,7 @@ export default function UsuariosPage() {
           onMouseLeave={handleSidebarClose}
           className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
           style={{ 
+            top: '40px',
             marginLeft: '32px',
             width: sidebarOpen ? '280px' : '64px',
             minWidth: sidebarOpen ? '280px' : '64px',
