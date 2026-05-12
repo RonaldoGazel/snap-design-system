@@ -9,10 +9,16 @@ import { verticals, type Vertical } from "@/lib/snap-tokens"
 /**
  * SNAP Header Global
  * 
+ * ESTRUTURA (de cima para baixo):
+ * 1. Linha do header: [Menu Grid] [Logo SNAP] ... [Notificações] [Tema] [Separador] [Usuario]
+ * 2. Faixa colorida da vertical (8px de altura)
+ * 3. Breadcrumb (abaixo da faixa, padding 16px top/bottom)
+ * 
  * MEDIDAS EXATAS DO FIGMA:
  * - Margem superior (topo até logo SNAP): 32px
- * - Margem inferior (logo SNAP até faixa colorida): 32px
- * - Faixa colorida da vertical: 8px de altura
+ * - Margem inferior (logo SNAP até faixa colorida): 24px
+ * - Faixa colorida da vertical: 8px de altura, marginLeft: 144px
+ * - Breadcrumb: marginLeft: 144px, padding: 16px (top/bottom)
  * - Gap entre ícone grid e logo SNAP: 70px
  * - Ícone grid: 24x24px
  * - Logo SNAP: 24px de altura
@@ -81,7 +87,7 @@ export function SnapHeader({
         className="flex items-center justify-between"
         style={{ marginBottom: '24px' }}
       >
-        {/* Lado esquerdo: Ícone Grid + Logo + Separador + Breadcrumb */}
+        {/* Lado esquerdo: Ícone Grid + Logo */}
         <div className="flex items-center">
           {/* 
             Ícone Menu Verticais (grid 3x3)
@@ -111,74 +117,6 @@ export function SnapHeader({
           >
             <SnapLogo variant="snap" height={24} />
           </Link>
-
-          {/* Separador vertical */}
-          <div 
-            className="bg-border" 
-            style={{ width: '1px', height: '24px', marginLeft: '24px', marginRight: '24px' }} 
-          />
-
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2" aria-label="Breadcrumb">
-            {/* Item da Vertical (primeiro) */}
-            <div className="flex items-center gap-2">
-              <Home 
-                style={{ width: '16px', height: '16px', color: verticalColor }} 
-              />
-              <span 
-                className="font-sans text-sm font-medium"
-                style={{ color: verticalColor }}
-              >
-                {verticalData.name}
-              </span>
-            </div>
-
-            {/* Itens intermediários e final */}
-            {breadcrumb.map((item, index) => {
-              const isLast = index === breadcrumb.length - 1
-              const isClickable = !isLast && (item.href || item.onClick)
-              
-              const content = (
-                <>
-                  {item.icon && (
-                    <span className={isLast ? "text-foreground" : "text-[#696969]"}>
-                      {item.icon}
-                    </span>
-                  )}
-                  <span 
-                    className={`font-sans text-sm ${
-                      isLast 
-                        ? "text-foreground font-semibold" 
-                        : "text-[#696969] font-medium"
-                    } ${isClickable ? "hover:underline cursor-pointer" : ""}`}
-                  >
-                    {item.label}
-                  </span>
-                </>
-              )
-              
-              return (
-                <div key={index} className="flex items-center gap-2">
-                  <ChevronRight className="w-4 h-4 text-[#696969]" />
-                  {isClickable ? (
-                    item.onClick ? (
-                      <button onClick={item.onClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        {content}
-                      </button>
-                    ) : (
-                      <Link href={item.href!} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        {content}
-                      </Link>
-                    )
-                  ) : (
-                    <div className="flex items-center gap-2">
-                      {content}
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </nav>
         </div>
 
         {/* Lado direito: Notificações + Tema + Separador + Org + Avatar */}
@@ -255,6 +193,74 @@ export function SnapHeader({
 
       {/* Faixa colorida da vertical - 8px de altura, começa a 144px da borda esquerda, termina a 32px da borda direita */}
       <div style={{ height: '8px', backgroundColor: verticalColor, marginLeft: '144px', marginRight: '32px' }} />
+
+      {/* Breadcrumb - ABAIXO da faixa colorida */}
+      {breadcrumb.length > 0 && (
+        <nav 
+          className="flex items-center gap-2" 
+          aria-label="Breadcrumb"
+          style={{ marginLeft: '144px', marginRight: '32px', paddingTop: '16px', paddingBottom: '16px' }}
+        >
+          {/* Item da Vertical (primeiro) */}
+          <div className="flex items-center gap-2">
+            <Home 
+              style={{ width: '16px', height: '16px', color: verticalColor }} 
+            />
+            <span 
+              className="font-sans text-sm font-medium"
+              style={{ color: verticalColor }}
+            >
+              {verticalData.name}
+            </span>
+          </div>
+
+          {/* Itens intermediários e final */}
+          {breadcrumb.map((item, index) => {
+            const isLast = index === breadcrumb.length - 1
+            const isClickable = !isLast && (item.href || item.onClick)
+            
+            const content = (
+              <>
+                {item.icon && (
+                  <span className={isLast ? "text-foreground" : "text-[#696969]"}>
+                    {item.icon}
+                  </span>
+                )}
+                <span 
+                  className={`font-sans text-sm ${
+                    isLast 
+                      ? "text-foreground font-semibold" 
+                      : "text-[#696969] font-medium"
+                  } ${isClickable ? "hover:underline cursor-pointer" : ""}`}
+                >
+                  {item.label}
+                </span>
+              </>
+            )
+            
+            return (
+              <div key={index} className="flex items-center gap-2">
+                <ChevronRight className="w-4 h-4 text-[#696969]" />
+                {isClickable ? (
+                  item.onClick ? (
+                    <button onClick={item.onClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                      {content}
+                    </button>
+                  ) : (
+                    <Link href={item.href!} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                      {content}
+                    </Link>
+                  )
+                ) : (
+                  <div className="flex items-center gap-2">
+                    {content}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </nav>
+      )}
     </header>
   )
 }
