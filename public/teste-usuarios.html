@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNAP - Usuarios (HTML + CSS)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       SNAP DESIGN SYSTEM - TOKENS
+       ======================================== */
+    :root {
+      /* Dark Mode (default) */
+      --background: #0a0a0a;
+      --foreground: #ffffff;
+      --card: #1a1a1a;
+      --card-hover: #2a2a2a;
+      --border: #2a2a2a;
+      --text-secondary: #a0a0a0;
+      --text-muted: #888888;
+      --input-bg: #000000;
+      --sidebar-bg: #0C0C0C;
+      
+      /* Vertical Administracao */
+      --vertical-color: #333540;
+      
+      /* Status */
+      --success: #3f9f76;
+      --warning: #ffc563;
+      --error: #fe473c;
+      
+      /* Typography */
+      --font-sans: 'Inter Tight', sans-serif;
+      --font-title: 'Chakra Petch', sans-serif;
+      
+      /* Spacing */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --radius-xl: 12px;
+      --radius-full: 9999px;
+    }
+    
+    /* Light Mode */
+    .light {
+      --background: #ECEEEF;
+      --foreground: #000000;
+      --card: #ffffff;
+      --card-hover: #eef1f3;
+      --border: #d0d5d9;
+      --text-secondary: #4a4a4a;
+      --text-muted: #6a6a6a;
+      --input-bg: #ffffff;
+      --sidebar-bg: #ffffff;
+    }
+    
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--background);
+      color: var(--foreground);
+      min-height: 100vh;
+    }
+    
+    /* ========================================
+       HEADER
+       ======================================== */
+    .header {
+      padding: 26px 32px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .header__left {
+      display: flex;
+      align-items: center;
+    }
+    
+    .header__menu-icon {
+      margin-left: 51px;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 6px);
+      grid-template-rows: repeat(3, 6px);
+      gap: 3px;
+    }
+    
+    .header__menu-icon span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #505050;
+    }
+    
+    .header__logo {
+      margin-left: 53px;
+      font-family: var(--font-title);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--foreground);
+    }
+    
+    .header__right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    
+    .header__notification {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .header__notification-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+    }
+    
+    .header__notification-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 18px;
+      height: 18px;
+      background-color: var(--error);
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    .header__theme-toggle {
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    
+    .header__separator {
+      width: 1px;
+      height: 32px;
+      background-color: var(--border);
+    }
+    
+    .header__user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .header__user-info {
+      text-align: right;
+    }
+    
+    .header__user-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--foreground);
+    }
+    
+    .header__user-role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    .header__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background-color: var(--vertical-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+    }
+    
+    /* Faixa colorida */
+    .header__vertical-bar {
+      height: 8px;
+      background-color: var(--vertical-color);
+      margin-left: 128px;
+      margin-right: 32px;
+    }
+    
+    /* Breadcrumb */
+    .header__breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 128px;
+      margin-right: 32px;
+      padding: 16px 0;
+      font-size: 14px;
+    }
+    
+    .header__breadcrumb-home {
+      width: 16px;
+      height: 16px;
+      color: var(--vertical-color);
+    }
+    
+    .header__breadcrumb-vertical {
+      color: var(--vertical-color);
+      font-weight: 500;
+    }
+    
+    .header__breadcrumb-separator {
+      width: 16px;
+      height: 16px;
+      color: #696969;
+    }
+    
+    .header__breadcrumb-current {
+      color: var(--foreground);
+      font-weight: 600;
+    }
+    
+    /* ========================================
+       LAYOUT
+       ======================================== */
+    .layout {
+      display: flex;
+      position: relative;
+    }
+    
+    /* ========================================
+       SIDEBAR
+       ======================================== */
+    .sidebar {
+      position: absolute;
+      top: 90px;
+      left: 32px;
+      width: 64px;
+      height: calc(100vh - 230px);
+      background-color: var(--sidebar-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      display: flex;
+      flex-direction: column;
+      padding: 16px 0;
+      z-index: 10;
+    }
+    
+    .sidebar__nav {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .sidebar__item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .sidebar__item:hover {
+      background-color: var(--card-hover);
+    }
+    
+    .sidebar__item--active {
+      background-color: var(--vertical-color);
+    }
+    
+    .sidebar__item--active svg {
+      color: white;
+    }
+    
+    .sidebar__item svg {
+      width: 20px;
+      height: 20px;
+      color: #717171;
+    }
+    
+    .sidebar__settings {
+      display: flex;
+      justify-content: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      margin: 0 12px;
+    }
+    
+    /* ========================================
+       MAIN CONTENT
+       ======================================== */
+    .main {
+      flex: 1;
+      padding: 32px 32px 32px 0;
+      margin-left: 128px;
+    }
+    
+    /* Page Header */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    
+    .page-header__left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .page-header__icon {
+      width: 28px;
+      height: 28px;
+      color: var(--foreground);
+    }
+    
+    .page-header__title {
+      font-family: var(--font-title);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    
+    /* Select */
+    .select {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      color: var(--foreground);
+      cursor: pointer;
+    }
+    
+    .select__icon {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+    
+    /* ========================================
+       TABLE
+       ======================================== */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table__header {
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .table__header th {
+      padding: 16px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    
+    .table__row {
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.2s;
+      cursor: pointer;
+    }
+    
+    .table__row:hover {
+      background-color: var(--card-hover);
+    }
+    
+    .table__row td {
+      padding: 16px;
+      font-size: 14px;
+    }
+    
+    .table__name {
+      font-weight: 500;
+      color: var(--foreground);
+    }
+    
+    .table__email {
+      color: var(--text-secondary);
+    }
+    
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .badge--success {
+      background-color: var(--success);
+      color: white;
+    }
+    
+    .badge--warning {
+      background-color: var(--text-muted);
+      color: white;
+    }
+    
+    .badge--error {
+      background-color: var(--error);
+      color: white;
+    }
+    
+    /* ========================================
+       PAGINATION
+       ======================================== */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .pagination__prev {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    
+    .pagination__prev:hover {
+      color: var(--foreground);
+    }
+    
+    .pagination__pages {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .pagination__page {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .pagination__page:hover {
+      background-color: var(--card-hover);
+    }
+    
+    .pagination__page--active {
+      background-color: var(--card);
+      color: var(--foreground);
+      font-weight: 600;
+    }
+    
+    .pagination__ellipsis {
+      color: var(--text-muted);
+    }
+    
+    /* ========================================
+       SVG ICONS (inline)
+       ======================================== */
+    .icon {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header__left">
+      <!-- Menu Icon -->
+      <div class="header__menu-icon">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+      
+      <!-- Logo -->
+      <div class="header__logo">SNAP</div>
+    </div>
+    
+    <div class="header__right">
+      <!-- Notification -->
+      <div class="header__notification">
+        <svg class="header__notification-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="header__notification-badge">35</span>
+      </div>
+      
+      <!-- Theme Toggle -->
+      <svg class="header__theme-toggle" onclick="toggleTheme()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      
+      <!-- Separator -->
+      <div class="header__separator"></div>
+      
+      <!-- User -->
+      <div class="header__user">
+        <div class="header__user-info">
+          <div class="header__user-name">Analista de Contrainteligencia</div>
+          <div class="header__user-role">Administrador</div>
+        </div>
+        <div class="header__avatar">VD</div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Vertical Bar -->
+  <div class="header__vertical-bar"></div>
+  
+  <!-- Breadcrumb -->
+  <nav class="header__breadcrumb">
+    <svg class="header__breadcrumb-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+    </svg>
+    <span class="header__breadcrumb-vertical">Administracao</span>
+    <svg class="header__breadcrumb-separator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+    <span class="header__breadcrumb-current">Usuarios</span>
+  </nav>
+  
+  <!-- Layout -->
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar__nav">
+        <div class="sidebar__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <div class="sidebar__item sidebar__item--active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <div class="sidebar__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="sidebar__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+        </div>
+        <div class="sidebar__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </div>
+      </nav>
+      <div class="sidebar__settings">
+        <div class="sidebar__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-header__left">
+          <svg class="page-header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <h1 class="page-header__title">Usuarios</h1>
+        </div>
+        
+        <div class="select">
+          <span>Visao plataforma</span>
+          <svg class="select__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Table -->
+      <table class="table">
+        <thead class="table__header">
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Nivel de Acesso</th>
+            <th>Criado em</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table__row">
+            <td class="table__name">admin</td>
+            <td class="table__email">admin@snap.local</td>
+            <td><span class="badge badge--success">Ativo</span></td>
+            <td>1</td>
+            <td>May 7, 2026, 2:17:14 PM</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__name">Maria Santos</td>
+            <td class="table__email">maria.santos@snap.local</td>
+            <td><span class="badge badge--success">Ativo</span></td>
+            <td>2</td>
+            <td>May 5, 2026, 10:30:00 AM</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__name">Pedro Costa</td>
+            <td class="table__email">pedro.costa@snap.local</td>
+            <td><span class="badge badge--warning">Inativo</span></td>
+            <td>3</td>
+            <td>Apr 20, 2026, 3:45:00 PM</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__name">Ana Oliveira</td>
+            <td class="table__email">ana.oliveira@snap.local</td>
+            <td><span class="badge badge--error">Bloqueado</span></td>
+            <td>2</td>
+            <td>Mar 15, 2026, 9:00:00 AM</td>
+          </tr>
+          <tr class="table__row">
+            <td class="table__name">Carlos Ferreira</td>
+            <td class="table__email">carlos.ferreira@snap.local</td>
+            <td><span class="badge badge--success">Ativo</span></td>
+            <td>1</td>
+            <td>Feb 10, 2026, 11:00:00 AM</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Pagination -->
+      <div class="pagination">
+        <div class="pagination__prev">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Pagina anterior</span>
+        </div>
+        
+        <div class="pagination__pages">
+          <span class="pagination__page">1</span>
+          <span class="pagination__ellipsis">...</span>
+          <span class="pagination__page">3</span>
+          <span class="pagination__page">4</span>
+          <span class="pagination__page">5</span>
+          <span class="pagination__page">6</span>
+          <span class="pagination__page pagination__page--active">7</span>
+          <span class="pagination__page">8</span>
+          <span class="pagination__page">9</span>
+          <span class="pagination__ellipsis">...</span>
+          <span class="pagination__page">25</span>
+        </div>
+        
+        <div></div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+  </script>
+</body>
+</html>
