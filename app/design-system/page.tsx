@@ -486,7 +486,7 @@ function TramitarModal() {
   }, [activeTab])
 
   return (
-    <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+    <div className="bg-[#101010] rounded-xl border border-border max-w-md mx-auto overflow-hidden">
       {/* Header compacto */}
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
@@ -1951,8 +1951,8 @@ notificationCount={35}`}
             {/* Exemplo de Modal - Verificação de Entidade */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade</p>
-{/* Modal: usa CSS variables para adaptar ao tema */}
-              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+{/* Modal: background #101010 (escuro) */}
+              <div className="bg-[#101010] rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
@@ -2013,8 +2013,8 @@ notificationCount={35}`}
             {/* Exemplo de Modal - Difusão */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Difusão de Processo</p>
-              {/* Modal: background #101112, borda #2A2B35, 1px */}
-              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+              {/* Modal: background #101010 (escuro) */}
+              <div className="bg-[#101010] rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">

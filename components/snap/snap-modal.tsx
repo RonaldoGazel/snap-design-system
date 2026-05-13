@@ -62,7 +62,7 @@ const SnapModal = forwardRef<HTMLDivElement, SnapModalProps>(
         <div
           ref={ref}
           className={cn(
-            "bg-card rounded-xl border border-border w-full overflow-hidden z-50",
+            "bg-[#101010] rounded-xl border border-border w-full overflow-hidden z-50",
             sizeClasses[size],
             className
           )}
@@ -152,7 +152,7 @@ const SnapModalInline = forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bg-card rounded-xl border border-border max-w-md overflow-hidden",
+      "bg-[#101010] rounded-xl border border-border max-w-md overflow-hidden",
       className
     )}
     {...props}
