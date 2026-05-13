@@ -35,6 +35,7 @@ import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
 import { SnapModal, SnapModalHeader, SnapModalContent, SnapModalFooter } from "@/components/snap/snap-modal"
 import { SnapSelect } from "@/components/snap/snap-select"
+import { SnapBackButton } from "@/components/snap/snap-back-button"
 import { Check } from "lucide-react"
 
 /**
@@ -922,17 +923,12 @@ export default function UsuariosPage() {
         <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 32}px` }}>
           {/* Voltar + Título - mt-[3px] compensa a diferença visual do botão circular vs ícone */}
           <div className="flex items-center justify-between mb-6 mt-[3px]">
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-3">
-                <button 
-                  onClick={() => setSelectedUser(null)} 
-                  className="w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
-                  title="Voltar para lista de usuários"
-                >
-                  <ChevronLeft className="w-5 h-5 text-text-secondary" />
-                </button>
-                <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
-              </div>
+            <div className="flex items-center gap-3">
+              <SnapBackButton 
+                onBack={() => setSelectedUser(null)}
+                title="Voltar para lista de usuários"
+              />
+              <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
             </div>
           </div>
 

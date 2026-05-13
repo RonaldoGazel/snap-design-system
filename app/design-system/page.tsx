@@ -486,7 +486,7 @@ function TramitarModal() {
   }, [activeTab])
 
   return (
-    <div className="bg-[#101010] rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+    <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
       {/* Header compacto */}
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
@@ -2014,8 +2014,8 @@ notificationCount={35}`}
             {/* Exemplo de Modal - Verificação de Entidade */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade</p>
-{/* Modal: background #101010 (escuro) */}
-              <div className="bg-[#101010] rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+{/* Modal: usa bg-card (adapta ao tema) */}
+              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
@@ -2076,8 +2076,8 @@ notificationCount={35}`}
             {/* Exemplo de Modal - Difusão */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Difusão de Processo</p>
-              {/* Modal: background #101010 (escuro) */}
-              <div className="bg-[#101010] rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+{/* Modal: usa bg-card (adapta ao tema) */}
+              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
@@ -2231,8 +2231,8 @@ notificationCount={35}`}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Card de Entidade (Endereço)</p>
               
-              {/* Card: background #101010 (escuro) */}
-              <div className="bg-[#101010] rounded-xl border border-border w-[340px] overflow-hidden">
+              {/* Card: usa bg-card (adapta ao tema) */}
+              <div className="bg-card rounded-xl border border-border w-[340px] overflow-hidden">
                 {/* Header - pt-4 (16px) do topo, pb-3 (12px) até a linha */}
                 <div className="px-5 pt-4 pb-3">
                   <div className="flex items-center gap-2">
