@@ -38,8 +38,8 @@ const snapButtonVariants = cva(
         // Ação de sucesso (verde)
         success: "bg-[#3f9f76] text-white hover:bg-[#358a66]",
         
-        // Ghost (sem fundo)
-        ghost: "bg-transparent text-[#b1b3c2] hover:bg-[#2a2b35] hover:text-white",
+        // Ghost (com borda sutil para modais)
+        ghost: "bg-transparent border border-border text-foreground hover:bg-muted",
         
         // Link style
         link: "bg-transparent text-[#72284b] hover:text-[#d4789b] underline-offset-4 hover:underline",

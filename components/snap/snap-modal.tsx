@@ -123,7 +123,7 @@ const SnapModalContent = forwardRef<
 ))
 SnapModalContent.displayName = "SnapModalContent"
 
-// Modal Footer (para botões - alinhados à DIREITA, margem 36px)
+// Modal Footer (para botões - alinhados à DIREITA, com padding)
 interface SnapModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Se true, adiciona a margem de 36px (mb-9) acima dos botões */
   withTopMargin?: boolean
@@ -134,7 +134,7 @@ const SnapModalFooter = forwardRef<HTMLDivElement, SnapModalFooterProps>(
     <div
       ref={ref}
       className={cn(
-        "flex items-center justify-end gap-4",
+        "flex items-center justify-end gap-4 px-6 pb-6",
         withTopMargin && "mt-9",
         className
       )}
