@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { 
   Plus, 
   Shield,
@@ -95,6 +96,8 @@ const organizacoesDisponiveis = [
 ]
 
 export default function GruposPage() {
+  const router = useRouter()
+  
   // Estado da sidebar
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarContentVisible, setSidebarContentVisible] = useState(false)
@@ -367,6 +370,7 @@ export default function GruposPage() {
                     key={grupo.id} 
                     className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
                     style={{ height: "48px" }}
+                    onClick={() => router.push(`/design-system/administracao/grupos/${grupo.id}`)}
                   >
                     <td className="px-4 text-foreground text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{grupo.nome}</td>
                     <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{grupo.criadoEm}</td>
