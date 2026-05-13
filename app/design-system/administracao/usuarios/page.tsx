@@ -727,26 +727,26 @@ export default function UsuariosPage() {
                 </div>
               </div>
             </div>
-            
-            {/* Botões */}
-            <SnapModalFooter withTopMargin>
-              <SnapButton
-                variant="primary"
-                size="modal"
-                icon={<Check className="w-4 h-4" />}
-              >
-                Criar
-              </SnapButton>
-              <SnapButton
-                variant="outline"
-                size="modal"
-                icon={<X className="w-4 h-4" />}
-                onClick={() => setShowCreateUserModal(false)}
-              >
-                Cancelar
-              </SnapButton>
-            </SnapModalFooter>
           </SnapModalContent>
+          
+          {/* Botões - FORA do SnapModalContent */}
+          <SnapModalFooter>
+            <SnapButton
+              variant="ghost"
+              size="modal"
+              icon={<X className="w-4 h-4" />}
+              onClick={() => setShowCreateUserModal(false)}
+            >
+              Cancelar
+            </SnapButton>
+            <SnapButton
+              variant="primary"
+              size="modal"
+              icon={<Check className="w-4 h-4" />}
+            >
+              Criar
+            </SnapButton>
+          </SnapModalFooter>
         </SnapModal>
       </div>
     )
@@ -959,7 +959,7 @@ export default function UsuariosPage() {
               {/* Separador */}
               <div className="w-px h-16 bg-border mx-6" />
               
-              {/* Status - botão largo */}
+              {/* Status - bot��o largo */}
               <div className="w-[100px]">
                 <label className="block text-sm font-sans text-text-muted mb-2">Status</label>
                 <span className={`inline-flex items-center justify-center w-full px-4 py-1.5 rounded-full text-sm font-sans font-medium ${
@@ -1176,26 +1176,27 @@ export default function UsuariosPage() {
             />
           </div>
           
-          {/* Botões */}
-          <SnapModalFooter withTopMargin>
-            <SnapButton
-              variant="primary"
-              size="modal"
-              icon={<Check className="w-4 h-4" />}
-              className="bg-foreground text-background hover:opacity-90"
-            >
-              Salvar
-            </SnapButton>
-            <SnapButton
-              variant="outline"
-              size="modal"
-              icon={<X className="w-4 h-4" />}
-              onClick={() => setShowEditModal(false)}
-            >
-              Cancelar
-            </SnapButton>
-          </SnapModalFooter>
         </SnapModalContent>
+        
+        {/* Botões - FORA do SnapModalContent */}
+        <SnapModalFooter>
+          <SnapButton
+            variant="ghost"
+            size="modal"
+            icon={<X className="w-4 h-4" />}
+            onClick={() => setShowEditModal(false)}
+          >
+            Cancelar
+          </SnapButton>
+          <SnapButton
+            variant="primary"
+            size="modal"
+            icon={<Check className="w-4 h-4" />}
+            className="!bg-[#333540] hover:!bg-[#252730]"
+          >
+            Salvar
+          </SnapButton>
+        </SnapModalFooter>
       </SnapModal>
 
       {/* Modal Redefinir Senha */}
@@ -1219,30 +1220,30 @@ export default function UsuariosPage() {
           </div>
           
           {/* Aviso de auditoria */}
-          <p className="text-sm font-sans text-text-muted mb-6">
+          <p className="text-sm font-sans text-text-muted">
             Esta ação será registrada no log de auditoria
           </p>
-          
-          {/* Botões */}
-          <SnapModalFooter>
-            <SnapButton
-              variant="primary"
-              size="modal"
-              icon={<Check className="w-4 h-4" />}
-              className="bg-foreground text-background hover:opacity-90"
-            >
-              Redefinir
-            </SnapButton>
-            <SnapButton
-              variant="outline"
-              size="modal"
-              icon={<X className="w-4 h-4" />}
-              onClick={() => setShowResetPasswordModal(false)}
-            >
-              Cancelar
-            </SnapButton>
-          </SnapModalFooter>
         </SnapModalContent>
+        
+        {/* Botões - FORA do SnapModalContent */}
+        <SnapModalFooter>
+          <SnapButton
+            variant="ghost"
+            size="modal"
+            icon={<X className="w-4 h-4" />}
+            onClick={() => setShowResetPasswordModal(false)}
+          >
+            Cancelar
+          </SnapButton>
+          <SnapButton
+            variant="primary"
+            size="modal"
+            icon={<Check className="w-4 h-4" />}
+            className="!bg-[#333540] hover:!bg-[#252730]"
+          >
+            Redefinir
+          </SnapButton>
+        </SnapModalFooter>
       </SnapModal>
 
       {/* Modal Desativar Usuário */}
@@ -1259,30 +1260,30 @@ export default function UsuariosPage() {
           </p>
           
           {/* Aviso de auditoria */}
-          <p className="text-sm font-sans text-text-muted mb-6">
+          <p className="text-sm font-sans text-text-muted">
             Esta ação será registrada no log de auditoria
           </p>
-          
-          {/* Botões */}
-          <SnapModalFooter>
-            <SnapButton
-              variant="primary"
-              size="modal"
-              icon={<Ban className="w-4 h-4" />}
-              className="bg-warning text-black hover:opacity-90"
-            >
-              Desativar
-            </SnapButton>
-            <SnapButton
-              variant="outline"
-              size="modal"
-              icon={<X className="w-4 h-4" />}
-              onClick={() => setShowDeactivateModal(false)}
-            >
-              Cancelar
-            </SnapButton>
-          </SnapModalFooter>
         </SnapModalContent>
+        
+        {/* Botões - FORA do SnapModalContent */}
+        <SnapModalFooter>
+          <SnapButton
+            variant="ghost"
+            size="modal"
+            icon={<X className="w-4 h-4" />}
+            onClick={() => setShowDeactivateModal(false)}
+          >
+            Cancelar
+          </SnapButton>
+          <SnapButton
+            variant="primary"
+            size="modal"
+            icon={<Ban className="w-4 h-4" />}
+            className="bg-warning text-black hover:opacity-90"
+          >
+            Desativar
+          </SnapButton>
+        </SnapModalFooter>
       </SnapModal>
 
       {/* Modal Bloquear Usuário */}
@@ -1299,30 +1300,30 @@ export default function UsuariosPage() {
           </p>
           
           {/* Aviso de auditoria */}
-          <p className="text-sm font-sans text-text-muted mb-6">
+          <p className="text-sm font-sans text-text-muted">
             Esta ação será registrada no log de auditoria
           </p>
-          
-          {/* Botões */}
-          <SnapModalFooter>
-            <SnapButton
-              variant="primary"
-              size="modal"
-              icon={<Lock className="w-4 h-4" />}
-              className="bg-[#d4789b] text-white hover:opacity-90"
-            >
-              Bloquear
-            </SnapButton>
-            <SnapButton
-              variant="outline"
-              size="modal"
-              icon={<X className="w-4 h-4" />}
-              onClick={() => setShowBlockModal(false)}
-            >
-              Cancelar
-            </SnapButton>
-          </SnapModalFooter>
         </SnapModalContent>
+        
+        {/* Botões - FORA do SnapModalContent */}
+        <SnapModalFooter>
+          <SnapButton
+            variant="ghost"
+            size="modal"
+            icon={<X className="w-4 h-4" />}
+            onClick={() => setShowBlockModal(false)}
+          >
+            Cancelar
+          </SnapButton>
+          <SnapButton
+            variant="primary"
+            size="modal"
+            icon={<Lock className="w-4 h-4" />}
+            className="bg-[#d4789b] text-white hover:opacity-90"
+          >
+            Bloquear
+          </SnapButton>
+        </SnapModalFooter>
       </SnapModal>
 
       {/* Modal Excluir Usuário */}
@@ -1339,30 +1340,30 @@ export default function UsuariosPage() {
           </p>
           
           {/* Aviso de ação irreversível */}
-          <p className="text-sm font-sans text-text-muted mb-6">
+          <p className="text-sm font-sans text-text-muted">
             Esta ação é irreversível. O usuário será removido permanentemente. Esta ação será registrada no log de auditoria.
           </p>
-          
-          {/* Botões */}
-          <SnapModalFooter>
-            <SnapButton
-              variant="primary"
-              size="modal"
-              icon={<Trash2 className="w-4 h-4" />}
-              className="bg-error text-white hover:opacity-90"
-            >
-              Excluir
-            </SnapButton>
-            <SnapButton
-              variant="outline"
-              size="modal"
-              icon={<X className="w-4 h-4" />}
-              onClick={() => setShowDeleteModal(false)}
-            >
-              Cancelar
-            </SnapButton>
-          </SnapModalFooter>
         </SnapModalContent>
+        
+        {/* Botões - FORA do SnapModalContent */}
+        <SnapModalFooter>
+          <SnapButton
+            variant="ghost"
+            size="modal"
+            icon={<X className="w-4 h-4" />}
+            onClick={() => setShowDeleteModal(false)}
+          >
+            Cancelar
+          </SnapButton>
+          <SnapButton
+            variant="primary"
+            size="modal"
+            icon={<Trash2 className="w-4 h-4" />}
+            className="bg-error text-white hover:opacity-90"
+          >
+            Excluir
+          </SnapButton>
+        </SnapModalFooter>
       </SnapModal>
 
     </div>
