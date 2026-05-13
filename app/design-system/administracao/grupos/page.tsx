@@ -392,6 +392,7 @@ export default function GruposPage() {
           ============================================ */}
       <SnapModal open={showCreateModal} onClose={() => setShowCreateModal(false)}>
         <SnapModalHeader 
+          icon={<Users className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />}
           title="Criar Grupo" 
           onClose={() => setShowCreateModal(false)} 
         />
@@ -430,6 +431,7 @@ export default function GruposPage() {
           <SnapButton
             variant="ghost"
             size="modal"
+            icon={<X className="w-4 h-4" />}
             onClick={() => setShowCreateModal(false)}
           >
             Cancelar
@@ -437,6 +439,7 @@ export default function GruposPage() {
           <SnapButton
             variant="primary"
             size="modal"
+            icon={<Check className="w-4 h-4" />}
             className="!bg-[#333540] hover:!bg-[#252730]"
             onClick={() => setShowCreateModal(false)}
           >
