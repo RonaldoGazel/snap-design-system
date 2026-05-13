@@ -1302,7 +1302,7 @@ export default function DesignSystemPage() {
               <li>• Texto à esquerda, setinha (chevron) alinhada à direita do container</li>
               <li>• Largura mínima: definir <code className="text-[#72284b]">min-w-[Xpx]</code> para evitar select muito estreito</li>
               <li>• Border-radius: <code className="text-[#72284b]">8px (rounded-lg)</code></li>
-              <li>• Chevron: rotação de 180° quando aberto (<code className="text-[#72284b]">rotate-180</code>)</li>
+              <li>• Chevron: rota��ão de 180° quando aberto (<code className="text-[#72284b]">rotate-180</code>)</li>
             </ul>
           </div>
 
@@ -1581,16 +1581,17 @@ notificationCount={35}`}
             </div>
 
             {/* Regra 3: Tabelas */}
-            <div className="p-4 rounded-xl bg-muted border border-border">
+            <div className="p-4 rounded-xl bg-error/10 border border-error">
               <div className="flex items-start gap-3">
-                <Info className="w-5 h-5 text-text-muted mt-0.5 shrink-0" />
+                <AlertTriangle className="w-5 h-5 text-error mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-foreground font-medium font-sans mb-2">Tabelas - Estrutura obrigatória</p>
+                  <p className="text-foreground font-medium font-sans mb-2">Tabelas - Altura MÁXIMA 48px (inegociável)</p>
                   <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
                     <li>Container: <code className="bg-card px-1 rounded">rounded-xl border border-border overflow-hidden mb-6</code></li>
-                    <li>Table: <code className="bg-card px-1 rounded">w-full</code></li>
+                    <li>Linha: <code className="bg-card px-1 rounded">{'style={{ height: "48px" }}'}</code> - NUNCA ultrapassar</li>
+                    <li>Celulas: <code className="bg-card px-1 rounded">py-3 px-4</code></li>
                     <li>Header: SEM background, apenas <code className="bg-card px-1 rounded">border-b border-border</code></li>
-                    <li>Linhas: <code className="bg-card px-1 rounded">hover:bg-card-hover</code>, altura 48px</li>
+                    <li>Atomos internos (badges, botoes) DEVEM caber em 48px</li>
                   </ul>
                 </div>
               </div>
