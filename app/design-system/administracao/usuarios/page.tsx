@@ -536,15 +536,16 @@ export default function UsuariosPage() {
                   {filteredUsers.map((user) => (
                     <tr 
                       key={user.id} 
-                      className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer h-12"
+                      className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
+                      style={{ height: "48px", maxHeight: "48px" }}
                       onClick={() => setSelectedUser(user)}
                     >
-                      <td className="px-4 text-foreground text-sm font-sans align-middle">{user.nome}</td>
-                      <td className="px-4 text-text-secondary text-sm font-sans align-middle">{user.email}</td>
-                      <td className="px-4 align-middle"><StatusBadge status={user.status} /></td>
-                      <td className="px-4 text-text-secondary text-sm font-sans align-middle">{user.nivelAcesso}</td>
-                      <td className="px-4 text-text-secondary text-sm font-sans align-middle">{user.criadoEm}</td>
-                      <td className="px-4 align-middle">
+                      <td className="px-4 text-foreground text-sm font-sans" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>{user.nome}</td>
+                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>{user.email}</td>
+                      <td className="px-4" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}><StatusBadge status={user.status} /></td>
+                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>{user.nivelAcesso}</td>
+                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>{user.criadoEm}</td>
+                      <td className="px-4" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>
                         <div className="flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
                           <button className="p-1 rounded hover:bg-muted transition-colors">
                             <Eye className="w-4 h-4 text-text-muted" />
