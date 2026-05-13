@@ -295,42 +295,44 @@ export default function GruposPage() {
             ============================================ */}
         <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 32}px` }}>
           
-          {/* Seletor de Organização - igual ao print */}
-          <div className="mb-6 relative">
-            <button
-              onClick={() => setOrgSelectOpen(!orgSelectOpen)}
-              className="flex items-center justify-between px-4 py-2 rounded-lg border border-border bg-card hover:bg-card-hover transition-colors min-w-[280px]"
-            >
-              <span className="font-sans text-sm text-foreground">
-                {orgSelecionada}
-              </span>
-              <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${orgSelectOpen ? 'rotate-180' : ''}`} />
-            </button>
-            
-            {orgSelectOpen && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-card border border-border rounded-lg shadow-lg z-50 overflow-hidden min-w-[280px]">
-                {organizacoesDisponiveis.map((org) => (
-                  <button
-                    key={org}
-                    onClick={() => { setOrgSelecionada(org); setOrgSelectOpen(false) }}
-                    className={`w-full text-left px-4 py-2 text-sm font-sans hover:bg-muted transition-colors ${
-                      orgSelecionada === org ? 'text-foreground bg-muted' : 'text-text-muted'
-                    }`}
-                  >
-                    {org}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Header: Título + Botão Criar */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <UsersRound className="w-8 h-8" style={{ color: VERTICAL_COLOR }} />
+          {/* Header: Ícone + Título + Select de Organização + Botão Criar */}
+          <div className="flex items-center justify-between mb-8">
+            {/* Lado esquerdo: Ícone + Título + Select */}
+            <div className="flex items-center gap-4">
+              <UsersRound className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
               <h1 className="font-title text-2xl text-foreground">GRUPOS</h1>
+              
+              {/* Seletor de Organização - ao lado do título */}
+              <div className="relative ml-4">
+                <button
+                  onClick={() => setOrgSelectOpen(!orgSelectOpen)}
+                  className="flex items-center justify-between px-4 py-2 rounded-lg border border-border bg-card hover:bg-card-hover transition-colors min-w-[220px]"
+                >
+                  <span className="font-sans text-sm text-foreground">
+                    {orgSelecionada}
+                  </span>
+                  <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ml-2 ${orgSelectOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {orgSelectOpen && (
+                  <div className="absolute top-full left-0 mt-1 w-full bg-card border border-border rounded-lg shadow-lg z-50 overflow-hidden min-w-[220px]">
+                    {organizacoesDisponiveis.map((org) => (
+                      <button
+                        key={org}
+                        onClick={() => { setOrgSelecionada(org); setOrgSelectOpen(false) }}
+                        className={`w-full text-left px-4 py-2 text-sm font-sans hover:bg-muted transition-colors ${
+                          orgSelecionada === org ? 'text-foreground bg-muted' : 'text-text-muted'
+                        }`}
+                      >
+                        {org}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
             
+            {/* Lado direito: Botão Criar */}
             <SnapButton
               variant="primary"
               size="default"
@@ -339,11 +341,6 @@ export default function GruposPage() {
             >
               Criar Grupo
             </SnapButton>
-          </div>
-
-          {/* Underline do título - cor da vertical */}
-          <div className="mb-6">
-            <div className="w-24 h-0.5" style={{ backgroundColor: VERTICAL_COLOR }} />
           </div>
 
           {/* Tabela de Grupos */}
