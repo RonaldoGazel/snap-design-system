@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon, Shield, Lock, ChevronDown, ChevronRight, Settings, Link2, Share2, Info } from "lucide-react"
+import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon, Shield, Lock, ChevronDown, ChevronRight, ChevronLeft, Settings, Link2, Share2, Info } from "lucide-react"
 import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
 import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
 import { SnapLogo } from "@/components/snap/snap-logo"
@@ -1302,7 +1302,7 @@ export default function DesignSystemPage() {
               <li>• Texto à esquerda, setinha (chevron) alinhada à direita do container</li>
               <li>• Largura mínima: definir <code className="text-[#72284b]">min-w-[Xpx]</code> para evitar select muito estreito</li>
               <li>• Border-radius: <code className="text-[#72284b]">8px (rounded-lg)</code></li>
-              <li>• Chevron: rota����ão de 180° quando aberto (<code className="text-[#72284b]">rotate-180</code>)</li>
+              <li>• Chevron: rota������ão de 180° quando aberto (<code className="text-[#72284b]">rotate-180</code>)</li>
             </ul>
           </div>
 
