@@ -516,27 +516,22 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
 
       {/* ============================================
           MODAL EXCLUIR GRUPO
-          Estrutura: SnapModalFooter FORA do SnapModalContent
+          Conforme protótipo: sem ícone no header, botões sem ícones
           ============================================ */}
-      <SnapModal open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
+      <SnapModal open={showDeleteModal} onClose={() => setShowDeleteModal(false)} size="sm">
         <SnapModalHeader 
-          icon={<Trash2 className="w-5 h-5 text-error" />}
-          title="Excluir Grupo" 
+          title="Tem certeza que deseja excluir este grupo?" 
           onClose={() => setShowDeleteModal(false)} 
         />
         <SnapModalContent>
-          <p className="text-foreground font-sans text-base mb-4">
-            Tem certeza que deseja excluir o grupo <strong>{grupoData.nome}</strong>?
-          </p>
           <p className="text-sm font-sans text-text-muted">
-            Esta ação é irreversível. O grupo será removido permanentemente. Esta ação será registrada no log de auditoria.
+            Esta ação será registrada no log de auditoria
           </p>
         </SnapModalContent>
         <SnapModalFooter>
           <SnapButton
             variant="ghost"
             size="modal"
-            icon={<X className="w-4 h-4" />}
             onClick={() => setShowDeleteModal(false)}
           >
             Cancelar
@@ -544,8 +539,7 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
           <SnapButton
             variant="primary"
             size="modal"
-            icon={<Trash2 className="w-4 h-4" />}
-            className="bg-error text-white hover:opacity-90"
+            className="!bg-error text-white hover:opacity-90"
             onClick={() => setShowDeleteModal(false)}
           >
             Excluir
