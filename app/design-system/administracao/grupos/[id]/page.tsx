@@ -22,7 +22,8 @@ import {
   Trash2,
   Search,
   Pencil,
-  Clock
+  Clock,
+  AlertTriangle
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
@@ -515,15 +516,20 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
       </SnapModal>
 
       {/* ============================================
-          MODAL EXCLUIR GRUPO
-          Conforme protótipo: sem ícone no header, botões sem ícones
+          MODAL EXCLUIR GRUPO - ALERTA CRÍTICO DE SISTEMA
+          Padrão: ícone atenção + título no header, pergunta em destaque no content
           ============================================ */}
       <SnapModal open={showDeleteModal} onClose={() => setShowDeleteModal(false)} size="sm">
         <SnapModalHeader 
-          title="Tem certeza que deseja excluir este grupo?" 
+          icon={<AlertTriangle className="w-5 h-5 text-error" />}
+          title="Excluir grupo" 
           onClose={() => setShowDeleteModal(false)} 
         />
         <SnapModalContent>
+          {/* Pergunta em destaque - font-title (Inter Tight) + bold + tamanho maior */}
+          <p className="font-title text-lg font-semibold text-foreground mb-3">
+            Tem certeza que deseja excluir este grupo?
+          </p>
           <p className="text-sm font-sans text-text-muted">
             Esta ação será registrada no log de auditoria
           </p>
