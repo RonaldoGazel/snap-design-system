@@ -2472,6 +2472,10 @@ export default function DesignSystemPage() {
                     <span className="text-text-secondary">Links de entidade com cores WCAG</span>
                   </div>
                   <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapPagination</code>
+                    <span className="text-text-secondary">Paginacao com numeros e navegacao</span>
+                  </div>
+                  <div className="flex items-start gap-2">
                     <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">verticals</code>
                     <span className="text-text-secondary">Cores das 5 verticais SNAP</span>
                   </div>
@@ -2495,7 +2499,8 @@ export default function DesignSystemPage() {
   ├── snap-modal.tsx        # SnapModal, SnapModalHeader, SnapModalContent, etc.
   ├── snap-tabs.tsx         # SnapTabs, SnapTabsList, SnapTabsTrigger, SnapTabsContent
   ├── snap-select.tsx       # SnapSelect (estilo accordion)
-  └── snap-entity-link.tsx  # SnapEntityLink, PessoaLink, EnderecoLink, etc.
+  ├── snap-entity-link.tsx  # SnapEntityLink, PessoaLink, EnderecoLink, etc.
+  └── snap-pagination.tsx   # SnapPagination (paginacao padrao)
 
 /lib/
   └── snap-tokens.ts        # Verticais, cores, tipografia, espaçamentos, WCAG

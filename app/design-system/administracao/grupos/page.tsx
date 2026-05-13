@@ -20,6 +20,7 @@ import {
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
 import { SnapModal, SnapModalHeader, SnapModalContent, SnapModalFooter } from "@/components/snap/snap-modal"
+import { SnapPagination } from "@/components/snap/snap-pagination"
 
 /**
  * TELA: Grupos (Listagem)
@@ -367,13 +368,12 @@ export default function GruposPage() {
             ))}
           </div>
 
-          {/* Paginação */}
-          <div className="flex items-center justify-start gap-4 mt-6">
-            <button className="flex items-center gap-2 text-sm font-sans text-text-muted hover:text-foreground transition-colors">
-              <span>←</span>
-              <span>Página anterior</span>
-            </button>
-          </div>
+          {/* Paginação - usando componente SnapPagination */}
+          <SnapPagination
+            currentPage={1}
+            totalPages={5}
+            onPageChange={(page) => console.log("Página:", page)}
+          />
         </main>
       </div>
 

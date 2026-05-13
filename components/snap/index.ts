@@ -93,3 +93,6 @@ export {
   VeiculoLink,
   EmpresaLink,
 } from "./snap-entity-link"
+
+// Pagination
+export { SnapPagination } from "./snap-pagination"
