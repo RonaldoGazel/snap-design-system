@@ -20,11 +20,19 @@ import {
   Check,
   ChevronLeft,
   Trash2,
-  Search
+  Search,
+  Pencil,
+  Clock
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
 import { SnapSelect } from "@/components/snap/snap-select"
+import { 
+  SnapModal, 
+  SnapModalHeader, 
+  SnapModalContent, 
+  SnapModalFooter 
+} from "@/components/snap/snap-modal"
 
 /**
  * TELA: Detalhe do Grupo
@@ -78,6 +86,13 @@ const gruposDisponiveis = [
   { value: "supervisores", label: "Supervisores" }
 ]
 
+// Dados do grupo (mockado)
+const grupoData = {
+  nome: "Diretoria Geral",
+  criadoEm: "May 12, 2026, 6:38:00 PM",
+  atualizadoEm: "May 12, 2026, 6:38:00 PM"
+}
+
 export default function GrupoDetalhePage({ params }: { params: { id: string } }) {
   const router = useRouter()
   
@@ -91,6 +106,10 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
   const [nomeGrupo, setNomeGrupo] = useState("Diretoria Geral")
   const [grupoPai, setGrupoPai] = useState("nenhum")
   const [buscaMembro, setBuscaMembro] = useState("")
+  
+  // Modais
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   
   // Filtrar membros
   const membrosFiltrados = mockMembros.filter(m => 
@@ -309,50 +328,63 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
             </p>
           </div>
 
-          {/* Card de dados do grupo */}
-          <div className="rounded-xl border border-border bg-card p-6 mb-8 max-w-md">
-            {/* Campo Nome */}
-            <div className="mb-4">
-              <label className="block font-sans text-sm text-text-muted mb-2">
-                Nome
-              </label>
-              <input 
-                type="text"
-                value={nomeGrupo}
-                onChange={(e) => setNomeGrupo(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-muted font-sans text-sm text-foreground focus:outline-none focus:border-foreground/50 transition-colors"
-              />
+          {/* ============================================
+              CARD HORIZONTAL DE DADOS - PADRÃO DE DETALHES
+              Igual ao card de detalhes do usuário
+              ============================================ */}
+          <div className="bg-card dark:bg-[#141414] rounded-xl border border-border mb-6">
+            <div className="flex items-start p-6">
+              {/* Nome */}
+              <div className="flex-1">
+                <label className="block text-sm font-sans text-text-muted mb-1">Nome</label>
+                <span className="block font-sans text-base text-foreground font-semibold">{grupoData.nome}</span>
+              </div>
+              
+              {/* Separador vertical */}
+              <div className="w-px h-12 bg-border mx-6" />
+              
+              {/* Criado em */}
+              <div className="flex-1">
+                <label className="block text-sm font-sans text-text-muted mb-1">Criado em</label>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-text-muted flex-shrink-0" />
+                  <span className="font-sans text-base text-foreground">{grupoData.criadoEm}</span>
+                </div>
+              </div>
+              
+              {/* Separador vertical */}
+              <div className="w-px h-12 bg-border mx-6" />
+              
+              {/* Atualizado em */}
+              <div className="flex-1">
+                <label className="block text-sm font-sans text-text-muted mb-1">Atualizado em</label>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-text-muted flex-shrink-0" />
+                  <span className="font-sans text-base text-foreground">{grupoData.atualizadoEm}</span>
+                </div>
+              </div>
             </div>
-            
-            {/* Campo Grupo Pai */}
-            <div className="mb-6">
-              <SnapSelect
-                label="Grupo Pai"
-                value={grupoPai}
-                onChange={(value) => setGrupoPai(value)}
-                options={gruposDisponiveis}
-              />
-            </div>
+          </div>
 
-            {/* Botões - Salvar primeiro (primário), Cancelar segundo (ghost) */}
-            <div className="flex items-center gap-4">
-              <SnapButton
-                variant="primary"
-                size="default"
-                icon={<Check className="w-4 h-4" />}
-                className="!bg-[#333540] hover:!bg-[#252730]"
-              >
-                Salvar
-              </SnapButton>
-              <SnapButton
-                variant="ghost"
-                size="default"
-                icon={<X className="w-4 h-4" />}
-                onClick={() => router.push('/design-system/administracao/grupos')}
-              >
-                Cancelar
-              </SnapButton>
-            </div>
+          {/* ============================================
+              BOTÕES DE AÇÃO - FORA DO CARD
+              Padrão de detalhes do usuário
+              ============================================ */}
+          <div className="flex items-center gap-4 mb-8">
+            <SnapButton 
+              variant="outline" 
+              size="default" 
+              icon={<Pencil className="w-4 h-4" />} 
+              className="border-success text-success hover:bg-success/10"
+              onClick={() => setShowEditModal(true)}
+            >Editar</SnapButton>
+            <SnapButton 
+              variant="primary" 
+              size="default" 
+              icon={<Trash2 className="w-4 h-4" />} 
+              className="bg-error text-white hover:opacity-90"
+              onClick={() => setShowDeleteModal(true)}
+            >Excluir</SnapButton>
           </div>
 
           {/* ============================================
@@ -427,6 +459,100 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
           </div>
         </main>
       </div>
+
+      {/* ============================================
+          MODAL EDITAR GRUPO
+          Estrutura: SnapModalFooter FORA do SnapModalContent
+          ============================================ */}
+      <SnapModal open={showEditModal} onClose={() => setShowEditModal(false)}>
+        <SnapModalHeader 
+          icon={<Pencil className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />}
+          title="Editar Grupo" 
+          onClose={() => setShowEditModal(false)} 
+        />
+        <SnapModalContent>
+          <div className="space-y-4">
+            {/* Campo Nome */}
+            <div>
+              <label className="block font-sans text-sm text-text-muted mb-2">
+                Nome
+              </label>
+              <input 
+                type="text"
+                value={nomeGrupo}
+                onChange={(e) => setNomeGrupo(e.target.value)}
+                className="w-full px-4 py-3 rounded-lg border border-border bg-muted font-sans text-sm text-foreground focus:outline-none focus:border-foreground/50 transition-colors"
+              />
+            </div>
+            
+            {/* Campo Grupo Pai */}
+            <SnapSelect
+              label="Grupo Pai"
+              value={grupoPai}
+              onChange={(value) => setGrupoPai(value)}
+              options={gruposDisponiveis}
+            />
+          </div>
+        </SnapModalContent>
+        <SnapModalFooter>
+          <SnapButton
+            variant="ghost"
+            size="modal"
+            icon={<X className="w-4 h-4" />}
+            onClick={() => setShowEditModal(false)}
+          >
+            Cancelar
+          </SnapButton>
+          <SnapButton
+            variant="primary"
+            size="modal"
+            icon={<Check className="w-4 h-4" />}
+            className="!bg-[#333540] hover:!bg-[#252730]"
+            onClick={() => setShowEditModal(false)}
+          >
+            Salvar
+          </SnapButton>
+        </SnapModalFooter>
+      </SnapModal>
+
+      {/* ============================================
+          MODAL EXCLUIR GRUPO
+          Estrutura: SnapModalFooter FORA do SnapModalContent
+          ============================================ */}
+      <SnapModal open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
+        <SnapModalHeader 
+          icon={<Trash2 className="w-5 h-5 text-error" />}
+          title="Excluir Grupo" 
+          onClose={() => setShowDeleteModal(false)} 
+        />
+        <SnapModalContent>
+          <p className="text-foreground font-sans text-base mb-4">
+            Tem certeza que deseja excluir o grupo <strong>{grupoData.nome}</strong>?
+          </p>
+          <p className="text-sm font-sans text-text-muted">
+            Esta ação é irreversível. O grupo será removido permanentemente. Esta ação será registrada no log de auditoria.
+          </p>
+        </SnapModalContent>
+        <SnapModalFooter>
+          <SnapButton
+            variant="ghost"
+            size="modal"
+            icon={<X className="w-4 h-4" />}
+            onClick={() => setShowDeleteModal(false)}
+          >
+            Cancelar
+          </SnapButton>
+          <SnapButton
+            variant="primary"
+            size="modal"
+            icon={<Trash2 className="w-4 h-4" />}
+            className="bg-error text-white hover:opacity-90"
+            onClick={() => setShowDeleteModal(false)}
+          >
+            Excluir
+          </SnapButton>
+        </SnapModalFooter>
+      </SnapModal>
     </div>
   )
 }
