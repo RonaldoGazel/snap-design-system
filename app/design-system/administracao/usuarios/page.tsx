@@ -521,15 +521,15 @@ export default function UsuariosPage() {
 
             {/* Tabela - com borda arredondada */}
             <div className="rounded-xl border border-border overflow-hidden mb-6">
-              <table className="w-full">
+              <table className="w-full" style={{ borderCollapse: "collapse" }}>
                 <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
-                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Email</th>
-                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Status</th>
-                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nível de Acesso</th>
-                    <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Criado em</th>
-                    <th className="text-right py-3 px-4 text-text-muted font-medium text-sm font-sans">Ações</th>
+                  <tr className="border-b border-border" style={{ height: "48px" }}>
+                    <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Nome</th>
+                    <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Email</th>
+                    <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Status</th>
+                    <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Nível de Acesso</th>
+                    <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Criado em</th>
+                    <th className="text-right px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -537,15 +537,15 @@ export default function UsuariosPage() {
                     <tr 
                       key={user.id} 
                       className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
-                      style={{ height: "48px", maxHeight: "48px" }}
+                      style={{ height: "48px" }}
                       onClick={() => setSelectedUser(user)}
                     >
-                      <td className="px-4 text-foreground text-sm font-sans" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>{user.nome}</td>
-                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>{user.email}</td>
-                      <td className="px-4" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}><StatusBadge status={user.status} /></td>
-                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>{user.nivelAcesso}</td>
-                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>{user.criadoEm}</td>
-                      <td className="px-4" style={{ height: "48px", maxHeight: "48px", verticalAlign: "middle" }}>
+                      <td className="px-4 text-foreground text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{user.nome}</td>
+                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{user.email}</td>
+                      <td className="px-4" style={{ height: "48px", verticalAlign: "middle" }}><StatusBadge status={user.status} /></td>
+                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{user.nivelAcesso}</td>
+                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{user.criadoEm}</td>
+                      <td className="px-4" style={{ height: "48px", verticalAlign: "middle" }}>
                         <div className="flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
                           <button className="p-1 rounded hover:bg-muted transition-colors">
                             <Eye className="w-4 h-4 text-text-muted" />
