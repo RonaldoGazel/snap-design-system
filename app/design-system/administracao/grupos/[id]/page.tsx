@@ -158,7 +158,7 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
         <aside 
           onMouseEnter={handleSidebarOpen}
           onMouseLeave={handleSidebarClose}
-          className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
+          className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#101010]"
           style={{ 
             top: '90px',
             marginLeft: '32px',
@@ -331,7 +331,7 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
               CARD HORIZONTAL DE DADOS - PADRÃO DE DETALHES
               Igual ao card de detalhes do usuário
               ============================================ */}
-          <div className="bg-card dark:bg-[#141414] rounded-xl border border-border mb-6">
+          <div className="bg-card dark:bg-[#101010] rounded-xl border border-border mb-6">
             <div className="flex items-start p-6">
               {/* Nome */}
               <div className="flex-1">

@@ -274,7 +274,7 @@ export default function UsuariosPage() {
           <aside 
             onMouseEnter={handleSidebarOpen}
             onMouseLeave={handleSidebarClose}
-            className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
+            className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#101010]"
             style={{ 
               top: '90px',
               marginLeft: '32px',
@@ -774,7 +774,7 @@ export default function UsuariosPage() {
         <aside 
           onMouseEnter={handleSidebarOpen}
           onMouseLeave={handleSidebarClose}
-          className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
+          className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#101010]"
           style={{ 
             top: '90px',
             marginLeft: '32px',
@@ -933,7 +933,7 @@ export default function UsuariosPage() {
           </div>
 
           {/* Card de Dados - Design com Avatar */}
-          <div className="bg-card dark:bg-[#141414] rounded-xl border border-border mb-6">
+          <div className="bg-card dark:bg-[#101010] rounded-xl border border-border mb-6">
             {/* Linha 1: Avatar + Dados COM separadores verticais */}
             <div className="flex items-center p-6">
               {/* Avatar circular - maior */}
