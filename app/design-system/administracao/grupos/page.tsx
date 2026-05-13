@@ -297,7 +297,7 @@ export default function GruposPage() {
         <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 32}px` }}>
           
           {/* Header: Ícone + Título + Select de Organização + Botão Criar */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-6">
             {/* Lado esquerdo: Ícone + Título + Select */}
             <div className="flex items-center gap-4">
               <UsersRound className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
@@ -345,7 +345,7 @@ export default function GruposPage() {
           </div>
 
           {/* Tabela de Grupos */}
-          <div className="border border-border rounded-lg overflow-hidden">
+          <div className="border border-border rounded-lg overflow-hidden mb-6">
             {/* Header da tabela */}
             <div className="grid grid-cols-3 gap-4 px-6 py-3 border-b border-border bg-muted/30">
               <span className="font-sans text-sm font-medium text-foreground">Nome</span>
