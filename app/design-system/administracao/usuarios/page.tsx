@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { 
   Plus, 
   Eye,
@@ -375,30 +376,30 @@ export default function UsuariosPage() {
                   {administracaoExpanded && (
                     <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
                       {/* Usuários - PÁGINA ATUAL = fundo da cor da vertical */}
-                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
+                      <Link href="/design-system/administracao/usuarios" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
                         <Users className="w-4 h-4 text-white" />
                         <span className="font-sans text-sm text-white">Usuários</span>
-                      </button>
-                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      </Link>
+                      <Link href="/design-system/administracao/grupos" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
                         <UsersRound className="w-4 h-4 text-muted-foreground" />
                         <span className="font-sans text-sm text-muted-foreground">Grupos</span>
-                      </button>
-                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      </Link>
+                      <Link href="/design-system/administracao/papeis" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
                         <Shield className="w-4 h-4 text-muted-foreground" />
                         <span className="font-sans text-sm text-muted-foreground">Papéis</span>
-                      </button>
-                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      </Link>
+                      <Link href="/design-system/administracao/convites" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
                         <Mail className="w-4 h-4 text-muted-foreground" />
                         <span className="font-sans text-sm text-muted-foreground">Convites</span>
-                      </button>
-                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      </Link>
+                      <Link href="/design-system/administracao/auditoria" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
                         <ClipboardList className="w-4 h-4 text-muted-foreground" />
                         <span className="font-sans text-sm text-muted-foreground">Auditoria</span>
-                      </button>
-                      <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      </Link>
+                      <Link href="/design-system/administracao/organizacoes" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
                         <Building className="w-4 h-4 text-muted-foreground" />
                         <span className="font-sans text-sm text-muted-foreground">Organizações</span>
-                      </button>
+                      </Link>
                     </div>
                   )}
                 </div>
