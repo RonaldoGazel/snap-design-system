@@ -21,6 +21,7 @@ import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
 import { SnapModal, SnapModalHeader, SnapModalContent, SnapModalFooter } from "@/components/snap/snap-modal"
 import { SnapPagination } from "@/components/snap/snap-pagination"
+import { SnapSelect } from "@/components/snap/snap-select"
 
 /**
  * TELA: Grupos (Listagem)
@@ -106,6 +107,7 @@ export default function GruposPage() {
   // Estado do modal
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [novoGrupoNome, setNovoGrupoNome] = useState("")
+  const [novoGrupoPai, setNovoGrupoPai] = useState("nenhum")
 
   // Handlers da sidebar
   const handleSidebarOpen = () => {
@@ -385,6 +387,8 @@ export default function GruposPage() {
 
       {/* ============================================
           MODAL: Criar Grupo
+          - Segue padrao de modal de criacao simples
+          - Campos: Nome, Grupo Pai (select)
           ============================================ */}
       <SnapModal isOpen={showCreateModal} onClose={() => setShowCreateModal(false)}>
         <SnapModalHeader 
@@ -393,25 +397,39 @@ export default function GruposPage() {
         />
         <SnapModalContent>
           <div className="space-y-4">
+            {/* Campo Nome */}
             <div>
-              <label className="block font-sans text-sm text-text-secondary mb-2">
-                Nome do grupo
+              <label className="block font-sans text-sm text-text-muted mb-2">
+                Nome
               </label>
               <input 
                 type="text"
                 value={novoGrupoNome}
                 onChange={(e) => setNovoGrupoNome(e.target.value)}
-                placeholder="Ex: Equipe de Análise"
+                placeholder=""
                 className="w-full px-4 py-3 rounded-lg border border-border bg-muted dark:bg-[#000000] font-sans text-sm text-foreground placeholder:text-text-muted focus:outline-none focus:border-foreground/50 transition-colors"
               />
             </div>
+            
+            {/* Campo Grupo Pai */}
+            <SnapSelect
+              label="Grupo Pai"
+              value={novoGrupoPai}
+              onChange={(value) => setNovoGrupoPai(value)}
+              options={[
+                { value: "nenhum", label: "Nenhum (grupo raiz)" },
+                { value: "diretoria", label: "Diretoria Geral" },
+                { value: "analistas", label: "Analistas" },
+                { value: "operadores", label: "Operadores" },
+                { value: "supervisores", label: "Supervisores" }
+              ]}
+            />
           </div>
         </SnapModalContent>
         <SnapModalFooter>
           <SnapButton
             variant="ghost"
             size="modal"
-            icon={<X className="w-4 h-4" />}
             onClick={() => setShowCreateModal(false)}
           >
             Cancelar
@@ -419,7 +437,6 @@ export default function GruposPage() {
           <SnapButton
             variant="primary"
             size="modal"
-            icon={<Check className="w-4 h-4" />}
             className="!bg-[#333540] hover:!bg-[#252730]"
             onClick={() => setShowCreateModal(false)}
           >
