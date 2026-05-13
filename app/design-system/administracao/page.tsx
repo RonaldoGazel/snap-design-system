@@ -45,7 +45,7 @@ const telas: Tela[] = [
     nome: "Papeis",
     descricao: "Definicao de papeis e permissoes",
     icon: Shield,
-    status: "pendente",
+    status: "pronto",
     href: "/design-system/administracao/papeis",
   },
   {

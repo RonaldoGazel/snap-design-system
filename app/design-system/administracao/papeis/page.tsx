@@ -18,7 +18,9 @@ import {
   Users,
   X,
   Check,
-  Heart
+  Heart,
+  Link2 as LinkIcon,
+  Share2 as ShareIcon
 } from "lucide-react"
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
@@ -161,12 +163,8 @@ export default function PapeisPage() {
           - Main: marginLeft 128px (32 + 64 + 32)
           ============================================ */}
       <div className="flex flex-1">
-        {/* ============================================
-            SIDEBAR: Navegação lateral
-            - Position absolute para não empurrar conteúdo
-            - Expande ao hover, colapsa ao sair
-            ============================================ */}
-        <nav
+        {/* Sidebar - Posição fixa, hover para expandir */}
+        <aside 
           onMouseEnter={handleSidebarOpen}
           onMouseLeave={handleSidebarClose}
           className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#101010]"
@@ -179,164 +177,139 @@ export default function PapeisPage() {
             boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.25)' : 'none'
           }}
         >
-          {/* Itens fixos do topo */}
-          <Link 
-            href="/design-system/inteligencia"
-            className="flex items-center gap-4 text-text-secondary hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-            style={{ paddingLeft: '20px', height: '48px' }}
-          >
-            <UsersRound className="w-6 h-6 shrink-0" />
-            {sidebarContentVisible && <span className="font-sans text-sm">Grafo</span>}
-          </Link>
-          
-          <Link
-            href="/design-system/inteligencia"
-            className="flex items-center gap-4 text-text-secondary hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-            style={{ paddingLeft: '20px', height: '48px' }}
-          >
-            <Heart className="w-6 h-6 shrink-0" />
-            {sidebarContentVisible && <span className="font-sans text-sm">Favoritos</span>}
-          </Link>
-
-          <Link
-            href="/design-system/inteligencia"
-            className="flex items-center gap-4 text-text-secondary hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-            style={{ paddingLeft: '20px', height: '48px' }}
-          >
-            <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-            {sidebarContentVisible && <span className="font-sans text-sm">Busca</span>}
-          </Link>
-
-          {/* Área de seções expansíveis - com scroll */}
-          <div className="flex-1 overflow-y-auto mt-4">
-            {/* Seção Inteligência */}
-            <div>
-              <button
-                onClick={() => setInteligenciaExpanded(!inteligenciaExpanded)}
-                className="flex items-center justify-between w-full text-text-secondary hover:text-foreground hover:bg-muted transition-colors"
-                style={{ paddingLeft: '20px', paddingRight: '16px', height: '48px' }}
-              >
-                <div className="flex items-center gap-4">
-                  <Shield className="w-6 h-6 shrink-0" style={{ color: '#72284B' }} />
-                  {sidebarContentVisible && (
-                    <span className="font-sans text-sm font-medium" style={{ color: '#72284B' }}>
-                      Inteligência
-                    </span>
-                  )}
-                </div>
-                {sidebarContentVisible && (
-                  inteligenciaExpanded ? 
-                    <ChevronUp className="w-4 h-4" /> : 
-                    <ChevronDown className="w-4 h-4" />
-                )}
+          {/* Sidebar Fechada */}
+          {!sidebarOpen && (
+            <>
+              <nav className="flex-1 flex flex-col items-center gap-2">
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+                  <Shield className="w-5 h-5" />
+                </button>
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: VERTICAL_COLOR }}>
+                  <Lock className="w-5 h-5" />
+                </button>
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+                  <FileText className="w-5 h-5" />
+                </button>
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+                  <LinkIcon className="w-5 h-5" />
+                </button>
+                <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+                  <ShareIcon className="w-5 h-5" />
+                </button>
+              </nav>
+              <div className="w-8 mx-auto my-2 border-t border-border" />
+              <button className="p-3 rounded-lg hover:opacity-80 transition-opacity mx-auto text-muted-foreground">
+                <Settings className="w-5 h-5" />
               </button>
-              
-              {inteligenciaExpanded && sidebarContentVisible && (
-                <div className="ml-[52px] border-l border-border">
-                  <Link 
-                    href="/design-system/inteligencia"
-                    className="flex items-center gap-3 py-2 pl-4 text-sm font-sans text-text-secondary hover:text-foreground transition-colors"
-                  >
-                    <FileText className="w-4 h-4" />
-                    Relatórios
-                  </Link>
-                  <Link 
-                    href="/design-system/inteligencia"
-                    className="flex items-center gap-3 py-2 pl-4 text-sm font-sans text-text-secondary hover:text-foreground transition-colors"
-                  >
-                    <ClipboardList className="w-4 h-4" />
-                    Análises
-                  </Link>
-                </div>
-              )}
-            </div>
+            </>
+          )}
 
-            {/* Seção Administração */}
-            <div>
-              <button
-                onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
-                className="flex items-center justify-between w-full text-text-secondary hover:text-foreground hover:bg-muted transition-colors"
-                style={{ paddingLeft: '20px', paddingRight: '16px', height: '48px' }}
-              >
-                <div className="flex items-center gap-4">
-                  <Lock className="w-6 h-6 shrink-0" style={{ color: VERTICAL_COLOR }} />
-                  {sidebarContentVisible && (
-                    <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>
-                      Administração
-                    </span>
+          {/* Sidebar Aberta */}
+          {sidebarOpen && sidebarContentVisible && (
+            <div className="flex flex-col h-full animate-in fade-in duration-150">
+              {/* Vertical: Inteligência */}
+              <div className="mb-2">
+                <button 
+                  onClick={() => setInteligenciaExpanded(!inteligenciaExpanded)}
+                  className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+                  style={{ paddingLeft: '10px', paddingRight: '16px' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 flex justify-center">
+                      <Shield className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                    <span className="font-sans text-sm font-medium text-muted-foreground">Inteligência</span>
+                  </div>
+                  {inteligenciaExpanded ? (
+                    <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
                   )}
-                </div>
-                {sidebarContentVisible && (
-                  administracaoExpanded ? 
-                    <ChevronUp className="w-4 h-4" /> : 
-                    <ChevronDown className="w-4 h-4" />
+                </button>
+                
+                {inteligenciaExpanded && (
+                  <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <UsersRound className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Pessoas</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <FileText className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Documentos</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <Settings className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Fluxos de Trabalho</span>
+                    </button>
+                  </div>
                 )}
-              </button>
-              
-              {administracaoExpanded && sidebarContentVisible && (
-                <div className="ml-[52px] border-l border-border">
-                  <Link 
-                    href="/design-system/administracao/usuarios"
-                    className="flex items-center gap-3 py-2 pl-4 text-sm font-sans text-text-secondary hover:text-foreground transition-colors"
-                  >
-                    <Users className="w-4 h-4" />
-                    Usuários
-                  </Link>
-                  <Link 
-                    href="/design-system/administracao/grupos"
-                    className="flex items-center gap-3 py-2 pl-4 text-sm font-sans text-text-secondary hover:text-foreground transition-colors"
-                  >
-                    <UsersRound className="w-4 h-4" />
-                    Grupos
-                  </Link>
-                  <Link 
-                    href="/design-system/administracao/papeis"
-                    className="flex items-center gap-3 py-2 pl-4 text-sm font-sans text-foreground font-medium transition-colors"
-                  >
-                    <Shield className="w-4 h-4" />
-                    Papéis
-                  </Link>
-                  <Link 
-                    href="/design-system/administracao"
-                    className="flex items-center gap-3 py-2 pl-4 text-sm font-sans text-text-secondary hover:text-foreground transition-colors"
-                  >
-                    <Mail className="w-4 h-4" />
-                    Convites
-                  </Link>
-                  <Link 
-                    href="/design-system/administracao"
-                    className="flex items-center gap-3 py-2 pl-4 text-sm font-sans text-text-secondary hover:text-foreground transition-colors"
-                  >
-                    <ClipboardList className="w-4 h-4" />
-                    Auditoria
-                  </Link>
-                  <Link 
-                    href="/design-system/administracao"
-                    className="flex items-center gap-3 py-2 pl-4 text-sm font-sans text-text-secondary hover:text-foreground transition-colors"
-                  >
-                    <Building className="w-4 h-4" />
-                    Organizações
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
+              </div>
 
-          {/* Item fixo do rodapé */}
-          <div className="mt-auto pt-4 border-t border-border">
-            <Link
-              href="/design-system"
-              className="flex items-center gap-4 text-text-secondary hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-              style={{ paddingLeft: '20px', height: '48px' }}
-            >
-              <Settings className="w-6 h-6 shrink-0" />
-              {sidebarContentVisible && <span className="font-sans text-sm">Configurações</span>}
-            </Link>
-          </div>
-        </nav>
+              {/* Vertical: Administração - ATIVA */}
+              <div className="mb-2">
+                <button 
+                  onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
+                  className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+                  style={{ paddingLeft: '10px', paddingRight: '16px' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 flex justify-center">
+                      <Lock className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />
+                    </div>
+                    <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
+                  </div>
+                  {administracaoExpanded ? (
+                    <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                  )}
+                </button>
+                
+                {administracaoExpanded && (
+                  <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                    <Link href="/design-system/administracao/usuarios" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <Users className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Usuários</span>
+                    </Link>
+                    <Link href="/design-system/administracao/grupos" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <UsersRound className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Grupos</span>
+                    </Link>
+                    {/* Papéis - PÁGINA ATUAL = fundo da cor da vertical */}
+                    <Link href="/design-system/administracao/papeis" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
+                      <Heart className="w-4 h-4 text-white" />
+                      <span className="font-sans text-sm text-white">Papéis</span>
+                    </Link>
+                    <Link href="/design-system/administracao/convites" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <Mail className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Convites</span>
+                    </Link>
+                    <Link href="/design-system/administracao/auditoria" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <ClipboardList className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Auditoria</span>
+                    </Link>
+                    <Link href="/design-system/administracao/organizacoes" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <Building className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Organizações</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex-1" />
+              <div className="mx-3 my-2 border-t border-border" />
+              <button 
+                className="flex items-center gap-3 py-3 rounded-lg hover:bg-muted transition-colors"
+                style={{ paddingLeft: '10px' }}
+              >
+                <div className="w-11 flex justify-center">
+                  <Settings className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <span className="font-sans text-sm text-muted-foreground">Configurações</span>
+              </button>
+            </div>
+          )}
+        </aside>
 
         {/* ============================================
             CONTEÚDO PRINCIPAL
