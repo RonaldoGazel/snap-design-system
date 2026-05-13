@@ -2402,6 +2402,60 @@ notificationCount={35}`}
         </Section>
 
         {/* ============================================
+            BOTÃO VOLTAR (SnapBackButton)
+            ============================================ */}
+        <Section title="BOTÃO VOLTAR (SnapBackButton)">
+          <div className="space-y-6">
+            {/* Regras */}
+            <div className="p-4 rounded-xl bg-error/10 border border-error">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-error mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Medidas OBRIGATÓRIAS - Não alterar!</p>
+                  <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
+                    <li><strong>Tamanho:</strong> <code className="bg-card px-1 rounded">w-8 h-8</code> (32x32px)</li>
+                    <li><strong>Formato:</strong> <code className="bg-card px-1 rounded">rounded-full</code></li>
+                    <li><strong>Borda:</strong> <code className="bg-card px-1 rounded">border border-border</code> (1px, cor do tema)</li>
+                    <li><strong>Ícone:</strong> <code className="bg-card px-1 rounded">ChevronLeft w-5 h-5 text-text-secondary</code></li>
+                    <li><strong>Hover:</strong> <code className="bg-card px-1 rounded">bg-muted</code></li>
+                    <li><strong>Gap até título:</strong> <code className="bg-card px-1 rounded">gap-3</code> (12px)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Exemplo Visual */}
+            <div className="p-6 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide mb-4">Exemplo: Título com botão voltar</p>
+              <div className="flex items-center gap-3">
+                <button className="w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors">
+                  <ChevronLeft className="w-5 h-5 text-text-secondary" />
+                </button>
+                <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
+              </div>
+            </div>
+
+            {/* Uso */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Uso do componente</p>
+              <pre className="text-xs font-mono text-text-secondary bg-muted p-3 rounded-lg overflow-x-auto">
+{`import { SnapBackButton } from "@/components/snap/snap-back-button"
+
+<div className="flex items-center gap-3 mb-6">
+  <SnapBackButton 
+    onBack={() => router.push('/path/to/list')}
+    title="Voltar para lista"
+  />
+  <h1 className="font-title text-2xl text-foreground">
+    DETALHE DO GRUPO
+  </h1>
+</div>`}
+              </pre>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
             TABELAS (DataTable)
             ============================================ */}
         <Section title="TABELAS (DATATABLE)">

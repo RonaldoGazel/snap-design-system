@@ -27,6 +27,7 @@ import {
 import { SnapHeader } from "@/components/snap/snap-header"
 import { SnapButton } from "@/components/snap/snap-button"
 import { SnapSelect } from "@/components/snap/snap-select"
+import { SnapBackButton } from "@/components/snap/snap-back-button"
 import { 
   SnapModal, 
   SnapModalHeader, 
@@ -309,14 +310,12 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
             ============================================ */}
         <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 32}px` }}>
           
-          {/* Título com seta circular de voltar - PADRÃO DE DETALHE */}
-          <div className="flex items-center gap-4 mb-6">
-            <button 
-              onClick={() => router.push('/design-system/administracao/grupos')}
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
-            >
-              <ChevronLeft className="w-5 h-5 text-foreground" />
-            </button>
+          {/* Título com seta circular de voltar - usando SnapBackButton padronizado */}
+          <div className="flex items-center gap-3 mb-6">
+            <SnapBackButton 
+              onBack={() => router.push('/design-system/administracao/grupos')}
+              title="Voltar para lista de grupos"
+            />
             {/* REGRA: font-title SÓ para textos >= 18px (text-2xl = 24px, OK!) */}
             <h1 className="font-title text-2xl text-foreground">DETALHE DO GRUPO</h1>
           </div>
