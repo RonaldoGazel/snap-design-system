@@ -4,7 +4,6 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { 
-  ArrowLeft,
   Plus, 
   Shield,
   ChevronDown,
@@ -19,6 +18,7 @@ import {
   Users,
   X,
   Check,
+  ChevronLeft,
   Trash2,
   Search
 } from "lucide-react"
@@ -30,10 +30,11 @@ import { SnapSelect } from "@/components/snap/snap-select"
  * TELA: Detalhe do Grupo
  * Vertical: Administração (#333540)
  * 
- * Analogia: Detalhe de Usuário
- * - Seta de voltar + Título
- * - Card editável com campos
- * - Seção de Membros com tabela
+ * ESTRUTURA COPIADA EXATAMENTE DE grupos/page.tsx (PADRÃO OURO)
+ * - SnapHeader com breadcrumb incluindo ID do grupo
+ * - Sidebar IDÊNTICA (sem font-title em textos < 18px!)
+ * - Seta circular de voltar (padrão de tela de detalhes)
+ * - Tabela de membros com altura 48px por linha
  */
 
 const VERTICAL_COLOR = "#333540" // Deep Gray Blue - Administração
@@ -63,21 +64,9 @@ function ShareIcon({ className }: { className?: string }) {
 
 // Dados mockados para membros do grupo
 const mockMembros = [
-  { 
-    id: "1",
-    nome: "admin", 
-    email: "admin@snap.local"
-  },
-  { 
-    id: "2",
-    nome: "João Silva", 
-    email: "joao.silva@snap.local"
-  },
-  { 
-    id: "3",
-    nome: "Maria Santos", 
-    email: "maria.santos@snap.local"
-  },
+  { id: "1", nome: "admin", email: "admin@snap.local" },
+  { id: "2", nome: "João Silva", email: "joao.silva@snap.local" },
+  { id: "3", nome: "Maria Santos", email: "maria.santos@snap.local" },
 ]
 
 // Grupos disponíveis para seleção de Grupo Pai
@@ -92,7 +81,7 @@ const gruposDisponiveis = [
 export default function GrupoDetalhePage({ params }: { params: { id: string } }) {
   const router = useRouter()
   
-  // Estado da sidebar
+  // Estado da sidebar - IDÊNTICO a grupos/page.tsx
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarContentVisible, setSidebarContentVisible] = useState(false)
   const [inteligenciaExpanded, setInteligenciaExpanded] = useState(false)
@@ -101,17 +90,15 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
   // Estado do formulário
   const [nomeGrupo, setNomeGrupo] = useState("Diretoria Geral")
   const [grupoPai, setGrupoPai] = useState("nenhum")
-  
-  // Estado da busca de membros
   const [buscaMembro, setBuscaMembro] = useState("")
   
-  // Filtrar membros pela busca
-  const membrosFiltrados = mockMembros.filter(membro => 
-    membro.nome.toLowerCase().includes(buscaMembro.toLowerCase()) ||
-    membro.email.toLowerCase().includes(buscaMembro.toLowerCase())
+  // Filtrar membros
+  const membrosFiltrados = mockMembros.filter(m => 
+    m.nome.toLowerCase().includes(buscaMembro.toLowerCase()) ||
+    m.email.toLowerCase().includes(buscaMembro.toLowerCase())
   )
 
-  // Handlers da sidebar
+  // Handlers da sidebar - IDÊNTICO a grupos/page.tsx
   const handleSidebarOpen = () => {
     setSidebarOpen(true)
     setTimeout(() => setSidebarContentVisible(true), 100)
@@ -125,8 +112,7 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* ============================================
-          HEADER: SnapHeader padrão
-          - Breadcrumb com ID do grupo
+          HEADER: SnapHeader padrão - NÃO MEXER
           ============================================ */}
       <SnapHeader
         vertical="administracao"
@@ -142,13 +128,17 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
 
       {/* ============================================
           LAYOUT: SIDEBAR + CONTEÚDO
+          Medidas EXATAS copiadas de grupos/page.tsx
           ============================================ */}
       <div className="flex flex-1">
-        {/* Sidebar - Posição fixa, hover para expandir */}
+        {/* ============================================
+            SIDEBAR - COPIADA EXATAMENTE DE grupos/page.tsx
+            NÃO USAR font-title em textos < 18px!
+            ============================================ */}
         <aside 
           onMouseEnter={handleSidebarOpen}
           onMouseLeave={handleSidebarClose}
-          className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card"
+          className="flex flex-col py-4 transition-all duration-300 absolute z-50 border border-border rounded-xl bg-card dark:bg-[#0C0C0C]"
           style={{ 
             top: '90px',
             marginLeft: '32px',
@@ -185,7 +175,7 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
             </>
           )}
 
-          {/* Sidebar Aberta */}
+          {/* Sidebar Aberta - IDÊNTICA a grupos/page.tsx */}
           {sidebarOpen && sidebarContentVisible && (
             <div className="flex flex-col h-full animate-in fade-in duration-150">
               {/* Vertical: Inteligência */}
@@ -196,13 +186,11 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
                   style={{ paddingLeft: '10px', paddingRight: '16px' }}
                 >
                   <div className="flex items-center gap-3">
-                    <div 
-                      className="w-10 h-10 rounded-lg flex items-center justify-center"
-                      style={{ backgroundColor: '#72284B' }}
-                    >
-                      <Shield className="w-5 h-5 text-white" />
+                    <div className="w-11 flex justify-center">
+                      <Shield className="w-5 h-5 text-muted-foreground" />
                     </div>
-                    <span className="font-title text-sm text-foreground uppercase tracking-wide">Inteligência</span>
+                    {/* REGRA: font-sans para textos < 18px */}
+                    <span className="font-sans text-sm font-medium text-muted-foreground">Inteligência</span>
                   </div>
                   {inteligenciaExpanded ? (
                     <ChevronUp className="w-4 h-4 text-muted-foreground" />
@@ -210,9 +198,26 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
                     <ChevronDown className="w-4 h-4 text-muted-foreground" />
                   )}
                 </button>
+                
+                {inteligenciaExpanded && (
+                  <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <UsersRound className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Pessoas</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <FileText className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Documentos</span>
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                      <Settings className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-sans text-sm text-muted-foreground">Fluxos de Trabalho</span>
+                    </button>
+                  </div>
+                )}
               </div>
 
-              {/* Vertical: Administração */}
+              {/* Vertical: Administração - ATIVA */}
               <div className="mb-2">
                 <button 
                   onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
@@ -220,13 +225,11 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
                   style={{ paddingLeft: '10px', paddingRight: '16px' }}
                 >
                   <div className="flex items-center gap-3">
-                    <div 
-                      className="w-10 h-10 rounded-lg flex items-center justify-center"
-                      style={{ backgroundColor: VERTICAL_COLOR }}
-                    >
-                      <Lock className="w-5 h-5 text-white" />
+                    <div className="w-11 flex justify-center">
+                      <Lock className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />
                     </div>
-                    <span className="font-title text-sm text-foreground uppercase tracking-wide">Administração</span>
+                    {/* REGRA: font-sans para textos < 18px */}
+                    <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
                   </div>
                   {administracaoExpanded ? (
                     <ChevronUp className="w-4 h-4 text-muted-foreground" />
@@ -234,7 +237,7 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
                     <ChevronDown className="w-4 h-4 text-muted-foreground" />
                   )}
                 </button>
-
+                
                 {administracaoExpanded && (
                   <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
                     <Link href="/design-system/administracao/usuarios" className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
@@ -266,62 +269,63 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
                 )}
               </div>
 
-              {/* Separador e Settings */}
-              <div className="mt-auto">
-                <div className="mx-4 my-2 border-t border-border" />
-                <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-muted transition-colors">
+              <div className="flex-1" />
+              <div className="mx-3 my-2 border-t border-border" />
+              <button 
+                className="flex items-center gap-3 py-3 rounded-lg hover:bg-muted transition-colors"
+                style={{ paddingLeft: '10px' }}
+              >
+                <div className="w-11 flex justify-center">
                   <Settings className="w-5 h-5 text-muted-foreground" />
-                  <span className="font-sans text-sm text-muted-foreground">Configurações</span>
-                </button>
-              </div>
+                </div>
+                <span className="font-sans text-sm text-muted-foreground">Configurações</span>
+              </button>
             </div>
           )}
         </aside>
 
-        {/* Conteúdo Principal */}
+        {/* ============================================
+            ÁREA DE CONTEÚDO - MIOLO
+            marginLeft: 128px (32 + 64 + 32)
+            ============================================ */}
         <main className="flex-1 py-8 pr-8" style={{ marginLeft: `${32 + 64 + 32}px` }}>
           
-          {/* ============================================
-              TÍTULO COM SETA DE VOLTAR
-              ============================================ */}
-          <div className="flex items-center gap-3 mb-6">
+          {/* Título com seta circular de voltar - PADRÃO DE DETALHE */}
+          <div className="flex items-center gap-4 mb-6">
             <button 
               onClick={() => router.push('/design-system/administracao/grupos')}
-              className="p-2 rounded-lg hover:bg-muted transition-colors"
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-foreground" />
+              <ChevronLeft className="w-5 h-5 text-foreground" />
             </button>
-            <h1 className="font-title text-2xl text-foreground">Detalhe do Grupo</h1>
+            {/* REGRA: font-title SÓ para textos >= 18px (text-2xl = 24px, OK!) */}
+            <h1 className="font-title text-2xl text-foreground">DETALHE DO GRUPO</h1>
           </div>
 
-          {/* ============================================
-              ALERTA INFORMATIVO
-              ============================================ */}
-          <div className="mb-6 p-4 rounded-xl border border-[#287266] bg-[#287266]/10">
-            <p className="text-sm font-sans text-[#4ECDC4]">
+          {/* Alerta informativo - cor Infraestrutura para destaque */}
+          <div className="mb-6 p-4 rounded-xl border border-[#287266]/50 bg-[#287266]/10">
+            <p className="font-sans text-sm text-[#4ECDC4]">
               Membros deste grupo compartilham acesso ao mesmo compartimento de dados.
             </p>
           </div>
 
-          {/* ============================================
-              CARD DE EDIÇÃO DO GRUPO
-              ============================================ */}
-          <div className="mb-8 p-6 rounded-xl border border-border bg-card max-w-lg">
-            <div className="space-y-4">
-              {/* Campo Nome */}
-              <div>
-                <label className="block font-sans text-sm text-text-muted mb-2">
-                  Nome
-                </label>
-                <input 
-                  type="text"
-                  value={nomeGrupo}
-                  onChange={(e) => setNomeGrupo(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-muted font-sans text-sm text-foreground placeholder:text-text-muted focus:outline-none focus:border-foreground/50 transition-colors"
-                />
-              </div>
-              
-              {/* Campo Grupo Pai */}
+          {/* Card de dados do grupo */}
+          <div className="rounded-xl border border-border bg-card p-6 mb-8 max-w-md">
+            {/* Campo Nome */}
+            <div className="mb-4">
+              <label className="block font-sans text-sm text-text-muted mb-2">
+                Nome
+              </label>
+              <input 
+                type="text"
+                value={nomeGrupo}
+                onChange={(e) => setNomeGrupo(e.target.value)}
+                className="w-full px-4 py-3 rounded-lg border border-border bg-muted font-sans text-sm text-foreground focus:outline-none focus:border-foreground/50 transition-colors"
+              />
+            </div>
+            
+            {/* Campo Grupo Pai */}
+            <div className="mb-6">
               <SnapSelect
                 label="Grupo Pai"
                 value={grupoPai}
@@ -329,12 +333,12 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
                 options={gruposDisponiveis}
               />
             </div>
-            
-            {/* Botões */}
-            <div className="flex items-center gap-4 mt-6">
+
+            {/* Botões - Salvar primeiro (primário), Cancelar segundo (ghost) */}
+            <div className="flex items-center gap-4">
               <SnapButton
                 variant="primary"
-                size="modal"
+                size="default"
                 icon={<Check className="w-4 h-4" />}
                 className="!bg-[#333540] hover:!bg-[#252730]"
               >
@@ -342,7 +346,7 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
               </SnapButton>
               <SnapButton
                 variant="ghost"
-                size="modal"
+                size="default"
                 icon={<X className="w-4 h-4" />}
                 onClick={() => router.push('/design-system/administracao/grupos')}
               >
@@ -355,23 +359,24 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
               SEÇÃO MEMBROS
               ============================================ */}
           <div>
-            {/* Título da seção */}
-            <h2 className="font-title text-xl text-foreground mb-4">Membros</h2>
+            {/* Título >= 18px pode usar font-title */}
+            <h2 className="font-title text-xl text-foreground mb-4">MEMBROS</h2>
             
-            {/* Busca e botão Adicionar */}
-            <div className="flex items-center gap-4 mb-6">
-              <div className="relative flex-1 max-w-xs">
+            {/* Busca + Botão Adicionar */}
+            <div className="flex items-center gap-4 mb-4">
+              <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
                 <input 
                   type="text"
                   placeholder="Buscar usuário..."
                   value={buscaMembro}
                   onChange={(e) => setBuscaMembro(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-border bg-muted font-sans text-sm text-foreground placeholder:text-text-muted focus:outline-none focus:border-foreground/50 transition-colors"
+                  className="w-[240px] pl-10 pr-4 py-2 rounded-lg border border-border bg-card font-sans text-sm text-foreground placeholder:text-text-muted focus:outline-none focus:border-foreground/50 transition-colors"
                 />
               </div>
               <SnapButton
-                variant="outline"
+                variant="ghost"
+                size="default"
                 icon={<Plus className="w-4 h-4" />}
               >
                 Adicionar Membro
@@ -379,35 +384,20 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
             </div>
 
             {/* ============================================
-                TABELA DE MEMBROS
-                Segue REGRAS DOCUMENTADAS:
-                - Container: rounded-xl border border-border overflow-hidden
+                TABELA DE MEMBROS - REGRAS DOCUMENTADAS:
+                - Container: rounded-xl border overflow-hidden
                 - Table: borderCollapse: collapse
                 - Linhas: height: 48px
                 - Células: height: 48px, verticalAlign: middle
+                - Fontes: font-sans text-sm (NUNCA font-title!)
                 ============================================ */}
             <div className="rounded-xl border border-border overflow-hidden">
               <table className="w-full" style={{ borderCollapse: "collapse" }}>
                 <thead>
                   <tr className="border-b border-border" style={{ height: "48px" }}>
-                    <th 
-                      className="text-left px-4 text-text-muted font-medium text-sm font-sans uppercase" 
-                      style={{ height: "48px", verticalAlign: "middle" }}
-                    >
-                      Nome
-                    </th>
-                    <th 
-                      className="text-left px-4 text-text-muted font-medium text-sm font-sans uppercase" 
-                      style={{ height: "48px", verticalAlign: "middle" }}
-                    >
-                      Email
-                    </th>
-                    <th 
-                      className="text-left px-4 text-text-muted font-medium text-sm font-sans uppercase" 
-                      style={{ height: "48px", verticalAlign: "middle" }}
-                    >
-                      Ações
-                    </th>
+                    <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>NOME</th>
+                    <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>EMAIL</th>
+                    <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>AÇÕES</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -417,22 +407,9 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
                       className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors"
                       style={{ height: "48px" }}
                     >
-                      <td 
-                        className="px-4 text-foreground text-sm font-sans" 
-                        style={{ height: "48px", verticalAlign: "middle" }}
-                      >
-                        {membro.nome}
-                      </td>
-                      <td 
-                        className="px-4 text-text-secondary text-sm font-sans" 
-                        style={{ height: "48px", verticalAlign: "middle" }}
-                      >
-                        {membro.email}
-                      </td>
-                      <td 
-                        className="px-4" 
-                        style={{ height: "48px", verticalAlign: "middle" }}
-                      >
+                      <td className="px-4 text-foreground text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{membro.nome}</td>
+                      <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{membro.email}</td>
+                      <td className="px-4" style={{ height: "48px", verticalAlign: "middle" }}>
                         <SnapButton
                           variant="primary"
                           size="sm"
