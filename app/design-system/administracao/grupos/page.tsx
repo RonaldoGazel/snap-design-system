@@ -347,29 +347,29 @@ export default function GruposPage() {
             </SnapButton>
           </div>
 
-          {/* Tabela de Grupos */}
-          <div className="border border-border rounded-lg overflow-hidden mb-6">
-            {/* Header da tabela */}
-            <div className="grid grid-cols-3 gap-4 px-6 py-3 border-b border-border bg-muted/30">
-              <span className="font-sans text-sm font-medium text-foreground">Nome</span>
-              <span className="font-sans text-sm font-medium text-foreground">Criado em</span>
-              <span className="font-sans text-sm font-medium text-foreground">Atualizado em</span>
-            </div>
-            
-            {/* Linhas da tabela */}
-            {mockGrupos.map((grupo, index) => (
-              <div 
-                key={grupo.id} 
-                className={`grid grid-cols-3 gap-4 px-6 py-4 hover:bg-muted/50 transition-colors cursor-pointer ${
-                  index !== mockGrupos.length - 1 ? 'border-b border-border' : ''
-                }`}
-              >
-                <span className="font-sans text-sm text-foreground">{grupo.nome}</span>
-                <span className="font-sans text-sm text-text-secondary">{grupo.criadoEm}</span>
-                <span className="font-sans text-sm text-text-secondary">{grupo.atualizadoEm}</span>
-              </div>
-            ))}
-          </div>
+          {/* Tabela de Grupos - usando <table> como padrao (igual Usuarios) */}
+          <table className="w-full mb-6">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
+                <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Criado em</th>
+                <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Atualizado em</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mockGrupos.map((grupo) => (
+                <tr 
+                  key={grupo.id} 
+                  className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
+                  style={{ height: "48px" }}
+                >
+                  <td className="py-3 px-4 text-foreground text-sm font-sans">{grupo.nome}</td>
+                  <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.criadoEm}</td>
+                  <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.atualizadoEm}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
           {/* Paginação - usando componente SnapPagination */}
           <SnapPagination
