@@ -299,12 +299,15 @@ export default function GruposPage() {
           {/* Header: Ícone + Título + Select de Organização + Botão Criar */}
           <div className="flex items-center justify-between mb-6">
             {/* Lado esquerdo: Ícone + Título + Select */}
-            <div className="flex items-center gap-4">
-              <UsersRound className="w-6 h-6" style={{ color: VERTICAL_COLOR }} />
-              <h1 className="font-title text-2xl text-foreground">GRUPOS</h1>
+            {/* PADRAO: gap-6 entre titulo e selects, gap-3 entre icone e texto, icone w-8 h-8 */}
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3">
+                <UsersRound className="w-8 h-8" style={{ color: VERTICAL_COLOR }} />
+                <h1 className="font-title text-2xl text-foreground">GRUPOS</h1>
+              </div>
               
               {/* Seletor de Organização - ao lado do título */}
-              <div className="relative ml-4">
+              <div className="relative">
                 <button
                   onClick={() => setOrgSelectOpen(!orgSelectOpen)}
                   className="flex items-center justify-between px-4 py-2 rounded-lg border border-border bg-card hover:bg-card-hover transition-colors min-w-[220px]"

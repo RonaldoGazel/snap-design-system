@@ -96,3 +96,6 @@ export {
 
 // Pagination
 export { SnapPagination } from "./snap-pagination"
+
+// Page Title
+export { SnapPageTitle } from "./snap-page-title"
