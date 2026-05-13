@@ -390,7 +390,7 @@ export default function GruposPage() {
           - Segue padrao de modal de criacao simples
           - Campos: Nome, Grupo Pai (select)
           ============================================ */}
-      <SnapModal isOpen={showCreateModal} onClose={() => setShowCreateModal(false)}>
+      <SnapModal open={showCreateModal} onClose={() => setShowCreateModal(false)}>
         <SnapModalHeader 
           title="Criar Grupo" 
           onClose={() => setShowCreateModal(false)} 
