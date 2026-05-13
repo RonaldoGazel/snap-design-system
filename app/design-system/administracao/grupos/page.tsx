@@ -347,29 +347,31 @@ export default function GruposPage() {
             </SnapButton>
           </div>
 
-          {/* Tabela de Grupos - usando <table> como padrao (igual Usuarios) */}
-          <table className="w-full mb-6">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
-                <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Criado em</th>
-                <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Atualizado em</th>
-              </tr>
-            </thead>
-            <tbody>
-              {mockGrupos.map((grupo) => (
-                <tr 
-                  key={grupo.id} 
-                  className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
-                  style={{ height: "48px" }}
-                >
-                  <td className="py-3 px-4 text-foreground text-sm font-sans">{grupo.nome}</td>
-                  <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.criadoEm}</td>
-                  <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.atualizadoEm}</td>
+          {/* Tabela de Grupos - seguindo Design System (igual Usuarios) */}
+          <div className="rounded-xl border border-border overflow-hidden mb-6">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
+                  <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Criado em</th>
+                  <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Atualizado em</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {mockGrupos.map((grupo) => (
+                  <tr 
+                    key={grupo.id} 
+                    className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
+                    style={{ height: "48px" }}
+                  >
+                    <td className="py-3 px-4 text-foreground text-sm font-sans">{grupo.nome}</td>
+                    <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.criadoEm}</td>
+                    <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.atualizadoEm}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           {/* Paginação - usando componente SnapPagination */}
           <SnapPagination
