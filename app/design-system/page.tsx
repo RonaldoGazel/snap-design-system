@@ -1302,7 +1302,7 @@ export default function DesignSystemPage() {
               <li>• Texto à esquerda, setinha (chevron) alinhada à direita do container</li>
               <li>• Largura mínima: definir <code className="text-[#72284b]">min-w-[Xpx]</code> para evitar select muito estreito</li>
               <li>• Border-radius: <code className="text-[#72284b]">8px (rounded-lg)</code></li>
-              <li>• Chevron: rota��ão de 180° quando aberto (<code className="text-[#72284b]">rotate-180</code>)</li>
+              <li>• Chevron: rota����ão de 180° quando aberto (<code className="text-[#72284b]">rotate-180</code>)</li>
             </ul>
           </div>
 
@@ -1588,9 +1588,10 @@ notificationCount={35}`}
                   <p className="text-foreground font-medium font-sans mb-2">Tabelas - Altura MÁXIMA 48px (inegociável)</p>
                   <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
                     <li>Container: <code className="bg-card px-1 rounded">rounded-xl border border-border overflow-hidden mb-6</code></li>
-                    <li>Linha: <code className="bg-card px-1 rounded">{'style={{ height: "48px" }}'}</code> - NUNCA ultrapassar</li>
-                    <li>Celulas: <code className="bg-card px-1 rounded">py-3 px-4</code></li>
-                    <li>Header: SEM background, apenas <code className="bg-card px-1 rounded">border-b border-border</code></li>
+                    <li>Table: <code className="bg-card px-1 rounded">{'style={{ borderCollapse: "collapse" }}'}</code></li>
+                    <li>Linha {'<tr>'}: <code className="bg-card px-1 rounded">{'style={{ height: "48px" }}'}</code></li>
+                    <li>Celulas {'<th>/<td>'}: <code className="bg-card px-1 rounded">{'style={{ height: "48px", verticalAlign: "middle" }}'}</code> + <code className="bg-card px-1 rounded">px-4</code></li>
+                    <li>Header: SEM background, SEM py-*, apenas <code className="bg-card px-1 rounded">border-b border-border</code></li>
                     <li>Atomos internos (badges, botoes) DEVEM caber em 48px</li>
                   </ul>
                 </div>
