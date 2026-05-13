@@ -731,10 +731,9 @@ export default function UsuariosPage() {
             {/* Botões */}
             <SnapModalFooter withTopMargin>
               <SnapButton
-                variant="solid"
+                variant="primary"
                 size="modal"
                 icon={<Check className="w-4 h-4" />}
-                className="bg-foreground text-background hover:opacity-90"
               >
                 Criar
               </SnapButton>
@@ -1098,7 +1097,7 @@ export default function UsuariosPage() {
                 onClick={() => setShowBlockModal(true)}
               >Bloquear</SnapButton>
               <SnapButton 
-                variant="solid" 
+                variant="primary" 
                 size="default" 
                 icon={<Trash2 className="w-4 h-4" />} 
                 className="bg-error text-white hover:opacity-90"
@@ -1180,7 +1179,7 @@ export default function UsuariosPage() {
           {/* Botões */}
           <SnapModalFooter withTopMargin>
             <SnapButton
-              variant="solid"
+              variant="primary"
               size="modal"
               icon={<Check className="w-4 h-4" />}
               className="bg-foreground text-background hover:opacity-90"
@@ -1227,7 +1226,7 @@ export default function UsuariosPage() {
           {/* Botões */}
           <SnapModalFooter>
             <SnapButton
-              variant="solid"
+              variant="primary"
               size="modal"
               icon={<Check className="w-4 h-4" />}
               className="bg-foreground text-background hover:opacity-90"
@@ -1267,7 +1266,7 @@ export default function UsuariosPage() {
           {/* Botões */}
           <SnapModalFooter>
             <SnapButton
-              variant="solid"
+              variant="primary"
               size="modal"
               icon={<Ban className="w-4 h-4" />}
               className="bg-warning text-black hover:opacity-90"
@@ -1307,7 +1306,7 @@ export default function UsuariosPage() {
           {/* Botões */}
           <SnapModalFooter>
             <SnapButton
-              variant="solid"
+              variant="primary"
               size="modal"
               icon={<Lock className="w-4 h-4" />}
               className="bg-[#d4789b] text-white hover:opacity-90"
@@ -1347,7 +1346,7 @@ export default function UsuariosPage() {
           {/* Botões */}
           <SnapModalFooter>
             <SnapButton
-              variant="solid"
+              variant="primary"
               size="modal"
               icon={<Trash2 className="w-4 h-4" />}
               className="bg-error text-white hover:opacity-90"
