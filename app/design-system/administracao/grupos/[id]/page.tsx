@@ -112,6 +112,8 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
   // Modais
   const [showEditModal, setShowEditModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showRemoveMemberModal, setShowRemoveMemberModal] = useState(false)
+  const [selectedMember, setSelectedMember] = useState<{id: string, nome: string, email: string} | null>(null)
   
   // Filtrar membros
   const membrosFiltrados = mockMembros.filter(m => 
@@ -447,6 +449,10 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
                           size="sm"
                           icon={<Trash2 className="w-3 h-3" />}
                           className="!bg-error hover:!bg-error/80"
+                          onClick={() => {
+                            setSelectedMember(membro)
+                            setShowRemoveMemberModal(true)
+                          }}
                         >
                           Remover
                         </SnapButton>
@@ -549,6 +555,39 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
             onClick={() => setShowDeleteModal(false)}
           >
             Excluir
+          </SnapButton>
+        </SnapModalFooter>
+      </SnapModal>
+
+      {/* ============================================
+          MODAL REMOVER MEMBRO - ALERTA SIMPLES
+          Sem ícone no header, pergunta em destaque (Inter Tight Bold)
+          ============================================ */}
+      <SnapModal open={showRemoveMemberModal} onClose={() => setShowRemoveMemberModal(false)} size="sm">
+        <SnapModalHeader 
+          title="Tem certeza que deseja remover este membro?" 
+          onClose={() => setShowRemoveMemberModal(false)} 
+        />
+        <SnapModalContent>
+          <p className="text-sm font-sans text-text-muted">
+            Esta ação será registrada no log de auditoria
+          </p>
+        </SnapModalContent>
+        <SnapModalFooter>
+          <SnapButton
+            variant="ghost"
+            size="modal"
+            onClick={() => setShowRemoveMemberModal(false)}
+          >
+            Cancelar
+          </SnapButton>
+          <SnapButton
+            variant="primary"
+            size="modal"
+            className="!bg-error text-white hover:opacity-90"
+            onClick={() => setShowRemoveMemberModal(false)}
+          >
+            Remover
           </SnapButton>
         </SnapModalFooter>
       </SnapModal>
