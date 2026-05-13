@@ -59,11 +59,11 @@ const SnapModal = forwardRef<HTMLDivElement, SnapModalProps>(
     
     return (
       <SnapModalOverlay onClose={onClose}>
-        {/* Classe "dark" forca tema escuro independente do tema da pagina */}
+        {/* bg-card adapta ao tema (light/dark) */}
         <div
           ref={ref}
           className={cn(
-            "dark bg-[#101010] rounded-xl border border-border w-full overflow-hidden z-50",
+            "bg-card rounded-xl border border-border w-full overflow-hidden z-50",
             sizeClasses[size],
             className
           )}
@@ -146,7 +146,7 @@ const SnapModalFooter = forwardRef<HTMLDivElement, SnapModalFooterProps>(
 SnapModalFooter.displayName = "SnapModalFooter"
 
 // Modal simples (sem portal, para uso inline)
-// Classe "dark" forca tema escuro independente do tema da pagina
+// bg-card adapta ao tema (light/dark)
 const SnapModalInline = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -154,7 +154,7 @@ const SnapModalInline = forwardRef<
   <div
     ref={ref}
     className={cn(
-      "dark bg-[#101010] rounded-xl border border-border max-w-md overflow-hidden",
+      "bg-card rounded-xl border border-border max-w-md overflow-hidden",
       className
     )}
     {...props}

@@ -1623,7 +1623,7 @@ notificationCount={35}`}
                 <div>
                   <p className="text-foreground font-medium font-sans mb-2">Modais - Estrutura OBRIGATÓRIA</p>
                   <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
-                    <li><strong>TEMA FORÇADO:</strong> <code className="bg-card px-1 rounded">dark bg-[#101010]</code> - classe <code className="bg-card px-1 rounded">dark</code> força tema escuro independente do tema da página</li>
+                    <li><strong>Background:</strong> <code className="bg-card px-1 rounded">bg-card</code> - adapta automaticamente ao tema (light/dark)</li>
                     <li><strong>ESTRUTURA CRÍTICA:</strong> <code className="bg-card px-1 rounded">SnapModalFooter</code> deve estar <strong>FORA</strong> do <code className="bg-card px-1 rounded">SnapModalContent</code> (irmão, não filho)</li>
                     <li><strong>Header:</strong> Ícone da vertical (cor da vertical) + título UPPERCASE (font-title 18px)</li>
                     <li><strong>Footer padding:</strong> <code className="bg-card px-1 rounded">px-6 pb-6</code> (24px direita/baixo)</li>
