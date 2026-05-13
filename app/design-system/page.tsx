@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon, Shield, Lock, ChevronDown, ChevronRight, Settings, Link2, Share2 } from "lucide-react"
+import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon, Shield, Lock, ChevronDown, ChevronRight, Settings, Link2, Share2, Info } from "lucide-react"
 import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
 import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
 import { SnapLogo } from "@/components/snap/snap-logo"
@@ -1525,6 +1525,93 @@ export default function DesignSystemPage() {
               <p className="text-sm text-[#d4789b] font-sans">
                 <strong>Uso da cor da vertical:</strong> A cor primária da vertical ativa é usada em ícones de headers (modais/cards), underlines de tabs, botões de ação positiva, badges de destaque e elementos de foco.
               </p>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            REGRAS CRÍTICAS (INEGOCIÁVEIS)
+            ============================================ */}
+        <Section title="REGRAS CRÍTICAS">
+          <div className="space-y-6">
+            {/* Regra 1: Cores de Verticais */}
+            <div className="p-4 rounded-xl bg-error/10 border border-error">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-error mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">NUNCA usar cor de uma vertical dentro de outra</p>
+                  <p className="text-text-secondary text-sm font-sans mb-3">
+                    Cada vertical tem sua cor exclusiva. Ao criar telas para a vertical Administração, use #333540. 
+                    Para Inteligência, use #72284B. Misturar cores entre verticais quebra a identidade visual.
+                  </p>
+                  <div className="bg-card p-3 rounded-lg border border-border">
+                    <p className="text-xs text-text-muted font-sans mb-2">Exemplo - Botão primário na vertical Administração:</p>
+                    <pre className="text-xs font-mono text-foreground overflow-x-auto">
+{`<SnapButton
+  variant="primary"
+  className="!bg-[#333540] hover:!bg-[#252730]"
+>
+  Criar
+</SnapButton>`}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Regra 2: Header Padrão */}
+            <div className="p-4 rounded-xl bg-warning-dark/20 border border-warning-dark">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Header - Dados do usuário são padronizados</p>
+                  <p className="text-text-secondary text-sm font-sans mb-3">
+                    Ao criar novas telas, SEMPRE usar os mesmos dados de exemplo no SnapHeader:
+                  </p>
+                  <div className="bg-card p-3 rounded-lg border border-border">
+                    <pre className="text-xs font-mono text-foreground overflow-x-auto">
+{`userName="Analista de Contrainteligência"
+userRole="Administrador"
+userInitials="VD"
+notificationCount={35}`}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Regra 3: Tabelas */}
+            <div className="p-4 rounded-xl bg-muted border border-border">
+              <div className="flex items-start gap-3">
+                <Info className="w-5 h-5 text-text-muted mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Tabelas - Estrutura obrigatória</p>
+                  <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
+                    <li>Container: <code className="bg-card px-1 rounded">rounded-xl border border-border overflow-hidden mb-6</code></li>
+                    <li>Table: <code className="bg-card px-1 rounded">w-full</code></li>
+                    <li>Header: SEM background, apenas <code className="bg-card px-1 rounded">border-b border-border</code></li>
+                    <li>Linhas: <code className="bg-card px-1 rounded">hover:bg-card-hover</code>, altura 48px</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Regra 4: Título de página */}
+            <div className="p-4 rounded-xl bg-muted border border-border">
+              <div className="flex items-start gap-3">
+                <Info className="w-5 h-5 text-text-muted mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Título de página - Medidas exatas</p>
+                  <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
+                    <li>Ícone: <code className="bg-card px-1 rounded">w-8 h-8</code> na cor da vertical</li>
+                    <li>Gap ícone/título: <code className="bg-card px-1 rounded">gap-3</code> (12px)</li>
+                    <li>Gap título/selects: <code className="bg-card px-1 rounded">gap-6</code> (24px)</li>
+                    <li>Margem inferior: <code className="bg-card px-1 rounded">mb-6</code> (24px)</li>
+                    <li>Selects ficam AO LADO do título, NUNCA acima</li>
+                    <li>SEM underline abaixo do título</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </Section>
