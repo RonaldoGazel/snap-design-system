@@ -350,23 +350,24 @@ export default function GruposPage() {
 
           {/* Tabela de Grupos - seguindo Design System (igual Usuarios) */}
           <div className="rounded-xl border border-border overflow-hidden mb-6">
-            <table className="w-full">
+            <table className="w-full" style={{ borderCollapse: "collapse" }}>
               <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Nome</th>
-                  <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Criado em</th>
-                  <th className="text-left py-3 px-4 text-text-muted font-medium text-sm font-sans">Atualizado em</th>
+                <tr className="border-b border-border" style={{ height: "48px" }}>
+                  <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Nome</th>
+                  <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Criado em</th>
+                  <th className="text-left px-4 text-text-muted font-medium text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>Atualizado em</th>
                 </tr>
               </thead>
               <tbody>
                 {mockGrupos.map((grupo) => (
                   <tr 
                     key={grupo.id} 
-                    className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer h-12"
+                    className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
+                    style={{ height: "48px" }}
                   >
-                    <td className="px-4 text-foreground text-sm font-sans align-middle">{grupo.nome}</td>
-                    <td className="px-4 text-text-secondary text-sm font-sans align-middle">{grupo.criadoEm}</td>
-                    <td className="px-4 text-text-secondary text-sm font-sans align-middle">{grupo.atualizadoEm}</td>
+                    <td className="px-4 text-foreground text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{grupo.nome}</td>
+                    <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{grupo.criadoEm}</td>
+                    <td className="px-4 text-text-secondary text-sm font-sans" style={{ height: "48px", verticalAlign: "middle" }}>{grupo.atualizadoEm}</td>
                   </tr>
                 ))}
               </tbody>
