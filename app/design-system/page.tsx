@@ -1615,6 +1615,30 @@ notificationCount={35}`}
                 </div>
               </div>
             </div>
+
+            {/* Regra 5: Modais - Estrutura e margens */}
+            <div className="p-4 rounded-xl bg-error/10 border border-error">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-error mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Modais - Estrutura OBRIGATÓRIA</p>
+                  <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
+                    <li><strong>Background:</strong> <code className="bg-card px-1 rounded">bg-[#101010]</code> (escuro)</li>
+                    <li><strong>ESTRUTURA CRÍTICA:</strong> <code className="bg-card px-1 rounded">SnapModalFooter</code> deve estar <strong>FORA</strong> do <code className="bg-card px-1 rounded">SnapModalContent</code> (irmão, não filho)</li>
+                    <li><strong>Header:</strong> Ícone da vertical (cor da vertical) + título UPPERCASE (font-title 18px)</li>
+                    <li><strong>Footer padding:</strong> <code className="bg-card px-1 rounded">px-6 pb-6</code> (24px direita/baixo)</li>
+                    <li><strong>Gap entre botões:</strong> <code className="bg-card px-1 rounded">gap-4</code> (16px)</li>
+                    <li><strong>Ordem botões:</strong> Cancelar (ghost) PRIMEIRO, Ação primária SEGUNDO</li>
+                    <li><strong>Botões:</strong> Ambos com ícone (X para cancelar, Check/ação para confirmar)</li>
+                  </ul>
+                  <div className="mt-3 p-3 bg-card rounded-lg">
+                    <p className="text-xs text-text-muted font-mono">
+                      {'<SnapModal> → <SnapModalHeader/> → <SnapModalContent>...</SnapModalContent> → <SnapModalFooter>...</SnapModalFooter> → </SnapModal>'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </Section>
 
