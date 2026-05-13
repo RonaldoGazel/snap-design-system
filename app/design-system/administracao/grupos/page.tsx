@@ -363,11 +363,11 @@ export default function GruposPage() {
                   <tr 
                     key={grupo.id} 
                     className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
-                    style={{ height: "48px" }}
+                    style={{ height: "56px" }}
                   >
-                    <td className="py-3 px-4 text-foreground text-sm font-sans">{grupo.nome}</td>
-                    <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.criadoEm}</td>
-                    <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.atualizadoEm}</td>
+                    <td className="py-4 px-4 text-foreground text-sm font-sans">{grupo.nome}</td>
+                    <td className="py-4 px-4 text-text-secondary text-sm font-sans">{grupo.criadoEm}</td>
+                    <td className="py-4 px-4 text-text-secondary text-sm font-sans">{grupo.atualizadoEm}</td>
                   </tr>
                 ))}
               </tbody>
