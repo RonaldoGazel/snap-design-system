@@ -2168,8 +2168,8 @@ notificationCount={35}`}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Card de Entidade (Endereço)</p>
               
-              {/* Card */}
-              <div className="bg-card rounded-xl border border-border w-[340px] overflow-hidden">
+              {/* Card: background #101010 (escuro) */}
+              <div className="bg-[#101010] rounded-xl border border-border w-[340px] overflow-hidden">
                 {/* Header - pt-4 (16px) do topo, pb-3 (12px) até a linha */}
                 <div className="px-5 pt-4 pb-3">
                   <div className="flex items-center gap-2">
