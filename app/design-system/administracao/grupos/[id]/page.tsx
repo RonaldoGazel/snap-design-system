@@ -526,8 +526,8 @@ export default function GrupoDetalhePage({ params }: { params: { id: string } })
           onClose={() => setShowDeleteModal(false)} 
         />
         <SnapModalContent>
-          {/* Pergunta em destaque - font-title (Inter Tight) + bold + tamanho maior */}
-          <p className="font-title text-lg font-semibold text-foreground mb-3">
+          {/* Pergunta em destaque - font-sans (Inter Tight) + bold + tamanho maior */}
+          <p className="font-sans text-lg font-bold text-foreground mb-3">
             Tem certeza que deseja excluir este grupo?
           </p>
           <p className="text-sm font-sans text-text-muted">
