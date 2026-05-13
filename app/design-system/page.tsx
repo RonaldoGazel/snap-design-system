@@ -1662,7 +1662,7 @@ notificationCount={35}`}
                 <div>
                   <p className="text-foreground font-medium font-sans mb-2">Modais - Estrutura OBRIGATÓRIA</p>
                   <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
-                    <li><strong>Background:</strong> <code className="bg-card px-1 rounded">bg-card</code> - adapta automaticamente ao tema (light/dark)</li>
+                    <li><strong>Background FIXO:</strong> <code className="bg-card px-1 rounded">bg-[#101010]</code> - SEMPRE escuro, independente do tema. NUNCA usar bg-card em modais!</li>
                     <li><strong>ESTRUTURA CRÍTICA:</strong> <code className="bg-card px-1 rounded">SnapModalFooter</code> deve estar <strong>FORA</strong> do <code className="bg-card px-1 rounded">SnapModalContent</code> (irmão, não filho)</li>
                     <li><strong>Header:</strong> Ícone da vertical (cor da vertical) + título UPPERCASE (font-title 18px)</li>
                     <li><strong>Footer padding:</strong> <code className="bg-card px-1 rounded">px-6 pb-6</code> (24px direita/baixo)</li>
@@ -2014,8 +2014,8 @@ notificationCount={35}`}
             {/* Exemplo de Modal - Verificação de Entidade */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade</p>
-{/* Modal: usa bg-card (adapta ao tema) */}
-              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+{/* Modal: SEMPRE usa #101010, NUNCA bg-card */}
+              <div className="bg-[#101010] rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
@@ -2076,8 +2076,8 @@ notificationCount={35}`}
             {/* Exemplo de Modal - Difusão */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Difusão de Processo</p>
-{/* Modal: usa bg-card (adapta ao tema) */}
-              <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
+{/* Modal: SEMPRE usa #101010, NUNCA bg-card */}
+              <div className="bg-[#101010] rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
                   <div className="flex items-center justify-between">
