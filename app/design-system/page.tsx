@@ -1534,6 +1534,45 @@ export default function DesignSystemPage() {
             ============================================ */}
         <Section title="REGRAS CRÍTICAS">
           <div className="space-y-6">
+            {/* Regra 0: Suporte a Light/Dark Mode */}
+            <div className="p-4 rounded-xl bg-[#72284B]/20 border border-[#72284B]">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-[#72284B] mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">TODOS os componentes devem suportar Light e Dark Mode</p>
+                  <p className="text-text-secondary text-sm font-sans mb-3">
+                    NUNCA usar cores hardcoded (ex: <code className="bg-card px-1 rounded">bg-[#101010]</code>, <code className="bg-card px-1 rounded">text-white</code>) para backgrounds e textos principais. 
+                    SEMPRE usar tokens semanticos que adaptam ao tema automaticamente.
+                  </p>
+                  <div className="grid grid-cols-2 gap-4 mb-3">
+                    <div className="bg-card p-3 rounded-lg border border-error">
+                      <p className="text-xs text-error font-sans mb-2 font-medium">ERRADO</p>
+                      <pre className="text-xs font-mono text-text-secondary overflow-x-auto">
+{`bg-[#101010]
+bg-black
+text-white
+text-[#ffffff]
+border-[#2a2b35]`}
+                      </pre>
+                    </div>
+                    <div className="bg-card p-3 rounded-lg border border-success">
+                      <p className="text-xs text-success font-sans mb-2 font-medium">CORRETO</p>
+                      <pre className="text-xs font-mono text-text-secondary overflow-x-auto">
+{`bg-card
+bg-background
+text-foreground
+text-text-secondary
+border-border`}
+                      </pre>
+                    </div>
+                  </div>
+                  <p className="text-text-muted text-xs font-sans">
+                    Excecao: Cores de verticais (ex: <code className="bg-card px-1 rounded">!bg-[#333540]</code> para botoes primarios) podem ser hardcoded pois sao fixas por definicao.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Regra 1: Cores de Verticais */}
             <div className="p-4 rounded-xl bg-error/10 border border-error">
               <div className="flex items-start gap-3">
