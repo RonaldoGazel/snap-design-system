@@ -128,10 +128,10 @@ export default function GruposPage() {
       <SnapHeader
         vertical="administracao"
         breadcrumb={[{ label: "Grupos" }]}
-        userName="SNAP"
-        userRole="SNAP"
-        userInitials="PA"
-        notificationCount={3}
+        userName="Analista de Contrainteligência"
+        userRole="Administrador"
+        userInitials="VD"
+        notificationCount={35}
       />
 
       {/* ============================================
@@ -336,11 +336,12 @@ export default function GruposPage() {
               </div>
             </div>
             
-            {/* Lado direito: Botão Criar */}
+            {/* Lado direito: Botão Criar - REGRA: usar cor da vertical via className */}
             <SnapButton
               variant="primary"
               size="default"
               icon={<Plus className="w-4 h-4" />}
+              className="!bg-[#333540] hover:!bg-[#252730]"
               onClick={() => setShowCreateModal(true)}
             >
               Criar Grupo
@@ -419,6 +420,7 @@ export default function GruposPage() {
             variant="primary"
             size="modal"
             icon={<Check className="w-4 h-4" />}
+            className="!bg-[#333540] hover:!bg-[#252730]"
             onClick={() => setShowCreateModal(false)}
           >
             Criar
