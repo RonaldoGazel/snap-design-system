@@ -362,12 +362,11 @@ export default function GruposPage() {
                 {mockGrupos.map((grupo) => (
                   <tr 
                     key={grupo.id} 
-                    className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
-                    style={{ height: "48px" }}
+                    className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer h-12"
                   >
-                    <td className="py-3 px-4 text-foreground text-sm font-sans">{grupo.nome}</td>
-                    <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.criadoEm}</td>
-                    <td className="py-3 px-4 text-text-secondary text-sm font-sans">{grupo.atualizadoEm}</td>
+                    <td className="px-4 text-foreground text-sm font-sans align-middle">{grupo.nome}</td>
+                    <td className="px-4 text-text-secondary text-sm font-sans align-middle">{grupo.criadoEm}</td>
+                    <td className="px-4 text-text-secondary text-sm font-sans align-middle">{grupo.atualizadoEm}</td>
                   </tr>
                 ))}
               </tbody>

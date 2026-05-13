@@ -536,24 +536,23 @@ export default function UsuariosPage() {
                   {filteredUsers.map((user) => (
                     <tr 
                       key={user.id} 
-                      className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer"
-                      style={{ height: "48px" }}
+                      className="border-b border-border last:border-b-0 hover:bg-card-hover transition-colors cursor-pointer h-12"
                       onClick={() => setSelectedUser(user)}
                     >
-                      <td className="py-3 px-4 text-foreground text-sm font-sans">{user.nome}</td>
-                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{user.email}</td>
-                      <td className="py-3 px-4"><StatusBadge status={user.status} /></td>
-                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{user.nivelAcesso}</td>
-                      <td className="py-3 px-4 text-text-secondary text-sm font-sans">{user.criadoEm}</td>
-                      <td className="py-3 px-4">
+                      <td className="px-4 text-foreground text-sm font-sans align-middle">{user.nome}</td>
+                      <td className="px-4 text-text-secondary text-sm font-sans align-middle">{user.email}</td>
+                      <td className="px-4 align-middle"><StatusBadge status={user.status} /></td>
+                      <td className="px-4 text-text-secondary text-sm font-sans align-middle">{user.nivelAcesso}</td>
+                      <td className="px-4 text-text-secondary text-sm font-sans align-middle">{user.criadoEm}</td>
+                      <td className="px-4 align-middle">
                         <div className="flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
-                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                          <button className="p-1 rounded hover:bg-muted transition-colors">
                             <Eye className="w-4 h-4 text-text-muted" />
                           </button>
-                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                          <button className="p-1 rounded hover:bg-muted transition-colors">
                             <Pencil className="w-4 h-4 text-text-muted" />
                           </button>
-                          <button className="p-1.5 rounded hover:bg-muted transition-colors">
+                          <button className="p-1 rounded hover:bg-muted transition-colors">
                             <Trash2 className="w-4 h-4" style={{ color: VERTICAL_COLOR }} />
                           </button>
                         </div>
