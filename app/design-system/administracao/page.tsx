@@ -37,7 +37,7 @@ const telas: Tela[] = [
     nome: "Grupos",
     descricao: "Organizacao de usuarios em grupos",
     icon: FolderKey,
-    status: "pendente",
+    status: "pronto",
     href: "/design-system/administracao/grupos",
   },
   {
