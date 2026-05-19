@@ -205,8 +205,8 @@ export default function SnapGraphDesignSystem() {
                               <span className="font-extrabold">58</span>
                               <span className="font-medium"> entidades</span>
                             </p>
-                            {/* Pill com 24px de distância do texto */}
-                            <div style={{ marginTop: '24px' }}>
+                            {/* Pill com 16px de distância do texto (mt-4 = padrão dos outros nodes) */}
+                            <div className="mt-4">>
                               <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#FE5722] rounded-full">Company SNAP</span>
                             </div>
                           </div>
