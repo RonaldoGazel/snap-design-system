@@ -240,10 +240,14 @@ export default function SnapGraphDesignSystem() {
                               <span className="font-extrabold">58</span>
                               <span className="font-medium"> entidades</span>
                             </p>
+                            {/* Pill com 24px de distância do texto */}
+                            <div style={{ marginTop: '24px' }}>
+                              <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#FE5722] rounded-full">Company SNAP</span>
+                            </div>
                           </div>
                           
-                          {/* Stack de ícones - 4 círculos empilhados */}
-                          <div className="relative flex-shrink-0" style={{ width: '44px', height: '71px' }}>
+                          {/* Stack de ícones - posição absoluta para não afetar altura */}
+                          <div className="relative flex-shrink-0" style={{ width: '44px', height: '44px' }}>
                             {/* Ícone 4 - 10% (mais atrás) */}
                             <div 
                               className="absolute w-11 h-11 rounded-full border-[3px] border-[#696969] bg-canvas-node flex items-center justify-center"
@@ -273,9 +277,6 @@ export default function SnapGraphDesignSystem() {
                               <Building className="w-5 h-5 text-[#696969]" />
                             </div>
                           </div>
-                        </div>
-                        <div className="mt-4">
-                          <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#FE5722] rounded-full">Company SNAP</span>
                         </div>
                       </div>
                     </div>
