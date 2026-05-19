@@ -1,6 +1,7 @@
 "use client"
 
 import { Building } from "lucide-react"
+import { useState, useEffect } from "react"
 
 /**
  * NODE CLUSTER - Componente de Grupo para SNAP Graph
@@ -14,15 +15,35 @@ import { Building } from "lucide-react"
  * - Borda lateral colorida (cor do tipo de entidade)
  * 
  * SUPORTA LIGHT/DARK MODE via variáveis CSS do globals.css
+ * Clique no node para alternar entre light e dark mode
  */
 
 const ENTITY_COLOR = "#FE5722" // Laranja - Company SNAP
 
 export default function NodeClusterPage() {
+  const [isDark, setIsDark] = useState(true)
+
+  useEffect(() => {
+    // Verificar tema inicial do documento
+    const isDarkMode = document.documentElement.classList.contains('dark')
+    setIsDark(isDarkMode)
+  }, [])
+
+  const toggleTheme = () => {
+    const newIsDark = !isDark
+    setIsDark(newIsDark)
+    
+    if (newIsDark) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }
+
   return (
     <div className="min-h-screen snap-canvas p-12 flex items-center justify-center">
-      {/* Container do Node Cluster */}
-      <div className="relative">
+      {/* Container do Node Cluster - clique para alternar tema */}
+      <div className="relative cursor-pointer hover:scale-[1.02] transition-transform" onClick={toggleTheme}>
         {/* Card 3 - 30% opacidade (mais atrás) - offset 20px */}
         <div 
           className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden bg-canvas-node"
