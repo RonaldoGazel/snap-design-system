@@ -192,7 +192,7 @@ export default function SnapGraphDesignSystem() {
                     Stack de 3 cards: 100%, 50%, 30% opacidade
                     Ícones empilhados com deslocamento de 9px
                     ============================================ */}
-                <div className="absolute" style={{ left: '752px', top: '60px' }}>
+                <Link href="/design-system/snap-graph/node-cluster" className="absolute cursor-pointer hover:scale-[1.02] transition-transform" style={{ left: '752px', top: '60px' }}>
                   {/* Card 3 - 30% opacidade (mais atrás) - offset 20px */}
                   <div 
                     className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden bg-canvas-node"
@@ -291,12 +291,12 @@ export default function SnapGraphDesignSystem() {
                               style={{ opacity: 1, top: '0px' }}
                             >
                               <Building className="w-5 h-5 text-[#696969]" />
-                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </Link>
                 </div>
               </div>
             </div>
