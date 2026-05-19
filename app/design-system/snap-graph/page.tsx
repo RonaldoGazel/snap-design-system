@@ -195,23 +195,21 @@ export default function SnapGraphDesignSystem() {
                 <div className="absolute" style={{ left: '752px', top: '60px' }}>
                   {/* Card 3 - 30% opacidade (mais atrás) - offset 20px */}
                   <div 
-                    className="absolute w-64 bg-canvas-node rounded-lg border border-canvas-node-border"
-                    style={{ opacity: 0.30, top: '20px', left: '-20px' }}
+                    className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden"
+                    style={{ opacity: 0.30, top: '20px', left: '-20px', height: '110px', backgroundColor: 'var(--canvas-node-bg)' }}
                   >
                     <div className="flex h-full">
-                      <div className="w-1 bg-[#FE5722]" />
-                      <div className="flex-1 p-4" style={{ height: '88px' }} />
+                      <div className="w-1 h-full bg-[#FE5722]" />
                     </div>
                   </div>
                   
                   {/* Card 2 - 50% opacidade - offset 10px */}
                   <div 
-                    className="absolute w-64 bg-canvas-node rounded-lg border border-canvas-node-border"
-                    style={{ opacity: 0.50, top: '10px', left: '-10px' }}
+                    className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden"
+                    style={{ opacity: 0.50, top: '10px', left: '-10px', height: '110px', backgroundColor: 'var(--canvas-node-bg)' }}
                   >
                     <div className="flex h-full">
-                      <div className="w-1 bg-[#FE5722]" />
-                      <div className="flex-1 p-4" style={{ height: '88px' }} />
+                      <div className="w-1 h-full bg-[#FE5722]" />
                     </div>
                   </div>
                   
