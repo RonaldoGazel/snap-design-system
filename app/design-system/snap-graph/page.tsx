@@ -297,7 +297,6 @@ export default function SnapGraphDesignSystem() {
                     </div>
                   </div>
                 </Link>
-                </div>
               </div>
             </div>
 
@@ -1586,7 +1585,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                 </div>
               </div>
               <p className="text-sm text-text-muted font-sans mt-4">
-                O visual deve ser semelhante a um circuito eletrônico: limpo, organizado e previsível.
+                O visual deve ser semelhante a um circuito eletr��nico: limpo, organizado e previsível.
               </p>
             </div>
           </div>
