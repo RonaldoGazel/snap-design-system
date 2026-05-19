@@ -189,45 +189,10 @@ export default function SnapGraphDesignSystem() {
 
                 {/* ============================================
                     NODE C - GROUP NODE (NOVO)
-                    Stack de 4 cards com opacidades 100%, 70%, 30%, 10%
                     Ícones empilhados com deslocamento de 9px
                     ============================================ */}
                 <div className="absolute" style={{ left: '752px', top: '60px' }}>
-                  {/* Stack de cards - de baixo para cima */}
-                  {/* Card 4 - 10% opacidade (mais atrás) */}
-                  <div 
-                    className="absolute w-64 bg-canvas-node rounded-lg border border-canvas-node-border"
-                    style={{ opacity: 0.10, top: '27px', left: '9px' }}
-                  >
-                    <div className="flex h-full">
-                      <div className="w-1 bg-[#FE5722]" />
-                      <div className="flex-1 p-4" style={{ height: '110px' }} />
-                    </div>
-                  </div>
-                  
-                  {/* Card 3 - 30% opacidade */}
-                  <div 
-                    className="absolute w-64 bg-canvas-node rounded-lg border border-canvas-node-border"
-                    style={{ opacity: 0.30, top: '18px', left: '6px' }}
-                  >
-                    <div className="flex h-full">
-                      <div className="w-1 bg-[#FE5722]" />
-                      <div className="flex-1 p-4" style={{ height: '110px' }} />
-                    </div>
-                  </div>
-                  
-                  {/* Card 2 - 70% opacidade */}
-                  <div 
-                    className="absolute w-64 bg-canvas-node rounded-lg border border-canvas-node-border"
-                    style={{ opacity: 0.70, top: '9px', left: '3px' }}
-                  >
-                    <div className="flex h-full">
-                      <div className="w-1 bg-[#FE5722]" />
-                      <div className="flex-1 p-4" style={{ height: '110px' }} />
-                    </div>
-                  </div>
-                  
-                  {/* Card 1 - 100% opacidade (frente) */}
+                  {/* Card principal - 100% opacidade */}
                   <div className="relative w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm">
                     <div className="flex h-full">
                       <div className="w-1 bg-[#FE5722]" />
