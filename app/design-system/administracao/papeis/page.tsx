@@ -300,7 +300,7 @@ export default function PapeisPage() {
           <div className="mb-6">
             <SnapSelect
               value={orgSelecionada}
-              onValueChange={setOrgSelecionada}
+              onChange={setOrgSelecionada}
               options={organizacoesDisponiveis.map(org => ({ value: org, label: org }))}
               placeholder="Selecione uma organização"
               className="w-[300px]"
@@ -423,8 +423,6 @@ export default function PapeisPage() {
             currentPage={currentPage} 
             totalPages={1}
             onPageChange={setCurrentPage}
-            itemsPerPage={itemsPerPage}
-            onItemsPerPageChange={setItemsPerPage}
           />
         </main>
       </div>
@@ -461,7 +459,7 @@ export default function PapeisPage() {
             </label>
             <SnapSelect
               value={novoPapelTipo}
-              onValueChange={setNovoPapelTipo}
+              onChange={setNovoPapelTipo}
               options={[
                 { value: "plataforma", label: "Plataforma" },
                 { value: "servico", label: "Serviço" }
