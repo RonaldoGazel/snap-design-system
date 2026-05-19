@@ -42,7 +42,7 @@ export default function NodeClusterPage() {
         </div>
         
         {/* Card principal - 100% opacidade (frente) */}
-        <div className="relative w-64 rounded-lg overflow-hidden border border-[#3a3a3a] shadow-sm" style={{ backgroundColor: '#2c2c2c' }}>
+        <div className="relative w-64 rounded-lg overflow-hidden border border-[#3a3a3a] shadow-sm" style={{ backgroundColor: '#2c2c2c', height: '110px' }}>
           <div className="flex h-full">
             <div className="w-1" style={{ backgroundColor: ENTITY_COLOR }} />
             <div className="flex-1 p-4">

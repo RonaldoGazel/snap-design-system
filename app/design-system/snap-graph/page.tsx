@@ -214,7 +214,7 @@ export default function SnapGraphDesignSystem() {
                   </div>
                   
                   {/* Card principal - 100% opacidade (frente) */}
-                  <div className="relative w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm">
+                  <div className="relative w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm" style={{ height: '110px' }}>
                     <div className="flex h-full">
                       <div className="w-1 bg-[#FE5722]" />
                       <div className="flex-1 p-4">
