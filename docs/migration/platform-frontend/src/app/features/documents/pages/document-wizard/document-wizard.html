@@ -1,0 +1,205 @@
+<p-toast />
+
+<div class="l-page document-wizard">
+  <div class="l-page__header">
+    <h2 class="page-title">Novo Documento</h2>
+    <p-button label="Cancelar" icon="pi pi-times" [text]="true" severity="secondary" (onClick)="cancel()" />
+  </div>
+
+  <p-steps [model]="steps" [activeIndex]="activeIndex()" [readonly]="true" />
+
+  <div class="document-wizard__content">
+    @switch (activeIndex()) {
+
+    <!-- ── Step 0: Selecionar Fluxo ──────────────────────────────── -->
+    @case (0) {
+    <div class="document-wizard__step">
+      <div class="document-wizard__step-header">
+        <h3 class="document-wizard__step-title">Selecione o Fluxo de Trabalho</h3>
+        <p class="hint">O fluxo define o tipo documental, template e as etapas que o documento percorrerá.</p>
+      </div>
+
+      @if (loadingWorkflows()) {
+      <div class="document-wizard__loading">
+        <i class="pi pi-spin pi-spinner"></i>
+        <span>Carregando fluxos...</span>
+      </div>
+      } @else if (workflows().length === 0) {
+      <div class="table-empty-state">
+        <div class="empty-icon-wrapper"><i class="pi pi-sitemap"></i></div>
+        <span class="empty-label">Nenhum fluxo disponível para seu perfil.</span>
+        <span class="hint">Apenas fluxos publicados onde seu setor e perfil estão registrados na etapa de iniciação são exibidos.</span>
+      </div>
+      } @else {
+      <div class="document-wizard__flow-grid">
+        @for (flow of workflows(); track flow.id) {
+        <div class="document-wizard__flow-card" [class.is-selected]="selectedWorkflow()?.id === flow.id"
+          (click)="selectWorkflow(flow)" (keydown.enter)="selectWorkflow(flow)"
+          (keydown.space)="selectWorkflow(flow); $event.preventDefault()" tabindex="0" role="radio"
+          [attr.aria-checked]="selectedWorkflow()?.id === flow.id" [attr.aria-label]="flow.name">
+          <div class="document-wizard__flow-card-icon">
+            <i class="pi pi-sitemap"></i>
+          </div>
+          <div class="document-wizard__flow-card-body">
+            <span class="document-wizard__flow-card-name">{{ flow.name }}</span>
+            @if (flow.description) {
+            <span class="document-wizard__flow-card-desc">{{ flow.description }}</span>
+            }
+          </div>
+          @if (selectedWorkflow()?.id === flow.id) {
+          <i class="pi pi-check-circle document-wizard__flow-card-check"></i>
+          }
+        </div>
+        }
+      </div>
+
+      @if (selectedWorkflow()) {
+      <div class="document-wizard__detail-panel">
+        @if (loadingFlowDetail()) {
+        <div class="document-wizard__loading">
+          <i class="pi pi-spin pi-spinner"></i>
+          <span>Carregando detalhes...</span>
+        </div>
+        } @else {
+        <div class="document-wizard__detail-grid">
+          <div class="document-wizard__detail-item">
+            <span class="document-wizard__detail-label">Tipo Documental</span>
+            <span class="document-wizard__detail-value">{{ resolvedDocTypeName() }}</span>
+          </div>
+          <div class="document-wizard__detail-item">
+            <span class="document-wizard__detail-label">Template</span>
+            <span class="document-wizard__detail-value">{{ resolvedTemplateName() }}</span>
+          </div>
+          <div class="document-wizard__detail-item">
+            <span class="document-wizard__detail-label">Etapa Após Criação</span>
+            <span class="document-wizard__detail-value">{{ resolvedStartingStepName() }}</span>
+          </div>
+          <div class="document-wizard__detail-item">
+            <span class="document-wizard__detail-label">Total de Etapas</span>
+            <span class="document-wizard__detail-value">{{ resolvedStepCount() }}</span>
+          </div>
+        </div>
+        }
+      </div>
+      }
+      }
+    </div>
+    }
+
+    <!-- ── Step 1: Metadados ─────────────────────────────────────── -->
+    @case (1) {
+    <div class="document-wizard__step">
+      <div class="document-wizard__step-header">
+        <h3 class="document-wizard__step-title">Metadados do Documento</h3>
+        <p class="hint">Informe o título e nível de segurança. O tipo documental e template são definidos pelo fluxo.</p>
+      </div>
+
+      <div class="document-wizard__context-tags">
+        <p-tag icon="pi pi-sitemap" [value]="selectedWorkflow()?.name ?? ''" severity="secondary" />
+        <p-tag icon="pi pi-file" [value]="resolvedDocTypeName()" severity="secondary" />
+        @if (workflowTemplate()) {
+        <p-tag icon="pi pi-file-edit" [value]="workflowTemplate()?.name ?? ''" severity="secondary" />
+        }
+      </div>
+
+      <div class="document-wizard__form">
+        <div class="field">
+          <label for="doc-title">Título do Documento <span class="required">*</span></label>
+          <input id="doc-title" pInputText class="w-full" [ngModel]="documentTitle()"
+            (ngModelChange)="documentTitle.set($event)" placeholder="Título do documento" />
+        </div>
+        <div class="field">
+          <label for="doc-security">Nível de Segurança <span class="required">*</span></label>
+          <p-select id="doc-security" class="w-full" [options]="securityLevelOptions()" optionLabel="label"
+            optionValue="value" [ngModel]="documentSecurityLevel()"
+            (ngModelChange)="documentSecurityLevel.set($event)" placeholder="Selecione o nível" />
+        </div>
+        <div class="field">
+          <label for="doc-desc">Descrição / Observações</label>
+          <textarea id="doc-desc" pTextarea class="w-full" [ngModel]="documentDescription()"
+            (ngModelChange)="documentDescription.set($event)" placeholder="Observações sobre o documento"
+            rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- ── Step 2: Confirmação ───────────────────────────────────── -->
+    @case (2) {
+    <div class="document-wizard__step">
+      <div class="document-wizard__step-header">
+        <h3 class="document-wizard__step-title">Resumo e Confirmação</h3>
+      </div>
+
+      <div class="document-wizard__summary">
+        <div class="document-wizard__summary-card">
+          <h4 class="section-label">Fluxo de Trabalho</h4>
+          <div class="document-wizard__summary-grid">
+            <div class="document-wizard__summary-item">
+              <span class="document-wizard__summary-label">Fluxo</span>
+              <span>{{ selectedWorkflow()?.name }}</span>
+            </div>
+            <div class="document-wizard__summary-item">
+              <span class="document-wizard__summary-label">Tipo Documental</span>
+              <span>{{ resolvedDocTypeName() }}</span>
+            </div>
+            <div class="document-wizard__summary-item">
+              <span class="document-wizard__summary-label">Template</span>
+              <span>{{ resolvedTemplateName() }}</span>
+            </div>
+            <div class="document-wizard__summary-item">
+              <span class="document-wizard__summary-label">Etapa Após Criação</span>
+              <span>{{ resolvedStartingStepName() }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="document-wizard__summary-card">
+          <h4 class="section-label">Documento</h4>
+          <div class="document-wizard__summary-grid">
+            <div class="document-wizard__summary-item">
+              <span class="document-wizard__summary-label">Título</span>
+              <span>{{ documentTitle() }}</span>
+            </div>
+            <div class="document-wizard__summary-item">
+              <span class="document-wizard__summary-label">Nível de Segurança</span>
+              <span>{{ documentSecurityLevel() }}</span>
+            </div>
+            @if (documentDescription()) {
+            <div class="document-wizard__summary-item col-span-2">
+              <span class="document-wizard__summary-label">Descrição</span>
+              <span>{{ documentDescription() }}</span>
+            </div>
+            }
+          </div>
+        </div>
+
+        <div class="document-wizard__info-banner" role="status">
+          <i class="pi pi-info-circle"></i>
+          <span>
+            Ao confirmar, o documento será criado e o fluxo de trabalho será iniciado automaticamente.
+            O documento será encaminhado para a etapa <strong>"{{ resolvedStartingStepName() }}"</strong>.
+            A edição do conteúdo estará disponível após a criação.
+          </span>
+        </div>
+      </div>
+    </div>
+    }
+    }
+  </div>
+
+  <!-- ── Navigation ──────────────────────────────────────────────── -->
+  <div class="document-wizard__actions">
+    @if (activeIndex() > 0) {
+    <p-button label="Anterior" icon="pi pi-arrow-left" [outlined]="true" (onClick)="previousStep()" />
+    }
+    <div class="document-wizard__spacer"></div>
+    @if (activeIndex() < steps.length - 1) {
+    <p-button label="Próximo" icon="pi pi-arrow-right" iconPos="right" [disabled]="!canAdvance()"
+      (onClick)="nextStep()" />
+    } @else {
+    <p-button label="Criar Documento" icon="pi pi-check" [disabled]="saving() || !canAdvance()"
+      [loading]="saving()" (onClick)="createDocument()" />
+    }
+  </div>
+</div>

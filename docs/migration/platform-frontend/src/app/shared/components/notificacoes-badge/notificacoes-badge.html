@@ -1,0 +1,6 @@
+<button pButton type="button" icon="pi pi-bell" class="p-button-rounded p-button-text" (click)="onAbrirNotificacoes()"
+    [attr.aria-label]="ariaLabel()">
+    @if (mostrarBadge()) {
+    <p-badge [value]="naoLidas()" severity="danger"></p-badge>
+    }
+</button>

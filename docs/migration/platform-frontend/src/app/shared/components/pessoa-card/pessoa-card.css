@@ -1,0 +1,90 @@
+::ng-deep .pessoa-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .pessoa-card .p-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+::ng-deep .pessoa-card .p-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--surface-ground);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    flex: 1;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    word-break: break-word;
+}
+
+.card-info {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.info-label {
+    font-weight: 500;
+    color: var(--text-color-secondary);
+    min-width: 50px;
+}
+
+.info-value {
+    color: var(--text-color);
+    word-break: break-word;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.card-monitoring {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.card-threat {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.card-footer {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-top: 1px solid var(--surface-border);
+    background-color: var(--surface-ground);
+}
+
+::ng-deep .pessoa-card .p-button {
+    flex: 1;
+}
+
+::ng-deep .pessoa-card .p-button-small {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+}

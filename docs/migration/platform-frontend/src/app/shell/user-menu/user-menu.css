@@ -1,0 +1,42 @@
+.user-menu {
+    /* Box Model */
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-2-5);
+    border-radius: var(--radius-md);
+    /* Visuals */
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.user-menu:hover {
+    background-color: var(--p-surface-hover);
+}
+
+.user-menu__info {
+    /* Box Model */
+    display: flex;
+    flex-direction: column;
+    /* Typography */
+    line-height: 1.2;
+}
+
+.user-menu__name {
+    /* Typography */
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--p-text-color);
+}
+
+.user-menu__role {
+    /* Typography */
+    font-size: var(--text-base);
+    color: var(--p-text-muted-color);
+}
+
+.user-menu__chevron {
+    /* Typography */
+    font-size: var(--text-base);
+    color: var(--p-text-muted-color);
+}

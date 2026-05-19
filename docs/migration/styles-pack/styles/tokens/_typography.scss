@@ -1,0 +1,24 @@
+/* ==========================================================================
+   SNAP Design Tokens — Typography
+   Source of truth: person-creation-flow-ui/colors_and_type.css
+   Base html font-size: 18px → rem values produce the pixel sizes shown.
+   ========================================================================== */
+
+:root {
+  /* ---- Type scale ---- */
+  --text-2xs:  0.5rem;      /*  9px */
+  --text-xs:   0.625rem;    /* 11px */
+  --text-sm:   0.6875rem;   /* 12px */
+  --text-base: 0.75rem;     /* 14px */
+  --text-md:   0.8125rem;   /* 15px */
+  --text-lg:   0.875rem;    /* 16px — body default */
+  --text-xl:   1rem;        /* 18px */
+  --text-2xl:  1.125rem;    /* 20px */
+  --text-3xl:  1.25rem;     /* 23px */
+  --text-4xl:  1.5rem;      /* 27px */
+  --text-5xl:  1.875rem;    /* 34px */
+
+  /* ---- Font families ---- */
+  --font-ui:     'Inter Tight Variable', 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --font-accent: 'Cygnito Mono', ui-monospace, monospace;
+}

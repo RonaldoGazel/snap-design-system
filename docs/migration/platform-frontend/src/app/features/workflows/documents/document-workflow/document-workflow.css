@@ -1,0 +1,7 @@
+.doc-workflow { padding: 1rem; }
+.doc-workflow__section { margin-bottom: 1.5rem; }
+.doc-workflow__section h4 { margin: 0 0 0.5rem; font-size: 0.9rem; color: var(--text-color-secondary); text-transform: uppercase; }
+.doc-workflow__transitions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.doc-workflow__dialog { padding: 1rem; border: 1px solid var(--surface-border); border-radius: 6px; margin-top: 1rem; background-color: var(--surface-ground); }
+.doc-workflow__field { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 0.75rem; }
+.doc-workflow__actions { display: flex; justify-content: flex-end; gap: 0.5rem; }

@@ -1,0 +1,112 @@
+:host {
+  display: block;
+}
+
+.filter-toggle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--p-content-border-color);
+  background: var(--p-surface-overlay);
+  color: var(--p-text-muted-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: background 0.15s, color 0.15s;
+  position: relative;
+}
+
+.filter-toggle-btn:hover {
+  background: var(--p-surface-hover);
+  color: var(--p-text-color);
+}
+
+.filter-toggle-btn.active {
+  background: var(--p-primary-color);
+  color: white;
+  border-color: var(--p-primary-color);
+}
+
+.filter-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--p-red-500);
+  border: 2px solid var(--p-surface-overlay);
+}
+
+.filter-panel {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  width: 432px;
+  max-height: 500px;
+  background: var(--p-surface-overlay);
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+}
+
+.filter-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--p-content-border-color);
+}
+
+.filter-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.filter-section {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--p-content-border-color);
+}
+
+.filter-section:last-child {
+  border-bottom: none;
+}
+
+.filter-section-title {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--p-text-muted-color);
+  margin-bottom: 0.5rem;
+}
+
+.filter-tree {
+  width: 100%;
+}
+
+:host ::ng-deep .filter-tree .p-tree {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.filter-profile-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.filter-profile-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+:host ::ng-deep .filter-tree .p-tree-node-label {
+  font-size: 0.85rem;
+}

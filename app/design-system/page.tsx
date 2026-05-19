@@ -1,10 +1,12 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon } from "lucide-react"
+import Link from "next/link"
+import { Check, Copy, User, MapPin, Car, Building, AlertTriangle, Sparkles, X, Eye, Download, Trash2, Search, FileText, Calendar, ArrowLeft, RefreshCw, Sun, Moon, Shield, Lock, ChevronDown, ChevronRight, ChevronLeft, Settings, Link2, Share2, Info } from "lucide-react"
 import { SnapButton, SnapButtonGroup } from "@/components/snap/snap-button"
 import { SnapThemeToggle } from "@/components/snap/snap-theme-toggle"
 import { SnapLogo } from "@/components/snap/snap-logo"
+import { SnapHeader } from "@/components/snap/snap-header"
 import { useTheme } from "@/hooks/use-theme"
 
 /* ============================================
@@ -14,11 +16,11 @@ import { useTheme } from "@/hooks/use-theme"
 
 // Verticais do Ecossistema SNAP (cores oficiais)
 const verticais = [
-  { name: "INVESTIGAÇÃO", color: "#FE473C", colorName: "Coral", icon: "Lupa" },
-  { name: "INTELIGÊNCIA", color: "#72284B", colorName: "Bordô", icon: "Cabeça/Cérebro" },
-  { name: "COOPERAÇÃO", color: "#889EA3", colorName: "Grey Ahead", icon: "Pessoas" },
-  { name: "INFRAESTRUTURA", color: "#287266", colorName: "Petroleum Blue", icon: "Nós conectados" },
-  { name: "ADMINISTRAÇÃO", color: "#333540", colorName: "Deep Gray Blue", icon: "Pessoa com engrenagem" },
+{ name: "INVESTIGAÇÃO", color: "#FE473C", colorName: "Coral", icon: "Lupa" },
+{ name: "INTELIGÊNCIA", color: "#72284B", colorName: "Bordô", icon: "Cabeça/Cérebro" },
+{ name: "COOPERAÇÃO", color: "#889EA3", colorName: "Grey Ahead", icon: "Pessoas" },
+{ name: "INFRAESTRUTURA", color: "#287266", colorName: "Petroleum Blue", icon: "Nós conectados" },
+{ name: "ADMINISTRAÇÃO", color: "#333540", colorName: "Deep Gray Blue", icon: "Pessoa com engrenagem" },
 ]
 
 // Cores Base
@@ -135,6 +137,145 @@ const accordionData = [
     ]
   }
 ]
+
+// Componente Sidebar Demo para documentação - IDÊNTICO à implementação real em /administracao/usuarios
+function SidebarDemo() {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarContentVisible, setSidebarContentVisible] = useState(false)
+  const [inteligenciaExpanded, setInteligenciaExpanded] = useState(true)
+  const [administracaoExpanded, setAdministracaoExpanded] = useState(true)
+  
+  const VERTICAL_COLOR = "#333540" // Deep Gray Blue - Administração
+  
+  const handleSidebarOpen = () => {
+    setSidebarOpen(true)
+    setTimeout(() => setSidebarContentVisible(true), 200)
+  }
+  
+  const handleSidebarClose = () => {
+    setSidebarContentVisible(false)
+    setTimeout(() => setSidebarOpen(false), 50)
+  }
+
+  return (
+    <aside 
+      onMouseEnter={handleSidebarOpen}
+      onMouseLeave={handleSidebarClose}
+      className="flex flex-col py-4 transition-all duration-300 border border-border rounded-xl bg-card dark:bg-[#0C0C0C] relative"
+      style={{ 
+        width: sidebarOpen ? '280px' : '64px',
+        minWidth: sidebarOpen ? '280px' : '64px',
+        height: '400px',
+        boxShadow: sidebarOpen ? '4px 0 24px rgba(0, 0, 0, 0.25)' : 'none'
+      }}
+    >
+      {/* Sidebar Fechada */}
+      {!sidebarOpen && (
+        <>
+          <nav className="flex-1 flex flex-col items-center gap-2">
+            {/* Inteligência - idle */}
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+              <Shield className="w-5 h-5" />
+            </button>
+            {/* Administração - PÁGINA ATUAL = cor da vertical */}
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity" style={{ color: VERTICAL_COLOR }}>
+              <Lock className="w-5 h-5" />
+            </button>
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+              <FileText className="w-5 h-5" />
+            </button>
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+              <Link2 className="w-5 h-5" />
+            </button>
+            <button className="p-3 rounded-lg hover:opacity-80 transition-opacity text-muted-foreground">
+              <Share2 className="w-5 h-5" />
+            </button>
+          </nav>
+          <div className="w-8 mx-auto my-2 border-t border-border" />
+          <button className="p-3 rounded-lg hover:opacity-80 transition-opacity mx-auto text-muted-foreground">
+            <Settings className="w-5 h-5" />
+          </button>
+        </>
+      )}
+
+      {/* Sidebar Aberta - conteúdo aparece após expansão */}
+      {sidebarOpen && sidebarContentVisible && (
+        <div className="flex flex-col h-full animate-in fade-in duration-150">
+          {/* Vertical: Inteligência */}
+          <div className="mb-2">
+            <button 
+              onClick={() => setInteligenciaExpanded(!inteligenciaExpanded)}
+              className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+              style={{ paddingLeft: '10px', paddingRight: '16px' }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-11 flex justify-center">
+                  <Shield className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <span className="font-sans text-sm font-medium text-muted-foreground">Inteligência</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${inteligenciaExpanded ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {inteligenciaExpanded && (
+              <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                  <User className="w-4 h-4 text-muted-foreground" />
+                  <span className="font-sans text-sm text-muted-foreground">Pessoas</span>
+                </button>
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                  <FileText className="w-4 h-4 text-muted-foreground" />
+                  <span className="font-sans text-sm text-muted-foreground">Documentos</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Vertical: Administração - ATIVA */}
+          <div className="mb-2">
+            <button 
+              onClick={() => setAdministracaoExpanded(!administracaoExpanded)}
+              className="w-full flex items-center justify-between py-3 rounded-lg hover:opacity-80 transition-opacity"
+              style={{ paddingLeft: '10px', paddingRight: '16px' }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-11 flex justify-center">
+                  <Lock className="w-5 h-5" style={{ color: VERTICAL_COLOR }} />
+                </div>
+                <span className="font-sans text-sm font-medium" style={{ color: VERTICAL_COLOR }}>Administração</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${administracaoExpanded ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {administracaoExpanded && (
+              <div className="mt-1 space-y-1" style={{ paddingLeft: '54px', paddingRight: '12px' }}>
+                {/* Usuários - PÁGINA ATUAL = fundo da cor da vertical */}
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: VERTICAL_COLOR }}>
+                  <User className="w-4 h-4 text-white" />
+                  <span className="font-sans text-sm text-white">Usuários</span>
+                </button>
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-muted transition-colors">
+                  <User className="w-4 h-4 text-muted-foreground" />
+                  <span className="font-sans text-sm text-muted-foreground">Grupos</span>
+                </button>
+              </div>
+            )}
+          </div>
+          
+          {/* Rodapé */}
+          <div className="mt-auto border-t border-border pt-2" style={{ paddingLeft: '10px', paddingRight: '16px' }}>
+            <button className="w-full flex items-center gap-3 py-2 rounded-lg hover:opacity-80 transition-opacity">
+              <div className="w-11 flex justify-center">
+                <Settings className="w-5 h-5 text-muted-foreground" />
+              </div>
+              <span className="font-sans text-sm text-muted-foreground">Configurações</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </aside>
+  )
+}
 
 // Componente Accordion Interativo para Modal Difusão
 function DifusaoAccordion() {
@@ -775,35 +916,45 @@ const indice = [
 export default function DesignSystemPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+      {/* Header da Documentação - padronizado niveis 1 e 2 */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="max-w-6xl mx-auto px-6 py-4">
+          {/* Linha 1: Titulo + Theme Toggle */}
+          <div className="flex items-center justify-between mb-3">
+            <h1 className="font-title text-2xl text-foreground tracking-wide">SNAP DESIGN SYSTEM</h1>
+            <SnapThemeToggle />
+          </div>
+          
+          {/* Linha 2: Breadcrumb + Links Verticais */}
           <div className="flex items-center justify-between">
-            <div>
-              {/* Breadcrumb */}
-              <nav className="flex items-center gap-2 text-sm font-sans mb-2">
-                <span className="text-foreground font-medium">Design System</span>
-                <span className="text-text-muted">|</span>
-                <a href="/design-system/snap-graph" className="text-text-muted hover:text-foreground transition-colors">
-                  SNAP Graph
-                </a>
-              </nav>
-              <h1 className="font-title text-3xl text-foreground tracking-wide">SNAP DESIGN SYSTEM</h1>
-              <p className="text-sm text-text-muted font-sans mt-1">Documentação base do Ecossistema SNAP</p>
-            </div>
-            <div className="flex items-center gap-4">
-              {/* Theme Toggle */}
-              <SnapThemeToggle />
-              
-              {/* Verticais */}
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#FE473C]" title="Investigação" />
-                <div className="w-3 h-3 rounded-full bg-[#72284B]" title="Inteligência" />
-                <div className="w-3 h-3 rounded-full bg-[#889EA3]" title="Cooperação" />
-                <div className="w-3 h-3 rounded-full bg-[#287266]" title="Infraestrutura" />
-                <div className="w-3 h-3 rounded-full bg-[#333540]" title="Administração" />
-              </div>
-            </div>
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-2 text-sm font-sans">
+              <span className="text-foreground font-semibold">Design System</span>
+            </nav>
+            
+            {/* Links das Verticais */}
+            <nav className="flex items-center gap-4">
+              <a href="/design-system/investigacao" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#FE473C] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#FE473C]" />
+                <span>Investigacao</span>
+              </a>
+              <a href="/design-system/inteligencia" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#72284B] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#72284B]" />
+                <span>Inteligencia</span>
+              </a>
+              <a href="/design-system/cooperacao" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#889EA3] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#889EA3]" />
+                <span>Cooperacao</span>
+              </a>
+              <a href="/design-system/infraestrutura" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#287266] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#287266]" />
+                <span>Infraestrutura</span>
+              </a>
+              <a href="/design-system/administracao" className="flex items-center gap-2 text-sm font-sans text-text-secondary hover:text-[#333540] transition-colors">
+                <div className="w-3 h-3 rounded-full bg-[#333540]" />
+                <span>Administracao</span>
+              </a>
+            </nav>
           </div>
         </div>
       </header>
@@ -881,6 +1032,330 @@ export default function DesignSystemPage() {
           <div className="mt-4 p-4 bg-muted rounded-lg">
             <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Uso no código</p>
             <code className="text-sm text-foreground font-mono">{'<SnapLogo variant="snap" height={32} />'}</code>
+          </div>
+        </Section>
+
+        {/* ============================================
+            HEADER GLOBAL (SnapHeader)
+            ============================================ */}
+        <Section title="HEADER GLOBAL">
+          <p className="text-text-secondary mb-4 font-sans">
+            Componente de cabeçalho global utilizado em todas as telas do ecossistema SNAP. Contém navegação, breadcrumb, notificações e informações do usuário.
+          </p>
+
+          {/* Medidas do Header */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">MEDIDAS EXATAS (FIGMA)</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm font-sans">
+              <div>
+                <span className="text-text-muted">Margem superior:</span>
+                <span className="text-foreground ml-2">32px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Margem inferior:</span>
+                <span className="text-foreground ml-2">24px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Margem esquerda ícone:</span>
+                <span className="text-foreground ml-2">51px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Gap ícone → logo:</span>
+                <span className="text-foreground ml-2">70px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Faixa colorida altura:</span>
+                <span className="text-foreground ml-2">8px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Faixa marginLeft:</span>
+                <span className="text-foreground ml-2">144px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Faixa marginRight:</span>
+                <span className="text-foreground ml-2">32px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Gaps lado direito:</span>
+                <span className="text-foreground ml-2">32px (todos)</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Breadcrumb padding:</span>
+                <span className="text-foreground ml-2">16px (top/bottom)</span>
+              </div>
+            </div>
+            <p className="text-xs text-text-muted mt-4 font-sans">
+              <strong>Estrutura:</strong> [Menu Grid] [Logo SNAP] ... [Notificações] [Tema] [Usuario] → Faixa colorida → Breadcrumb
+            </p>
+          </div>
+
+          {/* Preview do Header - Administração */}
+          <div className="mb-6">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Vertical: Administração</p>
+            <div className="bg-background rounded-xl border border-border overflow-hidden">
+              <SnapHeader 
+                vertical="administracao"
+                breadcrumb={[{ label: "Usuários" }]}
+                userName="Analista de Contrainteligência"
+                userRole="Administrador"
+                userInitials="VD"
+                notificationCount={35}
+              />
+            </div>
+          </div>
+
+          {/* Preview do Header - Inteligência */}
+          <div className="mb-6">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Vertical: Inteligência</p>
+            <div className="bg-background rounded-xl border border-border overflow-hidden">
+              <SnapHeader 
+                vertical="inteligencia"
+                breadcrumb={[{ label: "Processos" }, { label: "Documentos" }]}
+                userName="Coordenador de Inteligência"
+                userRole="Supervisor"
+                userInitials="RC"
+                notificationCount={12}
+              />
+            </div>
+          </div>
+
+          {/* Props do Componente */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">PROPS DO COMPONENTE</p>
+            <div className="space-y-2 text-sm font-sans">
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">vertical</code>
+                <span className="text-text-muted">Define a cor da vertical (administracao, inteligencia, investigacao, cooperacao, infraestrutura)</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">breadcrumb</code>
+                <span className="text-text-muted">{"Array de { label, href? } para navegação"}</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">userName</code>
+                <span className="text-text-muted">Nome do usuário logado</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">userRole</code>
+                <span className="text-text-muted">Role/cargo do usuário</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">userInitials</code>
+                <span className="text-text-muted">Iniciais para o avatar</span>
+              </div>
+              <div className="flex">
+                <code className="text-[#72284b] font-mono w-40">notificationCount</code>
+                <span className="text-text-muted">Número de notificações no badge</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Uso no código */}
+          <div className="p-4 bg-muted rounded-lg">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Uso no código</p>
+            <pre className="text-sm text-foreground font-mono overflow-x-auto">
+{`<SnapHeader 
+  vertical="administracao"
+  breadcrumb={[{ label: "Usuários" }]}
+  userName="Analista de Contrainteligência"
+  userRole="Administrador"
+  userInitials="VD"
+  notificationCount={35}
+/>`}
+            </pre>
+          </div>
+        </Section>
+
+        {/* ============================================
+            SIDEBAR GLOBAL
+            ============================================ */}
+        <Section title="SIDEBAR GLOBAL">
+          <p className="text-text-secondary mb-4 font-sans">
+            Componente de navegação lateral utilizado em todas as telas do ecossistema SNAP. Comportamento de hover para expandir, com verticais colapsáveis.
+          </p>
+
+          {/* Medidas da Sidebar */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">MEDIDAS E REGRAS</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm font-sans">
+              <div>
+                <span className="text-text-muted">Largura fechada:</span>
+                <span className="text-foreground ml-2">64px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Largura aberta:</span>
+                <span className="text-foreground ml-2">280px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Margem esquerda:</span>
+                <span className="text-foreground ml-2">32px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Gap até conteúdo:</span>
+                <span className="text-foreground ml-2">51px</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Background:</span>
+                <span className="text-foreground ml-2">#0F0F10</span>
+              </div>
+              <div>
+                <span className="text-text-muted">Border-radius:</span>
+                <span className="text-foreground ml-2">12px</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Demo Interativa da Sidebar */}
+          <div className="mb-6">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Demo interativa (hover para expandir)</p>
+            <div className="flex gap-8 p-6 bg-background rounded-xl border border-border min-h-[400px]">
+              {/* Sidebar Demo - implementada inline */}
+              <SidebarDemo />
+              
+              {/* Conteúdo exemplo */}
+              <div className="flex-1 p-4">
+                <p className="text-sm text-text-muted font-sans">
+                  Passe o mouse sobre a sidebar para ver o comportamento de expansão.
+                  A sidebar abre como overlay, sem empurrar o conteúdo.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Comportamento */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">COMPORTAMENTO</p>
+            <ul className="space-y-2 text-sm font-sans text-text-secondary">
+              <li>• <strong>Hover</strong> para abrir/fechar (não clique)</li>
+              <li>• Sidebar aberta é <strong>overlay</strong> (position absolute), conteúdo não move</li>
+              <li>• Verticais são <strong>colapsáveis</strong> com chevron</li>
+              <li>• Drop-shadow quando aberta: <code className="text-[#72284b]">4px 0 24px rgba(0, 0, 0, 0.5)</code></li>
+            </ul>
+          </div>
+
+          {/* Cores dos Ícones */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">CORES DOS ÍCONES</p>
+            <div className="space-y-3 text-sm font-sans">
+              <div className="flex items-center gap-4">
+                <Lock className="w-5 h-5 text-muted-foreground" />
+                <span className="text-text-muted">Idle/default:</span>
+                <code className="text-foreground">text-muted-foreground</code>
+              </div>
+              <div className="flex items-center gap-4">
+                <Lock className="w-5 h-5" style={{ color: '#333540' }} />
+                <span className="text-text-muted">Vertical ativa (sidebar fechada):</span>
+                <code className="text-foreground">Cor da vertical</code>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="px-3 py-2 rounded-lg flex items-center gap-3" style={{ backgroundColor: '#333540' }}>
+                  <User className="w-4 h-4 text-white" />
+                  <span className="font-sans text-sm text-white">Usuários</span>
+                </div>
+                <span className="text-text-muted">Item selecionado (aberta):</span>
+                <code className="text-foreground">Fundo cor vertical, texto branco</code>
+              </div>
+            </div>
+          </div>
+
+          {/* Ícones por Vertical */}
+          <div className="p-4 bg-muted rounded-lg">
+            <p className="text-xs text-text-muted mb-3 font-sans uppercase tracking-wide">Ícones por vertical (Lucide)</p>
+            <div className="grid grid-cols-2 gap-3 text-sm font-sans">
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Inteligência:</span>
+                <code className="text-foreground">Shield</code>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Administração:</span>
+                <code className="text-foreground">Lock</code>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Investigação:</span>
+                <code className="text-foreground">Search</code>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Cooperação:</span>
+                <code className="text-foreground">Users</code>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-text-muted">Infraestrutura:</span>
+                <code className="text-foreground">Network</code>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            SELECTS (REGRAS GLOBAIS)
+            ============================================ */}
+        <Section title="SELECTS">
+          <p className="text-text-secondary mb-4 font-sans">
+            Regras para todos os selects do ecossistema SNAP. A setinha (chevron) sempre fica alinhada à direita do container.
+          </p>
+
+          {/* Regras */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">REGRAS DE LAYOUT</p>
+            <ul className="space-y-2 text-sm font-sans text-text-secondary">
+              <li>• Layout do botão: <code className="text-[#72284b]">flex items-center justify-between</code> (NUNCA gap-2)</li>
+              <li>• Texto à esquerda, setinha (chevron) alinhada à direita do container</li>
+              <li>• Largura mínima: definir <code className="text-[#72284b]">min-w-[Xpx]</code> para evitar select muito estreito</li>
+              <li>• Border-radius: <code className="text-[#72284b]">8px (rounded-lg)</code></li>
+              <li>• Chevron: rota������ão de 180° quando aberto (<code className="text-[#72284b]">rotate-180</code>)</li>
+            </ul>
+          </div>
+
+          {/* Dropdown Flutuante */}
+          <div className="mb-6 p-4 bg-card rounded-xl border border-border">
+            <p className="font-title text-lg mb-4">DROPDOWN FLUTUANTE (FORA DE MODAIS)</p>
+            <ul className="space-y-2 text-sm font-sans text-text-secondary">
+              <li>• Container: <code className="text-[#72284b]">relative</code></li>
+              <li>• Dropdown: <code className="text-[#72284b]">absolute top-full left-0 mt-1 z-50</code></li>
+              <li>• Isso faz o dropdown flutuar SOBRE o conteúdo sem empurrar</li>
+            </ul>
+          </div>
+
+          {/* Código exemplo */}
+          <div className="p-4 bg-muted rounded-lg">
+            <p className="text-xs text-text-muted mb-2 font-sans uppercase tracking-wide">Exemplo de código</p>
+            <pre className="text-sm text-foreground font-mono overflow-x-auto whitespace-pre-wrap">
+{`<div className="relative">
+  <button className="flex items-center justify-between px-4 py-2 
+    rounded-lg border border-border bg-card min-w-[180px]">
+    <span>Opção selecionada</span>
+    <ChevronDown className="w-4 h-4 rotate-180" />
+  </button>
+  
+  <div className="absolute top-full left-0 mt-1 w-full 
+    bg-card border border-border rounded-lg z-50">
+    {/* Opções */}
+  </div>
+</div>`}
+            </pre>
+          </div>
+        </Section>
+
+        {/* ============================================
+            TELAS DAS VERTICAIS
+            ============================================ */}
+        <Section title="TELAS DAS VERTICAIS">
+          <p className="text-text-secondary mb-4 font-sans">
+            Documentação visual das telas de cada vertical do ecossistema SNAP.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link 
+              href="/design-system/administracao"
+              className="bg-card rounded-xl border border-border p-6 hover:bg-card-hover transition-colors group"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#333540' }} />
+                <h3 className="font-title text-lg text-foreground group-hover:opacity-80">ADMINISTRAÇÃO</h3>
+              </div>
+              <p className="text-sm text-text-muted font-sans">
+                Usuários, Grupos, Papéis, Convites, Auditoria, Organizações
+              </p>
+            </Link>
           </div>
         </Section>
 
@@ -1050,6 +1525,158 @@ export default function DesignSystemPage() {
               <p className="text-sm text-[#d4789b] font-sans">
                 <strong>Uso da cor da vertical:</strong> A cor primária da vertical ativa é usada em ícones de headers (modais/cards), underlines de tabs, botões de ação positiva, badges de destaque e elementos de foco.
               </p>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            REGRAS CRÍTICAS (INEGOCIÁVEIS)
+            ============================================ */}
+        <Section title="REGRAS CRÍTICAS">
+          <div className="space-y-6">
+            {/* Regra 0: Suporte a Light/Dark Mode */}
+            <div className="p-4 rounded-xl bg-[#72284B]/20 border border-[#72284B]">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-[#72284B] mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">TODOS os componentes devem suportar Light e Dark Mode</p>
+                  <p className="text-text-secondary text-sm font-sans mb-3">
+                    NUNCA usar cores hardcoded (ex: <code className="bg-card px-1 rounded">bg-[#101010]</code>, <code className="bg-card px-1 rounded">text-white</code>) para backgrounds e textos principais. 
+                    SEMPRE usar tokens semanticos que adaptam ao tema automaticamente.
+                  </p>
+                  <div className="grid grid-cols-2 gap-4 mb-3">
+                    <div className="bg-card p-3 rounded-lg border border-error">
+                      <p className="text-xs text-error font-sans mb-2 font-medium">ERRADO</p>
+                      <pre className="text-xs font-mono text-text-secondary overflow-x-auto">
+{`bg-[#101010]
+bg-black
+text-white
+text-[#ffffff]
+border-[#2a2b35]`}
+                      </pre>
+                    </div>
+                    <div className="bg-card p-3 rounded-lg border border-success">
+                      <p className="text-xs text-success font-sans mb-2 font-medium">CORRETO</p>
+                      <pre className="text-xs font-mono text-text-secondary overflow-x-auto">
+{`bg-card
+bg-background
+text-foreground
+text-text-secondary
+border-border`}
+                      </pre>
+                    </div>
+                  </div>
+                  <p className="text-text-muted text-xs font-sans">
+                    Excecao: Cores de verticais (ex: <code className="bg-card px-1 rounded">!bg-[#333540]</code> para botoes primarios) podem ser hardcoded pois sao fixas por definicao.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Regra 1: Cores de Verticais */}
+            <div className="p-4 rounded-xl bg-error/10 border border-error">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-error mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">NUNCA usar cor de uma vertical dentro de outra</p>
+                  <p className="text-text-secondary text-sm font-sans mb-3">
+                    Cada vertical tem sua cor exclusiva. Ao criar telas para a vertical Administração, use #333540. 
+                    Para Inteligência, use #72284B. Misturar cores entre verticais quebra a identidade visual.
+                  </p>
+                  <div className="bg-card p-3 rounded-lg border border-border">
+                    <p className="text-xs text-text-muted font-sans mb-2">Exemplo - Botão primário na vertical Administração:</p>
+                    <pre className="text-xs font-mono text-foreground overflow-x-auto">
+{`<SnapButton
+  variant="primary"
+  className="!bg-[#333540] hover:!bg-[#252730]"
+>
+  Criar
+</SnapButton>`}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Regra 2: Header Padrão */}
+            <div className="p-4 rounded-xl bg-warning-dark/20 border border-warning-dark">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-warning mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Header - Dados do usuário são padronizados</p>
+                  <p className="text-text-secondary text-sm font-sans mb-3">
+                    Ao criar novas telas, SEMPRE usar os mesmos dados de exemplo no SnapHeader:
+                  </p>
+                  <div className="bg-card p-3 rounded-lg border border-border">
+                    <pre className="text-xs font-mono text-foreground overflow-x-auto">
+{`userName="Analista de Contrainteligência"
+userRole="Administrador"
+userInitials="VD"
+notificationCount={35}`}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Regra 3: Tabelas */}
+            <div className="p-4 rounded-xl bg-error/10 border border-error">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-error mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Tabelas - Altura MÁXIMA 48px (inegociável)</p>
+                  <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
+                    <li>Container: <code className="bg-card px-1 rounded">rounded-xl border border-border overflow-hidden mb-6</code></li>
+                    <li>Table: <code className="bg-card px-1 rounded">{'style={{ borderCollapse: "collapse" }}'}</code></li>
+                    <li>Linha {'<tr>'}: <code className="bg-card px-1 rounded">{'style={{ height: "48px" }}'}</code></li>
+                    <li>Celulas {'<th>/<td>'}: <code className="bg-card px-1 rounded">{'style={{ height: "48px", verticalAlign: "middle" }}'}</code> + <code className="bg-card px-1 rounded">px-4</code></li>
+                    <li>Header: SEM background, SEM py-*, apenas <code className="bg-card px-1 rounded">border-b border-border</code></li>
+                    <li>Atomos internos (badges, botoes) DEVEM caber em 48px</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Regra 4: Título de página */}
+            <div className="p-4 rounded-xl bg-muted border border-border">
+              <div className="flex items-start gap-3">
+                <Info className="w-5 h-5 text-text-muted mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Título de página - Medidas exatas</p>
+                  <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
+                    <li>Ícone: <code className="bg-card px-1 rounded">w-8 h-8</code> na cor da vertical</li>
+                    <li>Gap ícone/título: <code className="bg-card px-1 rounded">gap-3</code> (12px)</li>
+                    <li>Gap título/selects: <code className="bg-card px-1 rounded">gap-6</code> (24px)</li>
+                    <li>Margem inferior: <code className="bg-card px-1 rounded">mb-6</code> (24px)</li>
+                    <li>Selects ficam AO LADO do título, NUNCA acima</li>
+                    <li>SEM underline abaixo do título</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Regra 5: Modais - Estrutura e margens */}
+            <div className="p-4 rounded-xl bg-error/10 border border-error">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-error mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Modais - Estrutura OBRIGATÓRIA</p>
+                  <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
+                    <li><strong>Background:</strong> <code className="bg-card px-1 rounded">bg-card</code> - adapta ao tema (light = claro, dark = escuro). NUNCA forçar tema.</li>
+                    <li><strong>ESTRUTURA CRÍTICA:</strong> <code className="bg-card px-1 rounded">SnapModalFooter</code> deve estar <strong>FORA</strong> do <code className="bg-card px-1 rounded">SnapModalContent</code> (irmão, não filho)</li>
+                    <li><strong>Header:</strong> Ícone da vertical (cor da vertical) + título UPPERCASE (font-title 18px)</li>
+                    <li><strong>Footer padding:</strong> <code className="bg-card px-1 rounded">px-6 pb-6</code> (24px direita/baixo)</li>
+                    <li><strong>Gap entre botões:</strong> <code className="bg-card px-1 rounded">gap-4</code> (16px)</li>
+                    <li><strong>Ordem botões:</strong> Cancelar (ghost) PRIMEIRO, Ação primária SEGUNDO</li>
+                    <li><strong>Botões:</strong> Ambos com ícone (X para cancelar, Check/ação para confirmar)</li>
+                  </ul>
+                  <div className="mt-3 p-3 bg-card rounded-lg">
+                    <p className="text-xs text-text-muted font-mono">
+                      {'<SnapModal> → <SnapModalHeader/> → <SnapModalContent>...</SnapModalContent> → <SnapModalFooter>...</SnapModalFooter> → </SnapModal>'}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </Section>
@@ -1387,7 +2014,7 @@ export default function DesignSystemPage() {
             {/* Exemplo de Modal - Verificação de Entidade */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Verificação de Entidade</p>
-{/* Modal: usa CSS variables para adaptar ao tema */}
+{/* Modal: bg-card adapta ao tema */}
               <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
@@ -1449,7 +2076,7 @@ export default function DesignSystemPage() {
             {/* Exemplo de Modal - Difusão */}
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Modal Difusão de Processo</p>
-              {/* Modal: background #101112, borda #2A2B35, 1px */}
+{/* Modal: bg-card adapta ao tema */}
               <div className="bg-card rounded-xl border border-border max-w-md mx-auto overflow-hidden">
                 {/* Header compacto */}
                 <div className="px-6 py-4">
@@ -1604,7 +2231,7 @@ export default function DesignSystemPage() {
             <div className="space-y-4">
               <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide">Exemplo: Card de Entidade (Endereço)</p>
               
-              {/* Card */}
+              {/* Card: usa bg-card (adapta ao tema) */}
               <div className="bg-card rounded-xl border border-border w-[340px] overflow-hidden">
                 {/* Header - pt-4 (16px) do topo, pb-3 (12px) até a linha */}
                 <div className="px-5 pt-4 pb-3">
@@ -1770,6 +2397,60 @@ export default function DesignSystemPage() {
                   <p className="text-text-secondary">Background #4d3a1a, ícone alerta</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================
+            BOTÃO VOLTAR (SnapBackButton)
+            ============================================ */}
+        <Section title="BOTÃO VOLTAR (SnapBackButton)">
+          <div className="space-y-6">
+            {/* Regras */}
+            <div className="p-4 rounded-xl bg-error/10 border border-error">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 text-error mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-foreground font-medium font-sans mb-2">Medidas OBRIGATÓRIAS - Não alterar!</p>
+                  <ul className="text-text-secondary text-sm font-sans space-y-1 list-disc ml-4">
+                    <li><strong>Tamanho:</strong> <code className="bg-card px-1 rounded">w-8 h-8</code> (32x32px)</li>
+                    <li><strong>Formato:</strong> <code className="bg-card px-1 rounded">rounded-full</code></li>
+                    <li><strong>Borda:</strong> <code className="bg-card px-1 rounded">border border-border</code> (1px, cor do tema)</li>
+                    <li><strong>Ícone:</strong> <code className="bg-card px-1 rounded">ChevronLeft w-5 h-5 text-text-secondary</code></li>
+                    <li><strong>Hover:</strong> <code className="bg-card px-1 rounded">bg-muted</code></li>
+                    <li><strong>Gap até título:</strong> <code className="bg-card px-1 rounded">gap-3</code> (12px)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Exemplo Visual */}
+            <div className="p-6 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-text-muted font-sans uppercase tracking-wide mb-4">Exemplo: Título com botão voltar</p>
+              <div className="flex items-center gap-3">
+                <button className="w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors">
+                  <ChevronLeft className="w-5 h-5 text-text-secondary" />
+                </button>
+                <h1 className="font-title text-2xl text-foreground">DETALHE DO USUÁRIO</h1>
+              </div>
+            </div>
+
+            {/* Uso */}
+            <div className="p-4 rounded-xl bg-card border border-border">
+              <p className="text-sm font-medium text-foreground mb-3 font-sans">Uso do componente</p>
+              <pre className="text-xs font-mono text-text-secondary bg-muted p-3 rounded-lg overflow-x-auto">
+{`import { SnapBackButton } from "@/components/snap/snap-back-button"
+
+<div className="flex items-center gap-3 mb-6">
+  <SnapBackButton 
+    onBack={() => router.push('/path/to/list')}
+    title="Voltar para lista"
+  />
+  <h1 className="font-title text-2xl text-foreground">
+    DETALHE DO GRUPO
+  </h1>
+</div>`}
+              </pre>
             </div>
           </div>
         </Section>
@@ -1997,6 +2678,14 @@ export default function DesignSystemPage() {
                     <span className="text-text-secondary">Links de entidade com cores WCAG</span>
                   </div>
                   <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapPagination</code>
+                    <span className="text-text-secondary">Paginacao com numeros e navegacao</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">SnapPageTitle</code>
+                    <span className="text-text-secondary">Titulo de pagina com icone (w-8 h-8)</span>
+                  </div>
+                  <div className="flex items-start gap-2">
                     <code className="text-[#72284b] bg-[#72284b]/10 px-1 rounded text-xs">verticals</code>
                     <span className="text-text-secondary">Cores das 5 verticais SNAP</span>
                   </div>
@@ -2018,9 +2707,11 @@ export default function DesignSystemPage() {
   ├── snap-button.tsx       # SnapButton, SnapButtonGroup
   ├── snap-card.tsx         # SnapCard, SnapCardHeader, SnapCardTitle, etc.
   ├── snap-modal.tsx        # SnapModal, SnapModalHeader, SnapModalContent, etc.
-  ├── snap-tabs.tsx         # SnapTabs, SnapTabsList, SnapTabsTrigger, SnapTabsContent
+  ├─�� snap-tabs.tsx         # SnapTabs, SnapTabsList, SnapTabsTrigger, SnapTabsContent
   ├── snap-select.tsx       # SnapSelect (estilo accordion)
-  └── snap-entity-link.tsx  # SnapEntityLink, PessoaLink, EnderecoLink, etc.
+  ��── snap-entity-link.tsx  # SnapEntityLink, PessoaLink, EnderecoLink, etc.
+  ├── snap-pagination.tsx   # SnapPagination (paginacao padrao)
+  └── snap-page-title.tsx   # SnapPageTitle (titulo de pagina)
 
 /lib/
   └── snap-tokens.ts        # Verticais, cores, tipografia, espaçamentos, WCAG

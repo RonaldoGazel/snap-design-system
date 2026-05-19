@@ -1,0 +1,83 @@
+<div class="search-panel">
+  <p-toast />
+  <div class="search-panel__header">
+    <h2 class="search-panel__title">Busca de Documentos</h2>
+  </div>
+
+  <div class="search-panel__bar">
+    <input pInputText type="text" [ngModel]="query()" (ngModelChange)="query.set($event)"
+      placeholder="Buscar documentos..." class="search-panel__input" (keyup.enter)="search()" />
+    <p-button label="Buscar" icon="pi pi-search" (onClick)="search()" />
+  </div>
+
+  <div class="search-panel__filters-toggle">
+    <p-button [label]="showAdvancedFilters() ? 'Ocultar Filtros' : 'Filtros Avançados'"
+      [icon]="showAdvancedFilters() ? 'pi pi-chevron-up' : 'pi pi-chevron-down'" severity="secondary" [text]="true"
+      (onClick)="toggleAdvancedFilters()" />
+  </div>
+
+  @if (showAdvancedFilters()) {
+  <div class="search-panel__advanced-filters">
+    <p-multiselect [options]="typeOptions" [ngModel]="typeFilter()" (ngModelChange)="typeFilter.set($event)"
+      optionLabel="label" optionValue="value" placeholder="Tipo Documental" class="search-panel__filter-item" />
+    <p-select [options]="classificationOptions" [ngModel]="classificationFilter()"
+      (ngModelChange)="classificationFilter.set($event)" optionLabel="label" optionValue="value"
+      placeholder="Classificação" [showClear]="true" class="search-panel__filter-item" />
+    <p-select [options]="priorityOptions" [ngModel]="priorityFilter()" (ngModelChange)="priorityFilter.set($event)"
+      optionLabel="label" optionValue="value" placeholder="Prioridade" [showClear]="true"
+      class="search-panel__filter-item" />
+    <p-multiselect [options]="statusOptions" [ngModel]="statusFilter()" (ngModelChange)="statusFilter.set($event)"
+      optionLabel="label" optionValue="value" placeholder="Status" class="search-panel__filter-item" />
+    <p-datepicker [ngModel]="periodFilter()" (ngModelChange)="periodFilter.set($event)" selectionMode="range"
+      placeholder="Período" dateFormat="dd/mm/yy" [showClear]="true" class="search-panel__filter-item" />
+  </div>
+  }
+
+  @if (hasSearched() && results().length === 0 && !loading() && !error()) {
+  <div class="search-panel__empty-message">
+    Nenhum documento encontrado para os critérios informados
+  </div>
+  }
+
+  @if (error()) {
+  <div class="search-panel__error">
+    <i class="pi pi-exclamation-triangle"></i>
+    <span>{{ error() }}</span>
+    <p-button label="Tentar Novamente" icon="pi pi-refresh" (onClick)="executeSearch()" [text]="true" />
+  </div>
+  }
+
+  @if (hasSearched() && (results().length > 0 || loading())) {
+  <p-table [value]="results()" [loading]="loading()" [rowHover]="true" dataKey="document.id">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Título</th>
+        <th>Tipo</th>
+        <th>Classificação</th>
+        <th>Status</th>
+        <th>Processo (NUP)</th>
+        <th>Setor</th>
+        <th>Responsável</th>
+        <th>Versão</th>
+        <th>Data</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr (click)="onRowClick(item)" class="search-panel__result-row">
+        <td>{{ item.document.title }}</td>
+        <td>{{ item.document.type }}</td>
+        <td><app-classification-badge [classification]="item.document.securityClassification" /></td>
+        <td><app-status-badge [status]="item.document.status" context="document" /></td>
+        <td>{{ item.process?.nup ?? '-' }}</td>
+        <td>{{ item.document.currentSectorId }}</td>
+        <td>{{ item.document.assignedUserId ?? '-' }}</td>
+        <td>{{ item.document.version }}</td>
+        <td>{{ item.document.updatedAt | dateFormat }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-paginator [rows]="pageSize()" [totalRecords]="totalRecords()" [rowsPerPageOptions]="[10, 20, 50]"
+    (onPageChange)="onPageChange($event)" />
+  }
+</div>

@@ -1,0 +1,40 @@
+.collabora-editor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 400px;
+}
+
+.collabora-editor__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    color: var(--p-text-muted-color);
+}
+
+.collabora-editor__error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--p-red-50);
+    border-radius: var(--p-border-radius);
+    color: var(--p-red-700);
+}
+
+.collabora-editor__container {
+    flex: 1;
+    min-height: 600px;
+    border: 1px solid var(--p-surface-border);
+    border-radius: var(--p-border-radius);
+    overflow: hidden;
+}
+
+.collabora-iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    border: none;
+}

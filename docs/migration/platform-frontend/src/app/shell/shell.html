@@ -1,0 +1,19 @@
+<div class="l-shell">
+    <app-header />
+    <app-sidebar />
+    <div class="l-shell__main" [style.margin-left.px]="contentMargin()">
+        <div class="l-shell__scroll">
+            @if (showBreadcrumb()) {
+            <app-breadcrumb class="l-shell__breadcrumb" />
+            }
+            <main class="l-shell__content">
+                <router-outlet />
+            </main>
+        </div>
+    </div>
+</div>
+<p-toast position="bottom-center" />
+<p-confirmdialog [pt]="{
+        pcAcceptButton: { root: { 'data-testid': 'shell-confirm-accept-btn' } },
+        pcRejectButton: { root: { 'data-testid': 'shell-confirm-reject-btn' } }
+    }" />

@@ -1,0 +1,50 @@
+<div class="process-form">
+  <div class="process-form__header">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    <h2>Novo Processo</h2>
+  </div>
+
+  <div class="process-form__description">
+    <p>Um <strong>Processo</strong> e um container operacional que agrupa documentos relacionados a um mesmo contexto ou objetivo. Por exemplo, uma investigacao pode gerar varios documentos (relatorios, pedidos de busca, ordens) que tramitam de forma independente mas pertencem ao mesmo processo. O processo permite acompanhar o andamento consolidado de todos os documentos vinculados.</p>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="process-form__error">
+      <i class="pi pi-exclamation-triangle"></i>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="process-form__body">
+    <div class="process-form__field">
+      <label for="identifier">Identificador <span class="required">*</span></label>
+      <small class="process-form__hint">Numero ou codigo unico que identifica este processo. Ex: "PROC-2024-001", "INQ-2024-042". Sera usado para referenciar o processo em documentos e comunicacoes.</small>
+      <input id="identifier" pInputText formControlName="identifier" placeholder="Ex: PROC-2024-001" [class.ng-invalid]="isInvalid('identifier')" />
+      @if (isInvalid('identifier')) { <small class="p-error">Identificador e obrigatorio.</small> }
+    </div>
+
+    <div class="process-form__field">
+      <label for="subject">Assunto <span class="required">*</span></label>
+      <small class="process-form__hint">Descricao resumida do assunto ou objeto do processo. Ex: "Investigacao de atividades suspeitas na regiao norte".</small>
+      <input id="subject" pInputText formControlName="subject" placeholder="Ex: Investigacao de atividades suspeitas" [class.ng-invalid]="isInvalid('subject')" />
+      @if (isInvalid('subject')) { <small class="p-error">Assunto e obrigatorio.</small> }
+    </div>
+
+    <div class="process-form__field">
+      <label for="description">Descricao</label>
+      <small class="process-form__hint">Contexto detalhado do processo: historico, objetivos, participantes envolvidos e qualquer informacao relevante para quem for trabalhar com este processo.</small>
+      <textarea id="description" pTextarea formControlName="description" placeholder="Descreva o contexto, objetivos e informacoes relevantes do processo" rows="4"></textarea>
+    </div>
+
+    <div class="process-form__field">
+      <label>Unidade e Perfil de Origem</label>
+      <small class="process-form__hint">Selecione a unidade organizacional e o perfil do responsavel pela abertura deste processo. Expanda a arvore para escolher a unidade e depois selecione o perfil.</small>
+      <app-org-selector [multiple]="false" [selectedCombos]="originCombos()" (selectionChange)="onOriginChange($event)" />
+    </div>
+
+    <div class="process-form__actions">
+      <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="goBack()"></button>
+      <button pButton type="submit" label="Criar Processo" [disabled]="saving()"></button>
+    </div>
+  </form>
+</div>

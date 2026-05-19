@@ -1,0 +1,21 @@
+@switch (mode()) {
+@case ('skeleton') {
+<div class="loading-skeleton">
+    <p-skeleton width="40%" height="1.25rem" />
+    <p-skeleton width="100%" height="0.875rem" />
+    <p-skeleton width="100%" height="0.875rem" />
+    <p-skeleton width="75%" height="0.875rem" />
+    <div class="loading-skeleton__row">
+        <p-skeleton width="48%" height="5rem" />
+        <p-skeleton width="48%" height="5rem" />
+    </div>
+    <p-skeleton width="100%" height="0.875rem" />
+    <p-skeleton width="60%" height="0.875rem" />
+</div>
+}
+@case ('progress') {
+<div class="loading-progress">
+    <p-progressbar mode="indeterminate" [style]="{ height: '4px' }" />
+</div>
+}
+}

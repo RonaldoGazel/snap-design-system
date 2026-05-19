@@ -1,0 +1,165 @@
+<p-toast />
+
+<div class="document-editor">
+  @if (loading()) {
+  <div class="document-editor__loading">
+    <i class="pi pi-spin pi-spinner"></i>
+    <span>Carregando documento...</span>
+  </div>
+  } @else if (error()) {
+  <div class="document-editor__error">
+    <i class="pi pi-exclamation-triangle"></i>
+    <span>{{ error() }}</span>
+    <p-button label="Tentar Novamente" icon="pi pi-refresh" (onClick)="loadDocument(document()?.id ?? '')"
+      [text]="true" />
+  </div>
+  } @else if (document(); as doc) {
+  <!-- Formalized indicator -->
+  @if (isFormalized()) {
+  <div class="document-editor__formalized-banner">
+    <i class="pi pi-lock"></i>
+    <span>Documento Formalizado — Edição Bloqueada</span>
+  </div>
+  }
+
+  <!-- Header -->
+  <div class="document-editor__header">
+    <div class="document-editor__header-top">
+      @if (isEditable()) {
+      <input class="document-editor__title-input" type="text" [ngModel]="doc.title"
+        (ngModelChange)="onTitleChange($event)" placeholder="Título do documento" />
+      } @else {
+      <h2 class="document-editor__title-readonly">{{ doc.title }}</h2>
+      }
+      <p-button icon="pi pi-ellipsis-v" [text]="true" (onClick)="actionMenu.toggle($event)" />
+      <p-menu #actionMenu [model]="actionMenuItems()" [popup]="true" />
+    </div>
+
+    <div class="document-editor__header-meta">
+      <span class="document-editor__meta-item"><strong>Tipo:</strong> {{ doc.type }}</span>
+      <span class="document-editor__meta-item">
+        <strong>Classificação:</strong>
+        <app-classification-badge [classification]="doc.securityClassification" />
+      </span>
+      <span class="document-editor__meta-item">
+        <strong>Status:</strong>
+        <app-status-badge [status]="doc.status" context="document" />
+      </span>
+      <span class="document-editor__meta-item"><strong>Versão:</strong> {{ doc.version }}</span>
+      <span class="document-editor__meta-item"><strong>Processo:</strong> {{ doc.processId }}</span>
+      <span class="document-editor__meta-item"><strong>Responsável:</strong> {{ doc.assignedUserId ?? doc.creatorId
+        }}</span>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="document-editor__body">
+    <!-- Editor panel -->
+    <div class="document-editor__panel">
+      @if (isEditable()) {
+      <app-collabora-editor [resourceType]="'document'" [resourceId]="doc.id" />
+      } @else {
+      <div class="document-editor__content-readonly" [innerHTML]="content()"></div>
+      }
+
+      @if (saving()) {
+      <div class="document-editor__saving">
+        <i class="pi pi-spin pi-spinner"></i> Salvando...
+      </div>
+      }
+    </div>
+
+    <!-- Side panel -->
+    <div class="document-editor__side-panel">
+      <p-tabs value="0">
+        <p-tablist>
+          <p-tab value="0">Metadados</p-tab>
+          <p-tab value="1">Versões</p-tab>
+          <p-tab value="2">Anexos</p-tab>
+          <p-tab value="3">Observações de Revisão</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+          <!-- Metadados tab -->
+          <p-tabpanel value="0">
+            <div class="document-editor__metadata-section">
+              <div class="document-editor__metadata-row"><strong>Classificação:</strong> {{ doc.securityClassification
+                }}</div>
+              <div class="document-editor__metadata-row"><strong>Tipo:</strong> {{ doc.type }}</div>
+              <div class="document-editor__metadata-row"><strong>Setor:</strong> {{ doc.currentSectorId }}</div>
+              <div class="document-editor__metadata-row"><strong>Criado em:</strong> {{ doc.createdAt | dateFormat }}
+              </div>
+              <div class="document-editor__metadata-row"><strong>Atualizado em:</strong> {{ doc.updatedAt | dateFormat
+                }}</div>
+            </div>
+          </p-tabpanel>
+
+          <!-- Versões tab -->
+          <p-tabpanel value="1">
+            <app-version-history [documentId]="doc.id" />
+          </p-tabpanel>
+
+          <!-- Anexos tab -->
+          <p-tabpanel value="2">
+            <div class="document-editor__attachments-section">
+              @if (isEditable()) {
+              <div class="document-editor__drop-zone" (dragover)="$event.preventDefault()"
+                (drop)="$event.preventDefault(); onFileSelect({ files: [$any($event.dataTransfer?.files?.[0])] })">
+                <i class="pi pi-cloud-upload"></i>
+                <span>Arraste um arquivo aqui ou</span>
+                <p-button label="Selecionar Arquivo" (onClick)="triggerFileUpload()" [text]="true" />
+                <input type="file" style="display: none" (change)="onFileSelect($event)"
+                  accept=".pdf,.docx,.xlsx,.png,.jpg,.jpeg,.tiff,.tif" />
+              </div>
+              }
+
+              @if (uploading()) {
+              <p-progressbar [value]="uploadProgress()" />
+              }
+
+              @if (attachments().length === 0) {
+              <div class="document-editor__empty-message">Nenhum anexo</div>
+              } @else {
+              <ul class="document-editor__attachment-list">
+                @for (att of attachments(); track att.id) {
+                <li class="document-editor__attachment-item">
+                  <i class="pi pi-file"></i>
+                  <span>{{ att.fileName }}</span>
+                  <span class="document-editor__file-size">{{ (att.fileSize / 1024 / 1024).toFixed(2) }} MB</span>
+                </li>
+                }
+              </ul>
+              }
+            </div>
+          </p-tabpanel>
+
+          <!-- Observações de Revisão tab -->
+          <p-tabpanel value="3">
+            <div class="document-editor__reviews-section">
+              @if (reviews().length === 0) {
+              <div class="document-editor__empty-message">Nenhuma observação de revisão</div>
+              } @else {
+              <ul class="document-editor__review-list">
+                @for (review of reviews(); track review.id) {
+                <li class="document-editor__review-item">
+                  <div class="document-editor__review-header">
+                    <strong>{{ review.reviewerName ?? review.reviewerId }}</strong>
+                    <span class="document-editor__review-date">{{ review.createdAt | dateFormat }}</span>
+                  </div>
+                  @if (review.observation) {
+                  <p class="document-editor__review-observation">{{ review.observation }}</p>
+                  }
+                  @if (review.reviewType) {
+                  <app-status-badge [status]="review.status" context="document" />
+                  }
+                </li>
+                }
+              </ul>
+              }
+            </div>
+          </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
+    </div>
+  </div>
+  }
+</div>

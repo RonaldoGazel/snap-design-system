@@ -1,0 +1,209 @@
+{
+    "items": [
+        {
+            "uuid": "p1",
+            "nome": "CARLA EDUARDA MENTES",
+            "cpf": "12345678900",
+            "rg": "12345678-9",
+            "data_nascimento": "1985-03-12",
+            "sexo": "MASCULINO",
+            "mae": "SÔNIA MARIA MENDES",
+            "pai": "JOSÉ EDUARDO MENDES",
+            "nacionalidade": "BRASIL",
+            "naturalidade": "RIO DE JANEIRO-RJ",
+            "cor_pele": "NEGRO",
+            "estado_civil": "SOLTEIRO",
+            "grau_instrucao": "SUPERIOR INCOMPLETO",
+            "profissao": "MÚSICO",
+            "vulgos": [
+                "CARLOTA",
+                "CARLA MENDES"
+            ],
+            "sinais_caracteristicos": "[{\"mark_type\": \"TATUAGEM\", \"description\": \"Dragão tribal\", \"location\": \"BRACO_DIREITO\"}, {\"mark_type\": \"CICATRIZ\", \"description\": \"Cicatriz de corte 8cm\", \"location\": \"ABDOMEN_ESQUERDO\"}]",
+            "rotulos": "[\"Person\", \"Inmate\"]",
+            "fonte": "SIPEN",
+            "id": "p1",
+            "perfis": [],
+            "fontes": [
+                {
+                    "tipo": "SIPEN",
+                    "status": "ativo"
+                }
+            ],
+            "resumoAnalitico": "",
+            "statusReconciliacao": "sem_divergencia",
+            "tagsRelevantes": [],
+            "_sources": [
+                {
+                    "graph_id": "6b10e263-f1d0-439c-85b2-63a27b334bef",
+                    "display_name": "Grafo Publico"
+                }
+            ],
+            "_merged_from": 1
+        },
+        {
+            "uuid": "person-lawyer-p1",
+            "nome": "DR. MARCOS ANTONIO SILVA",
+            "rotulos": "[\"Person\", \"Lawyer\"]",
+            "fonte": "SIPEN",
+            "id": "person-lawyer-p1",
+            "vulgos": [],
+            "perfis": [],
+            "fontes": [
+                {
+                    "tipo": "SIPEN",
+                    "status": "ativo"
+                }
+            ],
+            "resumoAnalitico": "",
+            "statusReconciliacao": "sem_divergencia",
+            "tagsRelevantes": [],
+            "_sources": [
+                {
+                    "graph_id": "6b10e263-f1d0-439c-85b2-63a27b334bef",
+                    "display_name": "Grafo Publico"
+                }
+            ],
+            "_merged_from": 1
+        },
+        {
+            "uuid": "75c43b03-36f8-4144-8f4f-f7c931e44469",
+            "nome": "ERIC FERREIRA PEREIRA",
+            "cpf": "09321218610",
+            "rg": "2104191294",
+            "data_nascimento": "15/03/1990",
+            "sexo": "MASCULINO",
+            "mae": "MARIA DA CONCEICAO FERREIRA",
+            "nacionalidade": "BRASILEIRO",
+            "fonte": "SNAP",
+            "id": "75c43b03-36f8-4144-8f4f-f7c931e44469",
+            "vulgos": [],
+            "perfis": [],
+            "fontes": [
+                {
+                    "tipo": "SNAP",
+                    "status": "ativo"
+                }
+            ],
+            "resumoAnalitico": "",
+            "statusReconciliacao": "sem_divergencia",
+            "tagsRelevantes": [],
+            "_sources": [
+                {
+                    "graph_id": "6b10e263-f1d0-439c-85b2-63a27b334bef",
+                    "display_name": "Grafo Publico"
+                }
+            ],
+            "_merged_from": 1
+        },
+        {
+            "uuid": "19f51770-d7f8-4f8e-9d97-f1760987bfcb",
+            "nome": "JOAO FERREIRA PEREIRA",
+            "cpf": "55566677788",
+            "sexo": "MASCULINO",
+            "fonte": "SNAP",
+            "id": "19f51770-d7f8-4f8e-9d97-f1760987bfcb",
+            "vulgos": [],
+            "perfis": [],
+            "fontes": [
+                {
+                    "tipo": "SNAP",
+                    "status": "ativo"
+                }
+            ],
+            "resumoAnalitico": "",
+            "statusReconciliacao": "sem_divergencia",
+            "tagsRelevantes": [],
+            "_sources": [
+                {
+                    "graph_id": "6b10e263-f1d0-439c-85b2-63a27b334bef",
+                    "display_name": "Grafo Publico"
+                }
+            ],
+            "_merged_from": 1
+        },
+        {
+            "uuid": "person-v-p1-001",
+            "nome": "MARIA APARECIDA MENDES",
+            "rg": "98765432-1",
+            "rotulos": "[\"Person\", \"Visitor\"]",
+            "fonte": "SIPEN",
+            "id": "person-v-p1-001",
+            "vulgos": [],
+            "perfis": [],
+            "fontes": [
+                {
+                    "tipo": "SIPEN",
+                    "status": "ativo"
+                }
+            ],
+            "resumoAnalitico": "",
+            "statusReconciliacao": "sem_divergencia",
+            "tagsRelevantes": [],
+            "_sources": [
+                {
+                    "graph_id": "6b10e263-f1d0-439c-85b2-63a27b334bef",
+                    "display_name": "Grafo Publico"
+                }
+            ],
+            "_merged_from": 1
+        },
+        {
+            "uuid": "8c308a9e-2238-4e26-a7bd-720eb9a55cfa",
+            "nome": "MARIA DA CONCEICAO FERREIRA",
+            "cpf": "11122233344",
+            "sexo": "FEMININO",
+            "fonte": "SNAP",
+            "id": "8c308a9e-2238-4e26-a7bd-720eb9a55cfa",
+            "vulgos": [],
+            "perfis": [],
+            "fontes": [
+                {
+                    "tipo": "SNAP",
+                    "status": "ativo"
+                }
+            ],
+            "resumoAnalitico": "",
+            "statusReconciliacao": "sem_divergencia",
+            "tagsRelevantes": [],
+            "_sources": [
+                {
+                    "graph_id": "6b10e263-f1d0-439c-85b2-63a27b334bef",
+                    "display_name": "Grafo Publico"
+                }
+            ],
+            "_merged_from": 1
+        },
+        {
+            "uuid": "person-v-p1-002",
+            "nome": "RICARDO SANTOS OLIVEIRA",
+            "rg": "34567890-2",
+            "rotulos": "[\"Person\", \"Visitor\"]",
+            "fonte": "SIPEN",
+            "id": "person-v-p1-002",
+            "vulgos": [],
+            "perfis": [],
+            "fontes": [
+                {
+                    "tipo": "SIPEN",
+                    "status": "ativo"
+                }
+            ],
+            "resumoAnalitico": "",
+            "statusReconciliacao": "sem_divergencia",
+            "tagsRelevantes": [],
+            "_sources": [
+                {
+                    "graph_id": "6b10e263-f1d0-439c-85b2-63a27b334bef",
+                    "display_name": "Grafo Publico"
+                }
+            ],
+            "_merged_from": 1
+        }
+    ],
+    "total": 7,
+    "total_merged": 7,
+    "total_raw": 7,
+    "limit": 200,
+    "offset": 0
+}

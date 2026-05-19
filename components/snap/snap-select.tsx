@@ -24,7 +24,7 @@ interface SnapSelectProps {
   onChange: (value: string) => void
   options: SnapSelectOption[]
   placeholder?: string
-  label?: string
+  label?: React.ReactNode
   required?: boolean
   className?: string
 }
@@ -43,24 +43,24 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
     return (
       <div ref={ref} className={cn("w-full", className)}>
         {label && (
-          <label className="text-sm text-white mb-2 block font-sans">
-            {label} {required && <span className="text-white">*</span>}
+          <label className="text-sm text-text-muted mb-2 block font-sans">
+            {label} {required && <span className="text-error">*</span>}
           </label>
         )}
         
-        <div className="bg-[#2a2b35] border border-[#2a2b35] rounded-lg overflow-hidden">
+        <div className="bg-muted dark:bg-[#000000] border border-border rounded-lg overflow-hidden focus-within:border-foreground/50">
           {/* Trigger */}
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[#3a3b45] transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between hover:bg-muted-foreground/10 transition-colors"
           >
-            <span className="text-[#b1b3c2] text-sm font-sans">
+            <span className="text-foreground text-sm font-sans">
               {selectedOption?.label || placeholder || "Selecione..."}
             </span>
             <ChevronRight 
               className={cn(
-                "w-4 h-4 text-[#898c9d] transition-transform duration-200",
+                "w-4 h-4 text-text-muted transition-transform duration-200",
                 isOpen && "rotate-90"
               )}
             />
@@ -69,8 +69,8 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
           {/* Dropdown (Accordion Style) */}
           <div 
             className={cn(
-              "bg-[#1a1b1e] overflow-hidden transition-all duration-200 ease-out",
-              isOpen ? "max-h-[160px] border-t border-[#2a2b35]" : "max-h-0"
+              "bg-background dark:bg-[#0a0a0a] overflow-hidden transition-all duration-200 ease-out",
+              isOpen ? "max-h-[160px] border-t border-border" : "max-h-0"
             )}
           >
             <div className="overflow-y-auto max-h-[160px] scrollbar-minimal">
@@ -80,10 +80,10 @@ export const SnapSelect = forwardRef<HTMLDivElement, SnapSelectProps>(
                   type="button"
                   onClick={() => handleSelect(option.value)}
                   className={cn(
-                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-[#2a2b35] transition-colors",
+                    "w-full text-left px-4 py-3 text-sm font-sans hover:bg-muted transition-colors",
                     option.value === value 
-                      ? "text-white bg-[#2a2b35]" 
-                      : "text-[#898c9d]"
+                      ? "text-foreground bg-muted" 
+                      : "text-text-muted"
                   )}
                 >
                   {option.label}

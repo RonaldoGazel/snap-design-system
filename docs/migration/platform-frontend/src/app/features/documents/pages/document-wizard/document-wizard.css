@@ -1,0 +1,417 @@
+/* ===================================================================
+   Module: document-wizard
+   SMACSS category: Module (BEM notation)
+   Uses SNAP design tokens to match person module visual language.
+   =================================================================== */
+
+/* Block */
+.document-wizard {
+  /* Box Model */
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-7);
+  /* Typography */
+  color: var(--snap-text-primary);
+}
+
+.document-wizard__content {
+  /* Box Model */
+  min-height: 400px;
+}
+
+/* ── Step panel ────────────────────────────────────────────────────── */
+
+.document-wizard__step {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.document-wizard__step-header {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.document-wizard__step-title {
+  /* Box Model */
+  margin: 0;
+  /* Typography */
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--snap-text-primary);
+}
+
+/* ── Flow cards (Step 0) ───────────────────────────────────────────── */
+
+.document-wizard__flow-grid {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.document-wizard__flow-card {
+  /* Box Model */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Typography */
+  cursor: pointer;
+  /* Visuals */
+  background: var(--snap-surface-2);
+  transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+}
+
+.document-wizard__flow-card:hover {
+  /* Box Model */
+  border-color: var(--snap-pillar-light);
+  /* Visuals */
+  background: var(--snap-surface-3);
+}
+
+.document-wizard__flow-card:focus-visible {
+  /* Visuals */
+  outline: 2px solid var(--snap-focus-ring);
+  outline-offset: 2px;
+}
+
+.document-wizard__flow-card.is-selected {
+  /* Box Model */
+  border-color: var(--snap-pillar-color);
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-pillar-color) 8%, var(--snap-surface-2));
+  box-shadow: 0 0 0 1px var(--snap-pillar-color);
+}
+
+.document-wizard__flow-card-icon {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-pillar-color) 12%, transparent);
+  flex-shrink: 0;
+}
+
+.document-wizard__flow-card-icon i {
+  /* Typography */
+  font-size: var(--text-xl);
+  color: var(--snap-pillar-color);
+}
+
+.document-wizard__flow-card-body {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+}
+
+.document-wizard__flow-card-name {
+  /* Typography */
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--snap-text-primary);
+}
+
+.document-wizard__flow-card-desc {
+  /* Typography */
+  font-size: var(--text-base);
+  color: var(--snap-text-muted);
+  line-height: 1.4;
+}
+
+.document-wizard__flow-card-check {
+  /* Typography */
+  font-size: var(--text-xl);
+  color: var(--snap-pillar-color);
+  /* Visuals */
+  flex-shrink: 0;
+}
+
+/* ── Detail panel ──────────────────────────────────────────────────── */
+
+.document-wizard__detail-panel {
+  /* Box Model */
+  padding: var(--space-6);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: var(--snap-surface-2);
+}
+
+.document-wizard__detail-grid {
+  /* Box Model */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.document-wizard__detail-item {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.document-wizard__detail-label {
+  /* Typography */
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+}
+
+.document-wizard__detail-value {
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-text-primary);
+}
+
+/* ── Context tags (Step 1) ─────────────────────────────────────────── */
+
+.document-wizard__context-tags {
+  /* Box Model */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2-5);
+}
+
+/* ── Form (Step 1) ─────────────────────────────────────────────────── */
+
+.document-wizard__form {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* ── Summary (Step 3) ──────────────────────────────────────────────── */
+
+.document-wizard__summary {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.document-wizard__summary-card {
+  /* Box Model */
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Visuals */
+  background: var(--snap-surface-2);
+}
+
+.document-wizard__summary-card .section-label {
+  /* Box Model — override global margin for tighter fit */
+  margin-top: 0;
+}
+
+.document-wizard__summary-grid {
+  /* Box Model */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5) var(--space-7);
+}
+
+.document-wizard__summary-item {
+  /* Box Model */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-text-primary);
+}
+
+.document-wizard__summary-label {
+  /* Typography */
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--snap-text-muted);
+}
+
+.document-wizard__info-banner {
+  /* Box Model */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3-5);
+  padding: var(--space-5);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  /* Typography */
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  color: var(--snap-text-secondary);
+  /* Visuals */
+  background: var(--snap-surface-2);
+}
+
+.document-wizard__info-banner i {
+  /* Typography */
+  font-size: var(--text-xl);
+  color: var(--snap-pillar-color);
+  /* Visuals */
+  flex-shrink: 0;
+  margin-top: var(--space-0-5);
+}
+
+/* ── Loading ───────────────────────────────────────────────────────── */
+
+.document-wizard__loading {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-9);
+  /* Typography */
+  font-size: var(--text-lg);
+  color: var(--snap-text-muted);
+}
+
+/* ── Navigation ────────────────────────────────────────────────────── */
+
+.document-wizard__actions {
+  /* Box Model */
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--snap-border-subtle);
+}
+
+.document-wizard__spacer {
+  /* Box Model */
+  flex: 1;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 899px) {
+
+  .document-wizard__detail-grid,
+  .document-wizard__summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===================================================================
+   PrimeNG component overrides — pillar color alignment
+   =================================================================== */
+
+/* ── p-steps: active step uses pillar color ────────────────────────── */
+
+:host ::ng-deep .p-steps-item-active .p-steps-item-number {
+  /* Visuals */
+  background: var(--snap-pillar-color) !important;
+  border-color: var(--snap-pillar-color) !important;
+  color: #fff !important;
+}
+
+:host ::ng-deep .p-steps-item-active .p-steps-item-label {
+  /* Typography */
+  color: var(--snap-pillar-color) !important;
+  font-weight: 600;
+}
+
+:host ::ng-deep .p-steps-item:not(.p-steps-item-active) .p-steps-item-number {
+  /* Visuals */
+  border-color: var(--snap-border-default);
+  color: var(--snap-text-muted);
+}
+
+:host ::ng-deep .p-steps-item:not(.p-steps-item-active) .p-steps-item-label {
+  /* Typography */
+  color: var(--snap-text-muted);
+}
+
+/* Visited / completed steps (before active) */
+:host ::ng-deep .p-steps-item:not(.p-steps-item-active):not(.p-disabled) .p-steps-item-number {
+  /* Visuals */
+  background: var(--snap-pillar-color) !important;
+  border-color: var(--snap-pillar-color) !important;
+  color: #fff !important;
+}
+
+:host ::ng-deep .p-steps-item:not(.p-steps-item-active):not(.p-disabled) .p-steps-item-label {
+  /* Typography */
+  color: var(--snap-text-secondary);
+}
+
+/* ── p-tag: secondary tags use subtle surface ──────────────────────── */
+
+:host ::ng-deep .document-wizard__context-tags .p-tag {
+  /* Box Model */
+  padding: var(--space-1-5) var(--space-3);
+  border: 1px solid var(--snap-border-subtle);
+  /* Typography */
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--snap-text-secondary);
+  /* Visuals */
+  background: var(--snap-surface-3);
+}
+
+:host ::ng-deep .document-wizard__context-tags .p-tag .p-tag-icon {
+  /* Typography */
+  font-size: var(--text-sm);
+  color: var(--snap-pillar-color);
+}
+
+/* ── p-button: primary action uses pillar color ────────────────────── */
+
+:host ::ng-deep .document-wizard__actions .p-button:not(.p-button-outlined) {
+  /* Visuals */
+  background: var(--snap-pillar-color);
+  border-color: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .document-wizard__actions .p-button:not(.p-button-outlined):hover {
+  /* Visuals */
+  background: var(--snap-pillar-dark);
+  border-color: var(--snap-pillar-dark);
+}
+
+:host ::ng-deep .document-wizard__actions .p-button:not(.p-button-outlined):focus {
+  /* Visuals */
+  box-shadow: 0 0 0 2px var(--snap-focus-ring);
+}
+
+/* ── p-button: outlined (Anterior) uses pillar color ───────────────── */
+
+:host ::ng-deep .document-wizard__actions .p-button-outlined {
+  /* Typography */
+  color: var(--snap-pillar-color);
+  /* Visuals */
+  border-color: var(--snap-pillar-color);
+}
+
+:host ::ng-deep .document-wizard__actions .p-button-outlined:hover {
+  /* Visuals */
+  background: color-mix(in srgb, var(--snap-pillar-color) 8%, transparent);
+}
+
+/* ── p-inputtext / p-select / p-textarea: focus uses pillar color ──── */
+
+:host ::ng-deep .document-wizard__form .p-inputtext:focus,
+:host ::ng-deep .document-wizard__form .p-select.p-focus,
+:host ::ng-deep .document-wizard__form .p-textarea:focus {
+  /* Visuals */
+  border-color: var(--snap-pillar-color);
+  box-shadow: 0 0 0 1px var(--snap-focus-ring);
+}

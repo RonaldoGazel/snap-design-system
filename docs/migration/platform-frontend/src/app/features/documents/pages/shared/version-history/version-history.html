@@ -1,0 +1,47 @@
+@if (loading()) {
+<div class="version-history__loading">
+  <i class="pi pi-spin pi-spinner"></i>
+  <span>Carregando versões...</span>
+</div>
+} @else if (versions().length === 0) {
+<div class="version-history__empty">
+  <div class="version-history__empty-icon"><i class="pi pi-history"></i></div>
+  <p>Nenhuma versão registrada.</p>
+</div>
+} @else {
+<p-timeline [value]="versions()" styleClass="version-history__timeline">
+  <ng-template pTemplate="content" let-v>
+    <div class="version-history__card" (click)="openVersionDialog(v)" (keydown.enter)="openVersionDialog(v)"
+      tabindex="0" role="button">
+      <div class="version-history__card-header">
+        <strong>Versão {{ v.version }}</strong>
+        @if (isCurrentVersion(v)) {
+        <span class="version-history__current-badge">Atual</span>
+        }
+      </div>
+      <div class="version-history__card-meta">
+        <span class="version-history__author"><i class="pi pi-user version-history__card-meta-icon"></i> {{ v.createdBy
+          }}</span>
+        <span class="version-history__date"><i class="pi pi-calendar version-history__card-meta-icon"></i> {{
+          v.createdAt | dateFormat }}</span>
+      </div>
+    </div>
+  </ng-template>
+</p-timeline>
+}
+
+<p-dialog header="Conteúdo da Versão" [(visible)]="dialogVisible" [modal]="true" [style]="{ width: '60vw' }"
+  (onHide)="closeDialog()">
+  @if (selectedVersion()) {
+  <div class="version-history__dialog-header">
+    <strong>Versão {{ selectedVersion()!.version }}</strong>
+    <span> — {{ selectedVersion()!.title }}</span>
+  </div>
+  <div class="version-history__dialog-meta">
+    <span><i class="pi pi-user version-history__dialog-meta-icon"></i> {{ selectedVersion()!.createdBy }}</span>
+    <span><i class="pi pi-calendar version-history__dialog-meta-icon"></i> {{ selectedVersion()!.createdAt | dateFormat
+      }}</span>
+  </div>
+  <div class="version-history__dialog-content" [innerHTML]="selectedVersion()!.content ?? ''"></div>
+  }
+</p-dialog>

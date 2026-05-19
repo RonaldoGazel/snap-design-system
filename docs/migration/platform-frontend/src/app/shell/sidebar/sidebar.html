@@ -1,0 +1,81 @@
+<aside class="sidebar" [class.expanded]="sidebar.isExpanded()" [class.pinned]="sidebar.isPinned()"
+  [class.auto]="sidebar.mode() === 'auto'" [class.collapsed]="sidebar.mode() === 'collapsed'"
+  (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+
+  <!-- Rail: hamburger + section icons (collapsed) / hamburger only (expanded) -->
+  <div class="sidebar-header">
+    <!-- Hamburger — always visible -->
+    <button class="sidebar-hamburger" aria-label="Expand menu" (click)="expandSidebar()"
+      pTooltip="{{ 'shell.nav.expand' | translate }}" tooltipPosition="right">
+      <i class="pi pi-bars"></i>
+    </button>
+
+    @if (!sidebar.isExpanded()) {
+    <!-- Section icon buttons — only in collapsed rail -->
+    @for (section of sidebar.sections(); track section.id) {
+    <button class="sidebar-hamburger" [class.is-active]="isSectionOpen(section.id)"
+      [pTooltip]="section.label | translate" tooltipPosition="right" (click)="toggleSection(section)">
+      <i [class]="section.icon"></i>
+    </button>
+    }
+    }
+  </div>
+
+  <!-- Expanded nav — fades in when expanded -->
+  <nav class="sidebar-nav" aria-label="Main navigation">
+    @for (section of sidebar.sections(); track section.id) {
+    <div class="nav-section">
+
+      <!-- Section group title -->
+      <button class="nav-section-header" [attr.data-testid]="'nav-section-' + section.id"
+        (click)="toggleSection(section)">
+        <i [class]="section.icon" class="nav-section-icon"></i>
+        <span class="nav-section-label">{{ section.label | translate }}</span>
+        <i [class]="isSectionOpen(section.id) ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+          class="nav-section-chevron"></i>
+      </button>
+
+      @if (isSectionOpen(section.id)) {
+      <div class="nav-section-items">
+        @for (item of section.items; track item.route) {
+
+        @if (item.items && item.items.length > 0) {
+        <!-- Parent item with sub-items -->
+        <button class="nav-item nav-item--parent" (click)="toggleSubItem(item.route)"
+          [class.active]="isSubItemOpen(item.route)">
+          <i [class]="item.icon" class="nav-item-icon"></i>
+          <span class="nav-item-label">{{ item.label | translate }}</span>
+          <i [class]="isSubItemOpen(item.route) ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+            class="nav-item-chevron"></i>
+        </button>
+
+        @if (isSubItemOpen(item.route)) {
+        <div class="nav-sub-items">
+          @for (sub of item.items; track sub.route) {
+          <a class="nav-item nav-item--sub" [routerLink]="sub.route" routerLinkActive="active"
+            [attr.data-testid]="'nav-' + toTestId(sub.route) + '-link'">
+            <i [class]="sub.icon" class="nav-item-icon"></i>
+            <span class="nav-item-label">{{ sub.label | translate }}</span>
+          </a>
+          }
+        </div>
+        }
+
+        } @else {
+        <!-- Leaf nav item -->
+        <a class="nav-item" [routerLink]="item.route" routerLinkActive="active"
+          [attr.data-testid]="'nav-' + toTestId(item.route) + '-link'">
+          <i [class]="item.icon" class="nav-item-icon"></i>
+          <span class="nav-item-label">{{ item.label | translate }}</span>
+        </a>
+        }
+
+        }
+      </div>
+      }
+
+    </div>
+    }
+  </nav>
+
+</aside>

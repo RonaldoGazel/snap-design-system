@@ -1,0 +1,73 @@
+<div class="doc-type-form">
+  <div class="doc-type-form__header">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    <h2>{{ isEditMode() ? 'Editar Tipo Documental' : 'Novo Tipo Documental' }}</h2>
+  </div>
+
+  <div class="doc-type-form__description">
+    <p>Um <strong>Tipo Documental</strong> categoriza os documentos produzidos pela organizacao. Ele define a natureza do documento (relatorio, pedido, oficio etc.) e sua distribuicao (interno, externo ou hibrido), o que determina automaticamente se o documento pode ser difundido internamente, externamente ou em ambos os sentidos. Os templates documentais sao vinculados a tipos documentais.</p>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="doc-type-form__error">
+      <i class="pi pi-exclamation-triangle"></i>
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="doc-type-form__body">
+    <div class="doc-type-form__field">
+      <label for="code">Codigo <span class="required">*</span></label>
+      <small class="doc-type-form__hint">Identificador unico e curto do tipo documental. Ex: "RELATORIO_EXT", "OFICIO". Nao pode ser alterado apos o cadastro.</small>
+      <input id="code" pInputText formControlName="code" placeholder="Ex: RELATORIO_EXT" [class.ng-invalid]="isInvalid('code')" />
+      @if (isInvalid('code')) { <small class="p-error">Codigo e obrigatorio.</small> }
+      @if (form.get('code')?.touched && isDuplicateCode()) { <small class="p-error">Codigo ja cadastrado.</small> }
+    </div>
+
+    <div class="doc-type-form__field">
+      <label for="name">Nome <span class="required">*</span></label>
+      <small class="doc-type-form__hint">Nome completo e legivel do tipo documental. Ex: "Relatorio de Inteligencia Externo".</small>
+      <input id="name" pInputText formControlName="name" placeholder="Ex: Relatorio de Inteligencia Externo" [class.ng-invalid]="isInvalid('name')" />
+      @if (isInvalid('name')) { <small class="p-error">Nome e obrigatorio.</small> }
+    </div>
+
+    <div class="doc-type-form__field">
+      <label for="distribution">Distribuicao <span class="required">*</span></label>
+      <small class="doc-type-form__hint">Define a natureza de circulacao do documento. Externo: pode ser difundido para fora da organizacao. Interno: circula apenas internamente. Interno/Externo: pode circular em ambos os sentidos.</small>
+      <p-select inputId="distribution" formControlName="distribution" [options]="distributionOptions" optionLabel="label" optionValue="value" placeholder="Selecione a distribuicao" [class.ng-invalid]="isInvalid('distribution')" />
+      @if (isInvalid('distribution')) { <small class="p-error">Distribuicao e obrigatoria.</small> }
+    </div>
+
+    <div class="doc-type-form__field">
+      <label for="doc_category">Categoria do Documento <span class="required">*</span></label>
+      <small class="doc-type-form__hint">Categoria funcional do documento dentro da organização. Ex: RELATORIO, PEDIDO, OFICIO, ORDEM, INFORME. Usado para agrupar tipos documentais similares.</small>
+      <input id="doc_category" pInputText formControlName="doc_category" placeholder="Ex: RELATORIO, PEDIDO, OFICIO" [class.ng-invalid]="isInvalid('doc_category')" />
+      @if (isInvalid('doc_category')) { <small class="p-error">Categoria é obrigatória.</small> }
+    </div>
+
+    <div class="doc-type-form__field">
+      <label for="template_id">Template Documental</label>
+      <small class="doc-type-form__hint">Template que define a estrutura inicial dos documentos criados com este tipo. Cada tipo documental possui exatamente um template vinculado.</small>
+      <p-select
+        inputId="template_id"
+        formControlName="template_id"
+        [options]="templates()"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecione um template"
+        [showClear]="true"
+      />
+    </div>
+
+    <div class="doc-type-form__field doc-type-form__field--checkbox">
+      <p-checkbox formControlName="is_active" [binary]="true" inputId="is_active" />
+      <label for="is_active">Tipo documental ativo</label>
+      <small class="doc-type-form__hint">Tipos inativos nao aparecem para selecao ao criar documentos.</small>
+    </div>
+
+    <div class="doc-type-form__actions">
+      <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="goBack()"></button>
+      <button pButton type="submit" [label]="isEditMode() ? 'Salvar' : 'Criar Tipo Documental'" [disabled]="saving()"></button>
+    </div>
+  </form>
+</div>

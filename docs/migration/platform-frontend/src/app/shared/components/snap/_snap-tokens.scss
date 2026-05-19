@@ -1,0 +1,87 @@
+// ===========================================
+// SNAP DESIGN SYSTEM - SCSS Tokens
+// Mapeamento dos tokens do styles-pack
+// ===========================================
+
+// ------------------------------------------
+// SPACING (usando escala do styles-pack)
+// ------------------------------------------
+$snap-spacing-0: 0;
+$snap-spacing-1: 0.25rem;   // 4px
+$snap-spacing-1-5: 0.375rem; // 6px
+$snap-spacing-2: 0.5rem;    // 8px
+$snap-spacing-3: 0.75rem;   // 12px
+$snap-spacing-4: 1rem;      // 16px
+$snap-spacing-5: 1.25rem;   // 20px
+$snap-spacing-6: 1.5rem;    // 24px
+$snap-spacing-8: 2rem;      // 32px
+$snap-spacing-10: 2.5rem;   // 40px
+$snap-spacing-12: 3rem;     // 48px
+
+// ------------------------------------------
+// BORDER RADIUS
+// ------------------------------------------
+$snap-radius-none: 0;
+$snap-radius-sm: 0.25rem;   // 4px
+$snap-radius-md: 0.375rem;  // 6px
+$snap-radius-lg: 0.5rem;    // 8px
+$snap-radius-xl: 0.75rem;   // 12px
+$snap-radius-2xl: 1rem;     // 16px
+$snap-radius-full: 9999px;
+
+// ------------------------------------------
+// TYPOGRAPHY
+// ------------------------------------------
+$snap-font-sans: 'DM Sans', sans-serif;
+$snap-font-title: 'Bebas Neue', sans-serif;
+$snap-font-mono: 'JetBrains Mono', monospace;
+
+// Font sizes
+$snap-text-xs: 0.75rem;     // 12px
+$snap-text-sm: 0.875rem;    // 14px
+$snap-text-base: 1rem;      // 16px
+$snap-text-lg: 1.125rem;    // 18px
+$snap-text-xl: 1.25rem;     // 20px
+$snap-text-2xl: 1.5rem;     // 24px
+$snap-text-3xl: 1.875rem;   // 30px
+
+// Font weights
+$snap-font-normal: 400;
+$snap-font-medium: 500;
+$snap-font-semibold: 600;
+$snap-font-bold: 700;
+
+// ------------------------------------------
+// Z-INDEX
+// ------------------------------------------
+$snap-z-dropdown: 100;
+$snap-z-sticky: 200;
+$snap-z-fixed: 300;
+$snap-z-modal-backdrop: 400;
+$snap-z-modal: 500;
+$snap-z-popover: 600;
+$snap-z-tooltip: 700;
+
+// ------------------------------------------
+// BREAKPOINTS
+// ------------------------------------------
+$snap-breakpoint-sm: 640px;
+$snap-breakpoint-md: 768px;
+$snap-breakpoint-lg: 1024px;
+$snap-breakpoint-xl: 1280px;
+$snap-breakpoint-2xl: 1536px;
+
+// ------------------------------------------
+// SHADOWS
+// ------------------------------------------
+$snap-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$snap-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$snap-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$snap-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+// ------------------------------------------
+// TRANSITIONS
+// ------------------------------------------
+$snap-transition-fast: 150ms ease;
+$snap-transition-normal: 200ms ease;
+$snap-transition-slow: 300ms ease;

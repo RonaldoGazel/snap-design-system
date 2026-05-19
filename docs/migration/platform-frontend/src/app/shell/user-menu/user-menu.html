@@ -1,0 +1,17 @@
+@if (user(); as u) {
+@if (sidebar.isExpanded()) {
+<div class="user-menu" (click)="toggleMenu($event)">
+    <p-avatar [label]="initials()" shape="circle" />
+    <div class="user-menu__info">
+        <span class="user-menu__name">{{ displayName() }}</span>
+        <span class="user-menu__role">{{ displayRole() }}</span>
+    </div>
+    <i class="pi pi-chevron-down user-menu__chevron"></i>
+</div>
+} @else {
+<div class="user-menu" (click)="toggleMenu($event)" [pTooltip]="displayName()" tooltipPosition="right">
+    <p-avatar [label]="initials()" shape="circle" />
+</div>
+}
+<p-menu #menu [model]="menuItems()" [popup]="true" appendTo="body" />
+}

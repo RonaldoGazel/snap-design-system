@@ -1,0 +1,19 @@
+<p-autoComplete
+  [(ngModel)]="displayValue"
+  [suggestions]="suggestions()"
+  (completeMethod)="onSearch($event)"
+  (onSelect)="onSelect($event)"
+  (onClear)="onClear()"
+  [placeholder]="placeholder() | translate"
+  [emptyMessage]="'admin.userPicker.noResults' | translate"
+  field="display_name"
+  [style]="{ width: '100%' }"
+  appendTo="body"
+>
+  <ng-template let-user #item>
+    <div class="user-suggestion">
+      <span class="user-name">{{ user.display_name }}</span>
+      <span class="user-email">{{ user.email }}</span>
+    </div>
+  </ng-template>
+</p-autoComplete>

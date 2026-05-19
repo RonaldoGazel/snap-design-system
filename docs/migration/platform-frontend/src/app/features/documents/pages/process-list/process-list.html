@@ -1,0 +1,66 @@
+<div class="l-process-list">
+  <p-toast />
+  <div class="process-list__header">
+    <h2 class="process-list__title">Processos</h2>
+    <p-button label="Novo Processo" icon="pi pi-plus" (onClick)="navigateToNew()" />
+  </div>
+
+  <div class="process-list__filters">
+    <p-select [options]="statusOptions" [ngModel]="statusFilter()"
+      (ngModelChange)="statusFilter.set($event); onFilterChange()" optionLabel="label" optionValue="value"
+      placeholder="Status" [showClear]="true" class="process-list__filter-item" />
+    <p-select [options]="classificationOptions" [ngModel]="classificationFilter()"
+      (ngModelChange)="classificationFilter.set($event); onFilterChange()" optionLabel="label" optionValue="value"
+      placeholder="Classificação" [showClear]="true" class="process-list__filter-item" />
+    <p-select [options]="priorityOptions" [ngModel]="priorityFilter()"
+      (ngModelChange)="priorityFilter.set($event); onFilterChange()" optionLabel="label" optionValue="value"
+      placeholder="Prioridade" [showClear]="true" class="process-list__filter-item" />
+    <p-datepicker [ngModel]="periodFilter()" (ngModelChange)="periodFilter.set($event)" selectionMode="range"
+      placeholder="Período" dateFormat="dd/mm/yy" [showClear]="true" (onClose)="onFilterChange()"
+      class="process-list__filter-item" />
+  </div>
+
+  @if (error()) {
+  <div class="process-list__error-state">
+    <i class="pi pi-exclamation-triangle"></i>
+    <span>{{ error() }}</span>
+    <p-button label="Tentar Novamente" icon="pi pi-refresh" (onClick)="loadProcesses()" [text]="true" />
+  </div>
+  }
+
+  <p-table [value]="processes()" [lazy]="true" [loading]="loading()" [paginator]="true" [rows]="pageSize()"
+    [totalRecords]="totalRecords()" [rowsPerPageOptions]="[10, 20, 50]" (onLazyLoad)="onLazyLoad($event)"
+    [rowHover]="true" dataKey="id">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>NUP</th>
+        <th>Título</th>
+        <th>Classificação</th>
+        <th>Prioridade</th>
+        <th>Status</th>
+        <th>Setor Atual</th>
+        <th>Responsável</th>
+        <th>Criação</th>
+        <th>Atualização</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-process>
+      <tr (click)="onRowClick(process)" class="process-list__row">
+        <td>{{ process.nup }}</td>
+        <td>{{ process.title }}</td>
+        <td><app-classification-badge [classification]="process.securityClassification" /></td>
+        <td>{{ process.priority }}</td>
+        <td><app-status-badge [status]="process.status" context="process" /></td>
+        <td>{{ process.currentSectorId }}</td>
+        <td>{{ process.assignedUserId ?? '-' }}</td>
+        <td>{{ process.createdAt | dateFormat }}</td>
+        <td>{{ process.updatedAt | dateFormat }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="9" class="process-list__empty-message">Nenhum processo encontrado</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

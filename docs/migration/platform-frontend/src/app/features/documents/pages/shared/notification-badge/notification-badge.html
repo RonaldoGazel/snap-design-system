@@ -1,0 +1,35 @@
+<div class="notification-badge">
+  <p-button icon="pi pi-bell" [rounded]="true" [text]="true" (onClick)="togglePanel()" aria-label="Notificações" />
+  @if (showBadge()) {
+  <p-badge [value]="'' + unreadCount()" severity="danger" styleClass="notification-badge__count" />
+  }
+</div>
+
+@if (panelVisible()) {
+<div class="notification-badge__panel">
+  <div class="notification-badge__panel-header">
+    <strong>Notificações</strong>
+  </div>
+  @if (notifications().length === 0) {
+  <div class="notification-badge__empty">
+    <p class="notification-badge__empty-text">Nenhuma notificação.</p>
+  </div>
+  } @else {
+  <div class="notification-badge__list">
+    @for (n of notifications(); track n.id) {
+    <div class="notification-badge__item" [class.is-unread]="!n.isRead" (click)="onNotificationClick(n)"
+      (keydown.enter)="onNotificationClick(n)" tabindex="0" role="button">
+      <div class="notification-badge__item-header">
+        <span class="notification-badge__title">{{ n.title }}</span>
+        @if (!n.isRead) {
+        <span class="notification-badge__unread-dot"></span>
+        }
+      </div>
+      <p class="notification-badge__message">{{ n.message }}</p>
+      <span class="notification-badge__date">{{ n.createdAt | dateFormat:'relative' }}</span>
+    </div>
+    }
+  </div>
+  }
+</div>
+}

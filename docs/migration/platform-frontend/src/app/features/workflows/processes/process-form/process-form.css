@@ -1,0 +1,8 @@
+.process-form__header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+.process-form__description { font-size: 0.88rem; color: var(--text-color-secondary); margin-bottom: 1.5rem; max-width: 680px; padding: 0.75rem; background: var(--surface-ground); border-radius: 6px; border-left: 3px solid var(--primary-color); }
+.process-form__body { display: flex; flex-direction: column; gap: 1.25rem; max-width: 680px; }
+.process-form__field { display: flex; flex-direction: column; gap: 0.25rem; }
+.process-form__hint { font-size: 0.78rem; color: var(--text-color-secondary); }
+.process-form__error { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--red-50); color: var(--red-700); border-radius: 6px; margin-bottom: 1rem; }
+.process-form__actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+.required { color: var(--red-500); }

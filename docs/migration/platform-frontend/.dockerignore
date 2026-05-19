@@ -1,0 +1,12 @@
+node_modules
+dist
+.angular
+.git
+.kiro
+.specs
+.vscode
+e2e
+*.md
+.editorconfig
+.prettierrc
+.gitignore

@@ -1,0 +1,18 @@
+<div class="empty-state">
+    <i [class]="icon()" class="empty-state__icon"></i>
+    <h3 class="empty-state__title">{{ title() }}</h3>
+    @if (subtitle()) {
+    <p class="empty-state__subtitle">{{ subtitle() }}</p>
+    }
+    @if (actions().length) {
+    <div class="empty-state__actions">
+        @for (action of actions().slice(0, 2); track action.label) {
+        @if (action.routerLink) {
+        <p-button [label]="action.label" [severity]="action.severity ?? 'primary'" [routerLink]="action.routerLink" />
+        } @else {
+        <p-button [label]="action.label" [severity]="action.severity ?? 'primary'" />
+        }
+        }
+    </div>
+    }
+</div>

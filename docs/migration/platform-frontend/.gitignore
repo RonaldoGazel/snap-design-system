@@ -1,0 +1,69 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+/build
+/out
+
+# Node
+/node_modules
+.pnpm-store/
+.pnp/
+.pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDEs and editors
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.history/*
+
+# Angular
+/.angular/cache
+.sass-cache/
+/connect.lock
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Testing
+/coverage
+.nyc_output/
+
+# Cache
+.cache/
+.eslintcache
+.parcel-cache/
+*.tsbuildinfo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.tgz
+*.log
+.turbo/

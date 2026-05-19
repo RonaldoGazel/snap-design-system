@@ -1,0 +1,95 @@
+<div class="preg-results" [class.is-visible]="resultGroups().length > 0" role="region" aria-label="Resultados da busca">
+    @for (group of reversedGroups(); track group.source + '-' + group.type) {
+    <div class="preg-results__group">
+        <!-- Group title -->
+        <h3 class="preg-results__title">
+            <i [class]="'pi ' + group.icon"></i>
+            {{ group.title }}
+        </h3>
+
+        @if (group.type === 'results') {
+        <!-- Person cards -->
+        @for (person of group.persons; track person.id) {
+        <app-person-match-card [person]="person" (cardClicked)="onPersonCardClicked($event, group.source)"
+            (registerClicked)="onRegisterClicked($event, group.source)"
+            (openProfileClicked)="onOpenProfileClicked($event)" />
+        }
+
+        <!-- Action bar -->
+        <div class="preg-actions-bar">
+            @if (group.source === 'BASE_LOCAL') {
+            <button pButton class="preg-actions-bar__btn" label="Nenhuma corresponde" icon="pi pi-arrow-right"
+                severity="secondary" [text]="true" (click)="onAdvance(group.source)"></button>
+            } @else if (group.source === 'SIPEN') {
+            <button pButton class="preg-actions-bar__btn" label="Nenhuma corresponde" icon="pi pi-arrow-right"
+                severity="secondary" [text]="true" (click)="onAdvance(group.source)"></button>
+            } @else if (group.source === 'SNAP') {
+            <button pButton class="preg-actions-bar__btn" label="Nenhuma corresponde" icon="pi pi-arrow-right"
+                severity="secondary" [text]="true" (click)="onAdvance(group.source)"></button>
+            }
+        </div>
+        }
+
+        @if (group.type === 'error') {
+        <!-- Error display -->
+        <div class="preg-error">
+            <i class="pi pi-exclamation-triangle preg-error__icon"></i>
+            <p class="preg-error__msg">
+                @if (group.source === 'SIPEN') {
+                Não foi possível consultar o SIPEN neste momento.
+                } @else if (group.source === 'SNAP') {
+                Não foi possível consultar o SNAP neste momento.
+                } @else {
+                Ocorreu um erro ao consultar a fonte.
+                }
+            </p>
+            <div class="preg-actions-bar">
+                <button pButton class="preg-actions-bar__btn" label="Tentar novamente" icon="pi pi-refresh"
+                    severity="secondary" [text]="true" (click)="onAdvance(group.source)"></button>
+                @if (group.source === 'SIPEN') {
+                <button pButton class="preg-actions-bar__btn is-primary" label="Avançar para SNAP"
+                    icon="pi pi-arrow-right" (click)="onAdvance(group.source)"></button>
+                }
+            </div>
+        </div>
+        }
+
+        @if (group.type === 'not-applicable') {
+        <!-- Not applicable display -->
+        <div class="preg-error">
+            <i class="pi pi-info-circle preg-error__icon"></i>
+            <p class="preg-error__msg">
+                Para consultar o SNAP, informe um CPF válido ou preencha Nome e UF.
+            </p>
+        </div>
+        }
+
+        @if (group.type === 'manual') {
+        <!-- Manual registration option -->
+        <div class="preg-manual">
+            <i class="pi pi-user-edit preg-manual__icon"></i>
+            <p class="preg-manual__msg">
+                Nenhuma pessoa correspondente foi encontrada nas fontes consultadas.
+            </p>
+
+            <!-- Generate from source buttons (when CPF is available) -->
+            @if (hasValidCPF()) {
+            <p class="preg-manual__hint">
+                Você pode gerar a pessoa a partir de uma fonte externa usando o CPF informado:
+            </p>
+            <div class="preg-manual__generate-actions">
+                <button pButton class="preg-manual__btn" label="Gerar via SIPEN" icon="pi pi-shield"
+                    (click)="onGenerate('SIPEN')"></button>
+                <button pButton class="preg-manual__btn" label="Gerar via SNAP" icon="pi pi-search"
+                    (click)="onGenerate('SNAP')"></button>
+            </div>
+            }
+
+            <p class="preg-manual__hint">Ou inicie o cadastro manual:</p>
+            <button pButton class="preg-manual__btn is-primary" label="Cadastrar Manualmente" icon="pi pi-user-plus"
+                (click)="onAdvance(group.source)"></button>
+        </div>
+        }
+    </div>
+    }
+</div>

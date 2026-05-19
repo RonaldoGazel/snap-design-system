@@ -1,0 +1,156 @@
+<div class="process-detail">
+  @if (loading()) {
+    <div class="process-detail__loading">
+      <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+    </div>
+  }
+
+  @if (!loading() && process()) {
+    <!-- Header -->
+    <div class="process-detail__header">
+      <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()" title="Voltar"></button>
+      <div class="process-detail__title">
+        <span class="process-detail__identifier">{{ process()!.identifier }}</span>
+        <h2>{{ process()!.subject }}</h2>
+      </div>
+      <p-tag
+        [value]="statusLabel(process()!.status) | translate"
+        [severity]="statusSeverity(process()!.status)"
+      />
+    </div>
+
+    <!-- Metadata -->
+    <p-card styleClass="process-detail__meta">
+      <div class="process-detail__meta-grid">
+        @if (process()!.description) {
+          <div class="process-detail__meta-item process-detail__meta-item--full">
+            <span class="process-detail__label">Descrição</span>
+            <span>{{ process()!.description }}</span>
+          </div>
+        }
+        <div class="process-detail__meta-item">
+          <span class="process-detail__label">Unidade de Origem</span>
+          <span>{{ process()!.origin_unit_id ?? '—' }}</span>
+        </div>
+        <div class="process-detail__meta-item">
+          <span class="process-detail__label">Perfil de Origem</span>
+          <span>{{ process()!.origin_profile_id ?? '—' }}</span>
+        </div>
+        <div class="process-detail__meta-item">
+          <span class="process-detail__label">Criado em</span>
+          <span>{{ process()!.created_at | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        <div class="process-detail__meta-item">
+          <span class="process-detail__label">Criado por</span>
+          <span>{{ process()!.created_by }}</span>
+        </div>
+      </div>
+    </p-card>
+
+    <!-- Documents Section -->
+    <p-card styleClass="process-detail__section">
+      <ng-template #title>
+        <div class="process-detail__section-header">
+          <span>Documentos Vinculados</span>
+          <button
+            pButton
+            label="Vincular Documento"
+            icon="pi pi-plus"
+            class="p-button-outlined p-button-sm"
+            (click)="navigateToDocument('novo')"
+            title="Adicionar documento ao processo"
+          ></button>
+        </div>
+      </ng-template>
+
+      @if (!process()!.document_instances?.length) {
+        <p class="process-detail__empty">Nenhum documento vinculado a este processo.</p>
+      } @else {
+        <div class="process-detail__doc-list">
+          @for (doc of process()!.document_instances; track doc.id) {
+            <div class="process-detail__doc-item" (click)="navigateToDocument(doc.id)" role="button" tabindex="0">
+              <div class="process-detail__doc-info">
+                <span class="process-detail__doc-title">{{ doc.title }}</span>
+                @if (doc.nup) {
+                  <span class="process-detail__doc-nup">NUP: {{ doc.nup }}</span>
+                }
+                <span class="process-detail__doc-step">
+                  Etapa atual: {{ doc.current_step_id ?? '—' }}
+                </span>
+              </div>
+              <div class="process-detail__doc-tags">
+                <p-tag
+                  [value]="docStatusLabel(doc.status) | translate"
+                  [severity]="docStatusSeverity(doc.status)"
+                />
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </p-card>
+
+    <!-- Closure Criteria -->
+    <p-card styleClass="process-detail__section">
+      <ng-template #title>Critérios de Encerramento</ng-template>
+      <div class="process-detail__criteria">
+        <div class="process-detail__criteria-item">
+          <i
+            class="pi"
+            [class.pi-check-circle]="canClose()"
+            [class.pi-times-circle]="!canClose()"
+            [style.color]="canClose() ? 'var(--green-500)' : 'var(--red-500)'"
+          ></i>
+          <span>Todos os documentos devem estar formalizados ou cancelados</span>
+          <p-tag
+            [value]="canClose() ? 'Satisfeito' : 'Pendente'"
+            [severity]="canClose() ? 'success' : 'warn'"
+          />
+        </div>
+      </div>
+
+      <div class="process-detail__close-action">
+        <button
+          pButton
+          label="Encerrar Processo"
+          icon="pi pi-lock"
+          severity="danger"
+          [disabled]="!canClose() || process()!.status !== 'ABERTO'"
+          (click)="closeProcess()"
+          [title]="!canClose() ? 'Critérios de encerramento não satisfeitos' : 'Encerrar processo'"
+        ></button>
+        @if (!canClose()) {
+          <small class="process-detail__close-hint">
+            O processo só pode ser encerrado quando todos os documentos estiverem formalizados ou cancelados.
+          </small>
+        }
+      </div>
+    </p-card>
+
+    <!-- Timeline -->
+    @if (timelineEvents().length) {
+      <p-card styleClass="process-detail__section">
+        <ng-template #title>Linha do Tempo</ng-template>
+        <p-timeline [value]="timelineEvents()" align="left">
+          <ng-template #content let-ev>
+            <div class="process-detail__timeline-item">
+              <span class="process-detail__timeline-title">{{ ev.title }}</span>
+              <span class="process-detail__timeline-doc">{{ ev.doc }}</span>
+              <span class="process-detail__timeline-date">{{ ev.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+          </ng-template>
+          <ng-template #marker let-ev>
+            <span class="process-detail__timeline-marker pi pi-circle-fill"></span>
+          </ng-template>
+        </p-timeline>
+      </p-card>
+    }
+  }
+
+  @if (!loading() && !process()) {
+    <div class="process-detail__not-found">
+      <p>Processo não encontrado.</p>
+      <button pButton label="Voltar" icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    </div>
+  }
+</div>

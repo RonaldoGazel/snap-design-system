@@ -1,0 +1,156 @@
+<div class="dissemination-panel">
+  <h2 class="dissemination-panel__title">Painel de Difusão</h2>
+
+  <p-toast />
+
+  <p-tabs [value]="0">
+    <p-tablist>
+      <p-tab [value]="0">Difusão Interna</p-tab>
+      <p-tab [value]="1">Difusão Externa</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+      <!-- Internal Dissemination Tab -->
+      <p-tabpanel [value]="0">
+        <div class="dissemination-panel__form-section">
+          <h3 class="dissemination-panel__section-title">Nova Difusão Interna</h3>
+          <div class="dissemination-panel__form-row">
+            <label class="dissemination-panel__form-label" for="internalSector">Setor de Destino</label>
+            <p-select id="internalSector" [options]="sectorOptions()" [ngModel]="internalSectorId()"
+              (ngModelChange)="internalSectorId.set($event)" optionLabel="label" optionValue="value"
+              placeholder="Selecione o setor" class="dissemination-panel__full-width" />
+          </div>
+          <div class="dissemination-panel__form-row">
+            <label class="dissemination-panel__form-label" for="internalJustification">Justificativa
+              (obrigatória)</label>
+            <textarea pTextarea id="internalJustification" [ngModel]="internalJustification()"
+              (ngModelChange)="internalJustification.set($event)" rows="3" class="dissemination-panel__full-width"
+              placeholder="Informe a justificativa..."></textarea>
+          </div>
+          <div class="dissemination-panel__form-actions">
+            <p-button label="Difundir Internamente" icon="pi pi-send"
+              [disabled]="!internalSectorId() || !internalJustification().trim() || internalSubmitting()"
+              [loading]="internalSubmitting()" (onClick)="submitInternalDissemination()" />
+          </div>
+        </div>
+
+        <div class="dissemination-panel__list-section">
+          <h3 class="dissemination-panel__section-title">Difusões Internas Realizadas</h3>
+          <p-table [value]="internalList()" [loading]="internalLoading()" dataKey="id">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Setor Destino</th>
+                <th>Responsável</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th>Justificativa</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+              <tr class="dissemination-panel__internal-row">
+                <td>{{ item.toSectorName ?? item.toSectorId }}</td>
+                <td>{{ item.disseminatorName ?? item.disseminatedBy }}</td>
+                <td>{{ item.createdAt | dateFormat }}</td>
+                <td><app-status-badge [status]="item.status" context="document" /></td>
+                <td>{{ item.justification }}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="5" class="dissemination-panel__empty-message">Nenhuma difusão interna realizada</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-tabpanel>
+
+      <!-- External Dissemination Tab -->
+      <p-tabpanel [value]="1">
+        <div class="dissemination-panel__form-section">
+          <h3 class="dissemination-panel__section-title">Nova Difusão Externa</h3>
+          <div class="dissemination-panel__form-row">
+            <label class="dissemination-panel__form-label" for="externalEntity">Entidade Destinatária</label>
+            <input pInputText id="externalEntity" [ngModel]="externalEntity()"
+              (ngModelChange)="externalEntity.set($event)" class="dissemination-panel__full-width"
+              placeholder="Nome da entidade..." />
+          </div>
+          <div class="dissemination-panel__form-row">
+            <label class="dissemination-panel__form-label" for="externalContact">Contato do Destinatário</label>
+            <input pInputText id="externalContact" [ngModel]="externalContact()"
+              (ngModelChange)="externalContact.set($event)" class="dissemination-panel__full-width"
+              placeholder="Contato (opcional)..." />
+          </div>
+          <div class="dissemination-panel__form-row">
+            <label class="dissemination-panel__form-label" for="externalJustification">Justificativa
+              (obrigatória)</label>
+            <textarea pTextarea id="externalJustification" [ngModel]="externalJustification()"
+              (ngModelChange)="externalJustification.set($event)" rows="3" class="dissemination-panel__full-width"
+              placeholder="Informe a justificativa..."></textarea>
+          </div>
+          <div class="dissemination-panel__form-row">
+            <label class="dissemination-panel__form-label" for="externalFormat">Formato de Exportação</label>
+            <p-select id="externalFormat" [options]="formatOptions()" [ngModel]="externalFormat()"
+              (ngModelChange)="externalFormat.set($event)" optionLabel="label" optionValue="value"
+              class="dissemination-panel__full-width" />
+          </div>
+          <div class="dissemination-panel__form-actions">
+            <p-button label="Solicitar Difusão Externa" icon="pi pi-external-link"
+              [disabled]="!externalEntity().trim() || !externalJustification().trim() || externalSubmitting()"
+              [loading]="externalSubmitting()" (onClick)="submitExternalDissemination()" />
+          </div>
+        </div>
+
+        <div class="dissemination-panel__list-section">
+          <h3 class="dissemination-panel__section-title">Difusões Externas</h3>
+          <p-table [value]="externalList()" [loading]="externalLoading()" dataKey="id">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Destinatário</th>
+                <th>Formato</th>
+                <th>Status</th>
+                <th>Autorizador</th>
+                <th>Data</th>
+                <th>Justificativa</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+              <tr class="dissemination-panel__external-row">
+                <td>{{ item.destinationEntity }}</td>
+                <td>{{ item.exportFormat }}</td>
+                <td><app-status-badge [status]="item.status" context="document" /></td>
+                <td>{{ item.authorizerName ?? item.authorizedBy ?? '-' }}</td>
+                <td>{{ item.createdAt | dateFormat }}</td>
+                <td>{{ item.justification }}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="6" class="dissemination-panel__empty-message">Nenhuma difusão externa realizada</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+
+  <!-- Dissemination Trail -->
+  <div class="dissemination-panel__trail-section">
+    <h3 class="dissemination-panel__section-title">Trilha de Difusão</h3>
+    @if (trailEvents().length > 0) {
+    <p-timeline [value]="trailEvents()">
+      <ng-template pTemplate="content" let-event>
+        <div class="dissemination-panel__trail-event">
+          <div class="dissemination-panel__trail-label">{{ event.label }}</div>
+          <div class="dissemination-panel__trail-detail">{{ event.detail }}</div>
+          <div class="dissemination-panel__trail-meta">
+            <span>{{ event.date | dateFormat }}</span>
+            <app-status-badge [status]="event.status" context="document" />
+          </div>
+        </div>
+      </ng-template>
+    </p-timeline>
+    } @else {
+    <div class="dissemination-panel__empty-message">Nenhuma difusão registrada</div>
+    }
+  </div>
+</div>

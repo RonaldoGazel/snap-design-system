@@ -1,0 +1,302 @@
+// ============================================================
+// Review Drawer — visual parity with PrototipoPOI person-registration.css
+// ============================================================
+
+:host ::ng-deep {
+  // Drawer container
+  .p-drawer {
+    width: 420px !important;
+    max-width: 90vw;
+    background: var(--snap-surface-2);
+    border-left: 1px solid var(--snap-border-default);
+    box-shadow: var(--shadow-xl);
+  }
+
+  // Drawer body — use prototype gap rules
+  .p-drawer .p-drawer-content {
+    padding: 0;
+  }
+
+  // Header area
+  .p-drawer .p-drawer-header {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--snap-border-subtle);
+  }
+
+  // Backdrop (semi-dark + blur)
+  .p-drawer-mask {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+:host-context(.p-dark) ::ng-deep .p-drawer-mask {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+// Header ---------------------------------------------------------
+
+.preg-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.preg-drawer__head-title {
+  margin: 0;
+  font-family: var(--font-accent);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--snap-text-primary);
+}
+
+:host ::ng-deep .preg-drawer__close.p-button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--snap-text-secondary);
+
+  &:hover {
+    background: var(--snap-surface-3);
+    color: var(--snap-text-primary);
+  }
+
+  .p-button-icon {
+    font-size: 14px;
+  }
+}
+
+// Body -----------------------------------------------------------
+
+.preg-drawer__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  overflow-y: auto;
+}
+
+// Photo ----------------------------------------------------------
+
+.preg-drawer__photo {
+  align-self: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--snap-surface-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preg-drawer__photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preg-drawer__photo-initials {
+  font-family: var(--font-accent);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--snap-text-muted);
+}
+
+// Name + badges --------------------------------------------------
+
+.preg-drawer__name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--snap-text-primary);
+}
+
+.preg-drawer__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.preg-drawer__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px 1px;
+  font-family: var(--font-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--snap-text-secondary);
+  background: var(--snap-surface-3);
+  border-radius: 3px;
+}
+
+// Section --------------------------------------------------------
+
+.preg-drawer__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preg-drawer__section-title {
+  margin: 0;
+  padding-bottom: 4px;
+  font-family: var(--font-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+  border-bottom: 1px solid var(--snap-border-subtle);
+}
+
+// Row (label | value) --------------------------------------------
+
+.preg-drawer__row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.preg-drawer__label {
+  font-family: var(--font-accent);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+}
+
+.preg-drawer__value {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--snap-text-primary);
+  word-break: break-word;
+}
+
+.preg-drawer__history-entry {
+  display: block;
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--snap-text-secondary);
+}
+
+// Alerts (warning / danger) --------------------------------------
+
+.preg-drawer__alert {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  i {
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 16px;
+  }
+}
+
+.preg-drawer__alert--warning {
+  color: var(--snap-warning);
+  background: color-mix(in oklab, var(--snap-warning) 8%, var(--snap-surface-2));
+  border: 1px solid color-mix(in oklab, var(--snap-warning) 25%, transparent);
+}
+
+.preg-drawer__alert--danger {
+  color: var(--snap-danger);
+  background: color-mix(in oklab, var(--snap-danger) 8%, var(--snap-surface-2));
+  border: 1px solid color-mix(in oklab, var(--snap-danger) 25%, transparent);
+}
+
+// Footer (secrecy + actions) -------------------------------------
+
+.preg-drawer__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border-top: 1px solid var(--snap-border-subtle);
+  margin-top: auto;
+}
+
+.preg-drawer__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+:host ::ng-deep .preg-drawer__action.p-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+
+  .p-button-icon {
+    font-size: 14px;
+  }
+
+  &.is-primary {
+    background: var(--snap-pillar-color);
+    border-color: var(--snap-pillar-color);
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background: var(--snap-pillar-dark);
+      border-color: var(--snap-pillar-dark);
+    }
+  }
+
+  &.is-secondary {
+    background: var(--snap-surface-2);
+    color: var(--snap-text-primary);
+    border: 1px solid var(--snap-border-default);
+    font-weight: 500;
+
+    &:hover:not(:disabled) {
+      background: var(--snap-surface-3);
+    }
+
+    .p-button-icon {
+      color: var(--snap-text-secondary);
+    }
+  }
+}
+
+// Dark mode
+:host-context(.p-dark) ::ng-deep .p-drawer {
+  background: var(--snap-surface-2);
+  border-left-color: var(--snap-border-default);
+}
+
+:host-context(.p-dark) {
+  .preg-drawer__alert--warning {
+    background: color-mix(in oklab, var(--snap-warning) 10%, var(--snap-surface-2));
+    border-color: color-mix(in oklab, var(--snap-warning) 20%, var(--snap-border-default));
+  }
+
+  .preg-drawer__alert--danger {
+    background: color-mix(in oklab, var(--snap-danger) 10%, var(--snap-surface-2));
+    border-color: color-mix(in oklab, var(--snap-danger) 20%, var(--snap-border-default));
+  }
+}

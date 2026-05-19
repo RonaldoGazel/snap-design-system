@@ -1,0 +1,44 @@
+/* =========================================================
+   Template Selector — Component Styles (SMACSS+BEM)
+   Block: .template-selector
+   ========================================================= */
+
+.template-selector__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+}
+
+.template-selector__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.875rem;
+    border: 2px solid var(--p-surface-border);
+    border-radius: 0.5rem;
+    background: var(--p-surface-card);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.template-selector__card:hover {
+    border-color: var(--p-primary-color);
+    background: var(--p-primary-50, #eff6ff);
+}
+
+.template-selector__card.is-selected {
+    border-color: var(--p-primary-color);
+    background: var(--p-primary-50, #eff6ff);
+}
+
+.template-selector__label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--p-text-color);
+}
+
+.template-selector__desc {
+    font-size: 0.75rem;
+    color: var(--p-text-muted-color);
+}

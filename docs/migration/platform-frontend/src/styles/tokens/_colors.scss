@@ -1,0 +1,195 @@
+/* ==========================================================================
+   SNAP Design Tokens — Colors
+   Source of truth: person-creation-flow-ui/colors_and_type.css
+   ========================================================================== */
+
+/* ===== Light Mode (default) ===== */
+
+:root {
+  /* Surfaces */
+  --snap-surface-1: #f8f9fa;   /* app background */
+  --snap-surface-2: #ffffff;   /* cards, panels, headers */
+  --snap-surface-3: #f0f1f3;   /* hover, subtle fills, tags */
+
+  /* Text */
+  --snap-text-primary:   #1e1f27;
+  --snap-text-secondary: #697e89;
+  --snap-text-muted:     #a0adb5;
+
+  /* Borders */
+  --snap-border-subtle:  #e9eced;
+  --snap-border-default: #c2cfd6;
+
+  /* Pillar — Intelligence */
+  --snap-pillar-color: #72284b;
+  --snap-pillar-light: #9b4d72;
+  --snap-pillar-dark:  #5a1f3b;
+
+  /* Semantics (coral is NOT danger) */
+  --snap-success: #22c55e;
+  --snap-warning: #f59e0b;
+  --snap-danger:  #dc2626;
+  --snap-info:    #3b82f6;
+
+  /* Risk levels */
+  --snap-risk-high: #f97316;
+
+  /* Focus & Overlays */
+  --snap-focus-ring: rgba(114, 40, 75, 0.35);
+  --snap-overlay-bg: rgba(0, 0, 0, 0.4);
+
+  /* Tag pill background */
+  --snap-tag-bg: #1e1f27;
+
+  /* Inverted surface */
+  --snap-surface-1-inv: #1e1f27;
+
+  /* Profile Colors */
+  --snap-perfil-preso:              #72284b;
+  --snap-perfil-ex-preso:           #e97320;
+  --snap-perfil-alvo:               #fe473c;
+  --snap-perfil-visitante:          #3b82f6;
+  --snap-perfil-familiar:           #22c55e;
+  --snap-perfil-pessoa-relacionada: #22c55e;
+  --snap-perfil-advogado:           #eab308;
+  --snap-perfil-servidor:           #889ea3;
+}
+
+/* ===== Dark Mode ===== */
+
+.p-dark {
+  /* Surfaces — near-black, slightly warmer than #000 */
+  --snap-surface-1: #0a0a0d;
+  --snap-surface-2: #141418;
+  --snap-surface-3: #22232a;
+
+  /* Text */
+  --snap-text-primary:   #ecedef;
+  --snap-text-secondary: #a0adb5;
+  --snap-text-muted:     #6c7a82;
+
+  /* Borders */
+  --snap-border-subtle:  #22232a;
+  --snap-border-default: #3a3b45;
+
+  /* Pillar — Intelligence (lighter in dark for contrast) */
+  --snap-pillar-color: #b8557f;
+  --snap-pillar-light: #d078a0;
+  --snap-pillar-dark:  #8a3a5a;
+
+  /* Semantics */
+  --snap-success: #5fd68a;
+  --snap-warning: #f5b544;
+  --snap-danger:  #ef6b6b;
+  --snap-info:    #6ca4f1;
+
+  /* Risk levels */
+  --snap-risk-high: #fb923c;
+
+  /* Focus & Overlays */
+  --snap-focus-ring: rgba(184, 85, 127, 0.45);
+  --snap-overlay-bg: rgba(0, 0, 0, 0.65);
+
+  /* Tag pill background */
+  --snap-tag-bg: #0a0a0d;
+
+  /* Inverted surface */
+  --snap-surface-1-inv: #0a0a0d;
+
+  /* Profile Colors — desaturated slightly for dense lists */
+  --snap-perfil-preso:              #b8557f;
+  --snap-perfil-ex-preso:           #e88950;
+  --snap-perfil-alvo:               #ef6b6b;
+  --snap-perfil-visitante:          #6ca4f1;
+  --snap-perfil-familiar:           #5fd68a;
+  --snap-perfil-pessoa-relacionada: #5fd68a;
+  --snap-perfil-advogado:           #e8c34a;
+  --snap-perfil-servidor:           #92a0a7;
+}
+
+/* ===== Explicit Light Override =====
+   Wrap any subtree in .p-light to force light even inside a .p-dark ancestor.
+   Mirrors :root defaults so the values are always available. */
+
+.p-light {
+  --snap-surface-1: #f8f9fa;
+  --snap-surface-2: #ffffff;
+  --snap-surface-3: #f0f1f3;
+
+  --snap-text-primary:   #1e1f27;
+  --snap-text-secondary: #697e89;
+  --snap-text-muted:     #a0adb5;
+
+  --snap-border-subtle:  #e9eced;
+  --snap-border-default: #c2cfd6;
+
+  --snap-pillar-color: #72284b;
+  --snap-pillar-light: #9b4d72;
+  --snap-pillar-dark:  #5a1f3b;
+
+  --snap-success: #22c55e;
+  --snap-warning: #f59e0b;
+  --snap-danger:  #dc2626;
+  --snap-info:    #3b82f6;
+
+  --snap-risk-high: #f97316;
+
+  --snap-focus-ring: rgba(114, 40, 75, 0.35);
+  --snap-overlay-bg: rgba(0, 0, 0, 0.4);
+
+  --snap-tag-bg: #1e1f27;
+  --snap-surface-1-inv: #1e1f27;
+
+  --snap-perfil-preso:              #72284b;
+  --snap-perfil-ex-preso:           #e97320;
+  --snap-perfil-alvo:               #fe473c;
+  --snap-perfil-visitante:          #3b82f6;
+  --snap-perfil-familiar:           #22c55e;
+  --snap-perfil-pessoa-relacionada: #22c55e;
+  --snap-perfil-advogado:           #eab308;
+  --snap-perfil-servidor:           #889ea3;
+}
+
+/* ===== Auto-follow OS preference =====
+   Only activates when neither .p-light nor .p-dark is set on html/body. */
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.p-light):not(.p-dark) {
+    --snap-surface-1: #0a0a0d;
+    --snap-surface-2: #141418;
+    --snap-surface-3: #22232a;
+
+    --snap-text-primary:   #ecedef;
+    --snap-text-secondary: #a0adb5;
+    --snap-text-muted:     #6c7a82;
+
+    --snap-border-subtle:  #22232a;
+    --snap-border-default: #3a3b45;
+
+    --snap-pillar-color: #b8557f;
+    --snap-pillar-light: #d078a0;
+    --snap-pillar-dark:  #8a3a5a;
+
+    --snap-success: #5fd68a;
+    --snap-warning: #f5b544;
+    --snap-danger:  #ef6b6b;
+    --snap-info:    #6ca4f1;
+
+    --snap-risk-high: #fb923c;
+
+    --snap-focus-ring: rgba(184, 85, 127, 0.45);
+    --snap-overlay-bg: rgba(0, 0, 0, 0.65);
+
+    --snap-tag-bg: #0a0a0d;
+    --snap-surface-1-inv: #0a0a0d;
+
+    --snap-perfil-preso:              #b8557f;
+    --snap-perfil-ex-preso:           #e88950;
+    --snap-perfil-alvo:               #ef6b6b;
+    --snap-perfil-visitante:          #6ca4f1;
+    --snap-perfil-familiar:           #5fd68a;
+    --snap-perfil-pessoa-relacionada: #5fd68a;
+    --snap-perfil-advogado:           #e8c34a;
+    --snap-perfil-servidor:           #92a0a7;
+  }
+}

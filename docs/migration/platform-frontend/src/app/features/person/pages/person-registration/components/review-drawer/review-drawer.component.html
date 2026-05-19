@@ -1,0 +1,244 @@
+<p-drawer position="right" [(visible)]="isOpen" [style]="{ width: '420px' }" (onHide)="onClose()" [modal]="true"
+    [dismissible]="true">
+    <!-- Header -->
+    <ng-template #header>
+        <div class="preg-drawer__head">
+            <h2 class="preg-drawer__head-title">Detalhes da Pessoa</h2>
+            <button pButton class="preg-drawer__close" icon="pi pi-times" severity="secondary" [text]="true"
+                [rounded]="true" (click)="onClose()" aria-label="Fechar"></button>
+        </div>
+    </ng-template>
+
+    @if (person(); as p) {
+    <div class="preg-drawer__body">
+        <!-- Photo -->
+        <div class="preg-drawer__photo">
+            @if (p.photoUrl) {
+            <img [src]="p.photoUrl" [alt]="p.fullName" class="preg-drawer__photo-img" />
+            } @else {
+            <div class="preg-drawer__photo-initials">
+                {{ getPersonInitials(p.fullName) }}
+            </div>
+            }
+        </div>
+
+        <!-- Name -->
+        <h3 class="preg-drawer__name">{{ p.fullName }}</h3>
+
+        <!-- Badges -->
+        <div class="preg-drawer__badges">
+            <span class="preg-drawer__badge">{{ p.source }}</span>
+            <span class="preg-drawer__badge">{{ formatConfidenceScore(p.confidenceScore) }}</span>
+            <span class="preg-drawer__badge">{{ formatMatchType(p.matchType) }}</span>
+            @if (p.source === 'SIPEN' && p.profileType) {
+            <span class="preg-drawer__badge">{{ formatProfileType(p.profileType) }}</span>
+            }
+        </div>
+
+        <!-- Identification -->
+        <div class="preg-drawer__section">
+            <h4 class="preg-drawer__section-title">Identificação</h4>
+
+            @if (p.cpf) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">CPF</span>
+                <span class="preg-drawer__value">{{ p.cpf }}</span>
+            </div>
+            }
+
+            @if (p.rg) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">RG</span>
+                <span class="preg-drawer__value">{{ p.rg }}</span>
+            </div>
+            }
+
+            @if (p.uf) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">UF</span>
+                <span class="preg-drawer__value">{{ p.uf }}</span>
+            </div>
+            }
+
+            @if (p.aliases.length > 0) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Vulgo</span>
+                <span class="preg-drawer__value">{{ p.aliases.join(', ') }}</span>
+            </div>
+            }
+
+            @if (p.age) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Idade</span>
+                <span class="preg-drawer__value">{{ p.age }} anos</span>
+            </div>
+            }
+
+            @if (p.birthplace) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Naturalidade</span>
+                <span class="preg-drawer__value">{{ p.birthplace }}</span>
+            </div>
+            }
+
+            @if (p.motherName) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Mãe</span>
+                <span class="preg-drawer__value">{{ p.motherName }}</span>
+            </div>
+            }
+
+            @if (p.fatherName) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Pai</span>
+                <span class="preg-drawer__value">{{ p.fatherName }}</span>
+            </div>
+            }
+
+            @if (p.lastUpdatedAt) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Atualizado em</span>
+                <span class="preg-drawer__value">{{ p.lastUpdatedAt }}</span>
+            </div>
+            }
+        </div>
+
+        <!-- Contacts (from full profile) -->
+        @if (fullProfile(); as fp) {
+        @if (fp.phones.length > 0 || fp.emails.length > 0 || fp.addresses.length > 0) {
+        <div class="preg-drawer__section">
+            <h4 class="preg-drawer__section-title">Contatos</h4>
+
+            @for (phone of fp.phones; track phone.number) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">{{ phone.type }}</span>
+                <span class="preg-drawer__value">{{ phone.number }}</span>
+            </div>
+            }
+
+            @for (email of fp.emails; track email.email) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">{{ email.type }}</span>
+                <span class="preg-drawer__value">{{ email.email }}</span>
+            </div>
+            }
+
+            @for (addr of fp.addresses; track addr.street + addr.number) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Endereço</span>
+                <span class="preg-drawer__value">
+                    {{ addr.street }}, {{ addr.number }} — {{ addr.district }}, {{ addr.city }}/{{ addr.uf }} · {{
+                    addr.zipCode }}
+                </span>
+            </div>
+            }
+        </div>
+        }
+
+        <!-- Prison Data (SIPEN only) -->
+        @if (fp.prisonData) {
+        <div class="preg-drawer__section">
+            <h4 class="preg-drawer__section-title">Dados Prisionais</h4>
+
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Status</span>
+                <span class="preg-drawer__value">{{ fp.prisonData.status }}</span>
+            </div>
+
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Unidade</span>
+                <span class="preg-drawer__value">{{ fp.prisonData.currentUnit }}</span>
+            </div>
+
+            @if (fp.prisonData.wing) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Galeria</span>
+                <span class="preg-drawer__value">{{ fp.prisonData.wing }}</span>
+            </div>
+            }
+
+            @if (fp.prisonData.cell) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Cela</span>
+                <span class="preg-drawer__value">{{ fp.prisonData.cell }}</span>
+            </div>
+            }
+
+            @if (fp.prisonData.riskLevel) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Nível de Risco</span>
+                <span class="preg-drawer__value">{{ fp.prisonData.riskLevel }}</span>
+            </div>
+            }
+
+            @if (fp.prisonData.factionIndication) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Facção</span>
+                <span class="preg-drawer__value">
+                    {{ fp.prisonData.factionIndication }}
+                    @if (fp.prisonData.factionRole) {
+                    ({{ fp.prisonData.factionRole }})
+                    }
+                </span>
+            </div>
+            }
+
+            @if (fp.prisonData.custodyHistory.length > 0) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">Histórico</span>
+                <span class="preg-drawer__value">
+                    @for (entry of fp.prisonData.custodyHistory; track entry.unit + entry.startDate) {
+                    <span class="preg-drawer__history-entry">
+                        {{ entry.unit }} ({{ entry.startDate }}@if (entry.endDate) { — {{ entry.endDate }}})
+                    </span>
+                    }
+                </span>
+            </div>
+            }
+        </div>
+        }
+
+        <!-- Related People -->
+        @if (fp.relatedPeople.length > 0) {
+        <div class="preg-drawer__section">
+            <h4 class="preg-drawer__section-title">Pessoas Relacionadas</h4>
+
+            @for (rel of fp.relatedPeople; track rel.name + rel.relationship) {
+            <div class="preg-drawer__row">
+                <span class="preg-drawer__label">{{ rel.relationship }}</span>
+                <span class="preg-drawer__value">{{ rel.name }}</span>
+            </div>
+            }
+        </div>
+        }
+        }
+
+        <!-- Duplicate Alert -->
+        @if (p.possibleLocalDuplicate) {
+        <div class="preg-drawer__alert preg-drawer__alert--warning">
+            <i class="pi pi-exclamation-triangle"></i>
+            <span>Possível duplicata com pessoa já cadastrada na base local.</span>
+        </div>
+        }
+
+        @if (p.alreadyRegistered) {
+        <div class="preg-drawer__alert preg-drawer__alert--danger">
+            <i class="pi pi-ban"></i>
+            <span>Esta pessoa já está cadastrada na base local.</span>
+        </div>
+        }
+    </div>
+
+    <!-- Footer -->
+    <div class="preg-drawer__footer">
+        <app-secrecy-selector [(selectedSecrecy)]="selectedSecrecy" />
+
+        <div class="preg-drawer__actions">
+            <button pButton class="preg-drawer__action is-primary" label="Cadastrar" icon="pi pi-check"
+                [disabled]="!selectedSecrecy()" (click)="onConfirm()"></button>
+            <button pButton class="preg-drawer__action is-secondary" label="Cancelar" severity="secondary" [text]="true"
+                (click)="onClose()"></button>
+        </div>
+    </div>
+    }
+</p-drawer>

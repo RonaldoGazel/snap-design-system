@@ -124,12 +124,13 @@ export default function SnapGraphDesignSystem() {
           <div className="space-y-6">
             {/* Preview do Canvas - usa CSS variables para adaptar ao tema */}
             <div 
-              className="snap-canvas h-64 rounded-xl border border-border overflow-hidden"
+              className="snap-canvas rounded-xl border border-border overflow-hidden"
+              style={{ minHeight: '320px' }}
             >
               {/* Exemplo com nodes conectados */}
               <div className="w-full h-full relative p-8">
                 {/* Node A - Company */}
-                <div className="absolute w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm" style={{ left: '80px', top: '50%', transform: 'translateY(-50%)' }}>
+                <div className="absolute w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm" style={{ left: '80px', top: '80px' }}>
                   <div className="flex h-full">
                     <div className="w-1 bg-[#7c8db0]" />
                     <div className="flex-1 p-4">
@@ -149,7 +150,7 @@ export default function SnapGraphDesignSystem() {
                 </div>
                 
                 {/* Conexão: lateral direita A → lateral esquerda B */}
-                <svg className="absolute" style={{ left: '344px', top: '50%', transform: 'translateY(-50%)' }} width="72" height="24">
+                <svg className="absolute" style={{ left: '344px', top: '115px' }} width="72" height="24">
                   <defs>
                     <marker
                       id="arrow-canvas"
@@ -167,7 +168,7 @@ export default function SnapGraphDesignSystem() {
                 </svg>
                 
                 {/* Node B - Person */}
-                <div className="absolute w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm" style={{ left: '416px', top: '50%', transform: 'translateY(-50%)' }}>
+                <div className="absolute w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm" style={{ left: '416px', top: '80px' }}>
                   <div className="flex h-full">
                     <div className="w-1 bg-[#9b7fb8]" />
                     <div className="flex-1 p-4">
@@ -185,6 +186,118 @@ export default function SnapGraphDesignSystem() {
                     </div>
                   </div>
                 </div>
+
+                {/* ============================================
+                    NODE C - GROUP NODE (NOVO)
+                    Stack de 3 cards: 100%, 50%, 30% opacidade
+                    Ícones empilhados com deslocamento de 9px
+                    ============================================ */}
+                <Link href="/design-system/snap-graph/node-cluster" className="absolute cursor-pointer hover:scale-[1.02] transition-transform" style={{ left: '752px', top: '60px' }}>
+                  {/* Card 3 - 30% opacidade (mais atrás) - offset 20px */}
+                  <div 
+                    className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden bg-canvas-node"
+                    style={{ opacity: 0.30, top: '20px', left: '-20px' }}
+                  >
+                    <div className="flex h-full">
+                      <div className="w-1 bg-[#FE5722]" />
+                      <div className="flex-1 pt-4 px-4 pb-[18px] invisible">
+                        <div className="flex items-start gap-3">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-foreground text-base font-sans leading-[1.3]">
+                              <span className="font-medium">Grupo com </span>
+                              <span className="font-extrabold">58</span>
+                              <span className="font-medium"> entidades</span>
+                            </p>
+                            <div className="mt-4">
+                              <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white rounded-full">Company SNAP</span>
+                            </div>
+                          </div>
+                          <div style={{ width: '44px', height: '44px' }} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Card 2 - 50% opacidade - offset 10px */}
+                  <div 
+                    className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden bg-canvas-node"
+                    style={{ opacity: 0.50, top: '10px', left: '-10px' }}
+                  >
+                    <div className="flex h-full">
+                      <div className="w-1 bg-[#FE5722]" />
+                      <div className="flex-1 pt-4 px-4 pb-[18px] invisible">
+                        <div className="flex items-start gap-3">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-foreground text-base font-sans leading-[1.3]">
+                              <span className="font-medium">Grupo com </span>
+                              <span className="font-extrabold">58</span>
+                              <span className="font-medium"> entidades</span>
+                            </p>
+                            <div className="mt-4">
+                              <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white rounded-full">Company SNAP</span>
+                            </div>
+                          </div>
+                          <div style={{ width: '44px', height: '44px' }} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Card principal - 100% opacidade (frente) */}
+                  <div className="relative w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm">
+                    <div className="flex h-full">
+                      <div className="w-1 bg-[#FE5722]" />
+                      <div className="flex-1 pt-4 px-4 pb-[18px]">
+                        <div className="flex items-start gap-3">
+                          <div className="flex-1 min-w-0">
+                            {/* Texto: "Grupo com X entidades" - número em extra-bold */}
+                            <p className="text-foreground text-base font-sans leading-[1.3]">
+                              <span className="font-medium">Grupo com </span>
+                              <span className="font-extrabold">58</span>
+                              <span className="font-medium"> entidades</span>
+                            </p>
+                            {/* Pill com 16px de distância do texto (mt-4 = padrão dos outros nodes) */}
+                            <div className="mt-4">
+                              <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white bg-[#FE5722] rounded-full">Company SNAP</span>
+                            </div>
+                          </div>
+                          
+                          {/* Stack de ícones - posição absoluta para não afetar altura */}
+                          <div className="relative flex-shrink-0" style={{ width: '44px', height: '44px' }}>
+                            {/* Ícone 4 - 10% (mais atrás) */}
+                            <div 
+                              className="absolute w-11 h-11 rounded-full border-[3px] border-[#696969] bg-canvas-node flex items-center justify-center"
+                              style={{ opacity: 0.10, top: '27px' }}
+                            >
+                              <Building className="w-5 h-5 text-[#696969]" />
+                            </div>
+                            {/* Ícone 3 - 30% */}
+                            <div 
+                              className="absolute w-11 h-11 rounded-full border-[3px] border-[#696969] bg-canvas-node flex items-center justify-center"
+                              style={{ opacity: 0.30, top: '18px' }}
+                            >
+                              <Building className="w-5 h-5 text-[#696969]" />
+                            </div>
+                            {/* Ícone 2 - 70% */}
+                            <div 
+                              className="absolute w-11 h-11 rounded-full border-[3px] border-[#696969] bg-canvas-node flex items-center justify-center"
+                              style={{ opacity: 0.70, top: '9px' }}
+                            >
+                              <Building className="w-5 h-5 text-[#696969]" />
+                            </div>
+                            {/* Ícone 1 - 100% (frente) */}
+                            <div 
+                              className="absolute w-11 h-11 rounded-full border-[3px] border-[#696969] bg-canvas-node flex items-center justify-center"
+                              style={{ opacity: 1, top: '0px' }}
+                            >
+                              <Building className="w-5 h-5 text-[#696969]" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               </div>
             </div>
 
@@ -1473,7 +1586,7 @@ TELEFONE:      left: 368px, top: 404px  → centro X: 496px  (gap 80px de Luiz)
                 </div>
               </div>
               <p className="text-sm text-text-muted font-sans mt-4">
-                O visual deve ser semelhante a um circuito eletrônico: limpo, organizado e previsível.
+                O visual deve ser semelhante a um circuito eletr��nico: limpo, organizado e previsível.
               </p>
             </div>
           </div>

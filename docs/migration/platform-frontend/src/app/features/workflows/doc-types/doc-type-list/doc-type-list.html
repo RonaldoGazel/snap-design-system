@@ -1,0 +1,90 @@
+<div class="doc-type-list">
+  <div class="doc-type-list__header">
+    <h2>Tipos Documentais</h2>
+    <button pButton label="Novo Tipo Documental" icon="pi pi-plus" (click)="navigateToNew()"></button>
+  </div>
+
+  <div class="doc-type-list__filters">
+    <input
+      pInputText
+      type="text"
+      placeholder="Buscar por código ou nome..."
+      [ngModel]="searchText()"
+      (ngModelChange)="searchText.set($event)"
+    />
+    <p-select
+      [options]="distributionOptions"
+      [ngModel]="filterDistribution()"
+      (ngModelChange)="filterDistribution.set($event)"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Distribuição"
+    />
+    <input
+      pInputText
+      type="text"
+      placeholder="Tipo documental..."
+      [ngModel]="filterDocType()"
+      (ngModelChange)="filterDocType.set($event)"
+    />
+    <p-select
+      [options]="activeOptions"
+      [ngModel]="filterActive()"
+      (ngModelChange)="filterActive.set($event)"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Status"
+    />
+  </div>
+
+  <p-table [value]="filteredDocTypes()" [paginator]="true" [rows]="15" responsiveLayout="scroll">
+    <ng-template #header>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Distribuição</th>
+        <th>Tipo Documental</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-dt>
+      <tr>
+        <td>{{ dt.code }}</td>
+        <td>{{ dt.name }}</td>
+        <td>{{ distributionLabel(dt.distribution) | translate }}</td>
+        <td>{{ dt.doc_category }}</td>
+        <td>
+          @if (dt.is_active) {
+            <p-tag [value]="'workflows.status.published' | translate" severity="success" />
+          } @else {
+            <p-tag [value]="'workflows.status.archived' | translate" severity="danger" />
+          }
+        </td>
+        <td>
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-text p-button-sm"
+            (click)="navigateToEdit(dt)"
+            title="Editar"
+          ></button>
+          <button
+            pButton
+            [icon]="dt.is_active ? 'pi pi-ban' : 'pi pi-check'"
+            class="p-button-text p-button-sm"
+            [class.p-button-danger]="dt.is_active"
+            [class.p-button-success]="!dt.is_active"
+            (click)="toggleActive(dt)"
+            [title]="dt.is_active ? 'Desativar' : 'Ativar'"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="6" class="text-center text-color-secondary">Nenhum tipo documental encontrado.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

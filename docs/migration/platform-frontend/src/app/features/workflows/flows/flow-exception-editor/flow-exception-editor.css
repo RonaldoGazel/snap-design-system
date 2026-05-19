@@ -1,0 +1,17 @@
+.flow-exception-editor__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.flow-exception-editor__actions { display: flex; gap: 0.5rem; }
+.flow-exception-editor__form { padding: 1rem; border: 1px solid var(--surface-border); border-radius: 6px; margin-bottom: 1rem; background-color: var(--surface-ground); }
+.flow-exception-editor__form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+.flow-exception-editor__field { display: flex; flex-direction: column; gap: 0.25rem; }
+.flow-exception-editor__field--checkbox { flex-direction: row; align-items: center; gap: 0.5rem; }
+.flow-exception-editor__org-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+.flow-exception-editor__form-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.75rem; }
+.flow-exception-editor__rule { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-bottom: 1px solid var(--surface-border); }
+.flow-exception-editor__rule--vedacao { background-color: var(--red-50); border-left: 3px solid var(--red-500); }
+.flow-exception-editor__rule-info { display: flex; flex-direction: column; gap: 0.25rem; }
+.flow-exception-editor__rule-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.flow-exception-editor__rule-actions { display: flex; align-items: center; gap: 0.25rem; }
+
+.flow-exception-editor__hint { font-size: 0.78rem; color: var(--text-color-secondary); margin-bottom: 0.2rem; }
+.flow-exception-editor__description { font-size: 0.88rem; color: var(--text-color-secondary); margin: 0.25rem 0 0.75rem; max-width: 680px; }
+.flow-exception-editor__empty { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.75rem; background: var(--surface-ground); border-radius: 4px; font-size: 0.85rem; color: var(--text-color-secondary); }

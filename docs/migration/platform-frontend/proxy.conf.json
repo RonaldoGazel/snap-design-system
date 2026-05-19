@@ -1,0 +1,68 @@
+{
+  "/api/v1/identity": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/permissions": {
+    "target": "http://localhost:8001",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/audit": {
+    "target": "http://localhost:8002",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/poi": {
+    "target": "http://localhost:8003",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/documents": {
+    "target": "http://localhost:9004",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/templates": {
+    "target": "http://localhost:9004",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/processes": {
+    "target": "http://localhost:9004",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/search": {
+    "target": "http://localhost:9004",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/v1/workflows": {
+    "target": "http://localhost:9005",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/browser": {
+    "target": "http://localhost:9980",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/hosting": {
+    "target": "http://localhost:9980",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/cool": {
+    "target": "http://localhost:9980",
+    "secure": false,
+    "changeOrigin": false,
+    "ws": true
+  },
+  "/wopi": {
+    "target": "http://localhost:9004",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

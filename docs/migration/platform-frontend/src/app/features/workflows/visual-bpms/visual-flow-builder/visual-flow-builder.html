@@ -1,0 +1,249 @@
+@if (loading()) {
+  <div class="builder-loading">
+    <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+    <span>Carregando fluxo visual...</span>
+  </div>
+} @else if (flow()) {
+  <!-- Action Bar -->
+  <div class="builder-action-bar">
+    <div class="action-bar-left">
+      <div class="action-bar-title-block">
+        <div class="action-bar-title-row">
+          <h2 class="flow-title">{{ flow()!.name }}</h2>
+          <span class="flow-status-tag" [class]="'flow-status-tag--' + flow()!.status.toLowerCase()">
+            {{ (flow()!.status === 'RASCUNHO' ? 'workflows.status.draft' : flow()!.status === 'ATIVO' ? 'workflows.status.published' : 'workflows.status.archived') | translate }}
+          </span>
+          <!-- Version Badge & Selector -->
+          <div class="version-selector-wrapper">
+            <span class="flow-version-badge">v{{ flow()!.version }}</span>
+            <button class="version-selector-trigger" (click)="toggleVersionSelector()" title="Selecionar versão">
+              <i class="pi pi-chevron-down"></i>
+            </button>
+
+        @if (versionSelectorOpen()) {
+          <div class="version-selector-backdrop" (click)="closeVersionSelector()"></div>
+          <div class="version-selector-dropdown">
+            <div class="version-selector-header">
+              <span class="version-selector-title">Versões</span>
+            </div>
+            <div class="version-selector-list">
+              @for (v of versions(); track v.id) {
+                <button
+                  class="version-selector-item"
+                  [class.version-selector-item--active]="v.id === flow()!.id"
+                  [class.version-selector-item--inactive]="v.status === 'INATIVO'"
+                  (click)="onVersionSelect(v.id)"
+                >
+                  <span class="version-item-badge">v{{ v.version }}</span>
+                  <span class="version-item-status" [class]="'version-item-status--' + v.status.toLowerCase()">
+                    {{ (v.status === 'RASCUNHO' ? 'workflows.status.draft' : v.status === 'ATIVO' ? 'workflows.status.published' : 'workflows.status.archived') | translate }}
+                  </span>
+                  @if (v.id === flow()!.id) {
+                    <i class="pi pi-check version-item-check"></i>
+                  }
+                </button>
+              }
+            </div>
+            <div class="version-selector-footer">
+              <button class="version-new-btn" (click)="toggleNewVersionMenu()" [disabled]="creatingVersion()">
+                <i class="pi pi-plus"></i> Nova Versão
+                <i class="pi" [class]="versionNewMenuOpen() ? 'pi-chevron-up' : 'pi-chevron-down'" style="margin-left: auto; font-size: 0.7rem"></i>
+              </button>
+              @if (versionNewMenuOpen()) {
+                <div class="version-new-options">
+                  <button class="version-new-option" (click)="onCreateBlankVersion()" [disabled]="creatingVersion()">
+                    <i class="pi pi-file"></i> Em branco
+                  </button>
+                  <button class="version-new-option" (click)="onDuplicateVersion()" [disabled]="creatingVersion()">
+                    <i class="pi pi-copy"></i> Duplicar atual
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+        </div>
+        <div class="action-bar-subtitle">
+          <span class="flow-template-label">Tipo de Documento:</span>
+          <span class="flow-template-value">{{ flow()!.template?.name }}</span>
+        </div>
+      </div>
+
+      <div class="action-bar-divider"></div>
+      <button class="pending-btn" (click)="onEditFlow()">
+        <i class="pi pi-pencil"></i> Configurações do Fluxo
+      </button>
+    </div>
+    <div class="action-bar-right">
+      <button class="pending-btn" (click)="onValidate()">
+        <i class="pi pi-check-circle"></i> Pendências
+        @if (pendingCount() > 0) {
+          <span class="pending-badge">{{ pendingCount() }}</span>
+        }
+      </button>
+      <div class="flow-activate-toggle">
+        <span class="flow-activate-label">{{ flow()!.status === 'ATIVO' ? 'Desativar Fluxo' : 'Ativar Fluxo' }}</span>
+        <label class="switch-slider switch-slider--lg">
+          <input type="checkbox" [checked]="flow()!.status === 'ATIVO'" (change)="confirmToggleFlowStatus($event)" />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="builder-layout">
+    <!-- Settings Drawer -->
+    <div class="builder-drawer" [class.builder-drawer--closed]="!drawerOpen()">
+      <div class="drawer-inner">
+        <div class="drawer-header">
+          <span class="drawer-title"><i class="pi pi-cog"></i> Configurações</span>
+          <button class="drawer-close-btn" (click)="toggleDrawer()">
+            <i class="pi pi-chevron-left"></i>
+          </button>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-section-header">
+            <span class="drawer-section-title">Auto-Agrupar</span>
+            <label class="switch-slider">
+              <input type="checkbox" [checked]="globalGrouping()" (change)="onGlobalGroupingToggle()" />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+          <span class="drawer-section-desc">Agrupa automaticamente perfis do mesmo tipo ao adicioná-los a uma etapa.</span>
+        </div>
+
+        <div class="drawer-section">
+          <span class="drawer-section-title">Ligação de Grupos</span>
+          <span class="drawer-section-desc">Controla como conexões são criadas entre grupos. "Todos → Todos" liga cada perfil do grupo origem a todos os perfis do grupo destino. "Setor → Setor" liga apenas perfis do mesmo setor entre os grupos.</span>
+          <div class="drawer-link-mode">
+            <button class="link-mode-btn" [class.active]="groupLinkMode() === 'all'" (click)="setGroupLinkMode('all')">Todos → Todos</button>
+            <button class="link-mode-btn" [class.active]="groupLinkMode() === 'sector'" (click)="setGroupLinkMode('sector')">Setor → Setor</button>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-section-header">
+            <span class="drawer-section-title">Auto-Organizar</span>
+            <label class="switch-slider">
+              <input type="checkbox" [checked]="autoLayoutEnabled()" (change)="toggleAutoLayout()" />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+          <span class="drawer-section-desc">Aproxima cards com mais conexões entre si, reduzindo cruzamento de linhas no canvas.</span>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-section-header">
+            <span class="drawer-section-title">{{ 'workflows.builder.autoReturn' | translate }}</span>
+            <label class="switch-slider">
+              <input type="checkbox" [checked]="autoReturnEnabled()" (change)="toggleAutoReturn()" />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+          <span class="drawer-section-desc">Cria automaticamente conexões de devolução (retorno) para cada conexão de avanço criada.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <div class="builder-canvas">
+      <!-- Floating settings button (when drawer is closed) -->
+      @if (!drawerOpen()) {
+        <button class="drawer-float-btn" (click)="toggleDrawer()" pTooltip="Configurações" tooltipPosition="right">
+          <i class="pi pi-cog"></i>
+        </button>
+      }
+      <app-flow-canvas
+        [stages]="stages()"
+        [connections]="connections()"
+        [orgUnits]="orgUnits()"
+        [globalGrouping]="globalGrouping()"
+        [groupLinkMode]="groupLinkMode()"
+        [connectionTypeVisibility]="connectionTypeVisibility()"
+        [templateName]="flow()!.template?.name ?? ''"
+        (connectionCreated)="onConnectionCreated($event)"
+        (connectionRemoved)="onConnectionRemoved($event)"
+        (groupConnectionRemoved)="onGroupConnectionRemoved($event)"
+        (openProfileDialog)="onOpenProfileDialog($event)"
+        (profileContextMenu)="onProfileContextMenu($event)"
+        (profileReordered)="onProfileReordered($event)"
+        (groupConnectionCreated)="onGroupConnectionCreated($event)"
+      />
+      <div class="builder-footer">
+        <div class="builder-footer-left">
+          <app-connection-legend (visibilityChanged)="onConnectionTypeVisibilityChanged($event)" />
+        </div>
+        <div class="builder-footer-right">
+          <div class="autosave-toggle">
+            <span>Auto-save</span>
+            <label class="switch-slider">
+              <input type="checkbox" [checked]="autoSaveEnabled()" (change)="toggleAutoSave()" />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+          @if (lastSavedLabel()) {
+            <span class="autosave-status">{{ lastSavedLabel() }}</span>
+          }
+          @if (saving()) {
+            <span class="autosave-status"><i class="pi pi-spin pi-spinner"></i> Salvando...</span>
+          }
+          <p-button label="Salvar" icon="pi pi-save" size="small" [disabled]="!hasUnsavedChanges() || saving()" [loading]="saving()" (onClick)="onSave()" />
+        </div>
+      </div>
+      <div class="zoom-slider-overlay">
+        <button class="zoom-btn" (click)="setZoomLevel(getZoomLevel() + 0.05)">
+          <i class="pi pi-search-plus zoom-icon"></i>
+        </button>
+        <div class="zoom-slider-wrap">
+          <input type="range" class="zoom-slider"
+                 min="0.5" max="2" step="0.05"
+                 [value]="getZoomLevel()"
+                 (input)="onZoomSliderInput($event)" />
+        </div>
+        <span class="zoom-label">{{ getZoomPercent() }}%</span>
+        <button class="zoom-btn" (click)="setZoomLevel(getZoomLevel() - 0.05)">
+          <i class="pi pi-search-minus zoom-icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Auto-layout overlay -->
+    @if (autoLayoutRunning()) {
+      <div class="auto-layout-overlay">
+        <div class="auto-layout-overlay-content">
+          <i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i>
+          <span>Reorganizando layout...</span>
+        </div>
+      </div>
+    }
+
+    <!-- Right Panel (Validation) -->
+    <div class="builder-sidebar-right" [class.builder-sidebar-right--open]="showValidationPanel()">
+      <app-validation-panel [errors]="validationErrors()" [count]="pendingCount()" (close)="closeValidationPanel()" />
+    </div>
+  </div>
+
+  <!-- Profile Tree Dialog -->
+  <app-profile-tree-dialog />
+
+  <!-- Profile Context Menu -->
+  <app-profile-context-menu
+    (permissionsChanged)="onPermissionsChanged($event)"
+    (profileDeleted)="onContextMenuDelete($event)"
+  />
+
+  <!-- Group Connection Dialog -->
+  <app-group-connection-dialog
+    (confirmed)="onGroupConnectionConfirmed($event)"
+  />
+
+  <p-confirmDialog />
+} @else {
+  <div class="builder-loading">
+    <p>Fluxo visual não encontrado.</p>
+    <p-button label="Voltar" icon="pi pi-arrow-left" (onClick)="onEditFlow()" />
+  </div>
+}

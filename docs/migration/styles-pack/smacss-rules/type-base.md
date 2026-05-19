@@ -1,0 +1,2 @@
+# Base Rules
+Base rules define the default styling for standard HTML elements (such as `body`, `a`, and `h1`) using only element selectors. These rules establish the foundation of the site's typography, colors, and resets. Base styles should never require the use of `!important` or ID/class selectors, as they represent the "starting point" for all elements on the page.

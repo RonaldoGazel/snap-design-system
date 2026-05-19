@@ -1,0 +1,84 @@
+/* ===== Base Rules — Element-only selectors (SMACSS Base) ===== */
+
+html {
+  // Typography
+  font-size: 18px;
+}
+
+body {
+  // Box Model
+  padding: var(--space-0);
+  margin: var(--space-0);
+  // Typography
+  font-family: 'Inter Tight Variable', 'Inter Tight', system-ui, -apple-system, sans-serif;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  color: var(--p-text-color);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  // Visuals
+  background-color: var(--p-surface-ground);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  // Box Model
+  margin-top: var(--space-0);
+  margin-bottom: var(--space-2-5);
+  // Typography
+  color: var(--p-text-color);
+}
+
+h1 {
+  // Typography
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h2 {
+  // Typography
+  font-size: var(--text-4xl);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h3 {
+  // Typography
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h4 {
+  // Typography
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+h5 {
+  // Typography
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+h6 {
+  // Typography
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ===== Tablet Responsive — Base element overrides ===== */
+
+@media (min-width: 744px) and (max-width: 1279px) {
+  html {
+    font-size: 16px;
+  }
+}

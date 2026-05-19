@@ -1,0 +1,5 @@
+.bpms-breadcrumb { display: flex; flex-direction: row; align-items: center; gap: 0.25rem; font-size: 0.85rem; color: var(--text-color-secondary); margin-bottom: 1rem; }
+.bpms-breadcrumb__link { color: var(--primary-color); text-decoration: none; }
+.bpms-breadcrumb__link:hover { text-decoration: underline; }
+.bpms-breadcrumb__separator { color: var(--text-color-secondary); }
+.bpms-breadcrumb__current { color: var(--text-color); }

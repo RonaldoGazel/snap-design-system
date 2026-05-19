@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "project_type": "CSS Architecture Reference",
+  "source_of_truth": true,
+  "indexing_strategy": "modular",
+  "topics": {
+    "naming_conventions": ["formatting.md", "categorizing.md", "smacss-bem.md"],
+    "selector_performance": ["selectors.md", "applicability.md"],
+    "component_logic": ["type-module.md", "icon-module.md", "complicated-inheritance.md"],
+    "architecture_layers": ["type-base.md", "type-layout.md", "type-state.md", "type-theme.md"],
+    "tooling_integration": ["preprocessors.md", "drop-the-base.md"]
+  },
+  "agent_instructions": {
+    "css_generation": "When writing CSS, agents MUST prioritize **BEM (Block, Element, Modifier)** notation (e.g., .block__element--modifier). Use SMACSS prefixes: 'l-' for layout, 'is-' for state. Use class selectors over IDs or tags.",
+    "context_loading": "Agents should only read the specific topic file corresponding to the component or rule they are modifying."
+  }
+}

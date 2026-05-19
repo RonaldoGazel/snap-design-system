@@ -1,0 +1,32 @@
+.org-tree-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.org-tree-page__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.org-tree-page__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.org-tree-page__profiles {
+  margin-top: 1rem;
+}
+
+.org-tree-page__profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}

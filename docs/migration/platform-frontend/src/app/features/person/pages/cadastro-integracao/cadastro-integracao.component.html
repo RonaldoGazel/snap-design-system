@@ -1,0 +1,555 @@
+<!-- Cabeçalho -->
+<header class="page-header">
+    <div class="page-header__left">
+        <button class="page-header__back-btn" (click)="voltar()"><i class="pi pi-arrow-left"></i></button>
+        <div class="page-header__titles">
+            <h1 class="page-header__title">Cadastro e Integração</h1>
+            <nav class="page-header__breadcrumb font-accent">PESSOAS DE INTERESSE &gt; CADASTRO E INTEGRAÇÃO</nav>
+        </div>
+    </div>
+</header>
+
+<!-- Stepper bar -->
+<p-steps [model]="stepItems" [activeIndex]="currentStep()" [readonly]="true" styleClass="snap-steps" />
+
+<!-- Body -->
+<div class="l-wizard">
+    <!-- Conteúdo do step -->
+    <div class="l-wizard__main" [class.step-transition-enter]="!transitioning()">
+
+        @if (transitioning()) {
+        <div class="step-skeleton">
+            <p-skeleton height="120px" styleClass="mb-3" />
+            <p-skeleton height="80px" />
+        </div>
+        } @else {
+
+        <!-- Step 0: Cadastro -->
+        @if (currentStep() === 0) {
+        <div class="step-section">
+            <p-selectbutton [options]="modoOptions" [ngModel]="modoCadastro()"
+                (ngModelChange)="modoCadastro.set($event)" optionLabel="label" optionValue="value"
+                styleClass="modo-toggle" />
+
+            @if (modoCadastro() === 'rapido') {
+            <div class="form-card">
+                <div class="form-card__field">
+                    <label class="form-card__label">Nome principal <span class="obrigatorio">*</span></label>
+                    <input pInputText [ngModel]="formRapido().nome"
+                        (ngModelChange)="formRapido.update(f => ({...f, nome: $event}))" placeholder="Nome completo"
+                        class="w-full" />
+                </div>
+                <div class="form-card__row">
+                    <div class="form-card__field">
+                        <label class="form-card__label">RG</label>
+                        <input pInputText [ngModel]="formRapido().rg"
+                            (ngModelChange)="formRapido.update(f => ({...f, rg: $event}))" placeholder="00.000.000-0"
+                            class="w-full" />
+                    </div>
+                    <div class="form-card__field">
+                        <label class="form-card__label">CPF</label>
+                        <input pInputText [ngModel]="formRapido().cpf"
+                            (ngModelChange)="formRapido.update(f => ({...f, cpf: $event}))" placeholder="000.000.000-00"
+                            class="w-full" />
+                    </div>
+                </div>
+                <div class="form-card__field">
+                    <label class="form-card__label">Vulgo / alcunha</label>
+                    <input pInputText [ngModel]="formRapido().vulgo"
+                        (ngModelChange)="formRapido.update(f => ({...f, vulgo: $event}))"
+                        placeholder="Apelido ou codinome" class="w-full" />
+                </div>
+                <div class="form-card__field">
+                    <label class="form-card__label">Perfil inicial presumido</label>
+                    <p-select [options]="perfilOptions" [ngModel]="formRapido().perfil"
+                        (ngModelChange)="formRapido.update(f => ({...f, perfil: $event}))" optionLabel="label"
+                        optionValue="value" placeholder="Selecionar perfil" class="w-full" />
+                </div>
+                <div class="form-card__field">
+                    <label class="form-card__label">Observação de inteligência</label>
+                    <textarea pTextarea [ngModel]="formRapido().observacao"
+                        (ngModelChange)="formRapido.update(f => ({...f, observacao: $event}))" rows="3"
+                        placeholder="Contexto analítico relevante..." class="w-full"></textarea>
+                </div>
+            </div>
+            } @else {
+            <div class="form-card">
+                <div class="form-card__field">
+                    <label class="form-card__label">Vulgo / referência principal <span class="obrigatorio">*</span></label>
+                    <input pInputText [ngModel]="formIncompleto().vulgo"
+                        (ngModelChange)="formIncompleto.update(f => ({...f, vulgo: $event}))"
+                        placeholder="Apelido, codinome ou referência" class="w-full" />
+                </div>
+                <div class="form-card__field">
+                    <label class="form-card__label">Nome aproximado</label>
+                    <input pInputText [ngModel]="formIncompleto().nomeAproximado"
+                        (ngModelChange)="formIncompleto.update(f => ({...f, nomeAproximado: $event}))"
+                        placeholder="Nome parcial ou aproximado" class="w-full" />
+                </div>
+                <div class="form-card__field">
+                    <label class="form-card__label">Descrição livre</label>
+                    <textarea pTextarea [ngModel]="formIncompleto().descricao"
+                        (ngModelChange)="formIncompleto.update(f => ({...f, descricao: $event}))" rows="2"
+                        placeholder="Características físicas, contexto..." class="w-full"></textarea>
+                </div>
+                <div class="form-card__row">
+                    <div class="form-card__field">
+                        <label class="form-card__label">Sexo presumido</label>
+                        <p-select [options]="sexoOptions" [ngModel]="formIncompleto().sexo"
+                            (ngModelChange)="formIncompleto.update(f => ({...f, sexo: $event}))" optionLabel="label"
+                            optionValue="value" placeholder="Selecionar" class="w-full" />
+                    </div>
+                    <div class="form-card__field">
+                        <label class="form-card__label">Faixa etária estimada</label>
+                        <p-select [options]="faixaEtariaOptions" [ngModel]="formIncompleto().faixaEtaria"
+                            (ngModelChange)="formIncompleto.update(f => ({...f, faixaEtaria: $event}))"
+                            optionLabel="label" optionValue="value" placeholder="Selecionar" class="w-full" />
+                    </div>
+                </div>
+                <div class="form-card__row">
+                    <div class="form-card__field">
+                        <label class="form-card__label">Perfil presumido</label>
+                        <p-select [options]="perfilOptions" [ngModel]="formIncompleto().perfil"
+                            (ngModelChange)="formIncompleto.update(f => ({...f, perfil: $event}))" optionLabel="label"
+                            optionValue="value" placeholder="Selecionar" class="w-full" />
+                    </div>
+                    <div class="form-card__field">
+                        <label class="form-card__label">Unidade / contexto prisional</label>
+                        <input pInputText [ngModel]="formIncompleto().unidade"
+                            (ngModelChange)="formIncompleto.update(f => ({...f, unidade: $event}))"
+                            placeholder="Ex: Bangu III" class="w-full" />
+                    </div>
+                </div>
+                <div class="form-card__section-title">Contexto analítico</div>
+                <div class="form-card__field">
+                    <label class="form-card__label">Origem do dado</label>
+                    <p-select [options]="origemOptions" [ngModel]="formIncompleto().origemDado"
+                        (ngModelChange)="formIncompleto.update(f => ({...f, origemDado: $event}))" optionLabel="label"
+                        optionValue="value" placeholder="Selecionar origem" class="w-full" />
+                </div>
+                <div class="form-card__field">
+                    <label class="form-card__label">Motivo do cadastro</label>
+                    <textarea pTextarea [ngModel]="formIncompleto().motivo"
+                        (ngModelChange)="formIncompleto.update(f => ({...f, motivo: $event}))" rows="2"
+                        placeholder="Por que esta pessoa está sendo cadastrada..." class="w-full"></textarea>
+                </div>
+                <div class="form-card__field">
+                    <label class="form-card__label">Pessoa / documento relacionado</label>
+                    <input pInputText [ngModel]="formIncompleto().pessoaRelacionada"
+                        (ngModelChange)="formIncompleto.update(f => ({...f, pessoaRelacionada: $event}))"
+                        placeholder="Nome ou referência" class="w-full" />
+                </div>
+            </div>
+            }
+
+            <!-- Painel de validação -->
+            <div class="validation-card">
+                <div class="validation-card__title">Validação preliminar</div>
+                <div class="validation-card__item--info"><i class="pi pi-info-circle"></i><span>Nenhuma verificação realizada
+                        ainda</span></div>
+                <div class="validation-card__item--warn"><i class="pi pi-exclamation-triangle"></i><span>Recomendado validar em
+                        SIPEN</span></div>
+                @if (!formRapido().cpf && !formRapido().rg && modoCadastro() === 'rapido') {
+                <div class="validation-card__item--warn"><i class="pi pi-exclamation-triangle"></i><span>Registro sem
+                        identificador formal</span></div>
+                }
+            </div>
+
+            <!-- Hipóteses (modo incompleto) -->
+            @if (modoCadastro() === 'incompleta') {
+            <div class="hypothesis-card">
+                <div class="hypothesis-card__title">Possíveis correspondências na base</div>
+                @for (h of mock.hipoteses; track h.nome) {
+                <div class="hypothesis-card__item">
+                    <div class="hypothesis-card__item-info">
+                        <span class="hypothesis-card__name">{{ h.nome }}</span>
+                        @if (h.vulgo) { <span class="hypothesis-card__alias">"{{ h.vulgo }}"</span> }
+                        <p-tag [value]="h.perfil" [rounded]="true" severity="secondary" />
+                    </div>
+                    <div [class]="'hypothesis-card__score ' + scoreClass(h.score)">{{ h.score }}%</div>
+                </div>
+                }
+                <span class="hypothesis-card__hint">Clique para comparar</span>
+            </div>
+            }
+        </div>
+        }
+
+        <!-- Step 1: SIPEN -->
+        @if (currentStep() === 1) {
+        <div class="step-section">
+            <div class="criteria-card">
+                <div class="criteria-card__title">Critérios de consulta</div>
+                <div class="field-grid">
+                    <div class="field-grid__item"><span class="field-grid__label">Nome</span><span class="field-grid__value">{{
+                            mock.resultadoSipen.dados?.nome }}</span></div>
+                    <div class="field-grid__item"><span class="field-grid__label">RG <span class="criteria-card__badge">Critério
+                                principal</span></span><span class="field-grid__value">{{ mock.resultadoSipen.dados?.rg
+                            }}</span></div>
+                    <div class="field-grid__item"><span class="field-grid__label">CPF</span><span class="field-grid__value">{{
+                            mock.resultadoSipen.dados?.cpf }}</span></div>
+                    <div class="field-grid__item"><span class="field-grid__label">Vulgo</span><span class="field-grid__value">{{
+                            mock.resultadoSipen.dados?.vulgos?.[0] }}</span></div>
+                </div>
+            </div>
+
+            <div class="sipen-result">
+                <span class="sipen-result__primary-badge">Fonte primária</span>
+                <div class="sipen-result__grid">
+                    <div class="sipen-result__photo-col">
+                        <div class="sipen-result__photo"
+                            [style.background-image]="'url(' + mock.resultadoSipen.dados?.fotoUrl + ')'"></div>
+                        <span class="sipen-result__name">{{ mock.resultadoSipen.dados?.nome }}</span>
+                        @for (v of mock.resultadoSipen.dados?.vulgos ?? []; track v) {
+                        <span class="sipen-result__alias">"{{ v }}"</span>
+                        }
+                    </div>
+                    <div class="sipen-result__data-col">
+                        <div class="field-grid">
+                            <div class="field-grid__item"><span class="field-grid__label">RG</span><span class="field-grid__value">{{
+                                    mock.resultadoSipen.dados?.rg }}</span></div>
+                            <div class="field-grid__item"><span class="field-grid__label">CPF</span><span class="field-grid__value">{{
+                                    mock.resultadoSipen.dados?.cpf }}</span></div>
+                            <div class="field-grid__item"><span class="field-grid__label">Pai</span><span class="field-grid__value">{{
+                                    mock.resultadoSipen.dados?.pai }}</span></div>
+                            <div class="field-grid__item"><span class="field-grid__label">Mãe</span><span class="field-grid__value">{{
+                                    mock.resultadoSipen.dados?.mae }}</span></div>
+                            <div class="field-grid__item"><span class="field-grid__label">Nascimento</span><span class="field-grid__value">{{
+                                    formatDate(mock.resultadoSipen.dados?.nascimento ?? '') }}</span></div>
+                        </div>
+                    </div>
+                    <div class="sipen-result__ops-col">
+                        <div class="field-grid__item"><span class="field-grid__label">Unidade</span><span class="field-grid__value">{{
+                                mock.resultadoSipen.dados?.unidade }}</span></div>
+                        <div class="field-grid__item"><span class="field-grid__label">Situação</span><span class="field-grid__value">{{
+                                mock.resultadoSipen.dados?.situacao }}</span></div>
+                        <div class="field-grid__item"><span class="field-grid__label">Periculosidade</span><span class="field-grid__value">{{
+                                mock.resultadoSipen.dados?.periculosidade }}</span></div>
+                        <p class="sipen-result__summary">{{ mock.resultadoSipen.dados?.resumoCustodia }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decision-grid">
+                <div class="decision-card" [class.is-selected]="decisaoSipen() === 'usar'"
+                    (click)="decisaoSipen.set('usar')">
+                    <i class="pi pi-check-circle decision-card__icon decision-card__icon--ok"></i>
+                    <span class="decision-card__title">Usar dados SIPEN como base principal</span>
+                    <span class="decision-card__description">Os dados do SIPEN serão priorizados na conciliação</span>
+                    <span class="decision-card__recommended">Recomendado</span>
+                </div>
+                <div class="decision-card" [class.is-selected]="decisaoSipen() === 'parcial'"
+                    (click)="decisaoSipen.set('parcial')">
+                    <i class="pi pi-minus-circle decision-card__icon"></i>
+                    <span class="decision-card__title">Usar parcialmente e revisar depois</span>
+                    <span class="decision-card__description">Alguns dados serão aproveitados, revisão pendente</span>
+                </div>
+                <div class="decision-card" [class.is-selected]="decisaoSipen() === 'nao-corresponde'"
+                    (click)="decisaoSipen.set('nao-corresponde')">
+                    <i class="pi pi-times-circle decision-card__icon decision-card__icon--warn"></i>
+                    <span class="decision-card__title">Não corresponde à pessoa pesquisada</span>
+                    <span class="decision-card__description">Nenhum dado SIPEN será vinculado</span>
+                </div>
+            </div>
+        </div>
+        }
+
+        <!-- Step 2: SNAP -->
+        @if (currentStep() === 2) {
+        <div class="step-section">
+            <div class="criteria-card">
+                <div class="criteria-card__title">Resumo da consulta</div>
+                <div class="field-grid">
+                    <div class="field-grid__item"><span class="field-grid__label">Chave de busca</span><span class="field-grid__value">CPF: {{
+                            mock.resultadoSipen.dados?.cpf }}</span></div>
+                    <div class="field-grid__item"><span class="field-grid__label">Status</span><p-tag value="Dados encontrados"
+                            [rounded]="true" severity="success" /></div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="content-card__title">Contatos <span class="content-card__source-badge">SNAP</span></div>
+                <div class="sub-section">
+                    <div class="sub-section__title">Telefones</div>
+                    @for (t of mock.dadosSnap.contatos.telefones; track t.numero) {
+                    <div class="inline-item"><i class="pi pi-phone"></i><span>{{ t.numero }}</span><span
+                            class="inline-item__type">{{ t.tipo }}</span></div>
+                    }
+                </div>
+                <div class="sub-section">
+                    <div class="sub-section__title">Emails</div>
+                    @for (e of mock.dadosSnap.contatos.emails; track e.endereco) {
+                    <div class="inline-item"><i class="pi pi-envelope"></i><span>{{ e.endereco }}</span><span
+                            class="inline-item__type">{{ e.tipo }}</span></div>
+                    }
+                </div>
+                <div class="sub-section">
+                    <div class="sub-section__title">Endereços</div>
+                    @for (end of mock.dadosSnap.contatos.enderecos; track end.cep) {
+                    <div class="inline-item"><i class="pi pi-map-marker"></i><span>{{ end.logradouro }}, {{ end.numero
+                            }} — {{ end.cidade }}/{{ end.estado }}</span></div>
+                    }
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="content-card__title">Pessoas Relacionadas <span class="content-card__source-badge">SNAP</span></div>
+                @for (p of mock.dadosSnap.pessoasRelacionadas; track p.nome) {
+                <div class="compact-item">
+                    <span class="compact-item__title">{{ p.nome }}</span>
+                    <span class="compact-item__description">{{ p.vinculo }}</span>
+                    <p-tag [value]="p.classificacao" [rounded]="true" severity="secondary" />
+                </div>
+                }
+            </div>
+
+            <div class="content-card">
+                <div class="content-card__title">Empresas e Sociedades <span class="content-card__source-badge">SNAP</span></div>
+                @for (emp of mock.dadosSnap.empresas; track emp.cnpj) {
+                <div class="company-card">
+                    <span class="company-card__name">{{ emp.razaoSocial }}</span>
+                    <span class="company-card__tax-id">CNPJ: {{ emp.cnpj }}</span>
+                    <p-tag [value]="emp.situacao" [rounded]="true" severity="secondary" />
+                    @for (s of emp.socios; track s.nome) {
+                    <div class="partner-item"><span>{{ s.nome }}</span><span class="partner-item__role">{{ s.qualificacao
+                            }}</span></div>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="snap-alert-card">
+                <div class="snap-alert-card__title">Alertas preliminares</div>
+                @for (a of mock.dadosSnap.alertas; track a) {
+                <div class="snap-alert-card__item"><i class="pi pi-exclamation-triangle"></i><span>{{ a }}</span></div>
+                }
+            </div>
+        </div>
+        }
+
+        <!-- Step 3: Conciliação -->
+        @if (currentStep() === 3) {
+        <div class="step-section">
+            <div class="conciliation__header">
+                <h2 class="conciliation__title">Conciliação de dados entre fontes</h2>
+                <p class="conciliation__subtitle">Compare, preserve e priorize informações vindas de múltiplas fontes</p>
+                <div class="conciliation__legend">
+                    <span class="legend-item"><span class="legend-item__dot"
+                            style="background: var(--snap-pillar-color)"></span>SIPEN = Fonte primária</span>
+                    <span class="legend-item"><span class="legend-item__dot"
+                            style="background: var(--snap-info)"></span>SNAP = Fonte complementar</span>
+                    <span class="legend-item"><span class="legend-item__dot"
+                            style="background: var(--snap-text-muted)"></span>Manual = Inserção do operador</span>
+                </div>
+            </div>
+            <table class="conciliation__table">
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>SIPEN</th>
+                        <th>SNAP</th>
+                        <th>Manual</th>
+                        <th>Decisão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (c of mock.camposConciliacao; track c.campo) {
+                    <tr [class.conciliation__row--divergent]="c.divergente">
+                        <td class="conciliation__field-name">
+                            {{ c.campo }}
+                            @if (c.divergente) { <i class="pi pi-exclamation-circle conciliation__divergence-icon"
+                                [pTooltip]="'Divergência entre fontes: ' + c.sipen + ' vs ' + c.snap"></i> }
+                        </td>
+                        <td>{{ c.sipen ?? '—' }}</td>
+                        <td>{{ c.snap ?? '—' }}</td>
+                        <td>{{ c.manual ?? '—' }}</td>
+                        <td>
+                            <p-select [options]="decisaoOptions" [(ngModel)]="c.decisao" optionLabel="label"
+                                optionValue="value" styleClass="conciliation__select" />
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+        <!-- Step 4: Deduplicação -->
+        @if (currentStep() === 4) {
+        <div class="step-section">
+            @if (estadoDedup() === 'fila') {
+            <div class="content-card">
+                <div class="content-card__title">
+                    Possíveis duplicidades
+                    <span class="count-badge">{{ mock.filaDuplicidades.length }}</span>
+                </div>
+                @for (item of mock.filaDuplicidades; track item.nomeA; let i = $index) {
+                <div class="dedup-item">
+                    <div [class]="'dedup-item__score ' + scoreClass(item.score)">{{ item.score }}%</div>
+                    <div class="dedup-item__names">
+                        <span class="dedup-item__name-a">{{ item.nomeA }}</span>
+                        <span class="dedup-item__vs">vs</span>
+                        <span class="dedup-item__name-b">{{ item.nomeB }}</span>
+                        <span class="dedup-item__reason">{{ item.motivo }}</span>
+                        <div class="dedup-item__profiles">
+                            <p-tag [value]="item.perfilA" [rounded]="true" severity="secondary" />
+                            <p-tag [value]="item.perfilB" [rounded]="true" severity="secondary" />
+                        </div>
+                    </div>
+                    <div class="dedup-item__actions">
+                        <button pButton label="Comparar" size="small" [outlined]="true" class="dedup-item__compare-btn"
+                            (click)="estadoDedup.set('comparacao'); itemComparando.set(i)"></button>
+                        <button pButton label="Adiar" size="small" [text]="true" class="dedup-item__defer-btn"></button>
+                    </div>
+                </div>
+                }
+            </div>
+            } @else {
+            <div class="comparison__header">
+                <button pButton label="Voltar à fila" icon="pi pi-arrow-left" [text]="true"
+                    (click)="estadoDedup.set('fila')"></button>
+                <span class="comparison__score">Score: <strong>{{ mock.filaDuplicidades[itemComparando() ?? 0].score
+                        }}%</strong> — {{ mock.filaDuplicidades[itemComparando() ?? 0].motivo }}</span>
+            </div>
+            <div class="comparison__grid">
+                <div class="record-card">
+                    <div class="record-card__top">
+                        <div class="record-card__photo"
+                            [style.background-image]="'url(' + mock.comparacaoDetalhe.registroA.fotoUrl + ')'"></div>
+                        <div>
+                            <span class="record-card__name">{{ mock.comparacaoDetalhe.registroA.nome }}</span>
+                            <p-tag [value]="mock.comparacaoDetalhe.registroA.perfil" [rounded]="true"
+                                severity="secondary" />
+                            <span class="record-card__id">RG: {{ mock.comparacaoDetalhe.registroA.rg }}</span>
+                            <span class="record-card__sources">{{ mock.comparacaoDetalhe.registroA.fontes.join(' + ')
+                                }}</span>
+                        </div>
+                    </div>
+                    <div class="record-card__section-title">Campos coincidentes</div>
+                    @for (m of mock.comparacaoDetalhe.camposMatch; track m.campo) {
+                    <div class="field-comparison--match"><i class="pi pi-check"></i><span class="field-comparison__name">{{ m.campo
+                            }}</span><span class="field-comparison__value">{{ m.valor }}</span></div>
+                    }
+                    <div class="record-card__section-title">Campos divergentes</div>
+                    @for (d of mock.comparacaoDetalhe.camposDivergentes; track d.campo) {
+                    <div class="field-comparison--divergent"><i class="pi pi-exclamation-circle"></i><span
+                            class="field-comparison__name">{{ d.campo }}</span><span class="field-comparison__value">{{ d.valorA
+                            }}</span></div>
+                    }
+                    <div class="record-card__section-title">Campos exclusivos</div>
+                    @for (e of mock.comparacaoDetalhe.camposExclusivos.filter(x => x.lado === 'A'); track e.campo) {
+                    <div class="field-comparison--exclusive"><i class="pi pi-plus-circle"></i><span class="field-comparison__name">{{
+                            e.campo }}</span><span class="field-comparison__value">{{ e.valor }}</span></div>
+                    }
+                </div>
+                <div class="record-card">
+                    <div class="record-card__top">
+                        <div class="record-card__photo-placeholder">{{ mock.comparacaoDetalhe.registroB.nome.charAt(0) }}
+                        </div>
+                        <div>
+                            <span class="record-card__name">{{ mock.comparacaoDetalhe.registroB.nome }}</span>
+                            <p-tag [value]="mock.comparacaoDetalhe.registroB.perfil" [rounded]="true"
+                                severity="secondary" />
+                            <span class="record-card__id">RG: {{ mock.comparacaoDetalhe.registroB.rg }}</span>
+                            <span class="record-card__sources">{{ mock.comparacaoDetalhe.registroB.fontes.join(' + ')
+                                }}</span>
+                        </div>
+                    </div>
+                    <div class="record-card__section-title">Campos coincidentes</div>
+                    @for (m of mock.comparacaoDetalhe.camposMatch; track m.campo) {
+                    <div class="field-comparison--match"><i class="pi pi-check"></i><span class="field-comparison__name">{{ m.campo
+                            }}</span><span class="field-comparison__value">{{ m.valor }}</span></div>
+                    }
+                    <div class="record-card__section-title">Campos divergentes</div>
+                    @for (d of mock.comparacaoDetalhe.camposDivergentes; track d.campo) {
+                    <div class="field-comparison--divergent"><i class="pi pi-exclamation-circle"></i><span
+                            class="field-comparison__name">{{ d.campo }}</span><span class="field-comparison__value">{{ d.valorB
+                            }}</span></div>
+                    }
+                    <div class="record-card__section-title">Campos exclusivos</div>
+                    @for (e of mock.comparacaoDetalhe.camposExclusivos.filter(x => x.lado === 'B'); track e.campo) {
+                    <div class="field-comparison--exclusive"><i class="pi pi-plus-circle"></i><span class="field-comparison__name">{{
+                            e.campo }}</span><span class="field-comparison__value">{{ e.valor }}</span></div>
+                    }
+                </div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-card__title">Impacto da mesclagem</div>
+                <div class="impact-card__grid">
+                    <div class="impact-card__item"><span class="impact-card__number">{{
+                            mock.comparacaoDetalhe.impactoMerge.documentos }}</span><span
+                            class="impact-card__label">documentos unificados</span></div>
+                    <div class="impact-card__item"><span class="impact-card__number">{{ mock.comparacaoDetalhe.impactoMerge.tags
+                            }}</span><span class="impact-card__label">tags mantidas</span></div>
+                    <div class="impact-card__item"><span class="impact-card__number">{{ mock.comparacaoDetalhe.impactoMerge.vinculos
+                            }}</span><span class="impact-card__label">vínculos consolidados</span></div>
+                    <div class="impact-card__item"><span class="impact-card__number">{{ mock.comparacaoDetalhe.impactoMerge.alertas
+                            }}</span><span class="impact-card__label">alertas redirecionados</span></div>
+                </div>
+            </div>
+            <div class="merge-actions">
+                <button pButton label="Mesclar registros" icon="pi pi-check" class="merge-actions__merge-btn"
+                    (click)="concluir()"></button>
+                <button pButton label="Manter separados" [outlined]="true" (click)="estadoDedup.set('fila')"></button>
+                <button pButton label="Revisão posterior" [text]="true" (click)="estadoDedup.set('fila')"></button>
+            </div>
+            }
+        </div>
+        }
+
+        }
+    </div>
+
+    <!-- Sidebar de resumo -->
+    <aside class="l-wizard__aside">
+        <div class="wizard-sidebar">
+            <div class="wizard-sidebar__title">RESUMO DA PESSOA</div>
+            <div class="wizard-sidebar__field"><span class="wizard-sidebar__label">Nome</span><span class="wizard-sidebar__value">{{
+                    resumoPessoa().nome || '—' }}</span></div>
+            <div class="wizard-sidebar__field"><span class="wizard-sidebar__label">Vulgo</span><span class="wizard-sidebar__value">{{
+                    resumoPessoa().vulgo || '—' }}</span></div>
+            <div class="wizard-sidebar__field"><span class="wizard-sidebar__label">CPF</span><span class="wizard-sidebar__value">{{
+                    resumoPessoa().cpf || '—' }}</span></div>
+            <div class="wizard-sidebar__field"><span class="wizard-sidebar__label">RG</span><span class="wizard-sidebar__value">{{
+                    resumoPessoa().rg || '—' }}</span></div>
+            <div class="wizard-sidebar__field"><span class="wizard-sidebar__label">Perfil</span><span class="wizard-sidebar__value">{{
+                    resumoPessoa().perfil || '—' }}</span></div>
+            <div class="wizard-sidebar__divider"></div>
+            <div class="wizard-sidebar__section-title">Fontes</div>
+            <div class="wizard-sidebar__source"><i
+                    [class]="'pi ' + (resumoPessoa().fonteManual ? 'pi-check-circle wizard-sidebar__source--ok' : 'pi-circle wizard-sidebar__source--pending')"></i><span>Manual</span>
+            </div>
+            <div class="wizard-sidebar__source"><i
+                    [class]="'pi ' + (resumoPessoa().fonteSipen ? 'pi-check-circle wizard-sidebar__source--ok' : 'pi-circle wizard-sidebar__source--pending')"></i><span>SIPEN</span>
+            </div>
+            <div class="wizard-sidebar__source"><i
+                    [class]="'pi ' + (resumoPessoa().fonteSnap ? 'pi-check-circle wizard-sidebar__source--ok' : 'pi-circle wizard-sidebar__source--pending')"></i><span>SNAP</span>
+            </div>
+            <div class="wizard-sidebar__divider"></div>
+            <div class="wizard-sidebar__section-title">Status</div>
+            <span class="wizard-sidebar__status">{{ resumoPessoa().status }}</span>
+            @if (resumoPessoa().alertas.length) {
+            <div class="wizard-sidebar__divider"></div>
+            <div class="wizard-sidebar__section-title">Alertas</div>
+            @for (a of resumoPessoa().alertas; track a) {
+            <div class="wizard-sidebar__alert"><i class="pi pi-exclamation-triangle"></i><span>{{ a }}</span></div>
+            }
+            }
+        </div>
+    </aside>
+</div>
+
+<!-- Footer -->
+<div class="step-footer">
+    @if (currentStep() === 0) {
+    <button pButton label="Salvar como rascunho" [text]="true" (click)="salvarRascunho()"></button>
+    }
+    <button pButton label="Voltar" icon="pi pi-arrow-left" [outlined]="true" [disabled]="currentStep() === 0"
+        (click)="voltar()"></button>
+    @if (canSkip) {
+    <button pButton label="Pular" [text]="true" (click)="pular()"></button>
+    }
+    <button pButton [label]="isLastStep ? 'Concluir' : 'Avançar'"
+        [icon]="isLastStep ? 'pi pi-check' : 'pi pi-arrow-right'" iconPos="right" class="step-footer__next-btn"
+        (click)="avancar()"></button>
+</div>

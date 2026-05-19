@@ -1,0 +1,21 @@
+{
+  "title": "Consulta SNAP",
+  "subtitle": "Busca de relatórios de pessoa por CPF",
+  "cpfLabel": "CPF",
+  "cpfPlaceholder": "000.000.000-00",
+  "searchButton": "Consultar",
+  "loading": "Enviando solicitação...",
+  "result.title": "Solicitação Aceita",
+  "result.status": "Status",
+  "result.message": "Mensagem",
+  "error.invalidCpf": "Informe um CPF válido com 11 dígitos.",
+  "error.badRequest": "CPF inválido ou parâmetros incorretos.",
+  "error.forbidden": "Você não tem permissão para realizar consultas SNAP.",
+  "error.notFound": "Nenhum resultado encontrado para o CPF informado.",
+  "error.serviceUnavailable": "Serviço SNAP temporariamente indisponível.",
+  "error.networkError": "Erro de conexão. Verifique sua rede.",
+  "error.retry": "Tentar novamente",
+  "targetGraph": "Grafo Destino",
+  "public": "Público",
+  "private": "Privado"
+}

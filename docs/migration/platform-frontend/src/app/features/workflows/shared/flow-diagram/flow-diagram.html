@@ -1,0 +1,50 @@
+<div class="flow-diagram">
+  @if (sortedSteps().length === 0) {
+    <p class="text-color-secondary text-center">{{ 'workflows.flowDiagram.noStepsConfigured' | translate }}</p>
+  } @else {
+    <div class="flow-diagram__steps">
+      @for (step of sortedSteps(); track step.id; let last = $last) {
+        <div
+          class="flow-diagram__step"
+          [class.flow-diagram__step--current]="isCurrentStep(step.id)"
+          [class.flow-diagram__step--orphan]="isOrphan(step.id)"
+          [class.flow-diagram__step--final]="step.type === 'terminal'"
+        >
+          <div class="flow-diagram__step-icon">
+            <i [class]="getStepIcon(step.type)"></i>
+          </div>
+          <div class="flow-diagram__step-info">
+            <span class="flow-diagram__step-name">{{ step.name }}</span>
+            <small class="flow-diagram__step-type">{{ getStepLabel(step.type) }}</small>
+          </div>
+          @if (isOrphan(step.id)) {
+            <p-tag [value]="'workflows.ui.noOutput' | translate" severity="warn" styleClass="ml-auto" />
+          }
+          @if (isCurrentStep(step.id)) {
+            <p-tag [value]="'workflows.ui.current' | translate" severity="success" styleClass="ml-auto" />
+          }
+        </div>
+
+        @if (!last) {
+          <div class="flow-diagram__transitions">
+            @for (t of getTransitionsFrom(step.id); track t.id) {
+              <div class="flow-diagram__transition">
+                <i class="pi pi-arrow-down flow-diagram__arrow"></i>
+                <span class="flow-diagram__transition-name">{{ t.name }}</span>
+                @if (getStepById(t.to_step_id); as target) {
+                  <small class="text-color-secondary">→ {{ target.name }}</small>
+                }
+              </div>
+            }
+            @if (getTransitionsFrom(step.id).length === 0 && step.type !== 'terminal') {
+              <div class="flow-diagram__transition flow-diagram__transition--missing">
+                <i class="pi pi-exclamation-triangle"></i>
+                <small>{{ 'workflows.flowDiagram.noTransitions' | translate }}</small>
+              </div>
+            }
+          </div>
+        }
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,66 @@
+<div class="preg-form-side" [class.is-disabled]="isDisabled()">
+
+    <!-- Title -->
+    <h2 class="preg-title">
+        Cadastrar<br><span class="accent">Nova Pessoa</span>
+    </h2>
+    <p class="preg-subtitle">
+        Preencha ao menos um campo para habilitar o cadastro.
+    </p>
+
+    <!-- Form -->
+    <form class="preg-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+
+        <!-- Nome + UF -->
+        <div class="preg-row preg-row--nome-uf">
+            <div class="preg-field">
+                <label class="preg-label" for="reg-nome">Nome</label>
+                <input pInputText id="reg-nome" formControlName="nome" placeholder="Nome completo"
+                    [class.is-filled]="form.get('nome')?.value" />
+            </div>
+
+            <div class="preg-field">
+                <label class="preg-label" for="reg-uf">UF</label>
+                <p-select inputId="reg-uf" formControlName="uf" [options]="ufOptions" optionLabel="label"
+                    optionValue="value" placeholder="UF" [class.is-filled]="form.get('uf')?.value"
+                    [disabled]="isDisabled()" />
+            </div>
+        </div>
+
+        <!-- Vulgo (full width) -->
+        <div class="preg-field">
+            <label class="preg-label" for="reg-vulgo">Vulgo</label>
+            <input pInputText id="reg-vulgo" formControlName="vulgo" placeholder="Apelido ou alcunha"
+                [class.is-filled]="form.get('vulgo')?.value" />
+        </div>
+
+        <!-- RG + CPF -->
+        <div class="preg-row">
+            <div class="preg-field">
+                <label class="preg-label" for="reg-rg">RG</label>
+                <input pInputText id="reg-rg" formControlName="rg" placeholder="00.000.000-0"
+                    [class.is-filled]="form.get('rg')?.value" />
+            </div>
+
+            <div class="preg-field">
+                <label class="preg-label" for="reg-cpf">CPF</label>
+                <input pInputText id="reg-cpf" formControlName="cpf" class="font-accent" placeholder="000.000.000-00"
+                    inputmode="numeric" maxlength="14" [class.is-filled]="form.get('cpf')?.value"
+                    (input)="onCpfInput($event)" />
+            </div>
+        </div>
+
+        <!-- Validation error -->
+        @if (errorMessage()) {
+        <div class="preg-validation" role="alert">{{ errorMessage() }}</div>
+        }
+
+        <!-- Actions -->
+        <div class="preg-actions">
+            <button pButton label="Cadastrar" icon="pi pi-user-plus" [disabled]="isDisabled()" type="submit"></button>
+            <button pButton label="Cancelar" severity="secondary" [disabled]="isDisabled()" type="button"
+                (click)="onCancel()"></button>
+        </div>
+
+    </form>
+</div>

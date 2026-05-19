@@ -1,0 +1,65 @@
+<p-card class="pessoa-card" [attr.aria-label]="ariaLabel()">
+    <ng-template pTemplate="header">
+        <div class="card-header">
+            @if (pessoa().photo) {
+            <p-avatar [image]="pessoa().photo" shape="circle" size="large"></p-avatar>
+            } @else {
+            <p-avatar [label]="iniciais()" shape="circle" size="large"
+                [style]="{ background: 'var(--primary-color)', color: '#fff' }"></p-avatar>
+            }
+        </div>
+    </ng-template>
+
+    <div class="card-content">
+        <!-- Nome -->
+        <h3 class="card-title">{{ pessoa().name }}</h3>
+
+        <!-- CPF -->
+        <div class="card-info">
+            <span class="info-label">CPF:</span>
+            <span class="info-value">{{ cpfFormatado() }}</span>
+        </div>
+
+        <!-- Nome da Mãe -->
+        @if (pessoa().motherName) {
+        <div class="card-info">
+            <span class="info-label">Mãe:</span>
+            <span class="info-value">{{ pessoa().motherName }}</span>
+        </div>
+        }
+
+        <!-- Roles/Perfis -->
+        @if (hasRoles()) {
+        <div class="card-tags">
+            @for (role of pessoa().roles!; track role) {
+            <p-tag [value]="role" [severity]="role === 'Preso' ? 'danger' : role === 'Alvo' ? 'warn' : 'info'"></p-tag>
+            }
+        </div>
+        }
+
+        <!-- Status de Monitoramento -->
+        <div class="card-monitoring">
+            @if (pessoa().monitoringActive) {
+            <p-tag value="Monitorada" severity="danger" icon="pi pi-eye"></p-tag>
+            } @else {
+            <p-tag value="Não Monitorada" severity="secondary" icon="pi pi-eye-slash"></p-tag>
+            }
+        </div>
+
+        <!-- Nível de Risco -->
+        @if (pessoa().threatLevel) {
+        <div class="card-threat">
+            <p-tag [value]="pessoa().threatLevel" [severity]="severidadeRisco()"
+                icon="pi pi-exclamation-triangle"></p-tag>
+        </div>
+        }
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="card-footer">
+            <p-button label="Atualizar" icon="pi pi-refresh" [loading]="isAtualizando()" (onClick)="onAtualizar()"
+                [disabled]="isAtualizando()" severity="secondary" outlined size="small"></p-button>
+            <p-button label="Ver Detalhes" icon="pi pi-arrow-right" (onClick)="onVerDetalhes()" size="small"></p-button>
+        </div>
+    </ng-template>
+</p-card>

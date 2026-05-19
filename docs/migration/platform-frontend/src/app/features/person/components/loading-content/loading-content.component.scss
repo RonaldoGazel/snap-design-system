@@ -1,0 +1,18 @@
+.loading-skeleton {
+  // Box Model
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3-5);
+  padding: var(--space-5);
+
+  &__row {
+    // Box Model
+    display: flex;
+    gap: var(--space-3-5);
+  }
+}
+
+.loading-progress {
+  // Box Model
+  padding: var(--space-5);
+}

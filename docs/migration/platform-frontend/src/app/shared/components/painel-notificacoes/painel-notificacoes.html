@@ -1,0 +1,51 @@
+<p-drawer [(visible)]="visible" position="right" [modal]="true" [showCloseIcon]="true" header="Notificações"
+    [style]="{ width: '450px' }">
+    <div class="painel-content">
+
+        <!-- Filtro por categoria -->
+        <div class="filtro-section">
+            <label for="filtro-categoria">Filtrar por categoria:</label>
+            <p-select id="filtro-categoria" [options]="categoriasDisponiveis" [ngModel]="filtroCategoria()"
+                (ngModelChange)="filtroCategoria.set($event)" optionLabel="label" optionValue="value"
+                placeholder="Todas as categorias" class="w-full" />
+        </div>
+
+        <!-- Marcar todas como lidas -->
+        <div class="acoes-section">
+            <p-button label="Marcar todas como lidas" icon="pi pi-check-circle" [text]="true" size="small"
+                [disabled]="naoLidas() === 0" (onClick)="onMarcarTodasComoLidas()" />
+        </div>
+
+        <!-- Lista de notificações -->
+        <div class="notificacoes-list">
+            @if (notificacoesFiltradas().length > 0) {
+            @for (notif of notificacoesFiltradas(); track notif.id) {
+            <div class="notificacao-item" [class.nao-lida]="!notif.is_read" (click)="onMarcarComoLida(notif.id)"
+                role="button" tabindex="0" (keydown.enter)="onMarcarComoLida(notif.id)"
+                (keydown.space)="onMarcarComoLida(notif.id)"
+                [attr.aria-label]="notif.title + (notif.is_read ? '' : ' — não lida')">
+                <div class="notif-header">
+                    <p-tag [value]="notif.prioridade" [severity]="getSeveridade(notif.prioridade)" />
+                    <span class="notif-date">{{ notif.created_at | date:'dd/MM HH:mm' }}</span>
+                </div>
+                <div class="notif-body">
+                    <p class="notif-titulo">{{ notif.title }}</p>
+                    <p class="notif-descricao">{{ notif.message }}</p>
+                </div>
+                @if (!notif.is_read) {
+                <div class="notif-indicator" aria-hidden="true">
+                    <i class="pi pi-circle-fill"></i>
+                </div>
+                }
+            </div>
+            }
+            } @else {
+            <div class="empty-state">
+                <i class="pi pi-inbox"></i>
+                <p>Nenhuma notificação</p>
+            </div>
+            }
+        </div>
+
+    </div>
+</p-drawer>

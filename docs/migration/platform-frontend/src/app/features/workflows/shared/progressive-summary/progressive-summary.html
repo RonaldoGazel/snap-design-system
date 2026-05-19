@@ -1,0 +1,91 @@
+<div class="progressive-summary">
+  <h4 class="progressive-summary__title">Resumo do Fluxo</h4>
+
+  @if (!flow()) {
+    <p class="text-color-secondary">Nenhum fluxo carregado.</p>
+  } @else {
+    <div class="progressive-summary__sections">
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">Criador</span>
+        <span class="progressive-summary__value">{{ getRoleName(creatorRole()) }}</span>
+      </div>
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">Produtor</span>
+        <span class="progressive-summary__value">{{ getRoleName(producerRole()) }}</span>
+      </div>
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">Revisor</span>
+        <span class="progressive-summary__value">{{ getRoleName(reviewerRole()) }}</span>
+      </div>
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">{{ 'workflows.progressiveSummary.formalizer' | translate }}</span>
+        <span class="progressive-summary__value">{{ getRoleName(formalizerRole()) }}</span>
+      </div>
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">{{ 'workflows.progressiveSummary.disseminationExecutor' | translate }}</span>
+        <span class="progressive-summary__value">{{ getRoleName(disseminatorRole()) }}</span>
+      </div>
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">Etapas</span>
+        <span class="progressive-summary__value">{{ steps().length }} etapa(s)</span>
+      </div>
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">{{ 'workflows.progressiveSummary.formalization' | translate }}</span>
+        <span class="progressive-summary__value">
+          @if (formalizationSteps().length > 0) {
+            {{ formalizationSteps().length }} etapa(s) configurada(s)
+          } @else {
+            <p-tag value="Não configurada" severity="warn" />
+          }
+        </span>
+      </div>
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">{{ 'workflows.stepType.internal_dissemination' | translate }}</span>
+        <span class="progressive-summary__value">
+          @if (internalDisseminationSteps().length > 0) {
+            {{ internalDisseminationSteps().length }} etapa(s)
+          } @else {
+            <p-tag value="Não configurada" severity="secondary" />
+          }
+        </span>
+      </div>
+
+      <div class="progressive-summary__section">
+        <span class="progressive-summary__label">{{ 'workflows.stepType.external_dissemination' | translate }}</span>
+        <span class="progressive-summary__value">
+          @if (externalDisseminationSteps().length > 0) {
+            {{ externalDisseminationSteps().length }} etapa(s)
+          } @else {
+            <p-tag value="Não configurada" severity="secondary" />
+          }
+        </span>
+      </div>
+
+      @if (hasConflicts()) {
+        <div class="progressive-summary__conflicts">
+          <p-tag value="Conflitos detectados" severity="danger" />
+          @if (!hasInitialStep()) {
+            <p class="progressive-summary__conflict-item">⚠ Sem etapa inicial</p>
+          }
+          @if (!hasFinalStep()) {
+            <p class="progressive-summary__conflict-item">⚠ Sem etapa final</p>
+          }
+          @for (step of orphanSteps(); track step.id) {
+            <p class="progressive-summary__conflict-item">⚠ Etapa "{{ step.name }}" sem saída</p>
+          }
+          @for (t of deadEndTransitions(); track t.id) {
+            <p class="progressive-summary__conflict-item">⚠ Transição "{{ t.name }}" sem destino válido</p>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

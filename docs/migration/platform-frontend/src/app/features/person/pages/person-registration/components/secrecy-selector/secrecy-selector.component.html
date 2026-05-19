@@ -1,0 +1,26 @@
+<div class="preg-secrecy" role="radiogroup" aria-label="Nível de sigilo">
+    <h4 class="preg-secrecy__title">Nível de Sigilo</h4>
+
+    @for (option of options(); track option.id) {
+    <div class="preg-secrecy__option" [class.is-selected]="selectedSecrecy() === option.id" role="radio"
+        [attr.aria-checked]="selectedSecrecy() === option.id" tabindex="0" (click)="selectOption(option)"
+        (keydown.enter)="selectOption(option)" (keydown.space)="selectOption(option); $event.preventDefault()">
+        <span class="preg-secrecy__radio">
+            @if (selectedSecrecy() === option.id) {
+            <span class="preg-secrecy__radio-dot"></span>
+            }
+        </span>
+        <div class="preg-secrecy__content">
+            <span class="preg-secrecy__option-label">{{ option.label }}</span>
+            <span class="preg-secrecy__option-desc">{{ option.description }}</span>
+        </div>
+    </div>
+    }
+
+    @if (selectedSecrecy() === 'RESERVADO') {
+    <div class="preg-secrecy__sector">
+        <i class="pi pi-building"></i>
+        <span>{{ reservedSectorName }}</span>
+    </div>
+    }
+</div>

@@ -1,0 +1,72 @@
+.routing-history__loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: var(--text-color-secondary);
+}
+
+.routing-history__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  color: var(--text-color-secondary);
+}
+
+.routing-history__empty-icon {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.routing-history__card {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid var(--surface-border);
+}
+
+.routing-history__card--received {
+  border-left-color: var(--green-500);
+  background-color: color-mix(in srgb, var(--green-500) 5%, transparent);
+}
+
+.routing-history__card--pending {
+  border-left-color: var(--yellow-500);
+  background-color: color-mix(in srgb, var(--yellow-500) 5%, transparent);
+}
+
+.routing-history__card--rejected {
+  border-left-color: var(--red-500);
+  background-color: color-mix(in srgb, var(--red-500) 5%, transparent);
+}
+
+.routing-history__card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.routing-history__meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+}
+
+.routing-history__meta-icon {
+  margin-right: 0.25rem;
+}
+
+.routing-history__observation {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+  font-style: italic;
+}
+
+.routing-history__observation-icon {
+  margin-right: 0.25rem;
+}

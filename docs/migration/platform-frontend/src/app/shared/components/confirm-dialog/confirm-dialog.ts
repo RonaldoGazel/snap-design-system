@@ -1,0 +1,10 @@
+import { Component } from '@angular/core';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+
+@Component({
+  selector: 'app-confirm-dialog',
+  standalone: true,
+  imports: [ConfirmDialog],
+  templateUrl: './confirm-dialog.html',
+})
+export class ConfirmDialogComponent {}

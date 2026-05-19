@@ -1,0 +1,271 @@
+// ============================================================
+// Person Match Card — visual parity with PrototipoPOI
+// ============================================================
+
+.preg-pcard {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 14px;
+  align-items: start;
+  padding: 14px 16px;
+  background: var(--snap-surface-2);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+
+  &.is-clickable {
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--snap-border-default);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--snap-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+}
+
+.preg-pcard__photo {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--snap-surface-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.preg-pcard__photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+// PrimeNG avatar (fallback initials) sized to the 60×60 slot
+:host ::ng-deep .preg-pcard__photo .p-avatar {
+  width: 60px;
+  height: 60px;
+  font-family: var(--font-accent);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--snap-text-muted);
+  background: var(--snap-surface-3);
+  border-radius: var(--radius-md);
+}
+
+.preg-pcard__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.preg-pcard__name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--snap-text-primary);
+}
+
+.preg-pcard__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-family: var(--font-accent);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--snap-text-secondary);
+}
+
+.preg-pcard__meta-item {
+  &:not(:last-child)::after {
+    content: '·';
+    margin-left: 10px;
+    color: var(--snap-text-muted);
+  }
+}
+
+.preg-pcard__aliases {
+  font-size: 12px;
+  line-height: 1.3;
+  font-style: italic;
+  color: var(--snap-text-muted);
+}
+
+.preg-pcard__filiation {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--snap-text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.preg-pcard__prison {
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--snap-text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.preg-pcard__profile-type {
+  font-family: var(--font-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+}
+
+// Badges -------------------------------------------------------------
+
+.preg-pcard__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.preg-pcard__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px 1px;
+  font-family: var(--font-accent);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 3px;
+}
+
+.preg-pcard__badge--local {
+  color: var(--snap-success);
+  background: color-mix(in oklab, var(--snap-success) 12%, var(--snap-surface-2));
+}
+
+.preg-pcard__badge--sipen {
+  color: var(--snap-info);
+  background: color-mix(in oklab, var(--snap-info) 12%, var(--snap-surface-2));
+}
+
+.preg-pcard__badge--snap {
+  color: var(--snap-pillar-color);
+  background: color-mix(in oklab, var(--snap-pillar-color) 12%, var(--snap-surface-2));
+}
+
+.preg-pcard__score {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px 1px;
+  font-family: var(--font-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--snap-text-secondary);
+  background: var(--snap-surface-3);
+  border-radius: 3px;
+}
+
+.preg-pcard__match {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px 1px;
+  font-family: var(--font-accent);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--snap-text-muted);
+  background: var(--snap-surface-3);
+  border-radius: 3px;
+}
+
+.preg-pcard__dup {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px 1px;
+  font-family: var(--font-accent);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 3px;
+}
+
+.preg-pcard__dup--registered {
+  color: var(--snap-warning);
+  background: color-mix(in oklab, var(--snap-warning) 12%, var(--snap-surface-2));
+}
+
+.preg-pcard__dup--possible {
+  color: var(--snap-info);
+  background: color-mix(in oklab, var(--snap-info) 12%, var(--snap-surface-2));
+}
+
+// Actions ------------------------------------------------------------
+
+.preg-pcard__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+:host ::ng-deep .preg-pcard__action.p-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 10px;
+  background: var(--snap-surface-2);
+  border: 1px solid var(--snap-border-default);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--snap-text-primary);
+  line-height: 1;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    background: var(--snap-surface-3);
+  }
+
+  .p-button-icon {
+    font-size: 12px;
+    color: var(--snap-text-secondary);
+  }
+
+  &.is-primary {
+    background: var(--snap-pillar-color);
+    border-color: var(--snap-pillar-color);
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background: var(--snap-pillar-dark);
+      border-color: var(--snap-pillar-dark);
+    }
+
+    .p-button-icon {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+// Dark mode
+:host-context(.p-dark) .preg-pcard {
+  background: var(--snap-surface-2);
+  border-color: var(--snap-border-default);
+}

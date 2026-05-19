@@ -22,11 +22,15 @@ const snapButtonVariants = cva(
   {
     variants: {
       variant: {
-        // Ação primária (cor da vertical)
-        primary: "bg-[#72284b] text-white hover:bg-[#5a1f3c]",
+        // Ação primária (cor da vertical - usar className para definir bg-[#COR_VERTICAL])
+        // Por padrão usa cor neutra, deve ser customizado com a cor da vertical via className
+        primary: "text-white",
         
         // Ação secundária/cancelar (outline) - usa text-foreground para adaptar ao tema
         secondary: "bg-transparent border border-border-strong text-foreground hover:bg-muted",
+        
+        // Outline (borda colorida customizável via className)
+        outline: "bg-transparent border",
         
         // Ação destrutiva (vermelho coral - para exclusões/remoções críticas)
         destructive: "bg-[#fe473c] text-white hover:bg-[#e03c32]",
@@ -34,8 +38,8 @@ const snapButtonVariants = cva(
         // Ação de sucesso (verde)
         success: "bg-[#3f9f76] text-white hover:bg-[#358a66]",
         
-        // Ghost (sem fundo)
-        ghost: "bg-transparent text-[#b1b3c2] hover:bg-[#2a2b35] hover:text-white",
+        // Ghost (com borda sutil para modais)
+        ghost: "bg-transparent border border-border text-foreground hover:bg-muted",
         
         // Link style
         link: "bg-transparent text-[#72284b] hover:text-[#d4789b] underline-offset-4 hover:underline",

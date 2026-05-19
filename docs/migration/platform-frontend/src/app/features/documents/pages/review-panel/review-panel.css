@@ -1,0 +1,83 @@
+.review-panel {
+  padding: 1.5rem;
+}
+
+.review-panel__title {
+  margin-bottom: 1rem;
+}
+
+.review-panel__section {
+  margin-bottom: 2rem;
+}
+
+.review-panel__section-title {
+  margin-bottom: 0.75rem;
+}
+
+.review-panel__action-buttons {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.review-panel__empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color-secondary);
+}
+
+.review-panel__document-section {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius);
+}
+
+.review-panel__document-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.review-panel__content-readonly {
+  padding: 1rem;
+  background: var(--surface-ground);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  min-height: 100px;
+}
+
+.review-panel__review-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.review-panel__row {
+  cursor: pointer;
+}
+
+.review-panel__row:hover {
+  background: var(--surface-hover);
+}
+
+.review-panel__history-row {
+  /* standard table row for history */
+}
+
+.review-panel__dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.review-panel__dialog-label {
+  font-weight: 600;
+}
+
+.review-panel__full-width {
+  width: 100%;
+}

@@ -1,0 +1,27 @@
+<div class="divergence" [attr.data-status]="status()">
+    <div class="divergence__badge">
+        <i [class]="statusIcon()"></i>
+        <span class="divergence__label">{{ statusLabel() }}</span>
+    </div>
+    @if (hasValues()) {
+    <div class="divergence__values">
+        <div class="divergence__source">
+            <span class="divergence__source-label">{{ fonteA() }}</span>
+            @if (valorA()) {
+            <span class="divergence__val">{{ valorA() }}</span>
+            } @else {
+            <span class="divergence__val divergence__val--empty">—</span>
+            }
+        </div>
+        <span class="divergence__separator">×</span>
+        <div class="divergence__source">
+            <span class="divergence__source-label">{{ fonteB() }}</span>
+            @if (valorB()) {
+            <span class="divergence__val">{{ valorB() }}</span>
+            } @else {
+            <span class="divergence__val divergence__val--empty">—</span>
+            }
+        </div>
+    </div>
+    }
+</div>

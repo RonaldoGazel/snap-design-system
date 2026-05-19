@@ -1,0 +1,76 @@
+<p-dialog
+  header="Conexão de Grupo"
+  [visible]="visible()"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '720px', height: '520px' }"
+  [contentStyle]="{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }"
+  (onHide)="onCancel()">
+
+  <div class="gcd-body">
+    <p class="gcd-desc">
+      Escolha o modo de ligação para esta conexão de grupo:
+    </p>
+
+    <div class="gcd-columns">
+      <!-- Todos → Todos -->
+      <div class="gcd-col" [class.gcd-col--selected]="selectedMode() === 'all'" (click)="selectedMode.set('all')">
+        <label class="gcd-col-header">
+          <p-radioButton name="mode" value="all" [(ngModel)]="selectedMode" />
+          <div class="gcd-col-title-block">
+            <span class="gcd-col-title">Todos → Todos</span>
+            <span class="gcd-col-desc">Cada perfil do grupo origem conecta a todos os perfis do grupo destino.</span>
+          </div>
+        </label>
+        <div class="gcd-preview">
+          <span class="gcd-preview-count">{{ allConnections().length }} conexões</span>
+          <div class="gcd-preview-list">
+            @for (conn of allConnections(); track conn) {
+              <span class="gcd-preview-item">{{ conn }}</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Setor → Setor -->
+      <div class="gcd-col" [class.gcd-col--selected]="selectedMode() === 'sector'" (click)="selectedMode.set('sector')">
+        <label class="gcd-col-header">
+          <p-radioButton name="mode" value="sector" [(ngModel)]="selectedMode" />
+          <div class="gcd-col-title-block">
+            <span class="gcd-col-title">Setor → Setor</span>
+            <span class="gcd-col-desc">Apenas perfis do mesmo setor são conectados entre os grupos.</span>
+          </div>
+        </label>
+        <div class="gcd-preview">
+          <span class="gcd-preview-count">{{ sectorConnections().length }} conexões</span>
+          <div class="gcd-preview-list">
+            @if (sectorConnections().length > 0) {
+              @for (conn of sectorConnections(); track conn) {
+                <span class="gcd-preview-item">{{ conn }}</span>
+              }
+            } @else {
+              <span class="gcd-preview-empty">Nenhuma conexão — não há perfis do mesmo setor entre os grupos.</span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gcd-bottom">
+      <label class="gcd-skip">
+        <p-checkbox [binary]="true" [(ngModel)]="skipNextTime" />
+        <span>Não mostrar novamente</span>
+      </label>
+      <p class="gcd-hint">
+        Você pode alterar o modo padrão a qualquer momento no painel de Configurações.
+      </p>
+    </div>
+  </div>
+
+  <ng-template #footer>
+    <div class="gcd-footer">
+      <p-button label="Cancelar" severity="secondary" [text]="true" (onClick)="onCancel()" />
+      <p-button label="Confirmar" icon="pi pi-check" (onClick)="onConfirm()" />
+    </div>
+  </ng-template>
+</p-dialog>

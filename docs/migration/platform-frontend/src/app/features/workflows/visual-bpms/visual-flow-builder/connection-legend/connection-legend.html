@@ -1,0 +1,22 @@
+<div class="legend-container">
+  <label class="legend-item">
+    <input type="checkbox" [checked]="visibility().AVANCO" (change)="toggle('AVANCO')" />
+    <span class="legend-line avanco"></span> Avançar
+  </label>
+  <label class="legend-item">
+    <input type="checkbox" [checked]="visibility().RETORNO" (change)="toggle('RETORNO')" />
+    <span class="legend-line retorno"></span> Devolver
+  </label>
+  <label class="legend-item">
+    <input type="checkbox" [checked]="visibility().INTRA_ETAPA" (change)="toggle('INTRA_ETAPA')" />
+    <span class="legend-line intra-etapa"></span> Repassar Outro Perfil
+  </label>
+  <label class="legend-item">
+    <input type="checkbox" [checked]="visibility().AUTO_REFERENCIA" (change)="toggle('AUTO_REFERENCIA')" />
+    <span class="legend-line auto-referencia"></span> Repassar Mesmo Perfil
+  </label>
+  <label class="legend-item">
+    <input type="checkbox" [checked]="visibility().AUTO_LINK" (change)="toggle('AUTO_LINK')" />
+    <span class="legend-line auto-link"></span> Avançar Mesmo Perfil
+  </label>
+</div>

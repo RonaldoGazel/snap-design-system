@@ -1,0 +1,99 @@
+.breadcrumb {
+    /* Box Model */
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.breadcrumb__list {
+    /* Box Model */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    /* Typography */
+    list-style: none;
+}
+
+.breadcrumb__item {
+    /* Box Model */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    /* Typography */
+    font-size: var(--text-lg);
+    color: var(--p-text-muted-color);
+}
+
+.breadcrumb__item--active {
+    /* Typography */
+    font-weight: 600;
+    color: var(--p-text-color);
+}
+
+.breadcrumb__link {
+    /* Box Model */
+    padding: 0;
+    margin: 0;
+    border: none;
+    /* Typography */
+    font-size: inherit;
+    font-family: inherit;
+    color: var(--p-text-muted-color);
+    text-decoration: none;
+    /* Visuals */
+    background: none;
+    cursor: pointer;
+}
+
+.breadcrumb__link:hover {
+    /* Typography */
+    color: var(--p-text-color);
+    text-decoration: underline;
+}
+
+.breadcrumb__link:focus-visible {
+    /* Box Model */
+    border-radius: 2px;
+    /* Visuals */
+    outline: 2px solid var(--p-primary-color);
+    outline-offset: 2px;
+}
+
+.breadcrumb__separator {
+    /* Typography */
+    font-size: var(--text-base);
+    color: var(--p-text-muted-color);
+}
+
+/* Person context — SNAP tokens + Cygnito Mono accent */
+.breadcrumb.font-accent {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.breadcrumb.font-accent .breadcrumb__item {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--snap-text-muted, var(--p-text-muted-color));
+}
+
+.breadcrumb.font-accent .breadcrumb__item--active {
+    font-weight: 500;
+    color: var(--snap-text-secondary, var(--p-text-color));
+}
+
+.breadcrumb.font-accent .breadcrumb__link {
+    color: var(--snap-text-muted, var(--p-text-muted-color));
+}
+
+.breadcrumb.font-accent .breadcrumb__link:hover {
+    color: var(--snap-text-primary, var(--p-text-color));
+}
+
+.breadcrumb.font-accent .breadcrumb__separator {
+    color: var(--snap-text-muted, var(--p-text-muted-color));
+    opacity: 0.6;
+}

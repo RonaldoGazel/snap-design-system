@@ -1,0 +1,73 @@
+<div class="flow-role-editor">
+  <div class="flow-role-editor__header">
+    <div>
+      <h3>Papéis do Fluxo</h3>
+      <p class="flow-role-editor__description">{{ 'workflows.roleEditor.description' | translate }}</p>
+    </div>
+    <div class="flow-role-editor__actions">
+      <button pButton label="Adicionar Papel" icon="pi pi-plus" class="p-button-outlined p-button-sm" (click)="openForm()"></button>
+      <button pButton label="Salvar Tudo" icon="pi pi-save" class="p-button-sm" (click)="saveAll()"></button>
+    </div>
+  </div>
+
+  @if (showForm()) {
+    <div class="flow-role-editor__form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="flow-role-editor__form-grid">
+          <div class="flow-role-editor__field">
+            <label>Nome <span class="required">*</span></label>
+            <small class="flow-role-editor__hint">Nome descritivo do papel neste fluxo. Ex: "Analista Produtor", "Chefe Revisor".</small>
+            <input pInputText formControlName="name" placeholder="Ex: Analista Produtor" [class.ng-invalid]="isInvalid('name')" />
+          </div>
+          <div class="flow-role-editor__field">
+            <label>Função <span class="required">*</span></label>
+            <small class="flow-role-editor__hint">{{ 'workflows.roleEditor.functionHint' | translate }}</small>
+            <p-select formControlName="code" [options]="roleCodeOptions" optionLabel="label" optionValue="value" />
+          </div>
+        </div>
+        <div class="flow-role-editor__field">
+          <label>Descrição</label>
+          <small class="flow-role-editor__hint">Descreva as responsabilidades específicas deste papel neste fluxo.</small>
+          <textarea pTextarea formControlName="description" rows="2" placeholder="Descreva as responsabilidades deste papel"></textarea>
+        </div>
+        <div class="flow-role-editor__field">
+          <label>Unidade Organizacional + Perfil</label>
+          <small class="flow-role-editor__hint">Selecione a unidade e o perfil que exercem este papel. Expanda a árvore à esquerda para escolher a unidade, depois selecione o perfil à direita. Deixe em branco para permitir qualquer ator autorizado pelas regras.</small>
+          <app-org-selector [multiple]="false" [selectedCombos]="selectedCombos()" (selectionChange)="onSelectionChange($event)" />
+        </div>
+        <div class="flow-role-editor__form-actions">
+          <button pButton type="button" label="Cancelar" class="p-button-outlined p-button-sm" (click)="closeForm()"></button>
+          <button pButton type="submit" [label]="editingId() ? 'Atualizar Papel' : 'Adicionar Papel'" class="p-button-sm"></button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <div class="flow-role-editor__list">
+    @for (role of roles(); track role.id) {
+      <div class="flow-role-editor__role">
+        <div class="flow-role-editor__role-info">
+          <span class="font-medium">{{ role.name }}</span>
+          <div class="flow-role-editor__role-meta">
+            <p-tag [value]="roleName(role.code) | translate" severity="info" />
+            @if (role.unit_id && role.profile_id) {
+              <small class="text-color-secondary">{{ unitName(role.unit_id) }} / {{ profileName(role.profile_id) }}</small>
+            } @else {
+              <small class="text-color-secondary">Qualquer ator autorizado</small>
+            }
+          </div>
+        </div>
+        <div class="flow-role-editor__role-actions">
+          <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="openForm(role)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger" (click)="removeRole(role.id)"></button>
+        </div>
+      </div>
+    }
+    @if (roles().length === 0) {
+      <div class="flow-role-editor__empty">
+        <i class="pi pi-info-circle"></i>
+        <span>{{ 'workflows.roleEditor.emptyMessage' | translate }}</span>
+      </div>
+    }
+  </div>
+</div>

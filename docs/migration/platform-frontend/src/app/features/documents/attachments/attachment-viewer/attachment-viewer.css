@@ -1,0 +1,66 @@
+/* =========================================================
+   Attachment Viewer — Component Styles (SMACSS+BEM)
+   Block: .attachment-viewer
+   ========================================================= */
+
+.attachment-viewer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.attachment-viewer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.attachment-viewer__count {
+    font-size: 0.875rem;
+    color: var(--p-text-muted-color);
+}
+
+.attachment-viewer__file-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.attachment-viewer__action-btns {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.attachment-viewer__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.attachment-viewer__empty-icon {
+    font-size: 1.5rem;
+    color: var(--p-text-muted-color);
+}
+
+.attachment-viewer__empty-label {
+    font-size: 0.875rem;
+    color: var(--p-text-muted-color);
+}
+
+.attachment-viewer__preview-image {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.attachment-viewer__preview-iframe {
+    width: 100%;
+    height: 70vh;
+    border: none;
+}

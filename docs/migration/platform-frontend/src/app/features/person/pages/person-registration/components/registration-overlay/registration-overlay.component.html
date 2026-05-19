@@ -1,0 +1,53 @@
+<div class="preg-overlay" [class.is-visible]="isVisible()">
+    @for (status of sourceStatuses(); track status.source) {
+    <div class="preg-overlay__item" [attr.data-source]="status.source"
+        [class.is-active]="status.status === 'CONSULTANDO'"
+        [class.is-done]="status.status === 'CONCLUIDA_COM_RESULTADOS' || status.status === 'CONCLUIDA_SEM_RESULTADOS'"
+        [class.is-error]="status.status === 'ERRO'" [class.is-empty]="status.status === 'NAO_APLICAVEL'">
+        <!-- Source icon -->
+        <span class="preg-overlay__icon">
+            @if (status.source === 'BASE_LOCAL') {
+            <i class="pi pi-database"></i>
+            } @else if (status.source === 'SIPEN') {
+            <i class="pi pi-server"></i>
+            } @else if (status.source === 'SNAP') {
+            <i class="pi pi-cloud"></i>
+            }
+        </span>
+
+        <!-- Content (title + bar + message) -->
+        <div class="preg-overlay__content">
+            <span class="preg-overlay__title">
+                @if (status.source === 'BASE_LOCAL') {
+                Base Local
+                } @else if (status.source === 'SIPEN') {
+                SIPEN
+                } @else if (status.source === 'SNAP') {
+                SNAP
+                }
+            </span>
+
+            <!-- Shimmer bar (active queries only) -->
+            @if (status.status === 'CONSULTANDO') {
+            <div class="preg-overlay__bar">
+                <div class="preg-overlay__bar-fill"></div>
+            </div>
+            }
+
+            <!-- Status message -->
+            <span class="preg-overlay__msg" aria-live="polite">{{ status.message }}</span>
+        </div>
+
+        <!-- Status icon -->
+        <span class="preg-overlay__status-icon">
+            @if (status.status === 'CONCLUIDA_COM_RESULTADOS' || status.status === 'CONCLUIDA_SEM_RESULTADOS') {
+            <i class="pi pi-check"></i>
+            } @else if (status.status === 'ERRO') {
+            <i class="pi pi-times"></i>
+            } @else if (status.status === 'NAO_APLICAVEL') {
+            <i class="pi pi-minus"></i>
+            }
+        </span>
+    </div>
+    }
+</div>

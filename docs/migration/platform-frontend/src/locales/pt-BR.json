@@ -1,0 +1,699 @@
+{
+  "audit": {
+    "page": {
+      "title": "Logs de Auditoria"
+    },
+    "table": {
+      "occurredAt": "Data/Hora",
+      "eventType": "Tipo de Evento",
+      "actorId": "Ator",
+      "action": "Ação",
+      "resourceType": "Tipo de Recurso",
+      "resourceId": "ID do Recurso",
+      "outcome": "Resultado",
+      "producer": "Produtor",
+      "empty": "Nenhum registro encontrado.",
+      "totalRecords": "{{count}} registros"
+    },
+    "filter": {
+      "eventType": "Tipo de Evento",
+      "resourceType": "Tipo de Recurso",
+      "outcome": "Resultado",
+      "producer": "Produtor",
+      "actorId": "ID do Ator",
+      "correlationId": "ID de Correlação",
+      "resourceId": "ID do Recurso",
+      "occurredAfter": "De",
+      "occurredBefore": "Até",
+      "apply": "Aplicar Filtros",
+      "clear": "Limpar",
+      "dateValidation": "Data final deve ser posterior à data inicial."
+    },
+    "outcome": {
+      "success": "Sucesso",
+      "failure": "Falha"
+    },
+    "detail": {
+      "title": "Detalhe do Evento",
+      "back": "Voltar à listagem",
+      "copied": "Copiado para a área de transferência",
+      "metadata": "Metadados",
+      "metadataEmpty": "Sem metadados",
+      "failureReason": "Motivo da Falha",
+      "failureReasonEmpty": "N/A",
+      "sectionIdentification": "Identificação do Evento",
+      "sectionTemporal": "Timestamps",
+      "sectionTraceability": "Rastreabilidade",
+      "sectionActor": "Ator e Ação",
+      "sectionResource": "Recurso",
+      "sectionOutcome": "Resultado"
+    },
+    "error": {
+      "forbidden": "Você não tem permissão para acessar logs de auditoria.",
+      "forbiddenAction": "Voltar ao início",
+      "badRequest": "Parâmetros de consulta inválidos. Revise seus filtros.",
+      "notFound": "Registro de auditoria não encontrado.",
+      "serviceUnavailable": "Serviço de auditoria temporariamente indisponível.",
+      "networkError": "Erro de conexão. Verifique sua rede.",
+      "retry": "Tentar novamente",
+      "unauthorized": "Autenticação necessária. Por favor, faça login."
+    },
+    "export": {
+      "button": "Exportar",
+      "csv": "Exportar como CSV",
+      "json": "Exportar como JSON",
+      "error": "Falha na exportação. Tente novamente.",
+      "truncated": "Exportação limitada a 10.000 registros."
+    }
+  },
+  "snap": {
+    "title": "Consulta SNAP",
+    "subtitle": "Busca de relatórios de pessoa por CPF",
+    "cpfLabel": "CPF",
+    "cpfPlaceholder": "000.000.000-00",
+    "searchButton": "Consultar",
+    "loading": "Gerando relatório...",
+    "result": {
+      "title": "Relatório Gerado",
+      "reportName": "Nome do Relatório",
+      "filePath": "Caminho do Arquivo",
+      "bucket": "Bucket de Armazenamento"
+    },
+    "error": {
+      "invalidCpf": "Informe um CPF válido com 11 dígitos.",
+      "badRequest": "CPF inválido ou parâmetros incorretos.",
+      "forbidden": "Você não tem permissão para realizar consultas SNAP.",
+      "notFound": "Nenhum resultado encontrado para o CPF informado.",
+      "serviceUnavailable": "Serviço SNAP temporariamente indisponível.",
+      "networkError": "Erro de conexão. Verifique sua rede.",
+      "retry": "Tentar novamente"
+    }
+  },
+  "shell": {
+    "nav": {
+      "intelligence": "Inteligência",
+      "poi": "Pessoas",
+      "snapSearch": "Consulta SNAP",
+      "administration": "Administração",
+      "audit": "Auditoria",
+      "expand": "Expandir menu",
+      "users": "Usuários",
+      "organizations": "Organizações",
+      "groups": "Grupos",
+      "roles": "Perfis",
+      "invitations": "Convites",
+      "allUsers": "Todos os Usuários"
+    },
+    "breadcrumb": {
+      "home": "Início",
+      "snap": "Consulta SNAP",
+      "audit": "Auditoria",
+      "auditDetail": "Detalhe do Evento",
+      "admin": "Administração",
+      "users": "Usuários",
+      "organizations": "Organizações",
+      "groups": "Grupos",
+      "roles": "Perfis",
+      "invitations": "Convites",
+      "allUsers": "Todos os Usuários",
+      "poi": "Pessoas de Interesse",
+      "pessoas": "Pessoas",
+      "intelligence": "Inteligência",
+      "person": "Pessoas de Interesse",
+      "dashboard": "Painel",
+      "profile": "Perfil",
+      "registration": "Cadastro",
+      "documents": "Documentos"
+    },
+    "userMenu": {
+      "signOut": "Sair"
+    },
+    "user": {
+      "profile": "Perfil",
+      "settings": "Configurações",
+      "logout": "Sair"
+    },
+    "brand": {
+      "name": "SNAP Apolo",
+      "subtitle": "Plataforma de Inteligência"
+    }
+  },
+  "auth": {
+    "login": {
+      "redirecting": "Redirecionando para o login..."
+    },
+    "welcome": {
+      "greeting": "Bem-vindo, {{name}}",
+      "logoutButton": "Sair"
+    },
+    "sessionExpired": {
+      "title": "Sessão Expirada",
+      "message": "Sua sessão expirou. Por favor, faça login novamente para continuar.",
+      "loginButton": "Entrar"
+    },
+    "error": {
+      "title": "Serviço de Autenticação Indisponível",
+      "message": "Não foi possível conectar ao serviço de autenticação. Por favor, tente novamente.",
+      "retryButton": "Tentar Novamente"
+    },
+    "idle": {
+      "warning": "Sua sessão expirará em breve devido à inatividade."
+    },
+    "errors": {
+      "networkError": "Ocorreu um erro de rede. Verifique sua conexão.",
+      "refreshFailed": "Não foi possível renovar sua sessão. Por favor, faça login novamente."
+    }
+  },
+  "admin": {
+    "users": {
+      "title": "Usuários",
+      "create": "Criar Usuário",
+      "filter": {
+        "status": "Status"
+      },
+      "table": {
+        "displayName": "Nome",
+        "email": "E-mail",
+        "status": "Status",
+        "clearanceLevel": "Nível de Acesso",
+        "createdAt": "Criado em",
+        "empty": "Nenhum usuário encontrado."
+      },
+      "status": {
+        "active": "Ativo",
+        "inactive": "Inativo",
+        "locked": "Bloqueado"
+      },
+      "createDialog": {
+        "title": "Criar Usuário",
+        "externalAuthId": "ID de Autenticação Externa",
+        "username": "Nome de Usuário",
+        "password": "Senha",
+        "email": "E-mail",
+        "displayName": "Nome",
+        "clearanceLevel": "Nível de Acesso",
+        "role": "Perfil",
+        "selectRole": "Selecione um perfil...",
+        "group": "Grupo",
+        "selectGroup": "Selecione um grupo...",
+        "usernameHint": "Nome de usuário deve ter pelo menos 3 caracteres",
+        "passwordHint": "Senha deve ter pelo menos 8 caracteres",
+        "cancel": "Cancelar",
+        "save": "Criar"
+      },
+      "keycloakError": {
+        "USER_ALREADY_EXISTS": "Já existe um usuário com este nome ou e-mail.",
+        "USERNAME_TAKEN": "Este nome de usuário já está em uso.",
+        "EMAIL_TAKEN": "Este e-mail já está em uso.",
+        "PASSWORD_TOO_SHORT": "Senha muito curta.",
+        "PASSWORD_NEEDS_SPECIAL_CHAR": "Senha deve conter pelo menos 1 caractere especial.",
+        "PASSWORD_NEEDS_UPPERCASE": "Senha deve conter pelo menos 1 letra maiúscula.",
+        "PASSWORD_NEEDS_LOWERCASE": "Senha deve conter pelo menos 1 letra minúscula.",
+        "PASSWORD_NEEDS_DIGIT": "Senha deve conter pelo menos 1 dígito.",
+        "PASSWORD_POLICY_VIOLATION": "Senha não atende à política de segurança.",
+        "USER_CREATION_FAILED": "Falha ao criar usuário. Tente novamente."
+      },
+      "detail": {
+        "title": "Detalhe do Usuário",
+        "back": "Voltar para Usuários",
+        "edit": "Editar",
+        "save": "Salvar",
+        "cancel": "Cancelar",
+        "delete": "Excluir",
+        "deactivate": "Desativar",
+        "lock": "Bloquear",
+        "unlock": "Desbloquear",
+        "confirmDelete": "Confirmar Exclusão do Usuário",
+        "confirmDeactivate": "Confirmar Desativação do Usuário",
+        "confirmLock": "Confirmar Bloqueio do Usuário",
+        "confirmUnlock": "Confirmar Desbloqueio do Usuário",
+        "auditHint": "Esta ação será registrada na trilha de auditoria.",
+        "notFound": "Usuário não encontrado.",
+        "noOrg": "Este usuário não possui vínculo organizacional e não tem acesso operacional (ADM-044).",
+        "noRoles": "Este usuário não possui perfis atribuídos e não tem permissões efetivas (ADM-045).",
+        "deleteWarning": "Este usuário possui {{roleCount}} perfil(is) ativo(s) e {{groupCount}} associação(ões) a grupo(s) que serão removidos.",
+        "resetPassword": {
+          "button": "Redefinir Senha",
+          "title": "Redefinir Senha",
+          "password": "Senha Temporária",
+          "auditHint": "Esta ação será registrada na trilha de auditoria.",
+          "confirm": "Redefinir",
+          "success": "Senha redefinida com sucesso."
+        },
+        "groups": {
+          "title": "Grupos",
+          "loading": "Carregando grupos...",
+          "empty": "Nenhuma associação a grupos."
+        },
+        "sections": {
+          "title": "Grupos",
+          "loading": "Carregando grupos...",
+          "empty": "Nenhuma associação a grupos."
+        },
+        "effectivePermissions": {
+          "title": "Permissões Efetivas",
+          "loading": "Carregando permissões...",
+          "unavailable": "Permissões efetivas indisponíveis no momento.",
+          "empty": "Nenhuma permissão efetiva encontrada.",
+          "showTrace": "Mostrar Rastreamento",
+          "hideTrace": "Ocultar Rastreamento",
+          "traceTitle": "Rastreamento de Avaliação de Permissões"
+        },
+        "field": {
+          "displayName": "Nome",
+          "email": "E-mail",
+          "status": "Status",
+          "clearanceLevel": "Nível de Acesso",
+          "externalAuthId": "ID de Autenticação Externa",
+          "organizationId": "ID da Organização",
+          "identityVersion": "Versão da Identidade",
+          "createdAt": "Criado em",
+          "updatedAt": "Atualizado em"
+        }
+      },
+      "error": {
+        "badRequest": "Requisição inválida. Revise os campos do formulário.",
+        "serviceUnavailable": "Serviço de usuários temporariamente indisponível.",
+        "networkError": "Erro de conexão. Verifique sua rede.",
+        "retry": "Tentar novamente"
+      }
+    },
+    "organizations": {
+      "title": "Organizações",
+      "create": "Criar Organização",
+      "table": {
+        "name": "Nome",
+        "status": "Status",
+        "createdAt": "Criado em",
+        "updatedAt": "Atualizado em",
+        "empty": "Nenhuma organização encontrada."
+      },
+      "status": {
+        "active": "Ativa",
+        "inactive": "Inativa"
+      },
+      "createDialog": {
+        "title": "Criar Organização",
+        "name": "Nome",
+        "status": "Status",
+        "ownerEmail": "E-mail do Proprietário Inicial",
+        "cancel": "Cancelar",
+        "save": "Criar"
+      },
+      "bootstrapDialog": {
+        "title": "Inicializar Organização",
+        "orgName": "Nome da Organização",
+        "ownerUsername": "Usuário do Proprietário",
+        "ownerEmail": "E-mail do Proprietário",
+        "ownerDisplayName": "Nome do Proprietário",
+        "ownerPassword": "Senha do Proprietário",
+        "auditHint": "Esta ação será registrada na trilha de auditoria.",
+        "cancel": "Cancelar",
+        "submit": "Inicializar",
+        "retry": "Tentar Novamente",
+        "validation": {
+          "orgNameRequired": "O nome da organização é obrigatório.",
+          "usernameRequired": "O nome de usuário é obrigatório.",
+          "usernameMinLength": "O nome de usuário deve ter pelo menos 3 caracteres.",
+          "emailRequired": "O e-mail é obrigatório.",
+          "emailInvalid": "Por favor, insira um endereço de e-mail válido.",
+          "displayNameRequired": "O nome de exibição é obrigatório.",
+          "passwordRequired": "A senha é obrigatória.",
+          "passwordMinLength": "A senha deve ter pelo menos 8 caracteres."
+        },
+        "errors": {
+          "USER_ALREADY_EXISTS": "Já existe um usuário com este nome de usuário ou e-mail.",
+          "USERNAME_TAKEN": "Este nome de usuário já está em uso.",
+          "EMAIL_TAKEN": "Este e-mail já está cadastrado.",
+          "PASSWORD_TOO_SHORT": "A senha é muito curta. Use uma senha mais longa.",
+          "PASSWORD_NEEDS_SPECIAL_CHAR": "A senha deve conter pelo menos 1 caractere especial.",
+          "PASSWORD_NEEDS_UPPERCASE": "A senha deve conter pelo menos 1 letra maiúscula.",
+          "PASSWORD_NEEDS_LOWERCASE": "A senha deve conter pelo menos 1 letra minúscula.",
+          "PASSWORD_NEEDS_DIGIT": "A senha deve conter pelo menos 1 dígito.",
+          "PASSWORD_IN_HISTORY": "Esta senha foi usada recentemente. Escolha uma diferente.",
+          "PASSWORD_IS_USERNAME": "A senha não pode ser igual ao nome de usuário.",
+          "PASSWORD_POLICY_VIOLATION": "A senha não atende aos requisitos de segurança.",
+          "USER_CREATION_FAILED": "Falha ao criar o usuário. Verifique as informações e tente novamente.",
+          "GENERIC": "Ocorreu um erro inesperado. Tente novamente."
+        }
+      },
+      "detail": {
+        "title": "Detalhe da Organização",
+        "back": "Voltar para Organizações",
+        "edit": "Editar",
+        "save": "Salvar",
+        "cancel": "Cancelar",
+        "delete": "Excluir",
+        "orgRecovery": "Recuperação da Organização",
+        "transferOwnership": "Transferir Propriedade",
+        "confirmDelete": "Confirmar Exclusão da Organização",
+        "auditHint": "Esta ação será registrada na trilha de auditoria.",
+        "notFound": "Organização não encontrada.",
+        "field": {
+          "name": "Nome",
+          "status": "Status",
+          "createdAt": "Criado em",
+          "updatedAt": "Atualizado em"
+        },
+        "recoveryDialog": {
+          "title": "Recuperação — Atribuir Novo Proprietário",
+          "targetUser": "Novo Proprietário",
+          "warning": "Esta é uma ação administrativa de substituição. O perfil de Proprietário da Organização do proprietário atual será revogado e reatribuído ao usuário selecionado.",
+          "cancel": "Cancelar",
+          "confirm": "Atribuir Proprietário"
+        },
+        "transferDialog": {
+          "title": "Transferir Propriedade",
+          "targetUser": "Usuário Destino",
+          "revokeCheckbox": "Revogar minha propriedade após a transferência",
+          "forbiddenMessage": "Apenas o Proprietário atual da Organização pode transferir a propriedade.",
+          "cancel": "Cancelar",
+          "confirm": "Transferir"
+        },
+        "error": {
+          "conflict": "Esta organização possui usuários associados e não pode ser excluída."
+        }
+      },
+      "error": {
+        "badRequest": "Requisição inválida. Revise os campos do formulário.",
+        "serviceUnavailable": "Serviço de organizações temporariamente indisponível.",
+        "networkError": "Erro de conexão. Verifique sua rede.",
+        "retry": "Tentar novamente"
+      }
+    },
+    "orgSwitcher": {
+      "platform": "Visão Plataforma",
+      "myOrg": "Minha Org",
+      "readOnly": "Somente leitura"
+    },
+    "groups": {
+      "title": "Grupos",
+      "create": "Criar Grupo",
+      "table": {
+        "name": "Nome",
+        "description": "Descrição",
+        "version": "Versão",
+        "createdAt": "Criado em",
+        "updatedAt": "Atualizado em",
+        "empty": "Nenhum grupo encontrado."
+      },
+      "list": {
+        "hierarchyTooltip": "Agrupamento organizacional — permissões não são herdadas"
+      },
+      "createDialog": {
+        "title": "Criar Grupo",
+        "name": "Nome",
+        "description": "Descrição",
+        "parentGroup": "Grupo Superior",
+        "parentGroupPlaceholder": "Nenhum (grupo raiz)",
+        "cancel": "Cancelar",
+        "save": "Criar"
+      },
+      "detail": {
+        "title": "Detalhe do Grupo",
+        "back": "Voltar para Grupos",
+        "edit": "Editar",
+        "save": "Salvar",
+        "cancel": "Cancelar",
+        "delete": "Excluir",
+        "reload": "Recarregar",
+        "confirmDelete": "Confirmar Exclusão do Grupo",
+        "auditHint": "Esta ação será registrada na trilha de auditoria.",
+        "notFound": "Grupo não encontrado.",
+        "noInheritance": "A associação a grupos não herda permissões de grupos superiores (ADM-033/035).",
+        "organizationalInfo": "Grupos são unidades organizacionais usadas para estruturar usuários em áreas, seções ou equipes. Eles não concedem permissões.",
+        "field": {
+          "name": "Nome",
+          "description": "Descrição",
+          "parentGroup": "Grupo Superior",
+          "parentGroupPlaceholder": "Nenhum (grupo raiz)",
+          "version": "Versão",
+          "createdAt": "Criado em",
+          "updatedAt": "Atualizado em"
+        },
+        "childGroups": {
+          "title": "Grupos Filhos"
+        },
+        "error": {
+          "conflict": "Este recurso foi modificado por outro usuário. Recarregue e tente novamente.",
+          "activeMembers": "Este grupo possui membros ativos e não pode ser excluído.",
+          "duplicateMember": "Este membro já existe no grupo."
+        },
+        "members": {
+          "title": "Membros",
+          "subjectId": "ID do Sujeito",
+          "displayName": "Nome",
+          "email": "E-mail",
+          "createdAt": "Adicionado em",
+          "actions": "Ações",
+          "add": "Adicionar Membro",
+          "searchUser": "Buscar usuário por nome...",
+          "remove": "Remover",
+          "confirmRemove": "Confirmar Remoção do Membro",
+          "subjectIdPlaceholder": "Informe o ID do sujeito",
+          "empty": "Nenhum membro encontrado."
+        }
+      },
+      "error": {
+        "badRequest": "Requisição inválida. Revise os campos do formulário.",
+        "serviceUnavailable": "Serviço de grupos temporariamente indisponível.",
+        "networkError": "Erro de conexão. Verifique sua rede.",
+        "retry": "Tentar novamente"
+      }
+    },
+    "sections": {
+      "title": "Grupos",
+      "create": "Criar Grupo",
+      "table": {
+        "name": "Nome",
+        "createdAt": "Criado em",
+        "updatedAt": "Atualizado em",
+        "empty": "Nenhum grupo encontrado."
+      },
+      "list": {
+        "hierarchyTooltip": "Agrupamento organizacional — acesso a dados é restrito por grupo"
+      },
+      "createDialog": {
+        "title": "Criar Grupo",
+        "name": "Nome",
+        "parentSection": "Grupo Superior",
+        "parentSectionPlaceholder": "Nenhum (grupo raiz)",
+        "cancel": "Cancelar",
+        "save": "Criar"
+      },
+      "detail": {
+        "title": "Detalhe do Grupo",
+        "back": "Voltar para Grupos",
+        "edit": "Editar",
+        "save": "Salvar",
+        "cancel": "Cancelar",
+        "delete": "Excluir",
+        "reload": "Recarregar",
+        "confirmDelete": "Confirmar Exclusão do Grupo",
+        "auditHint": "Esta ação será registrada na trilha de auditoria.",
+        "notFound": "Grupo não encontrado.",
+        "dataSegregationInfo": "Grupos são unidades organizacionais que controlam a visibilidade dos dados. Usuários só podem ver dados pertencentes aos seus grupos.",
+        "field": {
+          "name": "Nome",
+          "parentSection": "Grupo Superior",
+          "parentSectionPlaceholder": "Nenhum (grupo raiz)",
+          "createdAt": "Criado em",
+          "updatedAt": "Atualizado em"
+        },
+        "childSections": {
+          "title": "Grupos Filhos"
+        },
+        "members": {
+          "title": "Membros",
+          "displayName": "Nome",
+          "email": "E-mail",
+          "actions": "Ações",
+          "add": "Adicionar Membro",
+          "searchUser": "Buscar usuário por nome...",
+          "remove": "Remover",
+          "confirmRemove": "Confirmar Remoção do Membro",
+          "empty": "Nenhum membro encontrado."
+        }
+      },
+      "error": {
+        "badRequest": "Requisição inválida. Revise os campos do formulário.",
+        "serviceUnavailable": "Serviço de grupos temporariamente indisponível.",
+        "networkError": "Erro de conexão. Verifique sua rede.",
+        "retry": "Tentar novamente"
+      }
+    },
+    "roles": {
+      "title": "Perfis",
+      "create": "Criar Perfil",
+      "type": {
+        "platform": "Plataforma (Global)",
+        "service": "Serviço (Org)"
+      },
+      "table": {
+        "name": "Nome",
+        "type": "Tipo",
+        "permissionCount": "Permissões",
+        "version": "Versão",
+        "createdAt": "Criado em",
+        "empty": "Nenhum perfil encontrado."
+      },
+      "createDialog": {
+        "title": "Criar Perfil",
+        "name": "Nome",
+        "type": "Tipo",
+        "permissions": "Permissões",
+        "resourceType": "Tipo de Recurso",
+        "action": "Ação",
+        "addPermission": "Adicionar Permissão",
+        "cancel": "Cancelar",
+        "save": "Criar"
+      },
+      "detail": {
+        "title": "Detalhe do Perfil",
+        "back": "Voltar para Perfis",
+        "edit": "Editar",
+        "save": "Salvar",
+        "cancel": "Cancelar",
+        "delete": "Excluir",
+        "reload": "Recarregar",
+        "confirmDelete": "Confirmar Exclusão do Perfil",
+        "auditHint": "Esta ação será registrada na trilha de auditoria.",
+        "notFound": "Perfil não encontrado.",
+        "field": {
+          "name": "Nome",
+          "type": "Tipo",
+          "version": "Versão",
+          "createdAt": "Criado em",
+          "updatedAt": "Atualizado em"
+        },
+        "permissions": {
+          "title": "Permissões",
+          "empty": "Nenhuma permissão definida.",
+          "catalogUnavailable": "Catálogo de permissões indisponível no momento.",
+          "retryCatalog": "Tentar novamente",
+          "refreshCatalog": "Atualizar Catálogo"
+        },
+        "error": {
+          "conflict": "Este recurso foi modificado por outro usuário. Recarregue e tente novamente.",
+          "activeAssignments": "Este perfil possui atribuições ativas e não pode ser excluído.",
+          "globalForbidden": "Apenas Administradores da Plataforma podem atribuir perfis com escopo GLOBAL.",
+          "duplicateAssignment": "Esta atribuição já existe.",
+          "maxRoles": "Número máximo de atribuições de perfil excedido.",
+          "lastOwner": "Esta atribuição de perfil não pode ser revogada porque o usuário é o último Proprietário da Organização."
+        },
+        "assignments": {
+          "title": "Atribuições",
+          "displayName": "Nome",
+          "email": "E-mail",
+          "user": "Usuário",
+          "subjectId": "ID do Sujeito",
+          "subjectIdPlaceholder": "Informe o ID do sujeito",
+          "scopeType": "Tipo de Escopo",
+          "scopeId": "ID do Escopo",
+          "createdAt": "Criado em",
+          "actions": "Ações",
+          "assign": "Atribuir Perfil",
+          "revoke": "Revogar",
+          "confirmRevoke": "Confirmar Revogação da Atribuição",
+          "empty": "Nenhuma atribuição encontrada."
+        }
+      },
+      "error": {
+        "badRequest": "Requisição inválida. Revise os campos do formulário.",
+        "serviceUnavailable": "Serviço de perfis temporariamente indisponível.",
+        "networkError": "Erro de conexão. Verifique sua rede.",
+        "retry": "Tentar novamente"
+      }
+    },
+    "invitations": {
+      "title": "Convites",
+      "create": "Criar Convite",
+      "revoke": "Revogar",
+      "filter": {
+        "status": "Status"
+      },
+      "table": {
+        "email": "E-mail",
+        "status": "Status",
+        "invitedBy": "Convidado por",
+        "expiresAt": "Expira em",
+        "createdAt": "Criado em",
+        "actions": "Ações",
+        "empty": "Nenhum convite encontrado."
+      },
+      "status": {
+        "pending": "Pendente",
+        "accepted": "Aceito",
+        "expired": "Expirado",
+        "revoked": "Revogado"
+      },
+      "createDialog": {
+        "title": "Criar Convite",
+        "email": "E-mail",
+        "cancel": "Cancelar",
+        "save": "Enviar Convite"
+      },
+      "revokeDialog": {
+        "title": "Confirmar Revogação do Convite",
+        "message": "Tem certeza que deseja revogar este convite?",
+        "auditHint": "Esta ação será registrada na trilha de auditoria.",
+        "cancel": "Cancelar",
+        "confirm": "Revogar"
+      },
+      "error": {
+        "validation": "Requisição inválida. Revise os campos do formulário.",
+        "serviceUnavailable": "Serviço de convites temporariamente indisponível.",
+        "networkError": "Erro de conexão. Verifique sua rede.",
+        "retry": "Tentar novamente"
+      }
+    },
+    "allUsers": {
+      "title": "Todos os Usuários",
+      "filter": {
+        "organization": "Organização",
+        "status": "Status",
+        "search": "Buscar",
+        "searchPlaceholder": "Buscar por nome ou e-mail"
+      },
+      "table": {
+        "displayName": "Nome",
+        "email": "E-mail",
+        "status": "Status",
+        "organizationId": "Organização",
+        "clearanceLevel": "Nível de Acesso",
+        "createdAt": "Criado em",
+        "empty": "Nenhum usuário encontrado."
+      },
+      "status": {
+        "active": "Ativo",
+        "inactive": "Inativo",
+        "locked": "Bloqueado"
+      },
+      "error": {
+        "serviceUnavailable": "Serviço de usuários temporariamente indisponível.",
+        "networkError": "Erro de conexão. Verifique sua rede.",
+        "retry": "Tentar novamente"
+      }
+    },
+    "userPicker": {
+      "placeholder": "Buscar usuários por nome ou e-mail...",
+      "noResults": "Nenhum usuário encontrado."
+    },
+    "warnings": {
+      "lastOwner": "Este usuário é o último Proprietário da Organização. Removê-lo ou desativá-lo deixaria a organização sem proprietário.",
+      "userHasRoles": "Este usuário possui {{count}} atribuição(ões) de perfil ativa(s). Excluir o usuário revogará todas as atribuições.",
+      "userHasGroups": "Este usuário é membro de {{count}} grupo(s). Excluir o usuário removerá todas as associações."
+    }
+  },
+  "shared": {
+    "error": {
+      "forbidden": "Você não tem permissão para acessar este recurso.",
+      "forbiddenAction": "Voltar ao início"
+    }
+  },
+  "person": {
+    "profile": {
+      "openGraph": "Ver Grafo de Vínculos"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+# HTML5 and SMACSS
+SMACSS integrates seamlessly with HTML5 by focusing on two goals: increasing semantic value and decreasing reliance on specific HTML structures. While HTML5 provides more descriptive tags like `<nav>` and `<section>`, these tags alone don't always describe a module's specific style. The chapter suggests using class-based layout rules (e.g., `.l-inline`) rather than tag-qualified selectors (e.g., `nav.nav-primary`) to ensure that styles remain flexible even if the underlying HTML structure or element types change.

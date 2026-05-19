@@ -1,0 +1,46 @@
+@if (summary(); as s) {
+<div class="preg-summary" role="status" aria-label="Cadastro concluído">
+    <div class="preg-summary__icon">
+        <i class="pi pi-check-circle"></i>
+    </div>
+
+    <h3 class="preg-summary__title">Cadastro Concluído</h3>
+
+    <dl class="preg-summary__items">
+        <div class="preg-summary__item">
+            <dt class="preg-summary__label">Nome</dt>
+            <dd class="preg-summary__value">{{ s.personName }}</dd>
+        </div>
+
+        @if (s.cpf) {
+        <div class="preg-summary__item">
+            <dt class="preg-summary__label">CPF</dt>
+            <dd class="preg-summary__value">{{ s.cpf }}</dd>
+        </div>
+        }
+
+        <div class="preg-summary__item">
+            <dt class="preg-summary__label">Fonte</dt>
+            <dd class="preg-summary__value">{{ s.source }}</dd>
+        </div>
+
+        <div class="preg-summary__item">
+            <dt class="preg-summary__label">Sigilo</dt>
+            <dd class="preg-summary__value">
+                @if (s.secrecy === 'PUBLICO') {
+                Público
+                } @else {
+                Reservado
+                }
+            </dd>
+        </div>
+
+        @if (s.sector) {
+        <div class="preg-summary__item">
+            <dt class="preg-summary__label">Setor</dt>
+            <dd class="preg-summary__value">{{ s.sector }}</dd>
+        </div>
+        }
+    </dl>
+</div>
+}

@@ -1,0 +1,32 @@
+<div class="wf-stepper" role="list" aria-label="Etapas do fluxo de trabalho">
+    <div class="wf-stepper__track">
+        <div class="wf-stepper__track-bg"></div>
+        <div class="wf-stepper__track-fill" [style.width.%]="progressPercent()"></div>
+    </div>
+
+    <div class="wf-stepper__steps">
+        @for (entry of stepStates(); track entry.step.id; let i = $index; let last = $last) {
+        <div class="wf-stepper__step" [class.wf-stepper__step--completed]="entry.state === 'completed'"
+            [class.wf-stepper__step--current]="entry.state === 'current'"
+            [class.wf-stepper__step--returned]="entry.state === 'returned'"
+            [class.wf-stepper__step--upcoming]="entry.state === 'upcoming'" role="listitem"
+            [attr.aria-current]="entry.state === 'current' ? 'step' : null"
+            [pTooltip]="entry.step.capabilities?.join(', ') || ''" tooltipPosition="top">
+
+            <div class="wf-stepper__marker">
+                @if (entry.state === 'completed') {
+                <i class="pi pi-check"></i>
+                } @else if (entry.state === 'returned') {
+                <i class="pi pi-replay"></i>
+                } @else if (entry.state === 'current') {
+                <span class="wf-stepper__pulse"></span>
+                } @else {
+                <span class="wf-stepper__dot"></span>
+                }
+            </div>
+
+            <span class="wf-stepper__label">{{ entry.step.name }}</span>
+        </div>
+        }
+    </div>
+</div>

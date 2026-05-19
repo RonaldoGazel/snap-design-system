@@ -1,0 +1,153 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Person Registration — Page Orchestrator Styles
+// DS-002 SMACSS/BEM · All values tokenized
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Layout ──────────────────────────────────────────────────────────────────
+
+.l-preg-layout {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  // Match PrototipoPOI box sizing: min-height is on the content box, while
+  // the 120px padding-top is *added* to that height. With border-box the
+  // total would be clamped at min-height and the background image would be
+  // much shorter — content-box preserves the prototype's aspect ratio.
+  box-sizing: content-box;
+  min-height: calc(100vh - var(--shell-header-height) - 80px);
+  overflow: hidden;
+  padding-top: 120px;
+
+  // Background hero image
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 0;
+    width: 75%;
+    height: 100%;
+    transform: translateX(-50%);
+    background: url('/images/person-new-hero2.png') center / cover no-repeat;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+// ── Card (Glassmorphism) ────────────────────────────────────────────────────
+
+.preg-card {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  width: 100%;
+  background: color-mix(in oklab, var(--snap-surface-2) 25%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+// ── Title Bar ───────────────────────────────────────────────────────────────
+
+.preg-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--snap-border-subtle);
+}
+
+.preg-title-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.preg-title-bar__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--snap-text-secondary);
+  background: transparent;
+  border: 1px solid var(--snap-border-subtle);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background 120ms ease, color 120ms ease;
+
+  &:hover {
+    background: var(--snap-surface-3);
+    color: var(--snap-text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--snap-focus-ring);
+    outline-offset: 2px;
+  }
+
+  i {
+    font-size: 14px;
+  }
+}
+
+.preg-title-bar__heading {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--snap-text-primary);
+}
+
+.preg-title-bar__chip {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+  padding: 4px 9px 2px;
+  font-family: var(--font-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--snap-pillar-color);
+  background: color-mix(in oklab, var(--snap-pillar-color) 10%, var(--snap-surface-2));
+  border: 1px solid color-mix(in oklab, var(--snap-pillar-color) 25%, transparent);
+  border-radius: var(--radius-sm);
+}
+
+// ── Results Panel ───────────────────────────────────────────────────────────
+
+.preg-results-panel {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  width: 100%;
+}
+
+// ── Dark Mode Overrides ─────────────────────────────────────────────────────
+
+:host-context(.p-dark) {
+  .preg-card {
+    background: color-mix(in oklab, var(--snap-surface-2) 25%, transparent);
+    border-color: var(--snap-border-default);
+  }
+
+  .preg-title-bar__back {
+    color: var(--snap-text-muted);
+
+    &:hover {
+      color: var(--snap-text-secondary);
+    }
+  }
+}

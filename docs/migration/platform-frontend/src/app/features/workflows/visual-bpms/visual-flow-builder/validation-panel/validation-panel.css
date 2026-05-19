@@ -1,0 +1,72 @@
+.validation-panel {
+  padding: 1rem 1.25rem;
+}
+
+.validation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.validation-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.validation-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.validation-badge {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--p-red-500);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.validation-success {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--p-green-600);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.validation-success i {
+  font-size: 1.1rem;
+}
+
+.validation-error-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.validation-error-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--p-content-border-color);
+  font-size: 0.85rem;
+  color: var(--p-text-muted-color);
+}
+
+.validation-error-list li i {
+  margin-top: 0.15rem;
+  color: var(--p-text-muted-color);
+  flex-shrink: 0;
+}

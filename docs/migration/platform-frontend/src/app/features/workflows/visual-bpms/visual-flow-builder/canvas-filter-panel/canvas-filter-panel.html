@@ -1,0 +1,49 @@
+<!-- Toggle button -->
+<button class="filter-toggle-btn" (click)="toggle()" [class.active]="hasActiveFilters()">
+  <i class="pi pi-filter"></i>
+  @if (hasActiveFilters()) {
+    <span class="filter-badge"></span>
+  }
+</button>
+
+<!-- Expanded panel -->
+@if (expanded()) {
+  <div class="filter-panel">
+    <div class="filter-panel-header">
+      <span class="filter-title">Filtros</span>
+      @if (hasActiveFilters()) {
+        <button pButton type="button" label="Limpar" class="p-button-text p-button-sm" icon="pi pi-times" (click)="clearFilters()"></button>
+      }
+    </div>
+
+    <!-- Sector filter (tree with checkboxes) -->
+    <div class="filter-section">
+      <span class="filter-section-title">Setores</span>
+      <p-tree
+        [value]="unitTree()"
+        selectionMode="checkbox"
+        [(selection)]="selectedUnitNodes"
+        (selectionChange)="onUnitSelectionChange($any($event))"
+        scrollHeight="200px"
+        class="filter-tree"
+      />
+    </div>
+
+    <!-- Profile type filter (simple checkbox list) -->
+    <div class="filter-section">
+      <span class="filter-section-title">Tipos de Perfil</span>
+      <div class="filter-profile-list">
+        @for (profile of activeProfiles(); track profile.id) {
+          <label class="filter-profile-item">
+            <p-checkbox
+              [binary]="true"
+              [ngModel]="isProfileSelected(profile.id)"
+              (onChange)="toggleProfile(profile.id)"
+            />
+            <span>{{ profile.name }}</span>
+          </label>
+        }
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,79 @@
+<div class="org-unit-detail">
+  <div class="org-unit-detail__header">
+    <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+    <div class="org-unit-detail__breadcrumb">
+      @for (u of unitPath(); track u.id; let last = $last) {
+        <span [class.font-bold]="last">{{ u.acronym }}</span>
+        @if (!last) { <i class="pi pi-chevron-right text-sm"></i> }
+      }
+    </div>
+  </div>
+
+  @if (unit()) {
+    <div class="org-unit-detail__content">
+      <div class="org-unit-detail__main">
+        <h2>{{ unit()!.name }}</h2>
+        <div class="org-unit-detail__meta">
+          <p-tag [value]="unit()!.acronym" severity="info" />
+          <p-tag [value]="getLevelLabel(unit()!.level)" severity="secondary" />
+          @if (!unit()!.is_active) {
+            <p-tag [value]="'workflows.status.archived' | translate" severity="danger" />
+          }
+        </div>
+
+        @if (unit()!.description) {
+          <p class="org-unit-detail__description">{{ unit()!.description }}</p>
+        }
+
+        @if (parentUnit()) {
+          <div class="org-unit-detail__parent">
+            <span class="text-color-secondary">Unidade-pai:</span>
+            <button
+              pButton
+              [label]="parentUnit()!.name"
+              class="p-button-link p-0"
+              (click)="navigateToUnit(parentUnit()!)"
+            ></button>
+          </div>
+        }
+      </div>
+
+      <div class="org-unit-detail__profiles">
+        <h3>Perfis Internos</h3>
+        @for (up of profiles(); track up.id) {
+          <div class="org-unit-detail__profile">
+            <div class="org-unit-detail__profile-info">
+              <span class="font-medium">{{ up.profile?.name ?? up.profile_id }}</span>
+              <small class="text-color-secondary">Nível hierárquico {{ up.profile?.hierarchy_level }}</small>
+            </div>
+            <p-tag [value]="'Ordem ' + up.hierarchy_order" severity="secondary" />
+          </div>
+        }
+        @if (profiles().length === 0) {
+          <p class="text-color-secondary">Nenhum perfil associado.</p>
+        }
+      </div>
+
+      @if (subUnits().length > 0) {
+        <div class="org-unit-detail__subunits">
+          <h3>Subunidades</h3>
+          @for (sub of subUnits(); track sub.id) {
+            <div
+              class="org-unit-detail__subunit"
+              (click)="navigateToUnit(sub)"
+              (keydown.enter)="navigateToUnit(sub)"
+              tabindex="0"
+              role="button"
+            >
+              <i class="pi pi-circle"></i>
+              <span>{{ sub.name }}</span>
+              <small class="text-color-secondary ml-auto">{{ sub.acronym }}</small>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="text-color-secondary">Unidade não encontrada.</p>
+  }
+</div>

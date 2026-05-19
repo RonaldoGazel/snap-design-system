@@ -1,0 +1,317 @@
+<div class="flow-canvas-container" #canvasContainer (scroll)="onCanvasScroll()" (mousedown)="onCanvasMouseDown($event)" (contextmenu)="onCanvasContextMenu($event)" (wheel)="onCanvasWheel($event)">
+  <div class="flow-canvas-content"
+       [style.width.px]="canvasWidth() * zoomLevel()"
+       [style.height.px]="canvasHeight() * zoomLevel()">
+    <div class="flow-canvas-scaled"
+         [style.transform]="'scale(' + zoomLevel() + ')'"
+         [style.width.px]="canvasWidth()"
+         [style.height.px]="canvasHeight()">
+
+    <!-- SVG layer for connections -->
+    <svg class="connections-layer"
+         [attr.width]="canvasWidth()"
+         [attr.height]="canvasHeight()">
+      <defs>
+        <marker id="arrow-avanco" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+          <polygon points="0 0, 7 2.5, 0 5" fill="#22c55e" opacity="0.75" />
+        </marker>
+        <marker id="arrow-retorno" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+          <polygon points="0 0, 7 2.5, 0 5" fill="#f97316" opacity="0.75" />
+        </marker>
+        <marker id="arrow-intra-etapa" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+          <polygon points="0 0, 7 2.5, 0 5" fill="#3b82f6" opacity="0.75" />
+        </marker>
+        <marker id="arrow-auto-referencia" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+          <polygon points="0 0, 7 2.5, 0 5" fill="#a855f7" opacity="0.75" />
+        </marker>
+      </defs>
+
+      <!-- Connections -->
+      @for (path of (hasAnyGrouping() ? groupedConnectionPaths() : connectionPaths()); track path.id) {
+        @if (isConnectionTypeVisible(path.type)) {
+        <g class="connection-group"
+           (mouseenter)="onConnectionMouseEnter(path.sourceProfileIds, path.targetProfileIds); showTooltip(path.tooltip, $event)" (mouseleave)="onConnectionMouseLeave(); hideTooltip()">
+          <path [attr.d]="path.d" stroke="transparent" stroke-width="12" fill="none"
+                class="connection-hit-area" (click)="onConnectionClick(path.id, $event)" />
+          <path [attr.d]="path.d" [attr.stroke]="getStrokeColor(path.type)"
+                [attr.stroke-dasharray]="getStrokeDasharray(path.type)" stroke-width="1.5" fill="none"
+                [attr.opacity]="isConnectionPathHighlighted(path.id) ? 0.75 : 0.1"
+                [attr.marker-end]="'url(#arrow-' + getConnectionCssClass(path.type).replace('connection-', '') + ')'"
+                class="connection-path" pointer-events="none" />
+        </g>
+        }
+      }
+
+      <!-- Auto-link lines -->
+      @if (isAutoLinkVisible()) {
+        @for (link of autoLinks(); track link.sourceId + link.targetId) {
+        <g class="connection-group"
+           (mouseenter)="onConnectionMouseEnter([link.sourceId], [link.targetId]); showTooltip(link.tooltip, $event)"
+           (mouseleave)="onConnectionMouseLeave(); hideTooltip()">
+          <path [attr.d]="link.d" stroke="transparent" stroke-width="12" fill="none" class="connection-hit-area" />
+          <path [attr.d]="link.d" stroke="#6b7280" stroke-width="1" fill="none"
+                [attr.opacity]="hasAnyHover() ? 0.15 : 0.5"
+                class="connection-path" pointer-events="none" />
+        </g>
+      }
+      }
+
+      <!-- Drag preview line -->
+      @if (dragLine()) {
+        <line [attr.x1]="dragLine()!.x1" [attr.y1]="dragLine()!.y1"
+              [attr.x2]="dragLine()!.x2" [attr.y2]="dragLine()!.y2"
+              stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" />
+      }
+    </svg>
+
+    <!-- HTML layer for nodes -->
+    @for (stage of filteredStages(); track stage.id; let si = $index) {
+      <!-- Column background (alternating) -->
+      @if (si % 2 === 0) {
+        <div class="stage-column-bg"
+             [style.left.px]="getStageX(stage.order_index) - 10"
+             [style.width.px]="STAGE_COLUMN_WIDTH + 20">
+        </div>
+      }
+
+      <!-- Stage header (sticky via scrollTop signal) -->
+      <div class="stage-header"
+           [style.left.px]="getStageX(stage.order_index) - 10"
+           [style.width.px]="STAGE_COLUMN_WIDTH + 20"
+           [class.stage-header--alt]="si % 2 === 0">
+
+        <div class="stage-header-grid">
+          <div class="sh-col sh-col-num">
+            <span class="sh-num">{{ si + 1 }}</span>
+          </div>
+          <div class="sh-col sh-col-info">
+            <span class="sh-name">{{ 'workflows.' + stage.step_catalog?.name | translate }}</span>
+            @if (stage.step_catalog?.description) {
+              <span class="sh-desc">{{ 'workflows.' + stage.step_catalog!.description | translate }}</span>
+            }
+          </div>
+          <div class="sh-col sh-col-stats">
+            <span class="sh-stat">{{ stage.visibleProfiles.length }} perfis</span>
+            <span class="sh-stat">{{ getConnectionCount(stage) }} conexões</span>
+          </div>
+          <div class="sh-col sh-col-actions">
+            <button class="sh-btn" (click)="onAddProfileClick(stage, $event)"
+                    (mouseenter)="showTooltip('Gerenciar perfis', $event)" (mouseleave)="hideTooltip()">
+              <i class="pi pi-user-plus"></i>
+            </button>
+            <button class="sh-btn" [class.sh-btn--active]="isStageGrouped(stage.id)"
+                    (click)="toggleStageGrouping(stage.id, $event)"
+                    (mouseenter)="showTooltip('Agrupar perfis', $event)" (mouseleave)="hideTooltip()">
+              <i class="pi pi-objects-column"></i>
+            </button>
+            <button class="sh-btn" [class.sh-btn--active]="hasStageFilter(stage.id)"
+                    (click)="toggleFilterPopover(stage.id, $event)"
+                    (mouseenter)="showTooltip('Filtrar perfis', $event)" (mouseleave)="hideTooltip()">
+              <i class="pi pi-filter"></i>
+            </button>
+            <button class="sh-btn" [class.sh-btn--has-badge]="getHiddenCount(stage.id) > 0"
+                    (click)="toggleVisibilityPopover(stage.id, $event)"
+                    (mouseenter)="showTooltip('Gerenciar visibilidade', $event)" (mouseleave)="hideTooltip()">
+              <i class="pi pi-eye"></i>
+              @if (getHiddenCount(stage.id) > 0) {
+                <span class="sh-btn-badge">{{ getHiddenCount(stage.id) }}</span>
+              }
+            </button>
+          </div>
+        </div>
+
+        @if (filterPopoverStageId() === stage.id) {
+          <div class="stage-filter-popover" (click)="$event.stopPropagation()">
+            <div class="sfp-header">
+              <span class="sfp-title">Filtros</span>
+              @if (hasStageFilter(stage.id)) {
+                <button class="sfp-clear" (click)="clearStageFilter(stage.id)">Limpar</button>
+              }
+            </div>
+            <div class="sfp-section">
+              <span class="sfp-label">Setores</span>
+              @for (unit of getStageFilterOptions(stage).units; track unit.id) {
+                <label class="sfp-item">
+                  <input type="checkbox" [checked]="isStageFilterUnitActive(stage.id, unit.id)"
+                         (change)="toggleStageFilterUnit(stage.id, unit.id)" />
+                  {{ unit.label }}
+                </label>
+              }
+            </div>
+            <div class="sfp-section">
+              <span class="sfp-label">Perfis</span>
+              @for (prof of getStageFilterOptions(stage).profiles; track prof.id) {
+                <label class="sfp-item">
+                  <input type="checkbox" [checked]="isStageFilterProfileActive(stage.id, prof.id)"
+                         (change)="toggleStageFilterProfile(stage.id, prof.id)" />
+                  {{ prof.label }}
+                </label>
+              }
+            </div>
+          </div>
+        }
+
+        @if (visibilityPopoverStageId() === stage.id) {
+          <div class="stage-filter-popover visibility-popover" (click)="$event.stopPropagation()">
+            <div class="sfp-header">
+              <span class="sfp-title">Visibilidade</span>
+              @if (getHiddenCount(stage.id) > 0) {
+                <button class="sfp-clear" (click)="showAllHidden(stage.id)">Exibir todos</button>
+              }
+            </div>
+            <div class="sfp-section visibility-list">
+              @for (item of getStageProfileList(stage.id); track item.id; let last = $last) {
+                <div class="visibility-item" [class.visibility-item--hidden]="item.isHidden"
+                     (click)="toggleProfileVisibility(item.id)">
+                  <i [class]="item.isHidden ? 'pi pi-eye-slash' : 'pi pi-eye'" class="visibility-icon"></i>
+                  <div class="visibility-text">
+                    <span class="visibility-profile">{{ item.profileName }}</span>
+                    <span class="visibility-unit">{{ item.unitAcronym }}</span>
+                  </div>
+                </div>
+                @if (!last) {
+                  <div class="visibility-divider"></div>
+                }
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Display items -->
+      @for (item of getDisplayItems(stage); track item.id; let pi = $index) {
+        @if (item.type === 'individual' && item.profile) {
+          <div class="profile-card"
+               [style.left.px]="getCardX(stage.order_index)"
+               [style.top.px]="getProfileY(pi)"
+               [style.transform]="reorderProfileId() === item.profile.id ? 'translateY(' + reorderGhostY() + 'px)' : ''"
+               [class.profile-card--reordering]="reorderProfileId() === item.profile.id"
+               [class.profile-card--dimmed]="hasAnyHover() && !isCardHighlighted(item.profile.id)"
+               [class.profile-card--highlighted]="hasAnyHover() && isCardHighlighted(item.profile.id)"
+               (contextmenu)="onProfileRightClick(item.profile, stage, $event)"
+               (mouseenter)="onCardMouseEnter(item.profile.id)"
+               (mouseleave)="onCardMouseLeave()">
+            @if (autoLinkProfileIds().has(item.profile.id)) {
+              <div class="auto-link-dot"
+                   (mouseenter)="showTooltip('Ligação automática com etapa adjacente', $event)" (mouseleave)="hideTooltip()"></div>
+            }
+            <button class="profile-hide-btn" (click)="hideProfile(item.profile.id); $event.stopPropagation()"
+                    (mouseenter)="showTooltip('Ocultar perfil', $event)" (mouseleave)="hideTooltip()">
+              <i class="pi pi-eye-slash"></i>
+            </button>
+            <div class="connector-group connector-group-left">
+              <div class="connector connector-in" (mouseup)="onConnectorMouseUp(item.profile.id, $event)"
+                   (mouseenter)="onConnectorInMouseEnter(item.profile.id, $event); showTooltip('Entrada (avanço)', $event)" (mouseleave)="onConnectorInMouseLeave(); hideTooltip()">
+                <svg viewBox="0 0 10 10" class="connector-icon"><path d="M3 2 L7 5 L3 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="connector connector-out" (mousedown)="onConnectorMouseDown(item.profile.id, 'left-out', $event)"
+                   (mouseenter)="showTooltip('Saída (retorno)', $event)" (mouseleave)="hideTooltip()">
+                <svg viewBox="0 0 10 10" class="connector-icon"><path d="M7 2 L3 5 L7 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </div>
+            </div>
+            <div class="profile-card-content" (mousedown)="onCardMouseDown(item.profile.id, stage.id, $event)">
+              <div class="card-icon-col">
+                <i class="pi pi-user card-icon"></i>
+                <span class="card-icon-label">Perfil</span>
+                @if (item.profile.permissions_customized) {
+                  <div class="profile-customized-badge"
+                       (mouseenter)="showTooltip('Permissões customizadas', $event)" (mouseleave)="hideTooltip()">
+                    <i class="pi pi-exclamation-triangle" style="font-size: 0.65rem"></i>
+                  </div>
+                }
+              </div>
+              <div class="card-text">
+              <span class="profile-name">{{ item.label }}</span>
+              <span class="unit-acronym">{{ item.sublabel }}</span>
+              </div>
+            </div>
+            <div class="connector-group connector-group-right">
+              <div class="connector connector-out" (mousedown)="onConnectorMouseDown(item.profile.id, 'right-out', $event)"
+                   (mouseenter)="showTooltip('Saída (avanço)', $event)" (mouseleave)="hideTooltip()">
+                <svg viewBox="0 0 10 10" class="connector-icon"><path d="M3 2 L7 5 L3 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="connector connector-in" (mouseup)="onConnectorMouseUp(item.profile.id, $event)"
+                   (mouseenter)="onConnectorInMouseEnter(item.profile.id, $event); showTooltip('Entrada (retorno / intra-etapa)', $event)" (mouseleave)="onConnectorInMouseLeave(); hideTooltip()">
+                <svg viewBox="0 0 10 10" class="connector-icon"><path d="M7 2 L3 5 L7 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <div class="profile-card profile-card--group"
+               [style.left.px]="getCardX(stage.order_index)"
+               [style.top.px]="getProfileY(pi)"
+               (mouseenter)="onGroupMouseEnter(item.memberIds)"
+               (mouseleave)="onCardMouseLeave()">
+            <div class="connector-group connector-group-left">
+              <div class="connector connector-in" (mouseup)="onGroupConnectorMouseUp(item.memberIds, $event)"
+                   (mouseenter)="onGroupConnectorInMouseEnter(item.memberIds, $event); showTooltip('Entrada (avanço)', $event)" (mouseleave)="onGroupConnectorInMouseLeave(); hideTooltip()">
+                <svg viewBox="0 0 10 10" class="connector-icon"><path d="M3 2 L7 5 L3 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="connector connector-out" (mousedown)="onGroupConnectorMouseDown(item.id, item.memberIds, 'left-out', $event)"
+                   (mouseenter)="showTooltip('Saída (retorno)', $event)" (mouseleave)="hideTooltip()">
+                <svg viewBox="0 0 10 10" class="connector-icon"><path d="M7 2 L3 5 L7 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </div>
+            </div>
+            <div class="profile-card-content profile-card-content--group">
+              <div class="card-icon-col card-icon-col--group">
+                <i class="pi pi-users card-icon card-icon--group"></i>
+                <span class="card-icon-label">Grupo</span>
+              </div>
+              <div class="card-text">
+              <span class="profile-name">{{ item.label }}</span>
+              <span class="group-count">Perfis de {{ item.sectorCount }} setor{{ item.sectorCount > 1 ? 'es' : '' }} agrupados</span>
+              </div>
+            </div>
+            <div class="connector-group connector-group-right">
+              <div class="connector connector-out" (mousedown)="onGroupConnectorMouseDown(item.id, item.memberIds, 'right-out', $event)"
+                   (mouseenter)="showTooltip('Saída (avanço)', $event)" (mouseleave)="hideTooltip()">
+                <svg viewBox="0 0 10 10" class="connector-icon"><path d="M3 2 L7 5 L3 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="connector connector-in" (mouseup)="onGroupConnectorMouseUp(item.memberIds, $event)"
+                   (mouseenter)="onGroupConnectorInMouseEnter(item.memberIds, $event); showTooltip('Entrada (retorno / intra-etapa)', $event)" (mouseleave)="onGroupConnectorInMouseLeave(); hideTooltip()">
+                <svg viewBox="0 0 10 10" class="connector-icon"><path d="M7 2 L3 5 L7 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </div>
+            </div>
+            <button class="group-expand-btn" (click)="expandGroup(item.id, $event)"
+                    (mouseenter)="showTooltip('Desagrupar', $event)" (mouseleave)="hideTooltip()">
+              <i class="pi pi-objects-column"></i>
+            </button>
+          </div>
+        }
+      }
+
+      <!-- Empty stage placeholder -->
+      @if (getDisplayItems(stage).length === 0) {
+        <div class="stage-empty"
+             [style.left.px]="getCardX(stage.order_index)"
+             [style.top.px]="getProfileY(0)">
+          <i class="pi pi-user-plus stage-empty-icon"></i>
+          <span class="stage-empty-title">Adicione perfis à etapa</span>
+          <span class="stage-empty-desc">{{ 'workflows.visualBpms.addProfileToStage' | translate }} {{ 'workflows.' + stage.step_catalog?.name | translate }}</span>
+          <button class="stage-empty-btn" (click)="onAddProfileClick(stage, $event)">
+            <i class="pi pi-user-plus"></i> Adicionar Perfil
+          </button>
+        </div>
+      }
+    }
+  </div>
+  </div>
+
+  <!-- Drag hover hint tooltip -->
+  @if (dragHoverHint() && dragHoverPos()) {
+    <div class="drag-hover-tooltip"
+         [style.left.px]="dragHoverPos()!.x + 15"
+         [style.top.px]="dragHoverPos()!.y - 35">
+      {{ dragHoverHint() }}
+    </div>
+  }
+
+  <!-- Generic tooltip -->
+  @if (tooltipText() && tooltipPos() && !dragHoverHint()) {
+    <div class="drag-hover-tooltip"
+         [style.left.px]="tooltipPos()!.x + 12"
+         [style.top.px]="tooltipPos()!.y - 30">
+      {{ tooltipText() }}
+    </div>
+  }
+</div>

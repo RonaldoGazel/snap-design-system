@@ -1,0 +1,106 @@
+<div class="tiptap-editor" #editorWrapper>
+  <!-- Sentinel: 1px element observed by IntersectionObserver to detect when toolbar leaves viewport -->
+  <div class="tiptap-editor__sentinel" #toolbarSentinel></div>
+
+  <div class="tiptap-editor__toolbar" #toolbar>
+    <!-- Group 1: Text formatting -->
+    <button class="tiptap-editor__toolbar-btn" (click)="toggleBold()" [class.is-active]="isBold()"
+      title="Negrito"><b>B</b></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="toggleItalic()" [class.is-active]="isItalic()"
+      title="Itálico"><i>I</i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="toggleUnderline()" [class.is-active]="isUnderline()"
+      title="Sublinhado"><u>U</u></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="toggleStrike()" [class.is-active]="isStrike()"
+      title="Tachado"><s>S</s></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="toggleCode()" [class.is-active]="isCode()" title="Código"><i
+        class="pi pi-code"></i></button>
+
+    <span class="tiptap-editor__toolbar-separator"></span>
+
+    <!-- Group 2: Headings -->
+    <select (change)="setHeading($event)" class="tiptap-editor__toolbar-select" title="Cabeçalho">
+      <option value="0">Parágrafo</option>
+      <option value="1">H1</option>
+      <option value="2">H2</option>
+      <option value="3">H3</option>
+      <option value="4">H4</option>
+      <option value="5">H5</option>
+      <option value="6">H6</option>
+    </select>
+
+    <span class="tiptap-editor__toolbar-separator"></span>
+
+    <!-- Group 3: Lists -->
+    <button class="tiptap-editor__toolbar-btn" (click)="toggleOrderedList()" [class.is-active]="isOrderedList()"
+      title="Lista ordenada"><i class="pi pi-list-check"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="toggleBulletList()" [class.is-active]="isBulletList()"
+      title="Lista com marcadores"><i class="pi pi-list"></i></button>
+
+    <span class="tiptap-editor__toolbar-separator"></span>
+
+    <!-- Group 4: Alignment -->
+    <button class="tiptap-editor__toolbar-btn" (click)="setAlign('left')" [class.is-active]="isAlign('left')"
+      title="Alinhar à esquerda"><i class="pi pi-align-left"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="setAlign('center')" [class.is-active]="isAlign('center')"
+      title="Centralizar"><i class="pi pi-align-center"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="setAlign('right')" [class.is-active]="isAlign('right')"
+      title="Alinhar à direita"><i class="pi pi-align-right"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="setAlign('justify')" [class.is-active]="isAlign('justify')"
+      title="Justificar"><i class="pi pi-align-justify"></i></button>
+
+    <span class="tiptap-editor__toolbar-separator"></span>
+
+    <!-- Group 5: Insertions -->
+    <button class="tiptap-editor__toolbar-btn" (click)="insertTable()" title="Inserir tabela"><i
+        class="pi pi-table"></i></button>
+    @if (isInTable()) {
+    <button class="tiptap-editor__toolbar-btn" (click)="addRowAfter()" title="Adicionar linha"><i
+        class="pi pi-plus"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="deleteRow()" title="Remover linha"><i
+        class="pi pi-minus"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="addColumnAfter()" title="Adicionar coluna"><i
+        class="pi pi-plus-circle"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="deleteColumn()" title="Remover coluna"><i
+        class="pi pi-minus-circle"></i></button>
+    }
+    <button class="tiptap-editor__toolbar-btn" (click)="setLink()" [class.is-active]="isLink()" title="Link"><i
+        class="pi pi-link"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="insertImage()" title="Imagem"><i
+        class="pi pi-image"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="toggleBlockquote()" [class.is-active]="isBlockquote()"
+      title="Citação"><i class="pi pi-comment"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="insertHorizontalRule()" title="Linha horizontal"><i
+        class="pi pi-minus"></i></button>
+
+    <span class="tiptap-editor__toolbar-separator"></span>
+
+    <!-- Group 6: History -->
+    <button class="tiptap-editor__toolbar-btn" (click)="undo()" title="Desfazer"><i class="pi pi-undo"></i></button>
+    <button class="tiptap-editor__toolbar-btn" (click)="redo()" title="Refazer"><i class="pi pi-refresh"></i></button>
+
+    <!-- Group 7: Sync indicator (right side) -->
+    <div class="tiptap-editor__toolbar-spacer"></div>
+    <div class="tiptap-editor__sync-indicator">
+      @if (syncState() === 'saving') {
+      <i class="pi pi-spin pi-spinner tiptap-editor__sync-icon tiptap-editor__sync-icon--spinning"></i>
+      <span>Sincronizando...</span>
+      } @else if (syncState() === 'saved') {
+      <i class="pi pi-check-circle tiptap-editor__sync-icon"></i>
+      <span>Última sincronização: {{ lastSyncTime() | date:'HH:mm' }}</span>
+      } @else if (syncState() === 'error') {
+      <i class="pi pi-exclamation-triangle tiptap-editor__sync-icon"></i>
+      <span>Erro ao sincronizar</span>
+      }
+      <button class="tiptap-editor__sync-btn" (click)="manualSync()" title="Sincronizar agora">
+        <i class="pi pi-cloud-upload"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Spacer: reserves toolbar height in the flow when toolbar is sticky -->
+  @if (toolbarSticky()) {
+  <div class="tiptap-editor__sticky-spacer"></div>
+  }
+
+  <div #editorContainer class="tiptap-editor__content"></div>
+</div>

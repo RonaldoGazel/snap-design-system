@@ -1,0 +1,2 @@
+# Prototyping
+Prototyping is the process of codifying design patterns into reusable building blocks. A good prototype allows teams to visualize various module states, test localization (ensuring layouts don't break with different string lengths), and isolate dependencies. By building and testing these components in isolation—often using mock data and templates—developers can ensure that modules are robust and ready for integration into the larger application without negatively impacting other site elements.

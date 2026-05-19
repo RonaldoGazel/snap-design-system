@@ -1,0 +1,48 @@
+# =============================================================================
+# Platform Frontend — Local Development
+# =============================================================================
+# Connects to the shared infrastructure via the trillian-net overlay network.
+#
+# Prerequisites:
+#   1. Start shared infra first (keycloak, etc.)
+#   2. Start backend services the frontend depends on
+#   3. Then start platform-frontend:
+#      docker compose -f docker-compose.dev.yml up --build
+#
+# The platform-frontend connects to:
+#   - keycloak:8080      (OIDC authentication)
+#   - Backend services via nginx reverse proxy (API calls)
+#
+# Access the app at http://localhost:4200
+# =============================================================================
+
+services:
+  platform-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # No runtime env vars needed — Angular is a static SPA.
+      # API base URL and auth config are baked at build time via
+      # environment.ts or injected via nginx sub_filter if needed.
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx/conf.d
+    ports:
+      - target: 80
+        published: 4200
+        protocol: tcp
+        mode: host
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:80/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - trillian-net
+      - default
+
+networks:
+  trillian-net:
+    external: true
+  default:
+    driver: bridge

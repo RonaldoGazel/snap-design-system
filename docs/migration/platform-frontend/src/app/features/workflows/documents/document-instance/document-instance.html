@@ -1,0 +1,188 @@
+<div class="doc-instance">
+
+  @if (isCreateMode()) {
+    <!-- ===== CREATE MODE ===== -->
+    <div class="doc-instance__header">
+      <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()" title="Voltar"></button>
+      <h2>Novo Documento</h2>
+    </div>
+
+    @if (errorMessage()) {
+      <div class="doc-instance__error">
+        <i class="pi pi-exclamation-triangle"></i>
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <div class="doc-instance__form-description">
+      <p>Um <strong>Documento</strong> e uma peca documental individual que percorre um fluxo de workflow. Selecione o template que define o tipo de documento a ser produzido — o sistema identificara automaticamente o fluxo vigente. O documento pode ser criado dentro de um processo existente ou de forma avulsa.</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="doc-instance__form">
+
+      <!-- Title -->
+      <div class="doc-instance__field">
+        <label for="title">Titulo <span class="required">*</span></label>
+        <small class="doc-instance__hint">Titulo descritivo do documento. Ex: "Relatorio de Inteligencia - Operacao Norte - Jan/2024".</small>
+        <input id="title" pInputText formControlName="title" placeholder="Ex: Relatorio de Inteligencia - Operacao Norte" [class.ng-invalid]="isInvalid('title')" />
+        @if (isInvalid('title')) { <small class="p-error">Titulo e obrigatorio.</small> }
+      </div>
+
+      <!-- Template -->
+      <div class="doc-instance__field">
+        <label for="template_id">Template <span class="required">*</span></label>
+        <small class="doc-instance__hint">Selecione o modelo de documento a ser produzido. Ex: RELINT (Relatorio de Inteligencia), PB (Pedido de Busca). Ao selecionar, o sistema filtrara automaticamente os fluxos disponiveis.</small>
+        <p-select inputId="template_id" formControlName="template_id" [options]="templateOptions()" optionLabel="label" optionValue="value" placeholder="Selecione o template do documento" [class.ng-invalid]="isInvalid('template_id')" (onChange)="onTemplateChange($event.value)" />
+        @if (isInvalid('template_id')) { <small class="p-error">Template e obrigatorio.</small> }
+      </div>
+
+      <!-- Flow (auto-filtered by template's doc type) -->
+      <div class="doc-instance__field">
+        <label for="flow_id">Fluxo de Workflow</label>
+        <small class="doc-instance__hint">Selecione o fluxo que governara o ciclo de vida deste documento. O fluxo define as etapas, quem pode agir e como o documento tramita ate ser formalizado e difundido.</small>
+        <p-select inputId="flow_id" formControlName="flow_id" [options]="flowOptions()" optionLabel="label" optionValue="value" placeholder="Selecione o fluxo" (onChange)="onFlowChange($event.value)" />
+      </div>
+
+      <!-- Flow Version (auto-selected) -->
+      <div class="doc-instance__field">
+        <label for="flow_version_id">Versao do Fluxo <span class="required">*</span></label>
+        <small class="doc-instance__hint">A versao vigente e selecionada automaticamente ao escolher o fluxo. O documento ficara vinculado a esta versao durante todo o seu ciclo de vida.</small>
+        <p-select inputId="flow_version_id" formControlName="flow_version_id" [options]="flowVersionOptions()" optionLabel="label" optionValue="value" placeholder="Versao vigente (auto-selecionada)" [class.ng-invalid]="isInvalid('flow_version_id')" />
+        @if (isInvalid('flow_version_id')) { <small class="p-error">Versao do fluxo e obrigatoria. Certifique-se de que o fluxo selecionado tem uma versao publicada.</small> }
+        @if (form.get('flow_id')?.value && flowVersionOptions().length === 0) {
+          <small class="p-error">Nenhuma versao publicada disponivel para este fluxo. Publique uma versao antes de criar documentos.</small>
+        }
+      </div>
+
+      <!-- Process (optional) -->
+      <div class="doc-instance__field">
+        <label for="process_id">Processo (opcional)</label>
+        <small class="doc-instance__hint">Vincule este documento a um processo existente para acompanhamento consolidado. Deixe em branco para criar um documento avulso, independente de qualquer processo.</small>
+        <p-select inputId="process_id" formControlName="process_id" [options]="processOptions()" optionLabel="label" optionValue="value" placeholder="Selecione um processo ou deixe em branco" />
+      </div>
+
+      <!-- Content -->
+      <div class="doc-instance__field">
+        <label for="content">Conteudo base (opcional)</label>
+        <small class="doc-instance__hint">Texto inicial do documento. Pode ser preenchido agora ou durante a etapa de producao no fluxo.</small>
+        <textarea id="content" pTextarea formControlName="content" placeholder="Conteudo inicial do documento (pode ser preenchido depois)" rows="6"></textarea>
+      </div>
+
+      <!-- Origin (unit + profile) -->
+      <div class="doc-instance__field">
+        <label>Unidade e Perfil de Origem</label>
+        <small class="doc-instance__hint">Selecione a unidade organizacional e o perfil do responsavel pela criacao deste documento. Esta informacao e usada para validar as regras de criacao do fluxo.</small>
+        <app-org-selector [multiple]="false" [selectedCombos]="originCombos()" (selectionChange)="onOriginChange($event)" />
+      </div>
+
+      <div class="doc-instance__actions">
+        <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="goBack()"></button>
+        <button pButton type="submit" label="Criar Documento" icon="pi pi-check" [disabled]="saving()"></button>
+      </div>
+    </form>
+
+  } @else {
+    <!-- ===== VIEW MODE ===== -->
+    @if (loading()) {
+      <div class="doc-instance__loading">
+        <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+      </div>
+    }
+
+    @if (!loading() && instance()) {
+      <!-- Header -->
+      <div class="doc-instance__header">
+        <button pButton icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()" title="Voltar"></button>
+        <div class="doc-instance__title">
+          @if (instance()!.nup) {
+            <span class="doc-instance__nup">NUP: {{ instance()!.nup }}</span>
+          }
+          <h2>{{ instance()!.title }}</h2>
+        </div>
+        <p-tag
+          [value]="statusLabel(instance()!.status) | translate"
+          [severity]="statusSeverity(instance()!.status)"
+        />
+        @if (instance()!.is_formalized) {
+          <p-tag [value]="'workflows.docStatus.formalized' | translate" severity="success" />
+        }
+      </div>
+
+      <!-- Metadata card -->
+      <p-card>
+        <div class="doc-instance__meta-grid">
+          <div class="doc-instance__meta-item">
+            <span class="doc-instance__label">Template</span>
+            <span>{{ instance()!.template?.name ?? instance()!.template_id }}</span>
+          </div>
+          <div class="doc-instance__meta-item">
+            <span class="doc-instance__label">Tipo Documental</span>
+            <span>{{ instance()!.template?.name ?? '—' }}</span>
+          </div>
+          <div class="doc-instance__meta-item">
+            <span class="doc-instance__label">Versão do Fluxo</span>
+            <span>v{{ instance()!.flow_version?.version ?? '—' }}</span>
+          </div>
+          <div class="doc-instance__meta-item">
+            <span class="doc-instance__label">Processo</span>
+            <span>{{ instance()!.process?.identifier ?? 'Avulso' }}</span>
+          </div>
+          <div class="doc-instance__meta-item">
+            <span class="doc-instance__label">Etapa Atual</span>
+            <span>{{ instance()!.current_step_id ?? '—' }}</span>
+          </div>
+          <div class="doc-instance__meta-item">
+            <span class="doc-instance__label">Criado em</span>
+            <span>{{ instance()!.created_at | date: 'dd/MM/yyyy HH:mm' }}</span>
+          </div>
+          <div class="doc-instance__meta-item">
+            <span class="doc-instance__label">Criado por</span>
+            <span>{{ instance()!.created_by }}</span>
+          </div>
+          @if (instance()!.is_formalized && instance()!.formalized_at) {
+            <div class="doc-instance__meta-item">
+              <span class="doc-instance__label">{{ 'workflows.documentInstance.formalizedAt' | translate }}</span>
+              <span>{{ instance()!.formalized_at | date: 'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+          }
+        </div>
+      </p-card>
+
+      <!-- Content card -->
+      @if (instance()!.content) {
+        <p-card>
+          <ng-template #title>Conteúdo</ng-template>
+          <pre class="doc-instance__content">{{ instance()!.content }}</pre>
+        </p-card>
+      }
+
+      <!-- Events timeline -->
+      @if (instance()!.events?.length) {
+        <p-card>
+          <ng-template #title>Histórico de Eventos</ng-template>
+          <p-timeline [value]="instance()!.events!" align="left">
+            <ng-template #content let-ev>
+              <div class="doc-instance__timeline-item">
+                <span class="doc-instance__timeline-title">{{ eventLabel(ev.event_type) | translate }}</span>
+                @if (ev.notes) {
+                  <span class="doc-instance__timeline-notes">{{ ev.notes }}</span>
+                }
+                <span class="doc-instance__timeline-date">{{ ev.created_at | date: 'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+            </ng-template>
+            <ng-template #marker>
+              <span class="doc-instance__timeline-marker pi pi-circle-fill"></span>
+            </ng-template>
+          </p-timeline>
+        </p-card>
+      }
+    }
+
+    @if (!loading() && !instance()) {
+      <div class="doc-instance__not-found">
+        <p>Documento não encontrado.</p>
+        <button pButton label="Voltar" icon="pi pi-arrow-left" class="p-button-text" (click)="goBack()"></button>
+      </div>
+    }
+  }
+</div>
