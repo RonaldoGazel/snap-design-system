@@ -291,6 +291,7 @@ export default function SnapGraphDesignSystem() {
                               style={{ opacity: 1, top: '0px' }}
                             >
                               <Building className="w-5 h-5 text-[#696969]" />
+                            </div>
                           </div>
                         </div>
                       </div>
