@@ -189,10 +189,33 @@ export default function SnapGraphDesignSystem() {
 
                 {/* ============================================
                     NODE C - GROUP NODE (NOVO)
+                    Stack de 3 cards: 100%, 50%, 30% opacidade
                     Ícones empilhados com deslocamento de 9px
                     ============================================ */}
                 <div className="absolute" style={{ left: '752px', top: '60px' }}>
-                  {/* Card principal - 100% opacidade */}
+                  {/* Card 3 - 30% opacidade (mais atrás) - offset 20px */}
+                  <div 
+                    className="absolute w-64 bg-canvas-node rounded-lg border border-canvas-node-border"
+                    style={{ opacity: 0.30, top: '20px', left: '-20px' }}
+                  >
+                    <div className="flex h-full">
+                      <div className="w-1 bg-[#FE5722]" />
+                      <div className="flex-1 p-4" style={{ height: '88px' }} />
+                    </div>
+                  </div>
+                  
+                  {/* Card 2 - 50% opacidade - offset 10px */}
+                  <div 
+                    className="absolute w-64 bg-canvas-node rounded-lg border border-canvas-node-border"
+                    style={{ opacity: 0.50, top: '10px', left: '-10px' }}
+                  >
+                    <div className="flex h-full">
+                      <div className="w-1 bg-[#FE5722]" />
+                      <div className="flex-1 p-4" style={{ height: '88px' }} />
+                    </div>
+                  </div>
+                  
+                  {/* Card principal - 100% opacidade (frente) */}
                   <div className="relative w-64 bg-canvas-node rounded-lg overflow-hidden border border-canvas-node-border shadow-sm">
                     <div className="flex h-full">
                       <div className="w-1 bg-[#FE5722]" />
