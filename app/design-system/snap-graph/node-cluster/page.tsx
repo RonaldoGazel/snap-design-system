@@ -26,20 +26,50 @@ export default function NodeClusterPage() {
         {/* Card 3 - 30% opacidade (mais atrás) - offset 20px */}
         <div 
           className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden bg-canvas-node"
-          style={{ opacity: 0.30, top: '20px', left: '-20px', height: '134px' }}
+          style={{ opacity: 0.30, top: '20px', left: '-20px' }}
         >
           <div className="flex h-full">
-            <div className="w-1 h-full" style={{ backgroundColor: ENTITY_COLOR }} />
+            <div className="w-1" style={{ backgroundColor: ENTITY_COLOR }} />
+            <div className="flex-1 pt-4 px-4 pb-[18px] invisible">
+              <div className="flex items-start gap-3">
+                <div className="flex-1 min-w-0">
+                  <p className="text-foreground text-base font-sans leading-[1.3]">
+                    <span className="font-medium">Grupo com </span>
+                    <span className="font-extrabold">58</span>
+                    <span className="font-medium"> entidades</span>
+                  </p>
+                  <div className="mt-4">
+                    <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white rounded-full">Company SNAP</span>
+                  </div>
+                </div>
+                <div style={{ width: '44px', height: '44px' }} />
+              </div>
+            </div>
           </div>
         </div>
         
         {/* Card 2 - 50% opacidade - offset 10px */}
         <div 
           className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden bg-canvas-node"
-          style={{ opacity: 0.50, top: '10px', left: '-10px', height: '134px' }}
+          style={{ opacity: 0.50, top: '10px', left: '-10px' }}
         >
           <div className="flex h-full">
-            <div className="w-1 h-full" style={{ backgroundColor: ENTITY_COLOR }} />
+            <div className="w-1" style={{ backgroundColor: ENTITY_COLOR }} />
+            <div className="flex-1 pt-4 px-4 pb-[18px] invisible">
+              <div className="flex items-start gap-3">
+                <div className="flex-1 min-w-0">
+                  <p className="text-foreground text-base font-sans leading-[1.3]">
+                    <span className="font-medium">Grupo com </span>
+                    <span className="font-extrabold">58</span>
+                    <span className="font-medium"> entidades</span>
+                  </p>
+                  <div className="mt-4">
+                    <span className="inline-block px-3 py-1 text-xs font-sans font-medium text-white rounded-full">Company SNAP</span>
+                  </div>
+                </div>
+                <div style={{ width: '44px', height: '44px' }} />
+              </div>
+            </div>
           </div>
         </div>
         
