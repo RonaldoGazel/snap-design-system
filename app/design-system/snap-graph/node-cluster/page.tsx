@@ -26,7 +26,7 @@ export default function NodeClusterPage() {
         {/* Card 3 - 30% opacidade (mais atrás) - offset 20px */}
         <div 
           className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden bg-canvas-node"
-          style={{ opacity: 0.30, top: '20px', left: '-20px', height: '132px' }}
+          style={{ opacity: 0.30, top: '20px', left: '-20px', height: '134px' }}
         >
           <div className="flex h-full">
             <div className="w-1 h-full" style={{ backgroundColor: ENTITY_COLOR }} />
@@ -36,7 +36,7 @@ export default function NodeClusterPage() {
         {/* Card 2 - 50% opacidade - offset 10px */}
         <div 
           className="absolute w-64 rounded-lg border border-canvas-node-border overflow-hidden bg-canvas-node"
-          style={{ opacity: 0.50, top: '10px', left: '-10px', height: '132px' }}
+          style={{ opacity: 0.50, top: '10px', left: '-10px', height: '134px' }}
         >
           <div className="flex h-full">
             <div className="w-1 h-full" style={{ backgroundColor: ENTITY_COLOR }} />
@@ -47,7 +47,7 @@ export default function NodeClusterPage() {
         <div className="relative w-64 rounded-lg overflow-hidden border border-canvas-node-border shadow-sm bg-canvas-node">
           <div className="flex h-full">
             <div className="w-1" style={{ backgroundColor: ENTITY_COLOR }} />
-            <div className="flex-1 p-4">
+            <div className="flex-1 pt-4 px-4 pb-[18px]">
               <div className="flex items-start gap-3">
                 <div className="flex-1 min-w-0">
                   {/* Texto: "Grupo com X entidades" - número em extra-bold */}
